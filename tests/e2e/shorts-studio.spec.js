@@ -24,10 +24,9 @@ test('MVP: sugere destaque e gera Short vertical independente com legenda',async
     await page.locator('.sub-studio input[type=file]').setInputFiles({
       name:'episodio.srt',mimeType:'text/plain',buffer:Buffer.from(cues,'utf8')
     });
-    await expect(page.getByRole('textbox',{name:'Texto da legenda'}).first()).toContainText('Mas sabe como');
+    await expect(page.getByRole('textbox',{name:'Texto da legenda'}).first()).toHaveValue(/Mas sabe como/);
     await page.getByRole('button',{name:'Encontrar melhores momentos'}).click();
     await expect(page.locator('.shorts-candidate')).toHaveCount(1);
-    await expect(page.locator('.shorts-candidate')).toContainText(['Pergunta',''],{timeout:5000}).catch(()=>{});
     await page.screenshot({path:info.outputPath('shorts-auto-candidates.png'),animations:'disabled',fullPage:false});
     await page.getByRole('button',{name:'Gerar 1 Short legendado'}).click();
     await expect(page.getByText('Short automático')).toBeVisible({timeout:15000});
