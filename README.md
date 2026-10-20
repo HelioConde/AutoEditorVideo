@@ -79,7 +79,7 @@ Para edição desktop com servidor local, instale Node.js 22+, FFmpeg e FFprobe 
 
 As duas versões exibem **miniaturas reais do vídeo** (geradas localmente pelo navegador), sliders acessíveis para os limites de corte, uma ação de prévia e uma sequência ordenada de até cinco cortes. Use **Adicionar à sequência** para montar uma lista; altere a ordem com as setas ou remova um trecho. Quando a lista está vazia, a exportação continua usando o recorte único; quando há itens, **somente os cortes da lista são unidos**.
 
-O desktop usa FFmpeg nativo e concat demuxer de segmentos reencodados com parâmetros idênticos; duração final máxima de 10 minutos. Na web, o FFmpeg.wasm processa e concatena até cinco trechos somando **20 segundos**. Ambos exigem recursos adequados ao tamanho do vídeo. No desktop, a sequência e o roteiro agora são salvos no projeto; na web, podem ser exportados em JSON.
+O desktop usa FFmpeg nativo e concat demuxer de segmentos reencodados com parâmetros idênticos; duração final máxima de 10 minutos. Na web, o FFmpeg.wasm processa e concatena até cinco trechos somando **20 segundos**. Ambos exigem recursos adequados ao tamanho do vídeo. No desktop, a sequência e o roteiro são salvos no projeto; na web, também são preservados automaticamente em rascunho local no navegador e podem ser exportados em JSON.
 
 ## Projetos compartilháveis e vídeo narrado (2.3 beta)
 
@@ -124,3 +124,9 @@ $env:WHISPER_MODEL = "C:\\whisper.cpp\\models\\ggml-base.bin"
 npm run dev
 ```
 O editor reconhece o recurso quando modelo e CLI estão disponíveis. Áudio de arquivos de até 10 minutos é convertido em WAV 16 kHz mono pelo FFmpeg e transcrito localmente em português. Revise o texto e os horários, pois modelos de reconhecimento de fala podem errar. Os testes de CI usam um **simulador da interface CLI**, não um modelo Whisper real. Modelos não são distribuídos nem baixados automaticamente pelo aplicativo.
+
+## Timeline de precisão e rascunho automático (2.7 beta)
+
+Na timeline compartilhada com o site e o desktop é possível ajustar o corte em **centésimos de segundo (0,01s)** ou décimos (0,1s), escolher zoom **1×, 2×, 4×, 8×** para as réguas de corte e abrir um trecho da sequência com **Editar**, ajustá-lo e clicar em **Salvar ajuste**. O zoom amplia a **faixa dos sliders**, não o quadro das miniaturas (que permanece exibindo a fonte completa). Os ajustes respeitam o intervalo mínimo de 0,25s e os limites de duração por edição.
+
+A versão web preserva automaticamente o projeto no **localStorage deste navegador** a cada alteração válida (com debounce). Após atualizar ou fechar a página, o editor recupera cortes, roteiro, cenas, legendas, proporção e nome. Para recuperar trechos de mídia, **selecione o vídeo original novamente**; é verificado nome e duração aproximada, não o conteúdo exato. O rascunho **não inclui vídeo, imagens das cenas, MP4 exportado ou dados remotos**. Também há botão **Limpar rascunho**. Navegação privada, limpeza dos dados do navegador e políticas de armazenamento podem eliminar o rascunho; por segurança, exporte seu projeto `.autoeditor.json` regularmente.

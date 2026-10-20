@@ -1,12 +1,12 @@
 import { useEffect, useId, useState } from 'react';
-import { ArrowDown, ArrowUp, Film, Image as ImageIcon, Play, Plus, Trash2 } from 'lucide-react';
-import { MAX_CLIPS, insertClip, moveClip, normalizeClips } from '../clip-utils.js';
+import { ArrowDown, ArrowUp, Check, Film, Image as ImageIcon, Play, Plus, RotateCcw, Trash2 } from 'lucide-react';
+import { MAX_CLIPS, insertClip, moveClip, normalizeClips, nudgeBoundary, replaceClip, zoomWindow } from '../clip-utils.js';
 import './timeline.css';
 
 function pad(value) {
   const secs = Math.max(0, Number(value) || 0);
   const m = Math.floor(secs / 60).toString().padStart(2, '0');
-  const s = (secs % 60).toFixed(1).padStart(4, '0');
+  const s = (secs % 60).toFixed(2).padStart(5, '0');
   return m + ':' + s;
 }
 
@@ -76,6 +76,9 @@ export default function VideoTimeline({
   maxEach = 600, variant = 'desktop'
 }) {
   const id = useId();
+  const [zoom,setZoom]=useState(1);
+  const [editingIndex,setEditingIndex]=useState(-1);
+  useEffect(()=>{setZoom(1);setEditingIndex(-1);},[source]);
   const thumbs = useThumbnails(source);
   const max = Math.max(.1, Number(duration) || .1);
   const left = Math.max(0, Math.min(100, Number(start) / max * 100));
@@ -85,6 +88,22 @@ export default function VideoTimeline({
   const remaining = maxTotal - (queued?.total || 0);
   const canAdd = Boolean(!disabled && !current.error && clips.length < MAX_CLIPS && Number(end) - Number(start) <= remaining + .01);
   const formatTotal = pad(queued?.total || 0);
+  const view=zoomWindow({duration,start,end,zoom});
+  const applyNudge=(boundary,delta)=>{
+    const next=nudgeBoundary({start,end,duration,boundary,delta});
+    if(boundary==='start')onStartChange(next.start);
+    else onEndChange(next.end);
+  };
+  function beginEdit(index) {
+    setEditingIndex(index);
+    onStartChange(clips[index].start);
+    onEndChange(clips[index].end);
+  }
+  function saveEdit() {
+    const result=replaceClip(clips,editingIndex,{start,end},{duration,maxTotal,maxEach});
+    if(!result.error){onClipsChange(result.clips);setEditingIndex(-1);}
+  }
+  const editingResult=editingIndex>=0 ? replaceClip(clips,editingIndex,{start,end},{duration,maxTotal,maxEach}):null;
   return (
     <section className={'filmstrip-editor filmstrip-' + variant} aria-label="Timeline visual">
       <div className="filmstrip-header">
@@ -96,31 +115,62 @@ export default function VideoTimeline({
           <div className="filmstrip-placeholder" role="status">{thumbs.loading ? 'Gerando miniaturas do vídeo…' : (source ? 'Miniaturas não disponíveis para este vídeo' : 'Importe um vídeo para visualizar a timeline')}</div>}
         <div className="filmstrip-selection" style={{ left: left + '%', right: right + '%' }} aria-hidden="true" />
       </div>
+      <div className="filmstrip-precision">
+        <label htmlFor={id+'-zoom'}>Precisão da seleção</label>
+        <select id={id+'-zoom'} aria-label="Zoom dos controles de corte" value={zoom} disabled={disabled} onChange={e=>setZoom(Number(e.target.value))}>
+          <option value="1">1× · vídeo completo</option>
+          <option value="2">2× · detalhes</option>
+          <option value="4">4× · ajuste fino</option>
+          <option value="8">8× · máximo</option>
+        </select>
+        <span className="filmstrip-precision-window">Janela: {pad(view.min)} – {pad(view.max)}</span>
+      </div>
       <div className="filmstrip-sliders">
         <label htmlFor={id+'-start'}>Arrastar início <strong>{pad(start)}</strong></label>
-        <input id={id+'-start'} aria-label="Arrastar início" type="range" min="0" max={max} step=".1" value={Math.min(max, Number(start)||0)} disabled={disabled} onChange={e => onStartChange(e.target.value)} />
+        <input id={id+'-start'} aria-label="Arrastar início" type="range" min={view.min} max={view.max} step=".01" value={Math.min(view.max,Math.max(view.min,Number(start)||0))} disabled={disabled} onChange={e => onStartChange(e.target.value)} />
         <label htmlFor={id+'-end'}>Arrastar fim <strong>{pad(end)}</strong></label>
-        <input id={id+'-end'} aria-label="Arrastar fim" type="range" min="0" max={max} step=".1" value={Math.min(max, Number(end)||0)} disabled={disabled} onChange={e => onEndChange(e.target.value)} />
+        <input id={id+'-end'} aria-label="Arrastar fim" type="range" min={view.min} max={view.max} step=".01" value={Math.min(view.max,Math.max(view.min,Number(end)||0))} disabled={disabled} onChange={e => onEndChange(e.target.value)} />
+      </div>
+      <div className="filmstrip-nudge" aria-label="Ajuste fino de início e fim">
+        <div><strong>Início</strong>
+          <button type="button" disabled={disabled||!duration} aria-label="Diminuir início em 0,1 segundo" onClick={()=>applyNudge('start',-.1)}>−0,1s</button>
+          <button type="button" disabled={disabled||!duration} aria-label="Aumentar início em 0,1 segundo" onClick={()=>applyNudge('start',.1)}>+0,1s</button>
+          <button type="button" disabled={disabled||!duration} aria-label="Aumentar início em 0,01 segundo" onClick={()=>applyNudge('start',.01)}>+0,01s</button>
+        </div>
+        <div><strong>Fim</strong>
+          <button type="button" disabled={disabled||!duration} aria-label="Diminuir fim em 0,1 segundo" onClick={()=>applyNudge('end',-.1)}>−0,1s</button>
+          <button type="button" disabled={disabled||!duration} aria-label="Aumentar fim em 0,1 segundo" onClick={()=>applyNudge('end',.1)}>+0,1s</button>
+          <button type="button" disabled={disabled||!duration} aria-label="Diminuir fim em 0,01 segundo" onClick={()=>applyNudge('end',-.01)}>−0,01s</button>
+        </div>
       </div>
       <div className="filmstrip-actions">
         <button type="button" className="filmstrip-button" disabled={disabled || !!current.error} onClick={() => onPreview({ start: Number(start), end: Number(end) })}>
           <Play size={15} aria-hidden="true"/> Prévia do trecho
         </button>
-        <button type="button" className="filmstrip-button filmstrip-add" disabled={!canAdd} onClick={() => onClipsChange(insertClip(clips, { start, end }))}>
-          <Plus size={15} aria-hidden="true"/> Adicionar à sequência
-        </button>
+        {editingIndex>=0 ? <>
+          <button type="button" className="filmstrip-button filmstrip-add" disabled={disabled||!!editingResult?.error}
+            onClick={saveEdit}><Check size={15} aria-hidden="true"/> Salvar ajuste do trecho {editingIndex+1}</button>
+          <button type="button" className="filmstrip-button" onClick={()=>setEditingIndex(-1)}>
+            <RotateCcw size={15} aria-hidden="true"/> Cancelar edição</button>
+        </> : <button type="button" className="filmstrip-button filmstrip-add" disabled={!canAdd}
+          onClick={() => onClipsChange(insertClip(clips,{start,end}))}>
+          <Plus size={15} aria-hidden="true"/> Adicionar à sequência</button>}
       </div>
       <div className="filmstrip-queue" aria-label="Sequência de trechos">
         <div className="filmstrip-queue-heading"><span><Film size={16} aria-hidden="true"/> Sequência de cortes</span><span>{clips.length}/{MAX_CLIPS} · {formatTotal}</span></div>
+        {editingIndex>=0 && <p role="status" className="filmstrip-edit-message">
+          Editando trecho {editingIndex+1}. Ajuste as marcas acima e clique em “Salvar ajuste”. {editingResult?.error || ''}
+        </p>}
         {clips.length === 0 ? <p className="filmstrip-hint">Adicione trechos para montar um vídeo com vários cortes. Sem trechos adicionados, a exportação usa apenas a seleção atual.</p> :
           <ol className="filmstrip-queue-list">
-            {clips.map((c, i) => <li key={i}>
+            {clips.map((c, i) => <li key={i} className={editingIndex===i?'filmstrip-queue-editing':''}>
               <strong>Trecho {i+1}</strong><span>{pad(c.start)} → {pad(c.end)}</span>
               <div className="filmstrip-queue-buttons">
+                <button type="button" aria-label={'Editar trecho '+(i+1)} onClick={()=>beginEdit(i)} disabled={disabled}>Editar</button>
                 <button type="button" aria-label={'Prévia do trecho ' + (i+1)} onClick={() => onPreview(c)} disabled={disabled}><Play size={15}/></button>
-                <button type="button" aria-label={'Subir trecho ' + (i+1)} onClick={() => onClipsChange(moveClip(clips,i,-1))} disabled={disabled || i===0}><ArrowUp size={15}/></button>
-                <button type="button" aria-label={'Descer trecho ' + (i+1)} onClick={() => onClipsChange(moveClip(clips,i,1))} disabled={disabled || i===clips.length-1}><ArrowDown size={15}/></button>
-                <button type="button" aria-label={'Remover trecho ' + (i+1)} onClick={() => onClipsChange(clips.filter((_,n)=>i!==n))} disabled={disabled}><Trash2 size={15}/></button>
+                <button type="button" aria-label={'Subir trecho ' + (i+1)} onClick={() => {onClipsChange(moveClip(clips,i,-1));setEditingIndex(-1);}} disabled={disabled || i===0}><ArrowUp size={15}/></button>
+                <button type="button" aria-label={'Descer trecho ' + (i+1)} onClick={() => {onClipsChange(moveClip(clips,i,1));setEditingIndex(-1);}} disabled={disabled || i===clips.length-1}><ArrowDown size={15}/></button>
+                <button type="button" aria-label={'Remover trecho ' + (i+1)} onClick={() => {onClipsChange(clips.filter((_,n)=>i!==n));setEditingIndex(-1);}} disabled={disabled}><Trash2 size={15}/></button>
               </div>
             </li>)}
           </ol>}

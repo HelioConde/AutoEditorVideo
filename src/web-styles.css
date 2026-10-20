@@ -122,3 +122,11 @@
 @media(max-width:800px){.web-story-workspace{grid-template-columns:1fr}}
 
 .web-captions{margin-top:18px}.web-video-area{position:relative}.web-video-area .video-caption-overlay{font-size:clamp(12px,2vw,19px)}
+
+/* Portable Web draft — metadata only, never raw media/photos. */
+.web-draft-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:24px 0 8px;padding:16px;background:#1d2b23;border:1px solid #426148;border-radius:12px}
+.web-draft-bar strong{font-size:12px;color:#e3f3d7}
+.web-draft-bar p{font-size:11px;line-height:1.6;color:#b7ccb5;margin:5px 0 0}
+.web-draft-bar button{flex-shrink:0;border:1px solid #688069;background:#293b2e;color:#d6e9c8;border-radius:9px;padding:10px 13px;font-size:11px;min-height:44px;font-weight:750}
+.web-draft-bar button:hover:not(:disabled){background:#3d5541}
+@media(max-width:560px){.web-draft-bar{align-items:flex-start;flex-direction:column}.web-draft-bar button{width:100%}}

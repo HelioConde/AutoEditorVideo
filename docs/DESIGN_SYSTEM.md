@@ -72,3 +72,10 @@ Tokens adicionais de UI em `src/editor-polish.css`:
 Aplicação por componente: altura interativa de 44px (mobile), fontes de campo >=16px (mobile), `text-wrap:balance` em títulos, quebra explícita de conteúdo importado e painel alvo de âncora com realce suave. Em telas estreitas, a barra `WorkbenchNav` pode rolar horizontalmente **apenas dentro dela**, nunca na página.
 
 Checklist QA desta revisão em `docs/UX_AUDIT_2026-10-20.md`. Capturas disponíveis como artefatos no GitHub Actions. Testes Playwright verificam responsividade 320–1920px, navegação, foco e preferência por movimento reduzido.
+
+## Edição fina e retomada do projeto (2.7)
+- `VideoTimeline` compartilha controles de zoom da régua, microajustes e edição de trechos entre web e desktop; não sinalizar zoom visual nos frames, pois só sliders têm janela ampliada.
+- Botões de ajuste mínimo 44px para mobile, nomes claros via aria-label, estado de edição com `role=status`.
+- `web-draft.js` grava um manifesto `autoeditor.project` v1 no `localStorage`, até 140 KB. Não armazenar ou transmitir media e imagens. Dados inválidos não substituem o último rascunho válido.
+- O usuário controla a retenção com `Limpar rascunho` e `Exportar projeto` (JSON). A recuperação automática não equivale a sincronização em nuvem ou conta de usuário.
+- Testes de precisão e rascunhos: `tests/unit/timeline-precision.test.mjs`, `tests/unit/web-draft.test.mjs`, `tests/web/timeline-draft.spec.js` e `tests/e2e/timeline-precision.spec.js`.

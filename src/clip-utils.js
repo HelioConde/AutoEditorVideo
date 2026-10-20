@@ -35,3 +35,30 @@ export function moveClip(queue, index, direction) {
   [result[index], result[target]] = [result[target], result[index]];
   return result;
 }
+
+/** Move a trim boundary in 10ms increments while retaining a valid 250ms clip. */
+export function nudgeBoundary({ start, end, duration, boundary, delta }) {
+  const a=Number(start),b=Number(end),d=Number(duration),n=Number(delta);
+  if(![a,b,d,n].every(Number.isFinite)||d<MIN_CLIP_SECONDS || !['start','end'].includes(boundary))
+    return {start:a,end:b};
+  const round=x=>Math.round(x*100)/100;
+  if(boundary==='start')return {start:round(Math.max(0,Math.min(b-MIN_CLIP_SECONDS,a+n))),end:b};
+  return {start:a,end:round(Math.max(a+MIN_CLIP_SECONDS,Math.min(d,b+n)))};
+}
+/** Apply an edited clip to one position without modifying the rest of the sequence. */
+export function replaceClip(queue,index,clip,{duration,maxTotal=600,maxEach=600}={}) {
+  if(!Array.isArray(queue)||index<0||index>=queue.length)return {error:'Trecho não encontrado.'};
+  const next=queue.map((item,i)=>i===index?{start:Number(clip.start),end:Number(clip.end)}:item);
+  return normalizeClips({segments:next,duration,maxTotal,maxEach});
+}
+/** Zoom of the trim sliders; filmstrip thumbnails continue showing full source. */
+export function zoomWindow({duration,start,end,zoom=1}) {
+  const d=Number(duration);
+  if(!Number.isFinite(d)||d<=0)return {min:0,max:1};
+  const factor=[1,2,4,8].includes(Number(zoom))?Number(zoom):1;
+  const window=Math.min(d,Math.max(.3,d/factor));
+  const a=Number(start),b=Number(end);
+  const mid=Math.max(0,Math.min(d,(Number.isFinite(a)&&Number.isFinite(b)?(a+b)/2:0)));
+  const min=Math.max(0,Math.min(d-window,mid-window/2));
+  return {min:Math.round(min*1000)/1000,max:Math.round((min+window)*1000)/1000};
+}
