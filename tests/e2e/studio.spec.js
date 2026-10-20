@@ -8,13 +8,13 @@ test('painel tem navegação clara, estado vazio e captura visual', async ({ pag
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /Bom criar começa aqui/ })).toBeVisible();
   await expect(page.getByRole('navigation', { name: 'Seções' })).toBeAttached();
-  await expect(page.getByRole('button', { name: /Novo projeto/ }).first()).toBeVisible();
+  await expect(page.locator('.topbar').getByRole('button', { name: /Novo projeto/ })).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath('painel.png'), fullPage: true, animations: 'disabled' });
 });
 
 test('criar projeto, navegar ao editor e voltar ao painel', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: /Novo projeto/ }).first().click();
+  await page.locator('.topbar').getByRole('button', { name: /Novo projeto/ }).click();
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.getByRole('textbox', { name: 'Nome do projeto' }).fill('Minha primeira edição');
   await page.getByRole('button', { name: 'Criar projeto', exact: true }).click();
@@ -27,7 +27,7 @@ test('criar projeto, navegar ao editor e voltar ao painel', async ({ page }) => 
 
 test('modal aceita teclado, valida nome e fecha com Escape', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: /Novo projeto/ }).first().click();
+  await page.locator('.topbar').getByRole('button', { name: /Novo projeto/ }).click();
   const input = page.getByRole('textbox', { name: 'Nome do projeto' });
   await expect(input).toBeFocused();
   await expect(page.getByRole('button', { name: 'Criar projeto', exact: true })).toBeDisabled();
@@ -59,7 +59,7 @@ test('pipeline real: importa vídeo de teste, define recorte e exporta', async (
   try {
     execFileSync('ffmpeg', ['-hide_banner','-loglevel','error','-f','lavfi','-i','color=c=blue:s=320x180:r=15','-t','1.5','-c:v','libx264','-pix_fmt','yuv420p','-y',sample], { timeout: 20000 });
     await page.goto('/');
-    await page.getByRole('button', { name: /Novo projeto/ }).first().click();
+    await page.locator('.topbar').getByRole('button', { name: /Novo projeto/ }).click();
     await page.getByRole('textbox', { name: 'Nome do projeto' }).fill('Teste de renderização');
     await page.getByRole('button', { name: 'Criar projeto', exact: true }).click();
     await page.locator('#media-file').setInputFiles(sample);
