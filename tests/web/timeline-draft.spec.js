@@ -10,7 +10,12 @@ test('rascunho local restaura roteiro e legenda sem armazenar mídia', async ({p
   await page.getByRole('button',{name:'Organizar cenas'}).click();
   await page.getByRole('button',{name:'Nova legenda'}).click();
   await page.getByRole('textbox',{name:'Texto da legenda'}).fill('Olá, edição local.');
-  await expect(page.locator('.web-draft-bar')).toContainText('Rascunho salvo neste navegador', {timeout:10000});
+  // Wait for the *latest* debounced edit, not a status from an earlier autosave.
+  await expect.poll(()=>page.evaluate(()=>{
+    const raw=localStorage.getItem('autoeditor:web-draft:v1');
+    if(!raw)return '';
+    return JSON.parse(raw).project?.edit?.subtitles?.[0]?.text||'';
+  }),{timeout:10000}).toBe('Olá, edição local.');
   const manifest=await page.evaluate(()=>JSON.parse(localStorage.getItem('autoeditor:web-draft:v1')));
   expect(manifest.project.edit.script).toContain('introdução');
   expect(JSON.stringify(manifest)).not.toContain('data:image');
