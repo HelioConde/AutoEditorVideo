@@ -63,3 +63,6 @@
 @media(prefers-reduced-motion:reduce) {
   .workbench-nav-link { transition: none; }
 }
+
+/* Programmatic focus and touch-emulated keyboard focus must be visible, too. */
+.workbench-nav-link:focus { outline:3px solid #d5f579; outline-offset:2px; }

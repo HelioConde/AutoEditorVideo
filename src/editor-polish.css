@@ -104,3 +104,26 @@ html { scroll-padding-top: 20px; }
   html { scroll-behavior: auto; }
   :is(.web-studio,.workbench-nav,.story-studio,.sub-studio) { animation: none; }
 }
+
+/* QA follow-up: base StoryStudio input rules are bundled after shared styles.
+ * Increase selector specificity so iOS-sized text is always >= 16px. */
+@media(max-width:600px) {
+  html body .story-studio > textarea,
+  html body .story-scene input,
+  html body .story-scene textarea,
+  html body .story-scene select,
+  html body .sub-time-fields input,
+  html body .sub-lines textarea,
+  html body .web-controls input,
+  html body .trim-fields input,
+  html body .modal input { font-size:16px; }
+}
+@media(max-width:380px) {
+  /* Preserve the menu and primary project action; elide redundant breadcrumb
+     text that otherwise pushes the header 10px beyond the 320px viewport. */
+  .topbar { padding-left:12px; padding-right:12px; gap:8px; }
+  .topbar .breadcrumb > span:first-child,
+  .topbar .breadcrumb > svg { display:none; }
+  .topbar .breadcrumb { min-width:0; }
+  .topbar .topbar-right { margin-left:auto; flex-shrink:0; }
+}
