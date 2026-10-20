@@ -48,13 +48,18 @@ export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS
       const ending=/[.!?]\s*$/u.test(selected.at(-1).text)?7:0;
       const hook=reasons.reduce((sum,x)=>sum+x.weight,0);
       const audioVisual=candidateSignalEvidence(signals,cues[i].start,cues[j].end,profile);
-      const score=Math.min(99,Math.round(16+focus+speech+fluency+intro+ending+hook+audioVisual.bonus));
+      const textScore=Math.round(16+focus+speech+fluency+intro+ending+hook);
+      // Leave reserved headroom for actual audio/visual evidence so strong
+      // transcripts do not all saturate at 99 and obscure meaningful signals.
+      const score=audioVisual.available ?
+        Math.min(99,Math.min(86,textScore)+Math.min(13,audioVisual.bonus)) :
+        Math.min(99,textScore);
       const title=selected[0].text.replace(/[\n\r]/gu,' ').trim().slice(0,72);
       suggestions.push({
         start:round(cues[i].start),end:round(cues[j].end),
         duration:round(length),score,title,
         reason:[reasons[0]?.label||'Fala contínua com duração adequada',...audioVisual.reasons].join(' · '),
-        evidence:{text:Math.round(16+focus+speech+fluency+intro+ending+hook),audioPeaks:audioVisual.highEnergy,
+        evidence:{text:audioVisual.available?Math.min(86,textScore):Math.min(99,textScore),audioPeaks:audioVisual.highEnergy,
           sceneChanges:audioVisual.visualChanges,signalBonus:audioVisual.bonus,source:audioVisual.available?'texto + áudio/vídeo':'somente texto'},
         transcript:script.slice(0,360)
       });
