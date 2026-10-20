@@ -13,3 +13,5 @@
 /* Explicit mobile drawer close button avoids hit-testing the overlay behind the drawer. */
 .sidebar-close{display:none}
 @media(max-width:850px){.sidebar-close{display:grid;margin-left:auto;width:35px;height:35px}}
+
+.subtitle-workspace{display:grid;gap:11px;margin-bottom:18px}.sub-burn{display:flex;align-items:center;gap:10px;color:#cfe8c0;font-size:12px;cursor:pointer}.sub-burn input{width:18px;height:18px;accent-color:#d5f579}.video-caption-overlay{position:absolute;left:8%;right:8%;bottom:48px;pointer-events:none;text-align:center;white-space:pre-wrap;color:#fff;font-size:clamp(13px,2vw,22px);font-weight:800;text-shadow:0 1px 4px #000,1px 2px 8px #000;z-index:2}.preview-video,.video-preview,.web-video-area{position:relative}

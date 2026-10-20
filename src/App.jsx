@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import VideoTimeline from './components/VideoTimeline.jsx';
+import SubtitleStudio from './components/SubtitleStudio.jsx';
+import { validateSubtitles } from './subtitles.js';
 import { normalizeClips } from './clip-utils.js';
 import ProjectExchange from './components/ProjectExchange.jsx';
 import StoryStudio from './components/StoryStudio.jsx';
@@ -95,6 +97,10 @@ export default function App() {
   const [clips, setClips] = useState([]);
   const [script, setScript] = useState('');
   const [scenes, setScenes] = useState([]);
+  const [subtitles,setSubtitles] = useState([]);
+  const [transcriptionRevision,setTranscriptionRevision] = useState(null);
+  const [burnSubtitles,setBurnSubtitles] = useState(false);
+  const [previewTime,setPreviewTime] = useState(0);
   const [narrating, setNarrating] = useState(false);
   const [voiceEngine, setVoiceEngine] = useState('system');
   const [scenePictures, setScenePictures] = useState([]);
@@ -105,7 +111,7 @@ export default function App() {
   const inputRef = useRef(null);
   const current = projects.find(p => p.id === currentId);
   const ready = projects.reduce((sum,p) => sum + (p.exports || []).filter(e => e.status === 'ready').length, 0);
-  const processing = projects.some(p => (p.exports || []).some(e => e.status === 'processing'));
+  const processing = projects.some(p => (p.exports || []).some(e => e.status === 'processing') || p.transcription?.status==='processing');
 
   async function refresh(silent = false) {
     try {
@@ -139,20 +145,31 @@ export default function App() {
     setAspect(edit?.aspect || '9:16');
     setScript(edit?.script || '');
     setScenes(edit?.scenes || []);
+    setSubtitles(edit?.subtitles || []);
+    setTranscriptionRevision(current?.transcription?.status==='ready' ? current.transcription.updatedAt : null);
+    setBurnSubtitles(edit?.burnSubtitles || false);
+    setPreviewTime(0);
     setVoiceEngine(edit?.voiceEngine || 'system');
     setScenePictures([]);
     playbackEnd.current = null;
   }, [currentId, current?.media?.id]);
   useEffect(() => {
-    if (!currentId || !current) return;
+    if(current?.transcription?.status==='ready' && current?.edit?.subtitles) {
+      setSubtitles(current.edit.subtitles);
+      setTranscriptionRevision(current.transcription.updatedAt);
+    }
+  },[currentId,current?.transcription?.status,current?.transcription?.updatedAt]);
+  useEffect(() => {
+    if (!currentId || !current || current.transcription?.status==='processing') return;
     const timer=window.setTimeout(async()=>{
       const payload=createProjectFile({name:current.name,aspect,media:current.media||current.reference,
-        start:Number(start)||0,end:Number(end)||0,clips,script,scenes,voiceEngine});
+        start:Number(start)||0,end:Number(end)||0,clips,script,scenes,voiceEngine,subtitles,burnSubtitles});
+      payload.transcriptionVersion=transcriptionRevision;
       try { await api('/projects/'+currentId+'/edit',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); }
       catch(e){ console.warn('Não foi possível salvar a edição:',e.message); }
     },1000);
     return ()=>window.clearTimeout(timer);
-  }, [currentId, current?.media?.id, aspect, start, end, clips, script, scenes, voiceEngine]);
+  }, [currentId, current?.media?.id, aspect, start, end, clips, script, scenes, voiceEngine,subtitles,burnSubtitles,transcriptionRevision]);
 
   useEffect(() => { document.title = (page === 'editor' ? 'Editor' : 'Painel') + ' · AutoEditor Studio'; }, [page]);
   function openProject(id) { setCurrentId(id); setPage('editor'); setSidebarOpen(false); window.scrollTo(0,0); }
@@ -199,7 +216,7 @@ export default function App() {
     if (!current) return;
     setBusy(true);
     try {
-      const data = await api('/projects/' + current.id + '/exports', json({ start: Number(start), end: Number(end), aspect, ...(clips.length ? { segments: clips } : {}) }));
+      const data = await api('/projects/' + current.id + '/exports', json({ start: Number(start), end: Number(end), aspect, subtitles, burnSubtitles, ...(clips.length ? { segments: clips } : {}) }));
       setProjects(previous => previous.map(p => p.id === data.project.id ? data.project : p));
       notice('Exportação iniciada. Você pode continuar no estúdio.');
     } catch (e) { notice(e.message, 'error'); }
@@ -207,11 +224,19 @@ export default function App() {
   }
   async function importPortableProject(data) {
     const manifest=createProjectFile({name:data.name,aspect:data.aspect,media:data.media,
-      start:data.edit.start,end:data.edit.end,clips:data.edit.clips,script:data.edit.script,scenes:data.edit.scenes,voiceEngine:data.edit.voiceEngine});
+      start:data.edit.start,end:data.edit.end,clips:data.edit.clips,script:data.edit.script,scenes:data.edit.scenes,voiceEngine:data.edit.voiceEngine,subtitles:data.edit.subtitles,burnSubtitles:data.edit.burnSubtitles});
     const result=await api('/projects/import',json(manifest));
     setProjects(previous=>[result.project,...previous]);
     openProject(result.project.id);
     notice('Projeto importado. Reimporte a mídia original para ativar os cortes.');
+  }
+  async function requestTranscription() {
+    if(!current?.media)return;
+    try{
+      const result=await api('/projects/'+current.id+'/transcribe',json({}));
+      setProjects(previous=>previous.map(p=>p.id===result.project.id?result.project:p));
+      notice('Transcrição iniciada no seu computador. Revise os textos antes de exportar.');
+    }catch(e){notice(e.message,'error');}
   }
   async function renderNarratedVideo(sceneList) {
     if (!current || narrating) return;
@@ -226,7 +251,7 @@ export default function App() {
   }
   const exportList = current?.exports || [];
   const exportPlan = normalizeClips({ segments: clips.length ? clips : undefined, start, end, duration: current?.media?.duration || 0, maxTotal: 600 });
-  const canExport = Boolean(current?.media && health?.ffmpeg && !exportPlan.error && !busy);
+  const canExport = Boolean(current?.media && health?.ffmpeg && !exportPlan.error && !validateSubtitles(subtitles).error && !busy && current.transcription?.status!=='processing');
   return <>
     <a className="skip-link" href="#main">Pular para o conteúdo</a>
     <div className="app-layout">
@@ -270,18 +295,31 @@ export default function App() {
           </> : <section className="editor-page" aria-labelledby="editor-title">
             <div className="editor-heading"><button className="back-link" onClick={showHome}><ArrowLeft size={17}/> Voltar ao painel</button><div className="editor-title-row"><div><span className="section-kicker">WORKSPACE / EDITOR</span><h1 id="editor-title">{current?.name || 'Projeto não encontrado'}</h1><p>Um fluxo simples para transformar sua gravação em vídeo.</p></div><span className="editor-version">Editor beta</span></div></div>
             {!current ? <div className="empty-projects"><p>Selecione ou crie um projeto para começar.</p><button className="btn btn-primary" onClick={showHome}>Ver meus projetos</button></div> :
-            <div className="editor-grid"><div className="editor-primary"><div className="panel preview-panel"><div className="panel-title"><span><Film size={17} aria-hidden="true"/> Pré-visualização</span><span className="panel-subtitle">{current.media ? current.media.originalName : 'Nenhuma mídia importada'}</span></div>{current.media ? <div className="video-stage"><video ref={playerVideoRef} controls preload="metadata" onTimeUpdate={stopAtSegmentEnd} key={current.media.id} src={'/api/projects/' + current.id + '/media'} aria-label="Vídeo carregado" /></div> : <EmptyPreview />}</div>
+            <div className="editor-grid"><div className="editor-primary"><div className="panel preview-panel"><div className="panel-title"><span><Film size={17} aria-hidden="true"/> Pré-visualização</span><span className="panel-subtitle">{current.media ? current.media.originalName : 'Nenhuma mídia importada'}</span></div>{current.media ? <div className="video-stage"><video ref={playerVideoRef} controls preload="metadata" onTimeUpdate={e=>{stopAtSegmentEnd(e);setPreviewTime(e.currentTarget.currentTime);}} key={current.media.id} src={'/api/projects/' + current.id + '/media'} aria-label="Vídeo carregado" />
+                  {subtitles.some(c=>previewTime>=c.start&&previewTime<c.end)&&
+                    <div className="video-caption-overlay" aria-hidden="true">{subtitles.find(c=>previewTime>=c.start&&previewTime<c.end)?.text}</div>}
+                  </div> : <EmptyPreview />}</div>
               <div className="panel trim-panel"><div className="panel-title"><span><Scissors size={18} aria-hidden="true"/> Definir trecho</span><span className="panel-subtitle">Selecione os quadros e organize cortes</span></div><VideoTimeline source={current.media ? '/api/projects/' + current.id + '/media' : null}
                   duration={current.media?.duration || 0} start={start} end={end}
                   onStartChange={setStart} onEndChange={setEnd} clips={clips} onClipsChange={setClips}
                   onPreview={previewSegment} disabled={!current.media || busy} maxTotal={600} variant="desktop" /><div className="trim-fields"><label>Início <span>(segundos)</span><input type="number" aria-label="Início em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={start} onChange={e=>setStart(e.target.value)} /></label><label>Fim <span>(segundos)</span><input type="number" aria-label="Fim em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={end} onChange={e=>setEnd(e.target.value)} /></label><div className="duration-pill"><Clock3 size={15}/> {formatTime(Number(end)-Number(start))}</div></div>{current.media && Number(end) <= Number(start) && <p className="field-error" role="alert">O fim deve ser maior que o início.</p>}</div>
+              <div className="subtitle-workspace">
+                <SubtitleStudio mode="desktop" subtitles={subtitles} onChange={setSubtitles}
+                  mediaDuration={current.media?.duration||0} previewTime={previewTime}
+                  disabled={busy||current.transcription?.status==='processing'} transcribing={current.transcription?.status==='processing'}
+                  whisperAvailable={Boolean(health?.whisper)} onTranscribe={requestTranscription}/>
+                <label className="sub-burn"><input type="checkbox" checked={burnSubtitles}
+                  disabled={!current.media||busy} onChange={e=>setBurnSubtitles(e.target.checked)}/>
+                  Gravar legendas no MP4 dos cortes (FFmpeg desktop)</label>
+                {current.transcription?.status==='error' && <p className="field-error" role="alert">{current.transcription.error}</p>}
+              </div>
               <StoryStudio mode="desktop" script={script} scenes={scenes} aspect={aspect}
                 voiceEngine={voiceEngine} onVoiceEngineChange={setVoiceEngine} voiceCapabilities={health?.voices}
                 scenePictures={scenePictures} onScenePicturesChange={setScenePictures}
                 onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}}
                 onRender={renderNarratedVideo} renderBusy={narrating} />
               <ProjectExchange name={current.name} aspect={aspect} media={current.media||current.reference}
-                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine}
+                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine} subtitles={subtitles} burnSubtitles={burnSubtitles}
                 onImport={importPortableProject} disabled={busy||narrating} />
               {exportList.length > 0 && <div className="panel exports-panel"><div className="panel-title"><span><ArrowDownToLine size={18}/> Exportações</span><span className="panel-subtitle">{exportList.length} arquivo(s)</span></div><ul className="export-list">{exportList.map(job=><li key={job.id}><span className="export-status-icon">{job.status==='ready'?<CheckCircle2 size={19}/>:job.status==='processing'?<LoaderCircle className="spin" size={19}/>:<CircleAlert size={19}/>}</span><div><strong>{job.kind==='narration'?'Vídeo narrado':job.aspect==='9:16'?'Vídeo vertical':'Vídeo horizontal'}</strong><small>{job.status==='ready'?'Exportação concluída':job.status==='processing'?'Processando vídeo…':job.error || 'Exportação interrompida'}</small></div>{job.status==='ready'&&<a className="export-download" href={'/api/projects/'+current.id+'/exports/'+job.id+'/download'} download aria-label="Baixar vídeo exportado"><ArrowDownToLine size={17}/></a>}</li>)}</ul></div>}
             </div>

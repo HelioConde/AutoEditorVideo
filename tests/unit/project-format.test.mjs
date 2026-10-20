@@ -48,3 +48,12 @@ test('temas, transições e motor neural são preservados no formato v1',()=>{
   assert.throws(()=>parseProjectFile({...file,edit:{...file.edit,voiceEngine:'internet'}}),/Motor de voz/);
   assert.throws(()=>parseProjectFile({...file,edit:{...file.edit,scenes:[{...scenes[0],transition:'explosion'}]}}),/Transição/);
 });
+
+test('projetos portáteis incluem legendas SRT e estado opcional do burn-in',()=>{
+  const cues=[{start:0,end:2,text:'Legenda em português'}];
+  const x=createProjectFile({name:'Teste legenda',subtitles:cues,burnSubtitles:true});
+  const parsed=parseProjectFile(x);
+  assert.deepEqual(parsed.edit.subtitles,cues);
+  assert.equal(parsed.edit.burnSubtitles,true);
+  assert.throws(()=>parseProjectFile({...x,edit:{...x.edit,subtitles:[{start:0,end:-1,text:'x'}]}}),/tempos/);
+});

@@ -54,6 +54,8 @@ jobs:
       - run: npm run test:e2e
         env:
           CI: 'true'
+          WHISPER_BIN: ${{ github.workspace }}/tests/fixtures/mock-whisper-cli.mjs
+          WHISPER_MODEL: ${{ github.workspace }}/tests/fixtures/mock-whisper-model.bin
       - uses: actions/upload-artifact@v4
         if: always()
         with:

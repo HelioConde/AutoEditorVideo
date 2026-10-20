@@ -117,3 +117,23 @@ test('cenas mantêm tema e transição e aceitam imagem local sem transferi-la n
   expect(JSON.stringify(manifest)).not.toContain('data:image');
   expect(manifest.edit.voiceEngine).toBe('system');
 });
+
+test('legendas SRT são editáveis e preservadas no projeto web',async({page})=>{
+  await page.goto('/');
+  const input=page.locator('.sub-studio input[type=file]');
+  await input.setInputFiles({name:'legendas.srt',mimeType:'text/plain',
+    buffer:Buffer.from('1\n00:00:00,200 --> 00:00:01,500\nOlá, vídeo!\n','utf8')});
+  await expect(page.getByRole('textbox',{name:'Texto da legenda'})).toHaveValue('Olá, vídeo!');
+  const [download]=await Promise.all([
+    page.waitForEvent('download'),
+    page.getByRole('button',{name:'Baixar SRT'}).click()
+  ]);
+  expect(download.suggestedFilename()).toBe('autoeditor-legendas.srt');
+  const [projectDownload]=await Promise.all([
+    page.waitForEvent('download'),
+    page.getByRole('button',{name:'Exportar projeto'}).click()
+  ]);
+  const json=JSON.parse(fs.readFileSync(await projectDownload.path(),'utf8'));
+  expect(json.edit.subtitles[0].text).toBe('Olá, vídeo!');
+  expect(json.edit.burnSubtitles).toBe(false);
+});

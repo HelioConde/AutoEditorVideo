@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import VideoTimeline from './components/VideoTimeline.jsx';
+import SubtitleStudio from './components/SubtitleStudio.jsx';
 import { normalizeClips } from './clip-utils.js';
 import ProjectExchange from './components/ProjectExchange.jsx';
 import StoryStudio from './components/StoryStudio.jsx';
@@ -42,6 +43,9 @@ export default function WebApp() {
   const [clips, setClips] = useState([]);
   const [script,setScript] = useState('');
   const [scenes,setScenes] = useState([]);
+  const [subtitles,setSubtitles] = useState([]);
+  const [burnSubtitles,setBurnSubtitles] = useState(false);
+  const [previewTime,setPreviewTime] = useState(0);
   const [voiceEngine,setVoiceEngine] = useState('system');
   const [scenePictures,setScenePictures] = useState([]);
   const [reference,setReference] = useState(null);
@@ -177,6 +181,7 @@ export default function WebApp() {
     setProjectName(incoming.name);
     setAspect(incoming.aspect);
     setScript(edit.script);setScenes(edit.scenes);setVoiceEngine(edit.voiceEngine || 'system');
+    setSubtitles(edit.subtitles||[]);setBurnSubtitles(edit.burnSubtitles||false);
     setScenePictures([]);
     setClips(edit.clips);setStart(edit.start);setEnd(edit.end);
     setReference(incoming.media);
@@ -233,7 +238,9 @@ export default function WebApp() {
                     <strong>Comece com um vídeo</strong>
                     <span>Escolha um MP4 ou WebM com até 30 MB e 2 minutos.</span>
                     <span className="web-upload-cta">Escolher arquivo <ArrowRight size={17} aria-hidden="true"/></span>
-                  </label> : <div className="web-video-area"><video ref={videoRef} controls playsInline preload="metadata" src={previewUrl || undefined} onLoadedMetadata={onMetadata} onError={onVideoError} onTimeUpdate={stopAtSegmentEnd} aria-label="Pré-visualização do vídeo selecionado" /></div>}
+                  </label> : <div className="web-video-area"><video ref={videoRef} controls playsInline preload="metadata" src={previewUrl || undefined} onLoadedMetadata={onMetadata} onError={onVideoError} onTimeUpdate={e=>{stopAtSegmentEnd(e);setPreviewTime(e.currentTarget.currentTime);}} aria-label="Pré-visualização do vídeo selecionado" />
+                  {subtitles.some(c=>previewTime>=c.start&&previewTime<c.end) &&
+                    <div className="video-caption-overlay" aria-hidden="true">{subtitles.find(c=>previewTime>=c.start&&previewTime<c.end)?.text}</div>}</div>}
                   <input id={inputId} ref={fileInput} className="visually-hidden" type="file" accept=".mp4,.webm,video/mp4,video/webm" disabled={busy} onChange={e => selectFile(e.target.files?.[0])}/>
                   {file && <div className="web-file-row"><FileVideo2 size={21} aria-hidden="true"/><div><strong title={file.name}>{file.name}</strong><span>{size(file.size)} {duration ? '· ' + minutes(duration) : '· Lendo duração…'}</span></div><Check size={17} aria-hidden="true"/></div>}
                 </div>
@@ -280,12 +287,14 @@ export default function WebApp() {
                 <div className="web-privacy"><ShieldCheck size={23} aria-hidden="true"/><div><strong>Seus arquivos, seu controle.</strong><p>Vídeos são processados no navegador. O motor WebAssembly é baixado de um CDN; o arquivo de vídeo não é enviado ao CDN nem ao GitHub.</p></div></div>
               </div>
             </div>
+            <div className="web-captions"><SubtitleStudio mode="web" subtitles={subtitles} onChange={setSubtitles}
+              mediaDuration={duration} previewTime={previewTime} disabled={busy} /></div>
             <div className="web-story-workspace">
               <StoryStudio mode="web" aspect={aspect} script={script} scenes={scenes}
                 scenePictures={scenePictures} onScenePicturesChange={setScenePictures}
                 onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}} />
               <ProjectExchange name={projectName} aspect={aspect} media={file?{name:file.name,size:file.size,duration}:reference}
-                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine}
+                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine} subtitles={subtitles} burnSubtitles={burnSubtitles}
                 onImport={importPortableProject} disabled={busy} />
             </div>
           </section>

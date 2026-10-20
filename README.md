@@ -112,3 +112,15 @@ O arquivo de configuração **`pt_BR-faber-medium.onnx.json` deve ficar ao lado 
 Cada cena permite escolher um dos seis temas (floresta, oceano, crepúsculo, âmbar, menta, ardósia), uma transição **fade suave** ou **corte direto**, e carregar uma imagem de fundo JPG/PNG/WebP de até **2 MB**. O editor compõe título e narração sobre o fundo localmente; no desktop, isso vira uma cena no MP4. As imagens são tratadas na memória e **não são armazenadas nem transferidas no projeto JSON**; escolha-as novamente após importar ou recarregar.
 
 A renderização agora aumenta automaticamente a duração da cena quando a fala é mais longa que o número definido, para não cortar frases sem aviso. Há um limite de 65 s de fala por cena; se excedido, divida o texto. Transições fade escurecem a entrada e a saída em aproximadamente 350 ms, sem sobreposição de cenas. A prévia de áudio do navegador pode ter voz diferente do Piper utilizado na exportação.
+
+## Legendas e Whisper.cpp local (2.5 beta)
+
+As duas versões agora têm um editor de legendas: importação **SRT ou WebVTT**, edição de texto e horários, pré-visualização conforme o vídeo avança e download separado em `.srt`. Até 120 legendas e uma hora de timestamps; os textos são salvos no `.autoeditor.json` compartilhado. No **desktop**, marque **Gravar legendas no MP4 dos cortes** para que FFmpeg use libass e incorpore texto ao arquivo final. Para vários cortes, os tempos das legendas são remapeados à ordem da sequência. Se FFmpeg não possuir o filtro `subtitles`/libass, desmarque a opção e use o SRT separado. **Na web**, legendas são somente prévia e download separado, não incorporadas ao MP4 do navegador.
+
+A opção **Transcrever áudio** no desktop utiliza um executável Whisper.cpp local (`whisper-cli`), sem enviar dados a serviços de terceiros. Para habilitar, instale whisper.cpp e um modelo multilíngue GGML em seu PC; no Windows configure, por exemplo:
+```powershell
+$env:WHISPER_BIN = "C:\\whisper.cpp\\build\\bin\\Release\\whisper-cli.exe"
+$env:WHISPER_MODEL = "C:\\whisper.cpp\\models\\ggml-base.bin"
+npm run dev
+```
+O editor reconhece o recurso quando modelo e CLI estão disponíveis. Áudio de arquivos de até 10 minutos é convertido em WAV 16 kHz mono pelo FFmpeg e transcrito localmente em português. Revise o texto e os horários, pois modelos de reconhecimento de fala podem errar. Os testes de CI usam um **simulador da interface CLI**, não um modelo Whisper real. Modelos não são distribuídos nem baixados automaticamente pelo aplicativo.

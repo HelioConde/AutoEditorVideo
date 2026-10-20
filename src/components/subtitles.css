@@ -1,0 +1,23 @@
+.sub-studio{background:#1d2922;border:1px solid #435647;border-radius:14px;padding:18px;display:grid;gap:12px;color:#eaf3df;min-width:0}
+.sub-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sub-head h2{font-size:18px;margin:6px 0;display:flex;align-items:center;gap:8px}
+.sub-head h2 svg{color:#d5f579}.sub-count{font-size:11px;color:#c3dba9}
+.sub-studio>p{margin:0;font-size:11px;color:#abbeb0;line-height:1.7}
+.sub-toolbar{display:flex;flex-wrap:wrap;gap:8px}
+.sub-toolbar button,.sub-whisper button{border:1px solid #587a5b;background:#2e4837;color:#e2f5d3;padding:9px 11px;border-radius:9px;min-height:41px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:11px;font-weight:700}
+.sub-toolbar button:hover:not(:disabled),.sub-whisper button:hover:not(:disabled){background:#3d5a41}
+.sub-studio button:disabled{opacity:.44;cursor:not-allowed}
+.sub-whisper{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid #405845;background:#22362a;padding:13px;border-radius:10px}
+.sub-whisper>div{display:grid;gap:7px;min-width:0}
+.sub-whisper strong{font-size:11px;display:flex;gap:7px;align-items:center}
+.sub-whisper strong svg{color:#d5f579}.sub-whisper small{font-size:10px;color:#adbea9;line-height:1.6}
+.sub-preview{padding:13px;border-radius:10px;background:#0e1713;display:grid;gap:6px;text-align:center;min-height:75px;justify-content:center}
+.sub-preview span{font-size:10px;color:#aac2ac}.sub-preview strong{font-size:13px;font-weight:800;color:#f5f9ec}
+.sub-lines{margin:0;padding:0;display:grid;gap:9px;list-style:none;max-height:440px;overflow:auto}
+.sub-lines li{padding:12px;border:1px solid #435e49;border-radius:10px;background:#24382c;display:grid;gap:9px}
+.sub-line-head{display:flex;align-items:center;justify-content:space-between}.sub-line-head strong{font-size:11px}.sub-line-head button{min-height:30px;min-width:30px;background:transparent;border:0;color:#d3eab7}
+.sub-time-fields{display:flex;gap:11px}.sub-line-head~label,.sub-time-fields label{display:grid;gap:6px;flex:1;font-size:11px;color:#d4e4cc}
+.sub-time-fields input,.sub-lines textarea{min-height:37px;min-width:0;width:100%;border-radius:8px;border:1px solid #5c7360;background:#101d15;color:#f0f4e9;font-family:inherit;font-size:13px;padding:8px}
+.sub-lines textarea{resize:vertical;min-height:59px}
+.sub-studio .sub-error{color:#ffc1ad}.sub-studio .sub-notice{color:#c9f1ac}
+@media(max-width:550px){.sub-studio{padding:12px}.sub-toolbar button{flex:1}.sub-whisper{flex-direction:column;align-items:stretch}.sub-time-fields input{font-size:16px}}
