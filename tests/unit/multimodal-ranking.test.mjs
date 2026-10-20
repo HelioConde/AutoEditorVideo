@@ -34,7 +34,7 @@ test('multimodal ranking boosts meaningful loud moments and explains evidence',(
     scenes:[17.5,19]
   };
   const base=rankShortsFromTranscript(cues,{duration:30,maxClips:1});
-  const ranked=rankShortsFromTranscript(cues,{duration:25,maxClips:1,signals,profile:'gameplay'});
+  const ranked=rankShortsFromTranscript(cues,{duration:30,maxClips:1,signals,profile:'gameplay'});
   assert.equal(base.error,null);
   assert.equal(ranked.error,null);
   assert.equal(ranked.candidates[0].start,16);
