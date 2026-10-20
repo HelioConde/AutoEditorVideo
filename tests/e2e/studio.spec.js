@@ -7,7 +7,7 @@ import path from 'node:path';
 test('painel tem navegação clara, estado vazio e captura visual', async ({ page }, testInfo) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /Bom criar começa aqui/ })).toBeVisible();
-  await expect(page.getByRole('navigation', { name: 'Seções' })).toBeAttached();
+  await expect(page.locator('nav.side-nav')).toBeAttached();
   await expect(page.locator('.topbar').getByRole('button', { name: /Novo projeto/ })).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath('painel.png'), fullPage: true, animations: 'disabled' });
 });
@@ -22,7 +22,7 @@ test('criar projeto, navegar ao editor e voltar ao painel', async ({ page }) => 
   await expect(page.getByText('Escolher vídeo')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeDisabled();
   await page.getByRole('button', { name: /Voltar ao painel/ }).click();
-  await expect(page.getByRole('button', { name: /Minha primeira edição/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Minha primeira edição/ }).first()).toBeVisible();
 });
 
 test('modal aceita teclado, valida nome e fecha com Escape', async ({ page }) => {

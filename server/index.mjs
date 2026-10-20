@@ -128,7 +128,7 @@ export function createApp() {
     const project = findProject(req.params.id);
     if (!project?.media) return res.status(404).json({ error: 'Vídeo não encontrado.' });
     res.type(path.extname(project.media.fileName));
-    res.sendFile(path.join(UPLOADS, project.id, project.media.fileName));
+    res.sendFile(path.join(UPLOADS, project.id, project.media.fileName), { dotfiles: 'allow' });
   });
   app.post('/api/projects/:id/exports', (req, res) => {
     const project = findProject(req.params.id);
@@ -149,7 +149,7 @@ export function createApp() {
   app.get('/api/projects/:id/exports/:jobId/download', (req, res) => {
     const project = findProject(req.params.id), job = project?.exports.find(e => e.id === req.params.jobId);
     if (!project || !job || job.status !== 'ready') return res.status(404).json({ error: 'Exportação não disponível.' });
-    res.download(path.join(UPLOADS, project.id, job.filename), 'autoeditor-' + job.id.slice(0,8) + '.mp4');
+    res.download(path.join(UPLOADS, project.id, job.filename), 'autoeditor-' + job.id.slice(0,8) + '.mp4', { dotfiles: 'allow' });
   });
   app.use('/api', (_req,res) => res.status(404).json({ error: 'Rota não encontrada.' }));
   const dist = path.join(HERE, '..', 'dist');
