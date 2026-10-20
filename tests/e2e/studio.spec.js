@@ -17,7 +17,7 @@ test('criar projeto, navegar ao editor e voltar ao painel', async ({ page }) => 
   await page.locator('.topbar').getByRole('button', { name: /Novo projeto/ }).click();
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.getByRole('textbox', { name: 'Nome do projeto' }).fill('Minha primeira edição');
-  await page.getByRole('button', { name: 'Criar projeto', exact: true }).click();
+  await page.getByRole('dialog').getByRole('button', { name: 'Criar projeto', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Minha primeira edição' })).toBeVisible();
   await expect(page.getByText('Escolher vídeo')).toBeVisible();
   await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeDisabled();
@@ -30,9 +30,9 @@ test('modal aceita teclado, valida nome e fecha com Escape', async ({ page }) =>
   await page.locator('.topbar').getByRole('button', { name: /Novo projeto/ }).click();
   const input = page.getByRole('textbox', { name: 'Nome do projeto' });
   await expect(input).toBeFocused();
-  await expect(page.getByRole('button', { name: 'Criar projeto', exact: true })).toBeDisabled();
+  await expect(page.getByRole('dialog').getByRole('button', { name: 'Criar projeto', exact: true })).toBeDisabled();
   await input.fill('A');
-  await expect(page.getByRole('button', { name: 'Criar projeto', exact: true })).toBeDisabled();
+  await expect(page.getByRole('dialog').getByRole('button', { name: 'Criar projeto', exact: true })).toBeDisabled();
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
@@ -61,13 +61,17 @@ test('pipeline real: importa vídeo de teste, define recorte e exporta', async (
     await page.goto('/');
     await page.locator('.topbar').getByRole('button', { name: /Novo projeto/ }).click();
     await page.getByRole('textbox', { name: 'Nome do projeto' }).fill('Teste de renderização');
-    await page.getByRole('button', { name: 'Criar projeto', exact: true }).click();
+    await page.getByRole('dialog').getByRole('button', { name: 'Criar projeto', exact: true }).click();
     await page.locator('#media-file').setInputFiles(sample);
     await expect(page.getByText('Vídeo importado e pronto para editar.')).toBeVisible({ timeout: 30000 });
     await page.getByRole('spinbutton', { name: 'Início em segundos' }).fill('0.1');
     await page.getByRole('spinbutton', { name: 'Fim em segundos' }).fill('1.0');
     await page.getByRole('button', { name: 'Exportar vídeo' }).click();
     await expect(page.getByText('Exportação concluída')).toBeVisible({ timeout: 90_000 });
+    const downloadPath = await page.getByRole('link', { name: 'Baixar vídeo exportado' }).getAttribute('href');
+    const mediaResponse = await page.request.get(downloadPath);
+    expect(mediaResponse.status(), await mediaResponse.text().catch(() => 'download falhou')).toBe(200);
+    expect(mediaResponse.headers()['content-type']).toContain('video/mp4');
     const [download] = await Promise.all([
       page.waitForEvent('download'),
       page.getByRole('link', { name: 'Baixar vídeo exportado' }).click()
