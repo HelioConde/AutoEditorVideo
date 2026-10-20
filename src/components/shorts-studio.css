@@ -1,0 +1,26 @@
+.shorts-studio{border:1px solid #5a7058;border-radius:14px;background:linear-gradient(145deg,#1b2b22,#202a21);padding:20px;display:grid;gap:16px}
+.shorts-studio-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.shorts-studio h2{display:flex;align-items:center;gap:9px;font-size:19px;letter-spacing:-.03em;line-height:1.35;color:#f0f6e5;margin:8px 0}
+.shorts-studio h2 svg{color:#d5f579;flex-shrink:0}
+.shorts-studio-head p,.shorts-note,.shorts-guidance{font-size:11px;line-height:1.7;color:#bbcfb8;margin:0}
+.shorts-local{font-size:10px;font-weight:800;border:1px solid #73916a;border-radius:20px;padding:7px 11px;white-space:nowrap;color:#d5f579}
+.shorts-empty{display:flex;align-items:center;gap:13px;background:#2b4030;border-radius:10px;padding:14px}
+.shorts-empty>svg{color:#d5f579;flex-shrink:0}.shorts-empty>div{flex:1;min-width:0}
+.shorts-empty strong{font-size:12px}.shorts-empty p{font-size:11px;line-height:1.7;color:#c0d4be}
+.shorts-empty button,.shorts-actions button,.shorts-candidate button,.shorts-generate{min-height:44px;border-radius:9px;padding:10px 14px;font-size:12px;font-weight:800;cursor:pointer}
+.shorts-empty button,.shorts-actions button{border:1px solid #d5f579;color:#1a291d;background:#d5f579;display:inline-flex;align-items:center;gap:9px}
+.shorts-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.shorts-actions>span{font-size:11px;color:#b1c8b0}
+.shorts-studio button:disabled{opacity:.45;cursor:not-allowed}
+.shorts-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:12px}
+.shorts-candidate{border-radius:10px;background:#26362a;border:1px solid #506a51;padding:15px;display:flex;flex-direction:column;gap:9px;min-width:0}
+.shorts-candidate-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.shorts-candidate-top strong{font-size:12px}.shorts-candidate-top span{font-size:10px;color:#d5f579}
+.shorts-reason{font-size:11px;color:#d0e7b6;margin:0}
+.shorts-transcript{color:#d5e2d3;font-size:11px;line-height:1.6;overflow-wrap:anywhere;max-height:110px;overflow:auto;flex:1;margin:0}
+.shorts-candidate-actions{display:flex;gap:7px;flex-wrap:wrap}
+.shorts-candidate button{border:1px solid #698367;background:#2b4932;color:#e3f4d9;display:inline-flex;gap:6px;align-items:center;justify-content:center;flex:1}
+.shorts-generate{display:flex;gap:9px;align-items:center;justify-content:center;background:#d5f579;color:#162419;border:0;width:100%}
+.shorts-note{font-size:10px;border-top:1px solid #465d48;padding-top:13px}
+.shorts-error{font-size:11px;color:#f0c2a8}
+@media(max-width:680px){.shorts-studio{padding:14px}.shorts-studio-head,.shorts-empty{flex-direction:column}.shorts-local{align-self:flex-start}.shorts-empty button{width:100%}}

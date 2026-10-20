@@ -1,0 +1,66 @@
+import { validateSubtitles } from './subtitles.js';
+
+const MAX_SHORTS=3;
+const MAX_LEN=45;
+const MIN_LEN=8;
+const TERMS=[
+  {pattern:/\b(por que|porque|como|qual|quando|quem|será que|e se)\b/iu,weight:11,label:'Pergunta que cria curiosidade'},
+  {pattern:/\b(mas|porém|só que|entretanto|apesar|na verdade)\b/iu,weight:9,label:'Contraste ou mudança de ideia'},
+  {pattern:/\b(incrível|surpresa|segredo|nunca|ninguém|maior|melhor|pior|impossível|absurdo|finalmente)\b/iu,weight:8,label:'Expressão de destaque'},
+  {pattern:/\b(descobri|aprendi|resultado|aconteceu|consegui|errei|ganhei|perdi|mudou|venci|conclusão)\b/iu,weight:8,label:'Resultado ou descoberta'},
+  {pattern:/[!?]/u,weight:5,label:'Entonação marcada no texto'},
+];
+const round=n=>Math.round(n*100)/100;
+const wordCount=s=>(s.trim().match(/[\p{L}\p{N}]+/gu)||[]).length;
+
+export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS}={}) {
+  const checked=validateSubtitles(subtitles);
+  if(checked.error)return {error:checked.error,candidates:[]};
+  const endOfMedia=Number(duration);
+  if(!Number.isFinite(endOfMedia)||endOfMedia<=0||endOfMedia>3600)
+    return {error:'Duração da mídia inválida.',candidates:[]};
+  if(!Number.isInteger(maxClips)||maxClips<1||maxClips>MAX_SHORTS)
+    return {error:'Escolha de 1 a 3 Shorts.',candidates:[]};
+  const cues=checked.subtitles.filter(c=>c.start<endOfMedia && c.end<=endOfMedia+.15);
+  if(!cues.length)return {error:'Transcreva ou importe legendas SRT antes de buscar destaques.',candidates:[]};
+
+  const suggestions=[];
+  for(let i=0;i<cues.length;i++){
+    for(let j=i;j<cues.length;j++){
+      if(j>i && cues[j].start-cues[j-1].end>3)break;
+      const length=cues[j].end-cues[i].start;
+      if(length>MAX_LEN)break;
+      if(length<MIN_LEN)continue;
+      const selected=cues.slice(i,j+1);
+      const script=selected.map(x=>x.text).join(' ').replace(/\s+/gu,' ').trim();
+      const words=wordCount(script);
+      if(words<12)continue;
+      const reasons=TERMS.filter(t=>t.pattern.test(script));
+      const density=words/length;
+      const idealLength=26;
+      const focus=Math.max(0,19-Math.abs(length-idealLength)*.75);
+      const speech=Math.min(23,words*.34);
+      const fluency=Math.max(0,15-Math.abs(density-2.4)*6);
+      const intro=/^[A-ZÁÉÍÓÚÂÊÔÃÕ][^.!?]{3,}/u.test(selected[0].text.trim())?2:0;
+      const ending=/[.!?]\s*$/u.test(selected.at(-1).text)?7:0;
+      const hook=reasons.reduce((sum,x)=>sum+x.weight,0);
+      const score=Math.min(99,Math.round(16+focus+speech+fluency+intro+ending+hook));
+      const title=selected[0].text.replace(/[\n\r]/gu,' ').trim().slice(0,72);
+      suggestions.push({
+        start:round(cues[i].start),end:round(cues[j].end),
+        duration:round(length),score,title,
+        reason:reasons[0]?.label||'Fala contínua com duração adequada',
+        transcript:script.slice(0,360)
+      });
+    }
+  }
+  suggestions.sort((a,b)=>b.score-a.score||Math.abs(a.duration-26)-Math.abs(b.duration-26)||a.start-b.start);
+  const picked=[];
+  for(const candidate of suggestions){
+    if(picked.some(x=>candidate.start<x.end+1 && candidate.end>x.start-1))continue;
+    picked.push(candidate);
+    if(picked.length>=maxClips)break;
+  }
+  if(!picked.length)return {error:'Não há falas contínuas suficientes para gerar Shorts de pelo menos 8 segundos.',candidates:[]};
+  return {error:null,candidates:picked.map((c,i)=>({...c,rank:i+1}))};
+}

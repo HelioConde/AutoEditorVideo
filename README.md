@@ -138,3 +138,7 @@ A página web abre com apenas **Importar vídeo**. Ao carregar mídia válida, o
 Legendas, roteiro e projeto JSON são **ferramentas opcionais**: cada uma possui um botão de expansão e somente a ferramenta selecionada é montada. É possível **Criar pelo roteiro** ou **Abrir projeto salvo** sem importar mídia primeiro. O fluxo básico não exige configurar esses módulos. O painel de informações sobre rascunhos fica em uma seção recolhida, acessível pelo resumo **Rascunho no navegador**.
 
 Essa organização reduz a carga visual e evita renderizar timelines e formulários pesados antes de serem necessários. Ela não aumenta os limites técnicos da versão web (30 MB/2 min de entrada e até 20s somados de exportação), nem adiciona contas ou servidores.
+
+## Novo foco: Shorts automáticos (MVP)
+
+O desktop agora pode gerar Shorts verticais independentes, a partir dos destaques sugeridos na transcrição. É necessário transcrever localmente com Whisper.cpp ou importar SRT. Os destaques iniciais usam pontuação por padrões do texto (não inteligência multimodal ou garantia de viralização), são revisáveis e exportados individualmente com legenda incorporada. Saiba mais em [docs/AUTO_SHORTS_MVP.md](docs/AUTO_SHORTS_MVP.md).

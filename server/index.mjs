@@ -10,6 +10,7 @@ import { parseProjectFile, validateScenes } from '../src/project-format.js';
 import { getVoiceCapabilities, resolveVoiceEngine, synthesizeVoice } from './tts.mjs';
 import { validateSubtitles, toSrt, remapSubtitles } from '../src/subtitles.js';
 import { whisperCapability, transcribeLocalAudio } from './whisper.mjs';
+import { rankShortsFromTranscript } from '../src/shorts-ranking.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(process.env.DATA_DIR || path.join(HERE, '..', 'data'));
@@ -58,7 +59,7 @@ const upload = multer({
 const publicProject = p => ({
   id: p.id, name: p.name, createdAt: p.createdAt, media: p.media || null,
   reference: p.reference || null, edit: p.edit || null, transcription:p.transcription || null,
-  exports: (p.exports || []).map(({ id, status, aspect, createdAt, error, kind }) => ({ id, status, aspect, createdAt, error, kind:kind||'cuts' }))
+  exports: (p.exports || []).map(({ id, status, aspect, createdAt, error, kind, title, score }) => ({ id, status, aspect, createdAt, error, kind:kind||'cuts', title, score }))
 });
 
 function runFFmpeg(args,cwd) {
@@ -343,6 +344,36 @@ export function createApp() {
     save(projects);
     res.status(202).json({project:publicProject(project)});
     void transcribeProject(project);
+  });
+  app.post('/api/projects/:id/shorts', (req,res) => {
+    const project=findProject(req.params.id);
+    if(!project)return res.status(404).json({error:'Projeto não encontrado.'});
+    if(!project.media)return res.status(400).json({error:'Importe um vídeo para gerar Shorts.'});
+    if(!toolAvailable(FFmpeg))return res.status(503).json({error:'FFmpeg indisponível.'});
+    if(project.transcription?.status==='processing' || project.exports.some(j=>j.status==='processing'))
+      return res.status(409).json({error:'Aguarde a transcrição ou exportação em andamento.'});
+    const subtitles=validateSubtitles(req.body?.subtitles??project.edit?.subtitles??[]);
+    if(subtitles.error)return res.status(400).json({error:subtitles.error});
+    const ranked=rankShortsFromTranscript(subtitles.subtitles,{
+      duration:project.media.duration,maxClips:req.body?.count??3
+    });
+    if(ranked.error)return res.status(400).json({error:ranked.error});
+    const items=ranked.candidates.map(candidate=>({
+      id:randomUUID(),status:'processing',kind:'short',aspect:'9:16',
+      title:candidate.title,score:candidate.score,start:candidate.start,end:candidate.end,
+      createdAt:new Date().toISOString(),filename:randomUUID()+'.mp4'
+    }));
+    project.exports.unshift(...items);
+    save(projects);
+    res.status(202).json({project:publicProject(project),suggestions:ranked.candidates});
+    void (async()=>{
+      for(const job of items) {
+        await render(project,job,
+          path.join(UPLOADS,project.id,project.media.fileName),
+          path.join(UPLOADS,project.id,job.filename),
+          [{start:job.start,end:job.end}],'9:16',subtitles.subtitles,true);
+      }
+    })().catch(e=>console.error('Falha no lote de Shorts:',e.message));
   });
   app.post('/api/projects/:id/exports', (req, res) => {
     const project = findProject(req.params.id);
