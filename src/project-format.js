@@ -9,31 +9,29 @@ const text = (x, max) => typeof x === 'string' ? x.trim().slice(0,max) : '';
 const finite = x => typeof x === 'number' && Number.isFinite(x);
 
 export function scenesFromScript(input) {
-  const value = text(input, 4000);
-  if (!value) return [];
-  const paragraphs = value.split(/\n\s*\n/).map(p=>p.replace(/\s+/g,' ').trim()).filter(Boolean);
-  // Short paragraphs become scenes; long scripts are distributed over a small,
-  // predictable number of scenes. Nothing here generates fictional media.
-  const sentences = paragraphs.length > 1 ? paragraphs : (value.match(/[^.!?]+[.!?]+|[^.!?]+$/gu) || []);
-  const chunks = [];
-  for (const segment of sentences) {
-    const part = segment.trim();
-    if (!part) continue;
-    if (chunks.length < MAX_SCENES && (chunks.length === 0 || chunks[chunks.length-1].length + part.length > 160))
-      chunks.push(part);
-    else chunks[chunks.length-1] = (chunks[chunks.length-1] + ' ' + part).slice(0,500);
-  }
-  if (chunks.length === 1 && chunks[0].length > 180) {
-    const words=chunks[0].split(/\s+/);
-    const groups=[];
+  const value=text(input,4000);
+  if(!value) return [];
+  const paragraphs=value.split(/\n\s*\n/).map(s=>s.replace(/\s+/g,' ').trim()).filter(Boolean);
+  const sections=paragraphs.length>1?paragraphs:(value.match(/[^.!?]+[.!?]+|[^.!?]+$/gu)||[]).map(s=>s.trim()).filter(Boolean);
+  const result=[];
+  for(const section of sections) {
+    // Paragraph boundaries become scene boundaries unless at the scene limit.
+    const words=section.split(/\s+/);
+    let chunk='';
     for(const word of words) {
-      if (!groups.length || (groups[groups.length-1]+' '+word).length>145) groups.push(word);
-      else groups[groups.length-1]+=' '+word;
-      if(groups.length>=MAX_SCENES) break;
+      if(chunk && (chunk+' '+word).length>280 && result.length<MAX_SCENES-1) {
+        result.push(chunk);
+        chunk=word;
+      } else {
+        chunk=(chunk?chunk+' ':'')+word;
+      }
     }
-    return groups.map((p,i)=>({title:'Cena '+(i+1),text:p.slice(0,500),duration:7}));
+    if(chunk) {
+      if(result.length>=MAX_SCENES) result[MAX_SCENES-1]=(result[MAX_SCENES-1]+' '+chunk).slice(0,500);
+      else result.push(chunk.slice(0,500));
+    }
   }
-  return chunks.slice(0,MAX_SCENES).map((p,i)=>({title:'Cena '+(i+1),text:p.slice(0,500),duration:7}));
+  return result.slice(0,MAX_SCENES).map((body,i)=>({title:'Cena '+(i+1),text:body,duration:7}));
 }
 
 export function validateScenes(input) {
