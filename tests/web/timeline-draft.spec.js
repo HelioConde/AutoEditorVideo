@@ -6,8 +6,10 @@ import path from 'node:path';
 
 test('rascunho local restaura roteiro e legenda sem armazenar mídia', async ({page}) => {
   await page.goto('/');
+  await page.getByRole('button',{name:'Criar pelo roteiro'}).click();
   await page.getByRole('textbox',{name:'Roteiro'}).fill('Uma introdução para o AutoEditor Studio.');
   await page.getByRole('button',{name:'Organizar cenas'}).click();
+  await page.getByRole('button',{name:/^Legendas/}).click();
   await page.getByRole('button',{name:'Nova legenda'}).click();
   await page.getByRole('textbox',{name:'Texto da legenda'}).fill('Olá, edição local.');
   // Wait for the *latest* debounced edit, not a status from an earlier autosave.
@@ -20,11 +22,16 @@ test('rascunho local restaura roteiro e legenda sem armazenar mídia', async ({p
   expect(manifest.project.edit.script).toContain('introdução');
   expect(JSON.stringify(manifest)).not.toContain('data:image');
   await page.reload();
+  await page.getByRole('button',{name:/^Roteiro/}).click();
   await expect(page.getByRole('textbox',{name:'Roteiro'})).toHaveValue('Uma introdução para o AutoEditor Studio.');
+  await page.getByRole('button',{name:/^Legendas/}).click();
   await expect(page.getByRole('textbox',{name:'Texto da legenda'})).toHaveValue('Olá, edição local.');
+  await page.locator('.web-draft-details summary').click();
   await page.getByRole('button',{name:'Limpar rascunho'}).click();
+  await page.getByRole('button',{name:/^Roteiro/}).click();
   await expect(page.getByRole('textbox',{name:'Roteiro'})).toHaveValue('');
   await page.reload();
+  await page.getByRole('button',{name:/^Roteiro/}).click();
   await expect(page.getByRole('textbox',{name:'Roteiro'})).toHaveValue('');
   await expect(page.getByRole('textbox',{name:'Texto da legenda'})).toHaveCount(0);
 });
@@ -36,7 +43,7 @@ test('timeline edita trecho salvo com zoom e incremento de centésimos', async (
       '-t','2','-c:v','libx264','-pix_fmt','yuv420p','-y',video],{timeout:30000});
     await page.goto('/');
     await page.locator('input[type=file][accept*="video/mp4"]').setInputFiles(video);
-    await expect(page.getByRole('button',{name:'Exportar vídeo'})).toBeEnabled();
+    await expect(page.getByRole('button',{name:'Continuar para exportação'})).toBeEnabled();
     await page.getByRole('spinbutton',{name:'Fim (segundos)'}).fill('0.8');
     await page.getByRole('button',{name:'Adicionar à sequência'}).click();
     await page.getByRole('button',{name:'Editar trecho 1'}).click();
@@ -45,6 +52,7 @@ test('timeline edita trecho salvo com zoom e incremento de centésimos', async (
     await page.getByRole('button',{name:'Aumentar início em 0,01 segundo'}).click();
     await page.getByRole('button',{name:'Salvar ajuste do trecho 1'}).click();
     await expect(page.locator('.filmstrip-queue-list li').first()).toContainText('00:00.01');
+    await page.getByRole('button',{name:'Continuar para exportação'}).click();
     await expect(page.getByRole('button',{name:'Exportar vídeo'})).toBeEnabled();
   }finally{fs.rmSync(tmp,{recursive:true,force:true});}
 });
