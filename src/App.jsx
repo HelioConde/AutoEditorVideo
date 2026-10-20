@@ -98,6 +98,7 @@ export default function App() {
   const [script, setScript] = useState('');
   const [scenes, setScenes] = useState([]);
   const [subtitles,setSubtitles] = useState([]);
+  const [transcriptionRevision,setTranscriptionRevision] = useState(null);
   const [burnSubtitles,setBurnSubtitles] = useState(false);
   const [previewTime,setPreviewTime] = useState(0);
   const [narrating, setNarrating] = useState(false);
@@ -145,6 +146,7 @@ export default function App() {
     setScript(edit?.script || '');
     setScenes(edit?.scenes || []);
     setSubtitles(edit?.subtitles || []);
+    setTranscriptionRevision(current?.transcription?.status==='ready' ? current.transcription.updatedAt : null);
     setBurnSubtitles(edit?.burnSubtitles || false);
     setPreviewTime(0);
     setVoiceEngine(edit?.voiceEngine || 'system');
@@ -152,19 +154,22 @@ export default function App() {
     playbackEnd.current = null;
   }, [currentId, current?.media?.id]);
   useEffect(() => {
-    if(current?.transcription?.status==='ready' && current?.edit?.subtitles)
+    if(current?.transcription?.status==='ready' && current?.edit?.subtitles) {
       setSubtitles(current.edit.subtitles);
+      setTranscriptionRevision(current.transcription.updatedAt);
+    }
   },[currentId,current?.transcription?.status,current?.transcription?.updatedAt]);
   useEffect(() => {
     if (!currentId || !current || current.transcription?.status==='processing') return;
     const timer=window.setTimeout(async()=>{
       const payload=createProjectFile({name:current.name,aspect,media:current.media||current.reference,
         start:Number(start)||0,end:Number(end)||0,clips,script,scenes,voiceEngine,subtitles,burnSubtitles});
+      payload.transcriptionVersion=transcriptionRevision;
       try { await api('/projects/'+currentId+'/edit',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); }
       catch(e){ console.warn('Não foi possível salvar a edição:',e.message); }
     },1000);
     return ()=>window.clearTimeout(timer);
-  }, [currentId, current?.media?.id, aspect, start, end, clips, script, scenes, voiceEngine,subtitles,burnSubtitles]);
+  }, [currentId, current?.media?.id, aspect, start, end, clips, script, scenes, voiceEngine,subtitles,burnSubtitles,transcriptionRevision]);
 
   useEffect(() => { document.title = (page === 'editor' ? 'Editor' : 'Painel') + ' · AutoEditor Studio'; }, [page]);
   function openProject(id) { setCurrentId(id); setPage('editor'); setSidebarOpen(false); window.scrollTo(0,0); }
