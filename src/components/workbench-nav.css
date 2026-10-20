@@ -1,0 +1,68 @@
+/* Workbench wayfinding: same component and visual rhythm in both editions. */
+.workbench-nav {
+  --workbench-bg: #18241e;
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2.5vw, 25px);
+  min-width: 0;
+  padding: 13px clamp(12px, 1.8vw, 20px);
+  background: var(--workbench-bg);
+  border: 1px solid #3c5140;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px #080e0a19, inset 0 1px #d5f5790b;
+}
+.workbench-nav-heading {
+  color: #acc09f;
+  font-size: 10px;
+  letter-spacing: .12em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.workbench-nav-links {
+  flex: 1;
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+  justify-content: space-between;
+}
+.workbench-nav-link {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  color: #c5d7c5;
+  font-size: 12px;
+  font-weight: 750;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color .15s ease, background-color .15s ease, border-color .15s ease;
+}
+.workbench-nav-link svg { color: #c4e19f; }
+.workbench-nav-index { font-size: 10px; color: #91ac8e; font-variant-numeric: tabular-nums; }
+.workbench-nav-link:hover, .workbench-nav-link:focus-visible {
+  background: #304536;
+  border-color: #617d58;
+  color: #f1f8e7;
+}
+.workbench-nav-link:active { background: #415e41; }
+.workbench-nav-compact { margin: 14px 0 21px; }
+@media(max-width:940px) {
+  .workbench-nav { display: grid; gap: 8px; }
+  .workbench-nav-links { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; justify-content: flex-start; padding-bottom: 2px; }
+  .workbench-nav-link { flex: 0 0 auto; }
+}
+@media(max-width:550px) {
+  .workbench-nav { border-radius: 12px; padding: 10px 11px; }
+  .workbench-nav-link { padding: 9px 12px; }
+  .workbench-nav-heading { font-size: 10px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .workbench-nav-link { transition: none; }
+}
+
+/* Programmatic focus and touch-emulated keyboard focus must be visible, too. */
+.workbench-nav-link:focus { outline:3px solid #d5f579; outline-offset:2px; }

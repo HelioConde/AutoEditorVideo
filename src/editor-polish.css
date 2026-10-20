@@ -1,0 +1,129 @@
+/*
+ * AutoEditor Studio — shared editorial polish, v2.6
+ * Used in both desktop and GitHub Pages. No extra runtime dependency.
+ * Tokens are intentionally paired with src/styles.css; don't duplicate the
+ * existing charcoal/lime identity in child components.
+ */
+:root {
+  --ae-space-1: 4px;
+  --ae-space-2: 8px;
+  --ae-space-3: 12px;
+  --ae-space-4: 16px;
+  --ae-space-6: 24px;
+  --ae-space-8: 32px;
+  --ae-panel-border: #405448;
+  --ae-panel-shadow: 0 16px 48px #030b071c, inset 0 1px #f1ffda0a;
+  --ae-field-focus: #d5f579;
+  --ae-muted: #b3c4b4;
+}
+html { scroll-padding-top: 20px; }
+:is(#studio-video,#studio-cuts,#studio-captions,#studio-script,#studio-project) { scroll-margin-top: 22px; }
+:is(#studio-video,#studio-cuts,#studio-captions,#studio-script,#studio-project):target {
+  outline: 2px solid #d5f57985;
+  outline-offset: 4px;
+}
+:is(button,a,input,select,textarea,[tabindex]):focus-visible {
+  outline: 3px solid var(--ae-field-focus);
+  outline-offset: 3px;
+}
+:is(.story-studio,.sub-studio,.project-exchange,.filmstrip-editor) {
+  min-width: 0;
+}
+:is(.story-studio,.sub-studio,.project-exchange) {
+  box-shadow: var(--ae-panel-shadow);
+}
+:is(.story-studio textarea,.sub-studio textarea,.story-scene input,.story-scene select,
+    .sub-time-fields input,.project-exchange button) { line-height: 1.5; }
+.story-heading h2,.sub-head h2 {
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.story-heading p,.sub-studio>p,.project-exchange-copy span,
+.filmstrip-hint,.filmstrip-queue-note { color: var(--ae-muted); }
+:is(.story-scene,.sub-lines li) { overflow-wrap: anywhere; }
+:is(.web-file-row,.editor-title-row,.page-heading,.project-exchange-copy) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+:is(.filmstrip-button,.filmstrip-queue-buttons button,.sub-toolbar button,.sub-line-head button,
+    .story-generate,.story-render,.story-listen,.story-picture-clear,
+    .exchange-btn,.web-text-btn) {
+  min-height: 44px;
+}
+.filmstrip-queue-buttons button { min-width: 38px; }
+.story-scene-preview { box-shadow: inset 0 0 0 1px #ffffff15; }
+.story-scene-preview>small { overflow-wrap: anywhere; }
+.web-studio {
+  box-shadow: 0 28px 92px #030c0728, inset 0 1px #ffffff0a;
+}
+.web-studio-head h2,.editor-title-row h1 { text-wrap: balance; }
+.web-studio-head { margin-bottom: 8px; }
+.web-studio-head .section-kicker { margin-bottom: 6px; }
+.web-panel,.web-preview-panel {
+  box-shadow: 0 10px 30px #050e0812;
+}
+.web-studio .web-steps { margin-bottom: 14px; }
+.web-captions,.web-story-workspace { scroll-margin-top: 18px; }
+.web-captions { margin-top: 26px; }
+.web-story-workspace { margin-top: 20px; }
+.web-story-workspace .project-exchange { align-self: start; }
+.web-intro>p { text-wrap: pretty; }
+.editor-flow-nav { margin: 18px 0 22px; }
+:is(.story-scene input,.story-scene textarea,.story-scene select,.sub-time-fields input,.sub-lines textarea):focus-within {
+  border-color: #d5f579;
+  box-shadow: 0 0 0 1px #d5f57955;
+}
+@media (max-width: 850px) {
+  .web-intro { margin-top: 42px; margin-bottom: 30px; }
+  .web-intro h1 { line-height: 1.08; }
+  .web-main { padding-left: clamp(14px,3.6vw,26px); padding-right: clamp(14px,3.6vw,26px); }
+  .web-navbar { padding-left: clamp(14px,3.6vw,26px); padding-right: clamp(14px,3.6vw,26px); }
+  .web-studio { border-radius: 16px; }
+}
+@media (max-width: 600px) {
+  :is(.story-scene input,.story-scene textarea,.story-scene select,.story-studio>textarea,
+      .sub-time-fields input,.sub-lines textarea,.web-controls input,
+      .trim-fields input,.modal input) { font-size: 16px; }
+  :is(.story-scene input,.story-scene select,.sub-time-fields input,
+      .web-controls input,.trim-fields input) { min-height: 44px; }
+  .sub-lines textarea,.story-scene textarea { min-height: 76px; }
+  .web-intro h1 { font-size: clamp(36px,11vw,50px); letter-spacing: -.06em; }
+  .web-intro>p { font-size: 13px; line-height: 1.7; }
+  .web-studio-head h2 { font-size: 22px; }
+  .web-studio .web-panel-heading>strong { font-size: 13px; }
+  .story-heading h2 { font-size: 20px; }
+  .filmstrip-actions { flex-direction: column; }
+  .filmstrip-button { width: 100%; }
+  .filmstrip-queue-buttons button { width: 44px; height: 44px; }
+  .sub-toolbar button { min-width: 0; }
+  .story-scene-preview { height: 132px; }
+  .story-scene-options { gap: 10px; }
+  .editor-flow-nav { margin-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  :is(.web-studio,.workbench-nav,.story-studio,.sub-studio) { animation: none; }
+}
+
+/* QA follow-up: base StoryStudio input rules are bundled after shared styles.
+ * Increase selector specificity so iOS-sized text is always >= 16px. */
+@media(max-width:600px) {
+  html body .story-studio > textarea,
+  html body .story-scene input,
+  html body .story-scene textarea,
+  html body .story-scene select,
+  html body .sub-time-fields input,
+  html body .sub-lines textarea,
+  html body .web-controls input,
+  html body .trim-fields input,
+  html body .modal input { font-size:16px; }
+}
+@media(max-width:380px) {
+  /* Preserve the menu and primary project action; elide redundant breadcrumb
+     text that otherwise pushes the header 10px beyond the 320px viewport. */
+  .topbar { padding-left:12px; padding-right:12px; gap:8px; }
+  .topbar .breadcrumb > span:first-child,
+  .topbar .breadcrumb > svg { display:none; }
+  .topbar .breadcrumb { min-width:0; }
+  .topbar .topbar-right { margin-left:auto; flex-shrink:0; }
+}

@@ -57,3 +57,18 @@ Previews visuais por cena devem ser identificadas como cartões de composição 
 
 ## Editor de legendas
 `src/components/SubtitleStudio.jsx` expõe importação/exportação de arquivos com botões acessíveis, campos numéricos por cue e validação visível de limites/sobreposição. A prévia de vídeo utiliza overlay com `pointer-events:none`; legendas completas continuam no formulário editável. Não usar IA remota, não enviar texto ou mídia ao Pages. Nunca prometer burn-in na web antes de existir implementação testada.
+
+## Workbench 2.6 — identidade unificada e QA visual
+
+Esta revisão foi guiada por capturas reais do produto, **não** por uma imagem conceitual. A nova navegação compartilhada `src/components/WorkbenchNav.jsx` usa cinco âncoras nativas e o mesmo id nas duas versões: `studio-video`, `studio-cuts`, `studio-captions`, `studio-script`, `studio-project`. Não atribuir `aria-current` sem estado real correspondente.
+
+Tokens adicionais de UI em `src/editor-polish.css`:
+- Espaços `--ae-space-1/2/3/4/6/8`: 4/8/12/16/24/32px.
+- `--ae-panel-border: #405448` para painéis informacionais.
+- `--ae-panel-shadow` em dois níveis, sem sombra dramática.
+- `--ae-field-focus: #d5f579` para foco consistente e visível.
+- `--ae-muted: #b3c4b4` para texto de apoio em fundo verde-escuro.
+
+Aplicação por componente: altura interativa de 44px (mobile), fontes de campo >=16px (mobile), `text-wrap:balance` em títulos, quebra explícita de conteúdo importado e painel alvo de âncora com realce suave. Em telas estreitas, a barra `WorkbenchNav` pode rolar horizontalmente **apenas dentro dela**, nunca na página.
+
+Checklist QA desta revisão em `docs/UX_AUDIT_2026-10-20.md`. Capturas disponíveis como artefatos no GitHub Actions. Testes Playwright verificam responsividade 320–1920px, navegação, foco e preferência por movimento reduzido.

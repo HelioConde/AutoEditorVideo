@@ -29,7 +29,7 @@ export default function ProjectExchange({name,aspect,media,start,end,clips,scrip
     } catch(e) {setStatus('Não foi possível importar: '+(e?.message||'arquivo inválido'));}
     finally {setImporting(false);if(input.current)input.current.value='';}
   }
-  return <div className="project-exchange" aria-label="Projetos portáteis">
+  return <div id="studio-project" className="project-exchange" aria-label="Projetos portáteis">
     <div className="project-exchange-copy"><strong><FileJson2 size={16} aria-hidden="true"/> Mesmo projeto no site e desktop</strong><span>Exporte ou importe um projeto JSON. Os arquivos de vídeo devem ser selecionados novamente em outro dispositivo.</span></div>
     <div className="project-exchange-actions">
       <button type="button" className="exchange-btn" disabled={disabled} onClick={download}><ArrowDownToLine size={16} aria-hidden="true"/> Exportar projeto</button>
