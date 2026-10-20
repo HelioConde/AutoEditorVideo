@@ -76,3 +76,24 @@ test('exportação WebAssembly real sem backend (opcional)', async ({ page }, te
     expect(download.suggestedFilename()).toMatch(/\.mp4$/);
   } finally { fs.rmSync(folder,{recursive:true,force:true}); }
 });
+
+test('roteiro e manifesto podem ser transferidos sem API ou vídeo',async({page})=>{
+  const project={schema:'autoeditor.project',version:1,name:'História importada',aspect:'16:9',media:null,
+    edit:{start:0,end:0,clips:[],script:'Uma breve história sobre viagem.',
+      scenes:[{title:'Cena de abertura',text:'Uma breve história sobre viagem.',duration:5}]}};
+  await page.goto('/');
+  await page.getByRole('button',{name:'Importar projeto'}).click();
+  await page.locator('#project-json-input').setInputFiles({
+    name:'historia.autoeditor.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});
+  await expect(page.getByRole('textbox',{name:'Roteiro'})).toHaveValue('Uma breve história sobre viagem.');
+  await expect(page.getByRole('textbox',{name:'Título da cena'})).toHaveValue('Cena de abertura');
+  await expect(page.getByRole('button',{name:'Exportar projeto'})).toBeEnabled();
+  await page.getByRole('button',{name:'Exportar projeto'}).click();
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),page.getByRole('button',{name:'Exportar projeto'}).click()]);
+  const path=await download.path();
+  const manifest=JSON.parse(fs.readFileSync(path,'utf8'));
+  expect(manifest.schema).toBe('autoeditor.project');
+  expect(manifest.edit.scenes[0].title).toBe('Cena de abertura');
+  expect(manifest.aspect).toBe('16:9');
+});

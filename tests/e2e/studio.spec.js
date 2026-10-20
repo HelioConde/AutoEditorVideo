@@ -120,3 +120,30 @@ test('timeline com dois cortes gera MP4 concatenado de duração correta', async
     expect(seconds).toBeLessThan(2.1);
   } finally { fs.rmSync(folder,{recursive:true,force:true}); }
 });
+
+test('modo roteiro cria cenas e exporta narração local em MP4',async({page})=>{
+  test.setTimeout(150000);
+  const health=await(await page.request.get('/api/health')).json();
+  test.skip(!health.ffmpeg || !health.narration, 'Narração local não instalada');
+  await page.goto('/');
+  await page.locator('.topbar').getByRole('button',{name:/Novo projeto/}).click();
+  await page.getByRole('textbox',{name:'Nome do projeto'}).fill('Vídeo narrado de teste');
+  await page.getByRole('dialog').getByRole('button',{name:'Criar projeto',exact:true}).click();
+  await page.getByRole('textbox',{name:'Roteiro'}).fill('Olá, este é um teste de narração local.');
+  await page.getByRole('button',{name:'Organizar cenas'}).click();
+  await expect(page.getByRole('textbox',{name:'Texto da narração'})).toBeVisible();
+  await page.getByRole('spinbutton',{name:'Duração (s)'}).fill('3');
+  await page.getByRole('button',{name:'Gerar vídeo narrado'}).click();
+  await expect(page.getByText('Exportação concluída')).toBeVisible({timeout:90000});
+  const dl=page.getByRole('link',{name:'Baixar vídeo exportado'}).first();
+  const resp=await page.request.get(await dl.getAttribute('href'));
+  expect(resp.status()).toBe(200);
+  const path=await import('node:path'),os=await import('node:os');
+  const tmp=path.join(os.tmpdir(),'narrated-'+Date.now()+'.mp4');
+  try {
+    fs.writeFileSync(tmp,await resp.body());
+    const aud=execFileSync('ffprobe',['-v','error','-select_streams','a:0','-show_entries','stream=codec_name',
+      '-of','default=noprint_wrappers=1:nokey=1',tmp],{encoding:'utf8'});
+    expect(aud.trim()).toBe('aac');
+  } finally {fs.rmSync(tmp,{force:true});}
+});

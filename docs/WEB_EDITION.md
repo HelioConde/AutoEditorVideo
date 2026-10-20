@@ -56,3 +56,9 @@ Opcional: com FFmpeg do sistema e internet disponíveis, `WEB_WASM_INTEGRATION=1
 ## Timeline e sequência
 
 A edição web exibe 8 miniaturas reais extraídas no navegador, permite pré-visualizar o trecho e adicionar até cinco cortes. O arquivo final contém apenas os cortes adicionados, concatenados pela ordem escolhida, com duração acumulada de **até 20 segundos**. O motor WebAssembly renderiza os cortes individualmente, normaliza codecs e os une; esse modo usa mais memória e CPU do que a exportação de um único trecho. Limites do arquivo original permanecem 30 MB e 2 min.
+
+## Compartilhamento de projetos e roteiro
+
+`Exportar projeto` baixa `.autoeditor.json`; `Importar projeto` aplica cortes, proporção e cenas de outro dispositivo, sem salvar ou enviar a mídia. Ao importar um projeto com vídeo, selecione o mesmo nome de arquivo e a mesma duração; se a duração for diferente, os cortes são limpos.
+
+O novo modo de roteiro cria e edita até seis cenas. A prévia de voz usa `window.speechSynthesis`; a voz não é capturada no MP4. A renderização narrada offline está disponível somente no desktop, usando a voz local do sistema. O GitHub Pages não fornece servidor de renderização, contas ou armazenamento.
