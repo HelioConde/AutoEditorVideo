@@ -146,3 +146,9 @@ O desktop agora pode gerar Shorts verticais independentes, a partir dos destaque
 ## Ranking multimodal local (fase experimental)
 
 O modo desktop oferece uma análise opcional por FFmpeg que combina o texto das legendas com **picos relativos de intensidade no áudio** e **mudanças de cena** amostradas em baixa resolução. O seletor de tipo de vídeo permite escolher podcast, gameplay ou tutorial. As evidências aparecem em cada sugestão; nenhum serviço externo recebe o vídeo. A análise atual aceita até 10 minutos de origem, não identifica emoções, vitórias ou eventos esportivos e ainda requer uma transcrição/SRT para propor cortes. Leia [docs/MULTIMODAL_RANKING.md](docs/MULTIMODAL_RANKING.md) para limitações e próximos passos.
+
+## Revisão de Shorts antes de exportar
+
+Após a análise, cada sugestão tem uma caixa **Incluir Short na exportação**. É possível desmarcar resultados que não fazem sentido e gerar apenas os escolhidos; com nenhum selecionado, a exportação fica desativada. O servidor recalcula as sugestões e valida os intervalos enviados, evitando aceitar um trecho alterado ou desatualizado como se tivesse sido aprovado automaticamente.
+
+Os testes incluem uma gravação sintética com corte visual real entre cenas preta e branca, além de áudio. O Playwright exige que o FFmpeg detecte **amostras de áudio e ao menos uma mudança visual** antes de concluir o fluxo de exportação.

@@ -13,3 +13,11 @@ O usuário abre um projeto com mídia e SRT/transcrição, escolhe o perfil e cl
 **Limites:** fase experimental aceita mídias até **10 min** de duração na análise audiovisual. Os comandos não usam shell e têm tempo limite por processo. Para mídia sem faixa de áudio, o vídeo pode fornecer apenas cortes de cena. A seleção ainda requer legendas, pois o ranking semântico não oferece candidates para vídeos silenciosos. Cortes e legendas respeitam os limites existentes. 
 
 **Próximas fases recomendadas:** VAD (Silero), PySceneDetect opcional para cortes robustos, alinhamento de palavras, identificação de faces com YuNet/MediaPipe e avaliação semântica contextual local. Não declarar essas ferramentas como integradas antes de testes reais.
+
+## Revisão e aprovação explícita dos candidatos
+
+Na interface de Shorts, cada candidato tem um checkbox para incluir/excluir da exportação. O usuário pode ouvir o momento e ajustar um corte na timeline; a seleção do lote não altera os timestamps originais. O frontend envia `selectedRanges` e o backend valida cada par `start/end` contra os **três candidatos ranqueados novamente**, rejeitando mudanças ou duplicatas. O servidor continua gerando arquivos separados e legendados apenas para os aprovados.
+
+A compatibilidade com chamadas antigas é mantida: sem `selectedRanges`, o servidor gera os primeiros candidatos, respeitando `count`. Com seleção explícita, o novo app solicita até três candidatos e limita a saída aos marcados.
+
+Teste Playwright: simula gravação com duas cenas de cores distintas e áudio real; verifica presença positiva de amostras de áudio e mudanças de cena, alternância das caixas de aprovação e geração de Short vertical.
