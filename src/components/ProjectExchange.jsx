@@ -25,7 +25,7 @@ export default function ProjectExchange({name,aspect,media,start,end,clips,scrip
       if (file.size>1024*1024) throw new Error('Arquivo de projeto acima de 1 MB.');
       const parsed=parseProjectFile(JSON.parse(await file.text()));
       await onImport(parsed);
-      setStatus('Projeto importado. Selecione o vídeo original para recuperar os cortes.');
+      setStatus(parsed.media ? 'Projeto importado. Selecione o vídeo original para recuperar os cortes.' : 'Projeto importado com sucesso.');
     } catch(e) {setStatus('Não foi possível importar: '+(e?.message||'arquivo inválido'));}
     finally {setImporting(false);if(input.current)input.current.value='';}
   }
@@ -33,8 +33,8 @@ export default function ProjectExchange({name,aspect,media,start,end,clips,scrip
     <div className="project-exchange-copy"><strong><FileJson2 size={16} aria-hidden="true"/> Mesmo projeto no site e desktop</strong><span>Exporte ou importe um projeto JSON. Os arquivos de vídeo devem ser selecionados novamente em outro dispositivo.</span></div>
     <div className="project-exchange-actions">
       <button type="button" className="exchange-btn" disabled={disabled} onClick={download}><ArrowDownToLine size={16} aria-hidden="true"/> Exportar projeto</button>
-      <label className="exchange-btn exchange-import" htmlFor="project-json-input"><Upload size={16} aria-hidden="true"/> Importar projeto</label>
-      <input id="project-json-input" type="file" ref={input} accept=".json,application/json" disabled={disabled||importing} onChange={e=>read(e.target.files?.[0])} className="visually-hidden" />
+      <button type="button" className="exchange-btn exchange-import" disabled={disabled||importing} onClick={()=>input.current?.click()}><Upload size={16} aria-hidden="true"/> Importar projeto</button>
+      <input id="project-json-input" type="file" ref={input} tabIndex={-1} accept=".json,application/json" disabled={disabled||importing} onChange={e=>read(e.target.files?.[0])} className="visually-hidden" />
     </div>
     {status && <p className="exchange-notice" role="status">{status}</p>}
   </div>;

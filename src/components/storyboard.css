@@ -1,23 +1,18 @@
-.story-studio{background:#1c2520;border:1px solid #3a4f3d;border-radius:15px;padding:20px;display:grid;gap:12px;min-width:0}
-.story-heading h2{font-size:21px;margin:8px 0}.story-heading p{font-size:12px;color:#adc0ad;margin:0 0 4px}
-.story-label,.story-scene label{font-size:11px;color:#d1e3c9;font-weight:750}
-.story-studio textarea,.story-scene input{color:#edf5e5;background:#111913;border:1px solid #4a6150;border-radius:9px;padding:12px;font-size:13px;font-family:inherit;line-height:1.6;width:100%;resize:vertical}
-.story-studio textarea:focus,.story-scene input:focus{border-color:#d5f579}
-.story-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.story-toolbar>span{font-size:10px;color:#a3b7a3}
-.story-generate,.story-render{display:flex;align-items:center;gap:8px;justify-content:center;border:1px solid #d5f579;border-radius:8px;background:#d5f579;color:#182217;font-size:12px;font-weight:800;padding:10px 14px;min-height:43px}
-.story-generate:hover:not(:disabled),.story-render:hover:not(:disabled){background:#e4ffa4}
-.story-scenes{display:grid;gap:12px;margin-top:9px}
-.story-scene{background:#26382a;border:1px solid #435b46;border-radius:11px;padding:15px;display:flex;align-items:flex-start;gap:13px}
-.story-scene-number{background:#d5f579;color:#1b311e;min-width:30px;height:30px;display:grid;place-items:center;font-size:11px;font-weight:850;border-radius:8px}
-.story-scene-fields{display:grid;gap:7px;min-width:0;flex:1}
-.story-scene-fields textarea{min-height:75px}.story-scene-fields label:not(:first-child){margin-top:7px}
-.story-listen{display:flex;align-items:center;gap:5px;padding:7px 8px;background:#304c36;color:#d7efbb;border:1px solid #567059;border-radius:8px;min-height:37px;font-size:11px}
-.story-listen:hover:not(:disabled){background:#446048}
-.story-foot{border-top:1px solid #3e5040;padding-top:14px;display:flex;gap:15px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.story-foot p{display:flex;gap:8px;align-items:flex-start;font-size:10px;color:#a9bdaa;max-width:360px;margin:0}
-.story-foot p svg{flex-shrink:0}
-.story-web-info{font-size:11px;color:#d6e5c9;display:inline-flex;align-items:center;gap:8px}
-.story-status{padding:10px;border-radius:8px;background:#2c4430;color:#cbeeb3;font-size:12px;margin:0}
-.story-warning{display:flex;gap:8px;align-items:center;color:#ffd0a6;font-size:11px;margin:0}
-@media(max-width:550px){.story-studio{padding:14px}.story-scene{flex-wrap:wrap}.story-scene-number{min-width:25px;height:25px}.story-listen{margin-left:38px}.story-toolbar{align-items:stretch}.story-toolbar button{flex:1}}
+.project-exchange{background:#213028;border:1px solid #3b563f;border-radius:12px;padding:16px;display:grid;gap:13px}
+.project-exchange-copy{display:grid;gap:7px}
+.project-exchange-copy strong{font-size:12px;display:flex;align-items:center;gap:8px;color:#e6f1df}
+.project-exchange-copy strong svg{color:#d5f579}
+.project-exchange-copy span{font-size:11px;line-height:1.65;color:#a8bea9}
+.project-exchange-actions{display:flex;gap:8px;flex-wrap:wrap}
+.exchange-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#314736;border:1px solid #627d5f;color:#e2f5d3;font-size:11px;font-weight:750;padding:10px 12px;border-radius:8px;min-height:42px;cursor:pointer}
+.exchange-btn:hover:not(:disabled){background:#435c42}
+.exchange-import:focus-within{outline:2px solid #d5f579;outline-offset:3px}
+.exchange-btn:disabled{opacity:.5}
+.exchange-notice{color:#d7eabf;background:#2b402e;border-radius:7px;font-size:11px;padding:9px;margin:0;line-height:1.6}
+@media(max-width:550px){.exchange-btn{flex:1}}
+
+.story-scene-actions{display:grid;gap:8px;width:95px;flex-shrink:0}
+.story-scene-actions label{font-size:10px;color:#d1e3c9}
+.story-scene-actions input{width:100%;height:38px;font-size:12px;padding:7px}
+.story-scene-actions .story-listen{width:100%;justify-content:center}
+@media(max-width:550px){.story-scene-actions{width:100%;display:flex;align-items:center}.story-scene-actions input{max-width:82px}.story-scene-actions .story-listen{width:auto;margin-left:auto}}

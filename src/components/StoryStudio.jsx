@@ -53,9 +53,12 @@ export default function StoryStudio({ script, scenes, onChange, aspect='9:16', m
           <textarea id={'scene-text-'+i} value={scene.text} maxLength={500} rows={3}
             onChange={e=>update({script,scenes:scenes.map((s,n)=>n===i?{...s,text:e.target.value}:s)})}/>
         </div>
+        <div className="story-scene-actions"><label htmlFor={'scene-length-'+i}>Duração (s)</label>
+          <input id={'scene-length-'+i} type="number" min="2" max="15" step=".5" value={scene.duration}
+            disabled={renderBusy} onChange={e=>update({script,scenes:scenes.map((s,n)=>n===i?{...s,duration:Number(e.target.value)}:s)})} />
         <button type="button" className="story-listen" disabled={renderBusy} onClick={()=>preview(i)} aria-label={'Ouvir cena '+(i+1)}>
           <Play size={17} aria-hidden="true"/> Ouvir
-        </button>
+        </button></div>
       </div>)}
     </div>}
     {announcement && <p className="story-status" role="status" aria-live="polite">{announcement}</p>}
