@@ -312,7 +312,7 @@ export function createApp() {
     if(checked.error)return res.status(400).json({error:checked.error});
     const images=req.body?.images;
     if(!Array.isArray(images)||images.length!==checked.scenes.length||images.some(x=>typeof x!=='string'||x.length>1020000||!/^data:image\/(?:png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(x)))
-      return res.status(400).json({error:'Envie uma imagem PNG gerada para cada cena.'});
+      return res.status(400).json({error:'Envie uma imagem PNG ou JPEG válida para cada cena.'});
     const aspect=req.body?.aspect;
     if(!['9:16','16:9'].includes(aspect))return res.status(400).json({error:'Proporção inválida.'});
     if(p.exports.some(e=>e.status==='processing'))return res.status(409).json({error:'Outra exportação está em andamento.'});
