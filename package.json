@@ -1,21 +1,29 @@
 {
   "name": "autoeditor-video",
-  "version": "2.0.0-beta.1",
+  "version": "2.1.0-beta.1",
   "private": true,
   "type": "module",
-  "description": "Estúdio local de montagem e exportação de vídeos",
+  "description": "AutoEditor Studio: editor local e versão web estática",
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "dev:api": "node server/index.mjs",
+    "dev:web": "vite --mode web --host 127.0.0.1",
     "build": "vite build",
+    "build:web": "vite build --mode web",
     "preview": "vite preview --host 127.0.0.1",
+    "preview:web": "vite preview --mode web --host 127.0.0.1",
     "start": "node server/index.mjs",
-    "test": "node --test server/*.test.mjs",
+    "test": "node --test server/*.test.mjs tests/unit/*.test.mjs",
     "test:e2e": "playwright test",
-    "check": "npm run test && npm run build"
+    "test:e2e:web": "playwright test --config=playwright.web.config.js",
+    "check": "npm run test && npm run build && npm run build:web"
   },
-  "engines": {"node": ">=22"},
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
+    "@ffmpeg/ffmpeg": "0.12.15",
+    "@ffmpeg/util": "0.12.2",
     "express": "^5.1.0",
     "multer": "^2.0.2",
     "lucide-react": "^0.468.0",
