@@ -130,3 +130,65 @@
 .web-draft-bar button{flex-shrink:0;border:1px solid #688069;background:#293b2e;color:#d6e9c8;border-radius:9px;padding:10px 13px;font-size:11px;min-height:44px;font-weight:750}
 .web-draft-bar button:hover:not(:disabled){background:#3d5541}
 @media(max-width:560px){.web-draft-bar{align-items:flex-start;flex-direction:column}.web-draft-bar button{width:100%}}
+
+/* Studio 2.8 — disclosure by task. First paint shows import, not all editor modules. */
+.web-progressive-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:15px 0 12px}
+.web-step-action{display:flex;align-items:center;gap:10px;text-align:left;padding:14px 16px;background:#213027;color:#d0e1c9;border:1px solid #465d49;border-radius:11px;min-height:59px;font-size:12px;font-weight:800;cursor:pointer}
+.web-step-action .web-step-count{display:grid;place-items:center;width:29px;height:29px;border-radius:50%;background:#364c3a;color:#dce7d5;border:1px solid #567258;flex-shrink:0}
+.web-step-action.web-step-current{border-color:#b9e876;background:#2b3c2e;color:#f2ffdf;box-shadow:inset 0 0 0 1px #b9e87635}
+.web-step-action.web-step-current .web-step-count,.web-step-action.web-step-done .web-step-count{background:#d5f579;color:#1b2a1d;border-color:#d5f579}
+.web-step-action:disabled{opacity:.45;cursor:not-allowed}
+.web-step-action:hover:not(:disabled){border-color:#badf88}
+.web-phase-description{font-size:12px;color:#a8bda8;line-height:1.6;margin:0 0 20px}
+.web-progressive-columns.web-phase-import{grid-template-columns:minmax(0,1fr);max-width:780px;margin:0 auto}
+.web-progressive-columns.web-phase-edit{grid-template-columns:minmax(0,1fr);max-width:980px;margin:0 auto}
+.web-progressive-columns.web-phase-export{grid-template-columns:minmax(0,1fr) minmax(290px,350px)}
+.web-progressive-columns.web-phase-import .web-droparea{min-height:232px}
+.web-progressive-columns.web-phase-import .web-preview-panel{box-shadow:none}
+.web-global-error{margin:0 0 17px}
+.web-phase-next{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;border-radius:11px;background:#26352b;border:1px solid #456048}
+.web-phase-next p{margin:0;font-size:11px;line-height:1.6;color:#b7c9b5}
+.web-phase-next button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:10px 16px;background:#d5f579;color:#1d2b20;border:0;border-radius:9px;font-weight:800;font-size:12px;white-space:nowrap}
+.web-phase-next button:disabled{opacity:.5}
+.web-start-options{padding:18px 6px 3px}
+.web-start-options p{font-size:12px;color:#aebfac;text-align:center;margin:0 0 11px}
+.web-start-options>div{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.web-start-options button{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid #597559;background:#2b3d30;color:#e6f1df;border-radius:9px;padding:11px 14px;min-height:44px;font-size:12px;font-weight:750}
+.web-start-options button:hover{background:#38513d}
+.web-optional{margin-top:24px;border:1px solid #354b3d;border-radius:14px;background:#1b2820;padding:20px}
+.web-optional-heading h3{font-size:19px;letter-spacing:-.03em;margin:7px 0}
+.web-optional-heading p{font-size:11px;line-height:1.6;color:#a8beaa;margin:0 0 17px}
+.web-optional-selector{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.web-optional-selector button{display:grid;justify-items:start;gap:8px;text-align:left;padding:15px;background:#28392e;border:1px solid #435b49;border-radius:11px;color:#e6f1e0;min-height:81px;cursor:pointer}
+.web-optional-selector button>span{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800}
+.web-optional-selector button svg{color:#d5f579}
+.web-optional-selector button small{color:#b7cbb1;font-size:10px}
+.web-optional-selector button.active,.web-optional-selector button:hover{border-color:#a4d478;background:#314936}
+.web-single-tool,.web-optional>.web-captions{margin-top:16px}
+.web-single-tool>.story-studio,.web-single-tool>.project-exchange{width:100%;max-width:none}
+.web-draft-details{margin-top:14px;border:1px solid #354a3b;border-radius:11px;background:#17231c}
+.web-draft-details summary{display:flex;align-items:center;gap:9px;min-height:48px;padding:13px 16px;cursor:pointer;color:#d2e7c9;font-size:12px;font-weight:800;list-style:none}
+.web-draft-details summary::-webkit-details-marker{display:none}
+.web-draft-details summary::after{content:'⌄';font-size:15px;color:#d5f579;margin-left:8px}
+.web-draft-details[open] summary::after{content:'⌃'}
+.web-draft-details summary>span{color:#a5bba5;font-size:10px;font-weight:400;margin-left:auto}
+.web-draft-details .web-draft-bar{margin:0 12px 12px;border-radius:9px}
+@media(max-width:800px){
+  .web-progressive-columns.web-phase-export{grid-template-columns:1fr}
+  .web-optional{padding:15px}
+}
+@media(max-width:550px){
+  .web-progressive-steps{gap:5px;margin:10px 0}
+  .web-step-action{padding:9px 7px;min-height:68px;flex-direction:column;gap:6px;justify-content:center;text-align:center;font-size:10px;line-height:1.3}
+  .web-step-action .web-step-count{width:26px;height:26px;font-size:10px}
+  .web-phase-description{font-size:11px;margin-bottom:14px}
+  .web-progressive-columns.web-phase-import .web-droparea{min-height:225px}
+  .web-start-options>div{display:grid;grid-template-columns:1fr;width:100%}
+  .web-phase-next{align-items:stretch;flex-direction:column;padding:14px}
+  .web-phase-next button{width:100%;white-space:normal}
+  .web-optional-selector{gap:7px}
+  .web-optional-selector button{padding:11px 8px;min-height:85px}
+  .web-optional-selector button>span{font-size:10px;flex-direction:column;align-items:flex-start;gap:6px}
+  .web-optional-heading h3{font-size:17px}
+  .web-draft-details summary>span{display:none}
+}
