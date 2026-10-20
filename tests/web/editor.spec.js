@@ -96,3 +96,24 @@ test('roteiro e manifesto podem ser transferidos sem API ou vídeo',async({page}
   expect(manifest.edit.scenes[0].title).toBe('Cena de abertura');
   expect(manifest.aspect).toBe('16:9');
 });
+
+test('cenas mantêm tema e transição e aceitam imagem local sem transferi-la no manifesto',async({page})=>{
+  await page.goto('/');
+  await page.getByRole('textbox',{name:'Roteiro'}).fill('Nossa viagem pelo oceano ao pôr do sol.');
+  await page.getByRole('button',{name:'Organizar cenas'}).click();
+  await page.getByRole('combobox',{name:'Tema visual'}).selectOption('ocean');
+  await page.getByRole('combobox',{name:'Transição'}).selectOption('cut');
+  // One valid PNG pixel. Photo state must not be persisted into project JSON.
+  const image=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/sXcAAAAASUVORK5CYII=','base64');
+  await page.locator('#scene-picture-0').setInputFiles({name:'fundo.png',mimeType:'image/png',buffer:image});
+  await expect(page.getByRole('status').filter({hasText:'Imagem aplicada'})).toBeVisible();
+  const [download]=await Promise.all([
+    page.waitForEvent('download'),
+    page.getByRole('button',{name:'Exportar projeto'}).click()
+  ]);
+  const manifest=JSON.parse(fs.readFileSync(await download.path(),'utf8'));
+  expect(manifest.edit.scenes[0].theme).toBe('ocean');
+  expect(manifest.edit.scenes[0].transition).toBe('cut');
+  expect(JSON.stringify(manifest)).not.toContain('data:image');
+  expect(manifest.edit.voiceEngine).toBe('system');
+});

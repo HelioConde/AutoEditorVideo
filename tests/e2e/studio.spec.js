@@ -147,3 +147,19 @@ test('modo roteiro cria cenas e exporta narração local em MP4',async({page})=>
     expect(aud.trim()).toBe('aac');
   } finally {fs.rmSync(tmp,{force:true});}
 });
+
+test('cenas permitem selecionar Piper e fundo de foto para a exportação local',async({page})=>{
+  await page.goto('/');
+  await page.locator('.topbar').getByRole('button',{name:/Novo projeto/}).click();
+  await page.getByRole('textbox',{name:'Nome do projeto'}).fill('Estudo visual');
+  await page.getByRole('dialog').getByRole('button',{name:'Criar projeto',exact:true}).click();
+  await page.getByRole('textbox',{name:'Roteiro'}).fill('Uma jornada pelo oceano.');
+  await page.getByRole('button',{name:'Organizar cenas'}).click();
+  await page.getByRole('combobox',{name:'Tema visual'}).selectOption('ocean');
+  await page.getByRole('combobox',{name:'Transição'}).selectOption('cut');
+  await expect(page.getByRole('radio',{name:/Piper neural/})).toBeVisible();
+  await page.getByRole('radio',{name:/Piper neural/}).check();
+  await expect(page.getByRole('button',{name:'Gerar vídeo narrado'})).toBeDisabled();
+  await page.getByRole('radio',{name:/Voz do sistema/}).check();
+  await expect(page.getByRole('button',{name:'Exportar projeto'})).toBeEnabled();
+});

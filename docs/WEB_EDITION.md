@@ -62,3 +62,6 @@ A edição web exibe 8 miniaturas reais extraídas no navegador, permite pré-vi
 `Exportar projeto` baixa `.autoeditor.json`; `Importar projeto` aplica cortes, proporção e cenas de outro dispositivo, sem salvar ou enviar a mídia. Ao importar um projeto com vídeo, selecione o mesmo nome de arquivo e a mesma duração; se a duração for diferente, os cortes são limpos.
 
 O novo modo de roteiro cria e edita até seis cenas. A prévia de voz usa `window.speechSynthesis`; a voz não é capturada no MP4. A renderização narrada offline está disponível somente no desktop, usando a voz local do sistema. O GitHub Pages não fornece servidor de renderização, contas ou armazenamento.
+
+## Novidades visuais (2.4 beta)
+Tema visual e transição são propriedades portáteis de cada cena no manifesto v1. O editor aceita imagens de fundo até 2 MB, apenas para prévia local no site. **O site ainda não exporta vídeos narrados**, nem inclui fotos binárias no arquivo portátil. No desktop, a mesma imagem serve à composição dos slides narrados com FFmpeg. Alternativas: fade para preto entre cenas ou corte direto.

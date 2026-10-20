@@ -7,6 +7,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalizeClips } from '../src/clip-utils.js';
 import { parseProjectFile, validateScenes } from '../src/project-format.js';
+import { getVoiceCapabilities, resolveVoiceEngine, synthesizeVoice } from './tts.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(process.env.DATA_DIR || path.join(HERE, '..', 'data'));
@@ -43,11 +44,6 @@ function probe(file) {
 function toolAvailable(tool) {
   const result = spawnSync(tool, ['-version'], { encoding: 'utf8', timeout: 5000 });
   return !result.error && result.status === 0;
-}
-function narrationAvailable() {
-  if (process.platform==='win32') return true; // voice availability checked by SAPI at runtime
-  const result=spawnSync('espeak-ng',['--version'],{encoding:'utf8',timeout:5000});
-  return !result.error && result.status===0;
 }
 const upload = multer({
   dest: TMP,
@@ -129,34 +125,60 @@ async function runCommand(command,args) {
     child.once('close',code=>code===0?resolve():reject(new Error(stderr||command+' exited '+code)));
   });
 }
-async function renderNarration(project, job, scenes, images, aspect) {
+function probeAudioSeconds(file) {
+  const result=spawnSync(FFprobe,['-v','error','-show_entries','format=duration','-of',
+    'default=noprint_wrappers=1:nokey=1',file],{encoding:'utf8',timeout:10000});
+  const seconds=Number(result.stdout?.trim());
+  if(result.error || result.status!==0 || !Number.isFinite(seconds) || seconds<=0)
+    throw new Error('Não foi possível medir a duração da narração.');
+  return seconds;
+}
+export function sceneVideoFilters({ width, height, index, scenes, duration }) {
+  const fadeIn = index === 0 || scenes[index].transition === 'fade';
+  const fadeOut = index === scenes.length - 1 || scenes[index + 1].transition === 'fade';
+  const filter=['scale='+width+':'+height,'format=yuv420p'];
+  const audioFilter=['apad'];
+  const fadeTime=Math.min(.35, duration / 6);
+  if(fadeIn) {
+    filter.push('fade=t=in:st=0:d='+fadeTime);
+    audioFilter.push('afade=t=in:st=0:d='+fadeTime);
+  }
+  if(fadeOut) {
+    const offset=Math.max(0, duration-fadeTime);
+    filter.push('fade=t=out:st='+offset+':d='+fadeTime);
+    audioFilter.push('afade=t=out:st='+offset+':d='+fadeTime);
+  }
+  return { video:filter.join(','), audio:audioFilter.join(',') };
+}
+async function renderNarration(project, job, scenes, images, aspect, voiceEngine) {
   const folder=path.join(UPLOADS,project.id);
   const output=path.join(folder,job.filename);
   let tmp=null;
   try {
-    // Script-only projects have never imported media and therefore do not
-    // have an uploads/<id> folder yet.
     fs.mkdirSync(folder,{recursive:true});
     tmp=fs.mkdtempSync(path.join(folder,'narration-'));
     const parts=[];
     for(let i=0;i<scenes.length;i++) {
       const stem='scene-'+i;
-      const png=path.join(tmp,stem+'.png'),wav=path.join(tmp,stem+'.wav'),txt=path.join(tmp,stem+'.txt'),mp4=path.join(tmp,stem+'.mp4');
-      const data=Buffer.from(images[i].slice('data:image/png;base64,'.length),'base64');
-      if(data.byteLength>750000 || !data.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))
-        throw new Error('Imagem da cena inválida.');
-      fs.writeFileSync(png,data);
-      fs.writeFileSync(txt,scenes[i].text,'utf8');
-      if(process.platform==='win32') {
-        await runCommand('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass',
-          '-File',path.join(HERE,'tts-windows.ps1'),'-TextFile',txt,'-OutputFile',wav]);
-      } else {
-        await runCommand('espeak-ng',['-v','pt-br','-s','158','-f',txt,'-w',wav]);
-      }
+      const isJpeg=images[i].startsWith('data:image/jpeg;base64,');
+      const imageFile=path.join(tmp,stem+(isJpeg?'.jpg':'.png'));
+      const wav=path.join(tmp,stem+'.wav'),mp4=path.join(tmp,stem+'.mp4');
+      const data=Buffer.from(images[i].slice(isJpeg?'data:image/jpeg;base64,'.length:'data:image/png;base64,'.length),'base64');
+      const signature=isJpeg?data.subarray(0,3).equals(Buffer.from([255,216,255])):
+        data.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));
+      if(data.byteLength>750000 || !signature) throw new Error('Imagem da cena inválida.');
+      fs.writeFileSync(imageFile,data);
+      await synthesizeVoice({text:scenes[i].text,outputFile:wav,engine:voiceEngine});
+      // Respect the spoken words: extending a scene is safer than cutting a
+      // sentence because the user chose a duration shorter than its narration.
+      const speech=probeAudioSeconds(wav);
+      const duration=Math.max(scenes[i].duration,speech+.55);
+      if(duration>65)throw new Error('Narração maior que 65 segundos: divida o texto em cenas menores.');
       const vertical=aspect==='9:16',w=vertical?720:1280,h=vertical?1280:720;
+      const filters=sceneVideoFilters({width:w,height:h,index:i,scenes,duration});
       await runFFmpeg(['-hide_banner','-loglevel','error','-y','-loop','1','-framerate','24',
-        '-i',png,'-i',wav,'-t',String(scenes[i].duration),
-        '-vf','scale='+w+':'+h+',format=yuv420p','-af','apad',
+        '-i',imageFile,'-i',wav,'-t',String(duration),
+        '-vf',filters.video,'-af',filters.audio,
         '-c:v','libx264','-preset','veryfast','-crf','24','-c:a','aac','-b:a','128k',
         '-r','24','-movflags','+faststart',mp4]);
       parts.push(path.basename(mp4));
@@ -168,7 +190,8 @@ async function renderNarration(project, job, scenes, images, aspect) {
     if(!fs.existsSync(output)||fs.statSync(output).size===0)throw new Error('MP4 vazio');
     job.status='ready';
   } catch(e) {
-    job.status='error';job.error='Não foi possível gerar a narração. Verifique o motor de voz e os textos das cenas.';
+    job.status='error';
+    job.error=e.message?.includes('65 segundos')?e.message:'Não foi possível gerar a narração. Verifique a voz local e os textos das cenas.';
     console.error('Narration export:',e.message);
     try{fs.unlinkSync(output);}catch{}
   } finally {
@@ -190,7 +213,7 @@ export function createApp() {
     next();
   });
   app.get('/api/health', (_req, res) => res.json({ ffmpeg: toolAvailable(FFmpeg), ffprobe: toolAvailable(FFprobe),
-    narration: narrationAvailable(), version: '2.3-beta' }));
+    narration: Object.values(getVoiceCapabilities()).some(Boolean), voices:getVoiceCapabilities(), version: '2.4-beta' }));
   app.get('/api/projects', (_req, res) => res.json({ projects: projects.map(publicProject).sort((a,b) => b.createdAt.localeCompare(a.createdAt)) }));
   app.post('/api/projects', (req, res) => {
     const name = typeof req.body?.name === 'string' ? req.body.name.trim() : '';
@@ -281,20 +304,22 @@ export function createApp() {
   app.post('/api/projects/:id/narration', (req,res) => {
     const p=findProject(req.params.id);
     if(!p)return res.status(404).json({error:'Projeto não encontrado.'});
-    if(!toolAvailable(FFmpeg) || !narrationAvailable())
-      return res.status(503).json({error:'Instale FFmpeg e eSpeak NG (Linux) ou uma voz pt-BR no Windows para narrar.'});
+    if(!toolAvailable(FFmpeg)) return res.status(503).json({error:'FFmpeg não disponível.'});
+    const requestedVoice=req.body?.voiceEngine||'system';
+    try {resolveVoiceEngine(requestedVoice,getVoiceCapabilities());}
+    catch(e) {return res.status(503).json({error:e.message});}
     const checked=validateScenes(req.body?.scenes);
     if(checked.error)return res.status(400).json({error:checked.error});
     const images=req.body?.images;
-    if(!Array.isArray(images)||images.length!==checked.scenes.length||images.some(x=>typeof x!=='string'||x.length>1020000||!/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(x)))
-      return res.status(400).json({error:'Envie uma imagem PNG gerada para cada cena.'});
+    if(!Array.isArray(images)||images.length!==checked.scenes.length||images.some(x=>typeof x!=='string'||x.length>1020000||!/^data:image\/(?:png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(x)))
+      return res.status(400).json({error:'Envie uma imagem PNG ou JPEG válida para cada cena.'});
     const aspect=req.body?.aspect;
     if(!['9:16','16:9'].includes(aspect))return res.status(400).json({error:'Proporção inválida.'});
     if(p.exports.some(e=>e.status==='processing'))return res.status(409).json({error:'Outra exportação está em andamento.'});
-    const id=randomUUID(),job={id,status:'processing',aspect,kind:'narration',createdAt:new Date().toISOString(),filename:id+'.mp4'};
+    const id=randomUUID(),job={id,status:'processing',aspect,kind:'narration',voiceEngine:requestedVoice,createdAt:new Date().toISOString(),filename:id+'.mp4'};
     p.exports.unshift(job);save(projects);
     res.status(202).json({project:publicProject(p)});
-    renderNarration(p,job,checked.scenes,images,aspect);
+    renderNarration(p,job,checked.scenes,images,aspect,requestedVoice);
   });
   app.get('/api/projects/:id/exports/:jobId/download', (req, res) => {
     const project = findProject(req.params.id), job = project?.exports.find(e => e.id === req.params.jobId);
