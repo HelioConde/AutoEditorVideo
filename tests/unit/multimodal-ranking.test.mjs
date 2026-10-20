@@ -27,17 +27,17 @@ test('FFmpeg showinfo timestamps yield sorted scene changes',()=>{
 test('multimodal ranking boosts meaningful loud moments and explains evidence',()=>{
   const cues=[
     {start:0,end:11,text:'Hoje vamos falar sobre um assunto que aconteceu no início de uma apresentação.'},
-    {start:12,end:23,text:'Hoje vamos falar sobre um assunto que aconteceu no início de uma apresentação.'}
+    {start:16,end:27,text:'Hoje vamos falar sobre um assunto que aconteceu no início de uma apresentação.'}
   ];
   const signals={
-    audio:[{time:0,db:-38},{time:1,db:-37},{time:2,db:-39},{time:3,db:-38},{time:4,db:-37},{time:5,db:-39},{time:6,db:-38},{time:7,db:-37},{time:12,db:-18},{time:14,db:-17},{time:15,db:-19}],
-    scenes:[13.5,15]
+    audio:[{time:0,db:-38},{time:1,db:-37},{time:2,db:-39},{time:3,db:-38},{time:4,db:-37},{time:5,db:-39},{time:6,db:-38},{time:7,db:-37},{time:16,db:-18},{time:18,db:-17},{time:19,db:-19}],
+    scenes:[17.5,19]
   };
-  const base=rankShortsFromTranscript(cues,{duration:25,maxClips:1});
+  const base=rankShortsFromTranscript(cues,{duration:30,maxClips:1});
   const ranked=rankShortsFromTranscript(cues,{duration:25,maxClips:1,signals,profile:'gameplay'});
   assert.equal(base.error,null);
   assert.equal(ranked.error,null);
-  assert.equal(ranked.candidates[0].start,12);
+  assert.equal(ranked.candidates[0].start,16);
   assert.equal(ranked.candidates[0].evidence.source,'texto + áudio/vídeo');
   assert.ok(ranked.candidates[0].evidence.audioPeaks>=1);
   assert.ok(ranked.candidates[0].evidence.sceneChanges>=1);
