@@ -108,7 +108,13 @@ export default function App() {
   async function refresh(silent = false) {
     try {
       const data = await api('/projects');
-      setProjects(data.projects);
+      // Merge server updates with optimistic creations. An older list response
+      // must never erase a project created while the request was in flight.
+      setProjects(previous => {
+        const merged=new Map(data.projects.map(p=>[p.id,p]));
+        for(const project of previous) if(!merged.has(project.id))merged.set(project.id,project);
+        return [...merged.values()];
+      });
       if (!silent) setNotification(null);
     } catch (e) { if (!silent) setNotification({ type: 'error', message: e.message }); }
     finally { if (!silent) setLoading(false); }

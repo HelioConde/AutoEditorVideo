@@ -44,6 +44,11 @@ function toolAvailable(tool) {
   const result = spawnSync(tool, ['-version'], { encoding: 'utf8', timeout: 5000 });
   return !result.error && result.status === 0;
 }
+function narrationAvailable() {
+  if (process.platform==='win32') return true; // voice availability checked by SAPI at runtime
+  const result=spawnSync('espeak-ng',['--version'],{encoding:'utf8',timeout:5000});
+  return !result.error && result.status===0;
+}
 const upload = multer({
   dest: TMP,
   limits: { fileSize: 512 * 1024 * 1024, files: 1 },
@@ -181,7 +186,7 @@ export function createApp() {
     next();
   });
   app.get('/api/health', (_req, res) => res.json({ ffmpeg: toolAvailable(FFmpeg), ffprobe: toolAvailable(FFprobe),
-    narration: process.platform === 'win32' || toolAvailable('espeak-ng'), version: '2.3-beta' }));
+    narration: narrationAvailable(), version: '2.3-beta' }));
   app.get('/api/projects', (_req, res) => res.json({ projects: projects.map(publicProject).sort((a,b) => b.createdAt.localeCompare(a.createdAt)) }));
   app.post('/api/projects', (req, res) => {
     const name = typeof req.body?.name === 'string' ? req.body.name.trim() : '';
@@ -272,7 +277,7 @@ export function createApp() {
   app.post('/api/projects/:id/narration', (req,res) => {
     const p=findProject(req.params.id);
     if(!p)return res.status(404).json({error:'Projeto não encontrado.'});
-    if(!toolAvailable(FFmpeg) || (process.platform!=='win32' && !toolAvailable('espeak-ng')))
+    if(!toolAvailable(FFmpeg) || !narrationAvailable())
       return res.status(503).json({error:'Instale FFmpeg e eSpeak NG (Linux) ou uma voz pt-BR no Windows para narrar.'});
     const checked=validateScenes(req.body?.scenes);
     if(checked.error)return res.status(400).json({error:checked.error});
