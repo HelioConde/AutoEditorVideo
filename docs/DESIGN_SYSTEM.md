@@ -47,3 +47,7 @@ Regras: ações com estado desabilitado explícito; radio nativo para 9:16/16:9;
 ## Componente FilmstripTimeline
 
 Implementação compartilhada: `src/components/VideoTimeline.jsx` e `src/components/timeline.css`. O usuário vê frames extraídos do próprio vídeo; nunca usar imagens decorativas que pareçam quadros reais. Dois sliders `input type=range` complementam os controles numéricos preexistentes e mantêm seus nomes acessíveis. A fila permite mover/remover cinco trechos sem alterar a fonte. Vídeos continuam locais e nenhuma miniatura é enviada a serviços. Gerar miniaturas de forma limitada (8 JPEGs pequenos) e cancelar a operação ao trocar mídia. O botão de exportação usa a fila apenas quando contém itens; não misturar a seleção corrente silenciosamente na sequência.
+
+## Projeto portátil e modo roteiro
+
+`src/components/ProjectExchange.jsx` possui dois controles de teclado reais (botões) para baixar/upload de JSON e uma explicação explícita de que o arquivo não contém mídia. `src/components/StoryStudio.jsx` fornece campo de roteiro rotulado, botão de organização, cenas numeradas, títulos e textos editáveis, duração, prévia de voz e estados acessíveis. Utilizar tokens existentes. Não chamar segmentação determinística de roteiro de “IA geradora” nem apresentar síntese Web Speech como MP4 narrado na web.

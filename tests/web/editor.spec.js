@@ -21,14 +21,14 @@ test('versão web é responsiva e navegável por teclado', async ({ page }, test
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
   expect(overflow).toBe(false);
   await expect(page.getByRole('link', { name: /Versão desktop/ })).toBeVisible();
-  const upload = page.locator('input[type=file]');
+  const upload = page.locator('input[type=file][accept*=\"video/mp4\"]');
   await expect(upload).toBeAttached();
   await page.screenshot({ path: testInfo.outputPath('web-responsivo.png'), fullPage: true, animations: 'disabled' });
 });
 
 test('rejeita arquivo inválido antes do upload e aceita mídia local', async ({ page }) => {
   await page.goto('/');
-  await page.locator('input[type=file]').setInputFiles({ name:'notas.txt', mimeType:'text/plain', buffer:Buffer.from('teste') });
+  await page.locator('input[type=file][accept*=\"video/mp4\"]').setInputFiles({ name:'notas.txt', mimeType:'text/plain', buffer:Buffer.from('teste') });
   await expect(page.getByRole('alert')).toContainText('MP4 ou WebM');
   await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeDisabled();
 
@@ -36,7 +36,7 @@ test('rejeita arquivo inválido antes do upload e aceita mídia local', async ({
   const sample = path.join(folder, 'sample.mp4');
   try {
     execFileSync('ffmpeg', ['-hide_banner','-loglevel','error','-f','lavfi','-i','color=c=blue:s=320x180:r=15','-t','2','-c:v','libx264','-pix_fmt','yuv420p','-y',sample], { timeout: 30000 });
-    await page.locator('input[type=file]').setInputFiles(sample);
+    await page.locator('input[type=file][accept*=\"video/mp4\"]').setInputFiles(sample);
     await expect(page.getByText('sample.mp4')).toBeVisible();
     await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeEnabled({timeout: 15000});
     await page.getByRole('spinbutton', { name:'Fim (segundos)' }).fill('0.1');
@@ -58,7 +58,7 @@ test('exportação WebAssembly real sem backend (opcional)', async ({ page }, te
   try {
     execFileSync('ffmpeg', ['-hide_banner','-loglevel','error','-f','lavfi','-i','color=c=green:s=160x90:r=12','-t','1.5','-c:v','libx264','-pix_fmt','yuv420p','-y',sample], { timeout: 30000 });
     await page.goto('/');
-    await page.locator('input[type=file]').setInputFiles(sample);
+    await page.locator('input[type=file][accept*=\"video/mp4\"]').setInputFiles(sample);
     await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeEnabled();
     await page.getByRole('spinbutton', { name:'Fim (segundos)' }).fill('0.5');
     await expect(page.getByAltText('Quadro 1 do vídeo')).toBeVisible({timeout:15000});
@@ -75,4 +75,24 @@ test('exportação WebAssembly real sem backend (opcional)', async ({ page }, te
     ]);
     expect(download.suggestedFilename()).toMatch(/\.mp4$/);
   } finally { fs.rmSync(folder,{recursive:true,force:true}); }
+});
+
+test('roteiro e manifesto podem ser transferidos sem API ou vídeo',async({page})=>{
+  const project={schema:'autoeditor.project',version:1,name:'História importada',aspect:'16:9',media:null,
+    edit:{start:0,end:0,clips:[],script:'Uma breve história sobre viagem.',
+      scenes:[{title:'Cena de abertura',text:'Uma breve história sobre viagem.',duration:5}]}};
+  await page.goto('/');
+  await page.getByRole('button',{name:'Importar projeto'}).click();
+  await page.locator('#project-json-input').setInputFiles({
+    name:'historia.autoeditor.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});
+  await expect(page.getByRole('textbox',{name:'Roteiro'})).toHaveValue('Uma breve história sobre viagem.');
+  await expect(page.getByRole('textbox',{name:'Título da cena'})).toHaveValue('Cena de abertura');
+  await expect(page.getByRole('button',{name:'Exportar projeto'})).toBeEnabled();
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),page.getByRole('button',{name:'Exportar projeto'}).click()]);
+  const path=await download.path();
+  const manifest=JSON.parse(fs.readFileSync(path,'utf8'));
+  expect(manifest.schema).toBe('autoeditor.project');
+  expect(manifest.edit.scenes[0].title).toBe('Cena de abertura');
+  expect(manifest.aspect).toBe('16:9');
 });

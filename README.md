@@ -79,4 +79,18 @@ Para edição desktop com servidor local, instale Node.js 22+, FFmpeg e FFprobe 
 
 As duas versões exibem **miniaturas reais do vídeo** (geradas localmente pelo navegador), sliders acessíveis para os limites de corte, uma ação de prévia e uma sequência ordenada de até cinco cortes. Use **Adicionar à sequência** para montar uma lista; altere a ordem com as setas ou remova um trecho. Quando a lista está vazia, a exportação continua usando o recorte único; quando há itens, **somente os cortes da lista são unidos**.
 
-O desktop usa FFmpeg nativo e concat demuxer de segmentos reencodados com parâmetros idênticos; duração final máxima de 10 minutos. Na web, o FFmpeg.wasm processa e concatena até cinco trechos somando **20 segundos**. Ambos exigem recursos adequados ao tamanho do vídeo. Não há persistência da sequência entre sessões nesta primeira entrega.
+O desktop usa FFmpeg nativo e concat demuxer de segmentos reencodados com parâmetros idênticos; duração final máxima de 10 minutos. Na web, o FFmpeg.wasm processa e concatena até cinco trechos somando **20 segundos**. Ambos exigem recursos adequados ao tamanho do vídeo. No desktop, a sequência e o roteiro agora são salvos no projeto; na web, podem ser exportados em JSON.
+
+## Projetos compartilháveis e vídeo narrado (2.3 beta)
+
+As versões web e desktop compartilham **`autoeditor.project` v1**: exportação/importação `.autoeditor.json` com nome, proporção, marcas de tempo, sequência de cortes, roteiro e cenas. O **vídeo original não é transferido**: precisa ser selecionado novamente no outro dispositivo (o app verifica nome e duração antes de reaproveitar os cortes). A edição desktop é gravada automaticamente nos metadados locais, e a web trabalha em memória, com arquivo JSON para transporte.
+
+O **modo roteiro** transforma parágrafos em até seis cenas editáveis, com título, texto e duração de 2–15 segundos. **Não é geração de imagens ou vídeos por IA**: cria cartões de texto com paleta coerente. A prévia de voz usa a síntese do navegador, em português quando a voz está instalada.
+
+**No desktop**, com FFmpeg instalado e uma voz em português no sistema, `Gerar vídeo narrado` cria slides com narração e exporta MP4:
+- **Windows:** usa `System.Speech` via PowerShell e requer uma voz pt-BR/pt-PT instalada em Configurações de Fala. Não instala vozes automaticamente.
+- **Linux:** instale `espeak-ng` para disponibilizar narração `pt-br`. O Linux usa a voz sintética do sistema (qualidade inferior a modelos neurais como Kokoro).
+- O áudio da cena é limitado à duração configurada; ajuste a duração para evitar cortar a fala. A exportação preserva o roteiro em seu próprio projeto.
+- **Site (GitHub Pages):** por enquanto apenas organiza o roteiro e permite ouvir uma prévia da narração. O site **ainda não incorpora essa voz ao MP4 exportado**. Sem backend, `speechSynthesis` não permite capturar diretamente o áudio gerado.
+
+Este passo prepara a infraestrutura compartilhada para incorporar Kokoro/faster-whisper posteriormente, sem apresentar a prévia como exportação de narração.

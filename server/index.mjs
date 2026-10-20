@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalizeClips } from '../src/clip-utils.js';
+import { parseProjectFile, validateScenes } from '../src/project-format.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(process.env.DATA_DIR || path.join(HERE, '..', 'data'));
@@ -43,6 +44,11 @@ function toolAvailable(tool) {
   const result = spawnSync(tool, ['-version'], { encoding: 'utf8', timeout: 5000 });
   return !result.error && result.status === 0;
 }
+function narrationAvailable() {
+  if (process.platform==='win32') return true; // voice availability checked by SAPI at runtime
+  const result=spawnSync('espeak-ng',['--version'],{encoding:'utf8',timeout:5000});
+  return !result.error && result.status===0;
+}
 const upload = multer({
   dest: TMP,
   limits: { fileSize: 512 * 1024 * 1024, files: 1 },
@@ -53,7 +59,8 @@ const upload = multer({
 });
 const publicProject = p => ({
   id: p.id, name: p.name, createdAt: p.createdAt, media: p.media || null,
-  exports: (p.exports || []).map(({ id, status, aspect, createdAt, error }) => ({ id, status, aspect, createdAt, error }))
+  reference: p.reference || null, edit: p.edit || null,
+  exports: (p.exports || []).map(({ id, status, aspect, createdAt, error, kind }) => ({ id, status, aspect, createdAt, error, kind:kind||'cuts' }))
 });
 
 function runFFmpeg(args) {
@@ -111,10 +118,69 @@ async function render(project, job, source, output, clips, aspect) {
   }
 }
 
+// Narrated storyboard uses user-reviewed scene text and client-rendered PNG cards.
+// Offline speech is provided by OS engines: Windows SAPI or espeak-ng on Linux.
+async function runCommand(command,args) {
+  return new Promise((resolve,reject)=>{
+    const child=spawn(command,args,{windowsHide:true});
+    let stderr='';
+    child.stderr.on('data',x=>{stderr=(stderr+x.toString()).slice(-1000);});
+    child.once('error',reject);
+    child.once('close',code=>code===0?resolve():reject(new Error(stderr||command+' exited '+code)));
+  });
+}
+async function renderNarration(project, job, scenes, images, aspect) {
+  const folder=path.join(UPLOADS,project.id);
+  const output=path.join(folder,job.filename);
+  let tmp=null;
+  try {
+    // Script-only projects have never imported media and therefore do not
+    // have an uploads/<id> folder yet.
+    fs.mkdirSync(folder,{recursive:true});
+    tmp=fs.mkdtempSync(path.join(folder,'narration-'));
+    const parts=[];
+    for(let i=0;i<scenes.length;i++) {
+      const stem='scene-'+i;
+      const png=path.join(tmp,stem+'.png'),wav=path.join(tmp,stem+'.wav'),txt=path.join(tmp,stem+'.txt'),mp4=path.join(tmp,stem+'.mp4');
+      const data=Buffer.from(images[i].slice('data:image/png;base64,'.length),'base64');
+      if(data.byteLength>750000 || !data.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))
+        throw new Error('Imagem da cena inválida.');
+      fs.writeFileSync(png,data);
+      fs.writeFileSync(txt,scenes[i].text,'utf8');
+      if(process.platform==='win32') {
+        await runCommand('powershell.exe',['-NoProfile','-NonInteractive','-ExecutionPolicy','Bypass',
+          '-File',path.join(HERE,'tts-windows.ps1'),'-TextFile',txt,'-OutputFile',wav]);
+      } else {
+        await runCommand('espeak-ng',['-v','pt-br','-s','158','-f',txt,'-w',wav]);
+      }
+      const vertical=aspect==='9:16',w=vertical?720:1280,h=vertical?1280:720;
+      await runFFmpeg(['-hide_banner','-loglevel','error','-y','-loop','1','-framerate','24',
+        '-i',png,'-i',wav,'-t',String(scenes[i].duration),
+        '-vf','scale='+w+':'+h+',format=yuv420p','-af','apad',
+        '-c:v','libx264','-preset','veryfast','-crf','24','-c:a','aac','-b:a','128k',
+        '-r','24','-movflags','+faststart',mp4]);
+      parts.push(path.basename(mp4));
+    }
+    const listFile=path.join(tmp,'concat.txt');
+    fs.writeFileSync(listFile,parts.map(p=>"file '"+p+"'").join('\n')+'\n');
+    await runFFmpeg(['-hide_banner','-loglevel','error','-y','-f','concat','-safe','0','-i',listFile,
+      '-c','copy','-movflags','+faststart',output]);
+    if(!fs.existsSync(output)||fs.statSync(output).size===0)throw new Error('MP4 vazio');
+    job.status='ready';
+  } catch(e) {
+    job.status='error';job.error='Não foi possível gerar a narração. Verifique o motor de voz e os textos das cenas.';
+    console.error('Narration export:',e.message);
+    try{fs.unlinkSync(output);}catch{}
+  } finally {
+    if(tmp) fs.rmSync(tmp,{recursive:true,force:true});
+    save(projects);
+  }
+}
+
 export function createApp() {
   const app = express();
   app.disable('x-powered-by');
-  app.use(express.json({ limit: '50kb' }));
+  app.use(express.json({ limit: '5mb' }));
   // Do not accept cross-origin writes to the unauthenticated local-only API.
   app.use('/api', (req, res, next) => {
     if (!['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) return next();
@@ -123,15 +189,36 @@ export function createApp() {
       return res.status(403).json({ error: 'Origem não autorizada para operação local.' });
     next();
   });
-  app.get('/api/health', (_req, res) => res.json({ ffmpeg: toolAvailable(FFmpeg), ffprobe: toolAvailable(FFprobe), version: '2.0-beta' }));
+  app.get('/api/health', (_req, res) => res.json({ ffmpeg: toolAvailable(FFmpeg), ffprobe: toolAvailable(FFprobe),
+    narration: narrationAvailable(), version: '2.3-beta' }));
   app.get('/api/projects', (_req, res) => res.json({ projects: projects.map(publicProject).sort((a,b) => b.createdAt.localeCompare(a.createdAt)) }));
   app.post('/api/projects', (req, res) => {
     const name = typeof req.body?.name === 'string' ? req.body.name.trim() : '';
     if (name.length < 2 || name.length > 64) return res.status(400).json({ error: 'Use um nome entre 2 e 64 caracteres.' });
-    const project = { id: randomUUID(), name, createdAt: new Date().toISOString(), media: null, exports: [] };
+    const project = { id: randomUUID(), name, createdAt: new Date().toISOString(), media: null, reference:null, edit:null, exports: [] };
     projects.unshift(project);
     save(projects);
     res.status(201).json({ project: publicProject(project) });
+  });
+  app.post('/api/projects/import', (req, res) => {
+    let imported;
+    try { imported = parseProjectFile(req.body); }
+    catch(e) { return res.status(400).json({error:e.message}); }
+    const project={ id:randomUUID(),name:imported.name,createdAt:new Date().toISOString(), media:null,
+      reference:imported.media,edit:{...imported.edit,aspect:imported.aspect},exports:[] };
+    projects.unshift(project); save(projects);
+    res.status(201).json({project:publicProject(project)});
+  });
+  app.put('/api/projects/:id/edit', (req,res) => {
+    const p=findProject(req.params.id);
+    if(!p)return res.status(404).json({error:'Projeto não encontrado.'});
+    let parsed;
+    try {parsed=parseProjectFile({...req.body,schema:'autoeditor.project',version:1,
+      name:p.name,media:p.media ? {name:p.media.originalName,size:p.media.size,duration:p.media.duration} : (p.reference||null)});}
+    catch(e){return res.status(400).json({error:e.message});}
+    p.edit={...parsed.edit,aspect:parsed.aspect};
+    save(projects);
+    res.json({project:publicProject(p)});
   });
   app.post('/api/projects/:id/media', (req, res) => {
     const project = findProject(req.params.id);
@@ -149,6 +236,12 @@ export function createApp() {
         fs.renameSync(req.file.path, path.join(folder, filename));
         const previous = project.media;
         project.media = { id, originalName: path.basename(req.file.originalname).slice(0, 150), fileName: filename, size: req.file.size, duration };
+        // Apply portable cuts only if the same source was reselected.
+        if (project.reference && (project.reference.name !== project.media.originalName ||
+            Math.abs(project.reference.duration - duration) > .4)) {
+          if(project.edit)project.edit={...project.edit,clips:[],start:0,end:duration};
+        }
+        project.reference=null;
         project.exports = [];
         save(projects);
         if (previous) { try { fs.unlinkSync(path.join(folder, previous.fileName)); } catch {} }
@@ -184,6 +277,24 @@ export function createApp() {
     save(projects);
     res.status(202).json({ project: publicProject(project) });
     render(project, job, path.join(folder, project.media.fileName), path.join(folder, job.filename), plan.clips, aspect);
+  });
+  app.post('/api/projects/:id/narration', (req,res) => {
+    const p=findProject(req.params.id);
+    if(!p)return res.status(404).json({error:'Projeto não encontrado.'});
+    if(!toolAvailable(FFmpeg) || !narrationAvailable())
+      return res.status(503).json({error:'Instale FFmpeg e eSpeak NG (Linux) ou uma voz pt-BR no Windows para narrar.'});
+    const checked=validateScenes(req.body?.scenes);
+    if(checked.error)return res.status(400).json({error:checked.error});
+    const images=req.body?.images;
+    if(!Array.isArray(images)||images.length!==checked.scenes.length||images.some(x=>typeof x!=='string'||x.length>1020000||!/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(x)))
+      return res.status(400).json({error:'Envie uma imagem PNG gerada para cada cena.'});
+    const aspect=req.body?.aspect;
+    if(!['9:16','16:9'].includes(aspect))return res.status(400).json({error:'Proporção inválida.'});
+    if(p.exports.some(e=>e.status==='processing'))return res.status(409).json({error:'Outra exportação está em andamento.'});
+    const id=randomUUID(),job={id,status:'processing',aspect,kind:'narration',createdAt:new Date().toISOString(),filename:id+'.mp4'};
+    p.exports.unshift(job);save(projects);
+    res.status(202).json({project:publicProject(p)});
+    renderNarration(p,job,checked.scenes,images,aspect);
   });
   app.get('/api/projects/:id/exports/:jobId/download', (req, res) => {
     const project = findProject(req.params.id), job = project?.exports.find(e => e.id === req.params.jobId);

@@ -42,3 +42,29 @@ test('API não permite exportação sem mídia', async () => {
   const response = await request('/projects/' + created.data.project.id + '/exports', { start:0,end:1,aspect:'9:16' });
   assert.equal(response.status, 400);
 });
+
+test('importa edição portável sem exigir o vídeo original', async () => {
+  const data={schema:'autoeditor.project',version:1,name:'História portável',aspect:'9:16',
+    media:{name:'original.mp4',size:4000,duration:12},
+    edit:{start:1,end:3,clips:[{start:1,end:3}],script:'Era uma vez.',
+      scenes:[{title:'Abertura',text:'Era uma vez.',duration:3}]}};
+  const imported=await request('/projects/import',data);
+  assert.equal(imported.status,201);
+  assert.equal(imported.data.project.media,null);
+  assert.equal(imported.data.project.reference.name,'original.mp4');
+  assert.equal(imported.data.project.edit.scenes[0].text,'Era uma vez.');
+  const id=imported.data.project.id;
+  const save=await fetch(origin+'/api/projects/'+id+'/edit',{method:'PUT',
+    headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  assert.equal(save.status,200);
+  const found=await(await fetch(origin+'/api/projects')).json();
+  const project=found.projects.find(p=>p.id===id);
+  assert.equal(project.edit.clips.length,1);
+});
+test('rejeita JSON de projeto fora do formato e imagens arbitrárias',async()=>{
+  assert.equal((await request('/projects/import',{schema:'wrong',version:1})).status,400);
+  const created=await request('/projects',{name:'Roteiro QA'});
+  const id=created.data.project.id;
+  const response=await request('/projects/'+id+'/narration',{scenes:[],images:[],aspect:'9:16'});
+  assert.ok([400,503].includes(response.status));
+});
