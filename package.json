@@ -1,17 +1,30 @@
 {
-  "name": "autoeditor",
-  "version": "1.0.0",
-  "description": "Esse programa irar editar vídeo de forma automatica",
-  "main": "index.js",
+  "name": "autoeditor-video",
+  "version": "2.0.0-beta.1",
+  "private": true,
+  "type": "module",
+  "description": "Estúdio local de montagem e exportação de vídeos",
   "scripts": {
-    "test": "node index.js"
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "node server/index.mjs",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "start": "node server/index.mjs",
+    "test": "node --test server/*.test.mjs",
+    "test:e2e": "playwright test",
+    "check": "npm run test && npm run build"
   },
-  "author": "Francisco Hélio Conde dos Santos",
-  "license": "ISC",
+  "engines": {"node": ">=22"},
   "dependencies": {
-    "body-parser": "^1.20.0",
-    "express": "^4.18.1",
-    "node-fetch": "2.0",
-    "request": "^2.88.2"
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@vitejs/plugin-react": "^4.4.1",
+    "vite": "^6.3.5"
   }
 }
