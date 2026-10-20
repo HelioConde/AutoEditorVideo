@@ -279,7 +279,15 @@ export function createApp() {
     try {parsed=parseProjectFile({...req.body,schema:'autoeditor.project',version:1,
       name:p.name,media:p.media ? {name:p.media.originalName,size:p.media.size,duration:p.media.duration} : (p.reference||null)});}
     catch(e){return res.status(400).json({error:e.message});}
-    p.edit={...parsed.edit,aspect:parsed.aspect};
+    // A late autosave must not overwrite captions that Whisper has just
+    // produced. Only an editor that has acknowledged the new revision may
+    // modify the transcript-derived cues.
+    if(p.transcription?.status==='processing')
+      return res.status(409).json({error:'Aguarde a transcrição terminar antes de salvar alterações.'});
+    const acknowledgesTranscript= p.transcription?.status!=='ready' ||
+      req.body?.transcriptionVersion === p.transcription.updatedAt;
+    p.edit={...parsed.edit,aspect:parsed.aspect,
+      subtitles:acknowledgesTranscript ? parsed.edit.subtitles : (p.edit?.subtitles||[])};
     save(projects);
     res.json({project:publicProject(p)});
   });
