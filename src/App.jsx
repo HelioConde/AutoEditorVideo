@@ -179,7 +179,7 @@ export default function App() {
     <a className="skip-link" href="#main">Pular para o conteúdo</a>
     <div className="app-layout">
       <aside className={'sidebar ' + (sidebarOpen ? 'sidebar-open' : '')} aria-label="Navegação principal">
-        <div className="brand"><span className="brand-mark"><Clapperboard size={22} strokeWidth={2.4} aria-hidden="true" /></span><span className="brand-name">AutoEditor<span>Studio</span></span></div>
+        <div className="brand"><span className="brand-mark"><Clapperboard size={22} strokeWidth={2.4} aria-hidden="true" /></span><span className="brand-name">AutoEditor<span>Studio</span></span><button className="icon-button sidebar-close" type="button" aria-label="Fechar menu" onClick={() => setSidebarOpen(false)}><X size={18} aria-hidden="true" /></button></div>
         <div className="side-section-label">WORKSPACE</div>
         <nav className="side-nav" aria-label="Seções">
           <button className={'nav-item ' + (page === 'home' ? 'active' : '')} aria-current={page === 'home' ? 'page' : undefined} onClick={showHome}><LayoutDashboard size={18} aria-hidden="true" />Visão geral</button>
@@ -190,7 +190,7 @@ export default function App() {
         <div className="sidebar-help"><span className="help-icon"><Sparkles size={17} aria-hidden="true" /></span><strong>Crie no seu ritmo.</strong><p>Seu estúdio funciona localmente. Sem assinatura para começar.</p><button className="help-cta" onClick={() => setModal(true)}>Novo projeto <ArrowRight size={16} aria-hidden="true" /></button></div>
         <div className="sidebar-bottom"><div className={'status-dot ' + (health?.ffmpeg ? 'online' : '')}/><span>{health === null ? 'Verificando motor…' : health.ffmpeg ? 'Motor de vídeo disponível' : 'FFmpeg não encontrado'}</span><span className="version">BETA 2.0</span></div>
       </aside>
-      {sidebarOpen && <button className="mobile-overlay" aria-label="Fechar menu" onClick={() => setSidebarOpen(false)} />}
+      {sidebarOpen && <button className="mobile-overlay" aria-label="Fechar ao tocar fora do menu" onClick={() => setSidebarOpen(false)} />}
       <div className="main-shell">
         <header className="topbar">
           <button className="icon-button menu-button" aria-label="Abrir menu" onClick={() => setSidebarOpen(true)}><Menu size={23} /></button>
