@@ -1,43 +1,48 @@
 import { test, expect } from '@playwright/test';
 
-// @visual and @a11y intentionally run in the existing browser CI: screenshots
-// are artifacts, not fragile pixel-exact snapshots.
-test('QA visual @visual @a11y: navegação do estúdio, cinco resoluções e foco visível',async({page},testInfo)=>{
+// @visual and @a11y use real Chromium layouts: screens are attached to CI.
+test('QA visual @visual @a11y: entrada enxuta, etapas e ferramentas opcionais em cinco resoluções',async({page},testInfo)=>{
   await page.goto('/');
-  const nav=page.getByRole('navigation',{name:'Ir para uma etapa do editor'});
-  await expect(nav).toBeVisible();
-  await expect(nav.locator('a')).toHaveCount(5);
+  const stages=page.getByRole('group',{name:'Etapas da edição'});
+  await expect(stages).toBeVisible();
+  await expect(stages.getByRole('button')).toHaveCount(3);
+  await expect(stages.getByRole('button',{name:'Importar vídeo'})).toHaveAttribute('aria-current','step');
+  await expect(stages.getByRole('button',{name:'Editar cortes'})).toBeDisabled();
+  await expect(stages.getByRole('button',{name:'Exportar'})).toBeDisabled();
+  await expect(page.locator('#studio-cuts')).toHaveCount(0);
+  await expect(page.locator('#studio-captions')).toHaveCount(0);
+  await expect(page.locator('#studio-script')).toHaveCount(0);
+  await expect(page.locator('#studio-project')).toHaveCount(0);
   for(const width of [320,375,768,1280,1920]){
     await page.setViewportSize({width,height:850});
     await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth),
-      {message:'A página não deve ter scroll horizontal em '+width}).toBeLessThanOrEqual(1);
-    await expect(nav).toBeVisible();
-    if(width===375||width===1280){
-      await page.screenshot({path:testInfo.outputPath('web-workbench-'+width+'.png'),
+      {message:'Nenhum overflow horizontal na largura '+width}).toBeLessThanOrEqual(1);
+    await expect(stages).toBeVisible();
+    if(width===375||width===1280)
+      await page.screenshot({path:testInfo.outputPath('web-progressive-initial-'+width+'.png'),
         animations:'disabled',fullPage:false});
-    }
   }
   await page.setViewportSize({width:375,height:850});
-  const link=nav.getByRole('link',{name:/Legendas/});
-  await link.focus();
-  expect(await link.evaluate(e=>getComputedStyle(e).outlineStyle)).not.toBe('none');
-  await link.click();
-  await expect(page).toHaveURL(/#studio-captions$/);
-  await expect(page.locator('#studio-captions')).toBeInViewport();
-  await nav.getByRole('link',{name:/Roteiro/}).click();
-  await expect(page).toHaveURL(/#studio-script$/);
-  await expect(page.locator('#studio-script')).toBeInViewport();
+  const legends=page.getByRole('button',{name:/^Legendas/});
+  await legends.focus();
+  expect(await legends.evaluate(el=>getComputedStyle(el).outlineStyle)).not.toBe('none');
+  await legends.click();
+  await expect(legends).toHaveAttribute('aria-expanded','true');
+  await expect(page.locator('#studio-captions')).toBeVisible();
+  await page.getByRole('button',{name:/^Roteiro/}).click();
+  await expect(page.locator('#studio-captions')).toHaveCount(0);
+  await expect(page.locator('#studio-script')).toBeVisible();
   const script=page.getByRole('textbox',{name:'Roteiro'});
-  expect(Number.parseFloat(await script.evaluate(e=>getComputedStyle(e).fontSize))).toBeGreaterThanOrEqual(16);
-  await script.fill('Vídeo com roteiro para revisar o layout no celular.');
-  await expect(script).toHaveValue('Vídeo com roteiro para revisar o layout no celular.');
+  expect(Number.parseFloat(await script.evaluate(el=>getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(16);
+  await script.fill('Roteiro de demonstração das etapas para o celular.');
+  await expect(script).toHaveValue('Roteiro de demonstração das etapas para o celular.');
 });
-test('QA movimento reduzido @visual: respeita preferências do sistema',async({page})=>{
+test('QA movimento reduzido @visual: prefere evitar animações',async({page})=>{
   await page.emulateMedia({reducedMotion:'reduce'});
   await page.goto('/');
-  const smooth=await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior);
-  expect(smooth).toBe('auto');
-  const nav=page.getByRole('navigation',{name:'Ir para uma etapa do editor'});
-  await nav.getByRole('link',{name:/Cortes/}).click();
-  await expect(page).toHaveURL(/#studio-cuts$/);
+  expect(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
+  await page.getByRole('button',{name:'Criar pelo roteiro'}).click();
+  await expect(page.getByRole('textbox',{name:'Roteiro'})).toBeVisible();
+  await page.getByRole('button',{name:/^Roteiro/}).click();
+  await expect(page.locator('#studio-script')).toHaveCount(0);
 });

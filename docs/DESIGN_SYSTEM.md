@@ -79,3 +79,11 @@ Checklist QA desta revisão em `docs/UX_AUDIT_2026-10-20.md`. Capturas disponív
 - `web-draft.js` grava um manifesto `autoeditor.project` v1 no `localStorage`, até 140 KB. Não armazenar ou transmitir media e imagens. Dados inválidos não substituem o último rascunho válido.
 - O usuário controla a retenção com `Limpar rascunho` e `Exportar projeto` (JSON). A recuperação automática não equivale a sincronização em nuvem ou conta de usuário.
 - Testes de precisão e rascunhos: `tests/unit/timeline-precision.test.mjs`, `tests/unit/web-draft.test.mjs`, `tests/web/timeline-draft.spec.js` e `tests/e2e/timeline-precision.spec.js`.
+
+## Divulgar funções progressivamente (UX web 2.8)
+
+**Objetivo:** reduzir densidade da tela inicial sem esconder capacidades existentes. O fluxo principal é `Importar → Editar cortes → Exportar`. Estados `phase=import|edit|export` em `WebApp.jsx`. Somente a etapa ativa monta os componentes relevantes; o player de vídeo é preservado para não interromper a visualização.
+
+Ferramentas opcionais têm estado exclusivo `openTool=captions|script|project|null`, acesso a qualquer momento, indicadores de quantidade e `aria-expanded`. O roteiro e a importação JSON continuam disponíveis sem mídia. O painel de rascunho utiliza `details` recolhido, mas o autosave segue funcionando. Não limpar roteiro, legendas ou cortes ao recolher painéis.
+
+**Teste visual/QA:** tela inicial sem timeline, painel de exportação ou editores opcionais; desbloqueio após importar vídeo; alternância entre etapas sem apagar dados; capturas nas larguras 320, 375, 768, 1280 e 1920 px; sem overflow e com foco visível. A experiência desktop continua com WorkbenchNav, pois este PR modifica somente a página web.

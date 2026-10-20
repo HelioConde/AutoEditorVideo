@@ -1,14 +1,13 @@
-import { useEffect, useId, useRef, useState } from 'react';
-import VideoTimeline from './components/VideoTimeline.jsx';
-import WorkbenchNav from './components/WorkbenchNav.jsx';
+import { lazy, Suspense, useEffect, useId, useRef, useState } from 'react';
+const VideoTimeline=lazy(()=>import('./components/VideoTimeline.jsx'));
 import { browserStorage, clearWebDraft, loadWebDraft, saveWebDraft } from './web-draft.js';
 import './editor-polish.css';
-import SubtitleStudio from './components/SubtitleStudio.jsx';
+const SubtitleStudio=lazy(()=>import('./components/SubtitleStudio.jsx'));
 import { normalizeClips } from './clip-utils.js';
-import ProjectExchange from './components/ProjectExchange.jsx';
-import StoryStudio from './components/StoryStudio.jsx';
+const ProjectExchange=lazy(()=>import('./components/ProjectExchange.jsx'));
+const StoryStudio=lazy(()=>import('./components/StoryStudio.jsx'));
 import {
-  ArrowDownToLine, ArrowRight, BadgeCheck, Check, ChevronRight, Clapperboard,
+  ArrowDownToLine, ArrowRight, BadgeCheck, Check, Clapperboard,
   Clock3, FileVideo2, Film, Globe2, HardDrive, Info, LoaderCircle,
   Monitor, Play, RotateCcw, Scissors, ShieldCheck, Sparkles, UploadCloud, X
 } from 'lucide-react';
@@ -27,10 +26,12 @@ function durationLabel(seconds) {
 function size(bytes) {
   return (bytes / 1024 / 1024).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' MB';
 }
-function Stage({ number, title, completed, current }) {
-  return <div className={'web-step ' + (completed ? 'web-step-done ' : '') + (current ? 'web-step-current' : '')}>
+function Stage({ number, title, completed, current, onClick, disabled }) {
+  return <button type="button" onClick={onClick} disabled={disabled}
+    aria-current={current ? 'step' : undefined}
+    className={'web-step web-step-action ' + (completed ? 'web-step-done ' : '') + (current ? 'web-step-current' : '')}>
     <span className="web-step-count" aria-hidden="true">{completed ? <Check size={15}/> : number}</span><span>{title}</span>
-  </div>;
+  </button>;
 }
 
 export default function WebApp() {
@@ -42,6 +43,8 @@ export default function WebApp() {
   const fileInput = useRef(null);
   const cancelRef = useRef(null);
   const [file, setFile] = useState(null);
+  const [phase,setPhase] = useState('import');
+  const [openTool,setOpenTool] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [duration, setDuration] = useState(0);
   const [start, setStart] = useState(initialEdit?.start ?? 0);
@@ -95,6 +98,17 @@ export default function WebApp() {
     return ()=>window.clearTimeout(timer);
   },[file,duration,reference,projectName,aspect,start,end,clips,script,scenes,voiceEngine,subtitles,burnSubtitles,busy]);
 
+  function openOptional(tool) {
+    setOpenTool(tool);
+    requestAnimationFrame(()=>{
+      const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelector('.web-optional')?.scrollIntoView({block:'start',behavior:reduced?'auto':'smooth'});
+    });
+  }
+  function toggleTool(tool) {
+    setOpenTool(previous=>previous===tool?null:tool);
+  }
+
   function clearResult() {
     setDownloadUrl(null);
     setOutputSize(0);
@@ -116,6 +130,7 @@ export default function WebApp() {
     setDuration(0);
     if (!reference) {setStart(0);setEnd(0);setClips([]);}
     setFile(selected);
+    setPhase('import');
   }
 
   function onMetadata(e) {
@@ -138,6 +153,7 @@ export default function WebApp() {
       setStart(0);setEnd(Math.min(MAX_EXPORT_SECONDS,Math.floor(value*10)/10));
     }
     setReference(null);
+    setPhase('edit');
   }
 
   function onVideoError() {
@@ -146,6 +162,7 @@ export default function WebApp() {
 
   function newFile() {
     if (busy) return;
+    setPhase('import');
     setFile(null);
     setDuration(0);
     setClips([]);
@@ -199,6 +216,7 @@ export default function WebApp() {
     if(busy)return;
     clearWebDraft(browserStorage());
     setFile(null);setDuration(0);setStart(0);setEnd(0);setClips([]);
+    setPhase('import');setOpenTool(null);
     setScript('');setScenes([]);setSubtitles([]);setBurnSubtitles(false);setVoiceEngine('system');
     setAspect('9:16');setReference(null);setScenePictures([]);setProjectName('Meu projeto web');
     setError('');clearResult();
@@ -209,6 +227,7 @@ export default function WebApp() {
     if (busy) throw new Error('Conclua a exportação atual antes de importar.');
     const edit=incoming.edit;
     setFile(null);setDuration(0);
+    setPhase('import');setOpenTool('project');
     if(fileInput.current)fileInput.current.value='';
     setProjectName(incoming.name);
     setAspect(incoming.aspect);
@@ -254,15 +273,22 @@ export default function WebApp() {
               <span className="web-local-label"><span className="local-circle"/> Edição privada e local</span>
             </div>
 
-            <div className="web-steps" aria-label="Etapas do projeto">
-              <Stage number="01" title="Importar vídeo" current={!file} completed={Boolean(file)}/>
-              <ChevronRight size={18} aria-hidden="true" />
-              <Stage number="02" title="Definir corte" current={Boolean(file && !downloadUrl)} completed={Boolean(downloadUrl)}/>
-              <ChevronRight size={18} aria-hidden="true" />
-              <Stage number="03" title="Exportar MP4" current={Boolean(downloadUrl)} completed={Boolean(downloadUrl)}/>
+            <div className="web-progressive-steps" role="group" aria-label="Etapas da edição">
+              <Stage number="01" title="Importar vídeo" current={phase==='import'} completed={Boolean(file)}
+                onClick={()=>setPhase('import')} disabled={busy}/>
+              <Stage number="02" title="Editar cortes" current={phase==='edit'} completed={Boolean(file && validRange && phase==='export')}
+                onClick={()=>setPhase('edit')} disabled={!file || busy}/>
+              <Stage number="03" title="Exportar" current={phase==='export'} completed={Boolean(downloadUrl)}
+                onClick={()=>setPhase('export')} disabled={!file || busy}/>
             </div>
-            <WorkbenchNav />
-            <div className="web-columns">
+            <p className="web-phase-description">
+              {phase==='import' ? 'Primeiro, escolha o vídeo. As ferramentas de edição aparecerão na próxima etapa.' :
+                phase==='edit' ? 'Ajuste os cortes e a sequência. Depois, avance para a exportação.' :
+                'Escolha a proporção e gere seu MP4. O vídeo continua no seu dispositivo.'}
+            </p>
+            {error && <div className="web-error web-global-error" role="alert"><Info size={19} aria-hidden="true"/>
+              <span>{error}</span><button type="button" aria-label="Fechar aviso de erro" onClick={()=>setError('')}><X size={16}/></button></div>}
+            <div className={'web-columns web-progressive-columns web-phase-'+phase}>
               <div className="web-primary">
                 <div id="studio-video" className="web-preview-panel">
                   <div className="web-panel-heading"><strong><Film size={18} aria-hidden="true"/> Pré-visualização</strong>{file && <button className="web-text-btn" onClick={newFile} disabled={busy}><RotateCcw size={15} aria-hidden="true" /> Trocar vídeo</button>}</div>
@@ -277,7 +303,7 @@ export default function WebApp() {
                   <input id={inputId} ref={fileInput} className="visually-hidden" type="file" accept=".mp4,.webm,video/mp4,video/webm" disabled={busy} onChange={e => selectFile(e.target.files?.[0])}/>
                   {file && <div className="web-file-row"><FileVideo2 size={21} aria-hidden="true"/><div><strong title={file.name}>{file.name}</strong><span>{size(file.size)} {duration ? '· ' + minutes(duration) : '· Lendo duração…'}</span></div><Check size={17} aria-hidden="true"/></div>}
                 </div>
-
+                {phase==='edit' && <Suspense fallback={<div className="web-tool-loading" role="status">Carregando timeline…</div>}>
                 <div id="studio-cuts" className="web-panel web-cut-panel">
                   <div className="web-panel-heading"><strong><Scissors size={18} aria-hidden="true"/> Recortar vídeo</strong><span className="web-muted">Trechos somados até 20 segundos</span></div>
                   <VideoTimeline variant="web" source={previewUrl} duration={duration} start={start} end={end}
@@ -291,8 +317,20 @@ export default function WebApp() {
                   </div>
                   {canTrim && !validRange && <p className="web-validation" role="alert">{clips.length ? normalizeClips({ segments: clips, duration, maxTotal: 20, maxEach: 20 }).error : validateBrowserRange({ start, end, duration })}</p>}
                 </div>
+                  <div className="web-phase-next">
+                    <p>Pronto para criar o arquivo? A escolha do formato fica na última etapa.</p>
+                    <button type="button" disabled={!file||busy} onClick={()=>setPhase('export')}>Continuar para exportação <ArrowRight size={16} aria-hidden="true"/></button>
+                  </div>
+                </Suspense>}
+                {phase==='import' && <div className="web-start-options" aria-label="Outras formas de começar">
+                  <p>Ou comece de outra forma</p>
+                  <div>
+                    <button type="button" onClick={()=>openOptional('script')}><Sparkles size={17} aria-hidden="true"/> Criar pelo roteiro</button>
+                    <button type="button" onClick={()=>openOptional('project')}><FileVideo2 size={17} aria-hidden="true"/> Abrir projeto salvo</button>
+                  </div>
+                </div>}
               </div>
-
+              {phase==='export' && <>
               <div className="web-side">
                 <div className="web-panel web-settings">
                   <div className="web-panel-heading"><strong><Monitor size={18} aria-hidden="true"/> Configurar exportação</strong></div>
@@ -319,21 +357,49 @@ export default function WebApp() {
                 </div>
                 <div className="web-privacy"><ShieldCheck size={23} aria-hidden="true"/><div><strong>Seus arquivos, seu controle.</strong><p>Vídeos são processados no navegador. O motor WebAssembly é baixado de um CDN; o arquivo de vídeo não é enviado ao CDN nem ao GitHub.</p></div></div>
               </div>
+              </>}
             </div>
+            <section className="web-optional" aria-labelledby="optional-heading">
+              <div className="web-optional-heading">
+                <div><span className="section-kicker">PERSONALIZE QUANDO QUISER</span><h3 id="optional-heading">Ferramentas adicionais</h3>
+                  <p>Você não precisa configurar tudo. Abra somente o recurso que vai usar.</p></div>
+              </div>
+              <div className="web-optional-selector" role="group" aria-label="Escolher ferramenta adicional">
+                <button type="button" aria-expanded={openTool==='captions'} aria-controls="studio-captions"
+                  className={openTool==='captions'?'active':''} onClick={()=>toggleTool('captions')}>
+                  <span><Scissors size={16} aria-hidden="true"/> Legendas</span><small>{subtitles.length?subtitles.length+' trecho(s)':'Opcional'}</small>
+                </button>
+                <button type="button" aria-expanded={openTool==='script'} aria-controls="studio-script"
+                  className={openTool==='script'?'active':''} onClick={()=>toggleTool('script')}>
+                  <span><Sparkles size={16} aria-hidden="true"/> Roteiro</span><small>{scenes.length?scenes.length+' cena(s)':'Opcional'}</small>
+                </button>
+                <button type="button" aria-expanded={openTool==='project'} aria-controls="studio-project"
+                  className={openTool==='project'?'active':''} onClick={()=>toggleTool('project')}>
+                  <span><HardDrive size={16} aria-hidden="true"/> Meu projeto</span><small>Salvar ou importar</small>
+                </button>
+              </div>
+              {openTool==='captions' && <Suspense fallback={<div className="web-tool-loading" role="status">Abrindo legendas…</div>}>
+            <div id="studio-captions" className="web-captions"><SubtitleStudio mode="web" subtitles={subtitles} onChange={setSubtitles}
+              mediaDuration={duration} previewTime={previewTime} disabled={busy} /></div>
+              </Suspense>}
+              {openTool==='script' && <Suspense fallback={<div className="web-tool-loading" role="status">Abrindo roteiro…</div>}><div className="web-single-tool">
+<StoryStudio mode="web" aspect={aspect} script={script} scenes={scenes}
+                scenePictures={scenePictures} onScenePicturesChange={setScenePictures}
+                onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}} />
+              </div></Suspense>}
+              {openTool==='project' && <Suspense fallback={<div className="web-tool-loading" role="status">Abrindo projeto…</div>}><div className="web-single-tool">
+<ProjectExchange name={projectName} aspect={aspect} media={file?{name:file.name,size:file.size,duration}:reference}
+                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine} subtitles={subtitles} burnSubtitles={burnSubtitles}
+                onImport={importPortableProject} disabled={busy} />
+              </div></Suspense>}
+            </section>
+            <details className="web-draft-details">
+              <summary><ShieldCheck size={16} aria-hidden="true"/> Rascunho no navegador <span>Como o seu progresso é salvo</span></summary>
             <div className="web-draft-bar" aria-label="Rascunho local do editor">
               <div><strong>Projeto neste navegador</strong><p>{draftMessage}</p></div>
               <button type="button" disabled={busy} onClick={resetDraft}>Limpar rascunho</button>
             </div>
-            <div id="studio-captions" className="web-captions"><SubtitleStudio mode="web" subtitles={subtitles} onChange={setSubtitles}
-              mediaDuration={duration} previewTime={previewTime} disabled={busy} /></div>
-            <div className="web-story-workspace">
-              <StoryStudio mode="web" aspect={aspect} script={script} scenes={scenes}
-                scenePictures={scenePictures} onScenePicturesChange={setScenePictures}
-                onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}} />
-              <ProjectExchange name={projectName} aspect={aspect} media={file?{name:file.name,size:file.size,duration}:reference}
-                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine} subtitles={subtitles} burnSubtitles={burnSubtitles}
-                onImport={importPortableProject} disabled={busy} />
-            </div>
+            </details>
           </section>
           <section className="web-bottom" id="como-funciona" aria-labelledby="about-title"><div><span className="section-kicker">POR QUE A VERSÃO WEB?</span><h2 id="about-title">Simples de abrir.<br/>Fácil de criar.</h2><p>Uma primeira versão para cortes rápidos. Quer importar arquivos maiores, montar vídeos longos ou exportar em HD? O projeto desktop tem mais capacidade.</p><a href="https://github.com/HelioConde/AutoEditorVideo" className="web-bottom-link">Conhecer a versão desktop <ArrowRight size={18}/></a></div><div className="web-bottom-features"><div><HardDrive size={21}/><strong>Sem uploads para servidor</strong><p>O arquivo fica no dispositivo durante a edição.</p></div><div><Clock3 size={21}/><strong>Ideal para cortes curtos</strong><p>Exporte trechos de até 20 segundos por vez.</p></div></div></section>
           <footer className="web-footer"><span>© AutoEditor Studio · Ferramentas para contar boas histórias</span><a href="https://github.com/HelioConde/AutoEditorVideo">Código aberto no GitHub ↗</a></footer>

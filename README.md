@@ -130,3 +130,11 @@ O editor reconhece o recurso quando modelo e CLI estão disponíveis. Áudio de 
 Na timeline compartilhada com o site e o desktop é possível ajustar o corte em **centésimos de segundo (0,01s)** ou décimos (0,1s), escolher zoom **1×, 2×, 4×, 8×** para as réguas de corte e abrir um trecho da sequência com **Editar**, ajustá-lo e clicar em **Salvar ajuste**. O zoom amplia a **faixa dos sliders**, não o quadro das miniaturas (que permanece exibindo a fonte completa). Os ajustes respeitam o intervalo mínimo de 0,25s e os limites de duração por edição.
 
 A versão web preserva automaticamente o projeto no **localStorage deste navegador** a cada alteração válida (com debounce). Após atualizar ou fechar a página, o editor recupera cortes, roteiro, cenas, legendas, proporção e nome. Para recuperar trechos de mídia, **selecione o vídeo original novamente**; é verificado nome e duração aproximada, não o conteúdo exato. O rascunho **não inclui vídeo, imagens das cenas, MP4 exportado ou dados remotos**. Também há botão **Limpar rascunho**. Navegação privada, limpeza dos dados do navegador e políticas de armazenamento podem eliminar o rascunho; por segurança, exporte seu projeto `.autoeditor.json` regularmente.
+
+## Site 2.8: editor por etapas
+
+A página web abre com apenas **Importar vídeo**. Ao carregar mídia válida, o usuário avança para **Editar cortes** (timeline, seleção e sequência); a configuração de formato e o botão **Exportar MP4** aparecem na terceira etapa, selecionada ao clicar em **Continuar para exportação**. A navegação entre as etapas mantém os valores preenchidos, e o editor impede avançar para corte/exportação sem vídeo.
+
+Legendas, roteiro e projeto JSON são **ferramentas opcionais**: cada uma possui um botão de expansão e somente a ferramenta selecionada é montada. É possível **Criar pelo roteiro** ou **Abrir projeto salvo** sem importar mídia primeiro. O fluxo básico não exige configurar esses módulos. O painel de informações sobre rascunhos fica em uma seção recolhida, acessível pelo resumo **Rascunho no navegador**.
+
+Essa organização reduz a carga visual e evita renderizar timelines e formulários pesados antes de serem necessários. Ela não aumenta os limites técnicos da versão web (30 MB/2 min de entrada e até 20s somados de exportação), nem adiciona contas ou servidores.
