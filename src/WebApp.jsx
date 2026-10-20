@@ -1,4 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react';
+import VideoTimeline from './components/VideoTimeline.jsx';
+import { normalizeClips } from './clip-utils.js';
 import {
   ArrowDownToLine, ArrowRight, BadgeCheck, Check, ChevronRight, Clapperboard,
   Clock3, FileVideo2, Film, Globe2, HardDrive, Info, LoaderCircle,
@@ -35,6 +37,8 @@ export default function WebApp() {
   const [duration, setDuration] = useState(0);
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0);
+  const [clips, setClips] = useState([]);
+  const previewEndRef = useRef(null);
   const [aspect, setAspect] = useState('9:16');
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
@@ -73,6 +77,7 @@ export default function WebApp() {
     setDuration(0);
     setStart(0);
     setEnd(0);
+    setClips([]);
     setFile(selected);
   }
 
@@ -101,14 +106,28 @@ export default function WebApp() {
     if (busy) return;
     setFile(null);
     setDuration(0);
+    setClips([]);
     setError('');
     clearResult();
     if (fileInput.current) fileInput.current.value = '';
   }
 
+  function previewSegment(segment) {
+    const video = videoRef.current;
+    if (!video) return;
+    previewEndRef.current = Number(segment.end);
+    video.currentTime = Math.max(0, Number(segment.start));
+    video.play().catch(() => setError('O navegador não conseguiu reproduzir esta prévia.'));
+  }
+  function stopAtSegmentEnd(e) {
+    if (previewEndRef.current !== null && e.currentTarget.currentTime >= previewEndRef.current - .05) {
+      e.currentTarget.pause();
+      previewEndRef.current = null;
+    }
+  }
   async function createVideo() {
     if (!file || busy) return;
-    const issue = validateBrowserRange({ start, end, duration });
+    const issue = clips.length ? normalizeClips({ segments: clips, duration, maxTotal: 20, maxEach: 20 }).error : validateBrowserRange({ start, end, duration });
     if (issue) { setError(issue); return; }
     setError('');
     clearResult();
@@ -116,6 +135,7 @@ export default function WebApp() {
     try {
       const blob = await exportBrowserVideo({
         file, start: Number(start), end: Number(end), duration, aspect,
+        ...(clips.length ? { segments: clips } : {}),
         onStatus: setStatus, onProgress: setProgress,
         registerCancel: fn => { cancelRef.current = fn; }
       });
@@ -132,11 +152,9 @@ export default function WebApp() {
     }
   }
 
-  const validRange = file && !validateBrowserRange({ start, end, duration });
+  const validRange = file && !(clips.length ? normalizeClips({ segments: clips, duration, maxTotal: 20, maxEach: 20 }).error : validateBrowserRange({ start, end, duration }));
   const canExport = Boolean(validRange && !busy && !error);
   const canTrim = Boolean(file && duration > 0);
-  const trimLeft = duration > 0 ? Math.max(0, Math.min(100, Number(start) / duration * 100)) : 0;
-  const trimRight = duration > 0 ? Math.max(0, Math.min(100, (1 - Number(end) / duration) * 100)) : 0;
   const inputId = id + '-upload';
 
   return (
@@ -184,20 +202,23 @@ export default function WebApp() {
                     <strong>Comece com um vídeo</strong>
                     <span>Escolha um MP4 ou WebM com até 30 MB e 2 minutos.</span>
                     <span className="web-upload-cta">Escolher arquivo <ArrowRight size={17} aria-hidden="true"/></span>
-                  </label> : <div className="web-video-area"><video ref={videoRef} controls playsInline preload="metadata" src={previewUrl || undefined} onLoadedMetadata={onMetadata} onError={onVideoError} aria-label="Pré-visualização do vídeo selecionado" /></div>}
+                  </label> : <div className="web-video-area"><video ref={videoRef} controls playsInline preload="metadata" src={previewUrl || undefined} onLoadedMetadata={onMetadata} onError={onVideoError} onTimeUpdate={stopAtSegmentEnd} aria-label="Pré-visualização do vídeo selecionado" /></div>}
                   <input id={inputId} ref={fileInput} className="visually-hidden" type="file" accept=".mp4,.webm,video/mp4,video/webm" disabled={busy} onChange={e => selectFile(e.target.files?.[0])}/>
                   {file && <div className="web-file-row"><FileVideo2 size={21} aria-hidden="true"/><div><strong title={file.name}>{file.name}</strong><span>{size(file.size)} {duration ? '· ' + minutes(duration) : '· Lendo duração…'}</span></div><Check size={17} aria-hidden="true"/></div>}
                 </div>
 
                 <div className="web-panel web-cut-panel">
-                  <div className="web-panel-heading"><strong><Scissors size={18} aria-hidden="true"/> Recortar vídeo</strong><span className="web-muted">Trecho de até 20 segundos</span></div>
-                  <div className="web-timeline" aria-hidden="true"><div className="web-track-window" style={{ left: trimLeft + '%', right: trimRight + '%' }} />{Array.from({ length: 28 }, (_,i) => <i key={i} style={{ height: (18 + (i * 13 % 32)) + 'px' }}/>)}</div>
-                  <div className="web-controls">
+                  <div className="web-panel-heading"><strong><Scissors size={18} aria-hidden="true"/> Recortar vídeo</strong><span className="web-muted">Trechos somados até 20 segundos</span></div>
+                  <VideoTimeline variant="web" source={previewUrl} duration={duration} start={start} end={end}
+                    onStartChange={value => { setStart(value); clearResult(); }}
+                    onEndChange={value => { setEnd(value); clearResult(); }}
+                    clips={clips} onClipsChange={value => { setClips(value); clearResult(); }}
+                    onPreview={previewSegment} disabled={!canTrim || busy} maxTotal={20} maxEach={20} /><div className="web-controls">
                     <label htmlFor={id+'-start'}>Início (segundos)<input id={id+'-start'} type="number" step=".1" min="0" max={duration || 0} disabled={!canTrim || busy} value={start} onChange={e => {setStart(e.target.value);clearResult();}} /></label>
                     <label htmlFor={id+'-end'}>Fim (segundos)<input id={id+'-end'} type="number" step=".1" min="0" max={duration || 0} disabled={!canTrim || busy} value={end} onChange={e => {setEnd(e.target.value);clearResult();}} /></label>
                     <div className="web-selection-length"><Clock3 size={17} aria-hidden="true"/><div><small>Duração do corte</small><strong>{durationLabel(Number(end) - Number(start))}</strong></div></div>
                   </div>
-                  {canTrim && !validRange && <p className="web-validation" role="alert">{validateBrowserRange({ start, end, duration })}</p>}
+                  {canTrim && !validRange && <p className="web-validation" role="alert">{clips.length ? normalizeClips({ segments: clips, duration, maxTotal: 20, maxEach: 20 }).error : validateBrowserRange({ start, end, duration })}</p>}
                 </div>
               </div>
 

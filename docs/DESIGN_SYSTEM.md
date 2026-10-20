@@ -43,3 +43,7 @@ Checklist para cada PR: contraste/foco, navegação teclado, formulário, loadin
 A edição web segue os mesmos tokens de base `src/styles.css` e adota componentes `web-*` em `src/web-styles.css`: navegação horizontal, hero compacto, seção de edição com duas colunas, etapa visível e área de upload clicável. O modo web deve declarar claramente seus limites de duração, qualidade e privacidade antes da exportação. **Nunca mostrar números fictícios nem integração remota inexistente**.
 
 Regras: ações com estado desabilitado explícito; radio nativo para 9:16/16:9; erro próximo ao botão; `aria-live` no progresso; labels associadas a inputs; drag-and-drop ainda não prometido; responsividade 320px+; screenshots com Playwright. Pré-visualização do vídeo em `<video controls playsInline>` e exportação via WebAssembly, sem chamadas `/api`.
+
+## Componente FilmstripTimeline
+
+Implementação compartilhada: `src/components/VideoTimeline.jsx` e `src/components/timeline.css`. O usuário vê frames extraídos do próprio vídeo; nunca usar imagens decorativas que pareçam quadros reais. Dois sliders `input type=range` complementam os controles numéricos preexistentes e mantêm seus nomes acessíveis. A fila permite mover/remover cinco trechos sem alterar a fonte. Vídeos continuam locais e nenhuma miniatura é enviada a serviços. Gerar miniaturas de forma limitada (8 JPEGs pequenos) e cancelar a operação ao trocar mídia. O botão de exportação usa a fila apenas quando contém itens; não misturar a seleção corrente silenciosamente na sequência.

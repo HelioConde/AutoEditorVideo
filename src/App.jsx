@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import VideoTimeline from './components/VideoTimeline.jsx';
+import { normalizeClips } from './clip-utils.js';
 import {
   ArrowDownToLine, ArrowLeft, ArrowRight, Check, CheckCircle2, ChevronRight,
   CircleAlert, Clock3, Clapperboard, FileVideo2, Film, FolderClosed,
@@ -86,6 +88,9 @@ export default function App() {
   const [notification, setNotification] = useState(null);
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0);
+  const [clips, setClips] = useState([]);
+  const playbackEnd = useRef(null);
+  const playerVideoRef = useRef(null);
   const [aspect, setAspect] = useState('9:16');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const inputRef = useRef(null);
@@ -113,6 +118,8 @@ export default function App() {
   useEffect(() => {
     setStart(0);
     setEnd(Number(current?.media?.duration || 0).toFixed(1) * 1);
+    setClips([]);
+    playbackEnd.current = null;
   }, [current?.media?.id]);
   useEffect(() => { document.title = (page === 'editor' ? 'Editor' : 'Painel') + ' · AutoEditor Studio'; }, [page]);
   function openProject(id) { setCurrentId(id); setPage('editor'); setSidebarOpen(false); window.scrollTo(0,0); }
@@ -142,23 +149,37 @@ export default function App() {
     } catch (e) { notice(e.message, 'error'); }
     finally { setUploading(false); if (inputRef.current) inputRef.current.value = ''; }
   }
+  function previewSegment(segment) {
+    const video = playerVideoRef.current;
+    if (!video || !current?.media) return;
+    playbackEnd.current = Number(segment.end);
+    video.currentTime = Math.max(0, Number(segment.start));
+    video.play().catch(() => notice('Não foi possível reproduzir esta prévia.', 'error'));
+  }
+  function stopAtSegmentEnd(event) {
+    if (playbackEnd.current !== null && event.currentTarget.currentTime >= playbackEnd.current - .05) {
+      event.currentTarget.pause();
+      playbackEnd.current = null;
+    }
+  }
   async function exportVideo() {
     if (!current) return;
     setBusy(true);
     try {
-      const data = await api('/projects/' + current.id + '/exports', json({ start: Number(start), end: Number(end), aspect }));
+      const data = await api('/projects/' + current.id + '/exports', json({ start: Number(start), end: Number(end), aspect, ...(clips.length ? { segments: clips } : {}) }));
       setProjects(previous => previous.map(p => p.id === data.project.id ? data.project : p));
       notice('Exportação iniciada. Você pode continuar no estúdio.');
     } catch (e) { notice(e.message, 'error'); }
     finally { setBusy(false); }
   }
   const exportList = current?.exports || [];
-  const canExport = Boolean(current?.media && health?.ffmpeg && end - start >= 0.25 && !busy);
+  const exportPlan = normalizeClips({ segments: clips.length ? clips : undefined, start, end, duration: current?.media?.duration || 0, maxTotal: 600 });
+  const canExport = Boolean(current?.media && health?.ffmpeg && !exportPlan.error && !busy);
   return <>
     <a className="skip-link" href="#main">Pular para o conteúdo</a>
     <div className="app-layout">
       <aside className={'sidebar ' + (sidebarOpen ? 'sidebar-open' : '')} aria-label="Navegação principal">
-        <div className="brand"><span className="brand-mark"><Clapperboard size={22} strokeWidth={2.4} aria-hidden="true" /></span><span className="brand-name">AutoEditor<span>Studio</span></span></div>
+        <div className="brand"><span className="brand-mark"><Clapperboard size={22} strokeWidth={2.4} aria-hidden="true" /></span><span className="brand-name">AutoEditor<span>Studio</span></span><button className="icon-button sidebar-close" type="button" aria-label="Fechar menu" onClick={() => setSidebarOpen(false)}><X size={18} aria-hidden="true" /></button></div>
         <div className="side-section-label">WORKSPACE</div>
         <nav className="side-nav" aria-label="Seções">
           <button className={'nav-item ' + (page === 'home' ? 'active' : '')} aria-current={page === 'home' ? 'page' : undefined} onClick={showHome}><LayoutDashboard size={18} aria-hidden="true" />Visão geral</button>
@@ -169,7 +190,7 @@ export default function App() {
         <div className="sidebar-help"><span className="help-icon"><Sparkles size={17} aria-hidden="true" /></span><strong>Crie no seu ritmo.</strong><p>Seu estúdio funciona localmente. Sem assinatura para começar.</p><button className="help-cta" onClick={() => setModal(true)}>Novo projeto <ArrowRight size={16} aria-hidden="true" /></button></div>
         <div className="sidebar-bottom"><div className={'status-dot ' + (health?.ffmpeg ? 'online' : '')}/><span>{health === null ? 'Verificando motor…' : health.ffmpeg ? 'Motor de vídeo disponível' : 'FFmpeg não encontrado'}</span><span className="version">BETA 2.0</span></div>
       </aside>
-      {sidebarOpen && <button className="mobile-overlay" aria-label="Fechar menu" onClick={() => setSidebarOpen(false)} />}
+      {sidebarOpen && <button className="mobile-overlay" aria-label="Fechar ao tocar fora do menu" onClick={() => setSidebarOpen(false)} />}
       <div className="main-shell">
         <header className="topbar">
           <button className="icon-button menu-button" aria-label="Abrir menu" onClick={() => setSidebarOpen(true)}><Menu size={23} /></button>
@@ -197,11 +218,14 @@ export default function App() {
           </> : <section className="editor-page" aria-labelledby="editor-title">
             <div className="editor-heading"><button className="back-link" onClick={showHome}><ArrowLeft size={17}/> Voltar ao painel</button><div className="editor-title-row"><div><span className="section-kicker">WORKSPACE / EDITOR</span><h1 id="editor-title">{current?.name || 'Projeto não encontrado'}</h1><p>Um fluxo simples para transformar sua gravação em vídeo.</p></div><span className="editor-version">Editor beta</span></div></div>
             {!current ? <div className="empty-projects"><p>Selecione ou crie um projeto para começar.</p><button className="btn btn-primary" onClick={showHome}>Ver meus projetos</button></div> :
-            <div className="editor-grid"><div className="editor-primary"><div className="panel preview-panel"><div className="panel-title"><span><Film size={17} aria-hidden="true"/> Pré-visualização</span><span className="panel-subtitle">{current.media ? current.media.originalName : 'Nenhuma mídia importada'}</span></div>{current.media ? <div className="video-stage"><video controls preload="metadata" key={current.media.id} src={'/api/projects/' + current.id + '/media'} aria-label="Vídeo carregado" /></div> : <EmptyPreview />}</div>
-              <div className="panel trim-panel"><div className="panel-title"><span><Scissors size={18} aria-hidden="true"/> Definir trecho</span><span className="panel-subtitle">Selecione o início e o fim</span></div><div className="timeline-track" aria-hidden="true"><div className="timeline-fill" style={{left:current.media ? String(Math.min(100,100*start/current.media.duration))+'%' : '0%',right:current.media ? String(Math.max(0,100*(1-end/current.media.duration)))+'%' : '0%'}}/>{Array.from({length:24},(_,i)=><i key={i} style={{height:(20+((i*17)%33))+'px'}}/>)}</div><div className="trim-fields"><label>Início <span>(segundos)</span><input type="number" aria-label="Início em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={start} onChange={e=>setStart(e.target.value)} /></label><label>Fim <span>(segundos)</span><input type="number" aria-label="Fim em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={end} onChange={e=>setEnd(e.target.value)} /></label><div className="duration-pill"><Clock3 size={15}/> {formatTime(Number(end)-Number(start))}</div></div>{current.media && Number(end) <= Number(start) && <p className="field-error" role="alert">O fim deve ser maior que o início.</p>}</div>
+            <div className="editor-grid"><div className="editor-primary"><div className="panel preview-panel"><div className="panel-title"><span><Film size={17} aria-hidden="true"/> Pré-visualização</span><span className="panel-subtitle">{current.media ? current.media.originalName : 'Nenhuma mídia importada'}</span></div>{current.media ? <div className="video-stage"><video ref={playerVideoRef} controls preload="metadata" onTimeUpdate={stopAtSegmentEnd} key={current.media.id} src={'/api/projects/' + current.id + '/media'} aria-label="Vídeo carregado" /></div> : <EmptyPreview />}</div>
+              <div className="panel trim-panel"><div className="panel-title"><span><Scissors size={18} aria-hidden="true"/> Definir trecho</span><span className="panel-subtitle">Selecione os quadros e organize cortes</span></div><VideoTimeline source={current.media ? '/api/projects/' + current.id + '/media' : null}
+                  duration={current.media?.duration || 0} start={start} end={end}
+                  onStartChange={setStart} onEndChange={setEnd} clips={clips} onClipsChange={setClips}
+                  onPreview={previewSegment} disabled={!current.media || busy} maxTotal={600} variant="desktop" /><div className="trim-fields"><label>Início <span>(segundos)</span><input type="number" aria-label="Início em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={start} onChange={e=>setStart(e.target.value)} /></label><label>Fim <span>(segundos)</span><input type="number" aria-label="Fim em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={end} onChange={e=>setEnd(e.target.value)} /></label><div className="duration-pill"><Clock3 size={15}/> {formatTime(Number(end)-Number(start))}</div></div>{current.media && Number(end) <= Number(start) && <p className="field-error" role="alert">O fim deve ser maior que o início.</p>}</div>
               {exportList.length > 0 && <div className="panel exports-panel"><div className="panel-title"><span><ArrowDownToLine size={18}/> Exportações</span><span className="panel-subtitle">{exportList.length} arquivo(s)</span></div><ul className="export-list">{exportList.map(job=><li key={job.id}><span className="export-status-icon">{job.status==='ready'?<CheckCircle2 size={19}/>:job.status==='processing'?<LoaderCircle className="spin" size={19}/>:<CircleAlert size={19}/>}</span><div><strong>{job.aspect==='9:16'?'Vídeo vertical':'Vídeo horizontal'}</strong><small>{job.status==='ready'?'Exportação concluída':job.status==='processing'?'Processando vídeo…':job.error || 'Exportação interrompida'}</small></div>{job.status==='ready'&&<a className="export-download" href={'/api/projects/'+current.id+'/exports/'+job.id+'/download'} download aria-label="Baixar vídeo exportado"><ArrowDownToLine size={17}/></a>}</li>)}</ul></div>}
             </div>
-            <div className="editor-secondary"><div className="panel workflow-panel"><div className="panel-title"><span><Clapperboard size={18}/> Seu fluxo</span></div><div className="steps"><Step number={1} title="Importar vídeo" description="MP4, MOV, WebM ou MKV" complete={Boolean(current.media)} active={!current.media}/><Step number={2} title="Selecionar trecho" description="Ajuste os segundos acima" complete={Boolean(current.media && Number(end)>Number(start))} active={Boolean(current.media)}/><Step number={3} title="Exportar" description="Renderize em MP4" active={Boolean(current.media)}/></div></div>
+            <div className="editor-secondary"><div className="panel workflow-panel"><div className="panel-title"><span><Clapperboard size={18}/> Seu fluxo</span></div><div className="steps"><Step number={1} title="Importar vídeo" description="MP4, MOV, WebM ou MKV" complete={Boolean(current.media)} active={!current.media}/><Step number={2} title="Selecionar trecho" description="Ajuste a timeline ou monte uma sequência" complete={Boolean(current.media && Number(end)>Number(start))} active={Boolean(current.media)}/><Step number={3} title="Exportar" description="Renderize em MP4" active={Boolean(current.media)}/></div></div>
               <div className="panel upload-panel"><div className="panel-title"><span><UploadCloud size={18}/> Arquivo de origem</span></div><input id="media-file" className="visually-hidden" ref={inputRef} type="file" accept=".mp4,.mov,.webm,.mkv,video/*" onChange={e=>upload(e.target.files?.[0])} disabled={uploading}/><label className={'upload-target ' + (uploading?'uploading':'')} htmlFor="media-file"><span className="upload-icon">{uploading?<LoaderCircle className="spin" size={23}/>:<UploadCloud size={25}/>}</span><strong>{uploading?'Importando arquivo…':current.media?'Substituir gravação':'Escolher vídeo'}</strong><small>Até 512 MB · formato de vídeo</small></label>{current.media && <div className="file-detail"><FileVideo2 size={19} /><div><strong title={current.media.originalName}>{current.media.originalName}</strong><small>{formatSize(current.media.size)} · {formatTime(current.media.duration)}</small></div><CheckCircle2 size={17} className="file-check"/></div>}</div>
               <div className="panel export-panel"><div className="panel-title"><span><Settings2 size={18}/> Configurações de exportação</span></div><fieldset className="format-fieldset"><legend>Proporção do vídeo</legend><div className="aspect-group"><label className={'aspect-option '+(aspect==='9:16'?'selected':'')}><input type="radio" name="aspect" value="9:16" checked={aspect==='9:16'} onChange={()=>setAspect('9:16')}/><span className="aspect-shape portrait"/><strong>9:16</strong><small>Shorts / Reels</small></label><label className={'aspect-option '+(aspect==='16:9'?'selected':'')}><input type="radio" name="aspect" value="16:9" checked={aspect==='16:9'} onChange={()=>setAspect('16:9')}/><span className="aspect-shape landscape"/><strong>16:9</strong><small>YouTube</small></label></div></fieldset><p className="export-note">Saída MP4 · H.264 · 30 FPS · processamento local</p>{!health?.ffmpeg && <p className="engine-warning"><CircleAlert size={17}/> Instale o FFmpeg e reinicie o servidor para exportar.</p>}<button className="btn btn-primary export-button" disabled={!canExport} onClick={exportVideo}>{busy?'Iniciando…':'Exportar vídeo'}<ArrowRight size={18}/></button></div>
             </div></div>}

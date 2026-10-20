@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { normalizeClips } from '../src/clip-utils.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(process.env.DATA_DIR || path.join(HERE, '..', 'data'));
@@ -54,26 +55,60 @@ const publicProject = p => ({
   id: p.id, name: p.name, createdAt: p.createdAt, media: p.media || null,
   exports: (p.exports || []).map(({ id, status, aspect, createdAt, error }) => ({ id, status, aspect, createdAt, error }))
 });
-function render(project, job, source, output, start, length, aspect) {
+
+function runFFmpeg(args) {
+  return new Promise((resolve, reject) => {
+    let child;
+    try { child = spawn(FFmpeg, args, { windowsHide: true }); }
+    catch (e) { return reject(e); }
+    let stderr = '';
+    child.stderr.on('data', chunk => { stderr = (stderr + chunk.toString()).slice(-1800); });
+    child.once('error', reject);
+    child.once('close', code => {
+      if (code === 0) resolve();
+      else reject(new Error('FFmpeg encerrou com código ' + code + ': ' + stderr));
+    });
+  });
+}
+async function render(project, job, source, output, clips, aspect) {
   const vertical = aspect === '9:16';
   const w = vertical ? 720 : 1280, h = vertical ? 1280 : 720;
   const filter = 'scale=' + w + ':' + h + ':force_original_aspect_ratio=increase,crop=' + w + ':' + h + ',fps=30';
-  const args = ['-hide_banner', '-loglevel', 'error', '-y', '-i', source, '-ss', String(start), '-t', String(length),
-    '-vf', filter, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23', '-pix_fmt', 'yuv420p',
-    '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', output];
-  let process;
-  try { process = spawn(FFmpeg, args, { windowsHide: true }); }
-  catch { job.status = 'error'; job.error = 'Não foi possível iniciar o FFmpeg.'; save(projects); return; }
-  let stderr = '';
-  process.stderr.on('data', chunk => { stderr = (stderr + chunk.toString()).slice(-1200); });
-  process.on('error', () => { job.status = 'error'; job.error = 'Não foi possível iniciar o FFmpeg.'; save(projects); });
-  process.on('close', code => {
-    if (job.status === 'error') return;
-    if (code === 0 && fs.existsSync(output) && fs.statSync(output).size > 0) job.status = 'ready';
-    else { job.status = 'error'; job.error = 'A exportação falhou. Verifique o arquivo original e tente novamente.'; try { fs.unlinkSync(output); } catch {} }
+  // Every segment uses identical codecs, dimensions, frame rate and source
+  // streams. Therefore the concat demuxer can concatenate without re-encoding.
+  const makeArgs = (clip, dest) => [
+    '-hide_banner', '-loglevel', 'error', '-y', '-i', source, '-ss', String(clip.start),
+    '-t', String(clip.end - clip.start), '-vf', filter, '-c:v', 'libx264', '-preset', 'veryfast',
+    '-crf', '23', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '128k', '-movflags', '+faststart', dest
+  ];
+  let tmpFolder = null;
+  try {
+    if (clips.length === 1) {
+      await runFFmpeg(makeArgs(clips[0], output));
+    } else {
+      tmpFolder = fs.mkdtempSync(path.join(UPLOADS, project.id, 'cuts-'));
+      const names = [];
+      for (let i = 0; i < clips.length; i++) {
+        const part = 'part-' + i + '.mp4';
+        await runFFmpeg(makeArgs(clips[i], path.join(tmpFolder, part)));
+        names.push(part);
+      }
+      const listFile = path.join(tmpFolder, 'concat.txt');
+      // filenames are generated internally: no user-controlled concat paths.
+      fs.writeFileSync(listFile, names.map(name => "file '" + name + "'").join('\n') + '\n');
+      await runFFmpeg(['-hide_banner', '-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', '-movflags', '+faststart', output]);
+    }
+    if (!fs.existsSync(output) || fs.statSync(output).size === 0) throw new Error('Arquivo vazio');
+    job.status = 'ready';
+  } catch (e) {
+    console.error('FFmpeg export failed:', e.message);
+    job.status = 'error';
+    job.error = 'Não foi possível unir os cortes. Verifique a mídia e tente novamente.';
+    try { fs.unlinkSync(output); } catch {}
+  } finally {
+    if (tmpFolder) fs.rmSync(tmpFolder, { recursive: true, force: true });
     save(projects);
-    if (code !== 0) console.error('FFmpeg export failed:', stderr);
-  });
+  }
 }
 
 export function createApp() {
@@ -135,16 +170,20 @@ export function createApp() {
     if (!project) return res.status(404).json({ error: 'Projeto não encontrado.' });
     if (!project.media) return res.status(400).json({ error: 'Importe um vídeo antes de exportar.' });
     if (!toolAvailable(FFmpeg)) return res.status(503).json({ error: 'FFmpeg não disponível. Instale-o e reinicie o servidor.' });
-    const start = Number(req.body?.start), end = Number(req.body?.end), aspect = req.body?.aspect;
-    if (!Number.isFinite(start) || !Number.isFinite(end) || start < 0 || end <= start + 0.24 || end > project.media.duration + 0.1 || end - start > 600 || !['9:16', '16:9'].includes(aspect))
-      return res.status(400).json({ error: 'Selecione um trecho válido de até 10 minutos e um formato de exportação.' });
+    const aspect = req.body?.aspect;
+    const plan = normalizeClips({
+      segments: req.body?.segments, start: req.body?.start, end: req.body?.end,
+      duration: project.media.duration, maxTotal: 600, maxEach: 600
+    });
+    if (plan.error || !['9:16', '16:9'].includes(aspect))
+      return res.status(400).json({ error: plan.error || 'Formato de exportação inválido.' });
     if (project.exports.some(j => j.status === 'processing')) return res.status(409).json({ error: 'Já existe uma exportação em andamento neste projeto.' });
     const id = randomUUID(), folder = path.join(UPLOADS, project.id);
     const job = { id, status: 'processing', aspect, createdAt: new Date().toISOString(), filename: id + '.mp4' };
     project.exports.unshift(job);
     save(projects);
     res.status(202).json({ project: publicProject(project) });
-    render(project, job, path.join(folder, project.media.fileName), path.join(folder, job.filename), start, end - start, aspect);
+    render(project, job, path.join(folder, project.media.fileName), path.join(folder, job.filename), plan.clips, aspect);
   });
   app.get('/api/projects/:id/exports/:jobId/download', (req, res) => {
     const project = findProject(req.params.id), job = project?.exports.find(e => e.id === req.params.jobId);
