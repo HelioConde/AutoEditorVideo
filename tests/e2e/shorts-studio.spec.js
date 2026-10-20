@@ -11,7 +11,10 @@ test('MVP: sugere destaque e gera Short vertical independente com legenda',async
   try{
     const video=path.join(dir,'episodio.mp4');
     execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-f','lavfi','-i',
-      'color=c=teal:s=320x180:r=12','-f','lavfi','-i','sine=frequency=360:sample_rate=16000',
+      'color=c=black:s=320x180:r=12:d=6','-f','lavfi','-i',
+      'color=c=white:s=320x180:r=12:d=6','-f','lavfi','-i',
+      'sine=frequency=360:sample_rate=16000:duration=12',
+      '-filter_complex','[0:v][1:v]concat=n=2:v=1:a=0[v]','-map','[v]','-map','2:a:0',
       '-t','12','-c:v','libx264','-pix_fmt','yuv420p','-c:a','aac','-shortest','-y',video],
       {timeout:40000});
     await page.goto('/');
@@ -29,9 +32,16 @@ test('MVP: sugere destaque e gera Short vertical independente com legenda',async
     await expect(page.getByRole('textbox',{name:'Texto da legenda'}).first()).toHaveValue(/Mas sabe como/);
     await page.getByRole('combobox',{name:'Tipo de conteúdo'}).selectOption('gameplay');
     await page.getByRole('button',{name:'Encontrar melhores momentos'}).click();
-    await expect(page.locator('.shorts-analysis-summary')).toContainText('amostras de áudio',{timeout:45000});
+    await expect(page.locator('.shorts-analysis-summary')).toContainText(/[1-9][0-9]* amostras de áudio/,{timeout:45000});
+    await expect(page.locator('.shorts-analysis-summary')).toContainText(/[1-9][0-9]* mudanças de cena/);
     await expect(page.locator('.shorts-candidate')).toHaveCount(1);
     await expect(page.locator('.shorts-evidence')).toContainText('picos de áudio');
+    const approval=page.getByRole('checkbox',{name:'Incluir Short #1 na exportação'});
+    await expect(approval).toBeChecked();
+    await approval.uncheck();
+    await expect(page.getByRole('button',{name:'Gerar 0 Shorts legendados'})).toBeDisabled();
+    await approval.check();
+    await expect(page.getByRole('button',{name:'Gerar 1 Short legendado'})).toBeEnabled();
     await page.screenshot({path:info.outputPath('shorts-auto-candidates.png'),animations:'disabled',fullPage:false});
     await page.getByRole('button',{name:'Gerar 1 Short legendado'}).click();
     await expect(page.getByText('Short automático')).toBeVisible({timeout:15000});

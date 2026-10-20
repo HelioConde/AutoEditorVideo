@@ -31,3 +31,8 @@
 .shorts-analysis-summary{font-size:11px;line-height:1.6;color:#d4ecb5;border:1px solid #4d7150;background:#273c2b;padding:12px;border-radius:9px;margin:0}
 .shorts-evidence{font-size:10px;color:#b9d1ad;line-height:1.6;margin:0}
 @media(max-width:560px){.shorts-profile{flex-direction:column;align-items:stretch}.shorts-profile select{font-size:16px}}
+
+.shorts-candidate-select{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:750;color:#e3f1d5;cursor:pointer}
+.shorts-candidate-select input{width:19px;height:19px;accent-color:#d5f579;flex-shrink:0;cursor:pointer}
+.shorts-candidate:has(.shorts-candidate-select input:not(:checked)){opacity:.7;border-style:dashed}
+.shorts-selected-summary{font-size:11px;color:#d4e6c6;margin:0}

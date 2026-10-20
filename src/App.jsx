@@ -271,7 +271,7 @@ export default function App() {
     if(!current?.media||!candidates?.length||busy||processing)return;
     setBusy(true);
     try {
-      const result=await api('/projects/'+current.id+'/shorts',json({count:candidates.length,subtitles,profile}));
+      const result=await api('/projects/'+current.id+'/shorts',json({count:3,selectedRanges:candidates.map(c=>({start:c.start,end:c.end})),subtitles,profile}));
       setProjects(previous=>previous.map(p=>p.id===result.project.id?result.project:p));
       notice(result.suggestions.length+' Shorts legendados iniciados. Acompanhe na seção Exportações.');
     }catch(e){notice(e.message,'error');}
