@@ -1,4 +1,5 @@
-// Frame renderer shared by both editions. Only client-created PNG data URIs
+import { sceneTheme } from './scene-presets.js';
+// Frame renderer shared by both editions. Only client-created JPEG data URIs
 // are sent to the local desktop API; the web preview remains entirely local.
 function wrap(ctx,text,maxWidth,maxLines) {
   const words=String(text).split(/\s+/),lines=[];
@@ -16,12 +17,11 @@ function wrap(ctx,text,maxWidth,maxLines) {
 export async function createSceneImages(scenes,aspect='9:16',pictures=[]) {
   if(typeof document==='undefined')throw new Error('A exportação de cenas precisa do navegador.');
   const vertical=aspect==='9:16',width=vertical?360:640,height=vertical?640:360;
-  const palettes=[['#182b23','#507b50'],['#1b2635','#4c7294'],['#30263b','#9b648b'],['#302c21','#a58a55'],['#172e30','#4c8788'],['#292e31','#597282']];
   return Promise.all(scenes.map(async (scene,i)=>{
     const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
     const ctx=canvas.getContext('2d');
     if(!ctx)throw new Error('Canvas indisponível para criar cenas.');
-    const [dark,light]=palettes[i%palettes.length];
+    const [dark,light]=sceneTheme(scene.theme,i).colors;
     const gradient=ctx.createLinearGradient(0,0,width,height);
     gradient.addColorStop(0,dark);gradient.addColorStop(1,light);
     ctx.fillStyle=gradient;ctx.fillRect(0,0,width,height);
