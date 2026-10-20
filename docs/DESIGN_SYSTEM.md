@@ -38,3 +38,8 @@ Tipografia: Plus Jakarta Sans em títulos; DM Sans em interface/texto; fontes su
 Sem screenshots fornecidas como referência, a primeira rodada parte de wireframes CSS e da auditoria do produto. Screenshots reais do navegador são capturados no Playwright (desktop/mobile). Quando houver referência de tela, transformar em alterações concretas de `src/App.jsx` e `src/styles.css`; nunca apenas aproximar com uma imagem renderizada sem componentes editáveis.
 
 Checklist para cada PR: contraste/foco, navegação teclado, formulário, loading/empty/error, overflow 320px, desktop, captura visual e testes de importação/exportação.
+
+## Complemento: interface Web/Páginas públicas
+A edição web segue os mesmos tokens de base `src/styles.css` e adota componentes `web-*` em `src/web-styles.css`: navegação horizontal, hero compacto, seção de edição com duas colunas, etapa visível e área de upload clicável. O modo web deve declarar claramente seus limites de duração, qualidade e privacidade antes da exportação. **Nunca mostrar números fictícios nem integração remota inexistente**.
+
+Regras: ações com estado desabilitado explícito; radio nativo para 9:16/16:9; erro próximo ao botão; `aria-live` no progresso; labels associadas a inputs; drag-and-drop ainda não prometido; responsividade 320px+; screenshots com Playwright. Pré-visualização do vídeo em `<video controls playsInline>` e exportação via WebAssembly, sem chamadas `/api`.

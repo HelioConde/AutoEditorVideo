@@ -1,4 +1,4 @@
-# AutoEditor Studio 2.0 — MVP local
+# AutoEditor Studio 2.1 — Desktop e Web
 
 Estúdio para **importar, recortar, pré-visualizar e exportar vídeos** sem depender de uma API paga. Desenvolvimento inicial a partir de [AutoEditorVideo (2022)](https://github.com/HelioConde/AutoEditorVideo). Código original preservado em `legacy/` e no histórico do Git.
 
@@ -59,3 +59,18 @@ As capturas são gravadas em `test-results/`. No GitHub Actions ficam disponíve
 3. Remoção de silêncios com detecção de voz e revisão.
 4. Narração Kokoro local com avaliação de modelos e licenças.
 5. Templates Remotion e automações para Shorts.
+
+
+## Edição web: GitHub Pages
+
+**Endereço previsto:** https://helioconde.github.io/AutoEditorVideo/
+
+O modo web é **100% estático e separado da API Node**, permitindo cortes e exportações MP4 no próprio navegador usando FFmpeg WebAssembly. Aceita MP4/WebM até 30 MB e 2 minutos; exporta trechos até 20 segundos. Precisa baixar o motor na primeira exportação (~31 MB); nenhuma mídia é enviada para servidores. Pode ser lento em celulares.
+
+Para rodar localmente: `npm run dev:web` (http://127.0.0.1:5174). Para gerar: `npm run build:web`. Para testes: `npm run test:e2e:web`.
+
+**Ativação inicial do site:** em [Settings → Pages](https://github.com/HelioConde/AutoEditorVideo/settings/pages), escolha **GitHub Actions** como fonte. O workflow `.github/workflows/pages.yml` cuida dos próximos builds e deployments. Verifique status antes de divulgar o site. Veja [docs/WEB_EDITION.md](docs/WEB_EDITION.md).
+
+## Executar no Windows
+
+Para edição desktop com servidor local, instale Node.js 22+, FFmpeg e FFprobe no PATH, execute `npm install` e `npm run dev`. Acesse http://127.0.0.1:5173.

@@ -1,0 +1,238 @@
+import { useEffect, useId, useRef, useState } from 'react';
+import {
+  ArrowDownToLine, ArrowRight, BadgeCheck, Check, ChevronRight, Clapperboard,
+  Clock3, FileVideo2, Film, Globe2, HardDrive, Info, LoaderCircle,
+  Monitor, Play, RotateCcw, Scissors, ShieldCheck, Sparkles, UploadCloud, X
+} from 'lucide-react';
+import {
+  exportBrowserVideo, MAX_BROWSER_BYTES, MAX_BROWSER_SECONDS,
+  MAX_EXPORT_SECONDS, validateBrowserRange, validateBrowserVideo
+} from './browser-ffmpeg.js';
+
+function minutes(seconds) {
+  const s = Math.max(0, Math.floor(Number(seconds) || 0));
+  return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+}
+function durationLabel(seconds) {
+  return Math.max(0, Number(seconds || 0)).toFixed(1).replace('.', ',') + ' s';
+}
+function size(bytes) {
+  return (bytes / 1024 / 1024).toLocaleString('pt-BR', { maximumFractionDigits: 1 }) + ' MB';
+}
+function Stage({ number, title, completed, current }) {
+  return <div className={'web-step ' + (completed ? 'web-step-done ' : '') + (current ? 'web-step-current' : '')}>
+    <span className="web-step-count" aria-hidden="true">{completed ? <Check size={15}/> : number}</span><span>{title}</span>
+  </div>;
+}
+
+export default function WebApp() {
+  const id = useId();
+  const videoRef = useRef(null);
+  const fileInput = useRef(null);
+  const cancelRef = useRef(null);
+  const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [duration, setDuration] = useState(0);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(0);
+  const [aspect, setAspect] = useState('9:16');
+  const [error, setError] = useState('');
+  const [status, setStatus] = useState('');
+  const [progress, setProgress] = useState(0);
+  const [busy, setBusy] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState(null);
+  const [outputSize, setOutputSize] = useState(0);
+
+  useEffect(() => {
+    document.title = 'AutoEditor Studio Web — Editor online gratuito';
+    return () => { cancelRef.current?.(); };
+  }, []);
+  useEffect(() => {
+    if (!file) { setPreviewUrl(null); return; }
+    const url = URL.createObjectURL(file);
+    setPreviewUrl(url);
+    return () => URL.revokeObjectURL(url);
+  }, [file]);
+  useEffect(() => {
+    return () => { if (downloadUrl) URL.revokeObjectURL(downloadUrl); };
+  }, [downloadUrl]);
+
+  function clearResult() {
+    setDownloadUrl(null);
+    setOutputSize(0);
+    setProgress(0);
+    setStatus('');
+  }
+
+  function selectFile(selected) {
+    if (!selected || busy) return;
+    const issue = validateBrowserVideo(selected);
+    if (issue) { setError(issue); if (fileInput.current) fileInput.current.value = ''; return; }
+    setError('');
+    clearResult();
+    setDuration(0);
+    setStart(0);
+    setEnd(0);
+    setFile(selected);
+  }
+
+  function onMetadata(e) {
+    const value = Number(e.currentTarget.duration);
+    if (!Number.isFinite(value) || value <= 0) {
+      setError('Não foi possível identificar a duração do vídeo.');
+      return;
+    }
+    if (value > MAX_BROWSER_SECONDS) {
+      setFile(null);
+      setError('A versão web aceita vídeos de até 2 minutos. Para gravações maiores, use a versão desktop.');
+      if (fileInput.current) fileInput.current.value = '';
+      return;
+    }
+    setDuration(value);
+    setStart(0);
+    setEnd(Math.min(MAX_EXPORT_SECONDS, Math.floor(value * 10) / 10));
+  }
+
+  function onVideoError() {
+    setError('O navegador não conseguiu reproduzir esta mídia. Experimente um MP4 H.264 ou WebM compatível.');
+  }
+
+  function newFile() {
+    if (busy) return;
+    setFile(null);
+    setDuration(0);
+    setError('');
+    clearResult();
+    if (fileInput.current) fileInput.current.value = '';
+  }
+
+  async function createVideo() {
+    if (!file || busy) return;
+    const issue = validateBrowserRange({ start, end, duration });
+    if (issue) { setError(issue); return; }
+    setError('');
+    clearResult();
+    setBusy(true);
+    try {
+      const blob = await exportBrowserVideo({
+        file, start: Number(start), end: Number(end), duration, aspect,
+        onStatus: setStatus, onProgress: setProgress,
+        registerCancel: fn => { cancelRef.current = fn; }
+      });
+      setDownloadUrl(URL.createObjectURL(blob));
+      setOutputSize(blob.size);
+      setStatus('Exportação concluída. Baixe seu vídeo.');
+    } catch (err) {
+      console.error('Falha ao exportar vídeo na web', err);
+      setError('Não foi possível exportar: ' + (err?.message || 'erro inesperado') + '.');
+      setStatus('');
+    } finally {
+      cancelRef.current = null;
+      setBusy(false);
+    }
+  }
+
+  const validRange = file && !validateBrowserRange({ start, end, duration });
+  const canExport = Boolean(validRange && !busy && !error);
+  const canTrim = Boolean(file && duration > 0);
+  const trimLeft = duration > 0 ? Math.max(0, Math.min(100, Number(start) / duration * 100)) : 0;
+  const trimRight = duration > 0 ? Math.max(0, Math.min(100, (1 - Number(end) / duration) * 100)) : 0;
+  const inputId = id + '-upload';
+
+  return (
+    <>
+      <a className="skip-link" href="#web-main">Pular para o editor</a>
+      <div className="web-shell">
+        <header className="web-topbar">
+          <div className="web-navbar">
+            <a href={import.meta.env.BASE_URL} className="web-brand" aria-label="AutoEditor Studio Web, página inicial"><span className="brand-mark"><Clapperboard size={22} aria-hidden="true" /></span><span className="brand-name">AutoEditor<span>Studio</span></span><span className="web-badge">WEB</span></a>
+            <nav aria-label="Navegação web" className="web-nav">
+              <a className="web-nav-active" href="#web-main">Editor</a>
+              <a href="#como-funciona">Como funciona</a>
+              <a href="https://github.com/HelioConde/AutoEditorVideo" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+            </nav>
+            <a href="https://github.com/HelioConde/AutoEditorVideo#executar-no-windows" className="web-desktop-link">Versão desktop <ArrowRight size={16} aria-hidden="true" /></a>
+          </div>
+        </header>
+        <main id="web-main" className="web-main">
+          <section className="web-intro" aria-labelledby="web-title">
+            <div className="web-intro-eyebrow"><Sparkles size={14} aria-hidden="true" /> SEU ESTÚDIO, EM QUALQUER LUGAR</div>
+            <h1 id="web-title">Edite seu vídeo.<br/><span>Do seu jeito.</span></h1>
+            <p>Importe, recorte e exporte vídeos direto do navegador — sem instalar programas e sem enviar seus arquivos a um servidor.</p>
+            <div className="web-chips"><span><ShieldCheck size={15} aria-hidden="true"/> Privado por padrão</span><span><Globe2 size={15} aria-hidden="true"/> Funciona no navegador</span><span><BadgeCheck size={15} aria-hidden="true"/> Sem conta</span></div>
+          </section>
+
+          <section className="web-studio" aria-labelledby="studio-title">
+            <div className="web-studio-head">
+              <div><div className="section-kicker">SEU WORKSPACE</div><h2 id="studio-title">Área de edição</h2></div>
+              <span className="web-local-label"><span className="local-circle"/> Edição privada e local</span>
+            </div>
+
+            <div className="web-steps" aria-label="Etapas do projeto">
+              <Stage number="01" title="Importar vídeo" current={!file} completed={Boolean(file)}/>
+              <ChevronRight size={18} aria-hidden="true" />
+              <Stage number="02" title="Definir corte" current={Boolean(file && !downloadUrl)} completed={Boolean(downloadUrl)}/>
+              <ChevronRight size={18} aria-hidden="true" />
+              <Stage number="03" title="Exportar MP4" current={Boolean(downloadUrl)} completed={Boolean(downloadUrl)}/>
+            </div>
+            <div className="web-columns">
+              <div className="web-primary">
+                <div className="web-preview-panel">
+                  <div className="web-panel-heading"><strong><Film size={18} aria-hidden="true"/> Pré-visualização</strong>{file && <button className="web-text-btn" onClick={newFile} disabled={busy}><RotateCcw size={15} aria-hidden="true" /> Trocar vídeo</button>}</div>
+                  {!file ? <label className="web-droparea" htmlFor={inputId}>
+                    <span className="web-upload-illustration"><UploadCloud size={38} aria-hidden="true"/></span>
+                    <strong>Comece com um vídeo</strong>
+                    <span>Escolha um MP4 ou WebM com até 30 MB e 2 minutos.</span>
+                    <span className="web-upload-cta">Escolher arquivo <ArrowRight size={17} aria-hidden="true"/></span>
+                  </label> : <div className="web-video-area"><video ref={videoRef} controls playsInline preload="metadata" src={previewUrl || undefined} onLoadedMetadata={onMetadata} onError={onVideoError} aria-label="Pré-visualização do vídeo selecionado" /></div>}
+                  <input id={inputId} ref={fileInput} className="visually-hidden" type="file" accept=".mp4,.webm,video/mp4,video/webm" disabled={busy} onChange={e => selectFile(e.target.files?.[0])}/>
+                  {file && <div className="web-file-row"><FileVideo2 size={21} aria-hidden="true"/><div><strong title={file.name}>{file.name}</strong><span>{size(file.size)} {duration ? '· ' + minutes(duration) : '· Lendo duração…'}</span></div><Check size={17} aria-hidden="true"/></div>}
+                </div>
+
+                <div className="web-panel web-cut-panel">
+                  <div className="web-panel-heading"><strong><Scissors size={18} aria-hidden="true"/> Recortar vídeo</strong><span className="web-muted">Trecho de até 20 segundos</span></div>
+                  <div className="web-timeline" aria-hidden="true"><div className="web-track-window" style={{ left: trimLeft + '%', right: trimRight + '%' }} />{Array.from({ length: 28 }, (_,i) => <i key={i} style={{ height: (18 + (i * 13 % 32)) + 'px' }}/>)}</div>
+                  <div className="web-controls">
+                    <label htmlFor={id+'-start'}>Início (segundos)<input id={id+'-start'} type="number" step=".1" min="0" max={duration || 0} disabled={!canTrim || busy} value={start} onChange={e => {setStart(e.target.value);clearResult();}} /></label>
+                    <label htmlFor={id+'-end'}>Fim (segundos)<input id={id+'-end'} type="number" step=".1" min="0" max={duration || 0} disabled={!canTrim || busy} value={end} onChange={e => {setEnd(e.target.value);clearResult();}} /></label>
+                    <div className="web-selection-length"><Clock3 size={17} aria-hidden="true"/><div><small>Duração do corte</small><strong>{durationLabel(Number(end) - Number(start))}</strong></div></div>
+                  </div>
+                  {canTrim && !validRange && <p className="web-validation" role="alert">{validateBrowserRange({ start, end, duration })}</p>}
+                </div>
+              </div>
+
+              <div className="web-side">
+                <div className="web-panel web-settings">
+                  <div className="web-panel-heading"><strong><Monitor size={18} aria-hidden="true"/> Configurar exportação</strong></div>
+                  <fieldset disabled={busy}><legend>Formato do vídeo</legend>
+                    <div className="web-aspects">
+                      <label className={aspect === '9:16' ? 'web-aspect selected' : 'web-aspect'}>
+                        <input type="radio" name="web-aspect" value="9:16" checked={aspect === '9:16'} onChange={()=>{setAspect('9:16');clearResult();}}/>
+                        <span className="web-format-symbol portrait"/><strong>9:16</strong><small>Shorts · Reels</small>
+                      </label>
+                      <label className={aspect === '16:9' ? 'web-aspect selected' : 'web-aspect'}>
+                        <input type="radio" name="web-aspect" value="16:9" checked={aspect === '16:9'} onChange={()=>{setAspect('16:9');clearResult();}}/>
+                        <span className="web-format-symbol landscape"/><strong>16:9</strong><small>YouTube</small>
+                      </label>
+                    </div>
+                  </fieldset>
+                  <div className="web-quality"><span>Resolução</span><strong>{aspect === '9:16' ? '360 × 640' : '640 × 360'}</strong></div>
+                  <div className="web-quality"><span>Saída</span><strong>MP4 · H.264</strong></div>
+                  <div className="web-quality"><span>Motor</span><strong>FFmpeg WebAssembly</strong></div>
+                  <div className="web-info"><Info size={18} aria-hidden="true"/><span>A primeira exportação baixa o motor (~31 MB). Renderizar no navegador pode ser mais lento que na versão desktop.</span></div>
+                  {error && <div className="web-error" role="alert"><Info size={19} aria-hidden="true"/><span>{error}</span><button type="button" aria-label="Fechar aviso de erro" onClick={()=>setError('')}><X size={16}/></button></div>}
+                  {busy && <div className="web-processing" role="status" aria-live="polite"><span><LoaderCircle size={17} className="spin" aria-hidden="true"/>{status || 'Preparando exportação…'}</span><div className="web-progress-track" role="progressbar" aria-label="Progresso da exportação" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress}><div style={{width:progress+'%'}}/></div></div>}
+                  {downloadUrl ? <a className="web-export-button" href={downloadUrl} download="AutoEditor-Studio-Web.mp4"><ArrowDownToLine size={19} aria-hidden="true"/> Baixar vídeo MP4 ({size(outputSize)})</a> : <button className="web-export-button" type="button" onClick={createVideo} disabled={!canExport}>{busy ? <LoaderCircle size={19} className="spin" aria-hidden="true"/> : <Play size={17} fill="currentColor" aria-hidden="true"/>}{busy ? 'Processando…' : 'Exportar vídeo'}</button>}
+                  {downloadUrl && <p className="web-ready" role="status"><BadgeCheck size={17} aria-hidden="true"/> Exportação concluída. Seu vídeo está pronto.</p>}
+                </div>
+                <div className="web-privacy"><ShieldCheck size={23} aria-hidden="true"/><div><strong>Seus arquivos, seu controle.</strong><p>Vídeos são processados no navegador. O motor WebAssembly é baixado de um CDN; o arquivo de vídeo não é enviado ao CDN nem ao GitHub.</p></div></div>
+              </div>
+            </div>
+          </section>
+          <section className="web-bottom" id="como-funciona" aria-labelledby="about-title"><div><span className="section-kicker">POR QUE A VERSÃO WEB?</span><h2 id="about-title">Simples de abrir.<br/>Fácil de criar.</h2><p>Uma primeira versão para cortes rápidos. Quer importar arquivos maiores, montar vídeos longos ou exportar em HD? O projeto desktop tem mais capacidade.</p><a href="https://github.com/HelioConde/AutoEditorVideo" className="web-bottom-link">Conhecer a versão desktop <ArrowRight size={18}/></a></div><div className="web-bottom-features"><div><HardDrive size={21}/><strong>Sem uploads para servidor</strong><p>O arquivo fica no dispositivo durante a edição.</p></div><div><Clock3 size={21}/><strong>Ideal para cortes curtos</strong><p>Exporte trechos de até 20 segundos por vez.</p></div></div></section>
+          <footer className="web-footer"><span>© AutoEditor Studio · Ferramentas para contar boas histórias</span><a href="https://github.com/HelioConde/AutoEditorVideo">Código aberto no GitHub ↗</a></footer>
+        </main>
+      </div>
+    </>
+  );
+}
