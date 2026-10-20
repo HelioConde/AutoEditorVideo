@@ -1,5 +1,6 @@
 
 import { normalizeClips } from './clip-utils.js';
+import { SCENE_THEMES, SCENE_TRANSITIONS, defaultSceneTheme } from './scene-presets.js';
 
 export const PROJECT_SCHEMA = 'autoeditor.project';
 export const PROJECT_VERSION = 1;
@@ -47,17 +48,21 @@ export function validateScenes(input) {
     const duration=Number(s.duration ?? 7);
     if (!Number.isFinite(duration) || duration < 2 || duration > 15)
       return {error:'A duração de cada cena deve ser entre 2 e 15 segundos.',scenes:[]};
-    scenes.push({title,text:body,duration:Math.round(duration*10)/10});
+    const theme=s.theme === undefined ? defaultSceneTheme(i) : s.theme;
+    const transition=s.transition === undefined ? 'fade' : s.transition;
+    if(!SCENE_THEMES.some(item=>item.id===theme))return {error:'Tema visual de cena inválido.',scenes:[]};
+    if(!SCENE_TRANSITIONS.some(item=>item.id===transition))return {error:'Transição de cena inválida.',scenes:[]};
+    scenes.push({title,text:body,duration:Math.round(duration*10)/10,theme,transition});
   }
   return {error:null,scenes};
 }
 
-export function createProjectFile({name,aspect='9:16',media=null,start=0,end=0,clips=[],script='',scenes=[]}) {
+export function createProjectFile({name,aspect='9:16',media=null,start=0,end=0,clips=[],script='',scenes=[],voiceEngine='system'}) {
   const exported={schema:PROJECT_SCHEMA,version:PROJECT_VERSION,name:text(name,64)||'Projeto sem nome',
     aspect:aspect==='16:9'?'16:9':'9:16',
     media:media ? {name:text(media.originalName||media.name,150),size:Number(media.size)||0,duration:Number(media.duration)||0} : null,
     edit:{start:Number(start)||0,end:Number(end)||0,clips:Array.isArray(clips)?clips.map(c=>({start:Number(c.start),end:Number(c.end)})):[],
-      script:text(script,4000),scenes:Array.isArray(scenes)?scenes.map(x=>({title:x.title,text:x.text,duration:x.duration})):[]}};
+      script:text(script,4000),voiceEngine,scenes:Array.isArray(scenes)?scenes.map(x=>({title:x.title,text:x.text,duration:x.duration,theme:x.theme,transition:x.transition})):[]}};
   return exported;
 }
 
@@ -69,6 +74,8 @@ export function parseProjectFile(value) {
   if (!['9:16','16:9'].includes(value.aspect)) throw new Error('Formato do projeto inválido.');
   if (!value.edit || typeof value.edit!=='object' || Array.isArray(value.edit)) throw new Error('Edição ausente no projeto.');
   if (typeof value.edit.script!=='string' || value.edit.script.length>4000) throw new Error('Roteiro inválido.');
+  const voiceEngine=value.edit.voiceEngine ?? 'system';
+  if(!['system','piper'].includes(voiceEngine))throw new Error('Motor de voz inválido.');
   const scenes= value.edit.scenes?.length ? validateScenes(value.edit.scenes) : {error:null,scenes:[]};
   if(scenes.error) throw new Error(scenes.error);
   const media=value.media;
@@ -90,7 +97,7 @@ export function parseProjectFile(value) {
   if(!finite(start) || !finite(end) || start<0 || end<0) throw new Error('Marcas de tempo inválidas.');
   if(media && media.duration>0 && (start>media.duration+.15 || end>media.duration+.15)) throw new Error('Marcas fora da duração do vídeo.');
   return {name:value.name.trim(),aspect:value.aspect,media:media||null,
-    edit:{start,end,clips:parsedClips,script:value.edit.script,scenes:scenes.scenes}};
+    edit:{start,end,clips:parsedClips,script:value.edit.script,scenes:scenes.scenes,voiceEngine}};
 }
 
 export function stringifyProjectFile(data) { return JSON.stringify(createProjectFile(data),null,2)+'\n'; }

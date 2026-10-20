@@ -96,6 +96,7 @@ export default function App() {
   const [script, setScript] = useState('');
   const [scenes, setScenes] = useState([]);
   const [narrating, setNarrating] = useState(false);
+  const [voiceEngine, setVoiceEngine] = useState('system');
   const playbackEnd = useRef(null);
   const playerVideoRef = useRef(null);
   const [aspect, setAspect] = useState('9:16');
@@ -137,18 +138,19 @@ export default function App() {
     setAspect(edit?.aspect || '9:16');
     setScript(edit?.script || '');
     setScenes(edit?.scenes || []);
+    setVoiceEngine(edit?.voiceEngine || 'system');
     playbackEnd.current = null;
   }, [currentId, current?.media?.id]);
   useEffect(() => {
     if (!currentId || !current) return;
     const timer=window.setTimeout(async()=>{
       const payload=createProjectFile({name:current.name,aspect,media:current.media||current.reference,
-        start:Number(start)||0,end:Number(end)||0,clips,script,scenes});
+        start:Number(start)||0,end:Number(end)||0,clips,script,scenes,voiceEngine});
       try { await api('/projects/'+currentId+'/edit',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); }
       catch(e){ console.warn('Não foi possível salvar a edição:',e.message); }
     },1000);
     return ()=>window.clearTimeout(timer);
-  }, [currentId, current?.media?.id, aspect, start, end, clips, script, scenes]);
+  }, [currentId, current?.media?.id, aspect, start, end, clips, script, scenes, voiceEngine]);
 
   useEffect(() => { document.title = (page === 'editor' ? 'Editor' : 'Painel') + ' · AutoEditor Studio'; }, [page]);
   function openProject(id) { setCurrentId(id); setPage('editor'); setSidebarOpen(false); window.scrollTo(0,0); }
@@ -203,7 +205,7 @@ export default function App() {
   }
   async function importPortableProject(data) {
     const manifest=createProjectFile({name:data.name,aspect:data.aspect,media:data.media,
-      start:data.edit.start,end:data.edit.end,clips:data.edit.clips,script:data.edit.script,scenes:data.edit.scenes});
+      start:data.edit.start,end:data.edit.end,clips:data.edit.clips,script:data.edit.script,scenes:data.edit.scenes,voiceEngine:data.edit.voiceEngine});
     const result=await api('/projects/import',json(manifest));
     setProjects(previous=>[result.project,...previous]);
     openProject(result.project.id);
@@ -214,7 +216,7 @@ export default function App() {
     setNarrating(true);
     try {
       const images=createSceneImages(sceneList,aspect);
-      const result=await api('/projects/'+current.id+'/narration',json({scenes:sceneList,images,aspect}));
+      const result=await api('/projects/'+current.id+'/narration',json({scenes:sceneList,images,aspect,voiceEngine}));
       setProjects(prev=>prev.map(p=>p.id===result.project.id?result.project:p));
       notice('Vídeo narrado iniciado. Acompanhe em Exportações.');
     } catch(e) { notice(e.message,'error'); }
@@ -272,10 +274,11 @@ export default function App() {
                   onStartChange={setStart} onEndChange={setEnd} clips={clips} onClipsChange={setClips}
                   onPreview={previewSegment} disabled={!current.media || busy} maxTotal={600} variant="desktop" /><div className="trim-fields"><label>Início <span>(segundos)</span><input type="number" aria-label="Início em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={start} onChange={e=>setStart(e.target.value)} /></label><label>Fim <span>(segundos)</span><input type="number" aria-label="Fim em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={end} onChange={e=>setEnd(e.target.value)} /></label><div className="duration-pill"><Clock3 size={15}/> {formatTime(Number(end)-Number(start))}</div></div>{current.media && Number(end) <= Number(start) && <p className="field-error" role="alert">O fim deve ser maior que o início.</p>}</div>
               <StoryStudio mode="desktop" script={script} scenes={scenes} aspect={aspect}
+                voiceEngine={voiceEngine} onVoiceEngineChange={setVoiceEngine} voiceCapabilities={health?.voices}
                 onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}}
                 onRender={renderNarratedVideo} renderBusy={narrating} />
               <ProjectExchange name={current.name} aspect={aspect} media={current.media||current.reference}
-                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes}
+                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine}
                 onImport={importPortableProject} disabled={busy||narrating} />
               {exportList.length > 0 && <div className="panel exports-panel"><div className="panel-title"><span><ArrowDownToLine size={18}/> Exportações</span><span className="panel-subtitle">{exportList.length} arquivo(s)</span></div><ul className="export-list">{exportList.map(job=><li key={job.id}><span className="export-status-icon">{job.status==='ready'?<CheckCircle2 size={19}/>:job.status==='processing'?<LoaderCircle className="spin" size={19}/>:<CircleAlert size={19}/>}</span><div><strong>{job.kind==='narration'?'Vídeo narrado':job.aspect==='9:16'?'Vídeo vertical':'Vídeo horizontal'}</strong><small>{job.status==='ready'?'Exportação concluída':job.status==='processing'?'Processando vídeo…':job.error || 'Exportação interrompida'}</small></div>{job.status==='ready'&&<a className="export-download" href={'/api/projects/'+current.id+'/exports/'+job.id+'/download'} download aria-label="Baixar vídeo exportado"><ArrowDownToLine size={17}/></a>}</li>)}</ul></div>}
             </div>
