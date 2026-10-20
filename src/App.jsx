@@ -335,7 +335,7 @@ export default function App() {
               <div id="studio-captions" className="subtitle-workspace">
                 <SubtitleStudio mode="desktop" subtitles={subtitles} onChange={setSubtitles}
                   mediaDuration={current.media?.duration||0} previewTime={previewTime}
-                  disabled={busy||current.transcription?.status==='processing'} transcribing={current.transcription?.status==='processing'}
+                  disabled={busy||uploading||current.transcription?.status==='processing'} transcribing={current.transcription?.status==='processing'}
                   whisperAvailable={Boolean(health?.whisper)} onTranscribe={requestTranscription}/>
                 <label className="sub-burn"><input type="checkbox" checked={burnSubtitles}
                   disabled={!current.media||busy} onChange={e=>setBurnSubtitles(e.target.checked)}/>

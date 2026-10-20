@@ -19,6 +19,8 @@ test('MVP: sugere destaque e gera Short vertical independente com legenda',async
     await page.getByRole('textbox',{name:'Nome do projeto'}).fill('Shorts automáticos de teste');
     await page.getByRole('dialog').getByRole('button',{name:'Criar projeto',exact:true}).click();
     await page.locator('#media-file').setInputFiles(video);
+    await expect(page.locator('.video-stage video')).toBeVisible({timeout:20000});
+    await expect(page.locator('.panel-subtitle').filter({hasText:'episodio.mp4'})).toBeVisible({timeout:20000});
     const cues='1\n00:00:00,100 --> 00:00:05,700\nMas sabe como consegui vencer a partida no final?\n\n'+
       '2\n00:00:05,800 --> 00:00:11,500\nEu descobri uma estratégia incrível e finalmente ganhei o jogo!\n';
     await page.locator('.sub-studio input[type=file]').setInputFiles({
