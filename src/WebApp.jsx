@@ -1,5 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import VideoTimeline from './components/VideoTimeline.jsx';
+import WorkbenchNav from './components/WorkbenchNav.jsx';
+import './editor-polish.css';
 import SubtitleStudio from './components/SubtitleStudio.jsx';
 import { normalizeClips } from './clip-utils.js';
 import ProjectExchange from './components/ProjectExchange.jsx';
@@ -229,9 +231,10 @@ export default function WebApp() {
               <ChevronRight size={18} aria-hidden="true" />
               <Stage number="03" title="Exportar MP4" current={Boolean(downloadUrl)} completed={Boolean(downloadUrl)}/>
             </div>
+            <WorkbenchNav />
             <div className="web-columns">
               <div className="web-primary">
-                <div className="web-preview-panel">
+                <div id="studio-video" className="web-preview-panel">
                   <div className="web-panel-heading"><strong><Film size={18} aria-hidden="true"/> Pré-visualização</strong>{file && <button className="web-text-btn" onClick={newFile} disabled={busy}><RotateCcw size={15} aria-hidden="true" /> Trocar vídeo</button>}</div>
                   {!file ? <label className="web-droparea" htmlFor={inputId}>
                     <span className="web-upload-illustration"><UploadCloud size={38} aria-hidden="true"/></span>
@@ -245,7 +248,7 @@ export default function WebApp() {
                   {file && <div className="web-file-row"><FileVideo2 size={21} aria-hidden="true"/><div><strong title={file.name}>{file.name}</strong><span>{size(file.size)} {duration ? '· ' + minutes(duration) : '· Lendo duração…'}</span></div><Check size={17} aria-hidden="true"/></div>}
                 </div>
 
-                <div className="web-panel web-cut-panel">
+                <div id="studio-cuts" className="web-panel web-cut-panel">
                   <div className="web-panel-heading"><strong><Scissors size={18} aria-hidden="true"/> Recortar vídeo</strong><span className="web-muted">Trechos somados até 20 segundos</span></div>
                   <VideoTimeline variant="web" source={previewUrl} duration={duration} start={start} end={end}
                     onStartChange={value => { setStart(value); clearResult(); }}
@@ -287,7 +290,7 @@ export default function WebApp() {
                 <div className="web-privacy"><ShieldCheck size={23} aria-hidden="true"/><div><strong>Seus arquivos, seu controle.</strong><p>Vídeos são processados no navegador. O motor WebAssembly é baixado de um CDN; o arquivo de vídeo não é enviado ao CDN nem ao GitHub.</p></div></div>
               </div>
             </div>
-            <div className="web-captions"><SubtitleStudio mode="web" subtitles={subtitles} onChange={setSubtitles}
+            <div id="studio-captions" className="web-captions"><SubtitleStudio mode="web" subtitles={subtitles} onChange={setSubtitles}
               mediaDuration={duration} previewTime={previewTime} disabled={busy} /></div>
             <div className="web-story-workspace">
               <StoryStudio mode="web" aspect={aspect} script={script} scenes={scenes}

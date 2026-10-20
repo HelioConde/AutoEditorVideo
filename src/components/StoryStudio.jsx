@@ -46,7 +46,7 @@ export default function StoryStudio({
     window.speechSynthesis.speak(u);
   }
   const check=scenes.length?validateScenes(scenes):{error:'Adicione pelo menos uma cena.'};
-  return <section className="story-studio" aria-labelledby="story-studio-title">
+  return <section id="studio-script" className="story-studio" aria-labelledby="story-studio-title">
     <div className="story-heading">
       <span className="section-kicker">MODO ROTEIRO</span>
       <h2 id="story-studio-title">Do texto à história</h2>

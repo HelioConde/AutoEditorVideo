@@ -1,6 +1,6 @@
 {
   "name": "autoeditor-video",
-  "version": "2.1.0-beta.1",
+  "version": "2.6.0-beta.1",
   "private": true,
   "type": "module",
   "description": "AutoEditor Studio: editor local e versão web estática",
@@ -16,7 +16,9 @@
     "test": "node --test server/*.test.mjs tests/unit/*.test.mjs",
     "test:e2e": "playwright test",
     "test:e2e:web": "playwright test --config=playwright.web.config.js",
-    "check": "npm run test && npm run build && npm run build:web"
+    "check": "npm run test && npm run build && npm run build:web",
+    "qa:visual:web": "playwright test --config=playwright.web.config.js --grep @visual",
+    "qa:visual:desktop": "playwright test --grep @visual"
   },
   "engines": {
     "node": ">=22"
