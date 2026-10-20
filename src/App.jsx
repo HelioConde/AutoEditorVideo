@@ -103,6 +103,7 @@ export default function App() {
   const [subtitles,setSubtitles] = useState([]);
   const [analysisSignals,setAnalysisSignals] = useState(null);
   const [analysisProjectId,setAnalysisProjectId] = useState(null);
+  const [analysisMediaFilename,setAnalysisMediaFilename] = useState(null);
   const [analysisBusy,setAnalysisBusy] = useState(false);
   const [transcriptionRevision,setTranscriptionRevision] = useState(null);
   const [burnSubtitles,setBurnSubtitles] = useState(false);
@@ -258,6 +259,7 @@ export default function App() {
       const data=await api('/projects/'+current.id+'/signals');
       setAnalysisSignals(data.signals);
       setAnalysisProjectId(current.id);
+      setAnalysisMediaFilename(current.media.fileName);
       notice('Áudio e mudanças de cena analisados localmente. Revise as sugestões.');
       return true;
     }catch(e) {
@@ -346,7 +348,7 @@ export default function App() {
                 onPreview={previewSegment}
                 onUse={useShort} onGenerate={generateShorts}
                 onAnalyze={analyzeShortSignals} analysisBusy={analysisBusy}
-                analysisSignals={analysisProjectId===currentId?analysisSignals:null}/>
+                analysisSignals={analysisProjectId===currentId && analysisMediaFilename===current.media?.fileName ? analysisSignals : null}/>
               <div id="studio-cuts" className="panel trim-panel"><div className="panel-title"><span><Scissors size={18} aria-hidden="true"/> Definir trecho</span><span className="panel-subtitle">Selecione os quadros e organize cortes</span></div><VideoTimeline source={current.media ? '/api/projects/' + current.id + '/media' : null}
                   duration={current.media?.duration || 0} start={start} end={end}
                   onStartChange={setStart} onEndChange={setEnd} clips={clips} onClipsChange={setClips}
