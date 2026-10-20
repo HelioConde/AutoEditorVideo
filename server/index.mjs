@@ -160,11 +160,14 @@ async function renderNarration(project, job, scenes, images, aspect, voiceEngine
     const parts=[];
     for(let i=0;i<scenes.length;i++) {
       const stem='scene-'+i;
-      const png=path.join(tmp,stem+'.png'),wav=path.join(tmp,stem+'.wav'),mp4=path.join(tmp,stem+'.mp4');
-      const data=Buffer.from(images[i].slice('data:image/png;base64,'.length),'base64');
-      if(data.byteLength>750000 || !data.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))
-        throw new Error('Imagem da cena inválida.');
-      fs.writeFileSync(png,data);
+      const isJpeg=images[i].startsWith('data:image/jpeg;base64,');
+      const imageFile=path.join(tmp,stem+(isJpeg?'.jpg':'.png'));
+      const wav=path.join(tmp,stem+'.wav'),mp4=path.join(tmp,stem+'.mp4');
+      const data=Buffer.from(images[i].slice(isJpeg?'data:image/jpeg;base64,'.length:'data:image/png;base64,'.length),'base64');
+      const signature=isJpeg?data.subarray(0,3).equals(Buffer.from([255,216,255])):
+        data.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]));
+      if(data.byteLength>750000 || !signature) throw new Error('Imagem da cena inválida.');
+      fs.writeFileSync(imageFile,data);
       await synthesizeVoice({text:scenes[i].text,outputFile:wav,engine:voiceEngine});
       // Respect the spoken words: extending a scene is safer than cutting a
       // sentence because the user chose a duration shorter than its narration.
@@ -174,7 +177,7 @@ async function renderNarration(project, job, scenes, images, aspect, voiceEngine
       const vertical=aspect==='9:16',w=vertical?720:1280,h=vertical?1280:720;
       const filters=sceneVideoFilters({width:w,height:h,index:i,scenes,duration});
       await runFFmpeg(['-hide_banner','-loglevel','error','-y','-loop','1','-framerate','24',
-        '-i',png,'-i',wav,'-t',String(duration),
+        '-i',imageFile,'-i',wav,'-t',String(duration),
         '-vf',filters.video,'-af',filters.audio,
         '-c:v','libx264','-preset','veryfast','-crf','24','-c:a','aac','-b:a','128k',
         '-r','24','-movflags','+faststart',mp4]);
@@ -308,7 +311,7 @@ export function createApp() {
     const checked=validateScenes(req.body?.scenes);
     if(checked.error)return res.status(400).json({error:checked.error});
     const images=req.body?.images;
-    if(!Array.isArray(images)||images.length!==checked.scenes.length||images.some(x=>typeof x!=='string'||x.length>1020000||!/^data:image\/png;base64,[A-Za-z0-9+/=]+$/.test(x)))
+    if(!Array.isArray(images)||images.length!==checked.scenes.length||images.some(x=>typeof x!=='string'||x.length>1020000||!/^data:image\/(?:png|jpeg);base64,[A-Za-z0-9+/=]+$/.test(x)))
       return res.status(400).json({error:'Envie uma imagem PNG gerada para cada cena.'});
     const aspect=req.body?.aspect;
     if(!['9:16','16:9'].includes(aspect))return res.status(400).json({error:'Proporção inválida.'});

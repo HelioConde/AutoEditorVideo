@@ -51,3 +51,6 @@ Implementação compartilhada: `src/components/VideoTimeline.jsx` e `src/compone
 ## Projeto portátil e modo roteiro
 
 `src/components/ProjectExchange.jsx` possui dois controles de teclado reais (botões) para baixar/upload de JSON e uma explicação explícita de que o arquivo não contém mídia. `src/components/StoryStudio.jsx` fornece campo de roteiro rotulado, botão de organização, cenas numeradas, títulos e textos editáveis, duração, prévia de voz e estados acessíveis. Utilizar tokens existentes. Não chamar segmentação determinística de roteiro de “IA geradora” nem apresentar síntese Web Speech como MP4 narrado na web.
+
+## Storyboard 2.4
+Previews visuais por cena devem ser identificadas como cartões de composição (não fotografia gerada por IA). Manter label, select e file input associados; fotos são opt-in e nunca enviadas ao Pages. A disponibilidade do Piper e do motor do sistema aparece separadamente na UI; não prometer que a prévia Web Speech reproduz exatamente a voz neural da exportação. O recurso de fade respeita o fluxo de montagem e permite corte direto para ritmo mais rápido.

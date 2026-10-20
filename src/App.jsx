@@ -97,6 +97,7 @@ export default function App() {
   const [scenes, setScenes] = useState([]);
   const [narrating, setNarrating] = useState(false);
   const [voiceEngine, setVoiceEngine] = useState('system');
+  const [scenePictures, setScenePictures] = useState([]);
   const playbackEnd = useRef(null);
   const playerVideoRef = useRef(null);
   const [aspect, setAspect] = useState('9:16');
@@ -139,6 +140,7 @@ export default function App() {
     setScript(edit?.script || '');
     setScenes(edit?.scenes || []);
     setVoiceEngine(edit?.voiceEngine || 'system');
+    setScenePictures([]);
     playbackEnd.current = null;
   }, [currentId, current?.media?.id]);
   useEffect(() => {
@@ -215,7 +217,7 @@ export default function App() {
     if (!current || narrating) return;
     setNarrating(true);
     try {
-      const images=createSceneImages(sceneList,aspect);
+      const images=await createSceneImages(sceneList,aspect,scenePictures);
       const result=await api('/projects/'+current.id+'/narration',json({scenes:sceneList,images,aspect,voiceEngine}));
       setProjects(prev=>prev.map(p=>p.id===result.project.id?result.project:p));
       notice('Vídeo narrado iniciado. Acompanhe em Exportações.');
@@ -275,6 +277,7 @@ export default function App() {
                   onPreview={previewSegment} disabled={!current.media || busy} maxTotal={600} variant="desktop" /><div className="trim-fields"><label>Início <span>(segundos)</span><input type="number" aria-label="Início em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={start} onChange={e=>setStart(e.target.value)} /></label><label>Fim <span>(segundos)</span><input type="number" aria-label="Fim em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={end} onChange={e=>setEnd(e.target.value)} /></label><div className="duration-pill"><Clock3 size={15}/> {formatTime(Number(end)-Number(start))}</div></div>{current.media && Number(end) <= Number(start) && <p className="field-error" role="alert">O fim deve ser maior que o início.</p>}</div>
               <StoryStudio mode="desktop" script={script} scenes={scenes} aspect={aspect}
                 voiceEngine={voiceEngine} onVoiceEngineChange={setVoiceEngine} voiceCapabilities={health?.voices}
+                scenePictures={scenePictures} onScenePicturesChange={setScenePictures}
                 onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}}
                 onRender={renderNarratedVideo} renderBusy={narrating} />
               <ProjectExchange name={current.name} aspect={aspect} media={current.media||current.reference}

@@ -37,3 +37,14 @@ test('cenas rejeitam textos vazios, títulos e durações impróprias',()=>{
   assert.match(validateScenes([{text:'Uma boa cena',duration:20}]).error,/15/);
   assert.equal(validateScenes([{text:'Uma boa cena',duration:5}]).error,null);
 });
+
+test('temas, transições e motor neural são preservados no formato v1',()=>{
+  const scenes=[{title:'Paz',text:'Música e narração',duration:4,theme:'ocean',transition:'cut'}];
+  const file=createProjectFile({name:'Meu filme',scenes,script:'Música e narração',voiceEngine:'piper'});
+  const reopened=parseProjectFile(file);
+  assert.equal(reopened.edit.voiceEngine,'piper');
+  assert.equal(reopened.edit.scenes[0].theme,'ocean');
+  assert.equal(reopened.edit.scenes[0].transition,'cut');
+  assert.throws(()=>parseProjectFile({...file,edit:{...file.edit,voiceEngine:'internet'}}),/Motor de voz/);
+  assert.throws(()=>parseProjectFile({...file,edit:{...file.edit,scenes:[{...scenes[0],transition:'explosion'}]}}),/Transição/);
+});

@@ -43,6 +43,7 @@ export default function WebApp() {
   const [script,setScript] = useState('');
   const [scenes,setScenes] = useState([]);
   const [voiceEngine,setVoiceEngine] = useState('system');
+  const [scenePictures,setScenePictures] = useState([]);
   const [reference,setReference] = useState(null);
   const [projectName,setProjectName] = useState('Meu projeto web');
   const previewEndRef = useRef(null);
@@ -176,6 +177,7 @@ export default function WebApp() {
     setProjectName(incoming.name);
     setAspect(incoming.aspect);
     setScript(edit.script);setScenes(edit.scenes);setVoiceEngine(edit.voiceEngine || 'system');
+    setScenePictures([]);
     setClips(edit.clips);setStart(edit.start);setEnd(edit.end);
     setReference(incoming.media);
     setError('');
@@ -280,6 +282,7 @@ export default function WebApp() {
             </div>
             <div className="web-story-workspace">
               <StoryStudio mode="web" aspect={aspect} script={script} scenes={scenes}
+                scenePictures={scenePictures} onScenePicturesChange={setScenePictures}
                 onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}} />
               <ProjectExchange name={projectName} aspect={aspect} media={file?{name:file.name,size:file.size,duration}:reference}
                 start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine}

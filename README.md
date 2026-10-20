@@ -94,3 +94,21 @@ O **modo roteiro** transforma parágrafos em até seis cenas editáveis, com tí
 - **Site (GitHub Pages):** por enquanto apenas organiza o roteiro e permite ouvir uma prévia da narração. O site **ainda não incorpora essa voz ao MP4 exportado**. Sem backend, `speechSynthesis` não permite capturar diretamente o áudio gerado.
 
 Este passo prepara a infraestrutura compartilhada para incorporar Kokoro/faster-whisper posteriormente, sem apresentar a prévia como exportação de narração.
+
+## Narrador neural opcional: Piper pt-BR (2.4 beta)
+
+O desktop oferece dois motores: **Voz do sistema** (eSpeak NG no Linux; System.Speech no Windows) e **Piper neural local**. O Piper não é instalado ou baixado automaticamente pelo projeto. Para habilitá-lo, instale o executável Piper e obtenha um modelo `.onnx` e seu `.onnx.json` de uma voz brasileira. Exemplo: voz `pt_BR-faber-medium` no catálogo Rhasspy Piper Voices (aprox. 63 MB). Verifique a licença da voz antes de uso comercial.
+
+No PowerShell, antes de `npm run dev`:
+```powershell
+$env:PIPER_BIN = "C:\\piper\\piper.exe"
+$env:PIPER_MODEL = "C:\\piper\\models\\pt_BR-faber-medium.onnx"
+npm run dev
+```
+
+O arquivo de configuração **`pt_BR-faber-medium.onnx.json` deve ficar ao lado do modelo ONNX**. O app identifica a disponibilidade em `GET /api/health` e não troca silenciosamente a opção Piper por outra voz. Se o modelo não estiver presente, use a voz do sistema. O Piper funciona com CPU, mas a velocidade depende da máquina. No Linux, exporte as mesmas variáveis `PIPER_BIN` e `PIPER_MODEL`.
+
+## Temas, imagens próprias e transições
+Cada cena permite escolher um dos seis temas (floresta, oceano, crepúsculo, âmbar, menta, ardósia), uma transição **fade suave** ou **corte direto**, e carregar uma imagem de fundo JPG/PNG/WebP de até **2 MB**. O editor compõe título e narração sobre o fundo localmente; no desktop, isso vira uma cena no MP4. As imagens são tratadas na memória e **não são armazenadas nem transferidas no projeto JSON**; escolha-as novamente após importar ou recarregar.
+
+A renderização agora aumenta automaticamente a duração da cena quando a fala é mais longa que o número definido, para não cortar frases sem aviso. Há um limite de 65 s de fala por cena; se excedido, divida o texto. Transições fade escurecem a entrada e a saída em aproximadamente 350 ms, sem sobreposição de cenas. A prévia de áudio do navegador pode ter voz diferente do Piper utilizado na exportação.
