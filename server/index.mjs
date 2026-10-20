@@ -132,8 +132,12 @@ async function runCommand(command,args) {
 async function renderNarration(project, job, scenes, images, aspect) {
   const folder=path.join(UPLOADS,project.id);
   const output=path.join(folder,job.filename);
-  const tmp=fs.mkdtempSync(path.join(folder,'narration-'));
+  let tmp=null;
   try {
+    // Script-only projects have never imported media and therefore do not
+    // have an uploads/<id> folder yet.
+    fs.mkdirSync(folder,{recursive:true});
+    tmp=fs.mkdtempSync(path.join(folder,'narration-'));
     const parts=[];
     for(let i=0;i<scenes.length;i++) {
       const stem='scene-'+i;
@@ -168,7 +172,7 @@ async function renderNarration(project, job, scenes, images, aspect) {
     console.error('Narration export:',e.message);
     try{fs.unlinkSync(output);}catch{}
   } finally {
-    fs.rmSync(tmp,{recursive:true,force:true});
+    if(tmp) fs.rmSync(tmp,{recursive:true,force:true});
     save(projects);
   }
 }
