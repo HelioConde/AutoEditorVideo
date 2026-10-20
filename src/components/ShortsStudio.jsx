@@ -10,10 +10,11 @@ const stamp=seconds=>{
 export default function ShortsStudio({
   subtitles=[],duration=0,mediaReady=false,disabled=false,
   transcribing=false,whisperAvailable=false,
-  onTranscribe,onPreview,onUse,onGenerate
+  onTranscribe,onPreview,onUse,onGenerate,onAnalyze,analysisSignals=null,analysisBusy=false
 }) {
   const [showResults,setShowResults]=useState(false);
-  const ranked=useMemo(()=>rankShortsFromTranscript(subtitles,{duration,maxClips:3}),[subtitles,duration]);
+  const [profile,setProfile]=useState('podcast');
+  const ranked=useMemo(()=>rankShortsFromTranscript(subtitles,{duration,maxClips:3,profile,signals:analysisSignals}),[subtitles,duration,profile,analysisSignals]);
   const candidates=ranked.candidates;
   return <section className="shorts-studio" aria-labelledby="shorts-studio-title">
     <div className="shorts-studio-head">
@@ -33,14 +34,30 @@ export default function ShortsStudio({
             onClick={onTranscribe}>{transcribing?'Transcrevendo…':'Transcrever áudio'}</button>
         </div> :
         <>
+          <div className="shorts-profile">
+            <label htmlFor="shorts-profile">Tipo de conteúdo</label>
+            <select id="shorts-profile" disabled={disabled||analysisBusy} value={profile} onChange={e=>{setProfile(e.target.value);setShowResults(false);}}>
+              <option value="podcast">Podcast / Entrevista</option>
+              <option value="gameplay">Gameplay / Live</option>
+              <option value="tutorial">Tutorial / Aula</option>
+            </select>
+          </div>
           <div className="shorts-actions">
-            <button type="button" disabled={disabled||!!ranked.error}
-              onClick={()=>setShowResults(v=>!v)}>
+            <button type="button" disabled={disabled||analysisBusy||!!ranked.error}
+              onClick={async()=>{
+                if(showResults){setShowResults(false);return;}
+                if(onAnalyze && !analysisSignals)await onAnalyze();
+                setShowResults(true);
+              }}>
               <Sparkles size={18} aria-hidden="true"/>
-              {showResults?'Ocultar sugestões':'Encontrar melhores momentos'}
+              {analysisBusy?'Analisando áudio e cenas…':showResults?'Ocultar sugestões':'Encontrar melhores momentos'}
             </button>
             <span>Até 3 Shorts de 8 a 45 segundos, em 9:16.</span>
           </div>
+          {analysisSignals && <p className="shorts-analysis-summary" role="status">
+            Análise local: {analysisSignals.audio?.length||0} amostras de áudio e {analysisSignals.scenes?.length||0} mudanças de cena.
+            {analysisSignals.coverage?.audio===false?' O vídeo não possui uma faixa de áudio analisável.':''}
+          </p>}
           {ranked.error&&<p className="shorts-error" role="status">{ranked.error}</p>}
           {showResults && candidates.length>0 && <>
             <div className="shorts-results" aria-label="Momentos sugeridos">
@@ -50,6 +67,9 @@ export default function ShortsStudio({
                   <span aria-label={'Pontuação de sinais: '+candidate.score+' em 100'}>{candidate.score}/100 sinais</span>
                 </div>
                 <p className="shorts-reason">{candidate.reason}</p>
+                {candidate.evidence && <p className="shorts-evidence">
+                  Evidências: {candidate.evidence.source} · {candidate.evidence.audioPeaks} picos de áudio · {candidate.evidence.sceneChanges} cortes visuais
+                </p>}
                 <p className="shorts-transcript">“{candidate.transcript}”</p>
                 <div className="shorts-candidate-actions">
                   <button type="button" disabled={disabled} onClick={()=>onPreview?.(candidate)}>
@@ -62,14 +82,14 @@ export default function ShortsStudio({
               </article>)}
             </div>
             <button className="shorts-generate" type="button" disabled={disabled||!onGenerate}
-              onClick={()=>onGenerate(candidates)}>
+              onClick={()=>onGenerate(candidates,profile)}>
               <WandSparkles size={19} aria-hidden="true"/>
               Gerar {candidates.length} {candidates.length===1?'Short legendado':'Shorts legendados'}
             </button>
           </>}
         </>
     }
-    <p className="shorts-note">Pontuação experimental por padrões de fala, perguntas, contraste e continuidade.
-      Não analisa emoções, imagens nem prevê viralização. A seleção precisa de revisão humana.</p>
+    <p className="shorts-note">Ranking experimental por transcrição, variação de volume e cortes visuais no FFmpeg.
+      Mudanças de cena não equivalem a acontecimentos importantes; não há reconhecimento de emoções, jogadas ou previsão de viralização. Revise antes de publicar.</p>
   </section>;
 }

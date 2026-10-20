@@ -1,0 +1,15 @@
+# Melhorias de seleção automática — áudio + imagem (2ª etapa)
+
+O modo desktop pode analisar um vídeo **localmente** para enriquecer o ranking de Shorts por transcrição:
+
+- **FFmpeg / áudio:** decodifica em 16 kHz mono e calcula RMS por janela de aproximadamente 1 segundo. Um pico só conta quando supera em pelo menos 5 dB a mediana do próprio vídeo. Isso mede intensidade relativa, **não emoção**.
+- **FFmpeg / imagem:** amostra a 2 FPS, redimensiona para largura 160px e utiliza o detector de diferenças de cenas do filtro \`select=gt(scene\\,0.25)\`. O resultado representa possíveis **cortes visuais**, não identifica gols, vitórias, reações ou pessoas.
+- **Motor híbrido:** combina a pontuação textual existente com bônus limitados para picos de volume e transições visuais. Perfis **podcast**, **gameplay** e **tutorial** ajustam os bônus. Mostra evidências por candidato.
+- **Fallback:** se a análise não estiver disponível, continua oferecendo a classificação por texto. A geração de Shorts continua passando por revisão e FFmpeg.
+- **Privacidade:** FFmpeg executado no computador do usuário; não há upload do vídeo, chamada a IA remota, modelo extra ou necessidade de CUDA.
+
+O usuário abre um projeto com mídia e SRT/transcrição, escolhe o perfil e clica em **Encontrar melhores momentos**. O desktop solicita \`GET /api/projects/:id/signals\`, cacheado por vídeo importado, e exibe o total de amostras de áudio e de cortes detectados. O endpoint \`POST /api/projects/:id/shorts\` considera os mesmos sinais cacheados, sem aceitar valores arbitrários enviados pelo navegador.
+
+**Limites:** fase experimental aceita mídias até **10 min** de duração na análise audiovisual. Os comandos não usam shell e têm tempo limite por processo. Para mídia sem faixa de áudio, o vídeo pode fornecer apenas cortes de cena. A seleção ainda requer legendas, pois o ranking semântico não oferece candidates para vídeos silenciosos. Cortes e legendas respeitam os limites existentes. 
+
+**Próximas fases recomendadas:** VAD (Silero), PySceneDetect opcional para cortes robustos, alinhamento de palavras, identificação de faces com YuNet/MediaPipe e avaliação semântica contextual local. Não declarar essas ferramentas como integradas antes de testes reais.

@@ -101,6 +101,10 @@ export default function App() {
   const [script, setScript] = useState('');
   const [scenes, setScenes] = useState([]);
   const [subtitles,setSubtitles] = useState([]);
+  const [analysisSignals,setAnalysisSignals] = useState(null);
+  const [analysisProjectId,setAnalysisProjectId] = useState(null);
+  const [analysisMediaFilename,setAnalysisMediaFilename] = useState(null);
+  const [analysisBusy,setAnalysisBusy] = useState(false);
   const [transcriptionRevision,setTranscriptionRevision] = useState(null);
   const [burnSubtitles,setBurnSubtitles] = useState(false);
   const [previewTime,setPreviewTime] = useState(0);
@@ -248,11 +252,26 @@ export default function App() {
     notice('Trecho adicionado à timeline em 9:16. Revise o corte e exporte quando quiser.');
     document.getElementById('studio-cuts')?.scrollIntoView({block:'start',behavior:'smooth'});
   }
-  async function generateShorts(candidates) {
+  async function analyzeShortSignals() {
+    if(!current?.media || analysisBusy)return false;
+    setAnalysisBusy(true);
+    try {
+      const data=await api('/projects/'+current.id+'/signals');
+      setAnalysisSignals(data.signals);
+      setAnalysisProjectId(current.id);
+      setAnalysisMediaFilename(current.media.fileName);
+      notice('Áudio e mudanças de cena analisados localmente. Revise as sugestões.');
+      return true;
+    }catch(e) {
+      notice('A análise audiovisual não foi concluída. Você ainda pode usar a análise textual. '+e.message,'error');
+      return false;
+    }finally{setAnalysisBusy(false);}
+  }
+  async function generateShorts(candidates,profile='podcast') {
     if(!current?.media||!candidates?.length||busy||processing)return;
     setBusy(true);
     try {
-      const result=await api('/projects/'+current.id+'/shorts',json({count:candidates.length,subtitles}));
+      const result=await api('/projects/'+current.id+'/shorts',json({count:candidates.length,subtitles,profile}));
       setProjects(previous=>previous.map(p=>p.id===result.project.id?result.project:p));
       notice(result.suggestions.length+' Shorts legendados iniciados. Acompanhe na seção Exportações.');
     }catch(e){notice(e.message,'error');}
@@ -327,7 +346,9 @@ export default function App() {
                 disabled={busy||processing||uploading}
                 onTranscribe={requestTranscription}
                 onPreview={previewSegment}
-                onUse={useShort} onGenerate={generateShorts}/>
+                onUse={useShort} onGenerate={generateShorts}
+                onAnalyze={analyzeShortSignals} analysisBusy={analysisBusy}
+                analysisSignals={analysisProjectId===currentId && analysisMediaFilename===current.media?.fileName ? analysisSignals : null}/>
               <div id="studio-cuts" className="panel trim-panel"><div className="panel-title"><span><Scissors size={18} aria-hidden="true"/> Definir trecho</span><span className="panel-subtitle">Selecione os quadros e organize cortes</span></div><VideoTimeline source={current.media ? '/api/projects/' + current.id + '/media' : null}
                   duration={current.media?.duration || 0} start={start} end={end}
                   onStartChange={setStart} onEndChange={setEnd} clips={clips} onClipsChange={setClips}

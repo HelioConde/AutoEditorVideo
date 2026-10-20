@@ -1,4 +1,5 @@
 import { validateSubtitles } from './subtitles.js';
+import { candidateSignalEvidence } from './highlight-signals.js';
 
 const MAX_SHORTS=3;
 const MAX_LEN=45;
@@ -13,7 +14,7 @@ const TERMS=[
 const round=n=>Math.round(n*100)/100;
 const wordCount=s=>(s.trim().match(/[\p{L}\p{N}]+/gu)||[]).length;
 
-export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS}={}) {
+export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS,signals=null,profile='podcast'}={}) {
   const checked=validateSubtitles(subtitles);
   if(checked.error)return {error:checked.error,candidates:[]};
   const endOfMedia=Number(duration);
@@ -21,6 +22,8 @@ export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS
     return {error:'Duração da mídia inválida.',candidates:[]};
   if(!Number.isInteger(maxClips)||maxClips<1||maxClips>MAX_SHORTS)
     return {error:'Escolha de 1 a 3 Shorts.',candidates:[]};
+  if(!['podcast','gameplay','tutorial'].includes(profile))
+    return {error:'Perfil de análise inválido.',candidates:[]};
   const cues=checked.subtitles.filter(c=>c.start<endOfMedia && c.end<=endOfMedia+.15);
   if(!cues.length)return {error:'Transcreva ou importe legendas SRT antes de buscar destaques.',candidates:[]};
 
@@ -44,12 +47,20 @@ export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS
       const intro=/^[A-ZÁÉÍÓÚÂÊÔÃÕ][^.!?]{3,}/u.test(selected[0].text.trim())?2:0;
       const ending=/[.!?]\s*$/u.test(selected.at(-1).text)?7:0;
       const hook=reasons.reduce((sum,x)=>sum+x.weight,0);
-      const score=Math.min(99,Math.round(16+focus+speech+fluency+intro+ending+hook));
+      const audioVisual=candidateSignalEvidence(signals,cues[i].start,cues[j].end,profile);
+      const textScore=Math.round(16+focus+speech+fluency+intro+ending+hook);
+      // Leave reserved headroom for actual audio/visual evidence so strong
+      // transcripts do not all saturate at 99 and obscure meaningful signals.
+      const score=audioVisual.available ?
+        Math.min(99,Math.min(86,textScore)+Math.min(13,audioVisual.bonus)) :
+        Math.min(99,textScore);
       const title=selected[0].text.replace(/[\n\r]/gu,' ').trim().slice(0,72);
       suggestions.push({
         start:round(cues[i].start),end:round(cues[j].end),
         duration:round(length),score,title,
-        reason:reasons[0]?.label||'Fala contínua com duração adequada',
+        reason:[reasons[0]?.label||'Fala contínua com duração adequada',...audioVisual.reasons].join(' · '),
+        evidence:{text:audioVisual.available?Math.min(86,textScore):Math.min(99,textScore),audioPeaks:audioVisual.highEnergy,
+          sceneChanges:audioVisual.visualChanges,signalBonus:audioVisual.bonus,source:audioVisual.available?'texto + áudio/vídeo':'somente texto'},
         transcript:script.slice(0,360)
       });
     }

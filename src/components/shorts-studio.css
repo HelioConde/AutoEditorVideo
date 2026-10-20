@@ -24,3 +24,10 @@
 .shorts-note{font-size:10px;border-top:1px solid #465d48;padding-top:13px}
 .shorts-error{font-size:11px;color:#f0c2a8}
 @media(max-width:680px){.shorts-studio{padding:14px}.shorts-studio-head,.shorts-empty{flex-direction:column}.shorts-local{align-self:flex-start}.shorts-empty button{width:100%}}
+
+.shorts-profile{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.shorts-profile label{font-size:12px;color:#d6e6c9;font-weight:750}
+.shorts-profile select{min-height:44px;border:1px solid #698568;background:#263c2b;color:#f0f8ea;border-radius:9px;padding:8px 12px;font-size:13px}
+.shorts-analysis-summary{font-size:11px;line-height:1.6;color:#d4ecb5;border:1px solid #4d7150;background:#273c2b;padding:12px;border-radius:9px;margin:0}
+.shorts-evidence{font-size:10px;color:#b9d1ad;line-height:1.6;margin:0}
+@media(max-width:560px){.shorts-profile{flex-direction:column;align-items:stretch}.shorts-profile select{font-size:16px}}
