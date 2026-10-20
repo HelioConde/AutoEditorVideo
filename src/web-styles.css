@@ -120,3 +120,5 @@
 
 .web-story-workspace{margin-top:23px;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(240px,.85fr);align-items:start;gap:18px}
 @media(max-width:800px){.web-story-workspace{grid-template-columns:1fr}}
+
+.web-captions{margin-top:18px}.web-video-area{position:relative}.web-video-area .video-caption-overlay{font-size:clamp(12px,2vw,19px)}

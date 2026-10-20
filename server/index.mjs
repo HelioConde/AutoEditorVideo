@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url';
 import { normalizeClips } from '../src/clip-utils.js';
 import { parseProjectFile, validateScenes } from '../src/project-format.js';
 import { getVoiceCapabilities, resolveVoiceEngine, synthesizeVoice } from './tts.mjs';
+import { validateSubtitles, toSrt, remapSubtitles } from '../src/subtitles.js';
+import { whisperCapability, transcribeLocalAudio } from './whisper.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(process.env.DATA_DIR || path.join(HERE, '..', 'data'));
@@ -55,14 +57,14 @@ const upload = multer({
 });
 const publicProject = p => ({
   id: p.id, name: p.name, createdAt: p.createdAt, media: p.media || null,
-  reference: p.reference || null, edit: p.edit || null,
+  reference: p.reference || null, edit: p.edit || null, transcription:p.transcription || null,
   exports: (p.exports || []).map(({ id, status, aspect, createdAt, error, kind }) => ({ id, status, aspect, createdAt, error, kind:kind||'cuts' }))
 });
 
-function runFFmpeg(args) {
+function runFFmpeg(args,cwd) {
   return new Promise((resolve, reject) => {
     let child;
-    try { child = spawn(FFmpeg, args, { windowsHide: true }); }
+    try { child = spawn(FFmpeg, args, { windowsHide: true, ...(cwd?{cwd}:{}) }); }
     catch (e) { return reject(e); }
     let stderr = '';
     child.stderr.on('data', chunk => { stderr = (stderr + chunk.toString()).slice(-1800); });
@@ -73,7 +75,7 @@ function runFFmpeg(args) {
     });
   });
 }
-async function render(project, job, source, output, clips, aspect) {
+async function render(project, job, source, output, clips, aspect, subtitles=[],burnSubtitles=false) {
   const vertical = aspect === '9:16';
   const w = vertical ? 720 : 1280, h = vertical ? 1280 : 720;
   const filter = 'scale=' + w + ':' + h + ':force_original_aspect_ratio=increase,crop=' + w + ':' + h + ',fps=30';
@@ -102,6 +104,22 @@ async function render(project, job, source, output, clips, aspect) {
       await runFFmpeg(['-hide_banner', '-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', listFile, '-c', 'copy', '-movflags', '+faststart', output]);
     }
     if (!fs.existsSync(output) || fs.statSync(output).size === 0) throw new Error('Arquivo vazio');
+    if(burnSubtitles && subtitles.length) {
+      const mapped=remapSubtitles(subtitles,clips);
+      if(mapped.length) {
+        const working=fs.mkdtempSync(path.join(UPLOADS,project.id,'subtitles-'));
+        try {
+          fs.writeFileSync(path.join(working,'captions.srt'),toSrt(mapped),'utf8');
+          const baked=path.join(working,'baked.mp4');
+          // Render with a fixed relative subtitle filename: no user-supplied paths,
+          // and no Windows drive letter escaping issues.
+          await runFFmpeg(['-hide_banner','-loglevel','error','-y','-i',output,
+            '-vf',"subtitles=captions.srt:force_style='Fontname=Arial,Fontsize=21,Alignment=2,MarginV=34,Outline=2,Shadow=1'",
+            '-c:v','libx264','-preset','veryfast','-crf','23','-c:a','copy','-movflags','+faststart',baked],working);
+          fs.copyFileSync(baked,output);
+        } finally {fs.rmSync(working,{recursive:true,force:true});}
+      }
+    }
     job.status = 'ready';
   } catch (e) {
     console.error('FFmpeg export failed:', e.message);
@@ -200,6 +218,28 @@ async function renderNarration(project, job, scenes, images, aspect, voiceEngine
   }
 }
 
+// Runs after the API response so longer transcription does not block other
+// local editor interactions. Only one transcription per project is allowed.
+async function transcribeProject(project) {
+  const folder=path.join(UPLOADS,project.id);
+  let tmp=null;
+  try {
+    tmp=fs.mkdtempSync(path.join(folder,'whisper-'));
+    const cues=await transcribeLocalAudio({
+      source:path.join(folder,project.media.fileName),tmp,ffmpeg:FFmpeg
+    });
+    project.edit={...(project.edit||{start:0,end:project.media.duration,clips:[],scenes:[],script:'',voiceEngine:'system',aspect:'9:16'}),
+      subtitles:cues};
+    project.transcription={status:'ready',count:cues.length,updatedAt:new Date().toISOString()};
+  } catch(e) {
+    project.transcription={status:'error',error:e.message?.slice(0,240)||'Falha na transcrição.'};
+    console.error('Whisper transcription:',e.message);
+  } finally {
+    if(tmp)fs.rmSync(tmp,{recursive:true,force:true});
+    save(projects);
+  }
+}
+
 export function createApp() {
   const app = express();
   app.disable('x-powered-by');
@@ -213,12 +253,12 @@ export function createApp() {
     next();
   });
   app.get('/api/health', (_req, res) => res.json({ ffmpeg: toolAvailable(FFmpeg), ffprobe: toolAvailable(FFprobe),
-    narration: Object.values(getVoiceCapabilities()).some(Boolean), voices:getVoiceCapabilities(), version: '2.4-beta' }));
+    narration: Object.values(getVoiceCapabilities()).some(Boolean), voices:getVoiceCapabilities(),whisper:whisperCapability(), version: '2.5-beta' }));
   app.get('/api/projects', (_req, res) => res.json({ projects: projects.map(publicProject).sort((a,b) => b.createdAt.localeCompare(a.createdAt)) }));
   app.post('/api/projects', (req, res) => {
     const name = typeof req.body?.name === 'string' ? req.body.name.trim() : '';
     if (name.length < 2 || name.length > 64) return res.status(400).json({ error: 'Use um nome entre 2 e 64 caracteres.' });
-    const project = { id: randomUUID(), name, createdAt: new Date().toISOString(), media: null, reference:null, edit:null, exports: [] };
+    const project = { id: randomUUID(), name, createdAt: new Date().toISOString(), media: null, reference:null, edit:null, transcription:null, exports: [] };
     projects.unshift(project);
     save(projects);
     res.status(201).json({ project: publicProject(project) });
@@ -228,7 +268,7 @@ export function createApp() {
     try { imported = parseProjectFile(req.body); }
     catch(e) { return res.status(400).json({error:e.message}); }
     const project={ id:randomUUID(),name:imported.name,createdAt:new Date().toISOString(), media:null,
-      reference:imported.media,edit:{...imported.edit,aspect:imported.aspect},exports:[] };
+      reference:imported.media,edit:{...imported.edit,aspect:imported.aspect},transcription:null,exports:[] };
     projects.unshift(project); save(projects);
     res.status(201).json({project:publicProject(project)});
   });
@@ -265,6 +305,7 @@ export function createApp() {
           if(project.edit)project.edit={...project.edit,clips:[],start:0,end:duration};
         }
         project.reference=null;
+        project.transcription=null;
         project.exports = [];
         save(projects);
         if (previous) { try { fs.unlinkSync(path.join(folder, previous.fileName)); } catch {} }
@@ -281,6 +322,20 @@ export function createApp() {
     res.type(path.extname(project.media.fileName));
     res.sendFile(path.join(UPLOADS, project.id, project.media.fileName), { dotfiles: 'allow' });
   });
+  app.post('/api/projects/:id/transcribe', (req,res) => {
+    const project=findProject(req.params.id);
+    if(!project)return res.status(404).json({error:'Projeto não encontrado.'});
+    if(!project.media)return res.status(400).json({error:'Importe um vídeo com áudio para transcrever.'});
+    if(project.media.duration>600)return res.status(400).json({error:'A transcrição automática aceita vídeos de até 10 minutos.'});
+    if(!whisperCapability())return res.status(503).json({error:'Whisper.cpp indisponível. Configure WHISPER_BIN e WHISPER_MODEL.'});
+    if(!toolAvailable(FFmpeg))return res.status(503).json({error:'FFmpeg não disponível.'});
+    if(project.transcription?.status==='processing')return res.status(409).json({error:'Transcrição já em andamento.'});
+    if(project.exports.some(job=>job.status==='processing'))return res.status(409).json({error:'Aguarde o término da exportação atual.'});
+    project.transcription={status:'processing',startedAt:new Date().toISOString()};
+    save(projects);
+    res.status(202).json({project:publicProject(project)});
+    void transcribeProject(project);
+  });
   app.post('/api/projects/:id/exports', (req, res) => {
     const project = findProject(req.params.id);
     if (!project) return res.status(404).json({ error: 'Projeto não encontrado.' });
@@ -293,13 +348,19 @@ export function createApp() {
     });
     if (plan.error || !['9:16', '16:9'].includes(aspect))
       return res.status(400).json({ error: plan.error || 'Formato de exportação inválido.' });
-    if (project.exports.some(j => j.status === 'processing')) return res.status(409).json({ error: 'Já existe uma exportação em andamento neste projeto.' });
+    if (project.exports.some(j => j.status === 'processing')||project.transcription?.status==='processing')
+      return res.status(409).json({ error: 'Aguarde o processamento em andamento neste projeto.' });
+    const requestedSubtitles=req.body?.subtitles??[];
+    const subtitleValidation=validateSubtitles(requestedSubtitles);
+    if(subtitleValidation.error)return res.status(400).json({error:subtitleValidation.error});
+    const burnSubtitles=req.body?.burnSubtitles??false;
+    if(typeof burnSubtitles!=='boolean')return res.status(400).json({error:'Opção de legendar o vídeo inválida.'});
     const id = randomUUID(), folder = path.join(UPLOADS, project.id);
     const job = { id, status: 'processing', aspect, createdAt: new Date().toISOString(), filename: id + '.mp4' };
     project.exports.unshift(job);
     save(projects);
     res.status(202).json({ project: publicProject(project) });
-    render(project, job, path.join(folder, project.media.fileName), path.join(folder, job.filename), plan.clips, aspect);
+    render(project, job, path.join(folder, project.media.fileName), path.join(folder, job.filename), plan.clips, aspect, subtitleValidation.subtitles, burnSubtitles);
   });
   app.post('/api/projects/:id/narration', (req,res) => {
     const p=findProject(req.params.id);

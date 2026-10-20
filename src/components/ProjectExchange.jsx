@@ -3,12 +3,12 @@ import { ArrowDownToLine, FileJson2, Upload } from 'lucide-react';
 import { createProjectFile, parseProjectFile } from '../project-format.js';
 import './project-exchange.css';
 
-export default function ProjectExchange({name,aspect,media,start,end,clips,script,scenes,voiceEngine='system',onImport,disabled=false}) {
+export default function ProjectExchange({name,aspect,media,start,end,clips,script,scenes,voiceEngine='system',subtitles=[],burnSubtitles=false,onImport,disabled=false}) {
   const input=useRef(null);
   const [status,setStatus]=useState('');
   const [importing,setImporting]=useState(false);
   function download() {
-    const project=createProjectFile({name,aspect,media,start,end,clips,script,scenes,voiceEngine});
+    const project=createProjectFile({name,aspect,media,start,end,clips,script,scenes,voiceEngine,subtitles,burnSubtitles});
     const blob=new Blob([JSON.stringify(project,null,2)+'\n'],{type:'application/json'});
     const url=URL.createObjectURL(blob);
     const link=document.createElement('a');
