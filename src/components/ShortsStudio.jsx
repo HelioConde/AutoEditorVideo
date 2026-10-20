@@ -14,8 +14,11 @@ export default function ShortsStudio({
 }) {
   const [showResults,setShowResults]=useState(false);
   const [profile,setProfile]=useState('podcast');
+  const [selectedKeys,setSelectedKeys]=useState(null);
+  const keyOf=c=>c.start+':'+c.end;
   const ranked=useMemo(()=>rankShortsFromTranscript(subtitles,{duration,maxClips:3,profile,signals:analysisSignals}),[subtitles,duration,profile,analysisSignals]);
   const candidates=ranked.candidates;
+  const approved=selectedKeys===null?candidates:candidates.filter(c=>selectedKeys.includes(keyOf(c)));
   return <section className="shorts-studio" aria-labelledby="shorts-studio-title">
     <div className="shorts-studio-head">
       <div><span className="section-kicker">AUTOMAÇÃO / PRIMEIRA VERSÃO</span>
@@ -36,7 +39,7 @@ export default function ShortsStudio({
         <>
           <div className="shorts-profile">
             <label htmlFor="shorts-profile">Tipo de conteúdo</label>
-            <select id="shorts-profile" disabled={disabled||analysisBusy} value={profile} onChange={e=>{setProfile(e.target.value);setShowResults(false);}}>
+            <select id="shorts-profile" disabled={disabled||analysisBusy} value={profile} onChange={e=>{setProfile(e.target.value);setShowResults(false);setSelectedKeys(null);}}>
               <option value="podcast">Podcast / Entrevista</option>
               <option value="gameplay">Gameplay / Live</option>
               <option value="tutorial">Tutorial / Aula</option>
@@ -47,6 +50,7 @@ export default function ShortsStudio({
               onClick={async()=>{
                 if(showResults){setShowResults(false);return;}
                 if(onAnalyze && !analysisSignals)await onAnalyze();
+                setSelectedKeys(null);
                 setShowResults(true);
               }}>
               <Sparkles size={18} aria-hidden="true"/>
@@ -62,6 +66,15 @@ export default function ShortsStudio({
           {showResults && candidates.length>0 && <>
             <div className="shorts-results" aria-label="Momentos sugeridos">
               {candidates.map(candidate=><article className="shorts-candidate" key={candidate.start+'-'+candidate.end}>
+                <label className="shorts-candidate-select">
+                  <input type="checkbox" checked={approved.some(c=>keyOf(c)===keyOf(candidate))}
+                    disabled={disabled} onChange={e=>{
+                      const all=selectedKeys===null?candidates.map(keyOf):selectedKeys;
+                      setSelectedKeys(e.target.checked ? [...all,keyOf(candidate)] :
+                        all.filter(key=>key!==keyOf(candidate)));
+                    }}/>
+                  Incluir Short #{candidate.rank} na exportação
+                </label>
                 <div className="shorts-candidate-top">
                   <strong>#{candidate.rank} · {stamp(candidate.start)}–{stamp(candidate.end)}</strong>
                   <span aria-label={'Pontuação de sinais: '+candidate.score+' em 100'}>{candidate.score}/100 sinais</span>
@@ -81,10 +94,11 @@ export default function ShortsStudio({
                 </div>
               </article>)}
             </div>
-            <button className="shorts-generate" type="button" disabled={disabled||!onGenerate}
-              onClick={()=>onGenerate(candidates,profile)}>
+            <p className="shorts-selected-summary" role="status">{approved.length} de {candidates.length} sugestões selecionadas.</p>
+            <button className="shorts-generate" type="button" disabled={disabled||!onGenerate||!approved.length}
+              onClick={()=>onGenerate(approved,profile)}>
               <WandSparkles size={19} aria-hidden="true"/>
-              Gerar {candidates.length} {candidates.length===1?'Short legendado':'Shorts legendados'}
+              Gerar {approved.length} {approved.length===1?'Short legendado':'Shorts legendados'}
             </button>
           </>}
         </>

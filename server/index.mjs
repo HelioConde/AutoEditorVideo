@@ -11,6 +11,7 @@ import { getVoiceCapabilities, resolveVoiceEngine, synthesizeVoice } from './tts
 import { validateSubtitles, toSrt, remapSubtitles } from '../src/subtitles.js';
 import { whisperCapability, transcribeLocalAudio } from './whisper.mjs';
 import { rankShortsFromTranscript } from '../src/shorts-ranking.js';
+import { selectApprovedShorts } from '../src/shorts-selection.js';
 import { analyzeLocalMedia } from './media-analysis.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -392,14 +393,16 @@ export function createApp() {
         duration:project.media.duration,maxClips:req.body?.count??3,profile,signals:features
       });
       if(ranked.error)return res.status(400).json({error:ranked.error});
-      const items=ranked.candidates.map(candidate=>({
+      const approved=selectApprovedShorts(ranked.candidates,req.body?.selectedRanges);
+      if(approved.error)return res.status(400).json({error:approved.error});
+      const items=approved.candidates.map(candidate=>({
         id:randomUUID(),status:'processing',kind:'short',aspect:'9:16',
         title:candidate.title,score:candidate.score,start:candidate.start,end:candidate.end,
         createdAt:new Date().toISOString(),filename:randomUUID()+'.mp4'
       }));
       project.exports.unshift(...items);
       save(projects);
-      res.status(202).json({project:publicProject(project),suggestions:ranked.candidates});
+      res.status(202).json({project:publicProject(project),suggestions:approved.candidates});
       void (async()=>{
         for(const job of items) {
           await render(project,job,
