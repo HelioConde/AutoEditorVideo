@@ -6,7 +6,7 @@ import './timeline.css';
 function pad(value) {
   const secs = Math.max(0, Number(value) || 0);
   const m = Math.floor(secs / 60).toString().padStart(2, '0');
-  const s = (secs % 60).toFixed(1).padStart(4, '0');
+  const s = (secs % 60).toFixed(2).padStart(5, '0');
   return m + ':' + s;
 }
 

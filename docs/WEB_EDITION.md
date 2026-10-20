@@ -68,3 +68,9 @@ Tema visual e transição são propriedades portáteis de cada cena no manifesto
 
 ## Legendas v2.5
 O GitHub Pages permite importar e editar arquivos `.srt`/`.vtt`, acompanhar a legenda durante a prévia e baixar o `.srt` final. Os dados são incluídos no projeto portátil JSON. O site **não transcreve áudio automaticamente** e não incorpora legendas ao MP4 pelo FFmpeg.wasm nesta versão. A opção desktop utiliza Whisper.cpp instalado no PC e pode gravar as legendas no vídeo.
+
+## Retomar edição e cortes de precisão (2.7 beta)
+
+Rascunho `localStorage` versionado v1: armazena apenas metadados de edição, não arquivos binários. Ao voltar à página, selecione o mesmo vídeo de origem (nome e duração) para reativar os cortes. Conteúdo armazenado é limitado e validado; quando o rascunho é inválido ou armazenamento fica indisponível, a edição funciona sem salvamento automático e recomenda exportar JSON. Ações **Limpar rascunho** e **Exportar projeto** permitem controle do usuário.
+
+A timeline apresenta uma janela de zoom **dos controles de corte**, mantendo as oito miniaturas de todo o vídeo. Botões de ajuste fino alteram 0,01s / 0,1s. **Editar trecho** carrega as marcas do item na sequência e **Salvar ajuste** modifica apenas o trecho selecionado. A exportação web continua limitada a cinco trechos e 20 segundos somados.

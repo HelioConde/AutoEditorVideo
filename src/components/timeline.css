@@ -26,3 +26,22 @@
 .filmstrip-queue-buttons button:disabled{opacity:.3}
 .filmstrip-web{background:#202b24}
 @media(max-width:550px){.filmstrip-editor{padding:14px 12px}.filmstrip-frames{height:76px}.filmstrip-button{flex:1}.filmstrip-queue-list li{gap:7px}.filmstrip-queue-buttons{margin-left:0;width:100%;justify-content:flex-end}}
+
+/* Precision timeline 2.7: accessible controls remain keyboard and touch operable. */
+.filmstrip-precision{display:flex;flex-wrap:wrap;gap:9px 12px;align-items:center;margin:16px 0 8px}
+.filmstrip-precision label{color:#d4e3c8;font-size:11px;font-weight:750}
+.filmstrip-precision select{min-height:44px;border-radius:8px;padding:8px 12px;background:#172a1d;border:1px solid #54735a;color:#e8f3dc;font-size:12px;max-width:100%}
+.filmstrip-precision-window{font-size:10px;color:#b6cbb4;font-variant-numeric:tabular-nums;margin-left:auto}
+.filmstrip-nudge{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
+.filmstrip-nudge>div{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:9px;border:1px solid #465d4a;border-radius:9px;background:#24352a}
+.filmstrip-nudge strong{font-size:11px;color:#d8e8cf;margin-right:auto;flex-basis:100%}
+.filmstrip-nudge button{border:1px solid #68836b;border-radius:7px;min-height:44px;min-width:60px;background:#344a37;color:#edf5e5;font-size:11px;font-weight:700;padding:7px}
+.filmstrip-nudge button:hover:not(:disabled){background:#456348}
+.filmstrip-edit-message{border-radius:8px;padding:12px;margin:10px 0;color:#d5f579;background:#324832;line-height:1.6;font-size:11px}
+.filmstrip-queue-list li.filmstrip-queue-editing{outline:2px solid #d5f579;outline-offset:0}
+.filmstrip-queue-buttons button[aria-label^="Editar trecho"]{min-height:40px;padding:7px 10px;color:#d5f579;font-size:11px;font-weight:750}
+@media(max-width:650px){
+  .filmstrip-nudge{grid-template-columns:1fr}
+  .filmstrip-nudge button{flex:1}
+  .filmstrip-precision-window{margin-left:0;flex-basis:100%}
+}

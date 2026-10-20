@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import VideoTimeline from './components/VideoTimeline.jsx';
 import WorkbenchNav from './components/WorkbenchNav.jsx';
+import { browserStorage, clearWebDraft, loadWebDraft, saveWebDraft } from './web-draft.js';
 import './editor-polish.css';
 import SubtitleStudio from './components/SubtitleStudio.jsx';
 import { normalizeClips } from './clip-utils.js';
@@ -34,26 +35,32 @@ function Stage({ number, title, completed, current }) {
 
 export default function WebApp() {
   const id = useId();
+  const [initialDraft] = useState(()=>loadWebDraft(browserStorage()));
+  const initialProject=initialDraft?.project;
+  const initialEdit=initialProject?.edit;
   const videoRef = useRef(null);
   const fileInput = useRef(null);
   const cancelRef = useRef(null);
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [duration, setDuration] = useState(0);
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(0);
-  const [clips, setClips] = useState([]);
-  const [script,setScript] = useState('');
-  const [scenes,setScenes] = useState([]);
-  const [subtitles,setSubtitles] = useState([]);
-  const [burnSubtitles,setBurnSubtitles] = useState(false);
+  const [start, setStart] = useState(initialEdit?.start ?? 0);
+  const [end, setEnd] = useState(initialEdit?.end ?? 0);
+  const [clips, setClips] = useState(initialEdit?.clips || []);
+  const [script,setScript] = useState(initialEdit?.script || '');
+  const [scenes,setScenes] = useState(initialEdit?.scenes || []);
+  const [subtitles,setSubtitles] = useState(initialEdit?.subtitles || []);
+  const [burnSubtitles,setBurnSubtitles] = useState(initialEdit?.burnSubtitles || false);
   const [previewTime,setPreviewTime] = useState(0);
-  const [voiceEngine,setVoiceEngine] = useState('system');
+  const [voiceEngine,setVoiceEngine] = useState(initialEdit?.voiceEngine || 'system');
   const [scenePictures,setScenePictures] = useState([]);
-  const [reference,setReference] = useState(null);
-  const [projectName,setProjectName] = useState('Meu projeto web');
+  const [reference,setReference] = useState(initialProject?.media || null);
+  const [projectName,setProjectName] = useState(initialProject?.name || 'Meu projeto web');
+  const [draftMessage,setDraftMessage] = useState(initialDraft ?
+    'Rascunho restaurado neste navegador. Selecione o vídeo original para recuperar os cortes.' :
+    'Rascunho local: alterações salvas automaticamente neste navegador.');
   const previewEndRef = useRef(null);
-  const [aspect, setAspect] = useState('9:16');
+  const [aspect, setAspect] = useState(initialProject?.aspect || '9:16');
   const [error, setError] = useState('');
   const [status, setStatus] = useState('');
   const [progress, setProgress] = useState(0);
@@ -74,6 +81,19 @@ export default function WebApp() {
   useEffect(() => {
     return () => { if (downloadUrl) URL.revokeObjectURL(downloadUrl); };
   }, [downloadUrl]);
+  useEffect(()=>{
+    if(busy)return;
+    const timer=window.setTimeout(()=>{
+      const success=saveWebDraft(browserStorage(),{
+        name:projectName,aspect,
+        media:reference || (file&&duration>0 ? {name:file.name,size:file.size,duration}:null),
+        start:Number(start)||0,end:Number(end)||0,clips,script,scenes,voiceEngine,subtitles,burnSubtitles
+      });
+      setDraftMessage(success ? 'Rascunho salvo neste navegador. Vídeo e imagens não são armazenados.' :
+        'Não foi possível salvar. Exporte o projeto em JSON para preservá-lo.');
+    },650);
+    return ()=>window.clearTimeout(timer);
+  },[file,duration,reference,projectName,aspect,start,end,clips,script,scenes,voiceEngine,subtitles,burnSubtitles,busy]);
 
   function clearResult() {
     setDownloadUrl(null);
@@ -175,6 +195,16 @@ export default function WebApp() {
     }
   }
 
+  function resetDraft() {
+    if(busy)return;
+    clearWebDraft(browserStorage());
+    setFile(null);setDuration(0);setStart(0);setEnd(0);setClips([]);
+    setScript('');setScenes([]);setSubtitles([]);setBurnSubtitles(false);setVoiceEngine('system');
+    setAspect('9:16');setReference(null);setScenePictures([]);setProjectName('Meu projeto web');
+    setError('');clearResult();
+    if(fileInput.current)fileInput.current.value='';
+    setDraftMessage('Rascunho apagado. Você pode começar um novo projeto.');
+  }
   async function importPortableProject(incoming) {
     if (busy) throw new Error('Conclua a exportação atual antes de importar.');
     const edit=incoming.edit;
@@ -289,6 +319,10 @@ export default function WebApp() {
                 </div>
                 <div className="web-privacy"><ShieldCheck size={23} aria-hidden="true"/><div><strong>Seus arquivos, seu controle.</strong><p>Vídeos são processados no navegador. O motor WebAssembly é baixado de um CDN; o arquivo de vídeo não é enviado ao CDN nem ao GitHub.</p></div></div>
               </div>
+            </div>
+            <div className="web-draft-bar" aria-label="Rascunho local do editor">
+              <div><strong>Projeto neste navegador</strong><p>{draftMessage}</p></div>
+              <button type="button" disabled={busy} onClick={resetDraft}>Limpar rascunho</button>
             </div>
             <div id="studio-captions" className="web-captions"><SubtitleStudio mode="web" subtitles={subtitles} onChange={setSubtitles}
               mediaDuration={duration} previewTime={previewTime} disabled={busy} /></div>
