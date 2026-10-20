@@ -11,6 +11,7 @@ import { getVoiceCapabilities, resolveVoiceEngine, synthesizeVoice } from './tts
 import { validateSubtitles, toSrt, remapSubtitles } from '../src/subtitles.js';
 import { whisperCapability, transcribeLocalAudio } from './whisper.mjs';
 import { rankShortsFromTranscript } from '../src/shorts-ranking.js';
+import { analyzeLocalMedia } from './media-analysis.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(process.env.DATA_DIR || path.join(HERE, '..', 'data'));
@@ -36,6 +37,20 @@ function load() {
 let projects = load();
 if (projects.some(p => p.exports.some(j => j.error === 'Processamento interrompido. Exporte novamente.'))) save(projects);
 const findProject = id => projects.find(p => p.id === id);
+// Lazily computed, bound to a specific imported local media file. No user
+// supplied metrics are trusted for server-side export or ranking.
+const analysisCache=new Map();
+function getLocalSignals(project) {
+  if(!project.media)throw new Error('Importe um vídeo para analisar.');
+  if(project.media.duration>600)throw new Error('Análise de áudio e imagem limitada a 10 minutos nesta versão.');
+  const previous=analysisCache.get(project.id);
+  if(previous?.filename===project.media.fileName)return previous.promise;
+  const source=path.join(UPLOADS,project.id,project.media.fileName);
+  const promise=analyzeLocalMedia({source,duration:project.media.duration,ffmpeg:FFmpeg});
+  analysisCache.set(project.id,{filename:project.media.fileName,promise});
+  promise.catch(()=>{if(analysisCache.get(project.id)?.promise===promise)analysisCache.delete(project.id);});
+  return promise;
+}
 function probe(file) {
   const result = spawnSync(FFprobe, ['-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=codec_type', '-show_entries', 'format=duration', '-of', 'json', file], { encoding: 'utf8', timeout: 25000, maxBuffer: 1024 * 1024 });
   if (result.error || result.status !== 0) throw new Error('Não foi possível ler o vídeo. Verifique se o FFprobe está instalado e se o arquivo é válido.');
@@ -345,6 +360,17 @@ export function createApp() {
     res.status(202).json({project:publicProject(project)});
     void transcribeProject(project);
   });
+  app.get('/api/projects/:id/signals', async (req,res) => {
+    const project=findProject(req.params.id);
+    if(!project)return res.status(404).json({error:'Projeto não encontrado.'});
+    if(!project.media)return res.status(400).json({error:'Importe um vídeo para analisar.'});
+    if(!toolAvailable(FFmpeg))return res.status(503).json({error:'FFmpeg não disponível.'});
+    if(project.media.duration>600)return res.status(400).json({error:'A análise audiovisual aceita até 10 minutos.'});
+    try{
+      const signals=await getLocalSignals(project);
+      return res.json({signals});
+    }catch(e){return res.status(422).json({error:e.message||'Falha na análise.'});}
+  });
   app.post('/api/projects/:id/shorts', (req,res) => {
     const project=findProject(req.params.id);
     if(!project)return res.status(404).json({error:'Projeto não encontrado.'});
@@ -354,26 +380,37 @@ export function createApp() {
       return res.status(409).json({error:'Aguarde a transcrição ou exportação em andamento.'});
     const subtitles=validateSubtitles(req.body?.subtitles??project.edit?.subtitles??[]);
     if(subtitles.error)return res.status(400).json({error:subtitles.error});
-    const ranked=rankShortsFromTranscript(subtitles.subtitles,{
-      duration:project.media.duration,maxClips:req.body?.count??3
-    });
-    if(ranked.error)return res.status(400).json({error:ranked.error});
-    const items=ranked.candidates.map(candidate=>({
-      id:randomUUID(),status:'processing',kind:'short',aspect:'9:16',
-      title:candidate.title,score:candidate.score,start:candidate.start,end:candidate.end,
-      createdAt:new Date().toISOString(),filename:randomUUID()+'.mp4'
-    }));
-    project.exports.unshift(...items);
-    save(projects);
-    res.status(202).json({project:publicProject(project),suggestions:ranked.candidates});
-    void (async()=>{
-      for(const job of items) {
-        await render(project,job,
-          path.join(UPLOADS,project.id,project.media.fileName),
-          path.join(UPLOADS,project.id,job.filename),
-          [{start:job.start,end:job.end}],'9:16',subtitles.subtitles,true);
-      }
-    })().catch(e=>console.error('Falha no lote de Shorts:',e.message));
+    const profile=req.body?.profile??'podcast';
+    if(!['podcast','gameplay','tutorial'].includes(profile))
+      return res.status(400).json({error:'Perfil de análise inválido.'});
+    const cached=analysisCache.get(project.id);
+    // If audio/video were not analyzed, preserve legacy text-only behavior.
+    const signals=cached?.filename===project.media.fileName ? cached : null;
+    const respond=async()=>{
+      const features=signals ? await signals.promise.catch(()=>null) : null;
+      const ranked=rankShortsFromTranscript(subtitles.subtitles,{
+        duration:project.media.duration,maxClips:req.body?.count??3,profile,signals:features
+      });
+      if(ranked.error)return res.status(400).json({error:ranked.error});
+      const items=ranked.candidates.map(candidate=>({
+        id:randomUUID(),status:'processing',kind:'short',aspect:'9:16',
+        title:candidate.title,score:candidate.score,start:candidate.start,end:candidate.end,
+        createdAt:new Date().toISOString(),filename:randomUUID()+'.mp4'
+      }));
+      project.exports.unshift(...items);
+      save(projects);
+      res.status(202).json({project:publicProject(project),suggestions:ranked.candidates});
+      void (async()=>{
+        for(const job of items) {
+          await render(project,job,
+            path.join(UPLOADS,project.id,project.media.fileName),
+            path.join(UPLOADS,project.id,job.filename),
+            [{start:job.start,end:job.end}],'9:16',subtitles.subtitles,true);
+        }
+      })().catch(e=>console.error('Falha no lote de Shorts:',e.message));
+    };
+    void respond().catch(e=>{if(!res.headersSent)res.status(500).json({error:'Falha na análise e criação do Short.'});});
+
   });
   app.post('/api/projects/:id/exports', (req, res) => {
     const project = findProject(req.params.id);

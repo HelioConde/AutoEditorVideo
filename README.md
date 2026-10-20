@@ -142,3 +142,7 @@ Essa organização reduz a carga visual e evita renderizar timelines e formulár
 ## Novo foco: Shorts automáticos (MVP)
 
 O desktop agora pode gerar Shorts verticais independentes, a partir dos destaques sugeridos na transcrição. É necessário transcrever localmente com Whisper.cpp ou importar SRT. Os destaques iniciais usam pontuação por padrões do texto (não inteligência multimodal ou garantia de viralização), são revisáveis e exportados individualmente com legenda incorporada. Saiba mais em [docs/AUTO_SHORTS_MVP.md](docs/AUTO_SHORTS_MVP.md).
+
+## Ranking multimodal local (fase experimental)
+
+O modo desktop oferece uma análise opcional por FFmpeg que combina o texto das legendas com **picos relativos de intensidade no áudio** e **mudanças de cena** amostradas em baixa resolução. O seletor de tipo de vídeo permite escolher podcast, gameplay ou tutorial. As evidências aparecem em cada sugestão; nenhum serviço externo recebe o vídeo. A análise atual aceita até 10 minutos de origem, não identifica emoções, vitórias ou eventos esportivos e ainda requer uma transcrição/SRT para propor cortes. Leia [docs/MULTIMODAL_RANKING.md](docs/MULTIMODAL_RANKING.md) para limitações e próximos passos.
