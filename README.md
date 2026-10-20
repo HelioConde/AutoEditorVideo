@@ -74,3 +74,9 @@ Para rodar localmente: `npm run dev:web` (http://127.0.0.1:5174). Para gerar: `n
 ## Executar no Windows
 
 Para edição desktop com servidor local, instale Node.js 22+, FFmpeg e FFprobe no PATH, execute `npm install` e `npm run dev`. Acesse http://127.0.0.1:5173.
+
+## Timeline visual e cortes múltiplos
+
+As duas versões exibem **miniaturas reais do vídeo** (geradas localmente pelo navegador), sliders acessíveis para os limites de corte, uma ação de prévia e uma sequência ordenada de até cinco cortes. Use **Adicionar à sequência** para montar uma lista; altere a ordem com as setas ou remova um trecho. Quando a lista está vazia, a exportação continua usando o recorte único; quando há itens, **somente os cortes da lista são unidos**.
+
+O desktop usa FFmpeg nativo e concat demuxer de segmentos reencodados com parâmetros idênticos; duração final máxima de 10 minutos. Na web, o FFmpeg.wasm processa e concatena até cinco trechos somando **20 segundos**. Ambos exigem recursos adequados ao tamanho do vídeo. Não há persistência da sequência entre sessões nesta primeira entrega.

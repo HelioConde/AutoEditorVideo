@@ -60,7 +60,13 @@ test('exportação WebAssembly real sem backend (opcional)', async ({ page }, te
     await page.goto('/');
     await page.locator('input[type=file]').setInputFiles(sample);
     await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeEnabled();
-    await page.getByRole('spinbutton', { name:'Fim (segundos)' }).fill('1');
+    await page.getByRole('spinbutton', { name:'Fim (segundos)' }).fill('0.5');
+    await expect(page.getByAltText('Quadro 1 do vídeo')).toBeVisible({timeout:15000});
+    await page.getByRole('button',{name:'Adicionar à sequência'}).click();
+    await page.getByRole('spinbutton',{name:'Início (segundos)'}).fill('0.9');
+    await page.getByRole('spinbutton',{name:'Fim (segundos)'}).fill('1.4');
+    await page.getByRole('button',{name:'Adicionar à sequência'}).click();
+    await expect(page.getByRole('button',{name:'Remover trecho 2'})).toBeVisible();
     await page.getByRole('button', { name: 'Exportar vídeo' }).click();
     await expect(page.getByRole('link', { name: /Baixar vídeo MP4/ })).toBeVisible({ timeout: 180_000 });
     const [download] = await Promise.all([

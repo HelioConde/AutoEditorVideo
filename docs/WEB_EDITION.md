@@ -52,3 +52,7 @@ Opcional: com FFmpeg do sistema e internet disponíveis, `WEB_WASM_INTEGRATION=1
 2. Adicionar marcação de cortes em timeline real, miniaturas de quadros e download de legendas.
 3. Investigar PWA/offline com hospedagem apropriada dos assets grandes.
 4. Oferecer processamento remoto **apenas** em produto com backend autenticado e custo conhecido.
+
+## Timeline e sequência
+
+A edição web exibe 8 miniaturas reais extraídas no navegador, permite pré-visualizar o trecho e adicionar até cinco cortes. O arquivo final contém apenas os cortes adicionados, concatenados pela ordem escolhida, com duração acumulada de **até 20 segundos**. O motor WebAssembly renderiza os cortes individualmente, normaliza codecs e os une; esse modo usa mais memória e CPU do que a exportação de um único trecho. Limites do arquivo original permanecem 30 MB e 2 min.
