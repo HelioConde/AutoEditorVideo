@@ -54,3 +54,6 @@ Implementação compartilhada: `src/components/VideoTimeline.jsx` e `src/compone
 
 ## Storyboard 2.4
 Previews visuais por cena devem ser identificadas como cartões de composição (não fotografia gerada por IA). Manter label, select e file input associados; fotos são opt-in e nunca enviadas ao Pages. A disponibilidade do Piper e do motor do sistema aparece separadamente na UI; não prometer que a prévia Web Speech reproduz exatamente a voz neural da exportação. O recurso de fade respeita o fluxo de montagem e permite corte direto para ritmo mais rápido.
+
+## Editor de legendas
+`src/components/SubtitleStudio.jsx` expõe importação/exportação de arquivos com botões acessíveis, campos numéricos por cue e validação visível de limites/sobreposição. A prévia de vídeo utiliza overlay com `pointer-events:none`; legendas completas continuam no formulário editável. Não usar IA remota, não enviar texto ou mídia ao Pages. Nunca prometer burn-in na web antes de existir implementação testada.

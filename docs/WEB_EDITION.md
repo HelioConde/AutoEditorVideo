@@ -65,3 +65,6 @@ O novo modo de roteiro cria e edita até seis cenas. A prévia de voz usa `windo
 
 ## Novidades visuais (2.4 beta)
 Tema visual e transição são propriedades portáteis de cada cena no manifesto v1. O editor aceita imagens de fundo até 2 MB, apenas para prévia local no site. **O site ainda não exporta vídeos narrados**, nem inclui fotos binárias no arquivo portátil. No desktop, a mesma imagem serve à composição dos slides narrados com FFmpeg. Alternativas: fade para preto entre cenas ou corte direto.
+
+## Legendas v2.5
+O GitHub Pages permite importar e editar arquivos `.srt`/`.vtt`, acompanhar a legenda durante a prévia e baixar o `.srt` final. Os dados são incluídos no projeto portátil JSON. O site **não transcreve áudio automaticamente** e não incorpora legendas ao MP4 pelo FFmpeg.wasm nesta versão. A opção desktop utiliza Whisper.cpp instalado no PC e pode gravar as legendas no vídeo.

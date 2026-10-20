@@ -163,3 +163,36 @@ test('cenas permitem selecionar Piper e fundo de foto para a exportação local'
   await page.getByRole('radio',{name:/Voz do sistema/}).check();
   await expect(page.getByRole('button',{name:'Exportar projeto'})).toBeEnabled();
 });
+
+test('Whisper mock gera legendas SRT e FFmpeg as incorpora ao MP4',async({page})=>{
+  test.setTimeout(125000);
+  const health=await(await page.request.get('/api/health')).json();
+  test.skip(!health.ffmpeg||!health.whisper,'Whisper mock e FFmpeg ausentes');
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'autoeditor-subs-'));
+  const video=path.join(dir,'audio.mp4');
+  try{
+    execFileSync('ffmpeg',['-hide_banner','-loglevel','error','-f','lavfi','-i','color=c=navy:s=320x180:r=15',
+      '-f','lavfi','-i','sine=frequency=320:sample_rate=16000','-t','2.2',
+      '-c:v','libx264','-pix_fmt','yuv420p','-c:a','aac','-shortest','-y',video],{timeout:30000});
+    await page.goto('/');
+    await page.locator('.topbar').getByRole('button',{name:/Novo projeto/}).click();
+    await page.getByRole('textbox',{name:'Nome do projeto'}).fill('Legendas offline');
+    await page.getByRole('dialog').getByRole('button',{name:'Criar projeto',exact:true}).click();
+    await page.locator('#media-file').setInputFiles(video);
+    await page.getByRole('button',{name:'Transcrever áudio'}).click();
+    await expect(page.getByRole('textbox',{name:'Texto da legenda'})).toHaveValue(
+      'Legenda de teste gerada localmente.',{timeout:30000});
+    await page.getByRole('checkbox',{name:/Gravar legendas no MP4/}).check();
+    await page.getByRole('button',{name:'Exportar vídeo'}).click();
+    await expect(page.getByText('Exportação concluída')).toBeVisible({timeout:90000});
+    const link=page.getByRole('link',{name:'Baixar vídeo exportado'}).first();
+    const response=await page.request.get(await link.getAttribute('href'));
+    expect(response.status()).toBe(200);
+    const output=path.join(dir,'baked.mp4');
+    fs.writeFileSync(output,await response.body());
+    expect(fs.statSync(output).size).toBeGreaterThan(3000);
+    const streams=execFileSync('ffprobe',['-v','error','-show_entries','stream=codec_type',
+      '-of','csv=p=0',output],{encoding:'utf8'});
+    expect(streams).toContain('video');
+  }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
