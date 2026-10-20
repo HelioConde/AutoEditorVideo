@@ -11,7 +11,9 @@ test('editor web possui conteúdo real sem chamada à API desktop', async ({ pag
   await expect(page.getByRole('heading', { name: /Edite seu vídeo/ })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Área de edição' })).toBeVisible();
   await expect(page.getByText('Privado por padrão')).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Exportar', exact:true })).toBeDisabled();
+  await expect(page.locator('#studio-cuts')).toHaveCount(0);
+  await expect(page.getByRole('button',{name:'Importar vídeo'})).toHaveAttribute('aria-current','step');
   expect(localCalls).toEqual([]);
   await page.screenshot({ path: testInfo.outputPath('web-inicial.png'), fullPage: true, animations: 'disabled' });
 });
@@ -30,7 +32,7 @@ test('rejeita arquivo inválido antes do upload e aceita mídia local', async ({
   await page.goto('/');
   await page.locator('input[type=file][accept*=\"video/mp4\"]').setInputFiles({ name:'notas.txt', mimeType:'text/plain', buffer:Buffer.from('teste') });
   await expect(page.getByRole('alert')).toContainText('MP4 ou WebM');
-  await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Exportar', exact:true })).toBeDisabled();
 
   const folder = fs.mkdtempSync(path.join(os.tmpdir(), 'autoeditor-web-test-'));
   const sample = path.join(folder, 'sample.mp4');
@@ -38,11 +40,12 @@ test('rejeita arquivo inválido antes do upload e aceita mídia local', async ({
     execFileSync('ffmpeg', ['-hide_banner','-loglevel','error','-f','lavfi','-i','color=c=blue:s=320x180:r=15','-t','2','-c:v','libx264','-pix_fmt','yuv420p','-y',sample], { timeout: 30000 });
     await page.locator('input[type=file][accept*=\"video/mp4\"]').setInputFiles(sample);
     await expect(page.getByText('sample.mp4')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeEnabled({timeout: 15000});
+    await expect(page.getByRole('button', { name: 'Continuar para exportação' })).toBeEnabled({timeout: 15000});
     await page.getByRole('spinbutton', { name:'Fim (segundos)' }).fill('0.1');
     await expect(page.getByRole('alert')).toContainText('pelo menos 0,25 segundo');
-    await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeDisabled();
+    await expect(page.getByRole('alert')).toContainText('pelo menos 0,25 segundo');
     await page.getByRole('spinbutton', { name:'Fim (segundos)' }).fill('1');
+    await page.getByRole('button',{name:'Continuar para exportação'}).click();
     await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeEnabled();
   } finally {
     fs.rmSync(folder, { recursive: true, force: true });
@@ -59,7 +62,7 @@ test('exportação WebAssembly real sem backend (opcional)', async ({ page }, te
     execFileSync('ffmpeg', ['-hide_banner','-loglevel','error','-f','lavfi','-i','color=c=green:s=160x90:r=12','-t','1.5','-c:v','libx264','-pix_fmt','yuv420p','-y',sample], { timeout: 30000 });
     await page.goto('/');
     await page.locator('input[type=file][accept*=\"video/mp4\"]').setInputFiles(sample);
-    await expect(page.getByRole('button', { name: 'Exportar vídeo' })).toBeEnabled();
+    await expect(page.getByRole('button', { name: 'Continuar para exportação' })).toBeEnabled();
     await page.getByRole('spinbutton', { name:'Fim (segundos)' }).fill('0.5');
     await expect(page.getByAltText('Quadro 1 do vídeo')).toBeVisible({timeout:15000});
     await page.getByRole('button',{name:'Adicionar à sequência'}).click();
@@ -67,6 +70,7 @@ test('exportação WebAssembly real sem backend (opcional)', async ({ page }, te
     await page.getByRole('spinbutton',{name:'Fim (segundos)'}).fill('1.4');
     await page.getByRole('button',{name:'Adicionar à sequência'}).click();
     await expect(page.getByRole('button',{name:'Remover trecho 2'})).toBeVisible();
+    await page.getByRole('button',{name:'Continuar para exportação'}).click();
     await page.getByRole('button', { name: 'Exportar vídeo' }).click();
     await expect(page.getByRole('link', { name: /Baixar vídeo MP4/ })).toBeVisible({ timeout: 180_000 });
     const [download] = await Promise.all([
@@ -82,11 +86,14 @@ test('roteiro e manifesto podem ser transferidos sem API ou vídeo',async({page}
     edit:{start:0,end:0,clips:[],script:'Uma breve história sobre viagem.',
       scenes:[{title:'Cena de abertura',text:'Uma breve história sobre viagem.',duration:5}]}};
   await page.goto('/');
+  await page.getByRole('button',{name:'Abrir projeto salvo'}).click();
   await page.getByRole('button',{name:'Importar projeto'}).click();
   await page.locator('#project-json-input').setInputFiles({
     name:'historia.autoeditor.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(project))});
+  await page.getByRole('button',{name:/^Roteiro/}).click();
   await expect(page.getByRole('textbox',{name:'Roteiro'})).toHaveValue('Uma breve história sobre viagem.');
   await expect(page.getByRole('textbox',{name:'Título da cena'})).toHaveValue('Cena de abertura');
+  await page.getByRole('button',{name:/^Meu projeto/}).click();
   await expect(page.getByRole('button',{name:'Exportar projeto'})).toBeEnabled();
   const [download] = await Promise.all([
     page.waitForEvent('download'),page.getByRole('button',{name:'Exportar projeto'}).click()]);
@@ -99,6 +106,7 @@ test('roteiro e manifesto podem ser transferidos sem API ou vídeo',async({page}
 
 test('cenas mantêm tema e transição e aceitam imagem local sem transferi-la no manifesto',async({page})=>{
   await page.goto('/');
+  await page.getByRole('button',{name:'Criar pelo roteiro'}).click();
   await page.getByRole('textbox',{name:'Roteiro'}).fill('Nossa viagem pelo oceano ao pôr do sol.');
   await page.getByRole('button',{name:'Organizar cenas'}).click();
   await page.getByRole('combobox',{name:'Tema visual'}).selectOption('ocean');
@@ -107,6 +115,7 @@ test('cenas mantêm tema e transição e aceitam imagem local sem transferi-la n
   const image=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/sXcAAAAASUVORK5CYII=','base64');
   await page.locator('#scene-picture-0').setInputFiles({name:'fundo.png',mimeType:'image/png',buffer:image});
   await expect(page.getByRole('status').filter({hasText:'Imagem aplicada'})).toBeVisible();
+  await page.getByRole('button',{name:/^Meu projeto/}).click();
   const [download]=await Promise.all([
     page.waitForEvent('download'),
     page.getByRole('button',{name:'Exportar projeto'}).click()
@@ -120,6 +129,7 @@ test('cenas mantêm tema e transição e aceitam imagem local sem transferi-la n
 
 test('legendas SRT são editáveis e preservadas no projeto web',async({page})=>{
   await page.goto('/');
+  await page.getByRole('button',{name:/^Legendas/}).click();
   const input=page.locator('.sub-studio input[type=file]');
   await input.setInputFiles({name:'legendas.srt',mimeType:'text/plain',
     buffer:Buffer.from('1\n00:00:00,200 --> 00:00:01,500\nOlá, vídeo!\n','utf8')});
@@ -129,6 +139,7 @@ test('legendas SRT são editáveis e preservadas no projeto web',async({page})=>
     page.getByRole('button',{name:'Baixar SRT'}).click()
   ]);
   expect(download.suggestedFilename()).toBe('autoeditor-legendas.srt');
+  await page.getByRole('button',{name:/^Meu projeto/}).click();
   const [projectDownload]=await Promise.all([
     page.waitForEvent('download'),
     page.getByRole('button',{name:'Exportar projeto'}).click()
