@@ -7,6 +7,7 @@ import { validateSubtitles } from './subtitles.js';
 import { normalizeClips } from './clip-utils.js';
 import ProjectExchange from './components/ProjectExchange.jsx';
 import StoryStudio from './components/StoryStudio.jsx';
+import ShortsStudio from './components/ShortsStudio.jsx';
 import { createProjectFile } from './project-format.js';
 import { createSceneImages } from './scene-canvas.js';
 import {
@@ -240,6 +241,23 @@ export default function App() {
       notice('Transcrição iniciada no seu computador. Revise os textos antes de exportar.');
     }catch(e){notice(e.message,'error');}
   }
+  function useShort(candidate) {
+    setClips([{start:candidate.start,end:candidate.end}]);
+    setStart(candidate.start);setEnd(candidate.end);
+    setAspect('9:16');setBurnSubtitles(true);
+    notice('Trecho adicionado à timeline em 9:16. Revise o corte e exporte quando quiser.');
+    document.getElementById('studio-cuts')?.scrollIntoView({block:'start',behavior:'smooth'});
+  }
+  async function generateShorts(candidates) {
+    if(!current?.media||!candidates?.length||busy||processing)return;
+    setBusy(true);
+    try {
+      const result=await api('/projects/'+current.id+'/shorts',json({count:candidates.length,subtitles}));
+      setProjects(previous=>previous.map(p=>p.id===result.project.id?result.project:p));
+      notice(result.suggestions.length+' Shorts legendados iniciados. Acompanhe na seção Exportações.');
+    }catch(e){notice(e.message,'error');}
+    finally{setBusy(false);}
+  }
   async function renderNarratedVideo(sceneList) {
     if (!current || narrating) return;
     setNarrating(true);
@@ -302,6 +320,14 @@ export default function App() {
                   {subtitles.some(c=>previewTime>=c.start&&previewTime<c.end)&&
                     <div className="video-caption-overlay" aria-hidden="true">{subtitles.find(c=>previewTime>=c.start&&previewTime<c.end)?.text}</div>}
                   </div> : <EmptyPreview />}</div>
+              <ShortsStudio subtitles={subtitles} duration={current.media?.duration||0}
+                mediaReady={Boolean(current.media)}
+                whisperAvailable={Boolean(health?.whisper)}
+                transcribing={current.transcription?.status==='processing'}
+                disabled={busy||processing||uploading}
+                onTranscribe={requestTranscription}
+                onPreview={previewSegment}
+                onUse={useShort} onGenerate={generateShorts}/>
               <div id="studio-cuts" className="panel trim-panel"><div className="panel-title"><span><Scissors size={18} aria-hidden="true"/> Definir trecho</span><span className="panel-subtitle">Selecione os quadros e organize cortes</span></div><VideoTimeline source={current.media ? '/api/projects/' + current.id + '/media' : null}
                   duration={current.media?.duration || 0} start={start} end={end}
                   onStartChange={setStart} onEndChange={setEnd} clips={clips} onClipsChange={setClips}
@@ -309,7 +335,7 @@ export default function App() {
               <div id="studio-captions" className="subtitle-workspace">
                 <SubtitleStudio mode="desktop" subtitles={subtitles} onChange={setSubtitles}
                   mediaDuration={current.media?.duration||0} previewTime={previewTime}
-                  disabled={busy||current.transcription?.status==='processing'} transcribing={current.transcription?.status==='processing'}
+                  disabled={busy||uploading||current.transcription?.status==='processing'} transcribing={current.transcription?.status==='processing'}
                   whisperAvailable={Boolean(health?.whisper)} onTranscribe={requestTranscription}/>
                 <label className="sub-burn"><input type="checkbox" checked={burnSubtitles}
                   disabled={!current.media||busy} onChange={e=>setBurnSubtitles(e.target.checked)}/>
@@ -324,7 +350,7 @@ export default function App() {
               <ProjectExchange name={current.name} aspect={aspect} media={current.media||current.reference}
                 start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine} subtitles={subtitles} burnSubtitles={burnSubtitles}
                 onImport={importPortableProject} disabled={busy||narrating} />
-              {exportList.length > 0 && <div className="panel exports-panel"><div className="panel-title"><span><ArrowDownToLine size={18}/> Exportações</span><span className="panel-subtitle">{exportList.length} arquivo(s)</span></div><ul className="export-list">{exportList.map(job=><li key={job.id}><span className="export-status-icon">{job.status==='ready'?<CheckCircle2 size={19}/>:job.status==='processing'?<LoaderCircle className="spin" size={19}/>:<CircleAlert size={19}/>}</span><div><strong>{job.kind==='narration'?'Vídeo narrado':job.aspect==='9:16'?'Vídeo vertical':'Vídeo horizontal'}</strong><small>{job.status==='ready'?'Exportação concluída':job.status==='processing'?'Processando vídeo…':job.error || 'Exportação interrompida'}</small></div>{job.status==='ready'&&<a className="export-download" href={'/api/projects/'+current.id+'/exports/'+job.id+'/download'} download aria-label="Baixar vídeo exportado"><ArrowDownToLine size={17}/></a>}</li>)}</ul></div>}
+              {exportList.length > 0 && <div className="panel exports-panel"><div className="panel-title"><span><ArrowDownToLine size={18}/> Exportações</span><span className="panel-subtitle">{exportList.length} arquivo(s)</span></div><ul className="export-list">{exportList.map(job=><li key={job.id}><span className="export-status-icon">{job.status==='ready'?<CheckCircle2 size={19}/>:job.status==='processing'?<LoaderCircle className="spin" size={19}/>:<CircleAlert size={19}/>}</span><div><strong>{job.kind==='narration'?'Vídeo narrado':job.kind==='short'?'Short automático':job.aspect==='9:16'?'Vídeo vertical':'Vídeo horizontal'}</strong><small>{job.status==='ready'?'Exportação concluída':job.status==='processing'?'Processando vídeo…':job.error || 'Exportação interrompida'}{job.kind==='short'&&job.title?' · '+job.title.slice(0,55):''}</small></div>{job.status==='ready'&&<a className="export-download" href={'/api/projects/'+current.id+'/exports/'+job.id+'/download'} download aria-label="Baixar vídeo exportado"><ArrowDownToLine size={17}/></a>}</li>)}</ul></div>}
             </div>
             <div className="editor-secondary"><div className="panel workflow-panel"><div className="panel-title"><span><Clapperboard size={18}/> Seu fluxo</span></div><div className="steps"><Step number={1} title="Importar vídeo" description="MP4, MOV, WebM ou MKV" complete={Boolean(current.media)} active={!current.media}/><Step number={2} title="Selecionar trecho" description="Ajuste a timeline ou monte uma sequência" complete={Boolean(current.media && Number(end)>Number(start))} active={Boolean(current.media)}/><Step number={3} title="Exportar" description="Renderize em MP4" active={Boolean(current.media)}/></div></div>
               <div className="panel upload-panel"><div className="panel-title"><span><UploadCloud size={18}/> Arquivo de origem</span></div><input id="media-file" className="visually-hidden" ref={inputRef} type="file" accept=".mp4,.mov,.webm,.mkv,video/*" onChange={e=>upload(e.target.files?.[0])} disabled={uploading}/><label className={'upload-target ' + (uploading?'uploading':'')} htmlFor="media-file"><span className="upload-icon">{uploading?<LoaderCircle className="spin" size={23}/>:<UploadCloud size={25}/>}</span><strong>{uploading?'Importando arquivo…':current.media?'Substituir gravação':'Escolher vídeo'}</strong><small>Até 512 MB · formato de vídeo</small></label>{current.media && <div className="file-detail"><FileVideo2 size={19} /><div><strong title={current.media.originalName}>{current.media.originalName}</strong><small>{formatSize(current.media.size)} · {formatTime(current.media.duration)}</small></div><CheckCircle2 size={17} className="file-check"/></div>}</div>
