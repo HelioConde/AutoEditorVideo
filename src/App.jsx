@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import VideoTimeline from './components/VideoTimeline.jsx';
 import { normalizeClips } from './clip-utils.js';
+import ProjectExchange from './components/ProjectExchange.jsx';
+import StoryStudio from './components/StoryStudio.jsx';
+import { createProjectFile } from './project-format.js';
+import { createSceneImages } from './scene-canvas.js';
 import {
   ArrowDownToLine, ArrowLeft, ArrowRight, Check, CheckCircle2, ChevronRight,
   CircleAlert, Clock3, Clapperboard, FileVideo2, Film, FolderClosed,
@@ -89,6 +93,9 @@ export default function App() {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0);
   const [clips, setClips] = useState([]);
+  const [script, setScript] = useState('');
+  const [scenes, setScenes] = useState([]);
+  const [narrating, setNarrating] = useState(false);
   const playbackEnd = useRef(null);
   const playerVideoRef = useRef(null);
   const [aspect, setAspect] = useState('9:16');
@@ -116,11 +123,27 @@ export default function App() {
     return () => window.clearInterval(timer);
   }, [processing]);
   useEffect(() => {
-    setStart(0);
-    setEnd(Number(current?.media?.duration || 0).toFixed(1) * 1);
-    setClips([]);
+    // Hydrate portable edits when entering a project or replacing its media.
+    const edit=current?.edit;
+    setStart(edit?.start ?? 0);
+    setEnd(edit?.end ?? (Number(current?.media?.duration) || 0));
+    setClips(edit?.clips || []);
+    setAspect(edit?.aspect || '9:16');
+    setScript(edit?.script || '');
+    setScenes(edit?.scenes || []);
     playbackEnd.current = null;
-  }, [current?.media?.id]);
+  }, [currentId, current?.media?.id]);
+  useEffect(() => {
+    if (!currentId || !current) return;
+    const timer=window.setTimeout(async()=>{
+      const payload=createProjectFile({name:current.name,aspect,media:current.media||current.reference,
+        start:Number(start)||0,end:Number(end)||0,clips,script,scenes});
+      try { await api('/projects/'+currentId+'/edit',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}); }
+      catch(e){ console.warn('Não foi possível salvar a edição:',e.message); }
+    },1000);
+    return ()=>window.clearTimeout(timer);
+  }, [currentId, current?.media?.id, aspect, start, end, clips, script, scenes]);
+
   useEffect(() => { document.title = (page === 'editor' ? 'Editor' : 'Painel') + ' · AutoEditor Studio'; }, [page]);
   function openProject(id) { setCurrentId(id); setPage('editor'); setSidebarOpen(false); window.scrollTo(0,0); }
   function showHome() { setPage('home'); setSidebarOpen(false); }
@@ -171,6 +194,25 @@ export default function App() {
       notice('Exportação iniciada. Você pode continuar no estúdio.');
     } catch (e) { notice(e.message, 'error'); }
     finally { setBusy(false); }
+  }
+  async function importPortableProject(data) {
+    const manifest=createProjectFile({name:data.name,aspect:data.aspect,media:data.media,
+      start:data.edit.start,end:data.edit.end,clips:data.edit.clips,script:data.edit.script,scenes:data.edit.scenes});
+    const result=await api('/projects/import',json(manifest));
+    setProjects(previous=>[result.project,...previous]);
+    openProject(result.project.id);
+    notice('Projeto importado. Reimporte a mídia original para ativar os cortes.');
+  }
+  async function renderNarratedVideo(sceneList) {
+    if (!current || narrating) return;
+    setNarrating(true);
+    try {
+      const images=createSceneImages(sceneList,aspect);
+      const result=await api('/projects/'+current.id+'/narration',json({scenes:sceneList,images,aspect}));
+      setProjects(prev=>prev.map(p=>p.id===result.project.id?result.project:p));
+      notice('Vídeo narrado iniciado. Acompanhe em Exportações.');
+    } catch(e) { notice(e.message,'error'); }
+    finally {setNarrating(false);}
   }
   const exportList = current?.exports || [];
   const exportPlan = normalizeClips({ segments: clips.length ? clips : undefined, start, end, duration: current?.media?.duration || 0, maxTotal: 600 });
@@ -223,7 +265,13 @@ export default function App() {
                   duration={current.media?.duration || 0} start={start} end={end}
                   onStartChange={setStart} onEndChange={setEnd} clips={clips} onClipsChange={setClips}
                   onPreview={previewSegment} disabled={!current.media || busy} maxTotal={600} variant="desktop" /><div className="trim-fields"><label>Início <span>(segundos)</span><input type="number" aria-label="Início em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={start} onChange={e=>setStart(e.target.value)} /></label><label>Fim <span>(segundos)</span><input type="number" aria-label="Fim em segundos" min="0" step=".1" max={current.media?.duration || 0} disabled={!current.media} value={end} onChange={e=>setEnd(e.target.value)} /></label><div className="duration-pill"><Clock3 size={15}/> {formatTime(Number(end)-Number(start))}</div></div>{current.media && Number(end) <= Number(start) && <p className="field-error" role="alert">O fim deve ser maior que o início.</p>}</div>
-              {exportList.length > 0 && <div className="panel exports-panel"><div className="panel-title"><span><ArrowDownToLine size={18}/> Exportações</span><span className="panel-subtitle">{exportList.length} arquivo(s)</span></div><ul className="export-list">{exportList.map(job=><li key={job.id}><span className="export-status-icon">{job.status==='ready'?<CheckCircle2 size={19}/>:job.status==='processing'?<LoaderCircle className="spin" size={19}/>:<CircleAlert size={19}/>}</span><div><strong>{job.aspect==='9:16'?'Vídeo vertical':'Vídeo horizontal'}</strong><small>{job.status==='ready'?'Exportação concluída':job.status==='processing'?'Processando vídeo…':job.error || 'Exportação interrompida'}</small></div>{job.status==='ready'&&<a className="export-download" href={'/api/projects/'+current.id+'/exports/'+job.id+'/download'} download aria-label="Baixar vídeo exportado"><ArrowDownToLine size={17}/></a>}</li>)}</ul></div>}
+              <StoryStudio mode="desktop" script={script} scenes={scenes} aspect={aspect}
+                onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}}
+                onRender={renderNarratedVideo} renderBusy={narrating} />
+              <ProjectExchange name={current.name} aspect={aspect} media={current.media||current.reference}
+                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes}
+                onImport={importPortableProject} disabled={busy||narrating} />
+              {exportList.length > 0 && <div className="panel exports-panel"><div className="panel-title"><span><ArrowDownToLine size={18}/> Exportações</span><span className="panel-subtitle">{exportList.length} arquivo(s)</span></div><ul className="export-list">{exportList.map(job=><li key={job.id}><span className="export-status-icon">{job.status==='ready'?<CheckCircle2 size={19}/>:job.status==='processing'?<LoaderCircle className="spin" size={19}/>:<CircleAlert size={19}/>}</span><div><strong>{job.kind==='narration'?'Vídeo narrado':job.aspect==='9:16'?'Vídeo vertical':'Vídeo horizontal'}</strong><small>{job.status==='ready'?'Exportação concluída':job.status==='processing'?'Processando vídeo…':job.error || 'Exportação interrompida'}</small></div>{job.status==='ready'&&<a className="export-download" href={'/api/projects/'+current.id+'/exports/'+job.id+'/download'} download aria-label="Baixar vídeo exportado"><ArrowDownToLine size={17}/></a>}</li>)}</ul></div>}
             </div>
             <div className="editor-secondary"><div className="panel workflow-panel"><div className="panel-title"><span><Clapperboard size={18}/> Seu fluxo</span></div><div className="steps"><Step number={1} title="Importar vídeo" description="MP4, MOV, WebM ou MKV" complete={Boolean(current.media)} active={!current.media}/><Step number={2} title="Selecionar trecho" description="Ajuste a timeline ou monte uma sequência" complete={Boolean(current.media && Number(end)>Number(start))} active={Boolean(current.media)}/><Step number={3} title="Exportar" description="Renderize em MP4" active={Boolean(current.media)}/></div></div>
               <div className="panel upload-panel"><div className="panel-title"><span><UploadCloud size={18}/> Arquivo de origem</span></div><input id="media-file" className="visually-hidden" ref={inputRef} type="file" accept=".mp4,.mov,.webm,.mkv,video/*" onChange={e=>upload(e.target.files?.[0])} disabled={uploading}/><label className={'upload-target ' + (uploading?'uploading':'')} htmlFor="media-file"><span className="upload-icon">{uploading?<LoaderCircle className="spin" size={23}/>:<UploadCloud size={25}/>}</span><strong>{uploading?'Importando arquivo…':current.media?'Substituir gravação':'Escolher vídeo'}</strong><small>Até 512 MB · formato de vídeo</small></label>{current.media && <div className="file-detail"><FileVideo2 size={19} /><div><strong title={current.media.originalName}>{current.media.originalName}</strong><small>{formatSize(current.media.size)} · {formatTime(current.media.duration)}</small></div><CheckCircle2 size={17} className="file-check"/></div>}</div>

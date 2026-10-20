@@ -1,0 +1,12 @@
+.project-exchange{background:#213028;border:1px solid #3b563f;border-radius:12px;padding:16px;display:grid;gap:13px}
+.project-exchange-copy{display:grid;gap:7px}
+.project-exchange-copy strong{font-size:12px;display:flex;align-items:center;gap:8px;color:#e6f1df}
+.project-exchange-copy strong svg{color:#d5f579}
+.project-exchange-copy span{font-size:11px;line-height:1.65;color:#a8bea9}
+.project-exchange-actions{display:flex;gap:8px;flex-wrap:wrap}
+.exchange-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#314736;border:1px solid #627d5f;color:#e2f5d3;font-size:11px;font-weight:750;padding:10px 12px;border-radius:8px;min-height:42px;cursor:pointer}
+.exchange-btn:hover:not(:disabled){background:#435c42}
+.exchange-import:focus-within{outline:2px solid #d5f579;outline-offset:3px}
+.exchange-btn:disabled{opacity:.5}
+.exchange-notice{color:#d7eabf;background:#2b402e;border-radius:7px;font-size:11px;padding:9px;margin:0;line-height:1.6}
+@media(max-width:550px){.exchange-btn{flex:1}}

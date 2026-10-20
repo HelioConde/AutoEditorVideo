@@ -1,6 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import VideoTimeline from './components/VideoTimeline.jsx';
 import { normalizeClips } from './clip-utils.js';
+import ProjectExchange from './components/ProjectExchange.jsx';
+import StoryStudio from './components/StoryStudio.jsx';
 import {
   ArrowDownToLine, ArrowRight, BadgeCheck, Check, ChevronRight, Clapperboard,
   Clock3, FileVideo2, Film, Globe2, HardDrive, Info, LoaderCircle,
@@ -38,6 +40,10 @@ export default function WebApp() {
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0);
   const [clips, setClips] = useState([]);
+  const [script,setScript] = useState('');
+  const [scenes,setScenes] = useState([]);
+  const [reference,setReference] = useState(null);
+  const [projectName,setProjectName] = useState('Meu projeto web');
   const previewEndRef = useRef(null);
   const [aspect, setAspect] = useState('9:16');
   const [error, setError] = useState('');
@@ -71,13 +77,16 @@ export default function WebApp() {
   function selectFile(selected) {
     if (!selected || busy) return;
     const issue = validateBrowserVideo(selected);
+    if (reference && reference.name !== selected.name) {
+      setError('Este projeto usa o vídeo '+reference.name+'. Selecione esse mesmo arquivo para recuperar os cortes.');
+      if(fileInput.current)fileInput.current.value='';
+      return;
+    }
     if (issue) { setError(issue); if (fileInput.current) fileInput.current.value = ''; return; }
     setError('');
     clearResult();
     setDuration(0);
-    setStart(0);
-    setEnd(0);
-    setClips([]);
+    if (!reference) {setStart(0);setEnd(0);setClips([]);}
     setFile(selected);
   }
 
@@ -94,8 +103,13 @@ export default function WebApp() {
       return;
     }
     setDuration(value);
-    setStart(0);
-    setEnd(Math.min(MAX_EXPORT_SECONDS, Math.floor(value * 10) / 10));
+    if (reference && Math.abs(reference.duration - value) > .4) {
+      setStart(0);setEnd(Math.min(MAX_EXPORT_SECONDS,Math.floor(value*10)/10));setClips([]);
+      setError('A duração não corresponde ao projeto importado. Os cortes foram limpos para evitar usar o vídeo errado.');
+    } else if (!reference) {
+      setStart(0);setEnd(Math.min(MAX_EXPORT_SECONDS,Math.floor(value*10)/10));
+    }
+    setReference(null);
   }
 
   function onVideoError() {
@@ -107,6 +121,7 @@ export default function WebApp() {
     setFile(null);
     setDuration(0);
     setClips([]);
+    setReference(null);
     setError('');
     clearResult();
     if (fileInput.current) fileInput.current.value = '';
@@ -152,6 +167,19 @@ export default function WebApp() {
     }
   }
 
+  async function importPortableProject(incoming) {
+    if (busy) throw new Error('Conclua a exportação atual antes de importar.');
+    const edit=incoming.edit;
+    setFile(null);setDuration(0);
+    if(fileInput.current)fileInput.current.value='';
+    setProjectName(incoming.name);
+    setAspect(incoming.aspect);
+    setScript(edit.script);setScenes(edit.scenes);
+    setClips(edit.clips);setStart(edit.start);setEnd(edit.end);
+    setReference(incoming.media);
+    setError('');
+    clearResult();
+  }
   const validRange = file && !(clips.length ? normalizeClips({ segments: clips, duration, maxTotal: 20, maxEach: 20 }).error : validateBrowserRange({ start, end, duration }));
   const canExport = Boolean(validRange && !busy && !error);
   const canTrim = Boolean(file && duration > 0);
@@ -248,6 +276,13 @@ export default function WebApp() {
                 </div>
                 <div className="web-privacy"><ShieldCheck size={23} aria-hidden="true"/><div><strong>Seus arquivos, seu controle.</strong><p>Vídeos são processados no navegador. O motor WebAssembly é baixado de um CDN; o arquivo de vídeo não é enviado ao CDN nem ao GitHub.</p></div></div>
               </div>
+            </div>
+            <div className="web-story-workspace">
+              <StoryStudio mode="web" aspect={aspect} script={script} scenes={scenes}
+                onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}} />
+              <ProjectExchange name={projectName} aspect={aspect} media={file?{name:file.name,size:file.size,duration}:reference}
+                start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes}
+                onImport={importPortableProject} disabled={busy} />
             </div>
           </section>
           <section className="web-bottom" id="como-funciona" aria-labelledby="about-title"><div><span className="section-kicker">POR QUE A VERSÃO WEB?</span><h2 id="about-title">Simples de abrir.<br/>Fácil de criar.</h2><p>Uma primeira versão para cortes rápidos. Quer importar arquivos maiores, montar vídeos longos ou exportar em HD? O projeto desktop tem mais capacidade.</p><a href="https://github.com/HelioConde/AutoEditorVideo" className="web-bottom-link">Conhecer a versão desktop <ArrowRight size={18}/></a></div><div className="web-bottom-features"><div><HardDrive size={21}/><strong>Sem uploads para servidor</strong><p>O arquivo fica no dispositivo durante a edição.</p></div><div><Clock3 size={21}/><strong>Ideal para cortes curtos</strong><p>Exporte trechos de até 20 segundos por vez.</p></div></div></section>
