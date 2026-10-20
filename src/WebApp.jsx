@@ -100,7 +100,10 @@ export default function WebApp() {
 
   function openOptional(tool) {
     setOpenTool(tool);
-    requestAnimationFrame(()=>document.getElementById('studio-'+tool)?.scrollIntoView({block:'start',behavior:'smooth'}));
+    requestAnimationFrame(()=>{
+      const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelector('.web-optional')?.scrollIntoView({block:'start',behavior:reduced?'auto':'smooth'});
+    });
   }
   function toggleTool(tool) {
     setOpenTool(previous=>previous===tool?null:tool);
