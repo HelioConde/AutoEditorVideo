@@ -11,13 +11,13 @@ const sections = [
   { id: 'studio-project', label: 'Projeto', icon: FileJson2 },
 ];
 
-export default function WorkbenchNav({ compact = false, onNavigate }) {
+export default function WorkbenchNav({ compact = false }) {
   return (
     <nav className={'workbench-nav' + (compact ? ' workbench-nav-compact' : '')} aria-label="Ir para uma etapa do editor">
       <span className="workbench-nav-heading">IR PARA</span>
       <div className="workbench-nav-links">
         {sections.map(({ id, label, icon: Icon }, index) => (
-          <a key={id} href={'#' + id} className="workbench-nav-link" onClick={() => onNavigate?.(id)}>
+          <a key={id} href={'#' + id} className="workbench-nav-link">
             <span className="workbench-nav-index" aria-hidden="true">{String(index+1).padStart(2, '0')}</span>
             <Icon size={15} aria-hidden="true" />
             <span>{label}</span>

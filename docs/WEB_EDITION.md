@@ -74,3 +74,11 @@ O GitHub Pages permite importar e editar arquivos `.srt`/`.vtt`, acompanhar a le
 Rascunho `localStorage` versionado v1: armazena apenas metadados de edição, não arquivos binários. Ao voltar à página, selecione o mesmo vídeo de origem (nome e duração) para reativar os cortes. Conteúdo armazenado é limitado e validado; quando o rascunho é inválido ou armazenamento fica indisponível, a edição funciona sem salvamento automático e recomenda exportar JSON. Ações **Limpar rascunho** e **Exportar projeto** permitem controle do usuário.
 
 A timeline apresenta uma janela de zoom **dos controles de corte**, mantendo as oito miniaturas de todo o vídeo. Botões de ajuste fino alteram 0,01s / 0,1s. **Editar trecho** carrega as marcas do item na sequência e **Salvar ajuste** modifica apenas o trecho selecionado. A exportação web continua limitada a cinco trechos e 20 segundos somados.
+
+## Experiência progressiva (2.8)
+
+Em vez de exibir todos os blocos simultaneamente, a tela inicial oferece importar vídeo e duas alternativas (criar roteiro ou abrir JSON). Após ler os metadados, a etapa **Editar cortes** é liberada automaticamente. A etapa **Exportar** aparece mediante ação **Continuar para exportação**. As etapas desbloqueadas podem ser revisitadas sem perder os cortes atuais.
+
+Legendas, roteiro e projeto são opcionais e expandidos por botão com `aria-expanded`. Apenas um editor opcional fica aberto por vez. Seus dados permanecem no estado React e no rascunho automático local mesmo ao alternar de etapa. O resumo dos rascunhos permanece recolhido por padrão, com `details/summary` nativos.
+
+Acessibilidade: etapas bloqueadas possuem `disabled` nativo; campos e editores só aparecem quando são relevantes; avisos de arquivo inválido permanecem visíveis na etapa de importação. O layout foi testado em mobile e desktop com Playwright.
