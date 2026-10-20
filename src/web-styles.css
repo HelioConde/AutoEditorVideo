@@ -192,3 +192,11 @@
   .web-optional-heading h3{font-size:17px}
   .web-draft-details summary>span{display:none}
 }
+
+/* Above-the-fold cleanup and load-on-demand code split placeholders. */
+.web-intro{margin:clamp(28px,4vw,52px) auto clamp(22px,3vw,32px)}
+.web-intro-eyebrow{margin-bottom:13px}
+.web-intro h1{font-size:clamp(36px,5.4vw,60px);margin-bottom:12px}
+.web-chips{margin-top:15px}
+.web-tool-loading{padding:32px 16px;text-align:center;border-radius:11px;border:1px solid #425c45;color:#c7dcbd;background:#1d2b22;font-size:12px}
+@media(max-width:550px){.web-intro{margin:28px auto 23px}.web-intro-eyebrow{margin-bottom:10px}.web-chips{margin-top:13px}}

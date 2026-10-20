@@ -1,11 +1,11 @@
-import { useEffect, useId, useRef, useState } from 'react';
-import VideoTimeline from './components/VideoTimeline.jsx';
+import { lazy, Suspense, useEffect, useId, useRef, useState } from 'react';
+const VideoTimeline=lazy(()=>import('./components/VideoTimeline.jsx'));
 import { browserStorage, clearWebDraft, loadWebDraft, saveWebDraft } from './web-draft.js';
 import './editor-polish.css';
-import SubtitleStudio from './components/SubtitleStudio.jsx';
+const SubtitleStudio=lazy(()=>import('./components/SubtitleStudio.jsx'));
 import { normalizeClips } from './clip-utils.js';
-import ProjectExchange from './components/ProjectExchange.jsx';
-import StoryStudio from './components/StoryStudio.jsx';
+const ProjectExchange=lazy(()=>import('./components/ProjectExchange.jsx'));
+const StoryStudio=lazy(()=>import('./components/StoryStudio.jsx'));
 import {
   ArrowDownToLine, ArrowRight, BadgeCheck, Check, Clapperboard,
   Clock3, FileVideo2, Film, Globe2, HardDrive, Info, LoaderCircle,
@@ -300,7 +300,7 @@ export default function WebApp() {
                   <input id={inputId} ref={fileInput} className="visually-hidden" type="file" accept=".mp4,.webm,video/mp4,video/webm" disabled={busy} onChange={e => selectFile(e.target.files?.[0])}/>
                   {file && <div className="web-file-row"><FileVideo2 size={21} aria-hidden="true"/><div><strong title={file.name}>{file.name}</strong><span>{size(file.size)} {duration ? '· ' + minutes(duration) : '· Lendo duração…'}</span></div><Check size={17} aria-hidden="true"/></div>}
                 </div>
-                {phase==='edit' && <>
+                {phase==='edit' && <Suspense fallback={<div className="web-tool-loading" role="status">Carregando timeline…</div>}>
                 <div id="studio-cuts" className="web-panel web-cut-panel">
                   <div className="web-panel-heading"><strong><Scissors size={18} aria-hidden="true"/> Recortar vídeo</strong><span className="web-muted">Trechos somados até 20 segundos</span></div>
                   <VideoTimeline variant="web" source={previewUrl} duration={duration} start={start} end={end}
@@ -318,7 +318,7 @@ export default function WebApp() {
                     <p>Pronto para criar o arquivo? A escolha do formato fica na última etapa.</p>
                     <button type="button" disabled={!file||busy} onClick={()=>setPhase('export')}>Continuar para exportação <ArrowRight size={16} aria-hidden="true"/></button>
                   </div>
-                </>}
+                </Suspense>}
                 {phase==='import' && <div className="web-start-options" aria-label="Outras formas de começar">
                   <p>Ou comece de outra forma</p>
                   <div>
@@ -375,20 +375,20 @@ export default function WebApp() {
                   <span><HardDrive size={16} aria-hidden="true"/> Meu projeto</span><small>Salvar ou importar</small>
                 </button>
               </div>
-              {openTool==='captions' && <>
+              {openTool==='captions' && <Suspense fallback={<div className="web-tool-loading" role="status">Abrindo legendas…</div>}>
             <div id="studio-captions" className="web-captions"><SubtitleStudio mode="web" subtitles={subtitles} onChange={setSubtitles}
               mediaDuration={duration} previewTime={previewTime} disabled={busy} /></div>
-              </>}
-              {openTool==='script' && <div className="web-single-tool">
+              </Suspense>}
+              {openTool==='script' && <Suspense fallback={<div className="web-tool-loading" role="status">Abrindo roteiro…</div>}><div className="web-single-tool">
 <StoryStudio mode="web" aspect={aspect} script={script} scenes={scenes}
                 scenePictures={scenePictures} onScenePicturesChange={setScenePictures}
                 onChange={({script:next,scenes:nextScenes})=>{setScript(next);setScenes(nextScenes);}} />
-              </div>}
-              {openTool==='project' && <div className="web-single-tool">
+              </div></Suspense>}
+              {openTool==='project' && <Suspense fallback={<div className="web-tool-loading" role="status">Abrindo projeto…</div>}><div className="web-single-tool">
 <ProjectExchange name={projectName} aspect={aspect} media={file?{name:file.name,size:file.size,duration}:reference}
                 start={Number(start)||0} end={Number(end)||0} clips={clips} script={script} scenes={scenes} voiceEngine={voiceEngine} subtitles={subtitles} burnSubtitles={burnSubtitles}
                 onImport={importPortableProject} disabled={busy} />
-              </div>}
+              </div></Suspense>}
             </section>
             <details className="web-draft-details">
               <summary><ShieldCheck size={16} aria-hidden="true"/> Rascunho no navegador <span>Como o seu progresso é salvo</span></summary>
