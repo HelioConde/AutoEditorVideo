@@ -57,7 +57,7 @@ export default function ShortsStudio({
             <span>Até 3 Shorts de 8 a 45 segundos, em 9:16.</span>
           </div>
           {analysisSignals && <p className="shorts-analysis-summary" role="status">
-            Análise local: {analysisSignals.audio?.length||0} amostras de áudio, {analysisSignals.scenes?.length||0} mudanças de cena e {analysisSignals.motion?.length||0} quadros avaliados para movimento.
+            Análise local: {analysisSignals.audio?.length||0} amostras de áudio, {analysisSignals.scenes?.length||0} mudanças de cena e {analysisSignals.motion?.length||0} quadros avaliados para movimento e {analysisSignals.silences?.length||0} pausas detectadas.
             {analysisSignals.coverage?.audio===false?' O vídeo não possui uma faixa de áudio analisável.':''}
           </p>}
           {ranked.error&&<p className="shorts-error" role="status">{ranked.error}</p>}
@@ -79,7 +79,7 @@ export default function ShortsStudio({
                 </div>
                 <p className="shorts-reason">{candidate.reason}</p>
                 {candidate.evidence && <p className="shorts-evidence">
-                  Evidências: {candidate.evidence.source} · {candidate.evidence.audioPeaks} picos de áudio · {candidate.evidence.sceneChanges} cortes visuais · movimento {candidate.evidence.motionActivity||0}
+                  Evidências: {candidate.evidence.source} · {candidate.evidence.audioPeaks} picos de áudio · {candidate.evidence.sceneChanges} cortes visuais · movimento {candidate.evidence.motionActivity||0}{candidate.evidence.pauseAdjusted===true?' · cortes ajustados em pausas':''}
                 </p>}
                 <p className="shorts-transcript">“{candidate.transcript}”</p>
                 <div className="shorts-candidate-actions">

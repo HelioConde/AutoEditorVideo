@@ -33,6 +33,7 @@ test('MVP: sugere destaque e gera Short vertical independente com legenda',async
     await page.getByRole('combobox',{name:'Tipo de conteúdo'}).selectOption('gameplay');
     await page.getByRole('button',{name:'Encontrar melhores momentos'}).click();
     await expect(page.locator('.shorts-analysis-summary')).toContainText(/[1-9][0-9]* amostras de áudio/,{timeout:45000});
+    await expect(page.locator('.shorts-analysis-summary')).toContainText('pausas detectadas');
     await expect(page.locator('.shorts-analysis-summary')).toContainText(/[1-9][0-9]* mudanças de cena/);
     await expect(page.locator('.shorts-candidate')).toHaveCount(1);
     await expect(page.locator('.shorts-evidence')).toContainText('picos de áudio');

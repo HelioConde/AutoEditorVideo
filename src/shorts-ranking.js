@@ -1,5 +1,6 @@
 import { validateSubtitles } from './subtitles.js';
 import { candidateSignalEvidence } from './highlight-signals.js';
+import { narrativeQuality, refineShortBoundaries } from './shorts-boundaries.js';
 
 const MAX_SHORTS=3;
 const MAX_LEN=45;
@@ -49,10 +50,12 @@ export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS
       const hook=reasons.reduce((sum,x)=>sum+x.weight,0);
       const audioVisual=candidateSignalEvidence(signals,cues[i].start,cues[j].end,profile);
       const textScore=Math.round(16+focus+speech+fluency+intro+ending+hook);
+      const narrative=narrativeQuality(cues[i].text,cues[j].text);
+      const contextualAdjustment=Array.isArray(signals?.silences)?narrative.adjustment:0;
       // Leave reserved headroom for actual audio/visual evidence so strong
       // transcripts do not all saturate at 99 and obscure meaningful signals.
       const score=audioVisual.available ?
-        Math.min(99,Math.min(86,textScore)+Math.min(13,audioVisual.bonus)) :
+        Math.max(0,Math.min(99,Math.min(86,textScore)+Math.min(13,audioVisual.bonus)+contextualAdjustment)) :
         Math.min(99,textScore);
       const title=selected[0].text.replace(/[\n\r]/gu,' ').trim().slice(0,72);
       suggestions.push({
@@ -60,7 +63,7 @@ export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS
         duration:round(length),score,title,
         reason:[reasons[0]?.label||'Fala contínua com duração adequada',...audioVisual.reasons].join(' · '),
         evidence:{text:audioVisual.available?Math.min(86,textScore):Math.min(99,textScore),audioPeaks:audioVisual.highEnergy,
-          sceneChanges:audioVisual.visualChanges,motionActivity:audioVisual.motionActivity,signalBonus:audioVisual.bonus,source:audioVisual.available?'texto + áudio/vídeo':'somente texto'},
+          sceneChanges:audioVisual.visualChanges,motionActivity:audioVisual.motionActivity,signalBonus:audioVisual.bonus,coherence:contextualAdjustment,source:audioVisual.available?'texto + áudio/vídeo':'somente texto'},
         transcript:script.slice(0,360)
       });
     }
@@ -73,5 +76,19 @@ export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS
     if(picked.length>=maxClips)break;
   }
   if(!picked.length)return {error:'Não há falas contínuas suficientes para gerar Shorts de pelo menos 8 segundos.',candidates:[]};
-  return {error:null,candidates:picked.map((c,i)=>({...c,rank:i+1}))};
+  const refined=picked.map((candidate,i)=>{
+    const firstIndex=cues.findIndex(c=>Math.abs(c.start-candidate.start)<.011);
+    const lastIndex=cues.findIndex(c=>Math.abs(c.end-candidate.end)<.011);
+    const bounds=refineShortBoundaries({
+      start:candidate.start,end:candidate.end,duration:endOfMedia,signals,
+      previousEnd:firstIndex>0?cues[firstIndex-1].end:0,
+      nextStart:lastIndex>=0&&lastIndex<cues.length-1?cues[lastIndex+1].start:endOfMedia,
+      maxDuration:MAX_LEN
+    });
+    return {...candidate,start:bounds.start,end:bounds.end,
+      duration:round(bounds.end-bounds.start),rank:i+1,
+      reason:candidate.reason+(bounds.adjusted?' · Limites ajustados em pausas':''),
+      evidence:{...candidate.evidence,pauseAdjusted:bounds.adjusted}};
+  });
+  return {error:null,candidates:refined};
 }

@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { parseRmsLog, parseSceneLog, parseMotionLog } from '../src/highlight-signals.js';
+import { parseRmsLog, parseSceneLog, parseMotionLog, parseSilenceLog } from '../src/highlight-signals.js';
 
 /**
  * Use the locally installed FFmpeg to sample audio loudness and visual cuts.
@@ -35,7 +35,7 @@ export async function analyzeLocalMedia({source,duration,ffmpeg='ffmpeg'}) {
   const common=['-hide_banner','-nostdin','-loglevel','info','-i',source,
     '-t',String(Math.min(seconds,600))];
   const audioArgs=[...common,'-vn','-ac','1','-ar','16000',
-    '-af','asetnsamples=n=16000:p=0,astats=metadata=1:reset=1,ametadata=print:key=lavfi.astats.Overall.RMS_level',
+    '-af','silencedetect=noise=-32dB:d=0.25,asetnsamples=n=16000:p=0,astats=metadata=1:reset=1,ametadata=print:key=lavfi.astats.Overall.RMS_level',
     '-f','null','-'];
   // At 2 fps / 160px this extracts scene boundaries rather than decoding
   // expensive full-resolution frames for CV inference.
@@ -53,6 +53,7 @@ export async function analyzeLocalMedia({source,duration,ffmpeg='ffmpeg'}) {
     throw new Error('FFmpeg não conseguiu analisar áudio nem vídeo.');
   return {
     audio:audio.status==='fulfilled'?parseRmsLog(audio.value):[],
+    silences:audio.status==='fulfilled'?parseSilenceLog(audio.value):[],
     scenes:visual.status==='fulfilled'?parseSceneLog(visual.value):[],
     motion:movement.status==='fulfilled'?parseMotionLog(movement.value):[],
     coverage:{

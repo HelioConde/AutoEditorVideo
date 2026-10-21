@@ -4,8 +4,9 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {parseRmsLog,parseSceneLog,candidateSignalEvidence,normalizedSignals} from '../../src/highlight-signals.js';
+import {parseRmsLog,parseSceneLog,parseSilenceLog,candidateSignalEvidence,normalizedSignals} from '../../src/highlight-signals.js';
 import {analyzeLocalMedia} from '../../server/media-analysis.mjs';
+import { narrativeQuality,refineShortBoundaries } from '../../src/shorts-boundaries.js';
 import {rankShortsFromTranscript} from '../../src/shorts-ranking.js';
 
 test('FFmpeg audio sample log yields a bounded timeline without inventing silence levels',()=>{
@@ -67,4 +68,58 @@ test('real FFmpeg runs an offline audio + low-resolution scene analysis',async t
     assert.equal(res.coverage.video,true);
     assert.ok(Array.isArray(res.scenes));
   }finally{fs.rmSync(temp,{force:true,recursive:true});}
+});
+
+test('silencedetect parser pairs actual intervals and ignores dangling starts',()=>{
+  const log=['silence_start: 1.20','silence_end: 1.95 | silence_duration: 0.75','silence_start: 4.20'].join('\n');
+  assert.deepEqual(parseSilenceLog(log),[{start:1.2,end:1.95}]);
+});
+test('narrative quality rejects unfinished speech and rewards clear ending',()=>{
+  assert.ok(narrativeQuality('Mas eu pensava nisso','e porque').adjustment<0);
+  assert.ok(narrativeQuality('Temos o resultado','Esta é a conclusão!').adjustment>0);
+});
+test('pauses only pad outside selected speech and never cross adjacent cues',()=>{
+  const silences=[
+    {start:.55,end:.95},{start:9,end:11.5},
+    {start:12.55,end:12.95},{start:23.02,end:23.4}
+  ];
+  const a=refineShortBoundaries({start:1,end:9,duration:25,signals:{silences},previousEnd:0,nextStart:12});
+  assert.ok(a.adjusted&&a.start<1&&a.start>=.55&&a.end>9&&a.end<12);
+  const b=refineShortBoundaries({start:13,end:23,duration:26,signals:{silences},previousEnd:9,nextStart:26});
+  assert.ok(b.adjusted&&b.start<13&&b.start>=9&&b.end>23&&b.end<=23.4);
+  assert.deepEqual(refineShortBoundaries({start:2,end:12,duration:15,signals:{}}),
+    {start:2,end:12,adjusted:false});
+});
+test('ranker preserves subtitles and exposes pause adjustments',()=>{
+  const cues=[
+    {start:1,end:9,text:'Apresentamos aqui a primeira história com começo e final bem definido para todos.'},
+    {start:13,end:23,text:'Agora concluímos outra história de destaque com resposta e resultado muito importante!'}
+  ];
+  const signals={audio:[],scenes:[],silences:[
+    {start:.55,end:.95},{start:9,end:9.35},{start:11.55,end:11.95},{start:22.02,end:22.4}
+  ]};
+  const ranked=rankShortsFromTranscript(cues,{duration:26,signals,maxClips:2});
+  assert.equal(ranked.error,null);
+  assert.equal(ranked.candidates.length,2);
+  assert.ok(ranked.candidates.some(c=>c.evidence.pauseAdjusted));
+  assert.ok(ranked.candidates.every(c=>c.duration<=45));
+});
+test('real FFmpeg extracts silence intervals from a generated WAV',async t=>{
+  const check=spawnSync('ffmpeg',['-version'],{encoding:'utf8'});
+  if(check.error||check.status!==0)return t.skip('ffmpeg unavailable');
+  const folder=fs.mkdtempSync(path.join(os.tmpdir(),'autoeditor-pause-'));
+  try{
+    const wav=path.join(folder,'voice.wav');
+    const args=['-hide_banner','-loglevel','error',
+      '-f','lavfi','-i','aevalsrc=0:s=16000:d=0.8',
+      '-f','lavfi','-i','sine=frequency=880:sample_rate=16000:duration=1.2',
+      '-f','lavfi','-i','aevalsrc=0:s=16000:d=0.8',
+      '-filter_complex','[0:a][1:a][2:a]concat=n=3:v=0:a=1[out]',
+      '-map','[out]','-ar','16000','-c:a','pcm_s16le','-y',wav];
+    const made=spawnSync('ffmpeg',args,{timeout:20000});
+    assert.equal(made.status,0,made.stderr?.toString());
+    const signals=await analyzeLocalMedia({source:wav,duration:2.8});
+    assert.equal(signals.coverage.audio,true);
+    assert.ok(signals.silences.some(x=>x.start<.15&&x.end>.5),'Should find leading silence');
+  }finally{fs.rmSync(folder,{recursive:true,force:true});}
 });
