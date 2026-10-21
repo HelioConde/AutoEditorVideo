@@ -6,7 +6,7 @@ import path from 'node:path';
 import {analyzeLocalMedia} from '../server/media-analysis.mjs';
 
 // Exercise the production analyzer on media uploaded to this repository.
-const mediaFiles=['15979800_1080_1920_30fps.mp4','public/6767176-uhd_2560_1440_25fps.mp4'];
+const mediaFiles=['15979800_1080_1920_30fps.mp4','public/6767176-uhd_2560_1440_25fps.mp4','public/VID-20250216-WA0003.mp4'];
 const output=path.resolve('test-results','real-media');
 fs.mkdirSync(output,{recursive:true});
 function command(name,args,timeout=90000){
@@ -86,4 +86,4 @@ if(process.env.GITHUB_STEP_SUMMARY){
     '|---|---:|---:|---:|---:|---:|\n'+rows+'\n\n'+
     'Previews de Shorts 360x640 no artefato real-media-qa.\n');
 }
-console.log('PASS: mídias reais analisadas e convertidas para Shorts verticais.');
+console.log('PASS: '+results.length+' mídias reais analisadas e convertidas para Shorts verticais.');
