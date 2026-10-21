@@ -18,7 +18,8 @@
     "test:e2e:web": "playwright test --config=playwright.web.config.js",
     "check": "npm run test && npm run build && npm run build:web",
     "qa:visual:web": "playwright test --config=playwright.web.config.js --grep @visual",
-    "qa:visual:desktop": "playwright test --grep @visual"
+    "qa:visual:desktop": "playwright test --grep @visual",
+    "qa:media": "node scripts/qa-real-media.mjs"
   },
   "engines": {
     "node": ">=22"
