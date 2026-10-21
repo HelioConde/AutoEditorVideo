@@ -60,7 +60,7 @@ export function rankShortsFromTranscript(subtitles,{duration,maxClips=MAX_SHORTS
         duration:round(length),score,title,
         reason:[reasons[0]?.label||'Fala contínua com duração adequada',...audioVisual.reasons].join(' · '),
         evidence:{text:audioVisual.available?Math.min(86,textScore):Math.min(99,textScore),audioPeaks:audioVisual.highEnergy,
-          sceneChanges:audioVisual.visualChanges,signalBonus:audioVisual.bonus,source:audioVisual.available?'texto + áudio/vídeo':'somente texto'},
+          sceneChanges:audioVisual.visualChanges,motionActivity:audioVisual.motionActivity,signalBonus:audioVisual.bonus,source:audioVisual.available?'texto + áudio/vídeo':'somente texto'},
         transcript:script.slice(0,360)
       });
     }

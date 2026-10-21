@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Captions, ChevronRight, Play, Sparkles, WandSparkles } from 'lucide-react';
-import { rankShortsFromTranscript } from '../shorts-ranking.js';
+import { rankAutomaticShorts } from '../visual-highlights.js';
 import './shorts-studio.css';
 
 const stamp=seconds=>{
@@ -16,7 +16,7 @@ export default function ShortsStudio({
   const [profile,setProfile]=useState('podcast');
   const [selectedKeys,setSelectedKeys]=useState(null);
   const keyOf=c=>c.start+':'+c.end;
-  const ranked=useMemo(()=>rankShortsFromTranscript(subtitles,{duration,maxClips:3,profile,signals:analysisSignals}),[subtitles,duration,profile,analysisSignals]);
+  const ranked=useMemo(()=>rankAutomaticShorts(subtitles,{duration,maxClips:3,profile,signals:analysisSignals}),[subtitles,duration,profile,analysisSignals]);
   const candidates=ranked.candidates;
   const approved=selectedKeys===null?candidates:candidates.filter(c=>selectedKeys.includes(keyOf(c)));
   return <section className="shorts-studio" aria-labelledby="shorts-studio-title">
@@ -27,16 +27,14 @@ export default function ShortsStudio({
       </div>
       <span className="shorts-local">Processamento local</span>
     </div>
-    {!mediaReady ? <p className="shorts-guidance">Importe um vídeo para começar a encontrar os melhores momentos.</p> :
-      subtitles.length===0 ?
-        <div className="shorts-empty">
-          <Captions size={20} aria-hidden="true"/>
-          <div><strong>Primeiro precisamos das falas do vídeo.</strong>
-            <p>Use o Whisper.cpp local ou importe um SRT no editor de legendas. Assim conseguimos localizar trechos completos sem cortar frases ao acaso.</p></div>
-          <button type="button" disabled={!whisperAvailable||disabled||transcribing||!onTranscribe}
-            onClick={onTranscribe}>{transcribing?'Transcrevendo…':'Transcrever áudio'}</button>
-        </div> :
-        <>
+    {!mediaReady ? <p className="shorts-guidance">Importe um vídeo para começar a encontrar os melhores momentos.</p> : <>
+      {subtitles.length===0 && <div className="shorts-empty">
+        <Captions size={20} aria-hidden="true"/>
+        <div><strong>Vídeo sem transcrição: análise visual disponível.</strong>
+          <p>Você pode procurar trechos com movimento mesmo sem fala. Para Shorts legendados, transcreva com Whisper.cpp ou importe um SRT. Sem transcrição, os MP4 serão exportados sem legendas.</p></div>
+        <button type="button" disabled={!whisperAvailable||disabled||transcribing||!onTranscribe}
+          onClick={onTranscribe}>{transcribing?'Transcrevendo…':'Transcrever áudio'}</button>
+      </div>}
           <div className="shorts-profile">
             <label htmlFor="shorts-profile">Tipo de conteúdo</label>
             <select id="shorts-profile" disabled={disabled||analysisBusy} value={profile} onChange={e=>{setProfile(e.target.value);setShowResults(false);setSelectedKeys(null);}}>
@@ -46,7 +44,7 @@ export default function ShortsStudio({
             </select>
           </div>
           <div className="shorts-actions">
-            <button type="button" disabled={disabled||analysisBusy||!!ranked.error}
+            <button type="button" disabled={disabled||analysisBusy|| (!!ranked.error && subtitles.length>0)}
               onClick={async()=>{
                 if(showResults){setShowResults(false);return;}
                 if(onAnalyze && !analysisSignals)await onAnalyze();
@@ -54,12 +52,12 @@ export default function ShortsStudio({
                 setShowResults(true);
               }}>
               <Sparkles size={18} aria-hidden="true"/>
-              {analysisBusy?'Analisando áudio e cenas…':showResults?'Ocultar sugestões':'Encontrar melhores momentos'}
+              {analysisBusy?'Analisando áudio e cenas…':showResults?'Ocultar sugestões':subtitles.length?'Encontrar melhores momentos':'Analisar movimento no vídeo'}
             </button>
             <span>Até 3 Shorts de 8 a 45 segundos, em 9:16.</span>
           </div>
           {analysisSignals && <p className="shorts-analysis-summary" role="status">
-            Análise local: {analysisSignals.audio?.length||0} amostras de áudio e {analysisSignals.scenes?.length||0} mudanças de cena.
+            Análise local: {analysisSignals.audio?.length||0} amostras de áudio, {analysisSignals.scenes?.length||0} mudanças de cena e {analysisSignals.motion?.length||0} quadros avaliados para movimento.
             {analysisSignals.coverage?.audio===false?' O vídeo não possui uma faixa de áudio analisável.':''}
           </p>}
           {ranked.error&&<p className="shorts-error" role="status">{ranked.error}</p>}
@@ -81,7 +79,7 @@ export default function ShortsStudio({
                 </div>
                 <p className="shorts-reason">{candidate.reason}</p>
                 {candidate.evidence && <p className="shorts-evidence">
-                  Evidências: {candidate.evidence.source} · {candidate.evidence.audioPeaks} picos de áudio · {candidate.evidence.sceneChanges} cortes visuais
+                  Evidências: {candidate.evidence.source} · {candidate.evidence.audioPeaks} picos de áudio · {candidate.evidence.sceneChanges} cortes visuais · movimento {candidate.evidence.motionActivity||0}
                 </p>}
                 <p className="shorts-transcript">“{candidate.transcript}”</p>
                 <div className="shorts-candidate-actions">
@@ -98,12 +96,12 @@ export default function ShortsStudio({
             <button className="shorts-generate" type="button" disabled={disabled||!onGenerate||!approved.length}
               onClick={()=>onGenerate(approved,profile)}>
               <WandSparkles size={19} aria-hidden="true"/>
-              Gerar {approved.length} {approved.length===1?'Short legendado':'Shorts legendados'}
+              Gerar {approved.length} {subtitles.length?(approved.length===1?'Short legendado':'Shorts legendados'):(approved.length===1?'Short sem legendas':'Shorts sem legendas')}
             </button>
           </>}
         </>
     }
     <p className="shorts-note">Ranking experimental por transcrição, variação de volume e cortes visuais no FFmpeg.
-      Mudanças de cena não equivalem a acontecimentos importantes; não há reconhecimento de emoções, jogadas ou previsão de viralização. Revise antes de publicar.</p>
+      Sem fala, o motor usa movimento entre quadros: ele não reconhece jogadas, emoções ou potencial de viralização. Revise cada sugestão antes de publicar.</p>
   </section>;
 }

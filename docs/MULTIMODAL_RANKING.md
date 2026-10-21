@@ -21,3 +21,9 @@ Na interface de Shorts, cada candidato tem um checkbox para incluir/excluir da e
 A compatibilidade com chamadas antigas é mantida: sem `selectedRanges`, o servidor gera os primeiros candidatos, respeitando `count`. Com seleção explícita, o novo app solicita até três candidatos e limita a saída aos marcados.
 
 Teste Playwright: simula gravação com duas cenas de cores distintas e áudio real; verifica presença positiva de amostras de áudio e mudanças de cena, alternância das caixas de aprovação e geração de Short vertical.
+
+## Detecção de movimento para vídeos sem transcrição
+
+Além de RMS e mudanças de cena, o analisador mede `signalstats.YDIF` a 2 quadros/s no FFmpeg. O campo `motion` contém pares `{time,value}` sem imagens ou dados binários. O módulo `src/visual-highlights.js` usa janelas de 12 a 18 segundos e descarta candidatas com poucas amostras ou atividade visual insuficiente. Duração máxima da análise: 10 minutos.
+
+Com transcrição, mantém-se o ranking por falas com evidência adicional de movimento; sem transcrição, o programa usa a trilha de movimento e exporta **Shorts sem legendas**. A análise não interpreta semanticamente o que aconteceu na cena. Todos os candidatos passam pela revisão do usuário e pela validação de intervalos no servidor antes de exportar. Para detecção de ações específicas (gols, kills, reações), ainda será necessário um modelo de visão adaptado ao tipo de conteúdo.

@@ -152,3 +152,7 @@ O modo desktop oferece uma análise opcional por FFmpeg que combina o texto das 
 Após a análise, cada sugestão tem uma caixa **Incluir Short na exportação**. É possível desmarcar resultados que não fazem sentido e gerar apenas os escolhidos; com nenhum selecionado, a exportação fica desativada. O servidor recalcula as sugestões e valida os intervalos enviados, evitando aceitar um trecho alterado ou desatualizado como se tivesse sido aprovado automaticamente.
 
 Os testes incluem uma gravação sintética com corte visual real entre cenas preta e branca, além de áudio. O Playwright exige que o FFmpeg detecte **amostras de áudio e ao menos uma mudança visual** antes de concluir o fluxo de exportação.
+
+## Shorts sem fala: detecção visual experimental
+
+No desktop, agora também é possível analisar vídeos **sem transcrição ou faixa de áudio**. O FFmpeg amostra a 2 FPS e calcula a diferença de luminosidade entre quadros (`signalstats.YDIF`) em 160 px. Se encontrar movimento contínuo suficiente, o editor sugere trechos de 12 a 18 segundos (dependendo do perfil), com prévia e seleção manual. Vídeos estáticos não recebem destaques fictícios. Os Shorts silenciosos são renderizados em 9:16, **sem legendas inventadas**. Se houver SRT/Whisper, o ranking continua priorizando conteúdo de fala e a saída usa legendas reais. Este é um detector de movimento — **não** identifica gols, vitórias, rostos, emoções nem garante viralização. Leia [docs/VISUAL_HIGHLIGHTS.md](docs/VISUAL_HIGHLIGHTS.md).
