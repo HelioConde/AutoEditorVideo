@@ -34,9 +34,17 @@ for(const [index,relative] of mediaFiles.entries()){
   const signals=await analyzeLocalMedia({source:file,duration:inspected});
   assert.equal(signals.coverage.video,true,relative+' deve permitir análise visual');
   assert.ok(Array.isArray(signals.scenes));
+  let meanVolumeDb=null;
   if(audio.length>0){
-    assert.equal(signals.coverage.audio,true,relative+' deve permitir analisar a faixa de áudio');
-    assert.ok(signals.audio.length>0,relative+' possui áudio, porém RMS retornou vazio');
+    assert.equal(signals.coverage.audio,true,relative+' deve permitir decodificar áudio');
+    // A stream can contain encoded silence. A missing RMS sample must never
+    // be mistaken for proof that a detector found (or did not find) speech.
+    const volume=spawnSync('ffmpeg',['-hide_banner','-nostdin','-i',file,
+      '-t',String(inspected),'-vn','-af','volumedetect','-f','null','-'],
+      {encoding:'utf8',timeout:60000,maxBuffer:3*1024*1024});
+    assert.equal(volume.status,0,volume.stderr?.slice(-600));
+    const match=/mean_volume:\s*([-+\\w.]+)/u.exec(volume.stderr||'');
+    meanVolumeDb=match?(Number.isFinite(Number(match[1]))?Number(match[1]):match[1]):null;
   }else{
     assert.equal(signals.audio.length,0,'Não inventar energia sonora para arquivo sem áudio');
   }
@@ -57,6 +65,7 @@ for(const [index,relative] of mediaFiles.entries()){
     durationSeconds:Number(duration.toFixed(2)),
     video:{codec:video.codec_name,width:video.width,height:video.height,frameRate:video.r_frame_rate},
     audioTracks:audio.length,audioCodecs:audio.map(x=>x.codec_name),
+    meanVolumeDb, noDetectedAudioEnergy:signals.audio.length===0,
     analyzedSeconds:Number(inspected.toFixed(2)),rmsSamples:signals.audio.length,
     sceneChanges:signals.scenes.length,mediaCoverage:signals.coverage,
     portraitPreview:path.basename(portrait),snapshot:path.basename(snapshot)
