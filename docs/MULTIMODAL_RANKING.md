@@ -21,3 +21,7 @@ Na interface de Shorts, cada candidato tem um checkbox para incluir/excluir da e
 A compatibilidade com chamadas antigas é mantida: sem `selectedRanges`, o servidor gera os primeiros candidatos, respeitando `count`. Com seleção explícita, o novo app solicita até três candidatos e limita a saída aos marcados.
 
 Teste Playwright: simula gravação com duas cenas de cores distintas e áudio real; verifica presença positiva de amostras de áudio e mudanças de cena, alternância das caixas de aprovação e geração de Short vertical.
+
+## Etapa adicional: margens de silêncio e coerência textual
+
+Na mesma passada de RMS, o FFmpeg executa `silencedetect=noise=-32dB:d=0.25`; apenas intervalos completos entram em `signals.silences`. O ranqueamento considera conectivos e pontuação final quando o áudio foi analisado e o editor pode ampliar em até 0,65s os limites dentro de pausas, mas nunca remover partes das legendas escolhidas, invadir falas vizinhas ou exceder a duração máxima de 45s. Sem intervalos confiáveis, os limites originais da transcrição são mantidos. Não equivale a WhisperX, VAD Silero, diarização ou análise semântica por modelo multimodal.

@@ -152,3 +152,7 @@ O modo desktop oferece uma análise opcional por FFmpeg que combina o texto das 
 Após a análise, cada sugestão tem uma caixa **Incluir Short na exportação**. É possível desmarcar resultados que não fazem sentido e gerar apenas os escolhidos; com nenhum selecionado, a exportação fica desativada. O servidor recalcula as sugestões e valida os intervalos enviados, evitando aceitar um trecho alterado ou desatualizado como se tivesse sido aprovado automaticamente.
 
 Os testes incluem uma gravação sintética com corte visual real entre cenas preta e branca, além de áudio. O Playwright exige que o FFmpeg detecte **amostras de áudio e ao menos uma mudança visual** antes de concluir o fluxo de exportação.
+
+## Cortes em pausas e finais de frases
+
+A versão desktop detecta intervalos de baixa intensidade com FFmpeg e tenta adicionar margens curtas antes/depois do conteúdo falado para evitar cortes bruscos. Não remove nenhum trecho de legenda nem invade as falas vizinhas. Um ajuste heurístico avalia se o Short começa por uma continuação ou termina em uma frase incompleta. O resultado ainda exige revisão: silêncio detectado não equivale a compreensão real da fala.

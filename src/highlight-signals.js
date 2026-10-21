@@ -53,3 +53,21 @@ export function candidateSignalEvidence(value,start,end,profile='podcast') {
   if(visualChanges)reasons.push('Mudanças visuais detectadas');
   return {bonus,highEnergy,visualChanges,reasons,available:audio.length>0||scenes.length>0};
 }
+
+/** Parse pairs emitted by FFmpeg silencedetect, ignoring unfinished intervals. */
+export function parseSilenceLog(log) {
+  const result=[];
+  let start=null;
+  for(const line of String(log).split(/\r?\n/u)) {
+    const begin=/\bsilence_start:\s*([0-9]+(?:\.[0-9]+)?)/u.exec(line);
+    if(begin)start=Number(begin[1]);
+    const finish=/\bsilence_end:\s*([0-9]+(?:\.[0-9]+)?)/u.exec(line);
+    if(finish && start!==null) {
+      const end=Number(finish[1]);
+      if(Number.isFinite(start)&&Number.isFinite(end)&&end-start>=.22&&start>=0&&result.length<1000)
+        result.push({start:Math.round(start*100)/100,end:Math.round(end*100)/100});
+      start=null;
+    }
+  }
+  return result;
+}
