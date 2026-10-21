@@ -27,7 +27,7 @@ test('silent gameplay: detects motion, reviews selection and exports an uncaptio
     await expect(page.locator('.shorts-evidence')).toContainText('movimento');
     await expect(page.getByRole('button',{name:'Gerar 1 Short sem legendas'})).toBeEnabled();
     await page.getByRole('button',{name:'Gerar 1 Short sem legendas'}).click();
-    await expect(page.getByText('Short automático')).toBeVisible({timeout:20000});
+    await expect(page.getByText('Short sem legendas')).toBeVisible({timeout:20000});
     await expect(page.getByText('Exportação concluída').last()).toBeVisible({timeout:145000});
     const link=page.getByRole('link',{name:'Baixar vídeo exportado'}).last();
     const response=await page.request.get(await link.getAttribute('href'));
