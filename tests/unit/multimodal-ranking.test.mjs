@@ -81,7 +81,7 @@ test('narrative quality rejects unfinished speech and rewards clear ending',()=>
 test('pauses only pad outside selected speech and never cross adjacent cues',()=>{
   const silences=[
     {start:.55,end:.95},{start:9,end:11.5},
-    {start:11.55,end:11.95},{start:22.02,end:22.4}
+    {start:12.55,end:12.95},{start:23.02,end:23.4}
   ];
   const a=refineShortBoundaries({start:1,end:9,duration:25,signals:{silences},previousEnd:0,nextStart:12});
   assert.ok(a.adjusted&&a.start<1&&a.start>=.55&&a.end>9&&a.end<12);
@@ -93,12 +93,12 @@ test('pauses only pad outside selected speech and never cross adjacent cues',()=
 test('ranker preserves subtitles and exposes pause adjustments',()=>{
   const cues=[
     {start:1,end:9,text:'Apresentamos aqui a primeira história com começo e final bem definido.'},
-    {start:12,end:22,text:'Agora concluímos outra história de destaque com resposta e resultado importante!'}
+    {start:13,end:23,text:'Agora concluímos outra história de destaque com resposta e resultado importante!'}
   ];
   const signals={audio:[],scenes:[],silences:[
     {start:.55,end:.95},{start:9,end:9.35},{start:11.55,end:11.95},{start:22.02,end:22.4}
   ]};
-  const ranked=rankShortsFromTranscript(cues,{duration:25,signals,maxClips:2});
+  const ranked=rankShortsFromTranscript(cues,{duration:26,signals,maxClips:2});
   assert.equal(ranked.error,null);
   assert.equal(ranked.candidates.length,2);
   assert.ok(ranked.candidates.some(c=>c.evidence.pauseAdjusted));
