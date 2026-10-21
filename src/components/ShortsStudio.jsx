@@ -79,7 +79,7 @@ export default function ShortsStudio({
                 </div>
                 <p className="shorts-reason">{candidate.reason}</p>
                 {candidate.evidence && <p className="shorts-evidence">
-                  Evidências: {candidate.evidence.source} · {candidate.evidence.audioPeaks} picos de áudio · {candidate.evidence.sceneChanges} cortes visuais · movimento {candidate.evidence.motionActivity||0}{candidate.evidence.pauseAdjusted===true?' · cortes ajustados em pausas':''}
+                  Evidências: {candidate.evidence.source} · {candidate.evidence.audioPeaks} picos de áudio · {candidate.evidence.sceneChanges} cortes visuais · movimento {candidate.evidence.motionActivity||0}{candidate.evidence.motionBursts?' · '+candidate.evidence.motionBursts+' picos sustentados':''}{candidate.evidence.pauseAdjusted===true?' · cortes ajustados em pausas':''}
                 </p>}
                 <p className="shorts-transcript">“{candidate.transcript}”</p>
                 <div className="shorts-candidate-actions">

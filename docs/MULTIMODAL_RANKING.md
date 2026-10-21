@@ -31,3 +31,11 @@ Com transcrição, mantém-se o ranking por falas com evidência adicional de mo
 ## Etapa adicional: margens de silêncio e coerência textual
 
 Na mesma passada de RMS, o FFmpeg executa `silencedetect=noise=-32dB:d=0.25`; apenas intervalos completos entram em `signals.silences`. O ranqueamento considera conectivos e pontuação final quando o áudio foi analisado e o editor pode ampliar em até 0,45s os limites dentro de pausas, mas nunca remover partes das legendas escolhidas, invadir falas vizinhas ou exceder a duração máxima de 45s. Sem intervalos confiáveis, os limites originais da transcrição são mantidos. Não equivale a WhisperX, VAD Silero, diarização ou análise semântica por modelo multimodal.
+
+## Relevância temporal dos acontecimentos (evolução do ranking visual)
+
+Para gameplays e vídeos sem fala, o ranking agora detecta **picos sustentados de movimento em relação à atividade típica do próprio vídeo**, usando as amostras YDIF já calculadas pelo FFmpeg. O detector agrupa quadros próximos e só considera eventos com pelo menos duas amostras elevadas; flashes isolados não recebem bônus. As janelas de Short também podem começar antes desses picos, preservando um pouco do contexto anterior.
+
+A pontuação reduz a influência do movimento médio contínuo e concede um bônus limitado a picos visuais e acústicos, sem confundir movimento com emoção ou qualidade editorial. O candidato exibe quantos picos sustentados contribuíram para sua seleção. Vídeos com movimento uniforme continuam elegíveis, mas não ganham pontos fictícios por acontecimentos não detectados.
+
+Os testes em `tests/unit/visual-highlights.test.mjs` cobrem cenas estáticas, movimento contínuo, flash de um único quadro e dois acontecimentos visuais separados. A análise permanece 100% local e os limites de duração existentes não mudam.
