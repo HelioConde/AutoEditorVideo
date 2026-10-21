@@ -22,6 +22,12 @@ A compatibilidade com chamadas antigas é mantida: sem `selectedRanges`, o servi
 
 Teste Playwright: simula gravação com duas cenas de cores distintas e áudio real; verifica presença positiva de amostras de áudio e mudanças de cena, alternância das caixas de aprovação e geração de Short vertical.
 
+## Detecção de movimento para vídeos sem transcrição
+
+Além de RMS e mudanças de cena, o analisador mede `signalstats.YDIF` a 2 quadros/s no FFmpeg. O campo `motion` contém pares `{time,value}` sem imagens ou dados binários. O módulo `src/visual-highlights.js` usa janelas de 12 a 18 segundos e descarta candidatas com poucas amostras ou atividade visual insuficiente. Duração máxima da análise: 10 minutos.
+
+Com transcrição, mantém-se o ranking por falas com evidência adicional de movimento; sem transcrição, o programa usa a trilha de movimento e exporta **Shorts sem legendas**. A análise não interpreta semanticamente o que aconteceu na cena. Todos os candidatos passam pela revisão do usuário e pela validação de intervalos no servidor antes de exportar. Para detecção de ações específicas (gols, kills, reações), ainda será necessário um modelo de visão adaptado ao tipo de conteúdo.
+
 ## Etapa adicional: margens de silêncio e coerência textual
 
 Na mesma passada de RMS, o FFmpeg executa `silencedetect=noise=-32dB:d=0.25`; apenas intervalos completos entram em `signals.silences`. O ranqueamento considera conectivos e pontuação final quando o áudio foi analisado e o editor pode ampliar em até 0,45s os limites dentro de pausas, mas nunca remover partes das legendas escolhidas, invadir falas vizinhas ou exceder a duração máxima de 45s. Sem intervalos confiáveis, os limites originais da transcrição são mantidos. Não equivale a WhisperX, VAD Silero, diarização ou análise semântica por modelo multimodal.

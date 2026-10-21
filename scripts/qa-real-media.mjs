@@ -4,6 +4,7 @@ import {spawnSync} from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import {analyzeLocalMedia} from '../server/media-analysis.mjs';
+import {rankVisualShorts} from '../src/visual-highlights.js';
 
 // Exercise the production analyzer on media uploaded to this repository.
 const mediaFiles=['15979800_1080_1920_30fps.mp4','public/6767176-uhd_2560_1440_25fps.mp4','public/VID-20250216-WA0003.mp4'];
@@ -34,6 +35,8 @@ for(const [index,relative] of mediaFiles.entries()){
   const signals=await analyzeLocalMedia({source:file,duration:inspected});
   assert.equal(signals.coverage.video,true,relative+' deve permitir análise visual');
   assert.ok(Array.isArray(signals.scenes));
+  assert.ok(Array.isArray(signals.motion),relative+' deve fornecer uma série de movimento');
+  const visualHighlights=rankVisualShorts(signals,{duration:inspected,maxClips:3,profile:'gameplay'});
   let meanVolumeDb=null;
   if(audio.length>0){
     assert.equal(signals.coverage.audio,true,relative+' deve permitir decodificar áudio');
@@ -67,7 +70,10 @@ for(const [index,relative] of mediaFiles.entries()){
     audioTracks:audio.length,audioCodecs:audio.map(x=>x.codec_name),
     meanVolumeDb, noDetectedAudioEnergy:signals.audio.length===0,
     analyzedSeconds:Number(inspected.toFixed(2)),rmsSamples:signals.audio.length,
-    sceneChanges:signals.scenes.length,mediaCoverage:signals.coverage,
+    sceneChanges:signals.scenes.length,motionSamples:signals.motion.length,
+    visualCandidates:visualHighlights.candidates.length,
+    visualAnalysisNote:visualHighlights.error||'Movimento detectado — exige revisão',
+    mediaCoverage:signals.coverage,
     portraitPreview:path.basename(portrait),snapshot:path.basename(snapshot)
   };
   results.push(record);
@@ -75,15 +81,15 @@ for(const [index,relative] of mediaFiles.entries()){
 }
 fs.writeFileSync(path.join(output,'report.json'),JSON.stringify({
   generatedBy:'npm run qa:media',results,
-  note:'Energy peaks and scene changes do not prove semantic highlights. Speech transcription remains required.'
+  note:'Energy and visual movement are heuristics, not event detection. Silent videos may yield uncaptioned candidates only if actual sustained motion is measured.'
 },null,2)+'\n');
 if(process.env.GITHUB_STEP_SUMMARY){
   const rows=results.map(r=>'| '+r.file+' | '+r.video.width+'x'+r.video.height+
-    ' | '+r.durationSeconds+'s | '+r.audioTracks+' | '+r.rmsSamples+' | '+r.sceneChanges+' |').join('\n');
+    ' | '+r.durationSeconds+'s | '+r.audioTracks+' | '+r.rmsSamples+' | '+r.sceneChanges+' | '+r.motionSamples+' | '+r.visualCandidates+' |').join('\n');
   fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
     '\n## AutoEditor — verificação com vídeos reais\n\n'+
-    '| Vídeo | Resolução | Duração | Faixas de áudio | Amostras RMS | Mudanças de cena (12s) |\n'+
-    '|---|---:|---:|---:|---:|---:|\n'+rows+'\n\n'+
+    '| Vídeo | Resolução | Duração | Faixas de áudio | Amostras RMS | Mudanças de cena (12s) | Quadros analisados | Candidatos visuais |\n'+
+    '|---|---:|---:|---:|---:|---:|---:|---:|\n'+rows+'\n\n'+
     'Previews de Shorts 360x640 no artefato real-media-qa.\n');
 }
 console.log('PASS: '+results.length+' mídias reais analisadas e convertidas para Shorts verticais.');

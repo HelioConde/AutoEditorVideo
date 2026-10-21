@@ -30,28 +30,51 @@ export function parseSceneLog(log) {
   return [...new Set(times)].sort((a,b)=>a-b);
 }
 export function normalizedSignals(value) {
-  if(!value || typeof value!=='object')return {audio:[],scenes:[]};
+  if(!value || typeof value!=='object')return {audio:[],scenes:[],motion:[]};
   const audio=Array.isArray(value.audio)?value.audio.filter(x=>Number.isFinite(x?.time)&&Number.isFinite(x?.db)&&x.time>=0&&x.time<=3600&&x.db<=0&&x.db>=-120).slice(0,1800):[];
   const scenes=Array.isArray(value.scenes)?value.scenes.filter(x=>Number.isFinite(x)&&x>=0&&x<=3600).slice(0,1000):[];
-  return {audio,scenes};
+  const motion=Array.isArray(value.motion)?value.motion.filter(x=>Number.isFinite(x?.time)&&Number.isFinite(x?.value)&&x.time>=0&&x.time<=3600&&x.value>=0&&x.value<=255).slice(0,1800):[];
+  return {audio,scenes,motion};
 }
 export function candidateSignalEvidence(value,start,end,profile='podcast') {
-  const {audio,scenes}=normalizedSignals(value);
+  const {audio,scenes,motion}=normalizedSignals(value);
   const levels=audio.map(x=>x.db).sort((a,b)=>a-b);
   const median=levels.length?levels[Math.floor(levels.length/2)]:null;
   // A substantial *relative* increase in energy, not simply a loud source.
   const spikes=audio.filter(x=>x.time>=start && x.time<end && median!==null && x.db-median>=5);
   const cuts=scenes.filter(t=>t>=start && t<end);
+  const movement=motion.filter(x=>x.time>=start&&x.time<end);
+  const avgMotion=movement.length?movement.reduce((sum,x)=>sum+x.value,0)/movement.length:0;
+  const motionActivity=movement.length>=Math.max(4,(end-start)*.75)&&avgMotion>=2?Math.min(3,Math.floor(avgMotion/4)+1):0;
   const highEnergy=Math.min(3,spikes.length);
   const visualChanges=Math.min(3,cuts.length);
   const bonus=profile==='gameplay' ?
-    highEnergy*3 + visualChanges*4 :
-    profile==='tutorial' ? highEnergy*2 + visualChanges*2 :
-    highEnergy*3 + visualChanges*2;
+    highEnergy*3 + visualChanges*4 + motionActivity*2 :
+    profile==='tutorial' ? highEnergy*2 + visualChanges*2 + motionActivity :
+    highEnergy*3 + visualChanges*2 + motionActivity;
   const reasons=[];
   if(highEnergy)reasons.push('Picos de energia no áudio');
   if(visualChanges)reasons.push('Mudanças visuais detectadas');
-  return {bonus,highEnergy,visualChanges,reasons,available:audio.length>0||scenes.length>0};
+  if(motionActivity)reasons.push('Movimento entre quadros');
+  return {bonus,highEnergy,visualChanges,motionActivity,reasons,available:audio.length>0||scenes.length>0||motion.length>0};
+}
+
+/** Brightness change between sampled frames (FFmpeg signalstats YDIF, 0-255). */
+export function parseMotionLog(log) {
+  const motion=[];
+  let time=null;
+  for(const line of String(log).split(/\r?\n/u)){
+    const ts=/\bpts_time:\s*([0-9]+(?:\.[0-9]+)?)/u.exec(line);
+    if(ts){time=Number(ts[1]);continue;}
+    const diff=/lavfi\.signalstats\.YDIF=([0-9]+(?:\.[0-9]+)?)/u.exec(line);
+    if(diff && time!==null){
+      const value=Number(diff[1]);
+      if(Number.isFinite(value) && value>=0 && value<=255 && motion.length<1800)
+        motion.push({time:Math.round(time*100)/100,value:Math.round(value*100)/100});
+      time=null;
+    }
+  }
+  return motion;
 }
 
 /** Parse pairs emitted by FFmpeg silencedetect, ignoring unfinished intervals. */

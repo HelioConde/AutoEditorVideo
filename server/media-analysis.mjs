@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { parseRmsLog, parseSceneLog, parseSilenceLog } from '../src/highlight-signals.js';
+import { parseRmsLog, parseSceneLog, parseMotionLog, parseSilenceLog } from '../src/highlight-signals.js';
 
 /**
  * Use the locally installed FFmpeg to sample audio loudness and visual cuts.
@@ -41,19 +41,25 @@ export async function analyzeLocalMedia({source,duration,ffmpeg='ffmpeg'}) {
   // expensive full-resolution frames for CV inference.
   const imageArgs=[...common,'-an','-vf','fps=2,scale=160:-2,select=gt(scene\\,0.25),showinfo',
     '-f','null','-'];
-  const [audio,visual]=await Promise.allSettled([
+  const motionArgs=[...common,'-an','-vf',
+    'fps=2,scale=160:-2,signalstats,metadata=print:key=lavfi.signalstats.YDIF',
+    '-f','null','-'];
+  const [audio,visual,movement]=await Promise.allSettled([
     collectFfmpeg(ffmpeg,audioArgs),
     collectFfmpeg(ffmpeg,imageArgs),
+    collectFfmpeg(ffmpeg,motionArgs),
   ]);
-  if(audio.status==='rejected' && visual.status==='rejected')
+  if(audio.status==='rejected' && visual.status==='rejected' && movement.status==='rejected')
     throw new Error('FFmpeg não conseguiu analisar áudio nem vídeo.');
   return {
     audio:audio.status==='fulfilled'?parseRmsLog(audio.value):[],
-    scenes:visual.status==='fulfilled'?parseSceneLog(visual.value):[],
     silences:audio.status==='fulfilled'?parseSilenceLog(audio.value):[],
+    scenes:visual.status==='fulfilled'?parseSceneLog(visual.value):[],
+    motion:movement.status==='fulfilled'?parseMotionLog(movement.value):[],
     coverage:{
       audio:audio.status==='fulfilled',
-      video:visual.status==='fulfilled'
+      video:visual.status==='fulfilled',
+      motion:movement.status==='fulfilled'
     }
   };
 }
