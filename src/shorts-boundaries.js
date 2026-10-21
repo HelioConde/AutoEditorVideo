@@ -44,7 +44,7 @@ function silenceIntervals(signals, duration) {
  */
 export function refineShortBoundaries({
   start, end, duration, signals, previousEnd = 0, nextStart = duration,
-  maxPadding = 0.65, maxDuration = 45,
+  maxPadding = 0.45, maxDuration = 45,
 } = {}) {
   if (![start,end,duration,previousEnd,nextStart].every(Number.isFinite) ||
       start < 0 || end <= start || duration < end)

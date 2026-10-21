@@ -85,15 +85,15 @@ test('pauses only pad outside selected speech and never cross adjacent cues',()=
   ];
   const a=refineShortBoundaries({start:1,end:9,duration:25,signals:{silences},previousEnd:0,nextStart:12});
   assert.ok(a.adjusted&&a.start<1&&a.start>=.55&&a.end>9&&a.end<12);
-  const b=refineShortBoundaries({start:12,end:22,duration:25,signals:{silences},previousEnd:9,nextStart:25});
-  assert.ok(b.adjusted&&b.start<12&&b.start>=9&&b.end>22&&b.end<=22.4);
+  const b=refineShortBoundaries({start:13,end:23,duration:26,signals:{silences},previousEnd:9,nextStart:26});
+  assert.ok(b.adjusted&&b.start<13&&b.start>=9&&b.end>23&&b.end<=23.4);
   assert.deepEqual(refineShortBoundaries({start:2,end:12,duration:15,signals:{}}),
     {start:2,end:12,adjusted:false});
 });
 test('ranker preserves subtitles and exposes pause adjustments',()=>{
   const cues=[
-    {start:1,end:9,text:'Apresentamos aqui a primeira história com começo e final bem definido.'},
-    {start:13,end:23,text:'Agora concluímos outra história de destaque com resposta e resultado importante!'}
+    {start:1,end:9,text:'Apresentamos aqui a primeira história com começo e final bem definido para todos.'},
+    {start:13,end:23,text:'Agora concluímos outra história de destaque com resposta e resultado muito importante!'}
   ];
   const signals={audio:[],scenes:[],silences:[
     {start:.55,end:.95},{start:9,end:9.35},{start:11.55,end:11.95},{start:22.02,end:22.4}

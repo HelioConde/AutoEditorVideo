@@ -155,4 +155,4 @@ Os testes incluem uma gravação sintética com corte visual real entre cenas pr
 
 ## Cortes em pausas e finais de frases
 
-A versão desktop detecta intervalos de baixa intensidade com FFmpeg e tenta adicionar margens curtas antes/depois do conteúdo falado para evitar cortes bruscos. Não remove nenhum trecho de legenda nem invade as falas vizinhas. Um ajuste heurístico avalia se o Short começa por uma continuação ou termina em uma frase incompleta. O resultado ainda exige revisão: silêncio detectado não equivale a compreensão real da fala.
+A versão desktop detecta intervalos de baixa intensidade com FFmpeg e tenta adicionar margens curtas (até 450 ms por lado) antes/depois do conteúdo falado para evitar cortes bruscos. Não remove nenhum trecho de legenda nem invade as falas vizinhas. Um ajuste heurístico avalia se o Short começa por uma continuação ou termina em uma frase incompleta. O resultado ainda exige revisão: silêncio detectado não equivale a compreensão real da fala.
