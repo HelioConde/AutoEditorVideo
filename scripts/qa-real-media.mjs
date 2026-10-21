@@ -43,7 +43,7 @@ for(const [index,relative] of mediaFiles.entries()){
       '-t',String(inspected),'-vn','-af','volumedetect','-f','null','-'],
       {encoding:'utf8',timeout:60000,maxBuffer:3*1024*1024});
     assert.equal(volume.status,0,volume.stderr?.slice(-600));
-    const match=/mean_volume:\s*([-+\\w.]+)/u.exec(volume.stderr||'');
+    const match=/mean_volume:\s*([^\s]+)/u.exec(volume.stderr||'');
     meanVolumeDb=match?(Number.isFinite(Number(match[1]))?Number(match[1]):match[1]):null;
   }else{
     assert.equal(signals.audio.length,0,'Não inventar energia sonora para arquivo sem áudio');
