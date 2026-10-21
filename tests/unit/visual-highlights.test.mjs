@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import {parseMotionLog,candidateSignalEvidence} from '../../src/highlight-signals.js';
+import {parseMotionLog,candidateSignalEvidence,motionBurstMoments} from '../../src/highlight-signals.js';
 import {rankVisualShorts,rankAutomaticShorts} from '../../src/visual-highlights.js';
 import {analyzeLocalMedia} from '../../server/media-analysis.mjs';
 
@@ -67,4 +67,28 @@ test('real FFmpeg detects motion on a video without sound',async t=>{
     assert.equal(ranked.error,null);
     assert.equal(ranked.candidates.length,1);
   }finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
+
+test('sustained action bursts outrank steady background motion',()=>{
+  const motion=Array.from({length:120},(_,i)=>{
+    const time=i*.5;
+    const event=(time>=32&&time<34)||(time>=36&&time<38);
+    return {time,value:event?30:6};
+  });
+  const events=motionBurstMoments({motion});
+  assert.equal(events.length,2);
+  const ranked=rankVisualShorts({motion},{duration:60,maxClips:3,profile:'gameplay'});
+  assert.equal(ranked.error,null);
+  assert.ok(ranked.candidates[0].start<=33&&ranked.candidates[0].end>=37,
+    'o Short mais bem pontuado deve conter a ação e contexto ao redor');
+  assert.ok(ranked.candidates[0].evidence.motionBursts>=1);
+  assert.match(ranked.candidates[0].reason,/Picos de movimento sustentados/);
+});
+test('steady gameplay footage and a single-frame flash do not invent events',()=>{
+  const uniform=Array.from({length:80},(_,i)=>({time:i*.5,value:12}));
+  assert.deepEqual(motionBurstMoments({motion:uniform}),[]);
+  const flash=uniform.map((x,i)=>i===32?{...x,value:72}:x);
+  assert.deepEqual(motionBurstMoments({motion:flash}),[]);
+  const invalid=[{time:-1,value:250},{time:4,value:NaN}];
+  assert.deepEqual(motionBurstMoments({motion:invalid}),[]);
 });

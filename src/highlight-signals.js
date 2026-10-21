@@ -94,3 +94,35 @@ export function parseSilenceLog(log) {
   }
   return result;
 }
+
+/**
+ * Find sustained bursts relative to the source's usual frame activity.
+ * Single-frame flashes are ignored; a stationary source stays stationary.
+ * These are visual novelty markers, NOT semantic detections of game events.
+ */
+export function motionBurstMoments(value,{maxEvents=24}={}) {
+  const {motion}=normalizedSignals(value);
+  if(motion.length<8)return [];
+  const ordered=motion.map(x=>x.value).sort((a,b)=>a-b);
+  const median=ordered[Math.floor(ordered.length/2)];
+  const threshold=Math.max(4,median+Math.max(3,median*.6));
+  const high=motion.filter(x=>x.value>=threshold).sort((a,b)=>a.time-b.time);
+  const groups=[];
+  for(const point of high) {
+    const previous=groups.at(-1);
+    if(previous && point.time-previous.last<=1.1) {
+      previous.last=point.time;
+      previous.count++;
+      previous.peak=Math.max(previous.peak,point.value);
+    }else groups.push({first:point.time,last:point.time,count:1,peak:point.value});
+  }
+  // Prefer the strongest changes but do not interpret one corrupted frame
+  // or a tiny one-frame flash as a meaningful event.
+  return groups.filter(g=>g.count>=2)
+    .sort((a,b)=>(b.peak-threshold)-(a.peak-threshold)||a.first-b.first)
+    .slice(0,Math.max(0,Math.min(24,maxEvents)))
+    .map(g=>({time:Math.round(((g.first+g.last)/2)*100)/100,
+      strength:Math.round((g.peak-threshold)*100)/100,
+      samples:g.count}))
+    .sort((a,b)=>a.time-b.time);
+}
