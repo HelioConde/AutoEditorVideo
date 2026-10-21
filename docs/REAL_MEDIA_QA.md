@@ -21,3 +21,7 @@ Observação: um arquivo dentro de `public/` pode ser copiado para o build web, 
 - O terceiro vídeo será caracterizado automaticamente no próximo job do GitHub Actions, sem presumir falas, conteúdo ou presença de eventos.
 
 Uma cena contínua pode conter ação relevante mesmo com zero mudanças de cena; esse conjunto motiva um módulo de detecção de movimento/acontecimentos independente da transcrição.
+
+## Testes adicionais: vídeo sem fala
+
+O QA agora registra `motionSamples` e `visualCandidates`, além de energia RMS e cortes de cena. Para clipes estáticos, aceita **zero** sugestões; um frame com movimento não basta. Uma suíte sintética adicional usa FFmpeg para criar um vídeo animado sem áudio e valida tanto a detecção quanto a exportação vertical sem faixas de legendas. Isso não demonstra capacidade de reconhecer acontecimentos reais.

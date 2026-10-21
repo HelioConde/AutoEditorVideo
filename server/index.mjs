@@ -10,7 +10,7 @@ import { parseProjectFile, validateScenes } from '../src/project-format.js';
 import { getVoiceCapabilities, resolveVoiceEngine, synthesizeVoice } from './tts.mjs';
 import { validateSubtitles, toSrt, remapSubtitles } from '../src/subtitles.js';
 import { whisperCapability, transcribeLocalAudio } from './whisper.mjs';
-import { rankShortsFromTranscript } from '../src/shorts-ranking.js';
+import { rankAutomaticShorts } from '../src/visual-highlights.js';
 import { selectApprovedShorts } from '../src/shorts-selection.js';
 import { analyzeLocalMedia } from './media-analysis.mjs';
 
@@ -75,7 +75,7 @@ const upload = multer({
 const publicProject = p => ({
   id: p.id, name: p.name, createdAt: p.createdAt, media: p.media || null,
   reference: p.reference || null, edit: p.edit || null, transcription:p.transcription || null,
-  exports: (p.exports || []).map(({ id, status, aspect, createdAt, error, kind, title, score }) => ({ id, status, aspect, createdAt, error, kind:kind||'cuts', title, score }))
+  exports: (p.exports || []).map(({ id, status, aspect, createdAt, error, kind, title, score, captioned }) => ({ id, status, aspect, createdAt, error, kind:kind||'cuts', title, score, captioned }))
 });
 
 function runFFmpeg(args,cwd) {
@@ -388,15 +388,15 @@ export function createApp() {
     // If audio/video were not analyzed, preserve legacy text-only behavior.
     const signals=cached?.filename===project.media.fileName ? cached : null;
     const respond=async()=>{
-      const features=signals ? await signals.promise.catch(()=>null) : null;
-      const ranked=rankShortsFromTranscript(subtitles.subtitles,{
+      const features=subtitles.subtitles.length ? (signals ? await signals.promise.catch(()=>null) : null) : await getLocalSignals(project);
+      const ranked=rankAutomaticShorts(subtitles.subtitles,{
         duration:project.media.duration,maxClips:req.body?.count??3,profile,signals:features
       });
       if(ranked.error)return res.status(400).json({error:ranked.error});
       const approved=selectApprovedShorts(ranked.candidates,req.body?.selectedRanges);
       if(approved.error)return res.status(400).json({error:approved.error});
       const items=approved.candidates.map(candidate=>({
-        id:randomUUID(),status:'processing',kind:'short',aspect:'9:16',
+        id:randomUUID(),status:'processing',kind:'short',aspect:'9:16',captioned:subtitles.subtitles.length>0,
         title:candidate.title,score:candidate.score,start:candidate.start,end:candidate.end,
         createdAt:new Date().toISOString(),filename:randomUUID()+'.mp4'
       }));
@@ -408,7 +408,7 @@ export function createApp() {
           await render(project,job,
             path.join(UPLOADS,project.id,project.media.fileName),
             path.join(UPLOADS,project.id,job.filename),
-            [{start:job.start,end:job.end}],'9:16',subtitles.subtitles,true);
+            [{start:job.start,end:job.end}],'9:16',subtitles.subtitles,subtitles.subtitles.length>0);
         }
       })().catch(e=>console.error('Falha no lote de Shorts:',e.message));
     };
