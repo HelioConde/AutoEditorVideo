@@ -1,4 +1,26 @@
-# AutoEditor Studio 2.1 — Desktop e Web
+# AutoEditor Studio — edição de vídeo no desktop e no navegador
+
+**Importe vídeos, monte cortes e exporte conteúdos em formatos para redes sociais, com processamento local.**
+
+[**Versão web (GitHub Pages)**](https://helioconde.github.io/AutoEditorVideo/) · [**Guia da edição web**](docs/WEB_EDITION.md)
+
+![React](https://img.shields.io/badge/React-18-149ECA?logo=react&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-22%2B-339933?logo=nodedotjs&logoColor=white) ![FFmpeg](https://img.shields.io/badge/FFmpeg-local-007808) ![Status](https://img.shields.io/badge/status-beta-64748b)
+
+## Escolha sua edição
+
+| | Desktop/local | Web |
+| --- | --- | --- |
+| Processamento | FFmpeg nativo + API Node local | FFmpeg WebAssembly no navegador |
+| Instalação | Node.js 22+, FFmpeg e FFprobe | Navegador compatível |
+| Desenvolvimento | `npm install && npm run dev` | `npm install && npm run dev:web` |
+| Limites | Depende dos recursos disponíveis no computador | Limites menores de duração e tamanho |
+| Dados | Arquivos locais no projeto | Processamento no dispositivo |
+
+**Já disponível no código:** importação, prévia, recortes, sequência de cortes e exportação em MP4. **Objetivo futuro:** identificar melhores momentos automaticamente para criar Shorts — não confundir essa visão com recurso pronto.
+
+**Qualidade:** `npm run check` executa testes e builds das duas edições. A documentação detalhada abaixo descreve segurança, limites e testes de navegador.
+
+---
 
 Estúdio para **importar, recortar, pré-visualizar e exportar vídeos** sem depender de uma API paga. Desenvolvimento inicial a partir de [AutoEditorVideo (2022)](https://github.com/HelioConde/AutoEditorVideo). Código original preservado em `legacy/` e no histórico do Git.
 
