@@ -26,6 +26,12 @@ param(
   [switch]$Renderizar,
   [switch]$CriarVoz,
   [switch]$SemAnimacao,
+  [switch]$Esqueleto2D,
+  [switch]$PrepararRig2D,
+  [string]$ImportarQuadrosRig2D='',
+  [switch]$AprovarRig2D,
+  [ValidateSet('l','light')][string]$PersonagemRig='l',
+  [ValidateRange(8,60)][int]$RigFps=30,
   [ValidateSet('ultrassutil','equilibrado','vivo')][string]$PerfilPersonagens='equilibrado',
   [switch]$Offline
 )
@@ -37,6 +43,12 @@ if(($ReprovarCena -or $AprovarCena) -and ($Renderizar -or $CriarVoz -or $Somente
   throw 'Revise uma cena de cada vez, sem -Renderizar, -CriarVoz, -SomenteCapa nem -TodasCenas.'
 }
 if($ReprovarCena -and $AprovarCena){throw 'Escolha -ReprovarCena ou -AprovarCena.'}
+if($Esqueleto2D -and $SemAnimacao){throw 'Escolha -Esqueleto2D ou -SemAnimacao.'}
+$rigOperations=@([int]$PrepararRig2D,[int][bool]$ImportarQuadrosRig2D,[int]$AprovarRig2D)
+if(($rigOperations | Measure-Object -Sum).Sum -gt 1){throw 'Escolha apenas uma operacao Rig2D por vez.'}
+if((($rigOperations | Measure-Object -Sum).Sum -gt 0) -and ($Renderizar -or $CriarVoz -or $TodasCenas -or $SomenteCapa -or $PrepararReprovadas)){
+  throw 'Preparar/importar/aprovar Rig2D exige uma cena e nao renderiza no mesmo comando.'
+}
 if($AprovarMulticamadas -and ($ReprovarCena -or $AprovarCena -or $PrepararReprovadas -or $Renderizar -or $SomenteCapa -or $TodasCenas)){
   throw '-AprovarMulticamadas exige uma unica cena para revisao, sem -Renderizar nem outras operacoes.'
 }
@@ -132,6 +144,17 @@ $oldEnv=Join-Path $root '..\arquivo-otaku-kit\chatgpt-codex-proxy\.env'
 if((Test-Path $oldEnv) -and -not (Test-Path (Join-Path $root 'chatgpt-codex-proxy\.env'))){
   $env:ARQUIVO_OTAKU_PROXY_ENV=$oldEnv
 }
+if($PrepararRig2D -or $ImportarQuadrosRig2D -or $AprovarRig2D){
+  $rigArgs=@((Join-Path $root 'scripts\rigby2d_bridge.py'),
+    '--id',$Id,'--modelo',$Modelo,'--cena',[string]$Cena,
+    '--personagem',$PersonagemRig,'--fps',[string]$RigFps)
+  if($PrepararRig2D){$rigArgs+='--preparar'}
+  if($ImportarQuadrosRig2D){$rigArgs+=@('--importar-quadros',$ImportarQuadrosRig2D)}
+  if($AprovarRig2D){$rigArgs+=@('--aprovar','--motivo',$Motivo)}
+  & $py @rigArgs
+  if($LASTEXITCODE -ne 0){throw 'Falha na preparacao/revisao Rigby2D. Caches originais preservados.'}
+  return
+}
 if($PrepararReprovadas){
   & $py (Join-Path $root 'scripts\preparar_cenas_reprovadas.py') '--id' $Id '--modelo' $Modelo
   if($LASTEXITCODE -ne 0){throw 'Falhou preparo das cenas reprovadas; nenhum pedido pago enviado.'}
@@ -201,7 +224,7 @@ if($ModoComposicao -eq 'multicamadas' -or $AprovarMulticamadas){
       '--id',$Id,'--modelo',$Modelo,'--max-segundos-por-plano',
       $MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture),'--renderizar')
     if($Plano){$videoArgs+=@('--plano',$Plano)}
-    $videoArgs+=@('--animacao',$(if($SemAnimacao){'desligada'}else{'cinematica'}))
+    $videoArgs+=@('--animacao',$(if($Esqueleto2D){'esqueleto2d'}elseif($SemAnimacao){'desligada'}else{'cinematica'}))
     $videoArgs+=@('--perfil-personagens',$PerfilPersonagens)
     & $py @videoArgs
     if($LASTEXITCODE -ne 0){throw 'Remotion bloqueou render ou falta aprovacao visual.'}
@@ -229,7 +252,7 @@ if($Renderizar){
     $MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture),'--renderizar')
   if($Plano){$videoArgs+=@('--plano',$Plano)}
   if($CriarVoz){$videoArgs+='--criar-voz'}
-  $videoArgs+=@('--animacao',$(if($SemAnimacao){'desligada'}else{'cinematica'}))
+  $videoArgs+=@('--animacao',$(if($Esqueleto2D){'esqueleto2d'}elseif($SemAnimacao){'desligada'}else{'cinematica'}))
     $videoArgs+=@('--perfil-personagens',$PerfilPersonagens)
   & $py @videoArgs
   if($LASTEXITCODE -ne 0){throw 'Falhou montagem Remotion. Imagens mantidas em cache.'}
