@@ -140,7 +140,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('X-Content-Type-Options','nosniff')
         self.send_header('X-Frame-Options','DENY')
         self.send_header('Content-Security-Policy',
-                         "default-src 'self'; object-src 'none'; frame-ancestors 'none'")
+                         "default-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'none'; frame-ancestors 'none'")
         self.end_headers()
         self.wfile.write(data)
 
@@ -154,6 +154,12 @@ class Handler(BaseHTTPRequestHandler):
                                             'localhost:'+str(self.server.server_port)))
 
     def do_GET(self):
+        # Reject DNS rebinding: only the loopback host used by the launcher.
+        if self.headers.get('Host') not in (
+            '127.0.0.1:'+str(self.server.server_port),
+            'localhost:'+str(self.server.server_port)):
+            self.json(403,{'error':'Host nao autorizado'})
+            return
         if self.path=='/':
             page=(HERE/'shorts-studio.html').read_text(encoding='utf-8')
             page=page.replace('__STUDIO_TOKEN__',self.job.token)
