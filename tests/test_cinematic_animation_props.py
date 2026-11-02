@@ -82,3 +82,44 @@ def test_animation_modes_validate_without_touching_paid_assets(tmp_path,monkeypa
     with pytest.raises(ValueError,match="Modo de animacao"):
         renderer.build_props({"id":"test","scenes":[scene]},voice,[],4,
                              public=tmp_path/"public",animation_mode="random")
+
+
+def test_three_character_presets_in_props_without_changing_approved_pngs(
+        tmp_path,monkeypatch):
+    scene={"id":"06","subject":"personagens","shot_type":"final_checkmate"}
+    master=tmp_path/"master.png"
+    Image.new("RGB",(1024,1536),(20,25,40)).save(master)
+    monkeypatch.setattr(renderer,"validate_scenes",lambda *args,**kwargs:[{
+        "scene":scene,"render_mode":"master_static",
+        "files":{"master":master},"fidelity":{}
+    }])
+    monkeypatch.setattr(renderer,"select_episode",lambda *_:{"cover":"Chess"})
+    voice=tmp_path/"voice.mp3";voice.write_bytes(b"audio")
+    original_hash=hashlib.sha256(master.read_bytes()).hexdigest()
+    for preset in ("ultrassutil","equilibrado","vivo"):
+        props=renderer.build_props({"id":"test","scenes":[scene]},voice,[],3,
+             public=tmp_path/"public",character_preset=preset)
+        assert props["animationMode"]=="cinematica"
+        assert props["characterPreset"]==preset
+        assert hashlib.sha256(master.read_bytes()).hexdigest()==original_hash
+    import pytest
+    with pytest.raises(ValueError,match="Preset de personagens"):
+        renderer.build_props({"id":"test","scenes":[scene]},voice,[],3,
+             public=tmp_path/"public",character_preset="forte_demais")
+
+
+def test_micro_motion_assets_are_not_created_during_props_build(tmp_path,monkeypatch):
+    from pathlib import Path
+    scene={"id":"03","subject":"personagens","shot_type":"light_moves_king"}
+    master=tmp_path/"master.png"
+    Image.new("RGB",(1024,1536),(20,25,40)).save(master)
+    monkeypatch.setattr(renderer,"validate_scenes",lambda *args,**kwargs:[{
+        "scene":scene,"render_mode":"master_static",
+        "files":{"master":master},"fidelity":{}
+    }])
+    monkeypatch.setattr(renderer,"select_episode",lambda *_:{"cover":"Chess"})
+    voice=tmp_path/"voice.mp3";voice.write_bytes(b"audio")
+    renderer.build_props({"id":"test","scenes":[scene]},voice,[],3,
+          public=tmp_path/"public",character_preset="equilibrado")
+    assert not list(tmp_path.rglob("*eyes_closed*.png"))
+    assert not list(tmp_path.rglob("*blink*.png"))

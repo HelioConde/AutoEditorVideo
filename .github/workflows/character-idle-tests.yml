@@ -1,0 +1,33 @@
+name: "Remotion — testes de movimento sutil"
+on:
+  pull_request:
+    paths:
+      - "motion-remotion/src/character-idle.ts"
+      - "motion-remotion/tests/character-idle.test.cjs"
+      - "motion-remotion/package.json"
+      - ".github/workflows/character-idle-tests.yml"
+  push:
+    branches: [main]
+    paths:
+      - "motion-remotion/src/character-idle.ts"
+      - "motion-remotion/tests/character-idle.test.cjs"
+      - "motion-remotion/package.json"
+      - ".github/workflows/character-idle-tests.yml"
+permissions:
+  contents: read
+jobs:
+  test-character-motion:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    defaults:
+      run:
+        working-directory: motion-remotion
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Instalar dependencias (sem scripts externos)
+        run: npm install --no-audit --no-fund --ignore-scripts
+      - name: Testar presets e limites de movimentacao
+        run: npm run test:character
