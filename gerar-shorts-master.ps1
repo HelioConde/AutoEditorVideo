@@ -12,6 +12,7 @@ param(
   [ValidateRange(2.5,12.0)][double]$MaxSegundosPorPlano=6,
   [switch]$SomentePlanejar,
   [switch]$SomenteValidar,
+  [switch]$RepararFundo,
   [switch]$Renderizar,
   [switch]$CriarVoz,
   [switch]$Offline
@@ -100,6 +101,7 @@ if($Plano){$argsList+=@('--plano',$Plano)}
 if($MasterExistente){$argsList+=@('--master-existente',$MasterExistente)}
 if($TodasCenas){$argsList+='--todas-cenas'}
 if($SomenteValidar){$argsList+='--validar'}
+if($RepararFundo){$argsList+='--reparar-fundo'}
 if($Offline){$argsList+='--offline'}
 & $py @argsList
 if($LASTEXITCODE -ne 0){throw 'Geracao interrompida. Cache e videos anteriores preservados.'}
