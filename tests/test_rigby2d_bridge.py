@@ -61,7 +61,11 @@ def test_import_approve_and_rollback_on_changed_frame(tmp_path):
     with pytest.raises(ValueError,match="Frames existentes"):
         rig.import_sequence(scene,"l",exported,24)
     # Changing a single pose invalidates its signed scene export.
-    Image.new("RGBA",rig.SIZE,(15,50,25,255)).save(approved["files"][2])
+    with Image.open(approved["files"][2]) as opened:
+        tampered=opened.convert("RGBA")
+    # Keep valid alpha/pose, change one visible pixel to trigger SHA mismatch.
+    tampered.putpixel((400,600),(40,120,210,255))
+    tampered.save(approved["files"][2])
     with pytest.raises(ValueError,match="editado"):
         rig.approved_frames(scene,"l")
 
