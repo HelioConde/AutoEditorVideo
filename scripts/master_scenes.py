@@ -555,7 +555,8 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
               'A comparacao 2.5D e diagnostica. O Short usara a master original '
               'para preservar a peca e a mao. Nenhuma chamada de IA extra.',flush=True)
     if fidelity['redrawn'] or safe_hero:
-        mask_alerts.append('foreground_redesenhado')
+        if fidelity['redrawn']:
+            mask_alerts.append('foreground_redesenhado')
         # Show the exact frame that the safety fallback will use, making it
         # possible to review the corrected video frame without rendering MP4.
         preview=d/'preview-render-seguro.jpg'
