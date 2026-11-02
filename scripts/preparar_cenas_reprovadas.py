@@ -63,6 +63,18 @@ def prepare_rejected(ep_id:str,model:str,*,plan:Path|None=None)->dict:
         # not accumulate contradictory prompt instructions.
         base_prompt=scene['prompt'].split('\nVISUAL REGENERATION / TAKE ',1)[0]
         appendix=SAFETY_APPENDIX.replace('TAKE 2',f'TAKE {take}',1)
+        if scene.get('shot_type')=='ots_light':
+            appendix+=(' SPECIFIC SHOT SAFETY: CAMERA OVER LIGHT SHOULDER, '
+                       'but keep L at the far side of a CLEARLY SEPARATED '
+                       'CHESS TABLE. L is SEATED UPRIGHT on a chair behind the '
+                       'far tabletop edge. Show ONLY his head, shoulders and '
+                       'upper chest; his hips and the rest of his torso are '
+                       'fully hidden by the front edge of the table. His '
+                       'elbows may REST BEHIND the board, but no chest, arm, '
+                       'sleeve or knee may cross or overlap chessboard squares. '
+                       'Keep a visible horizontal strip of tabletop between '
+                       'L and all chessboard squares. This is a MEDIUM seated '
+                       'portrait, not a close-up leaning over the tabletop.')
         proposal['prompt']=base_prompt.rstrip()+'\n'+appendix
         proposal['correcao_visual']={
             'schema':REVISION_SCHEMA,
