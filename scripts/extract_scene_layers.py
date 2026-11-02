@@ -267,15 +267,25 @@ def main(argv:list[str]|None=None)->int:
         next((s for s in ep["scenes"] if int(s["id"])==args.cena),None)]
     if scenes[0] is None:raise ValueError("Cena inexistente")
     if args.verificar_aprovacoes:
-        # The renderer owns this check for both legacy scenes and semantic
-        # layers. Keep image generation disconnected from the approval check.
+        # Report EVERY scene that needs review, without any AI calls or
+        # modifying existing hashes/caches. A user can approve scenes one by
+        # one instead of discovering blockers after each failed render.
         from renderizar_master_remotion import validate_scenes
-        try:
-            validated=validate_scenes(ep,args.modelo)
-        except (OSError,RuntimeError,ValueError,KeyError) as exc:
-            print("[RENDER AGUARDA REVISAO] "+str(exc),flush=True)
+        blocked=0
+        for selected in scenes:
+            try:
+                validate_scenes({**ep,"scenes":[selected]},args.modelo)
+            except (OSError,RuntimeError,ValueError,KeyError) as exc:
+                blocked+=1
+                print(f"[RENDER PENDENTE] Cena {selected['id']}: {exc}",flush=True)
+            else:
+                print(f"[RENDER OK] Cena {selected['id']}: pronta.",flush=True)
+        if blocked:
+            print(f"[RENDER AGUARDA REVISAO] {blocked} de {len(scenes)} "
+                  "cenas ainda nao liberadas. Nenhum render ou chamada de IA.",
+                  flush=True)
             return 2
-        print(f"[RENDER LIBERADO] {len(validated)} cenas aprovadas e prontas.",flush=True)
+        print(f"[RENDER LIBERADO] {len(scenes)} cenas prontas.",flush=True)
         return 0
     if args.aprovar:
         if args.todas_cenas:raise ValueError("Aprovacao deve ser individual")
