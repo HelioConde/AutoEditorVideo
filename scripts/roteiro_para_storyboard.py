@@ -10,6 +10,7 @@ import json
 import math
 from pathlib import Path
 import re
+from diversidade_visual import direction, direction_prompt, storyboard_warnings
 
 ROOT=Path(__file__).resolve().parents[1]
 MANIFEST=ROOT/'conteudos'/'testes-animados-5.json'
@@ -26,7 +27,8 @@ def chunks(text: str, count: int) -> list[str]:
             for i in range(count)]
 
 
-def framing(episode: dict, role: str, index: int, within: int, total: int) -> tuple[str,str,str]:
+def framing(episode: dict, role: str, index: int, within: int, total: int,
+            direction_info: dict | None = None, previous: dict | None = None) -> tuple[str,str,str]:
     """Planos são dependentes da narração e do elenco, não uma lista fixa."""
     effect=episode.get('effect','chess')
     character=episode.get('character','personagem principal do anime')
@@ -47,6 +49,12 @@ def framing(episode: dict, role: str, index: int, within: int, total: int) -> tu
     subject='objeto' if within%3==2 and role!='fechamento' else 'personagens'
     if effect=='chess' and subject=='objeto':
         focal='Peça de xadrez realista no tabuleiro; a metáfora do duelo intelectual'
+    if direction_info is not None:
+        shot=direction_info['camera_angle']+' | '+direction_info['shot_type']
+        focal=direction_info['focus_subject']
+        # Action inserts must be large enough to read and preserve real hands.
+        # The only pure-object chess shot is top_board.
+        subject='objeto' if direction_info['shot_type'] in ('top_board','top_detail') else 'personagens'
     prompt=(f'{shot} Assunto principal: {focal}. Ambiente: {background}. '
             'Cena inspirada no tema de '+episode.get('series','anime')+'. '
             'Uma imagem vertical 2D anime cel shaded, com um único enquadramento coeso. '
@@ -54,6 +62,10 @@ def framing(episode: dict, role: str, index: int, within: int, total: int) -> tu
             'margens laterais de 12%, margem superior de 10%, '
             'escala natural e espaço inferior para legenda. '
             'NÃO desenhar texto, interface, mosaico ou telas divididas.')
+    if direction_info is not None:
+        prompt=(direction_prompt(episode,direction_info,previous=previous)+
+                prompt+' Use an intentional single-camera composition unlike the preceding shot. '
+                'For a close/detail view, crop naturally but never amputate wrists or hair. ')
     return subject,shot,prompt
 
 
@@ -76,12 +88,20 @@ def build_storyboard(episode: dict, max_hold: float=6.0,
         for j,speech in enumerate(snippets):
             proportion=len(speech.split())/total_words
             end=beat['fim_estimado_s'] if j==len(snippets)-1 else pos+seconds*proportion
-            subject,angle,prompt=framing(episode,beat['papel'],len(shots),j,len(snippets))
-            prompt += ' Narrative moment: '+speech+' Keep the visual action faithful to this segment.'
+            visual=direction(episode,len(shots),speech,beat['papel'],
+                             previous=shots,
+                             last=(beat_idx==len(base['cenas'])-1 and
+                                   j==len(snippets)-1))
+            subject,angle,prompt=framing(
+                episode,beat['papel'],len(shots),j,len(snippets),
+                direction_info=visual,previous=shots[-1] if shots else None)
+            prompt += (' Narrative moment: '+speech+
+                       ' Preserve the narrated meaning; do not invent canonical actions.')
             shots.append({
                 'id':f'{len(shots)+1:02d}','bloco_id':beat['id'],
                 'papel':beat['papel'],'subject':subject,
                 'trecho_roteiro':speech,'tipo_plano':angle,'prompt':prompt,
+                **{k:v for k,v in visual.items() if k!='visual_instruction'},
                 'inicio_estimado_s':round(pos,3),'fim_estimado_s':round(end,3),
                 'duracao_estimada_s':round(end-pos,3),
                 'revisao_visual_pendente':True
@@ -89,7 +109,13 @@ def build_storyboard(episode: dict, max_hold: float=6.0,
             pos=end
     if not shots:raise ValueError('Roteiro sem planos')
     if len(shots)>60:raise ValueError('Roteiro exige mais de 60 enquadramentos; revise antes de gastar cota')
+    visual_issues=storyboard_warnings(shots)
+    if visual_issues:
+        raise ValueError('Planejamento visual repetitivo: '+str(visual_issues))
     return {'schema':'arquivo-otaku/master-storyboards/v2','id':ep_id,
+            'visual_direction_version':'arquivo-otaku/visual-diversity/v1',
+            'visual_diversity_qa':{'status':'planejamento_distinto',
+                                   'warnings':visual_issues,'review_required':True},
             'title':episode.get('title',episode.get('titulo','')),
             'series':episode.get('series',episode.get('serie','Anime')),
             'effect':episode.get('effect',''), 'script':episode.get('script',episode.get('roteiro_melhorado','')),

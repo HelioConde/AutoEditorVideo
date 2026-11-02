@@ -18,6 +18,7 @@ import sys
 
 from PIL import Image, ImageChops, ImageFilter, ImageOps, ImageStat
 from roteiro_para_storyboard import select_episode, save_plan
+from diversidade_visual import similar_masters, storyboard_warnings
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets'/'gerados'/'shorts-animados'
@@ -530,6 +531,43 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     return result
 
 
+def review_visual_diversity(ep:dict,scene:dict,model:str,directory:Path,
+                            result:dict)->dict:
+    """Advisory QA, without changing paid PNGs or retrying requests."""
+    previous=[]
+    for candidate in ep.get('scenes',[]):
+        if candidate.get('id')==scene['id']:
+            break
+        path=scene_dir(ep,candidate,model)/'master.png'
+        if path.is_file():
+            previous.append((candidate['id'],path))
+    matches=similar_masters(directory/'master.png',previous)
+    metadata_warnings=[w for w in storyboard_warnings(ep.get('scenes',[]))
+                       if w['scene']==scene['id']]
+    result['visual_diversity']={
+        'shot_type':scene.get('shot_type','legado_sem_direcao'),
+        'camera_angle':scene.get('camera_angle','nao_especificado'),
+        'action':scene.get('action','nao_especificada'),
+        'similar_master_scenes':matches,
+        'metadata_warnings':metadata_warnings,
+        'review_required':bool(matches or metadata_warnings),
+        'status':'revisar_repeticao' if (matches or metadata_warnings) else
+                 'sem_repeticao_detectada',
+    }
+    if matches:
+        warning='composicao_repetitiva'
+        if warning not in result['warnings']:
+            result['warnings'].append(warning)
+        print(f"[QA AVISO] Cena {scene['id']}: master parecida "
+              f"com cenas {', '.join(x['scene'] for x in matches)}. "
+              'Revise antes de autorizar outra chamada de IA.',flush=True)
+    if metadata_warnings:
+        print(f"[QA AVISO] Cena {scene['id']}: direcao de camera repetida.",flush=True)
+    atomic(directory/'qa.json',
+           (json.dumps(result,ensure_ascii=False,indent=2)+'\n').encode('utf-8'))
+    return result
+
+
 def production_storyboard(ep_id:str,max_hold:float,*,selected:Path|None=None,
                           replan:bool=False)->Path:
     """Keep a production snapshot stable across restarts and future plan changes.
@@ -664,6 +702,8 @@ def main(argv:list[str]|None=None)->int:
         result=execute_scene(ep,scene,args.modelo,supplied_master=args.master_existente,
                              generate=generate,edit=edit,offline=args.offline,
                              repair_background=args.reparar_fundo)
+        result=review_visual_diversity(
+            ep,scene,args.modelo,scene_dir(ep,scene,args.modelo),result)
         print(f"[OK] {idx}/{len(scenes)} cena {scene['id']} | diferença média: "
               f"{result['composition']['mean_rgb_difference']} | margens: "
               f"{'REVER' if result['alpha']['margin_warning'] else 'OK'}")
