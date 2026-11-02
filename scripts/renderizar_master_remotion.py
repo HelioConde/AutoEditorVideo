@@ -26,6 +26,7 @@ from narracao_shorts import ensure_voice
 from renderizar_com_remotion import audio_duration,captions_from_ass
 from capa_cinematografica import cover_options, render_cover
 from qa_foreground_fidelity import foreground_fidelity
+from revisao_visual_cenas import read_review
 
 
 def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
@@ -37,6 +38,11 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
             if not path.is_file():
                 raise FileNotFoundError(f'Enquadramento {scene["id"]}: falta {path}. Gere as camadas antes.')
             validate_image(path.read_bytes(),alpha=kind=='foreground')
+        manual=read_review(folder)
+        if manual and manual['status']=='reprovado':
+            raise ValueError(f"Cena {scene['id']} REPROVADA manualmente: "
+                             f"{manual['reason']}. Corrija/regenere a imagem e "
+                             'revise a nova versão antes de renderizar.')
         qa=folder/'qa.json'
         if not qa.is_file():
             raise ValueError(f'Enquadramento {scene["id"]}: falta QA da composição')
@@ -129,6 +135,10 @@ def cover_from_master(ep:dict,model:str,destination:Path)->dict:
     foreground=folder/'foreground.png'
     background=folder/'background.png'
     master=folder/'master.png'
+    manual=read_review(folder)
+    if manual and manual['status']=='reprovado':
+        raise ValueError(f"Capa bloqueada: cena {chosen} reprovada: "
+                         f"{manual['reason']}. Escolha cena aprovada no JSON.")
     if background.is_file() and foreground.is_file():
         validate_image(background.read_bytes(),alpha=False)
         validate_image(foreground.read_bytes(),alpha=True)
