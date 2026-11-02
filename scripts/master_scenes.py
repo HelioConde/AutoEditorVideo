@@ -523,13 +523,32 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
             atomic(bg,source.read_bytes())
     print(f'[FUNDO] {scene["id"]}: cenário limpo usado diretamente '
           '(sem remontagem com a master).',flush=True)
-    comp=compare(master,bg,fg,d/'comparacao.jpg')
+    safe_hero=master_static_for_chess_action(scene)
+    # For critical chess pieces, show what the video actually renders:
+    # the intact original, not the layers that may erase the king. Preserve
+    # the broken layer composite in a separate diagnostic file for QA.
+    if safe_hero:
+        diagnostic=d/'comparacao-camadas.jpg'
+        comp=compare(master,bg,fg,diagnostic)
+        with Image.open(master) as master_img:
+            original=master_img.convert('RGB')
+            side=Image.new('RGB',(1024,768))
+            small=original.resize((512,768))
+            side.paste(small,(0,0))
+            side.paste(small,(512,0))
+            side.save(d/'comparacao.jpg','JPEG',quality=90)
+            original.save(d/'preview-render-seguro.jpg','JPEG',quality=94)
+        comp['layer_comparison_diagnostic']=str(diagnostic)
+        comp['comparison']=str(d/'comparacao.jpg')
+        comp['render_mode']='master_static'
+    else:
+        comp=compare(master,bg,fg,d/'comparacao.jpg')
+        comp['render_mode']='2_5d'
     # Check what the extraction model drew BEFORE Photoshop adjustments.
     # Whole-image compositing difference can be small despite a duplicated
     # torso or a body floating on the chessboard.
     fidelity=foreground_fidelity(master,normalized_fg)
     mask_alerts=[] if clean_reference else background_mask_warnings(d,mask_content)
-    safe_hero=master_static_for_chess_action(scene)
     if safe_hero:
         mask_alerts.append('peca_xadrez_pode_sumir_na_recomposicao')
         print(f"[QA PROTECAO] Cena {scene['id']}: movimento de rei/objeto essencial. "
