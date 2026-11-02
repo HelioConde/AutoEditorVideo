@@ -170,3 +170,63 @@ def test_budget_preflight_counts_one_per_distinct_raw_and_background(tmp_path,mo
     (base/"multilayer"/"l-raw.png").write_bytes(b"old paid cache raw")
     assert len(multi.pending_calls(ep,scene,"gpt-image-1.5"))==4
     assert not calls
+
+
+def test_missing_master_preflight_includes_one_generation_and_all_layers(tmp_path,monkeypatch):
+    ep,scene,folder,edit,calls=scene_fixture(tmp_path,monkeypatch)
+    (folder/"master.png").unlink()
+    pending=multi.pending_calls(ep,scene,"gpt-image-1.5")
+    assert pending==["02/master","02/l","02/table","02/board",
+                     "02/light","02/background-clean"]
+    assert not calls
+    assert not (folder/"master-raw.png").exists()
+
+
+def test_multilayer_generates_master_first_then_edit_masks_once(tmp_path,monkeypatch):
+    ep,scene,folder,edit,calls=scene_fixture(tmp_path,monkeypatch)
+    source=(folder/"master.png").read_bytes()
+    (folder/"master.png").unlink()
+    generates=[]
+    def fake_generate(prompt,model):
+        generates.append((prompt,model))
+        assert "cinematic" in prompt or "anatomy" in prompt
+        return source
+    result=multi.process_multilayer(ep,scene,"gpt-image-1.5",
+                                   edit=edit,generate=fake_generate)
+    assert len(generates)==1 and len(calls)==5
+    assert (folder/"master-raw.png").read_bytes()==source
+    assert (folder/"master.png").is_file()
+    assert result["master_sha256"]==hashlib.sha256(source).hexdigest()
+    multi.process_multilayer(ep,scene,"gpt-image-1.5",offline=True)
+    assert len(generates)==1 and len(calls)==5
+
+
+def test_restore_master_from_raw_does_not_consume_credit(tmp_path,monkeypatch):
+    ep,scene,folder,edit,calls=scene_fixture(tmp_path,monkeypatch)
+    source=(folder/"master.png").read_bytes()
+    (folder/"master-raw.png").write_bytes(source)
+    (folder/"master.png").unlink()
+    pending=multi.pending_calls(ep,scene,"gpt-image-1.5")
+    assert "02/master" not in pending
+    recovered=multi.ensure_master(ep,scene,"gpt-image-1.5",offline=True)
+    assert recovered.read_bytes()==source
+    assert not calls
+
+
+def test_offline_rejects_missing_master_without_network_and_no_cache_deletion(tmp_path,monkeypatch):
+    ep,scene,folder,edit,calls=scene_fixture(tmp_path,monkeypatch)
+    (folder/"master.png").unlink()
+    with pytest.raises(RuntimeError,match="modo offline"):
+        multi.process_multilayer(ep,scene,"gpt-image-1.5",
+                                edit=edit,offline=True)
+    assert not calls
+    assert not (folder/"multilayer").exists()
+
+
+def test_missing_pinned_master_fails_closed_even_with_budget(tmp_path,monkeypatch):
+    ep,scene,folder,edit,calls=scene_fixture(tmp_path,monkeypatch)
+    (folder/"master.png").unlink()
+    monkeypatch.setattr(core,"cache_pin",lambda *_args:folder.name)
+    with pytest.raises(ValueError,match="cache fixado"):
+        multi.pending_calls(ep,scene,"gpt-image-1.5")
+    assert not calls

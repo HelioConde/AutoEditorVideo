@@ -110,7 +110,8 @@ if($Renderizar){
       if($LASTEXITCODE -ne 0){throw 'Falha ao instalar Remotion'}
     } finally {Pop-Location}
   }
-  if($CriarVoz){
+}
+if($CriarVoz){
     $missingVoice = & $py $checker --voz
     if($LASTEXITCODE -ne 0){throw 'Falhou a verificacao da biblioteca de voz'}
     if($missingVoice -and $missingVoice.Trim()){
@@ -124,7 +125,6 @@ if($Renderizar){
       }
     }
   }
-}
 # Mantem o arquivo de credenciais onde ja estava. Nada e enviado ao GitHub.
 $oldEnv=Join-Path $root '..\arquivo-otaku-kit\chatgpt-codex-proxy\.env'
 if((Test-Path $oldEnv) -and -not (Test-Path (Join-Path $root 'chatgpt-codex-proxy\.env'))){
@@ -173,12 +173,32 @@ if($ModoComposicao -eq 'multicamadas' -or $AprovarMulticamadas){
     & $py @multArgs
     if($LASTEXITCODE -ne 0){throw 'Extracao multicamadas interrompida. Cache e raws preservados.'}
   }
+  # TTS nao depende da aprovacao da arte: preparar voz/legendas agora,
+  # mesmo que o Short precise aguardar a revisao das novas camadas.
+  if($CriarVoz){
+    $voiceArgs=@((Join-Path $root 'scripts\renderizar_master_remotion.py'),
+      '--id',$Id,'--modelo',$Modelo,'--somente-voz','--criar-voz',
+      '--max-segundos-por-plano',$MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture))
+    if($Plano){$voiceArgs+=@('--plano',$Plano)}
+    & $py @voiceArgs
+    if($LASTEXITCODE -ne 0){throw 'Nao foi possivel gerar voz/legendas. Imagens preservadas.'}
+  }
   if($Renderizar){
+    $checkArgs=@((Join-Path $root 'scripts\extract_scene_layers.py'),
+      '--id',$Id,'--modelo',$Modelo,'--verificar-aprovacoes',
+      '--todas-cenas','--max-chamadas','0',
+      '--max-segundos-por-plano',$MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture))
+    if($Plano){$checkArgs+=@('--plano',$Plano)}
+    & $py @checkArgs
+    if($LASTEXITCODE -ne 0){
+      Write-Warning 'Imagens e voz geradas/em cache, mas o MP4 aguarda aprovacao visual. Nenhuma cena reprovada sera renderizada.'
+      Write-Host 'Confira os previews, aprove cada cena e execute novamente com -MaxChamadas 0 -Renderizar.' -ForegroundColor Yellow
+      return
+    }
     $videoArgs=@((Join-Path $root 'scripts\renderizar_master_remotion.py'),
       '--id',$Id,'--modelo',$Modelo,'--max-segundos-por-plano',
       $MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture),'--renderizar')
     if($Plano){$videoArgs+=@('--plano',$Plano)}
-    if($CriarVoz){$videoArgs+='--criar-voz'}
     & $py @videoArgs
     if($LASTEXITCODE -ne 0){throw 'Remotion bloqueou render ou falta aprovacao visual.'}
   }
