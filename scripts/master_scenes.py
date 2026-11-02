@@ -203,10 +203,18 @@ def request_edit(master:Path,prompt:str,model:str,key:str,*,transparent:bool,
 
 def foreground_prompt(scene:dict)->str:
     thing='personagens, seus cabelos, roupas, mãos e acessórios visíveis' if scene['subject']=='personagens' else 'objeto de primeiro plano que é o foco'
-    return ('Edit the ATTACHED scene, keeping exact original 1024x1536 canvas and X/Y '
-            'placement. Isolate ONLY the '+thing+' and turn every other pixel '
-            'TRANSPARENT with real PNG alpha. No green, no scene elements, '
-            'do not create or redraw new poses, do not move the subject.')
+    return ('PIXEL-PRESERVING SEGMENTATION, NOT GENERATION. Copy each visible pixel '
+            'of ONLY the '+thing+' from the attached input into the EXACT SAME '
+            'X/Y position on the 1024x1536 canvas. Remove all other pixels using '
+            'true PNG transparency. DO NOT REDRAW the face, torso, limbs, hands, '
+            'feet or clothing; do not change skin, style, colors, proportions, '
+            'pose, perspective, body size or anatomy. No novel pixels, no new '
+            'objects or duplicates. NEVER include chessboard squares, table surface, '
+            'table legs, floor or background fragments in the extracted human layer. '
+            'Any arm resting on the table must stay at exactly its source pixel '
+            'coordinates, with correct occlusion. If a body part is occluded by '
+            'furniture, do NOT invent the hidden body. Do not move the subject. '
+            'Output real RGBA PNG alpha, never a green or opaque backdrop.')
 
 
 def background_prompt()->str:
