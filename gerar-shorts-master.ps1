@@ -19,6 +19,7 @@ param(
   [switch]$SomenteCapa,
   [switch]$ReprovarCena,
   [switch]$AprovarCena,
+  [switch]$PrepararReprovadas,
   [string]$Motivo='Defeito anatomico ou objeto atravessando a mesa',
   [switch]$Renderizar,
   [switch]$CriarVoz,
@@ -32,6 +33,9 @@ if(($ReprovarCena -or $AprovarCena) -and ($Renderizar -or $CriarVoz -or $Somente
   throw 'Revise uma cena de cada vez, sem -Renderizar, -CriarVoz, -SomenteCapa nem -TodasCenas.'
 }
 if($ReprovarCena -and $AprovarCena){throw 'Escolha -ReprovarCena ou -AprovarCena.'}
+if($PrepararReprovadas -and ($ReprovarCena -or $AprovarCena -or $SomentePlanejar -or $SomenteValidar -or $DiagnosticarCache -or $Renderizar -or $CriarVoz -or $Replanejar -or $TodasCenas -or $SomenteCapa -or $RepararFundo -or $MasterExistente -or $Plano)){
+  throw '-PrepararReprovadas e um passo de preparo local: execute sozinho com -Id e -Modelo.'
+}
 if($SomenteCapa -and ($Renderizar -or $CriarVoz)){
   throw '-SomenteCapa nao pode ser combinado com -Renderizar ou -CriarVoz.'
 }
@@ -117,6 +121,11 @@ if($Renderizar){
 $oldEnv=Join-Path $root '..\arquivo-otaku-kit\chatgpt-codex-proxy\.env'
 if((Test-Path $oldEnv) -and -not (Test-Path (Join-Path $root 'chatgpt-codex-proxy\.env'))){
   $env:ARQUIVO_OTAKU_PROXY_ENV=$oldEnv
+}
+if($PrepararReprovadas){
+  & $py (Join-Path $root 'scripts\preparar_cenas_reprovadas.py') '--id' $Id '--modelo' $Modelo
+  if($LASTEXITCODE -ne 0){throw 'Falhou preparo das cenas reprovadas; nenhum pedido pago enviado.'}
+  return
 }
 if($ReprovarCena -or $AprovarCena){
   $reviewArgs=@((Join-Path $root 'scripts\revisao_visual_cenas.py'),
