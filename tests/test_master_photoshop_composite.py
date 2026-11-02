@@ -55,8 +55,10 @@ def test_photoshop_style_composite_has_no_master_ghosts_and_preserves_raw(tmp_pa
     with Image.open(folder/'foreground.png') as final_fg:
         assert final_fg.getpixel((490,480))[3]==255
         assert final_fg.getpixel((490,850))[3]==0
-    with Image.open(folder/'background-mask.png') as mask:
-        # Mask stays at the master coordinates, not the shifted display layer.
+    # Background is already cached: no mask file needs to be rewritten.
+    assert not (folder/'background-mask.png').exists()
+    with Image.open(io.BytesIO(master.mask_png(folder/'foreground-normalized.png'))) as mask:
+        # In-memory mask stays at master coordinates, not shifted display coords.
         assert mask.getchannel('A').getpixel((490,740)) < 20
     assert (folder/'foreground-raw.png').read_bytes()==raw_data
     assert (folder/'background-raw.png').read_bytes()==raw_bg
