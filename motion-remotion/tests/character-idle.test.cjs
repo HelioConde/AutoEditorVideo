@@ -34,17 +34,17 @@ test('first and last frame exactly match approved preview',()=>{
     assert.equal(pose.scaleY,1);
   }
 });
-test('movement is subpixel, no clipping-sized transforms',()=>{
+test('visible motion stays within safe whole-character 2D limits',()=>{
   for (const preset of presetNames){
     for (const id of ['light','l']){
       for (let frame=0;frame<=150;frame+=3){
         const pose=characterPoseAtFrame(input({frame,id,preset}));
         assert.equal(pose.reason,'safe');
-        assert.ok(Math.abs(pose.translateX)<=.300001);
-        assert.ok(Math.abs(pose.translateY)<=1.250001);
-        assert.ok(Math.abs(pose.rotateDeg)<=.150001);
-        assert.ok(Math.abs(pose.scaleX-1)<=.000601);
-        assert.ok(Math.abs(pose.scaleY-1)<=.001001);
+        assert.ok(Math.abs(pose.translateX)<=4.600001);
+        assert.ok(Math.abs(pose.translateY)<=10.000001);
+        assert.ok(Math.abs(pose.rotateDeg)<=1.140001);
+        assert.ok(Math.abs(pose.scaleX-1)<=.006001);
+        assert.ok(Math.abs(pose.scaleY-1)<=.007001);
       }
     }
   }
@@ -83,6 +83,31 @@ test('vivo stronger than ultrassutil across scene',()=>{
   }
   assert.ok(peaks.ultrassutil<peaks.equilibrado);
   assert.ok(peaks.equilibrado<peaks.vivo);
+});
+test('stronger presets are actually visible at Short resolution, unlike old subpixel versions',()=>{
+  for(const [id,minY,minAngle] of [
+    ['l',4,0.45],
+    ['light',2.5,0.30],
+  ]){
+    let y=0,angle=0;
+    for(let frame=1;frame<150;frame++){
+      const pose=characterPoseAtFrame(input({id,frame,preset:'equilibrado'}));
+      y=Math.max(y,Math.abs(pose.translateY));
+      angle=Math.max(angle,Math.abs(pose.rotateDeg));
+    }
+    assert.ok(y>minY,`${id}: breathing should be detectable (peak ${y}px)`);
+    assert.ok(angle>minAngle,`${id}: lean should be detectable (peak ${angle}deg)`);
+  }
+});
+test('idle moves through most of a shot, not only at the midpoint',()=>{
+  for(const frame of [30,55,75,100,115]){
+    const pose=characterPoseAtFrame(input({frame,id:'l',preset:'equilibrado'}));
+    assert.equal(pose.enabled,true);
+    assert.ok(
+      Math.abs(pose.translateY)>0.15 || Math.abs(pose.rotateDeg)>0.15,
+      `frame ${frame} should show physical movement`
+    );
+  }
 });
 test('scene frame duration controls envelope without globals/random',()=>{
   assert.equal(source.includes('Math.random('),false);
