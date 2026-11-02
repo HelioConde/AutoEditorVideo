@@ -235,3 +235,32 @@ novamente, é necessário um recorte realmente fiel à master ou uma nova
 edição aprovada, não uma transformação arbitrária da pose. A detecção é
 heurística e **não dispensa conferência humana**.
 
+
+
+### Bloquear uma master com anatomia fisicamente errada (pés/corpo na mesa)
+
+A proteção acima preserva a **master** original quando o recorte alpha é ruim.
+Se a master também tem pé, corpo ou objetos atravessando a mesa, **não é
+possível corrigir isso apenas reorganizando camadas**. Marque a cena como
+reprovada. A reprovação fica no cache local da cena (arquivo
+`visual-review.json`), não é enviada ao repositório. O vídeo e a capa
+passam a recusar cenas reprovadas.
+
+```powershell
+# Exemplo: reprovar a cena 04 porque o corpo atravessa o tabuleiro
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 4 -Modelo gpt-image-1.5 -ReprovarCena -Motivo "Corpo ou pe atravessa a mesa"
+
+# Após corrigir e confirmar VISUALMENTE a imagem da MESMA pasta/cache:
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 4 -Modelo gpt-image-1.5 -AprovarCena -Motivo "Revisada manualmente"
+```
+
+Não aprove imagens defeituosas apenas para permitir o render. Ao gerar
+um **novo enquadramento/hash**, a reprovação da versão anterior continua na
+pasta antiga sem bloquear uma imagem nova. A nova master precisa passar por
+revisão própria. O parâmetro `-ReprovarCena` não chama IA.
+
+Os prompts de novas cenas de xadrez agora exigem que pés, pernas, quadris e
+troncos **não ocupem a superfície da mesa/tabuleiro**. Apenas mãos e
+antebraços podem tocar a mesa. Esses prompts só alteram uma produção nova
+depois de replanejamento explícito; cenas antigas e os caches pagos não
+são sobrescritos.
