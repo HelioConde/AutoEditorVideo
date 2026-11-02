@@ -1,7 +1,9 @@
 import React from 'react';
 import {AbsoluteFill,Audio,Img,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
 
-export type Scene={id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;background:string;foreground:string};
+export type SemanticLayer={id:string;role:string;z:number;src:string};
+export type Scene={id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
+ background:string;foreground:string;renderMode?:string;layers?:SemanticLayer[]};
 export type Caption={startFrame:number;endFrame:number;text:string};
 export type MasterProps={id:string;durationFrames:number;audio:string;scenes:Scene[];captions:Caption[];hook:string};
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
@@ -26,8 +28,16 @@ const Shot:React.FC<{scene:Scene;opacity:number}>=({scene,opacity})=>{
     <div style={{position:'absolute',left:70,top:245,width:940,height:1410,
       transform:'scale('+zoom+')',transformOrigin:'center center',overflow:'hidden'}}>
       <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain'}}/>
-      <Img src={urlfg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
-        objectFit:'contain',transform:'translate('+drift+'px,'+bob+'px)'}}/>
+      {scene.renderMode==='multilayer' && scene.layers?.length
+        ? [...scene.layers].sort((a,b)=>a.z-b.z).map(layer=>
+          // Semantic occlusion is established in the source image. Move the
+          // complete camera frame, never individual bodies through the table.
+          <Img key={layer.id} src={staticFile(layer.src)} style={{
+            position:'absolute',inset:0,width:'100%',height:'100%',
+            objectFit:'contain',zIndex:layer.z
+          }}/>)
+        : <Img src={urlfg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
+          objectFit:'contain',transform:'translate('+drift+'px,'+bob+'px)'}}/>}
     </div>
   </AbsoluteFill>;
 };
