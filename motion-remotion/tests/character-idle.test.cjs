@@ -1,117 +1,128 @@
-// Test the actual TypeScript motion engine without producing paid images.
-// Run inside motion-remotion after npm install: node --test tests/character-idle.test.cjs
+// Test the shipped TypeScript motion code, not a JS reimplementation.
+// No media, AI generation, browser or paid assets are required.
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const ts=require('typescript');
 
-const target=path.join(__dirname,'../src/character-idle.ts');
-const source=fs.readFileSync(target,'utf8');
-const transpiled=ts.transpileModule(source,{
-  compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}
-}).outputText;
-const mod={exports:{}};
-new Function('module','exports',transpiled)(mod,mod.exports);
-const {characterPoseAtFrame,presetNames}=mod.exports;
+function load(relative) {
+  const source=fs.readFileSync(path.join(__dirname,'../src',relative),'utf8');
+  const transpiled=ts.transpileModule(source,{
+    compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}
+  }).outputText;
+  const mod={exports:{}};
+  new Function('module','exports',transpiled)(mod,mod.exports);
+  return {exports:mod.exports,source};
+}
+const {exports:engine,source}=load('character-idle.ts');
+const {characterPoseAtFrame, presetNames}=engine;
+const camera=load('cinematic-motion.ts').exports;
+
 const input=(overrides={})=>({
-  role:'back_character',id:'l',coverage:.21,hasHeroProp:false,
-  frame:65,sceneStart:0,sceneEnd:150,fps:30,
-  preset:'equilibrado',enabled:true,...overrides
+  role:'back_character',id:'uma personagem qualquer',
+  coverage:.19,contactRisk:.07,heroRisk:0,
+  heightFraction:.6,motionSeed:4123457,
+  frame:66,sceneStart:0,sceneEnd:150,fps:30,
+  preset:'ultrassutil',enabled:true,...overrides
+});
+const poses=(options={})=>Array.from({length:151},(_,frame)=>
+  characterPoseAtFrame(input({...options,frame})));
+const peak=(p,k)=>Math.max(...p.map(x=>Math.abs(x[k])));
+
+test('unlimited arbitrary character names and unicode, no named Light/L rules',()=>{
+  for(const id of ['Personagem_99','hero_番','uma pessoa qualquer','L','Light']){
+    const pose=characterPoseAtFrame(input({id}));
+    assert.equal(pose.reason,'safe');
+    assert.equal(pose.enabled,true);
+  }
+  assert.ok(!source.includes("id==='light'"));
+  assert.ok(!source.includes("id==='l'"));
+  assert.deepEqual(presetNames,['ultrassutil','equilibrado','vivo']);
 });
 
-test('three presets are available and deterministic',()=>{
-  assert.deepEqual(presetNames,['ultrassutil','equilibrado','vivo']);
-  assert.deepEqual(characterPoseAtFrame(input()),characterPoseAtFrame(input()));
-});
-test('first and last frame exactly match approved preview',()=>{
-  for (const frame of [0,150]){
-    const pose=characterPoseAtFrame(input({frame,preset:'vivo'}));
+test('first and last frame exactly preserve approved pixels',()=>{
+  for(const frame of [0,150,151]){
+    const pose=characterPoseAtFrame(input({frame}));
     assert.equal(pose.translateX,0);
-    assert.ok(Math.abs(pose.translateY)<1e-14);
-    assert.ok(Math.abs(pose.rotateDeg)<1e-14);
+    assert.equal(pose.translateY,0);
+    assert.equal(pose.rotateDeg,0);
     assert.equal(pose.scaleX,1);
     assert.equal(pose.scaleY,1);
   }
 });
-test('visible motion stays within safe whole-character 2D limits',()=>{
-  for (const preset of presetNames){
-    for (const id of ['light','l']){
-      for (let frame=0;frame<=150;frame+=3){
-        const pose=characterPoseAtFrame(input({frame,id,preset}));
-        assert.equal(pose.reason,'safe');
-        assert.ok(Math.abs(pose.translateX)<=4.600001);
-        assert.ok(Math.abs(pose.translateY)<=10.000001);
-        assert.ok(Math.abs(pose.rotateDeg)<=1.140001);
-        assert.ok(Math.abs(pose.scaleX-1)<=.006001);
-        assert.ok(Math.abs(pose.scaleY-1)<=.007001);
-      }
-    }
-  }
-});
-test('hero prop and non character roles do NOT move separately',()=>{
-  for (const changes of [
-    {hasHeroProp:true},{role:'occluder'}, {role:'object'},
-    {role:'hero_prop'}, {coverage:0.8}, {coverage:0.001},
-    {enabled:false}
-  ]){
-    const pose=characterPoseAtFrame(input(changes));
-    assert.equal(pose.enabled,false);
-    assert.equal(pose.translateY,0);
-    assert.equal(pose.rotateDeg,0);
-  }
-});
-test('distinct Light and L breaths; L stronger than Light',()=>{
-  const light=characterPoseAtFrame(input({id:'light',frame:42}));
-  const l=characterPoseAtFrame(input({id:'l',frame:42}));
-  assert.notEqual(light.translateY,l.translateY);
-  let amplitudeL=0, amplitudeLight=0;
-  for(let f=10;f<150;f++){
-    amplitudeL=Math.max(amplitudeL,Math.abs(characterPoseAtFrame(input({frame:f,id:'l'})).translateY));
-    amplitudeLight=Math.max(amplitudeLight,Math.abs(characterPoseAtFrame(input({frame:f,id:'light'})).translateY));
-  }
-  assert.ok(amplitudeL>amplitudeLight);
-});
-test('vivo stronger than ultrassutil across scene',()=>{
-  const peaks={};
+
+test('no stretching of face, torso or arms at ANY time',()=>{
   for(const preset of presetNames){
-    peaks[preset]=0;
-    for(let frame=0;frame<=150;frame++){
-      const pose=characterPoseAtFrame(input({preset,frame}));
-      peaks[preset]=Math.max(peaks[preset],Math.abs(pose.translateY));
+    for(const pose of poses({preset})){
+      assert.equal(pose.scaleX,1);
+      assert.equal(pose.scaleY,1);
+      assert.ok(Math.abs(pose.translateX)<=1.700001);
+      assert.ok(Math.abs(pose.translateY)<=7.500001);
+      assert.ok(Math.abs(pose.rotateDeg)<=.250001);
     }
   }
-  assert.ok(peaks.ultrassutil<peaks.equilibrado);
-  assert.ok(peaks.equilibrado<peaks.vivo);
 });
-test('stronger presets are actually visible at Short resolution, unlike old subpixel versions',()=>{
-  for(const [id,minY,minAngle] of [
-    ['l',4,0.45],
-    ['light',2.5,0.30],
+
+test('high furniture contact dampens movement without making it random',()=>{
+  const free=poses({contactRisk:0});
+  const contacting=poses({contactRisk:.40});
+  assert.ok(peak(free,'translateY')>peak(contacting,'translateY')*1.4);
+  assert.ok(peak(contacting,'translateY')>0);
+});
+
+test('hero overlap freezes ONLY the attached person, not everybody in scene',()=>{
+  const attached=characterPoseAtFrame(input({heroRisk:.12,hasHeroProp:true}));
+  const bystander=characterPoseAtFrame(input({
+    heroRisk:0,hasHeroProp:true,id:'outro personagem',motionSeed:43
+  }));
+  assert.equal(attached.reason,'hero-protected');
+  assert.equal(attached.enabled,false);
+  assert.equal(bystander.reason,'safe');
+  assert.equal(bystander.enabled,true);
+  // Legacy manifests without collision metadata stay conservative.
+  assert.equal(characterPoseAtFrame(input({
+    heroRisk:undefined,hasHeroProp:true
+  })).reason,'hero-protected');
+});
+
+test('camera choreography uses shot semantics, not Death Note scene indexes',()=>{
+  assert.equal(camera.profileForShot('wide_intro','79'),'establish');
+  assert.equal(camera.profileForShot('portrait_reaction','19'),'reaction');
+  assert.equal(camera.profileForShot('hand_detail','302'),'king');
+  assert.equal(camera.profileForShot('dialogue_over_shoulder','ABC'),'duel');
+  assert.equal(camera.profileForShot('endcard','last'),'final');
+  assert.equal(camera.profileForShot('unknown','01'),
+               camera.profileForShot('unknown','06'));
+});
+
+test('harmonics vary across characters/videos, no repetition of same fixed phase',()=>{
+  const a=poses({id:'a',motionSeed:4242});
+  const b=poses({id:'b',motionSeed:67890});
+  assert.deepEqual(a,poses({id:'a',motionSeed:4242}));
+  assert.notDeepEqual(a.map(p=>p.translateY),b.map(p=>p.translateY));
+  assert.ok(peak(a,'translateY')>0.20);
+  assert.ok(peak(b,'translateY')>0.20);
+  assert.ok(!source.includes('Math.random('));
+  assert.ok(!source.includes('Date.now('));
+});
+
+test('duration and defensive validation, no invalid transforms',()=>{
+  for(const options of [
+    {role:'object'}, {role:'hero_prop'}, {role:'occluder'},
+    {coverage:.9},{coverage:.001},
+    {fps:0},{frame:NaN},{sceneEnd:0},{enabled:false},
   ]){
-    let y=0,angle=0;
-    for(let frame=1;frame<150;frame++){
-      const pose=characterPoseAtFrame(input({id,frame,preset:'equilibrado'}));
-      y=Math.max(y,Math.abs(pose.translateY));
-      angle=Math.max(angle,Math.abs(pose.rotateDeg));
-    }
-    assert.ok(y>minY,`${id}: breathing should be detectable (peak ${y}px)`);
-    assert.ok(angle>minAngle,`${id}: lean should be detectable (peak ${angle}deg)`);
+    const pose=characterPoseAtFrame(input(options));
+    assert.equal(pose.enabled,false);
+    assert.equal(pose.scaleX,1);
+    assert.equal(pose.scaleY,1);
   }
 });
-test('idle moves through most of a shot, not only at the midpoint',()=>{
-  for(const frame of [30,55,75,100,115]){
-    const pose=characterPoseAtFrame(input({frame,id:'l',preset:'equilibrado'}));
-    assert.equal(pose.enabled,true);
-    assert.ok(
-      Math.abs(pose.translateY)>0.15 || Math.abs(pose.rotateDeg)>0.15,
-      `frame ${frame} should show physical movement`
-    );
-  }
-});
-test('scene frame duration controls envelope without globals/random',()=>{
-  assert.equal(source.includes('Math.random('),false);
-  assert.equal(source.includes('Date.now('),false);
-  assert.equal(characterPoseAtFrame(input({fps:0})).enabled,false);
-  assert.equal(characterPoseAtFrame(input({frame:Number.NaN})).enabled,false);
+
+test('settings change amplitude but do not change source art or character identity',()=>{
+  const peaks=presetNames.map(preset=>peak(poses({preset}),'translateY'));
+  assert.ok(peaks[0]<peaks[1]);
+  assert.ok(peaks[1]<peaks[2]);
+  assert.ok(poses({preset:'ultrassutil'}).every(x=>x.scaleY===1));
 });
