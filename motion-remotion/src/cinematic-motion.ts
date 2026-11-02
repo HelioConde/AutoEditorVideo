@@ -68,24 +68,8 @@ export const motionAtFrame=(
   };
 };
 
-export const characterMotion=(
-    layerRole:string,layerId:string,
-    alphaFraction:number,hasHeroProp:boolean,
-    breath:number,mode:AnimationMode):
-    {translateX:number;translateY:number;scaleY:number;enabled:boolean}=>{
-  if(mode==='desligada'||hasHeroProp||
-      (layerRole!=='back_character' && layerRole!=='front_character')||
-      !['l','light','subject'].includes(layerId)||
-      !Number.isFinite(alphaFraction)||alphaFraction>.57||alphaFraction<.025){
-    return {translateX:0,translateY:0,scaleY:1,enabled:false};
-  }
-  // Bigger and more foregrounded people need SMALLER deformation.
-  const weight=layerRole==='front_character'?0.65:1;
-  const area=Math.max(0.30,1-alphaFraction);
-  const magnitude=weight*area;
-  return {translateX:0,translateY:breath*1.25*magnitude,
-          scaleY:1+breath*0.0016*magnitude,enabled:true};
-};
+// Per-character idle motion is implemented by character-idle.ts using
+// automatic geometry from the source PNGs (no fixed names or episode IDs).
 
 export const cannotMoveSeparately=(role:string)=>[
   'occluder','object','hero_prop'
