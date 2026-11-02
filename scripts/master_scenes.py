@@ -60,9 +60,9 @@ def cache_pin(ep:dict,scene:dict,model:str)->str|None:
     return name
 
 
-def scene_dir(ep:dict,scene:dict,model:str,output:Path=OUT)->Path:
+def scene_dir(ep:dict,scene:dict,model:str,output:Path|None=None)->Path:
     ident=sha(model+'\n'+master_prompt(ep,scene))
-    root=output/ep['id']/'master-scenes'
+    root=(output if output is not None else OUT)/ep['id']/'master-scenes'
     selected=cache_pin(ep,scene,model)
     return root/(selected or f"{scene['id']}-{ident}")
 
