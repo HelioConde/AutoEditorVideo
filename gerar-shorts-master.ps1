@@ -20,6 +20,8 @@ param(
   [switch]$ReprovarCena,
   [switch]$AprovarCena,
   [switch]$PrepararReprovadas,
+  [ValidateSet('classico','multicamadas')][string]$ModoComposicao='classico',
+  [switch]$AprovarMulticamadas,
   [string]$Motivo='Defeito anatomico ou objeto atravessando a mesa',
   [switch]$Renderizar,
   [switch]$CriarVoz,
@@ -33,6 +35,12 @@ if(($ReprovarCena -or $AprovarCena) -and ($Renderizar -or $CriarVoz -or $Somente
   throw 'Revise uma cena de cada vez, sem -Renderizar, -CriarVoz, -SomenteCapa nem -TodasCenas.'
 }
 if($ReprovarCena -and $AprovarCena){throw 'Escolha -ReprovarCena ou -AprovarCena.'}
+if($AprovarMulticamadas -and ($ReprovarCena -or $AprovarCena -or $PrepararReprovadas -or $Renderizar -or $SomenteCapa -or $TodasCenas)){
+  throw '-AprovarMulticamadas exige uma unica cena para revisao, sem -Renderizar nem outras operacoes.'
+}
+if($ModoComposicao -eq 'multicamadas' -and ($RepararFundo -or $Replanejar -or $MasterExistente -or $SomentePlanejar)){
+  throw 'Modo multicamadas usa a master ja criada e o storyboard fixado. Nao combina com -RepararFundo, -Replanejar, -MasterExistente ou -SomentePlanejar.'
+}
 if($PrepararReprovadas -and ($ReprovarCena -or $AprovarCena -or $SomentePlanejar -or $SomenteValidar -or $DiagnosticarCache -or $Renderizar -or $CriarVoz -or $Replanejar -or $TodasCenas -or $SomenteCapa -or $RepararFundo -or $MasterExistente -or $Plano)){
   throw '-PrepararReprovadas e um passo de preparo local: execute sozinho com -Id e -Modelo.'
 }
@@ -145,6 +153,36 @@ if($SomenteCapa){
   & $py @capaArgs
   if($LASTEXITCODE -ne 0){throw 'Falhou ao criar capa local. Imagens originais preservadas.'}
   Write-Host '[OK] Capa premium gerada com cache local, sem IA ou upload.'
+  return
+}
+if($ModoComposicao -eq 'multicamadas' -or $AprovarMulticamadas){
+  $multArgs=@((Join-Path $root 'scripts\extract_scene_layers.py'),
+    '--id',$Id,'--cena',[string]$Cena,'--modelo',$Modelo,
+    '--max-chamadas',[string]$MaxChamadas,
+    '--max-segundos-por-plano',$MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture))
+  if($Plano){$multArgs+=@('--plano',$Plano)}
+  if($AprovarMulticamadas){$multArgs+=@('--aprovar','--motivo',$Motivo)}
+  if($DiagnosticarCache -or $SomenteValidar){$multArgs+='--diagnosticar-cache'}
+  if($Offline){$multArgs+='--offline'}
+  if($TodasCenas){$multArgs+='--todas-cenas'}
+  # Rendering with a zero-call budget uses existing approved multi layers
+  # and falls back to legacy layers for scenes that were not converted.
+  if($Renderizar -and $MaxChamadas -eq 0){
+    Write-Host '[MULTICAMADAS] Render apenas, sem chamadas de imagem.' -ForegroundColor Cyan
+  } else {
+    & $py @multArgs
+    if($LASTEXITCODE -ne 0){throw 'Extracao multicamadas interrompida. Cache e raws preservados.'}
+  }
+  if($Renderizar){
+    $videoArgs=@((Join-Path $root 'scripts\renderizar_master_remotion.py'),
+      '--id',$Id,'--modelo',$Modelo,'--max-segundos-por-plano',
+      $MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture),'--renderizar')
+    if($Plano){$videoArgs+=@('--plano',$Plano)}
+    if($CriarVoz){$videoArgs+='--criar-voz'}
+    & $py @videoArgs
+    if($LASTEXITCODE -ne 0){throw 'Remotion bloqueou render ou falta aprovacao visual.'}
+  }
+  Write-Host '[OK] Modo multicamadas concluido; nenhum upload ao YouTube.' -ForegroundColor Green
   return
 }
 $script=Join-Path $root 'scripts\master_scenes.py'

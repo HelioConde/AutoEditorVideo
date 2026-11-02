@@ -28,12 +28,33 @@ from capa_cinematografica import cover_options, render_cover
 from qa_foreground_fidelity import foreground_fidelity
 from chess_composition_safety import master_static_for_chess_action
 from revisao_visual_cenas import read_review
+from extract_scene_layers import validate_multilayer
+from qa_multilayer_geometry import compose as compose_semantic_layers
 
 
 def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
     verified=[]
     for scene in ep['scenes']:
         folder=scene_dir(ep,scene,model,output)
+        if (folder/'scene-layers.json').is_file():
+            # Once opted into semantic layers, never silently fall back to an
+            # unapproved two-layer render on a failing QA/review.
+            base_review=read_review(folder)
+            if base_review and base_review['status']=='reprovado':
+                raise ValueError(f"Cena {scene['id']}: master reprovada; "
+                                 'multicamadas nao consertam anatomia ruim.')
+            validated=validate_multilayer(ep,scene,model,folder)
+            report={'status':'aguardando_revisao_visual',
+                    'alpha':{'margin_warning':False},
+                    'composition':{'alignment_warning':False},
+                    'warnings':validated['qa'].get('warnings',[]),
+                    'background_source':'semantic_multilayer'}
+            verified.append({'scene':scene,'folder':folder,
+                             'files':{'master':folder/'master.png'},
+                             'multi':validated,'qa':report,
+                             'fidelity':{'status':'source_master_pixels'},
+                             'render_mode':'multilayer'})
+            continue
         paths={k:folder/(k+'.png') for k in ('master','foreground','background')}
         for kind,path in paths.items():
             if not path.is_file():
@@ -104,7 +125,19 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
     for entry,(start,end) in zip(entries,bounds):
         scene=entry['scene']
         stem='scene-'+scene['id']
-        if entry['render_mode']=='master_static':
+        if entry['render_mode']=='multilayer':
+            multi=entry['multi']
+            shutil.copy2(multi['background'],target/f'{stem}-background.png')
+            with Image.open(entry['files']['master']) as original:
+                transparent=Image.new('RGBA',original.size,(0,0,0,0))
+            transparent.save(target/f'{stem}-foreground.png')
+            semantic=[]
+            for layer,path in multi['layers']:
+                dest=target/f'{stem}-layer-{layer.id}.png'
+                shutil.copy2(path,dest)
+                semantic.append({'id':layer.id,'role':layer.role,'z':layer.z,
+                    'src':f'generated/{ep["id"]}/{dest.name}'})
+        elif entry['render_mode']=='master_static':
             # A wrongly redrawn alpha layer may cover furniture and chess
             # pieces. Use the ORIGINAL master as a single still image.
             shutil.copy2(entry['files']['master'],target/f'{stem}-background.png')
@@ -116,6 +149,7 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
             for kind in ('foreground','background'):
                 shutil.copy2(entry['files'][kind],target/f'{stem}-{kind}.png')
         scenes.append({'id':scene['id'],'subject':scene['subject'],
+                       'layers':semantic if entry['render_mode']=='multilayer' else [],
                        'renderMode':entry['render_mode'],
                        'foregroundQA':entry['fidelity'],
                        'startFrame':start,'endFrame':end,
@@ -140,6 +174,18 @@ def cover_from_master(ep:dict,model:str,destination:Path)->dict:
     if scene is None:
         raise ValueError(f'Cena de capa {chosen} ausente no storyboard atual')
     folder=scene_dir(ep,scene,model)
+    if (folder/'scene-layers.json').is_file():
+        multi=validate_multilayer(ep,scene,model,folder)
+        source=compose_semantic_layers(multi['background'],multi['layers'])
+        label=options.get('title') or select_episode(ep['id']).get('cover') or ep.get('title') or 'ARQUIVO OTAKU'
+        report=render_cover(source,str(label),destination,
+                            zoom=options.get('zoom',1.07),
+                            focus_x=options.get('focus_x',.5),
+                            focus_y=options.get('focus_y',.38))
+        report.update(scene=chosen,source='multilayer-approved',
+                      model=model,output=str(destination))
+        print(f'[CAPA] multicamadas aprovadas | cena {chosen} | {destination}',flush=True)
+        return report
     foreground=folder/'foreground.png'
     background=folder/'background.png'
     master=folder/'master.png'
