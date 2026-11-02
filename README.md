@@ -187,3 +187,13 @@ O número de imagens é decidido pelas mudanças narrativas, não por um valor p
 ```
 
 O JSON gerado é uma **proposta visual para revisão**; ainda não constitui um vídeo final nem aciona automaticamente o gerador de imagens-mãe. Veja [docs/CENAS-DINAMICAS.md](docs/CENAS-DINAMICAS.md).
+
+## Fluxo integrado: imagens-mãe multicenas por roteiro (v1.4)
+
+O clone inclui geração de storyboards com quantidade variável de enquadramentos, extração com alpha nativo via image edits, cenário reconstruído da mesma imagem, narração, legendas e render Remotion. Nenhuma publicação automática.
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -SomentePlanejar
+```
+
+Guia completo: [docs/MULTICENAS-DINAMICAS.md](docs/MULTICENAS-DINAMICAS.md).
