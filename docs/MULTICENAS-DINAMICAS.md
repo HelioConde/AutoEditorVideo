@@ -560,3 +560,55 @@ realistas, labios e movimentos amplos de bracos exigem quadros novos
 com alpha/oclusao validos; nao devem ser inventados a partir de um
 PNG estatico. Revise o video final para detectar cortes de cabelo
 ou rostos antes da publicacao.
+
+### Teste de movimentos sutis dos personagens (3 intensidades)
+
+Para revisar a movimentacao dos personagens no Death Note, configure
+`-PerfilPersonagens` (somente com render cinematografico):
+`ultrassutil`, `equilibrado` (padrao) ou `vivo`.
+
+Light tem respiracao de 3,92 s e amplitude menor; L respira a cada
+3,28 s, em fase distinta. Ambos fazem oscilacao subpixel de tronco
+e ombros, com microinclinacao da figura inteira — nao e um rig de
+cabeca independente. O movimento so comeca depois do primeiro frame
+e volta a zero no final do plano, preservando o preview aprovado.
+
+**Limites rigidos**: deslocamento horizontal <=0,30 px;
+vertical <=1,25 px; inclinacao <=0,15 graus;
+variacao de largura <=0,06%; variacao de altura <=0,1%.
+A amplitude cai para personagens grandes ou muito na frente do quadro.
+Nos shots com camada hero_prop (como mao+rei das cenas 03 e 05),
+todos os personagens ficam fixos no sistema de camadas e seguem apenas
+a camera global: nao mover partes misturadas da mascara. Mesa,
+tabuleiro e rei jamais recebem essas transformacoes.
+
+A animacao procedural NAO cria olhos/rostos novos nem simula uma
+piscada falsa. Para piscadas reais precisamos de sprites de olhos
+abertos/fechados ou mascaras faciais revisadas para cada personagem.
+Nao gaste imagens so para este teste inicial.
+
+**Cada preset salva um MP4 com nome diferente, sem sobrescrever a
+versao que voce ja aprovou**:
+
+```powershell
+cd C:\Users\helio\Documents\arquivo-otaku-github
+git pull origin main
+
+# Opcao 1: quase imperceptivel
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar -PerfilPersonagens ultrassutil
+
+# Opcao 2: sutil equilibrado
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar -PerfilPersonagens equilibrado
+
+# Opcao 3: um pouco mais perceptivel
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar -PerfilPersonagens vivo
+```
+
+Novos arquivos:
+`003-death-note-xadrez-master-multicenas-personagens-ultrassutil.mp4`,
+`003-death-note-xadrez-master-multicenas-personagens-equilibrado.mp4`,
+`003-death-note-xadrez-master-multicenas-personagens-vivo.mp4`.
+
+Todos reutilizam PNGs, voz e legendas aprovados, sem chamada de
+imagem. Opcional: `cd motion-remotion; npm.cmd run test:character`
+executa testes das curvas de movimento.
