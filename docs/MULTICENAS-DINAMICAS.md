@@ -130,9 +130,9 @@ coincidir totalmente com a master, apesar do alinhamento.
 
 O gerador agora usa uma biblioteca determinística de **10 planos de câmera para
 xadrez e 10 planos reutilizáveis para outros assuntos**. Cada enquadramento
-novo recebe os metadados \`shot_type\`, \`camera_angle\`, \`camera_distance\`,
-\`focus_subject\`, \`action\`, \`emotion\`,
-\`must_differ_from_previous\` e \`avoid_repeating\`.
+novo recebe os metadados `shot_type`, `camera_angle`, `camera_distance`,
+`focus_subject`, `action`, `emotion`,
+`must_differ_from_previous` e `avoid_repeating`.
 
 O prompt sempre começa com direção de fotografia, ângulo e ação narrativa,
 seguido de uma proibição explícita de repetir o enquadramento anterior.
@@ -151,20 +151,20 @@ roteiro e do momento do fechamento.
 
 ### Verificar sem gastar créditos ou mexer no Short já pronto
 
-\`\`\`powershell
+```powershell
 .\\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -SomentePlanejar
-\`\`\`
+```
 
 O comando escreve a **proposta** em
-\`assets/gerados/planos-visuais/003-death-note-xadrez-master-dinamico.json\`.
-Ele não modifica o \`storyboard-producao.json\` já fixado, não regenera
+`assets/gerados/planos-visuais/003-death-note-xadrez-master-dinamico.json`.
+Ele não modifica o `storyboard-producao.json` já fixado, não regenera
 a master aprovada nem faz requisições de imagem.
 
 Para começar uma produção nova com a diversidade visual, revise antes a
-proposta e use \`-Replanejar\` **intencionalmente**, em um novo conjunto de
+proposta e use `-Replanejar` **intencionalmente**, em um novo conjunto de
 imagens e com um orçamento permitido. O sistema preserva o plano antigo em
 backup e mantém pastas antigas identificadas por hash. **Atenção:** o
-\`configs/scene-cache-pins.json\` contém uma escolha manual da antiga cena 06
+`configs/scene-cache-pins.json` contém uma escolha manual da antiga cena 06
 do episódio do xadrez; remova/ajuste essa escolha somente quando for iniciar
 uma versão realmente nova e após revisar o cache existente. Não misture o
 foreground de um enquadramento novo com uma master antiga por engano.
@@ -174,9 +174,9 @@ foreground de um enquadramento novo com uma master antiga por engano.
 Além da auditoria dos metadados do storyboard, depois de compor cada cena o
 motor compara a master com as **até seis masters anteriores do mesmo
 storyboard/modelo**. A assinatura perceptual em tons de cinza e a diferença
-média de luminância geram o aviso \`composicao_repetitiva\` quando as imagens
+média de luminância geram o aviso `composicao_repetitiva` quando as imagens
 parecem quase idênticas. Esse aviso aparece no console e no
-\`qa.json.visual_diversity\`, incluindo IDs das cenas parecidas e os resultados
+`qa.json.visual_diversity`, incluindo IDs das cenas parecidas e os resultados
 da comparação.
 
 **O detector é conservador e não substitui revisão humana**: o mesmo cenário
