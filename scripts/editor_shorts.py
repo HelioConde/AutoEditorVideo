@@ -76,8 +76,8 @@ def create_shot_sequence(scenes: list[Path], destination: Path, seconds: int = C
     A montagem nao presume que a mesma imagem seja uma cena nova: registra
     source_id, uso e crop no manifesto para auditoria posterior.
     """
-    if not 3 <= len(scenes) <= 12:
-        raise ValueError('Precisamos de 3 a 12 imagens/cenas')
+    if not 1 <= len(scenes) <= 60:
+        raise ValueError('Precisamos de pelo menos 1 imagem; 60 e limite tecnico, nao meta')
     destination.mkdir(parents=True,exist_ok=True)
     shots=[]
     for idx,source in enumerate(scenes,1):

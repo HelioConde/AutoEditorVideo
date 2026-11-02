@@ -60,8 +60,8 @@ def validate_item(item: dict, root: Path = ROOT) -> tuple[list[str], dict | None
             problems.append("id invalido no plano")
         if len(script.split()) < 55:
             problems.append("roteiro curto demais")
-        if not isinstance(scenes, list) or not 5 <= len(scenes) <= 20:
-            problems.append("o roteiro precisa de 5 a 20 cenas")
+        if not isinstance(scenes, list) or not 1 <= len(scenes) <= 60:
+            problems.append("o roteiro precisa de 1 a 60 cenas (limite técnico, sem quantidade fixa)")
         if len(script) > 1000 and len(script.split()) > 180:
             problems.append("revisar duracao do roteiro")
         if not str(plan.get("prova_da_obra_a_verificar", "")).strip():

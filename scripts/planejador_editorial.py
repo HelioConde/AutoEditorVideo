@@ -17,10 +17,10 @@ def audit_plan(plan:dict)->dict:
     if len(hook.split())>18:issues.append('Gancho possivelmente longo: tente ate 18 palavras')
     if not script.lower().startswith(hook[:22].lower()): issues.append('Gancho do plano diferente da abertura do roteiro')
     if not script.strip().endswith('?'):issues.append('Considere um encerramento com pergunta relevante')
-    if not 6<=len(scenes)<=12:issues.append('Avaliar de 6 a 12 cenas para variedade visual')
+    if not scenes:issues.append('Falta propor cenas visuais com base nos acontecimentos do roteiro')
     if word_count>150:issues.append('Roteiro longo: ajuste com uma narracao de teste antes de publicar')
     if word_count<55:issues.append('Roteiro possivelmente curto: verificar se entrega uma ideia completa')
-    if len(set(x.get('tipo') for x in scenes))<=2:issues.append('Pouca variacao de planos: inclua objetos, ambientes e contrapontos')
+    if len(scenes)>=4 and len(set(x.get('tipo') for x in scenes))<=2:issues.append('Avaliar variedade visual: objetos, ambientes e contrapontos quando o roteiro pedir')
     if not plan.get('tese_original'):
         issues.append('Especifique a tese interpretativa original do episodio e um exemplo da obra')
     if any(x in script.lower() for x in ['vazou oficialmente','foi confirmado oficialmente','acaba de ser anunciado']):

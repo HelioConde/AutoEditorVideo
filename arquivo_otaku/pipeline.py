@@ -29,8 +29,8 @@ def load_episode(path: Path) -> dict:
             raise ValueError(f'Episodio incompleto: {key}')
     if slug(data['id']) != data['id']:
         raise ValueError('ID nao pode conter path traversal ou espacos')
-    if not isinstance(data['cenas'], list) or not 3 <= len(data['cenas']) <= 20:
-        raise ValueError('Precisa de 3 a 20 cenas')
+    if not isinstance(data['cenas'], list) or not 1 <= len(data['cenas']) <= 60:
+        raise ValueError('Precisa de 1 a 60 cenas (limite técnico, sem quantidade fixa)')
     for scene in data['cenas']:
         if not scene.get('descricao') or not scene.get('papel'):
             raise ValueError('Cada cena precisa de descricao e papel narrativo')

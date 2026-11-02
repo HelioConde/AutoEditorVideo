@@ -26,8 +26,8 @@ STYLE = (
 def load_plan(path: Path) -> dict:
     obj=json.loads(Path(path).read_text(encoding="utf-8-sig"))
     scenes=obj.get("cenas")
-    if not isinstance(scenes,list) or not (3<=len(scenes)<=12):
-        raise ValueError("Plano precisa de 3 a 12 cenas")
+    if not isinstance(scenes,list) or not (1<=len(scenes)<=60):
+        raise ValueError("Plano precisa de 1 a 60 cenas por limite tecnico, sem meta editorial fixa")
     for s in scenes:
         if not s.get("id") or len(s.get("descricao", ""))<20:
             raise ValueError("Cena sem identificador ou descricao suficiente")

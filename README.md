@@ -177,3 +177,13 @@ Leia [o guia do lote](docs/LOTE-25.md).
 Foi integrado um segundo renderizador que anima personagem, objetos e câmera com movimentos por tipo de cena, reutilizando voz e legendas em cache. Ele **não faz upload**, não altera vídeos anteriores e bloqueia PNG opaco ou com verde residual.
 
 Documentação e instalação: [motion-remotion/README.md](motion-remotion/README.md). Análise dos motores GitHub: [docs/ESCOLHA-DO-MOTOR-DE-ANIMACAO.md](docs/ESCOLHA-DO-MOTOR-DE-ANIMACAO.md).
+
+## Cenas por acontecimentos do roteiro (sem quantidade fixa)
+
+O número de imagens é decidido pelas mudanças narrativas, não por um valor padrão. O planejador local propõe cortes e permite `blocos_visuais` escritos pelo roteirista. Para planejar o xadrez sem gastar IA:
+
+```powershell
+.\planejar-cenas.ps1 -Id 003-death-note-xadrez
+```
+
+O JSON gerado é uma **proposta visual para revisão**; ainda não constitui um vídeo final nem aciona automaticamente o gerador de imagens-mãe. Veja [docs/CENAS-DINAMICAS.md](docs/CENAS-DINAMICAS.md).
