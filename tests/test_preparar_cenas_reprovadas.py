@@ -99,3 +99,27 @@ def test_prepare_does_nothing_without_rejections(tmp_path,monkeypatch):
     result=prepare_rejected('003-death-note-xadrez','gpt-image-1.5')
     assert result['scenes']==[] and not result['changed']
     assert path.read_bytes()==before
+
+
+def test_newly_rejected_second_take_can_prepare_third_without_changing_others(tmp_path,monkeypatch):
+    path,_,_=fixture(tmp_path,monkeypatch)
+    initial=prepare_rejected('003-death-note-xadrez','gpt-image-1.5')
+    assert initial['scenes']==['02','03','04']
+    take2=json.loads(path.read_text(encoding='utf-8'))
+    scene=take2['scenes'][1]
+    folder=m.scene_dir(take2,scene,'gpt-image-1.5')
+    folder.mkdir(parents=True)
+    Image.new('RGB',m.SIZE,(35,30,40)).save(folder/'master.png')
+    write_review(folder,status='reprovado',reason='still bad foot')
+    before=path.read_bytes()
+    next_attempt=prepare_rejected('003-death-note-xadrez','gpt-image-1.5')
+    assert next_attempt['scenes']==['02']
+    take3=json.loads(path.read_text(encoding='utf-8'))
+    new=take3['scenes'][1]
+    assert new['correcao_visual']['take']==3
+    assert 'TAKE 3' in new['prompt'] and 'TAKE 2' not in new['prompt']
+    assert new['prompt'].count('VISUAL REGENERATION')==1
+    assert m.scene_dir(take3,new,'gpt-image-1.5')!=folder
+    for idx in (0,2,3,4,5):
+        assert take3['scenes'][idx]==take2['scenes'][idx]
+    assert Path(next_attempt['backup']).read_bytes()==before
