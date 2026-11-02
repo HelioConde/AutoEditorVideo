@@ -21,6 +21,7 @@ param(
   [switch]$Offline
 )
 $ErrorActionPreference='Stop'
+$env:PYTHONUNBUFFERED='1' # Enviar log ao Studio em tempo real.
 $root=$PSScriptRoot
 $py=Join-Path $root '.venv\Scripts\python.exe'
 if($Renderizar -and -not $TodasCenas){ throw 'Para renderizar o Short inteiro, use -TodasCenas.' }
