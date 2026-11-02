@@ -479,3 +479,43 @@ no QA e na revisao visual:
 Se o Short estiver aguardando aprovacao, a voz fica no cache e o
 MP4 **ainda nao existe**. Nao use a opcao de aprovar para burlar
 avisos de QA.
+
+
+### QA: aviso `personagem_atras_sobre_tabuleiro:l` nao deveria travar o Short
+
+Ao separar Light, L, mesa e tabuleiro, uma mascara de personagem atras
+pode conter a mao sobre o tabuleiro **ou pixels ocultados pelo objeto que
+esta na frente**. O tabuleiro tem Z superior, de modo que isso **nao
+significa automaticamente** que o corpo esta aparecendo em cima da mesa.
+O QA antigo classificava qualquer area sobreposta acima de 2,5% como
+erro fatal, mesmo quando `preview-composicao.png` estava visualmente
+correto.
+
+A partir desta correcao, esta sobreposicao aparece em
+`qa.review_warnings` e no log `[QA REVISAO]`: exige inspecao visual,
+mas nao bloqueia a operacao `-AprovarMulticamadas` se a cena foi
+realmente revisada e nao ha **outros** erros. O QA continua bloqueando
+`recomposicao_distante_da_master`, conflitos de hashes, camadas
+incompletas, masters reprovadas e imagens ainda nao aprovadas.
+Manifestos antigos com o alerta em `qa.warnings` sao interpretados
+sem modificar arquivos pagos e sem invalidar hashes.
+
+Para liberar o render das imagens **ja geradas**:
+
+```powershell
+cd C:\Users\helio\Documents\arquivo-otaku-github
+git pull origin main
+
+# Conferir manualmente cada preview-composicao.png
+# Depois aprovar somente a cena realmente conferida (exemplo 01):
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 1 -Modelo gpt-image-1.5 -ModoComposicao multicamadas -AprovarMulticamadas -Motivo "Visual conferido: mao em frente ao tabuleiro, sem corpo atravessando"
+
+# Repetir com -Cena 2, 3, ... para cada cena aprovada de verdade.
+# Por fim, video com a voz ja salva, zero chamadas de imagem:
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar
+```
+
+O teste de liberacao lista o estado **de todas as cenas**, nao somente
+a primeira que falhou. **Nao** repita a geracao com chamadas pagas
+para resolver um aviso que se refere apenas a sobreposicao de mascaras.
+Se o preview estiver errado, reprove a cena em vez de aprova-la.
