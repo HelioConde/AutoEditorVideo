@@ -110,8 +110,14 @@ def validate_frames(scene_folder:Path,character:str)->dict:
                 if coverage<.008 or coverage>.70:
                     bad.append(f"alpha fora do intervalo: {path.name}")
                 if index==0:
-                    d=ImageChops.difference(original,image)
-                    mean=sum(ImageStat.Stat(d.resize((256,384))).mean)/4
+                    # Color underneath alpha=0 is undefined for PNGs:
+                    # the master may retain RGB while Rigby2D exports
+                    # transparent black. Compare only visible pixels.
+                    blank=Image.new("RGBA",SIZE,(0,0,0,255))
+                    original_visible=Image.alpha_composite(blank,original)
+                    rig_visible=Image.alpha_composite(blank,image)
+                    d=ImageChops.difference(original_visible,rig_visible)
+                    mean=sum(ImageStat.Stat(d.convert("RGB").resize((256,384))).mean)/3
                     if mean>7:
                         bad.append(f"frame inicial nao corresponde ao personagem aprovado (MAE={mean:.1f})")
         hashes.append(sha(path))
