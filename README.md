@@ -1,3 +1,7 @@
+> **Novo: Arquivo Otaku v0.9 (integração em andamento).** [Núcleo editorial](arquivo_otaku/README.md): pautas por episódio, cortes por SRT, QA visual e controle de revisão. O projeto original está [preservado](../../tree/backup/autoeditor-studio-2026-11-01). O pacote completo local v0.8 ainda não foi transferido.
+
+---
+
 <div align="center">
 
 <h1>🎬 AutoEditor Studio</h1>

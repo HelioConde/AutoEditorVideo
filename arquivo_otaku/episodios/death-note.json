@@ -1,0 +1,24 @@
+{
+  "id": "death-note",
+  "obra": "Death Note",
+  "titulo": "Por que Light e L prendem a atenção?",
+  "roteiro": "Light precisa esconder o caderno. L transforma pequenos detalhes em pistas. Cada conversa parece uma partida de xadrez.",
+  "fatos_revisados": false,
+  "cenas": [
+    {
+      "id": "1",
+      "papel": "Conflito",
+      "descricao": "Light e L lado a lado em confronto"
+    },
+    {
+      "id": "2",
+      "papel": "Evidência",
+      "descricao": "Caderno e anotações sob luz dramática"
+    },
+    {
+      "id": "3",
+      "papel": "Desfecho",
+      "descricao": "Light e L estudam o próximo movimento"
+    }
+  ]
+}
