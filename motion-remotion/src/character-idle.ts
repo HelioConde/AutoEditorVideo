@@ -61,7 +61,8 @@ export const characterPoseAtFrame=(args:{
   const elapsed=finite((frame-sceneStart)/fps,0,duration/fps);
   const t=finite((frame-sceneStart)/duration,0,1);
   // Fades the first and last ~20% of the shot to the approved still.
-  const envelope=Math.pow(Math.sin(Math.PI*t),2);
+  // Exact zeros avoid floating-point residue on the first and final frames.
+  const envelope=t<=0||t>=1?0:Math.pow(Math.sin(Math.PI*t),2);
   // Real-time breathing instead of scene-relative oscillation; L breathes
   // slightly faster and more visibly than Light.
   const isLight=id==='light';
