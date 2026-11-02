@@ -311,3 +311,43 @@ Somente depois de revisar todas as cenas, renderize usando o cache:
 Se o comando de diagnóstico encontrar outro cache incompleto, não autorize
 a chamada por impulso: verifique primeiro cada pasta. Cenas antigas com
 pins manuais também continuam vinculadas ao cache explicitamente escolhido.
+
+### Protecao extra: rei de xadrez desaparece no foreground
+
+No take reenviado, a master 03 mostra Light com o rei preto, mas a recomposicao
+foreground/background apaga a peca. Para planos `light_moves_king`,
+`l_moves_king`, `king_hand_macro` e `top_board`, o Short e a capa agora
+usam `master_static`, mantendo mao, tabuleiro e peca originais. O movimento
+de camera global permanece; apenas a animacao 2.5D entre essas camadas e
+desativada. O cache pago e preservado, sem novas chamadas.
+
+Nessas cenas, `comparacao.jpg` mostra a imagem efetivamente renderizada,
+`comparacao-camadas.jpg` conserva a composicao defeituosa para diagnostico
+e `preview-render-seguro.jpg` apresenta a master intacta.
+
+**Cena 02:** quando a propria master ja posiciona mal o tronco de L, o
+fallback estatico nao corrige a anatomia. Reprove o cache atual e prepare um
+novo take somente para a 02. O novo prompt `ots_light` exige L sentado
+em uma cadeira ATRAS da borda distante da mesa, com espaco visivel entre
+torso e tabuleiro.
+
+**Portao de aprovacao:** cenas revisadas com
+`correcao_visual.requires_manual_approval` so entram no video/capa
+depois de `-AprovarCena`. Marcacao de aprovacao vale apenas para a
+pasta/hash daquela versao. Nao aprove imagens erradas apenas para renderizar.
+
+```powershell
+# A cena 03 pode ser recuperada da master, sem IA
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 3 -Modelo gpt-image-1.5 -MaxChamadas 0 -Offline
+
+# Se a master 02 continua com corpo sobre mesa, produzir outro take
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 2 -Modelo gpt-image-1.5 -ReprovarCena -Motivo "L ainda atravessa a mesa"
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Modelo gpt-image-1.5 -PrepararReprovadas
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 2 -Modelo gpt-image-1.5 -MaxChamadas 3
+
+# Apenas apos revisar a arte, registrar aprovacao
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 4 -Modelo gpt-image-1.5 -AprovarCena -Motivo "Master e comparacao conferidas"
+```
+
+A protecao do rei impede perda de um objeto importante na composicao, mas nao
+certifica automaticamente a anatomia. A revisao visual continua obrigatoria.
