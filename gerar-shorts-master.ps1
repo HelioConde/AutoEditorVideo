@@ -13,6 +13,9 @@ param(
   [switch]$SomentePlanejar,
   [switch]$SomenteValidar,
   [switch]$RepararFundo,
+  [switch]$DiagnosticarCache,
+  [switch]$StatusCodex,
+  [switch]$Replanejar,
   [switch]$Renderizar,
   [switch]$CriarVoz,
   [switch]$Offline
@@ -23,6 +26,16 @@ $py=Join-Path $root '.venv\Scripts\python.exe'
 if($Renderizar -and -not $TodasCenas){ throw 'Para renderizar o Short inteiro, use -TodasCenas.' }
 if($MasterExistente -and $TodasCenas){ throw '-MasterExistente somente com uma cena.' }
 if($CriarVoz -and $Offline){ throw 'Nao e possivel gerar voz em modo offline.' }
+if($StatusCodex){
+  if(-not(Test-Path $py)){
+    $systemPython=Get-Command python -ErrorAction SilentlyContinue
+    if(-not $systemPython){ throw 'Python nao encontrado para diagnostico do proxy.' }
+    $py=$systemPython.Source
+  }
+  & $py (Join-Path $root 'scripts\estado_codex_proxy.py')
+  if($LASTEXITCODE -ne 0){throw 'Falhou o diagnostico local do Codex Proxy.'}
+  return
+}
 
 if($SomentePlanejar){
   if(-not(Test-Path $py)){
@@ -102,6 +115,8 @@ if($MasterExistente){$argsList+=@('--master-existente',$MasterExistente)}
 if($TodasCenas){$argsList+='--todas-cenas'}
 if($SomenteValidar){$argsList+='--validar'}
 if($RepararFundo){$argsList+='--reparar-fundo'}
+if($DiagnosticarCache){$argsList+='--diagnosticar-cache'}
+if($Replanejar){$argsList+='--replanejar'}
 if($Offline){$argsList+='--offline'}
 & $py @argsList
 if($LASTEXITCODE -ne 0){throw 'Geracao interrompida. Cache e videos anteriores preservados.'}
