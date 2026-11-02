@@ -521,6 +521,12 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     mask_alerts=[] if clean_reference else background_mask_warnings(d,mask_content)
     if fidelity['redrawn']:
         mask_alerts.append('foreground_redesenhado')
+        # Show the exact frame that the safety fallback will use, making it
+        # possible to review the corrected video frame without rendering MP4.
+        preview=d/'preview-render-seguro.jpg'
+        with Image.open(master) as source_master:
+            source_master.convert('RGB').save(preview,'JPEG',quality=94)
+        fidelity['safe_preview']=str(preview)
         print(f"[QA ALERTA] Cena {scene['id']}: foreground difere da master "
               f"(MAE={fidelity['mean_difference']}, metade inferior="
               f"{fidelity['lower_half_mean_difference']}). "
