@@ -79,3 +79,28 @@ No Docker Desktop, configure o aplicativo para iniciar junto do Windows. Caso a 
 - O painel mostra logs localmente sem salvar tokens. Os arquivos `.env` e resultados de imagens continuam no seu PC.
 - **Reparar fundo** limita-se a uma cena por vez e preserva o backup do background pago.
 - Se aparecer erro no terminal, confira o log e use **Verificar cache** antes de autorizar nova geração.
+
+
+## Windows: `[Errno 22] Invalid argument: background-mask.png`
+
+Isso pode acontecer quando a máscara existente está aberta/bloqueada por um
+visualizador ou editor no Windows. A composição 2.5D com
+`background-raw.png` já em cache **não precisa gravar a máscara outra vez**.
+
+A partir desta correção, o motor calcula a máscara somente em memória para
+o QA e para conferir fundos limpos, sem abrir, sobrescrever nem apagar
+`background-mask.png` no fluxo offline com fundo já gerado. Ele continua
+preservando as camadas raw e o deslocamento da cena 06.
+
+```powershell
+git pull origin main
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 6 -Modelo gpt-image-1.5 -MaxChamadas 0 -Offline
+```
+
+Procure `[MASCARA] 06: calculada em memoria`, `[POSICIONAMENTO]` e
+`[FUNDO]` no log. Isso não gera imagens com IA. Se você precisar
+**regenerar** o background usando `-RepararFundo`, a máscara ainda será
+escrita no disco, pois a API de edição a utiliza; feche antes qualquer
+aplicativo que a esteja segurando e reexecute. Se a escrita falhar,
+nenhuma chamada de edição é enviada e os arquivos raw continuam preservados.
+
