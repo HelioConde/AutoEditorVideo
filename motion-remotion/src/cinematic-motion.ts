@@ -6,7 +6,7 @@
  * tiny in-place transform, while the whole frame has a cinematic camera move.
  * First frame retains the exact approved scene preview.
  */
-export type AnimationMode='cinematica'|'desligada';
+export type AnimationMode='cinematica'|'desligada'|'esqueleto2d';
 export type ShotProfile='establish'|'duel'|'king'|'reaction'|'reply'|'final';
 
 type Camera={zoom:number;panX:number;panY:number;fill:number;focus:number;breath:number;lighting:number};
