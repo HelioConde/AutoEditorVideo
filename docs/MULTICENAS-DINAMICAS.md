@@ -185,3 +185,53 @@ parecidos podem merecer avaliação manual. O gerador **não repete chamadas
 pagas, não apaga arquivos e não altera imagens aprovadas** apenas porque
 encontrou similaridade. O editor decide se vale gerar outra versão depois de
 ver o custo estimado.
+
+## Evitar personagens redesenhados sobre a mesa / tabuleiro
+
+Quando a IA recebe uma imagem-mãe para **extrair** um foreground transparente,
+ela pode, incorretamente, **redesenhar** o personagem, mudar o contorno do
+corpo e até acrescentar partes da mesa dentro do recorte. O alpha pode ser
+válido e as margens podem estar corretas, mas a composição final fica errada.
+Isso aconteceu no exemplo enviado da cena 04 (L pensando diante do
+tabuleiro): a master original é utilizável, enquanto o novo torso recortado
+avança sobre a mesa.
+
+### Novo QA: fidelidade da camada ao original
+
+`scripts/qa_foreground_fidelity.py` mede a diferença entre pixels opacos do
+`foreground-normalized.png` **antes de qualquer deslocamento/escala** e a
+mesma posição da `master.png`. Inclui média global e da metade inferior.
+Quando detecta redesenho grave, registra
+`qa.json.foreground_source_consistency.redrawn=true` e o aviso
+`foreground_redesenhado` e cria `preview-render-seguro.jpg`.
+
+O QA de alinhamento antigo calculava apenas a diferença de composição média
+sobre a tela inteira. Essa métrica sozinha pode esconder um torso redesenhado.
+
+### O que acontece no render
+
+Ao encontrar esse problema, o Remotion **não utiliza a camada defeituosa**.
+Ele incorpora a **master original inteira** como quadro seguro e usa um
+foreground transparente, sem movimento independente do corpo. A imagem
+continua podendo receber movimento de câmera de cena, mas perde o efeito
+parallax 2.5D, preferível a ter braços/mesa sobrepostos. A capa também usa
+a master original se a extração está incorreta.
+
+O renderizador recalcula a verificação mesmo para QA legado, de modo que um
+`qa.json` antigo sem esse campo não permita o erro silenciosamente. O
+manifesto de render registra `render_mode: master_static` para essas cenas.
+Não são feitas chamadas de IA nem descartados arquivos raw/caches.
+
+### Reprocessar a cena 04 do Death Note sem custo
+
+```powershell
+git pull origin main
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 4 -Modelo gpt-image-1.5 -MaxChamadas 0 -Offline
+```
+
+Abra o `preview-render-seguro.jpg` no cache da cena 04, que mostra o quadro
+que será utilizado no Short. Se desejar animação 2.5D do personagem
+novamente, é necessário um recorte realmente fiel à master ou uma nova
+edição aprovada, não uma transformação arbitrária da pose. A detecção é
+heurística e **não dispensa conferência humana**.
+
