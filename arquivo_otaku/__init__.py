@@ -1,1 +1,1 @@
-"""Ferramentas offline do Arquivo Otaku."""
+"""Arquivo Otaku: ferramentas de planejamento editorial sem API."""

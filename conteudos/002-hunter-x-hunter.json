@@ -1,0 +1,55 @@
+{
+  "id": "002-hunter-x-hunter",
+  "titulo": "Por que o Nen torna as lutas de Hunter x Hunter interessantes?",
+  "serie": "Hunter x Hunter",
+  "tipo": "análise original, sem spoilers importantes",
+  "duracao_alvo_segundos": 50,
+  "gancho": "Em Hunter x Hunter, nem sempre vence quem tem mais força.",
+  "roteiro": "Em Hunter x Hunter, nem sempre vence quem tem mais força. O Nen faz o combate parecer um jogo de estratégia. Conhecer as regras da própria habilidade é só o começo: descobrir limites e condições pode ser tão importante quanto atacar. Por isso, entender o adversário costuma mudar toda a luta. E o mais interessante é que uma habilidade aparentemente simples pode se tornar perigosa quando usada de forma inteligente. É por isso que as batalhas da obra dão assunto para tantas discussões. Qual habilidade de Nen você acha mais criativa?",
+  "observacoes": "Não mostrar episódios, artes oficiais ou músicas sem autorização. Confirmar informação de versões e arcos antes de publicar.",
+  "tags": [
+    "#HunterxHunter",
+    "#Nen",
+    "#Anime",
+    "#Otaku",
+    "#AnimeBrasil"
+  ],
+  "cenas": [
+    {
+      "tempo": "00-06",
+      "cartela": "FORÇA NÃO É TUDO",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original adventurous anime inspired composition of abstract aura energy shimmering around a fist with a forest in background"
+    },
+    {
+      "tempo": "06-14",
+      "cartela": "REGRAS E CONDIÇÕES",
+      "direcao": "Diagrama original",
+      "prompt_imagem": "original mysterious anime-inspired illustration of an empty ancient training arena with floating glowing energy glyphs"
+    },
+    {
+      "tempo": "14-24",
+      "cartela": "LIMITE = ESTRATÉGIA",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original fantasy anime inspired artwork of three distinct colored energy spheres in dynamic balance without written labels"
+    },
+    {
+      "tempo": "24-34",
+      "cartela": "ENTENDER O RIVAL",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original anime inspired cinematic scene of strategy board with glowing energy lines connecting symbolic power stones"
+    },
+    {
+      "tempo": "34-44",
+      "cartela": "CRIATIVIDADE VENCE?",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original dramatic anime inspired art of a traveler practicing aura control under the starry sky with an original silhouette"
+    },
+    {
+      "tempo": "44-50",
+      "cartela": "QUAL É O SEU NEN?",
+      "direcao": "Pergunta",
+      "prompt_imagem": "original anime-inspired editorial artwork with mysterious glowing energy pathways leading into a distant mountain"
+    }
+  ]
+}

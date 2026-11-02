@@ -1,14 +1,37 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#101214" />
-    <meta name="description" content="AutoEditor Studio: importe, recorte e exporte seus vídeos localmente." />
-    <title>AutoEditor Studio — Seu estúdio de vídeo</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arquivo Otaku · Ferramentas para Shorts de Anime</title>
+<meta name="description" content="Arquivo Otaku é um projeto local de criação de Shorts de anime com radar editorial, imagens com IA, montagem e YouTube OAuth.">
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#090b13;color:#eef0f8}
+*{box-sizing:border-box}body{margin:0}a{color:#ff7c8d}a:focus-visible{outline:3px solid #ff7c8d;outline-offset:4px}
+main{max-width:1000px;margin:auto;padding:70px 24px}
+small{color:#aeb4c7}.tag{display:inline-block;background:#2e1525;color:#ffa4b0;padding:8px 13px;border-radius:999px}
+h1{font-size:clamp(42px,8vw,88px);letter-spacing:-.065em;line-height:1.06;margin:18px 0}
+h1 span{color:#ff637e}p{max-width:720px;color:#c3c8d7;line-height:1.7;font-size:18px}
+.button{display:inline-flex;padding:13px 18px;border-radius:12px;background:#ff637e;color:#16070c;text-decoration:none;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:38px 0}
+.card{background:#121622;border:1px solid #30384a;border-radius:16px;padding:23px}
+.card h2{font-size:18px}.card p{font-size:15px;margin-bottom:0}
+pre{background:#121622;border:1px solid #30384a;border-radius:13px;padding:16px;overflow:auto;color:#eaeef7}
+footer{border-top:1px solid #30384a;padding-top:25px;margin-top:65px;color:#aeb4c7}
+</style></head>
+<body><main>
+<span class="tag">Projeto open source · Windows + Python</span>
+<h1>Arquivo <span>Otaku.</span></h1>
+<p>Da ideia ao YouTube: radar editorial, roteiro, ilustrações de anime via IA, edição de Shorts, miniaturas e publicação OAuth. Execute no seu computador e mantenha a revisão criativa nas suas mãos.</p>
+<a class="button" href="https://github.com/HelioConde/AutoEditorVideo">Ver código e instalar no GitHub</a>
+<section class="cards" aria-label="Funcionalidades">
+<article class="card"><h2>Radar editorial</h2><p>Ideias de anime, pauta, gancho e verificação do roteiro.</p></article>
+<article class="card"><h2>Gerador de cenas</h2><p>Integração local com Codex Proxy, respeitando disponibilidade e cotas.</p></article>
+<article class="card"><h2>Edição vertical</h2><p>MoneyPrinterTurbo, FFmpeg, narração e legendas.</p></article>
+<article class="card"><h2>Publicação YouTube</h2><p>Miniaturas, título, descrição e autorização oficial OAuth.</p></article>
+</section>
+<h2>Comece no PowerShell</h2>
+<pre><code>git clone https://github.com/HelioConde/AutoEditorVideo.git
+cd AutoEditorVideo
+.\radar-conteudo.ps1</code></pre>
+<p><small>Antes de usar o radar, instale Python e dependências seguindo o README. O GitHub Pages é uma vitrine estática: não gera vídeos nem recebe credenciais.</small></p>
+<footer>Arquivo Otaku · Desenvolvido por Hélio Conde · <a href="https://github.com/HelioConde/AutoEditorVideo/tree/backup/autoeditor-studio-2026-11-01">Editor anterior preservado</a></footer>
+</main></body></html>

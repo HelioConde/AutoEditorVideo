@@ -1,0 +1,54 @@
+{
+  "id": "003-fullmetal",
+  "titulo": "O verdadeiro peso da troca equivalente em Fullmetal Alchemist",
+  "serie": "Fullmetal Alchemist",
+  "tipo": "análise temática original, sem spoilers importantes",
+  "duracao_alvo_segundos": 50,
+  "gancho": "A troca equivalente é mais do que uma regra de alquimia.",
+  "roteiro": "A troca equivalente é mais do que uma regra de alquimia em Fullmetal Alchemist. Ela também faz a gente pensar no custo de cada escolha. Os irmãos Elric começam a jornada tentando corrigir as consequências de uma decisão impossível de ignorar. Mas a grande pergunta da história não é só quanto algo custa. É o que vale a pena sacrificar para conseguir o que queremos. Essa é uma das razões pelas quais a obra continua rendendo discussões mesmo depois do final. Para você, qual anime melhor fala sobre consequências?",
+  "observacoes": "Tema interpretativo. Preferir artes editoriais próprias, não cenas protegidas.",
+  "tags": [
+    "#FullmetalAlchemist",
+    "#Anime",
+    "#Otaku",
+    "#AnimeBrasil"
+  ],
+  "cenas": [
+    {
+      "tempo": "00-06",
+      "cartela": "TUDO TEM UM PREÇO?",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original fantasy anime-inspired illustration of a symbolic balancing scale and glowing alchemical circle without any text"
+    },
+    {
+      "tempo": "06-14",
+      "cartela": "TROCA EQUIVALENTE",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original anime-inspired scene of an old metal workshop filled with alchemy instruments and blue light reflections"
+    },
+    {
+      "tempo": "14-24",
+      "cartela": "CADA ESCOLHA CONTA",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original dramatic hand drawn anime-inspired illustration of an empty glove reaching toward a floating broken gear"
+    },
+    {
+      "tempo": "24-34",
+      "cartela": "O PESO DA JORNADA",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original anime-inspired cinematic illustration of a golden scale balancing stones against luminous energy"
+    },
+    {
+      "tempo": "34-44",
+      "cartela": "VALE O SACRIFÍCIO?",
+      "direcao": "Cartela original",
+      "prompt_imagem": "original thoughtful anime-inspired image of a scientist silhouette studying a mysterious glowing geometric transmutation design"
+    },
+    {
+      "tempo": "44-50",
+      "cartela": "E PRA VOCÊ?",
+      "direcao": "Pergunta",
+      "prompt_imagem": "original anime-inspired editorial image of an open laboratory doorway and glowing scale in the foreground"
+    }
+  ]
+}

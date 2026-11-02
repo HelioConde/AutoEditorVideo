@@ -1,0 +1,56 @@
+{
+  "atualizado_em": "2026-11-01",
+  "metodologia": "Fontes publicas de catalogo/canais. Padroes editoriais inferidos de titulos e descricoes, NAO de retention, cortes, analytics internos ou videos assistidos.",
+  "canais": [
+    {
+      "nome": "Locomotiva Pop",
+      "url": "https://www.youtube.com/@Locomotivapop/shorts",
+      "tipo": "Shorts cultura pop",
+      "referencia": "Dilemas de cultura pop, titulos que criam curiosidade",
+      "aplicacao": "pergunta especifica e promessa clara"
+    },
+    {
+      "nome": "Time Trends",
+      "url": "https://www.youtube.com/@TimeTrends/shorts",
+      "tipo": "Shorts anime",
+      "referencia": "Curiosidades, novidades e resumos de anime",
+      "aplicacao": "temas reconheciveis de anime e videos concisos"
+    },
+    {
+      "nome": "Vicio Nerd",
+      "url": "https://socialdiscovery.app/pt/youtube/channel/vicio-nerd",
+      "tipo": "analises/curiosidades",
+      "referencia": "Titulos de debate sobre personagens e vilões, listas de curiosidades",
+      "aplicacao": "angulos polemicos com exemplos reais, sem alegacoes enganosas"
+    },
+    {
+      "nome": "buruno",
+      "url": "https://socialdiscovery.app/pt/youtube/channel/buruno",
+      "tipo": "critica/anime",
+      "referencia": "Perguntas e interpretacoes narrativas de One Piece e outros animes",
+      "aplicacao": "roteiro que sustenta uma tese ate a conclusao"
+    },
+    {
+      "nome": "Hashi Quebrado",
+      "url": "https://socialdiscovery.app/pt/youtube/themes/animation/anime-manga",
+      "tipo": "terror/analise",
+      "referencia": "Mangás sombrios e debates sobre historias perturbadoras",
+      "aplicacao": "serie misterio com cuidado de spoilers e factualidade"
+    },
+    {
+      "nome": "Daniel Morais",
+      "url": "https://socialdiscovery.app/pt/youtube/themes/animation/anime-manga",
+      "tipo": "personagens/anime",
+      "referencia": "Analises de contradicoes e consequencias de escolhas",
+      "aplicacao": "causa, conflito, consequencia, tese"
+    }
+  ],
+  "fontes": [
+    "https://socialdiscovery.app/pt/youtube/themes/animation/anime-manga",
+    "https://socialdiscovery.app/pt/youtube/channel/vicio-nerd",
+    "https://socialdiscovery.app/pt/youtube/channel/buruno",
+    "https://support.google.com/youtube/answer/11914225",
+    "https://support.google.com/youtube/answer/12942217",
+    "https://support.google.com/youtube/answer/1311392"
+  ]
+}

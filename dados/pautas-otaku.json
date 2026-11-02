@@ -1,0 +1,272 @@
+{
+  "versao": "0.8",
+  "observacao": "Pautas editoriais sao hipotese; nao sao tendencia medida nem fatos ja verificados.",
+  "pautas": [
+    {
+      "id": "death-note-l",
+      "obra": "Death Note",
+      "formato": "personagem",
+      "pauta": "O detalhe que torna L o maior perigo para Light",
+      "titulo_sugerido": "Por que L assusta mais que o Death Note?",
+      "gancho": "Light pode ter a vantagem sobrenatural, mas L pressiona sem ter esse poder.",
+      "prova_a_verificar": "Comparar cenas especificas da investigacao sem revelar grandes spoilers",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 4
+      },
+      "spoiler": "baixo",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "death-note-caderno",
+      "obra": "Death Note",
+      "formato": "misterio",
+      "pauta": "O terror real da primeira pagina do Death Note",
+      "titulo_sugerido": "O que torna um caderno tao assustador?",
+      "gancho": "O suspense nao depende de luta, mas das consequencias de uma escolha.",
+      "prova_a_verificar": "Selecionar e conferir regras exatas do caderno no anime",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "moderado",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "death-note-contradicao",
+      "obra": "Death Note",
+      "formato": "dilema",
+      "pauta": "O erro que aproxima Light de sua queda",
+      "titulo_sugerido": "A maior fraqueza de Light era o proprio ego?",
+      "gancho": "Uma vantagem pode se transformar em risco quando o protagonista quer controlar todos.",
+      "prova_a_verificar": "Escolher episodio e eventos sem generalizacoes nem spoiler surpresa",
+      "pontuacao_manual": {
+        "curiosidade": 4,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "moderado",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "hxh-killua",
+      "obra": "Hunter x Hunter",
+      "formato": "personagem",
+      "pauta": "Por que Killua parece mais humano quando tem medo",
+      "titulo_sugerido": "O medo de Killua era sua maior força?",
+      "gancho": "A origem dos seus medos pode explicar algumas escolhas mais importantes.",
+      "prova_a_verificar": "Rever cenas especificas e separar interpretacao de fato",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "baixo",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "hxh-kurapika",
+      "obra": "Hunter x Hunter",
+      "formato": "dilema",
+      "pauta": "O preço de buscar vinganca no caso de Kurapika",
+      "titulo_sugerido": "A vinganca de Kurapika o deixa mais fraco?",
+      "gancho": "Um personagem forte pode pagar um custo enorme por sua motivacao.",
+      "prova_a_verificar": "Checar as regras da habilidade e os eventos citados",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "moderado",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "fma-troca",
+      "obra": "Fullmetal Alchemist",
+      "formato": "misterio",
+      "pauta": "O peso da troca equivalente em Fullmetal",
+      "titulo_sugerido": "E se o maior inimigo fosse uma escolha?",
+      "gancho": "A ideia de custo e consequencia esta no centro do conflito dos irmaos.",
+      "prova_a_verificar": "Definir se o roteiro usara Brotherhood ou adaptacao de 2003",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "baixo",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "fma-mustang",
+      "obra": "Fullmetal Alchemist",
+      "formato": "personagem",
+      "pauta": "O paradoxo da ambicao de Roy Mustang",
+      "titulo_sugerido": "Por que Mustang quer tanto poder?",
+      "gancho": "A ambicao do personagem pode parecer diferente quando analisamos suas motivacoes.",
+      "prova_a_verificar": "Confirmar contexto da historia sem spoiler de arco final",
+      "pontuacao_manual": {
+        "curiosidade": 4,
+        "potencial_visual": 4,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "baixo",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "naruto-itachi",
+      "obra": "Naruto",
+      "formato": "dilema",
+      "pauta": "Uma decisao de Itachi que divide os fas",
+      "titulo_sugerido": "Itachi foi heroi ou vilao?",
+      "gancho": "A interpretacao do personagem muda dependendo da informacao conhecida.",
+      "prova_a_verificar": "Tema inclui spoilers grandes; marcar e confirmar cronologia",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "alto",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "naruto-pain",
+      "obra": "Naruto",
+      "formato": "dilema",
+      "pauta": "Por que as palavras de Pain incomodam tanto",
+      "titulo_sugerido": "Pain tinha razão sobre a dor?",
+      "gancho": "A forca do antagonista tambem aparece nas perguntas que ele faz.",
+      "prova_a_verificar": "Checar fala e contexto exatos, evitar citações não verificadas",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "moderado",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "aot-eren",
+      "obra": "Attack on Titan",
+      "formato": "dilema",
+      "pauta": "O debate sobre liberdade em Attack on Titan",
+      "titulo_sugerido": "Eren era livre nas proprias escolhas?",
+      "gancho": "A historia provoca discussoes sobre liberdade e responsabilidade.",
+      "prova_a_verificar": "Spoilers importantes: confirmar fatos, evitar revelacoes no titulo",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "alto",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "aot-levi",
+      "obra": "Attack on Titan",
+      "formato": "personagem",
+      "pauta": "Por que a calma de Levi impõe tanta tensão",
+      "titulo_sugerido": "O verdadeiro poder de Levi era a frieza?",
+      "gancho": "Disciplina e escolhas sob pressao podem dizer mais que força bruta.",
+      "prova_a_verificar": "Rever cenas concretas para fundamentar a interpretacao",
+      "pontuacao_manual": {
+        "curiosidade": 4,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 4
+      },
+      "spoiler": "baixo",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "jjk-gojo",
+      "obra": "Jujutsu Kaisen",
+      "formato": "personagem",
+      "pauta": "Por que ser o mais forte nao resolve tudo",
+      "titulo_sugerido": "Ser invencivel pode ser uma fraqueza?",
+      "gancho": "O peso de ser excepcional cria conflitos que vao alem das batalhas.",
+      "prova_a_verificar": "Evitar spoilers de mangá não adaptados e alegacoes de poder absolutas",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 5
+      },
+      "spoiler": "moderado",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "one-piece-robin",
+      "obra": "One Piece",
+      "formato": "personagem",
+      "pauta": "Por que a decisao de Robin marcou tanto",
+      "titulo_sugerido": "O que faz uma frase mudar tudo?",
+      "gancho": "O valor emocional da historia vem de escolhas e consequencias, nao apenas de lutas.",
+      "prova_a_verificar": "Verificar episodio e citações e sinalizar spoiler de arco",
+      "pontuacao_manual": {
+        "curiosidade": 5,
+        "potencial_visual": 5,
+        "atemporal": 5,
+        "originalidade": 4
+      },
+      "spoiler": "moderado",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    },
+    {
+      "id": "one-piece-zoro",
+      "obra": "One Piece",
+      "formato": "dilema",
+      "pauta": "O preco da lealdade em One Piece",
+      "titulo_sugerido": "Lealdade pode ser mais forte que ambição?",
+      "gancho": "O conflito entre dever, sonho e sacrificio ajuda a entender personagens.",
+      "prova_a_verificar": "Escolher exemplo e arco especificos sem inventar citações",
+      "pontuacao_manual": {
+        "curiosidade": 4,
+        "potencial_visual": 4,
+        "atemporal": 5,
+        "originalidade": 4
+      },
+      "spoiler": "moderado",
+      "fato_verificado": false,
+      "status": "pauta_a_verificar",
+      "fonte_obra": "anime/manga original — conferir episodio/capitulo"
+    }
+  ]
+}

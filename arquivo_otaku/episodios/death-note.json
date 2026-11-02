@@ -1,24 +1,58 @@
 {
   "id": "death-note",
   "obra": "Death Note",
-  "titulo": "Por que Light e L prendem a atenção?",
-  "roteiro": "Light precisa esconder o caderno. L transforma pequenos detalhes em pistas. Cada conversa parece uma partida de xadrez.",
+  "titulo": "O segredo de Death Note: vencer sem lutar?",
+  "roteiro": "Em Death Note, uma pergunta pode ser mais perigosa que um soco. Light tem um poder absurdo, mas precisa esconder quem ele é. L não tem esse poder. Então ele transforma cada detalhe numa pista. E o mais interessante é que uma simples conversa pode virar uma armadilha. Light tenta antecipar a próxima jogada de L. L observa até o menor silêncio de Light. Parece uma partida de xadrez em que ninguém pode revelar seu plano. É por isso que Death Note prende tanto: o perigo não está só na ação, mas naquilo que cada personagem sabe. Afinal, quem você acha que jogou melhor: Light ou L?",
   "fatos_revisados": false,
   "cenas": [
     {
-      "id": "1",
-      "papel": "Conflito",
-      "descricao": "Light e L lado a lado em confronto"
+      "id": "01",
+      "tipo": "confronto",
+      "descricao": "Light Yagami and L Lawliet staring at one another across a chessboard in a blue noir Japanese investigation room, expressive eyes visible, medium two-shot, warm rim light, suspenseful psychological duel",
+      "movimento": "zoom",
+      "papel": "Gancho visual imediato: rivalidade"
     },
     {
-      "id": "2",
-      "papel": "Evidência",
-      "descricao": "Caderno e anotações sob luz dramática"
+      "id": "02",
+      "tipo": "retrato",
+      "descricao": "close-up of Light Yagami from Death Note in white shirt and loose red tie, recognizable brown layered hair and brown eyes, cunning calculating half-smile, face illuminated by a desk lamp in a dim room",
+      "movimento": "zoom",
+      "papel": "A decisao de Light"
     },
     {
-      "id": "3",
-      "papel": "Desfecho",
-      "descricao": "Light e L estudam o próximo movimento"
+      "id": "03",
+      "tipo": "retrato-personagem-alternativo",
+      "descricao": "L Lawliet from Death Note sitting hunched with knees up on a chair, messy black hair, distinct dark eyes, oversized white long sleeve shirt and blue jeans, medium shot in an investigation office, clear face and pale screen light",
+      "movimento": "zoom",
+      "papel": "Introduzir L e seu olhar analitico"
+    },
+    {
+      "id": "04",
+      "tipo": "objeto",
+      "descricao": "cinematic top-down close-up of a closed mysterious black notebook on an illuminated wooden desk, hands at the edges with correct five fingers, red pen and investigation notes, dramatic legible lighting and sharp focus, no written text on any surface",
+      "movimento": "zoom",
+      "papel": "O risco de esconder pistas"
+    },
+    {
+      "id": "05",
+      "tipo": "metafora",
+      "descricao": "dramatic low angle view of black and white chess pieces casting long shadows on a board, a single white king in danger near a black queen, midnight blue background and restrained red backlight, bright detail on the important pieces, no characters",
+      "movimento": "zoom",
+      "papel": "A estrategia sem violencia"
+    },
+    {
+      "id": "06",
+      "tipo": "ambiente",
+      "descricao": "Light Yagami from Death Note in side profile by a rain covered window at night, brown layered hair and white shirt, city lights reflecting in blue and red, clearly readable profile with balanced noir illumination, medium wide shot",
+      "movimento": "zoom",
+      "papel": "Toda vantagem gera novo risco"
+    },
+    {
+      "id": "07",
+      "tipo": "desfecho",
+      "descricao": "two-shot anime scene with Light Yagami on the left and L Lawliet on the right in a tense silent standoff, both recognizable with faithful hairstyles and clothing, visible facial expressions, atmospheric blue and warm red theatrical lighting, ample space for short Portuguese subtitles",
+      "movimento": "zoom",
+      "papel": "Pergunta final e convite para comentario"
     }
   ]
 }

@@ -1,0 +1,60 @@
+{
+  "id": "001-death-note",
+  "titulo": "Por que Death Note prende tanto sem grandes batalhas?",
+  "serie": "Death Note",
+  "tipo": "análise original, sem spoilers importantes",
+  "plataformas": [
+    "YouTube Shorts",
+    "TikTok",
+    "Instagram Reels"
+  ],
+  "duracao_alvo_segundos": 48,
+  "gancho": "Como um anime sem grandes batalhas consegue ser tão tenso?",
+  "roteiro": "Como um anime sem grandes batalhas consegue ser tão tenso? Em Death Note, cada conversa pode ser um confronto. Light tenta esconder o que sabe, enquanto L procura uma contradição. O resultado é uma batalha de estratégias: a gente acompanha não só o que os personagens fazem, mas o que eles pensam que o outro vai fazer. E existe um detalhe genial: quase toda vitória traz um novo risco. Por isso, uma simples decisão pode parecer mais perigosa que um golpe final. Para você, qual duelo mental dos animes é o mais marcante?",
+  "observacoes": "Análise interpretativa. Evitar afirmar detalhes que não foram checados; sem citações de diálogos nem cenas copiadas.",
+  "tags": [
+    "#DeathNote",
+    "#Anime",
+    "#Otaku",
+    "#CuriosidadesAnime",
+    "#AnimeBrasil"
+  ],
+  "cenas": [
+    {
+      "tempo": "00-04",
+      "cartela": "UM ANIME SEM LUTAS...\nE TENSÃO MÁXIMA?",
+      "direcao": "Título impactante; fundo original abstrato",
+      "prompt_imagem": "original noir anime inspired art of a shadowy study desk with a mysterious blank notebook and moonlight streaming through a window"
+    },
+    {
+      "tempo": "04-12",
+      "cartela": "CADA CONVERSA\nÉ UM CONFRONTO",
+      "direcao": "Layout tipográfico com cartas de investigação",
+      "prompt_imagem": "original cinematic anime-inspired illustration showing an intense conversation between two anonymous silhouettes in a dim urban office"
+    },
+    {
+      "tempo": "12-20",
+      "cartela": "LIGHT x L",
+      "direcao": "Nomes em oposição; sem retratar personagens",
+      "prompt_imagem": "original anime illustration of two unidentified rival strategists separated by a beam of cold blue light and a chessboard in foreground"
+    },
+    {
+      "tempo": "20-30",
+      "cartela": "ESTRATÉGIA > FORÇA",
+      "direcao": "Quadro de xadrez abstrato original",
+      "prompt_imagem": "original suspenseful anime-inspired close up of chess pieces on a dark board and symbolic floating decision diagrams"
+    },
+    {
+      "tempo": "30-40",
+      "cartela": "CADA VITÓRIA\nTRAZ UM RISCO",
+      "direcao": "Texto de impacto, gráfico de risco original",
+      "prompt_imagem": "original cinematic noir anime-inspired illustration of a risky strategy symbolized by a falling domino chain and a red warning glow"
+    },
+    {
+      "tempo": "40-48",
+      "cartela": "QUAL É O MELHOR\nDUELO MENTAL?",
+      "direcao": "Pergunta final e convite para comentar",
+      "prompt_imagem": "original anime-inspired editorial artwork of a dark chessboard with an empty central square and dramatic spotlight suggesting a question"
+    }
+  ]
+}
