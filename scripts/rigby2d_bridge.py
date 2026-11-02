@@ -36,6 +36,8 @@ def rig_folder(scene_folder:Path,character:str)->Path:
     return scene_folder/"multilayer"/"rigby2d"/character
 
 def source_for(scene_folder:Path,character:str)->Path:
+    if character not in CHARACTERS:
+        raise ValueError("Personagem nao suportado: "+character)
     path=scene_folder/"multilayer"/(character+".png")
     if not path.is_file():
         raise FileNotFoundError(f"Camada {character} nao existe no cache: {path}")
