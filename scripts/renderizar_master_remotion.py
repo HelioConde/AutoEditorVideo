@@ -115,8 +115,27 @@ def assign_frames(scenes:list[dict],seconds:float)->list[tuple[int,int]]:
     return bounds
 
 
+def layer_animation_metrics(image:Path)->dict:
+    """Read metadata from approved RGBA layer; never change cached PNG bytes."""
+    with Image.open(image) as layer:
+        alpha=layer.getchannel('A')
+        histogram=alpha.histogram()
+        fraction=round(sum(histogram[128:]) / float(layer.width*layer.height),5)
+        bounding=alpha.point(lambda a:255 if a>127 else 0).getbbox()
+        if bounding is None:
+            return {'alphaCoverage':0.,'anchorX':50.,'anchorY':80.}
+        # Breathing pivot near the character's lowest visible body pixel.
+        x0,y0,x1,y1=bounding
+        return {
+            'alphaCoverage':fraction,
+            'anchorX':round((x0+x1)/2/layer.width*100,2),
+            'anchorY':round((y0*.10+y1*.90)/layer.height*100,2),
+        }
+
+
 def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
-                *,model:str='gpt-image-1.5',output:Path=OUT,public:Path|None=None)->dict:
+                *,model:str='gpt-image-1.5',output:Path=OUT,
+                public:Path|None=None,animation_mode:str='cinematica')->dict:
     entries=validate_scenes(ep,model,output)
     target=(public or MOTION/'public')/'generated'/ep['id']
     target.mkdir(parents=True,exist_ok=True)
@@ -136,7 +155,8 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                 dest=target/f'{stem}-layer-{layer.id}.png'
                 shutil.copy2(path,dest)
                 semantic.append({'id':layer.id,'role':layer.role,'z':layer.z,
-                    'src':f'generated/{ep["id"]}/{dest.name}'})
+                    'src':f'generated/{ep["id"]}/{dest.name}',
+                    **layer_animation_metrics(path)})
         elif entry['render_mode']=='master_static':
             # A wrongly redrawn alpha layer may cover furniture and chess
             # pieces. Use the ORIGINAL master as a single still image.
@@ -161,7 +181,10 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                        'action':scene.get('action','')})
     shutil.copy2(voice,target/'voz.mp3')
     parent=select_episode(ep['id'])
+    if animation_mode not in ('cinematica','desligada'):
+        raise ValueError('Modo de animacao desconhecido')
     return {'id':ep['id'],'durationFrames':bounds[-1][1],
+            'animationMode':animation_mode,
             'audio':f'generated/{ep["id"]}/voz.mp3',
             'scenes':scenes,'captions':captions,'hook':parent.get('cover','')}
 
@@ -245,6 +268,9 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--modelo',default='gpt-image-1.5')
     ap.add_argument('--max-segundos-por-plano',type=float,default=6)
     ap.add_argument('--criar-voz',action='store_true')
+    ap.add_argument('--animacao',choices=['cinematica','desligada'],
+                    default='cinematica',
+                    help='Movimentos originais de camera, respiracao segura e luz')
     ap.add_argument('--somente-voz',action='store_true',help='Gerar voz e legendas sem validar ou renderizar imagens')
     ap.add_argument('--renderizar',action='store_true')
     ap.add_argument('--somente-capa',action='store_true',help='Gera so a capa premium com imagens em cache; sem voz/Remotion/IA')
@@ -277,7 +303,8 @@ def main(argv:list[str]|None=None)->int:
     seconds=audio_duration(voice)+.4
     captions=captions_from_ass(ass,seconds)
     if not captions:raise RuntimeError('Narração sem legendas')
-    props=build_props(ep,voice,captions,seconds,model=args.modelo,public=args.motor/'public')
+    props=build_props(ep,voice,captions,seconds,model=args.modelo,
+                      public=args.motor/'public',animation_mode=args.animacao)
     propfile=args.motor/f"props-master-{ep['id']}.json"
     propfile.write_text(json.dumps(props,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f"[PREPARADO] {len(props['scenes'])} planos, {seconds:.1f}s e {len(captions)} legendas: {propfile}")
@@ -288,7 +315,9 @@ def main(argv:list[str]|None=None)->int:
         raise RuntimeError('Execute npm.cmd install em motion-remotion antes de renderizar')
     npm=shutil.which('npm.cmd' if sys.platform=='win32' else 'npm')
     if not npm:raise RuntimeError('Node/npm não encontrado')
-    output=folder/f"{ep['id']}-master-multicenas.mp4"
+    # Never overwrite the previous still-image MP4 while introducing motion.
+    suffix='-master-multicenas-animado.mp4' if args.animacao=='cinematica' else '-master-multicenas.mp4'
+    output=folder/f"{ep['id']}{suffix}"
     command=[npm,'run','render:master','--',str(output.resolve()),'--props',
              str(propfile.resolve()),'--concurrency','2']
     subprocess.run(command,cwd=args.motor,check=True,timeout=1800)
@@ -299,6 +328,7 @@ def main(argv:list[str]|None=None)->int:
               'mp4':str(output),'cover':str(cover),'duration_s':seconds,
               'narrative_beats':ep.get('narrative_beats'),
               'visual_shots':len(props['scenes']),'captions':len(captions),
+              'animation_mode':args.animacao,
               'published':False,
               'visual_alerts':[{'scene':e['scene']['id'],
                   'margins':e['qa']['alpha'].get('margin_warning'),

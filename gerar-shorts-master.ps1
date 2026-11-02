@@ -25,6 +25,7 @@ param(
   [string]$Motivo='Defeito anatomico ou objeto atravessando a mesa',
   [switch]$Renderizar,
   [switch]$CriarVoz,
+  [switch]$SemAnimacao,
   [switch]$Offline
 )
 $ErrorActionPreference='Stop'
@@ -199,6 +200,7 @@ if($ModoComposicao -eq 'multicamadas' -or $AprovarMulticamadas){
       '--id',$Id,'--modelo',$Modelo,'--max-segundos-por-plano',
       $MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture),'--renderizar')
     if($Plano){$videoArgs+=@('--plano',$Plano)}
+    $videoArgs+=@('--animacao',$(if($SemAnimacao){'desligada'}else{'cinematica'}))
     & $py @videoArgs
     if($LASTEXITCODE -ne 0){throw 'Remotion bloqueou render ou falta aprovacao visual.'}
   }
@@ -225,6 +227,7 @@ if($Renderizar){
     $MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture),'--renderizar')
   if($Plano){$videoArgs+=@('--plano',$Plano)}
   if($CriarVoz){$videoArgs+='--criar-voz'}
+  $videoArgs+=@('--animacao',$(if($SemAnimacao){'desligada'}else{'cinematica'}))
   & $py @videoArgs
   if($LASTEXITCODE -ne 0){throw 'Falhou montagem Remotion. Imagens mantidas em cache.'}
 }

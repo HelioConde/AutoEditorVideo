@@ -1,48 +1,82 @@
 import React from 'react';
 import {AbsoluteFill,Audio,Img,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
+import {AnimationMode,characterMotion,cannotMoveSeparately,motionAtFrame} from './cinematic-motion';
 
-export type SemanticLayer={id:string;role:string;z:number;src:string};
-export type Scene={id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
- background:string;foreground:string;renderMode?:string;layers?:SemanticLayer[]};
+export type SemanticLayer={
+  id:string;role:string;z:number;src:string;
+  alphaCoverage?:number;anchorX?:number;anchorY?:number
+};
+export type Scene={
+  id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
+  background:string;foreground:string;renderMode?:string;layers?:SemanticLayer[];
+  shotType?:string;cameraAngle?:string;focusSubject?:string;action?:string
+};
 export type Caption={startFrame:number;endFrame:number;text:string};
-export type MasterProps={id:string;durationFrames:number;audio:string;scenes:Scene[];captions:Caption[];hook:string};
+export type MasterProps={
+  id:string;durationFrames:number;audio:string;scenes:Scene[];
+  captions:Caption[];hook:string;animationMode?:AnimationMode
+};
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
 
-const Shot:React.FC<{scene:Scene;opacity:number}>=({scene,opacity})=>{
+const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode}>=({scene,opacity,mode})=>{
   const frame=useCurrentFrame();
-  const elapsed=Math.max(0,frame-scene.startFrame);
-  const length=Math.max(1,scene.endFrame-scene.startFrame);
-  const ratio=Math.min(1,elapsed/length);
-  const zoom=1+0.017*ratio;
-  const drift=(scene.subject==='objeto'?4:1.8)*Math.sin(elapsed/26);
-  const bob=(scene.subject==='objeto'?3:1.3)*Math.sin(elapsed/31);
+  const motion=motionAtFrame(frame,scene.startFrame,scene.endFrame,
+                            scene.shotType,scene.id,mode);
+  const hasHero=Boolean(scene.layers?.some(l=>l.role==='hero_prop'));
   const urlbg=staticFile(scene.background);
   const urlfg=staticFile(scene.foreground);
-  // Imagem-mãe tem razão 2:3. 940x1410 preserva o quadro INTEIRO
-  // e deixa margem lateral para os personagens; jamais usar cover no original.
-  const aligned={position:'absolute' as const,left:70,top:245,width:940,height:1410,
-                 objectFit:'contain' as const};
+  // Image master has the 2:3 ratio. Never fill/cover the portrait: it would
+  // crop heads or board. The WHOLE content, including the table, moves under
+  // one fixed camera. This avoids character/prop penetration.
+  const camera='translate('+motion.panX.toFixed(3)+'px,'+
+    motion.panY.toFixed(3)+'px) scale('+motion.zoom.toFixed(5)+')';
+  const ordered=(scene.layers||[]).slice().sort((a,b)=>a.z-b.z);
   return <AbsoluteFill style={{opacity,background:'#070912',overflow:'hidden'}}>
     <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
       objectFit:'cover',filter:'blur(60px) brightness(.34)',transform:'scale(1.25)'}}/>
     <div style={{position:'absolute',left:70,top:245,width:940,height:1410,
-      transform:'scale('+zoom+')',transformOrigin:'center center',overflow:'hidden'}}>
-      <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',objectFit:'contain'}}/>
-      {scene.renderMode==='multilayer' && scene.layers?.length
-        ? [...scene.layers].sort((a,b)=>a.z-b.z).map(layer=>
-          // Semantic occlusion is established in the source image. Move the
-          // complete camera frame, never individual bodies through the table.
-          <Img key={layer.id} src={staticFile(layer.src)} style={{
+      transform:camera,transformOrigin:'center center',overflow:'hidden'}}>
+      <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
+        objectFit:'contain'}}/>
+      {scene.renderMode==='multilayer' && ordered.length
+        ? ordered.map(layer=>{
+          const pose=characterMotion(layer.role,layer.id,layer.alphaCoverage ?? NaN,
+                hasHero,motion.breath,mode);
+          // Furniture, board and large hero masks are always STATIC in scene
+          // coordinates. Never animate a chess piece independently if its
+          // alpha also contains a hand/arm or another person's sleeve.
+          const staticLayer=cannotMoveSeparately(layer.role);
+          const transform=!staticLayer && pose.enabled
+            ? 'translate('+pose.translateX.toFixed(3)+'px,'+
+              pose.translateY.toFixed(3)+'px) scaleY('+pose.scaleY.toFixed(6)+')'
+            : undefined;
+          return <Img key={layer.id} src={staticFile(layer.src)} style={{
             position:'absolute',inset:0,width:'100%',height:'100%',
-            objectFit:'contain',zIndex:layer.z
-          }}/>)
+            objectFit:'contain',zIndex:layer.z,
+            transform,
+            transformOrigin:(layer.anchorX ?? 50)+'% '+(layer.anchorY ?? 80)+'%',
+          }}/>;
+        })
         : <Img src={urlfg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
-          objectFit:'contain',transform:'translate('+drift+'px,'+bob+'px)'}}/>}
+          objectFit:'contain'}}/>}
+      {mode==='cinematica'?<>
+        {/* In-scene colored bounce light, always tiny and slowly varying.
+            No flashes, jitter, or fabricated movement of faces/pieces. */}
+        <div style={{position:'absolute',inset:0,zIndex:100,pointerEvents:'none',
+          background:'linear-gradient(122deg, rgba(16,81,196,.45) 0%, transparent 48%, rgba(224,26,36,.37) 100%)',
+          mixBlendMode:'screen',opacity:motion.fill}}/>
+        {motion.focus>0?<div style={{position:'absolute',inset:0,zIndex:101,
+          pointerEvents:'none',background:
+            'radial-gradient(ellipse at 50% 68%,rgba(242,215,156,.16),transparent 42%)',
+          mixBlendMode:'screen',opacity:motion.focus}}/>:null}
+      </>:null}
     </div>
   </AbsoluteFill>;
 };
 
-export const MasterShort:React.FC<MasterProps>=({scenes,audio,captions,hook,durationFrames})=>{
+export const MasterShort:React.FC<MasterProps>=({
+  scenes,audio,captions,hook,animationMode='cinematica'
+})=>{
   const frame=useCurrentFrame();
   const {fps}=useVideoConfig();
   if(!scenes.length)return <AbsoluteFill style={{background:'#080a14'}}/>;
@@ -50,11 +84,12 @@ export const MasterShort:React.FC<MasterProps>=({scenes,audio,captions,hook,dura
   if(idx<0)idx=frame<scenes[0].startFrame?0:scenes.length-1;
   const current=scenes[idx];
   const previous=idx>0?scenes[idx-1]:null;
-  const fade=previous?interpolate(frame,[current.startFrame,current.startFrame+7],[0,1],clamp):1;
+  const fade=previous?interpolate(frame,
+    [current.startFrame,current.startFrame+7],[0,1],clamp):1;
   const caption=captions.find(c=>frame>=c.startFrame&&frame<c.endFrame);
   return <AbsoluteFill style={{background:'#080a14',fontFamily:'Arial,sans-serif'}}>
-    {previous&&fade<1?<Shot scene={previous} opacity={1}/>:null}
-    <Shot scene={current} opacity={fade}/>
+    {previous&&fade<1?<Shot scene={previous} opacity={1} mode={animationMode}/>:null}
+    <Shot scene={current} opacity={fade} mode={animationMode}/>
     <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(0,0,0,.15),transparent 20%,rgba(0,0,0,.13) 55%,rgba(0,0,0,.65) 100%)'}}/>
     {hook&&frame<fps*2.2?<div style={{position:'absolute',top:100,left:75,right:75,
       fontSize:76,lineHeight:1.1,color:'#fff',textAlign:'center',fontWeight:900,

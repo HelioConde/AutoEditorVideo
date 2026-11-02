@@ -519,3 +519,44 @@ O teste de liberacao lista o estado **de todas as cenas**, nao somente
 a primeira que falhou. **Nao** repita a geracao com chamadas pagas
 para resolver um aviso que se refere apenas a sobreposicao de mascaras.
 Se o preview estiver errado, reprove a cena em vez de aprova-la.
+
+### Animacoes cinematograficas das seis cenas aprovadas (sem IA)
+
+A partir desta versao, o Remotion executa coreografia deterministica
+sincronizada com a duracao de cada cena, a partir dos PNGs aprovados.
+Nenhum RAW, master, QA ou manifesto e modificado na renderizacao.
+
+Coreografia de Death Note: abertura (plano geral, aproximação e luz);
+duelo sobre o ombro (travelling lento); movimento de rei (zoom e luz de
+foco); reacao de L (zoom e respiracao); resposta de L (aproximacao
+do tabuleiro); final (movimento de camera de encerramento).
+
+**Seguranca de oclusao:** toda a cena segue uma unica camera; mesa,
+tabuleiro e king_hand nunca se movem sozinhos. So mascaras de personagens
+podem respirar muito sutilmente, usando os metadados de area e ancora
+obtidos dos mesmos pixels do PNG. Com king_hand presente, as
+transformacoes independentes de personagens ficam desligadas, pois as
+mascaras originais incluem antebracos e roupas. Nao move dedos/reis
+sem quadros reais de animacao. O primeiro frame coincide com o preview
+aprovado. Nao usa geracao de imagem nem flicker estroboscopico.
+
+O MP4 animado e gravado separadamente com sufixo
+-master-multicenas-animado.mp4; o Short anterior permanece intocado.
+A voz e as legendas existentes sao reutilizadas.
+
+```powershell
+cd C:\Users\helio\Documents\arquivo-otaku-github
+git pull origin main
+
+# Short novo, animado e com narração/legendas existentes, zero imagens IA:
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar
+
+# Comparacao opcional com MP4 estatico:
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar -SemAnimacao
+```
+
+Esta fase faz movimento cinematografico e micro-respiracao. Piscadas
+realistas, labios e movimentos amplos de bracos exigem quadros novos
+com alpha/oclusao validos; nao devem ser inventados a partir de um
+PNG estatico. Revise o video final para detectar cortes de cabelo
+ou rostos antes da publicacao.
