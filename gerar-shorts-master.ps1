@@ -41,11 +41,24 @@ if(-not(Test-Path $py)){
   & uv venv (Join-Path $root '.venv') --python 3.11
   if($LASTEXITCODE -ne 0){throw 'Erro ao criar .venv'}
 }
-& $py -c 'import PIL,numpy,requests' 2>$null
-if($LASTEXITCODE -ne 0){
-  if(-not(Get-Command uv -ErrorAction SilentlyContinue)){ throw 'Dependencias ausentes. Instale uv e rode novamente.' }
+# Nao execute imports potencialmente falhos com 2>$null:
+# PowerShell 5.1 pode promover traceback nativo a erro terminante.
+$checker=Join-Path $root 'scripts\diagnosticar_dependencias_master.py'
+if(-not(Test-Path $checker)){throw "Verificador de dependencias ausente: $checker. Atualize com git pull."}
+$missingCore = & $py $checker
+if($LASTEXITCODE -ne 0){throw 'Falhou o verificador Python de dependencias'}
+if($missingCore -and $missingCore.Trim()){
+  Write-Host "[DEPENDENCIAS] Faltando ou com falha de import: $missingCore. Instalando via uv..." -ForegroundColor Yellow
+  if(-not(Get-Command uv -ErrorAction SilentlyContinue)){
+    throw "Instale uv: winget install --id astral-sh.uv -e. Depois execute: uv pip install --python .\.venv\Scripts\python.exe -r .\requirements-master.txt"
+  }
   & uv pip install --python $py -r (Join-Path $root 'requirements-master.txt')
-  if($LASTEXITCODE -ne 0){throw 'Falha ao instalar dependencias do motor'}
+  if($LASTEXITCODE -ne 0){throw 'Falha ao instalar dependencias com uv; verifique a mensagem acima'}
+  $missingAfter = & $py $checker
+  if($LASTEXITCODE -ne 0 -or ($missingAfter -and $missingAfter.Trim())){
+    throw "Dependencias ainda indisponiveis apos instalacao: $missingAfter"
+  }
+  Write-Host '[OK] Dependencias do motor Python verificadas.' -ForegroundColor Green
 }
 if($Renderizar){
   if(-not(Get-Command ffprobe -ErrorAction SilentlyContinue)){throw 'FFprobe ausente no PATH'}
@@ -60,11 +73,17 @@ if($Renderizar){
     } finally {Pop-Location}
   }
   if($CriarVoz){
-    & $py -c 'import edge_tts' 2>$null
-    if($LASTEXITCODE -ne 0){
+    $missingVoice = & $py $checker --voz
+    if($LASTEXITCODE -ne 0){throw 'Falhou a verificacao da biblioteca de voz'}
+    if($missingVoice -and $missingVoice.Trim()){
+      Write-Host '[DEPENDENCIAS] Instalando edge-tts para narracao...' -ForegroundColor Yellow
       if(-not(Get-Command uv -ErrorAction SilentlyContinue)){throw 'Instale uv para adicionar edge-tts'}
       & uv pip install --python $py 'edge-tts>=7,<9'
       if($LASTEXITCODE -ne 0){throw 'Nao foi possivel instalar edge-tts'}
+      $missingVoiceAfter = & $py $checker --voz
+      if($LASTEXITCODE -ne 0 -or ($missingVoiceAfter -and $missingVoiceAfter.Trim())){
+        throw 'edge-tts continua indisponivel apos a instalacao'
+      }
     }
   }
 }
