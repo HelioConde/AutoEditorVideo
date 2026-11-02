@@ -112,7 +112,7 @@ def test_old_background_without_mask_record_is_flagged(tmp_path):
     mask = tmp_path / 'background-mask.png'
     mask.write_bytes(b'mask-1')
     assert background_mask_warnings(tmp_path, mask) == ['background_sem_registro_de_mascara']
-    (tmp_path / 'background-raw-mask.sha256').write_text(mask_fingerprint(mask)+'\\n')
+    (tmp_path / 'background-raw-mask.sha256').write_text(mask_fingerprint(mask)+'\n')
     assert background_mask_warnings(tmp_path, mask) == []
     mask.write_bytes(b'mask-2')
     assert background_mask_warnings(tmp_path, mask) == ['background_gerado_com_mascara_diferente']
