@@ -119,7 +119,13 @@ def direction_prompt(episode: dict, selected: dict, *, previous: dict | None = N
     if episode.get("effect") == "chess":
         context += ("The chess moves are a cinematic METAPHOR for the intellectual conflict "
                     "in Death Note, not a factual claim of a literal televised chess game. "
-                    "Show a single clear king and realistic chessboard perspective. ")
+                    "Show a single clear king and realistic chessboard perspective. "
+                    "CRITICAL PHYSICAL GEOMETRY: torso and hips stay BEHIND the tabletop edge. "
+                    "Feet, shoes, knees, legs and clothing hems must stay UNDER the table "
+                    "or completely out of frame, NEVER on the table or chessboard. "
+                    "Only hands and forearms may rest on the table edge or touch a chess piece. "
+                    "Never overlap a body, sleeve or shoe onto the chessboard plane. "
+                    "The tabletop must be a solid barrier with physically plausible depth. ")
     return context
 
 
