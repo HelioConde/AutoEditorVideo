@@ -41,6 +41,9 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
         report=json.loads(qa.read_text(encoding='utf-8'))
         if report.get('status')!='aguardando_revisao_visual':
             raise ValueError('Enquadramento sem relatório de extração válido')
+        if report.get('warnings'):
+            print(f"[QA AVISO] Cena {scene['id']}: {', '.join(report['warnings'])}. "
+                  'Confira o background antes de publicar.')
         verified.append({'scene':scene,'folder':folder,'files':paths,'qa':report})
     return verified
 
@@ -150,7 +153,9 @@ def main(argv:list[str]|None=None)->int:
               'published':False,
               'visual_alerts':[{'scene':e['scene']['id'],
                   'margins':e['qa']['alpha'].get('margin_warning'),
-                  'alignment':e['qa']['composition'].get('alignment_warning')}
+                  'alignment':e['qa']['composition'].get('alignment_warning'),
+                  'background_source':e['qa'].get('background_source','desconhecido'),
+                  'background_warnings':e['qa'].get('warnings',[])}
                   for e in validated]}
     (folder/'qa-master-multicenas.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f'[OK] Short pronto para revisão (NÃO publicado): {output}')
