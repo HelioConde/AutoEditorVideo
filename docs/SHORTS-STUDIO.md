@@ -104,3 +104,42 @@ escrita no disco, pois a API de edição a utiliza; feche antes qualquer
 aplicativo que a esteja segurando e reexecute. Se a escrita falhar,
 nenhuma chamada de edição é enviada e os arquivos raw continuam preservados.
 
+
+
+## Calibrar os enquadramentos 01 e 05 (referências aprovadas)
+
+A montagem manual enviada para o episódio `003-death-note-xadrez` mostrou
+que a **diferença principal é a escala/posição do foreground**, não o fundo.
+Fizemos uma calibração visual aproximada das capturas de referência para
+`gpt-image-1.5`:
+
+| Cena | Escala do foreground | X | Y | Status |
+| --- | ---: | ---: | ---: | --- |
+| 01 | 1.03× | -4 px | -15 px | Ajustada pela referência 3 |
+| 05 | 1.10× | -25 px | -88 px | Ajustada pela referência 6 |
+| 02, 03, 04 | 1.00× | 0 | 0 | Sem alterações |
+| 06 | 1.00× | 0 | -211 px | Configuração Photoshop preservada |
+
+O suporte a `scale` foi adicionado em `configs/foreground-placements.json`.
+A configuração por **episódio + modelo + cena** é usada quando não existe
+uma configuração mais específica por **hash exato do cache**. Assim, não
+modificamos outras histórias, outro modelo ou a cena 06. A escala é
+aplicada à camada de animação `foreground.png` e não altera
+`foreground-raw.png`, `foreground-normalized.png`,
+`background-raw.png` nem a máscara de inpainting.
+
+Os valores aproximam as capturas redimensionadas pelo usuário. Somente a
+visualização final no Windows confirma o acabamento; aumentar uma imagem não
+recupera partes que a própria IA já cortou na origem.
+
+Recompor **só as duas cenas** offline, sem gerar imagens novas:
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 1 -Modelo gpt-image-1.5 -Offline -MaxChamadas 0
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 5 -Modelo gpt-image-1.5 -Offline -MaxChamadas 0
+```
+
+Abra `comparacao.jpg` de cada cena no cache e verifique as bordas
+laterais antes de renderizar. Se a referência pedir ajustes finos,
+edite x/y/scale em `configs/foreground-placements.json` e execute
+os mesmos comandos: não há necessidade de chamadas adicionais à IA.
