@@ -422,3 +422,60 @@ a aprovacao caduca e o render fica bloqueado.
 **Seguranca e custos**: ninguem deve aprovar uma imagem apenas para
 forcar o render. O modo offline nao chama IA, o diagnostico nao publica
 nada e os recursos antigos permanecem intactos.
+
+
+### Erro: master.png ausente depois de apagar o cache
+
+O modo multicamadas originalmente partia da premissa de que ja existia
+`master.png`, e falhava antes de gerar as mascaras. Agora, num comando
+unico, ele:
+
+1. Faz **preflight de todo o storyboard**: conta **uma** chamada extra
+   por master que nao tenha `master.png` **nem** `master-raw.png`.
+2. Reconstrói `master.png` gratuitamente a partir de
+   `master-raw.png` quando disponivel.
+3. Se a master estiver totalmente ausente, gera **somente uma imagem-mae**
+   para a cena usando o prompt do storyboard fixado, preservando o raw.
+4. Extrai separadamente cada personagem, mesa, tabuleiro e rei/mao de
+   xadrez com limite de chamadas; **nao executa foreground/background
+   do modo classico** antes das camadas semanticas.
+5. Salva QA, manifesto e preview. A narracao pode ser produzida com
+   `-CriarVoz` mesmo que a arte ainda esteja aguardando aprovacao.
+   Caso `-Renderizar` tenha sido informado e haja cenas pendentes, o
+   programa **adia o MP4** sem forcar aprovacao.
+
+**Nunca apague a pasta `master-scenes` para regenerar uma cena.** Ela
+contém as imagens originais pagas, previews, QA e revisoes. A sugestao
+anterior de exclui-la era incorreta. Se ela foi apagada e nao ha backup,
+a nova geracao tera custo. Uma cena com cache fixado manualmente nao
+pode ser sobrescrita implicitamente.
+
+```powershell
+cd C:\Users\helio\Documents\arquivo-otaku-github
+git pull origin main
+
+# Conferir quantas chamadas serao cobradas ANTES de gastar:
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -DiagnosticarCache -MaxChamadas 0
+
+# Gerar masters faltantes, mascaras e voz em um comando:
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 60 -CriarVoz -Renderizar
+```
+
+O limite `60` e um teto **maximo** de chamadas, nao uma promessa
+de consumo exato. Confira `[PENDENTE]` para decidir quanto gastar.
+Pode haver falha de cota, mascaras invalidas ou anatomia incorreta;
+nesses casos preserve o cache e corrija a causa antes de repetir.
+
+Apos conferir cada `multilayer/preview-composicao.png` e o
+`scene-layers.json`, aprove individualmente as cenas que passaram
+no QA e na revisao visual:
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 1 -Modelo gpt-image-1.5 -ModoComposicao multicamadas -AprovarMulticamadas -Motivo "Preview inspecionado"
+# Repetir somente para as outras cenas boas (02..06)
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar
+```
+
+Se o Short estiver aguardando aprovacao, a voz fica no cache e o
+MP4 **ainda nao existe**. Nao use a opcao de aprovar para burlar
+avisos de QA.
