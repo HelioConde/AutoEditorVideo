@@ -264,3 +264,50 @@ troncos **não ocupem a superfície da mesa/tabuleiro**. Apenas mãos e
 antebraços podem tocar a mesa. Esses prompts só alteram uma produção nova
 depois de replanejamento explícito; cenas antigas e os caches pagos não
 são sobrescritos.
+
+
+### Preparar novamente só as cenas reprovadas, preservando as boas
+
+Se marcou cenas no cache com \`-ReprovarCena\`, **não** basta executar
+\`-Cena 2 -MaxChamadas 3\` outra vez: a pasta atual já contém imagens
+pagas. Também **não** execute \`-Replanejar\` para corrigir apenas uma
+pequena parte do Short, pois isso muda o planejamento de todas as cenas.
+
+O modo \`-PrepararReprovadas\` cria novos hashes **somente para cenas cujo
+cache atual está marcado como reprovado**, acrescenta regras de geometria
+física aos prompts e preserva backup do storyboard antigo. Não chama IA,
+não envia imagens ao GitHub, não mexe nas pastas raw anteriores e
+não remove nenhuma reprovação. O comando é seguro para ser executado uma
+única vez; rodar novamente sem novas reprovações não altera nada.
+
+\`\`\`powershell
+cd C:\Users\helio\Documents\arquivo-otaku-github
+git pull origin main
+
+# 1. Criar novas versões 02/03/04 sem custo
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Modelo gpt-image-1.5 -PrepararReprovadas
+
+# 2. Conferir plano e hashes, ainda sem custo
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -DiagnosticarCache -MaxChamadas 0
+
+# 3. Gerar SOMENTE as novas cenas (cada chamada = imagem cobrada)
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 2 -Modelo gpt-image-1.5 -MaxChamadas 3
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 3 -Modelo gpt-image-1.5 -MaxChamadas 3
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 4 -Modelo gpt-image-1.5 -MaxChamadas 3
+\`\`\`
+
+Verifique as três novas imagens e suas máscaras. **Não marque como
+aprovada uma imagem que ainda apresenta pés, pernas ou roupas atravessando
+a mesa.** Uma reprovada nova ficará na pasta nova, sem sobrescrever
+a versão anterior. O orçamento sugerido de três chamadas por cena é um
+**limite**, não garantia de custo ou de qualidade.
+
+Somente depois de revisar todas as cenas, renderize usando o cache:
+
+\`\`\`powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -MaxChamadas 0 -Offline -Renderizar
+\`\`\`
+
+Se o comando de diagnóstico encontrar outro cache incompleto, não autorize
+a chamada por impulso: verifique primeiro cada pasta. Cenas antigas com
+pins manuais também continuam vinculadas ao cache explicitamente escolhido.
