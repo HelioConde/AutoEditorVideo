@@ -124,3 +124,64 @@ e `foreground_offset`. Se o hash atual for diferente de
 `06-594007f1c10bb8`, use `-DiagnosticarCache` antes de mudar a configuração.
 Confirme visualmente o resultado; um foreground redesenhado pela IA pode não
 coincidir totalmente com a master, apesar do alinhamento.
+
+
+## Regra permanente: diversidade visual de cenas (v1)
+
+O gerador agora usa uma biblioteca determinística de **10 planos de câmera para
+xadrez e 10 planos reutilizáveis para outros assuntos**. Cada enquadramento
+novo recebe os metadados \`shot_type\`, \`camera_angle\`, \`camera_distance\`,
+\`focus_subject\`, \`action\`, \`emotion\`,
+\`must_differ_from_previous\` e \`avoid_repeating\`.
+
+O prompt sempre começa com direção de fotografia, ângulo e ação narrativa,
+seguido de uma proibição explícita de repetir o enquadramento anterior.
+Duas cenas consecutivas não podem repetir o mesmo tipo de plano; a distribuição
+padrão também impede usar o mesmo plano mais de duas vezes em Shorts curtos.
+
+### Exemplo didático de xadrez
+
+A sequência de direção inclui: duelo em plano geral; câmera por trás de Light
+olhando L; **close de uma mão de Light movendo o rei preto**; close na reação
+de L; **ângulo por trás de L com mão movimentando o rei branco**; plano final
+dramático em diagonal. Os movimentos de peças são **metáforas visuais do
+confronto intelectual**, não uma afirmação de que uma partida literal ocorreu
+no anime. A distribuição real depende do número de cenas identificado pelo
+roteiro e do momento do fechamento.
+
+### Verificar sem gastar créditos ou mexer no Short já pronto
+
+\`\`\`powershell
+.\\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -SomentePlanejar
+\`\`\`
+
+O comando escreve a **proposta** em
+\`assets/gerados/planos-visuais/003-death-note-xadrez-master-dinamico.json\`.
+Ele não modifica o \`storyboard-producao.json\` já fixado, não regenera
+a master aprovada nem faz requisições de imagem.
+
+Para começar uma produção nova com a diversidade visual, revise antes a
+proposta e use \`-Replanejar\` **intencionalmente**, em um novo conjunto de
+imagens e com um orçamento permitido. O sistema preserva o plano antigo em
+backup e mantém pastas antigas identificadas por hash. **Atenção:** o
+\`configs/scene-cache-pins.json\` contém uma escolha manual da antiga cena 06
+do episódio do xadrez; remova/ajuste essa escolha somente quando for iniciar
+uma versão realmente nova e após revisar o cache existente. Não misture o
+foreground de um enquadramento novo com uma master antiga por engano.
+
+### QA de imagens repetidas
+
+Além da auditoria dos metadados do storyboard, depois de compor cada cena o
+motor compara a master com as **até seis masters anteriores do mesmo
+storyboard/modelo**. A assinatura perceptual em tons de cinza e a diferença
+média de luminância geram o aviso \`composicao_repetitiva\` quando as imagens
+parecem quase idênticas. Esse aviso aparece no console e no
+\`qa.json.visual_diversity\`, incluindo IDs das cenas parecidas e os resultados
+da comparação.
+
+**O detector é conservador e não substitui revisão humana**: o mesmo cenário
+com personagens em poses diferentes pode escapar ao teste, e fundos muito
+parecidos podem merecer avaliação manual. O gerador **não repete chamadas
+pagas, não apaga arquivos e não altera imagens aprovadas** apenas porque
+encontrou similaridade. O editor decide se vale gerar outra versão depois de
+ver o custo estimado.
