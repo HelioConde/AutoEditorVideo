@@ -25,7 +25,7 @@ from scene_layer_profiles import (
 )
 from qa_multilayer_geometry import (
     SIZE, exact_layer, union_inpaint_mask, normalize_clean_plate, compose,
-    qa_multilayer_geometry,
+    qa_multilayer_geometry, classify_qa_alerts,
 )
 
 REVIEW="review.json"
@@ -103,9 +103,17 @@ def validate_multilayer(ep:dict,scene:dict,model:str,folder:Path,
     with Image.open(bg) as img:
         if img.size!=SIZE:raise ValueError("Fundo multicamadas invalido")
     qa=document.get("qa",{})
-    if qa.get("warnings"):
-        raise ValueError("Multicamadas com alertas: "+", ".join(qa["warnings"])+
+    blockers,review_warnings=classify_qa_alerts(qa)
+    if blockers:
+        raise ValueError("Multicamadas com ERROS de composicao: "+
+                         ", ".join(blockers)+
                          ". Corrija as camadas antes de liberar o render.")
+    if review_warnings:
+        print(f"[QA REVISAO] Cena {scene['id']}: "+
+              ", ".join(review_warnings)+
+              ". Sobreposicao de mascaras pode ser mao/oclusao legitima; "
+              "confira preview-composicao.png antes de aprovar.",
+              flush=True)
     if approval:
         reviewfile=folder/"multilayer"/REVIEW
         if not reviewfile.is_file():
@@ -128,7 +136,9 @@ def approve_multilayer(ep:dict,scene:dict,model:str,reason:str)->dict:
     if not reason.strip():
         raise ValueError("Informe motivo/nota de aprovacao apos revisao visual")
     file=folder/"scene-layers.json"
+    _,review_alerts=classify_qa_alerts(result["qa"])
     report={"status":"aprovado","reason":reason.strip(),
+            "reviewed_warnings":review_alerts,
             "manifest_sha256":hashlib.sha256(file.read_bytes()).hexdigest()}
     core.atomic(folder/"multilayer"/REVIEW,
                 (json.dumps(report,ensure_ascii=False,indent=2)+"\n").encode())
@@ -228,7 +238,9 @@ def process_multilayer(ep:dict,scene:dict,model:str,*,edit=None,
     core.atomic(folder/"scene-layers.json",atomic_json)
     print(f"[MULTICAMADAS] Cena {scene['id']}: {len(layers)+1} camadas; "
           f"QA diferenca media={qa['master_composite_mean_difference']}; "
-          f"avisos={qa['warnings']}. Pendente de aprovacao visual.",flush=True)
+          f"erros={qa['warnings']}; "
+          f"para revisar={qa.get('review_warnings',[])}. "
+          "Pendente de aprovacao visual.",flush=True)
     return document
 
 
