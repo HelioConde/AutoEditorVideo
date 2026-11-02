@@ -306,38 +306,65 @@ def background_mask_warnings(directory:Path,mask:Path|bytes)->list[str]:
     return []
 
 
-def foreground_placement(ep:dict,directory:Path)->tuple[int,int]:
-    """Manual per-cache alignment measured in original 1024x1536 pixels.
+def foreground_transform(ep:dict,directory:Path,model:str|None=None)->tuple[int,int,float]:
+    """Calibrate the display layer without altering the original image or mask.
 
-    Changes are restricted to a specific scene hash, so new renders or models
-    cannot accidentally inherit an adjustment made for another composition.
+    Exact cache-hash placements take precedence. Scene defaults are opt-in,
+    episode- AND model-scoped, so unrelated shorts and GPT Image 2 stay intact.
+    Coordinates are full-size 1024x1536 pixels, measured from top-left.
     """
     config=ROOT/'configs'/'foreground-placements.json'
     if not config.is_file():
-        return (0,0)
+        return (0,0,1.0)
     data=json.loads(config.read_text(encoding='utf-8'))
     if data.get('schema')!='arquivo-otaku/foreground-placements/v1':
         raise ValueError('Config de posicionamento invalida: schema desconhecido')
-    key=ep['id']+'/'+directory.name
-    placement=data.get('placements',{}).get(key)
+    exact_key=ep['id']+'/'+directory.name
+    placement=data.get('placements',{}).get(exact_key)
+    if placement is None and model is not None:
+        scene_id=directory.name.split('-',1)[0]
+        if re.fullmatch(r'\d{2}',scene_id):
+            model_key=f"{ep['id']}/{model}/{scene_id}"
+            placement=data.get('scene_defaults',{}).get(model_key)
     if placement is None:
-        return (0,0)
+        return (0,0,1.0)
+    if not isinstance(placement,dict):
+        raise ValueError('Config de posicionamento precisa ser um objeto')
     x,y=placement.get('x',0),placement.get('y',0)
+    scale=placement.get('scale',1.0)
     if (type(x) is not int or type(y) is not int or
             abs(x)>512 or abs(y)>512):
         raise ValueError('Posicao de foreground deve ter x/y inteiros entre -512 e 512')
+    if type(scale) not in (float,int) or not 0.75<=scale<=1.35:
+        raise ValueError('Escala de foreground deve estar entre 0.75 e 1.35')
+    return (x,y,float(scale))
+
+
+def foreground_placement(ep:dict,directory:Path)->tuple[int,int]:
+    """Backwards-compatible query of exact, hash-scoped XY adjustments."""
+    x,y,_=foreground_transform(ep,directory)
     return (x,y)
 
 
-def reposition_foreground(blob:bytes,x:int,y:int)->bytes:
-    """Translate the transparent foreground; never touch the paid raw layer."""
-    if x==0 and y==0:
+def reposition_foreground(blob:bytes,x:int,y:int,scale:float=1.0)->bytes:
+    """Apply optional scale + translation; untouched raw PNG remains in cache.
+
+    Scaling is based on the original top-left image origin. A clipped input
+    subject cannot be reconstructed here; QA still requires visual review.
+    """
+    if not 0.75<=scale<=1.35:
+        raise ValueError('Escala de foreground fora do limite')
+    if x==0 and y==0 and scale==1.0:
         return blob
     with Image.open(io.BytesIO(blob)) as image:
         if image.size!=SIZE or 'A' not in image.getbands():
             raise ValueError('Foreground precisa ter 1024x1536 e alpha real')
         layer=Image.new('RGBA',SIZE,(0,0,0,0))
-        layer.paste(image.convert('RGBA'),(x,y))
+        source=image.convert('RGBA')
+        if scale!=1.0:
+            size=(round(SIZE[0]*scale),round(SIZE[1]*scale))
+            source=source.resize(size,Image.Resampling.LANCZOS)
+        layer.paste(source,(x,y))
         buffer=io.BytesIO()
         layer.save(buffer,format='PNG',optimize=True)
         return buffer.getvalue()
@@ -441,13 +468,14 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     else:
         print(f'[MASCARA] {scene["id"]}: calculada em memoria; '
               'arquivo em disco preservado (cache existente).',flush=True)
-    offset_x,offset_y=foreground_placement(ep,d)
-    placed_foreground=reposition_foreground(normalized_fg,offset_x,offset_y)
+    offset_x,offset_y,foreground_scale=foreground_transform(ep,d,model)
+    placed_foreground=reposition_foreground(normalized_fg,offset_x,offset_y,foreground_scale)
     report=validate_image(placed_foreground,alpha=True)
     atomic(fg,placed_foreground)
-    if offset_x or offset_y:
-        print(f'[POSICIONAMENTO] {scene["id"]}: foreground deslocado '
-              f'x={offset_x}, y={offset_y} px (raw preservado).',flush=True)
+    if offset_x or offset_y or foreground_scale!=1.0:
+        print(f'[POSICIONAMENTO] {scene["id"]}: foreground '
+              f'escala={foreground_scale:.3f}, x={offset_x}, y={offset_y} px '
+              '(raw e mascara preservados).',flush=True)
     if needs_background_edit:
         if offline or edit is None:
             raise RuntimeError('Background ausente ou reparo solicitado em modo offline')
@@ -493,6 +521,7 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
             'background_source':str(clean_reference) if clean_reference else 'inpainting',
             'background_compositing':'clean-direct',
             'foreground_offset':{'x':offset_x,'y':offset_y},
+            'foreground_scale':foreground_scale,
             'warnings':mask_alerts,
             'subject':scene['subject'],'alpha':report,'composition':comp,
             'status':'aguardando_revisao_visual','files':{
