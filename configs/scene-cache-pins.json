@@ -1,0 +1,7 @@
+{
+  "schema": "arquivo-otaku/scene-cache-pins/v1",
+  "description": "Diretorios de cache escolhidos explicitamente. Nao infira imagens de outro prompt, episodio ou modelo. Se o cache nao existir, o programa falha sem gerar imagens.",
+  "pins": {
+    "003-death-note-xadrez/gpt-image-1.5/06": "06-594007f1c10bb8"
+  }
+}
