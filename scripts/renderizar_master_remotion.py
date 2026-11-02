@@ -352,7 +352,7 @@ def main(argv:list[str]|None=None)->int:
     if not npm:raise RuntimeError('Node/npm não encontrado')
     # Never overwrite the previous still-image MP4 while introducing motion.
     # Never overwrite the previous originals or existing cinematic version.
-    suffix=(f'-master-multicenas-personagens-{args.perfil_personagens}.mp4'
+    suffix=(f'-master-multicenas-personagens-v2-{args.perfil_personagens}.mp4'
             if args.animacao=='cinematica' else
             '-master-multicenas-esqueleto2d.mp4'
             if args.animacao=='esqueleto2d'
