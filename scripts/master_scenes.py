@@ -186,10 +186,10 @@ def make_mask(fg:Path,target:Path)->None:
 
 
 def find_clean_background(master:Path,mask:Path,directory:Path)->Path|None:
-    """Reuse only same-camera clean plates: never substitute a merely similar room.
+    """Use only deliberately approved clean plates at compatible camera positions.
 
-    Explicit background-clean.png has priority. Other scenes are candidates only
-    when their unchanged, nonblack background pixels align closely with master.
+    A generated background.png may still contain isolated hair or hands. Do not
+    propagate such unreviewed artifacts to other scenes, regardless of similarity.
     """
     import numpy as np
     sample=(128,192)
@@ -204,7 +204,7 @@ def find_clean_background(master:Path,mask:Path,directory:Path)->Path|None:
     if directory.parent.is_dir():
         for sibling in sorted(directory.parent.iterdir()):
             if sibling.is_dir() and sibling!=directory:
-                candidates.extend((sibling/'background-clean.png',sibling/'background.png'))
+                candidates.append(sibling/'background-clean.png')
     best=None
     best_score=float('inf')
     for candidate in candidates:
@@ -227,6 +227,21 @@ def find_clean_background(master:Path,mask:Path,directory:Path)->Path|None:
     return best
 
 
+def mask_fingerprint(mask:Path)->str:
+    return hashlib.sha256(mask.read_bytes()).hexdigest()
+
+
+def background_mask_warnings(directory:Path,mask:Path)->list[str]:
+    """Report when a paid edit was produced using a different/unknown mask."""
+    record=directory/'background-raw-mask.sha256'
+    if not record.is_file():
+        return ['background_sem_registro_de_mascara']
+    previous=record.read_text(encoding='ascii').strip()
+    if previous!=mask_fingerprint(mask):
+        return ['background_gerado_com_mascara_diferente']
+    return []
+
+
 def reconstruct(master:Path,edited:Path,mask:Path,out:Path)->None:
     with Image.open(master) as a, Image.open(edited) as b, Image.open(mask) as m:
         erase=ImageOps.invert(m.getchannel('A'))
@@ -244,8 +259,12 @@ def compare(master:Path,bg:Path,fg:Path,output:Path)->dict:
         preview.paste(main.resize((512,768)),(0,0))
         preview.paste(merged.resize((512,768)),(512,0))
         preview.save(output,'JPEG',quality=90)
+        # Highlight recomposition errors for the human visual review.
+        difference.point(lambda value:min(255,value*4)).save(
+            output.with_name('diferencas.jpg'),'JPEG',quality=90)
     return {'mean_rgb_difference':error,'alignment_warning':error>50,
-            'visual_approval':'pendente','comparison':str(output)}
+            'visual_approval':'pendente','comparison':str(output),
+            'difference_preview':str(output.with_name('diferencas.jpg'))}
 
 
 def atomic(path:Path,bytes_:bytes)->None:
@@ -317,6 +336,8 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
             if not backup.exists():
                 atomic(backup,previous)
         atomic(bg_raw,content)
+        atomic(d/'background-raw-mask.sha256',
+               (mask_fingerprint(mask)+'\n').encode('ascii'))
     normalized_bg=normalize_image(bg_raw.read_bytes(),alpha=False,stage=f"{scene['id']}/background")
     validate_image(normalized_bg,alpha=False)
     working_bg=d/'background-normalized.png'
@@ -325,8 +346,14 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     source=clean_reference or working_bg
     reconstruct(master,source,mask,bg)
     comp=compare(master,bg,fg,d/'comparacao.jpg')
+    mask_alerts=[] if clean_reference else background_mask_warnings(d,mask)
+    if mask_alerts:
+        print('[QA AVISO] '+scene['id']+': '+', '.join(mask_alerts)+
+              '. Use -RepararFundo para nova edicao com a mascara atual.',
+              flush=True)
     result={'version':'master-derived-v2','episode':ep['id'],'scene':scene['id'],
             'background_source':str(clean_reference) if clean_reference else 'inpainting',
+            'warnings':mask_alerts,
             'subject':scene['subject'],'alpha':report,'composition':comp,
             'status':'aguardando_revisao_visual','files':{
               name:str(d/name) for name in ('master.png','foreground.png','background.png','comparacao.jpg')}}
@@ -351,6 +378,8 @@ def main(argv:list[str]|None=None)->int:
     args=ap.parse_args(argv)
     if not 0<=args.max_chamadas<=180:raise ValueError('Limite permitido: 0 a 180 chamadas')
     if args.master_existente and args.todas_cenas:raise ValueError('Master existente funciona somente com uma cena')
+    if args.reparar_fundo and (args.offline or args.validar or args.planejar):
+        raise ValueError('-RepararFundo exige geracao online, sem -Offline/-SomenteValidar/-SomentePlanejar')
     plan_path=args.plano or save_plan(select_episode(args.id),max_hold=args.max_segundos_por_plano)
     ep=read_storyboard(plan_path)
     if ep['id']!=args.id:raise ValueError('ID no storyboard diferente do solicitado')
@@ -367,9 +396,20 @@ def main(argv:list[str]|None=None)->int:
             d=scene_dir(ep,scene,args.modelo)
             for name,alpha in [('master.png',False),('foreground.png',True),('background.png',False)]:
                 validate_image((d/name).read_bytes(),alpha=alpha)
+            qa_path=d/'qa.json'
+            if qa_path.is_file():
+                qa=json.loads(qa_path.read_text(encoding='utf-8'))
+                if qa.get('warnings'):
+                    print(f"[QA AVISO] Cena {scene['id']}: {', '.join(qa['warnings'])}")
             print(f'[QA] {d}/comparacao.jpg')
         return 0
     if args.offline and missing:raise RuntimeError('Imagens faltando, mas foi solicitado modo offline')
+    if args.reparar_fundo:
+        unexpected=[stage for stage in missing if not stage.endswith('/background-repair')
+                    and not stage.endswith('/background')]
+        if unexpected:
+            raise RuntimeError('Reparo de fundo exige master e foreground em cache: '+
+                               ', '.join(unexpected)+'. Nenhuma chamada enviada.')
     if len(missing)>args.max_chamadas:raise RuntimeError('Orçamento de IA insuficiente; nenhum pedido enviado')
     generate=edit=None
     if missing:
