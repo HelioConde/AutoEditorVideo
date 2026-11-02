@@ -230,3 +230,86 @@ def test_missing_pinned_master_fails_closed_even_with_budget(tmp_path,monkeypatc
     with pytest.raises(ValueError,match="cache fixado"):
         multi.pending_calls(ep,scene,"gpt-image-1.5")
     assert not calls
+
+
+def test_board_mask_overlap_is_review_only_when_composite_matches_master(tmp_path):
+    """A seated character may have a masked arm over a board, hidden by Z."""
+    from scene_layer_profiles import Layer
+    from qa_multilayer_geometry import compose, classify_qa_alerts
+    bg=tmp_path/"bg.png"
+    Image.new("RGB",core.SIZE,(25,38,52)).save(bg)
+    data=[
+        (Layer("l","back_character",10,""),(100,100,850,1050),(100,90,65,255)),
+        (Layer("table","occluder",20,""),(130,680,940,1400),(125,80,50,255)),
+        (Layer("board","object",30,""),(300,780,850,1100),(214,200,170,255)),
+    ]
+    layers=[]
+    for layer,rectangle,color in data:
+        target=tmp_path/(layer.id+".png")
+        im=Image.new("RGBA",core.SIZE,(0,0,0,0))
+        ImageDraw.Draw(im).rectangle(rectangle,fill=color)
+        im.save(target)
+        layers.append((layer,target))
+    master=tmp_path/"master.png"
+    compose(bg,layers).save(master)
+    qa=qa_multilayer_geometry(master,bg,layers)
+    assert qa["master_composite_mean_difference"]==0
+    assert qa["warnings"]==[]
+    assert qa["review_warnings"]==["personagem_atras_sobre_tabuleiro:l"]
+    assert qa["overlap_with_board"][0]["board_fraction"]>.025
+    assert classify_qa_alerts(qa)==([],["personagem_atras_sobre_tabuleiro:l"])
+
+
+def test_old_cached_overlap_warning_can_be_approved_without_rewriting_pngs(tmp_path,monkeypatch):
+    """Legacy QA stores this warning as fatal; only change its classification."""
+    ep,scene,folder,edit,calls=scene_fixture(tmp_path,monkeypatch)
+    doc=multi.process_multilayer(ep,scene,"gpt-image-1.5",edit=edit)
+    doc["qa"]["warnings"]=["personagem_atras_sobre_tabuleiro:l"]
+    doc["qa"].pop("review_warnings",None)
+    manifest=folder/"scene-layers.json"
+    manifest.write_text(json.dumps(doc,ensure_ascii=False,indent=2)+"\n",
+                        encoding="utf-8")
+    before={p:p.read_bytes() for p in (folder/"master.png",folder/"multilayer"/"l.png",
+                                       folder/"multilayer"/"background.png",manifest)}
+    with pytest.raises(ValueError,match="aguardando revisao"):
+        multi.validate_multilayer(ep,scene,"gpt-image-1.5",folder)
+    result=multi.approve_multilayer(ep,scene,"gpt-image-1.5",
+                     "Revisei o preview: mao no tabuleiro, anatomia correta")
+    assert result["reviewed_warnings"]==["personagem_atras_sobre_tabuleiro:l"]
+    assert multi.validate_multilayer(ep,scene,"gpt-image-1.5",folder)
+    assert renderer.validate_scenes(ep,"gpt-image-1.5")[0]["render_mode"]=="multilayer"
+    assert all(p.read_bytes()==blob for p,blob in before.items())
+    assert len(calls)==5  # no new paid calls
+
+
+def test_other_qa_errors_remain_blocking_even_with_overlap_review(tmp_path,monkeypatch):
+    ep,scene,folder,edit,calls=scene_fixture(tmp_path,monkeypatch)
+    doc=multi.process_multilayer(ep,scene,"gpt-image-1.5",edit=edit)
+    doc["qa"]["warnings"]=["personagem_atras_sobre_tabuleiro:l",
+                             "recomposicao_distante_da_master"]
+    (folder/"scene-layers.json").write_text(json.dumps(doc,ensure_ascii=False)+"\n")
+    with pytest.raises(ValueError,match="recomposicao_distante_da_master"):
+        multi.approve_multilayer(ep,scene,"gpt-image-1.5","Quero aprovar")
+    assert not (folder/"multilayer"/"review.json").exists()
+
+
+def test_status_checker_shows_all_pending_scenes_without_creating_images(tmp_path,monkeypatch,capsys):
+    import renderizar_master_remotion as ren
+    ep={"id":"ep-test","scenes":[{"id":"01"},{"id":"02"},{"id":"03"}]}
+    monkeypatch.setattr(multi.core,"production_storyboard",lambda *a,**kw:tmp_path/"plan.json")
+    monkeypatch.setattr(multi.core,"read_storyboard",lambda *a:ep)
+    seen=[]
+    def inspect(one,model):
+        number=one["scenes"][0]["id"]
+        seen.append(number)
+        if number in ("02","03"):
+            raise ValueError("Aguardando aprovacao da preview")
+        return [{"scene":one["scenes"][0]}]
+    monkeypatch.setattr(ren,"validate_scenes",inspect)
+    status=multi.main(["--id","ep-test","--todas-cenas",
+                       "--verificar-aprovacoes","--max-chamadas","0"])
+    lines=capsys.readouterr().out
+    assert status==2 and seen==["01","02","03"]
+    for number in ("01","02","03"):
+        assert "Cena "+number in lines
+    assert "2 de 3" in lines

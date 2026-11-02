@@ -9,6 +9,25 @@ from scene_layer_profiles import Layer
 
 SIZE=(1024,1536)
 MAX_MEAN_DIFFERENCE=32.0
+OVERLAP_REVIEW_PREFIX="personagem_atras_sobre_tabuleiro:"
+
+
+def classify_qa_alerts(qa:dict)->tuple[list[str],list[str]]:
+    """Split blocking image defects from ambiguous mask collisions.
+
+    Previous versions stored ALL alerts in qa.warnings. Do not alter paid
+    cache manifests just to reclassify a mask overlap; approvals are tied to
+    the manifest hash. Unknown warnings fail closed.
+    """
+    blocking=[]
+    review=list(qa.get("review_warnings",[]))
+    for warning in qa.get("warnings",[]):
+        if warning.startswith(OVERLAP_REVIEW_PREFIX):
+            if warning not in review:
+                review.append(warning)
+        elif warning not in blocking:
+            blocking.append(warning)
+    return blocking,review
 
 
 def exact_layer(master:Path,mask_raw:bytes)->bytes:
@@ -93,6 +112,7 @@ def qa_multilayer_geometry(master:Path,background:Path,ordered:list[tuple[Layer,
     diff=ImageChops.difference(base,composed)
     mean=round(sum(ImageStat.Stat(diff.resize((256,384))).mean)/3,2)
     warnings=[]
+    review_warnings=[]
     if mean>MAX_MEAN_DIFFERENCE:
         warnings.append("recomposicao_distante_da_master")
     # Masks overlapping the board do not automatically imply penetration:
@@ -111,12 +131,18 @@ def qa_multilayer_geometry(master:Path,background:Path,ordered:list[tuple[Layer,
             fraction=round(sum(crossing.histogram()[128:])/max(1,board_area),4)
             overlaps.append({"character":layer.id,"board_fraction":fraction})
             if fraction>.025:
-                warnings.append("personagem_atras_sobre_tabuleiro:"+layer.id)
+                # A back-character mask can include a hand over the board or
+                # hidden torso pixels. The board has a HIGHER Z and masks
+                # this overlap in the actual render. A mask collision is not
+                # proof of a visible anatomical error. Flag it for human
+                # review instead of automatically rejecting a good preview.
+                review_warnings.append(OVERLAP_REVIEW_PREFIX+layer.id)
     return {
         "status":"revisao_obrigatoria",
         "master_composite_mean_difference":mean,
         "overlap_with_board":overlaps,
         "warnings":warnings,
+        "review_warnings":review_warnings,
         "manual_approval_required":True,
         "notes":"Comparacao geometrica nao detecta todas as poses impossiveis; revisar visualmente master, camadas e preview",
     }
