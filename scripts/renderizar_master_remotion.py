@@ -79,7 +79,11 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
         scenes.append({'id':scene['id'],'subject':scene['subject'],
                        'startFrame':start,'endFrame':end,
                        'background':f'generated/{ep["id"]}/{stem}-background.png',
-                       'foreground':f'generated/{ep["id"]}/{stem}-foreground.png'})
+                       'foreground':f'generated/{ep["id"]}/{stem}-foreground.png',
+                       'shotType':scene.get('shot_type','legacy'),
+                       'cameraAngle':scene.get('camera_angle',''),
+                       'focusSubject':scene.get('focus_subject',''),
+                       'action':scene.get('action','')})
     shutil.copy2(voice,target/'voz.mp3')
     parent=select_episode(ep['id'])
     return {'id':ep['id'],'durationFrames':bounds[-1][1],
