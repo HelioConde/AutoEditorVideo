@@ -88,7 +88,8 @@ def test_repair_background_preserves_raw_backup(tmp_path):
 
 def test_estimate_counts_only_requested_background_repair(monkeypatch, tmp_path):
     import master_scenes
-    monkeypatch.setattr(master_scenes, 'OUT', tmp_path)
+    monkeypatch.setattr(master_scenes, 'scene_dir',
+                        lambda ep, scene, model: tmp_path / ep['id'] / scene['id'])
     ep = {'id': 'test-episode'}
     scene = {'id': '01', 'subject': 'personagens', 'prompt': 'x' * 60}
     folder = master_scenes.scene_dir(ep, scene, 'gpt-image-1.5')
