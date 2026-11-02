@@ -39,9 +39,55 @@ def master_prompt(ep:dict, scene:dict)->str:
         'one image, not a split screen, no typography or green screen.')
 
 
+def cache_pin(ep:dict,scene:dict,model:str)->str|None:
+    """Explicit, model-scoped pin for a previously reviewed local image cache.
+
+    Never discover/reuse a different prompt hash just because a folder exists.
+    """
+    config=ROOT/'configs'/'scene-cache-pins.json'
+    if not config.is_file():
+        return None
+    settings=json.loads(config.read_text(encoding='utf-8-sig'))
+    if settings.get('schema')!='arquivo-otaku/scene-cache-pins/v1':
+        raise ValueError('Config de cache com schema invalido')
+    key=f"{ep['id']}/{model}/{scene['id']}"
+    name=settings.get('pins',{}).get(key)
+    if name is None:
+        return None
+    if not isinstance(name,str) or not re.fullmatch(
+            re.escape(scene['id'])+r'-[0-9a-f]{14}',name):
+        raise ValueError('Pin de cache invalido para '+key)
+    return name
+
+
 def scene_dir(ep:dict,scene:dict,model:str,output:Path=OUT)->Path:
     ident=sha(model+'\n'+master_prompt(ep,scene))
-    return output/ep['id']/'master-scenes'/f"{scene['id']}-{ident}"
+    root=output/ep['id']/'master-scenes'
+    selected=cache_pin(ep,scene,model)
+    return root/(selected or f"{scene['id']}-{ident}")
+
+
+def validate_cache_pin(ep:dict,scene:dict,model:str)->None:
+    """Fail closed if an explicitly pinned cache is absent or belongs elsewhere."""
+    selected=cache_pin(ep,scene,model)
+    if selected is None:
+        return
+    d=scene_dir(ep,scene,model)
+    required=('master.png','foreground-raw.png','background-raw.png','qa.json')
+    missing=[name for name in required if not (d/name).is_file()]
+    if missing:
+        raise RuntimeError(
+            f'Cache selecionado {selected} indisponivel ou incompleto: '
+            +', '.join(missing)+'. Use -DiagnosticarCache para localizar suas imagens; '
+            'nenhuma imagem nova sera gerada nesse cache.')
+    try:
+        qa=json.loads((d/'qa.json').read_text(encoding='utf-8'))
+    except (OSError,ValueError) as exc:
+        raise ValueError('QA do cache selecionado ilegivel: '+str(d)) from exc
+    if qa.get('episode')!=ep['id'] or qa.get('scene')!=scene['id']:
+        raise ValueError('Cache selecionado nao corresponde a episodio/cena: '+str(d))
+    print(f'[CACHE FIXADO] Cena {scene["id"]}: {d.name} '
+          '(versao anterior escolhida explicitamente; sem regenerar).',flush=True)
 
 
 def read_storyboard(path:Path)->dict:
@@ -462,6 +508,9 @@ def describe_cache(ep:dict,scenes:list[dict],model:str)->None:
     for scene in scenes:
         expected=scene_dir(ep,scene,model)
         root=expected.parent
+        selected=cache_pin(ep,scene,model)
+        if selected:
+            print(f'  [SELECAO EXPLICITA] {scene["id"]}: {selected}')
         print(f'[CACHE] Cena {scene["id"]} | esperado: {expected}')
         for name in ('master.png','master-raw.png','foreground-raw.png',
                      'background-raw.png','qa.json'):
@@ -512,6 +561,8 @@ def main(argv:list[str]|None=None)->int:
         describe_cache(ep,scenes,args.modelo)
         return 0
     if args.planejar:return 0
+    for scene in scenes:
+        validate_cache_pin(ep,scene,args.modelo)
     if args.validar:
         for scene in scenes:
             d=scene_dir(ep,scene,args.modelo)
