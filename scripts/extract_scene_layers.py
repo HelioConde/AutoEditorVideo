@@ -38,18 +38,26 @@ def paths(folder:Path,layer:Layer)->tuple[Path,Path]:
 
 def pending_calls(ep:dict,scene:dict,model:str)->list[str]:
     folder=core.scene_dir(ep,scene,model)
-    if not (folder/"master.png").is_file():
-        raise FileNotFoundError(
-            f"Cena {scene['id']} sem master.png no cache atual: {folder}. "
-            "Gere a master com o fluxo tradicional antes de pedir as camadas.")
+    # A new multicamadas scene can begin with NO generated image. Count
+    # the master as one distinct paid image only if neither the normalized
+    # master nor its paid raw response already exists.
+    missing_master=not (folder/"master.png").is_file()
+    if missing_master and core.cache_pin(ep,scene,model):
+        raise ValueError(
+            f"Cena {scene['id']} tem cache fixado e master ausente: {folder}. "
+            "Restaure o cache aprovado ou retire o pin conscientemente. "
+            "Nunca sobrescrever uma versao fixada sem autorizacao.")
     if (review:=read_review(folder)) and review["status"]=="reprovado":
         raise ValueError(
             f"Cena {scene['id']} MASTER reprovada: {review['reason']}. "
             "Uma separacao de camadas nao conserta anatomia na imagem-mae. "
             "Crie um novo take da master primeiro.")
     wanted=layer_profile(ep,scene)
-    pending=[scene["id"]+"/"+layer.id for layer in wanted
-             if not paths(folder,layer)[0].is_file()]
+    pending=[]
+    if missing_master and not (folder/"master-raw.png").is_file():
+        pending.append(scene["id"]+"/master")
+    pending.extend(scene["id"]+"/"+layer.id for layer in wanted
+                   if not paths(folder,layer)[0].is_file())
     if not (folder/"multilayer"/"background-raw.png").is_file():
         pending.append(scene["id"]+"/background-clean")
     return pending
@@ -127,13 +135,50 @@ def approve_multilayer(ep:dict,scene:dict,model:str,reason:str)->dict:
     return report
 
 
+def ensure_master(ep:dict,scene:dict,model:str,*,generate=None,
+                  offline:bool=False)->Path:
+    """Reuse existing PNG/raw first; generate exactly one paid master if needed.
+
+    Raw responses survive normalization failures. This deliberately does NOT
+    invoke the legacy foreground/background pipeline (three extra edits).
+    """
+    folder=core.scene_dir(ep,scene,model)
+    master=folder/"master.png"
+    if master.is_file():
+        core.validate_image(master.read_bytes(),alpha=False)
+        return master
+    if core.cache_pin(ep,scene,model):
+        raise ValueError("Master de cache fixado ausente: "+str(master))
+    raw=folder/"master-raw.png"
+    if not raw.is_file():
+        if offline or generate is None:
+            raise RuntimeError(
+                f"Cena {scene['id']}: master faltando. "
+                "Rode sem -Offline e com orcamento suficiente "
+                "ou restaure master-raw.png do cache.")
+        content=generate(core.master_prompt(ep,scene),model)
+        folder.mkdir(parents=True,exist_ok=True)
+        core.atomic(raw,content)
+    normalized=core.normalize_image(raw.read_bytes(),alpha=False,
+                                     stage=f"{scene['id']}/master")
+    core.validate_image(normalized,alpha=False)
+    core.atomic(master,normalized)
+    print(f"[MASTER] Cena {scene['id']}: " +
+          ("normalizada do raw existente." if generate is None else
+           "reconstruida/gerada no cache."),flush=True)
+    return master
+
+
 def process_multilayer(ep:dict,scene:dict,model:str,*,edit=None,
-                       offline:bool=False)->dict:
+                       generate=None,offline:bool=False)->dict:
     folder=core.scene_dir(ep,scene,model)
     pending=pending_calls(ep,scene,model)
-    if pending and (offline or edit is None):
-        raise RuntimeError("Camadas faltantes em modo offline: "+", ".join(pending))
-    master=folder/"master.png"
+    if pending and offline:
+        raise RuntimeError("Imagens faltando em modo offline: "+", ".join(pending))
+    if pending and edit is None:
+        # Generating just a master without masks would leave partial work.
+        raise RuntimeError("Edicoes faltando sem autorizacao: "+", ".join(pending))
+    master=ensure_master(ep,scene,model,generate=generate,offline=offline)
     dest=folder/"multilayer"
     dest.mkdir(parents=True,exist_ok=True)
     layers=layer_profile(ep,scene)
@@ -227,16 +272,19 @@ def main(argv:list[str]|None=None)->int:
                            "Aumente -MaxChamadas apenas se desejar pagar pelas edicoes.")
     if args.offline and preflight:
         raise RuntimeError("Modo offline: mascaras/fundos faltando; sem chamadas enviadas.")
-    edit=None
+    edit=generate=None
     if preflight:
-        from gerar_video_codex import proxy_key,check_proxy_accounts
+        from gerar_video_codex import proxy_key,check_proxy_accounts,request_image
         key=(proxy_key(Path(os.environ["ARQUIVO_OTAKU_PROXY_ENV"]))
              if os.environ.get("ARQUIVO_OTAKU_PROXY_ENV") else proxy_key())
         check_proxy_accounts(key)
         edit=lambda source,prompt,model,*,transparent,mask=None:core.request_edit(
             source,prompt,model,key,transparent=transparent,mask=mask)
+        generate=lambda prompt,model:request_image(
+            prompt,model,key,size="1024x1536",output_format="png")
     for scene in scenes:
-        process_multilayer(ep,scene,args.modelo,edit=edit,offline=args.offline)
+        process_multilayer(ep,scene,args.modelo,edit=edit,
+                           generate=generate,offline=args.offline)
     print("[PRONTO] Previews e manifestos no cache local. Nao publicado.")
     return 0
 
