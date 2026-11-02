@@ -82,4 +82,10 @@ Se ainda houver residuos no background, use reparo de fundo na cena escolhida:
 .\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 6 -RepararFundo -MaxChamadas 1
 ```
 
-O reparo consome no maximo uma nova chamada de edicao por cena, preserva a master e o foreground em cache e faz backup do background raw anterior. Revise a comparacao visual antes de renderizar. Nao ha upload automatico.
+O reparo consome no maximo uma nova chamada de edicao por cena, preserva a master e o foreground em cache e faz backup do background raw anterior. Agora o reparo recusa a execucao se master/foreground estiverem ausentes; nao os recria silenciosamente.
+
+**Reutilizacao de fundo segura:** um `background.png` gerado de outra cena nao e considerado automaticamente um fundo limpo, pois pode conter cabelo/maos flutuantes. Depois de revisar visualmente e confirmar que o fundo esta correto, copie-o manualmente como `background-clean.png` na pasta da cena. Apenas os arquivos com esse nome entram na busca; o codigo ainda compara as partes visiveis do cenario para rejeitar outra posicao de camera. Nao copie uma cena com cortes ou fantasmas. Os fundos sem aprovacao visual nao sao promovidos automaticamente.
+
+O `qa.json` passou a registrar `warnings` de mascara obsoleta ou sem historico (`background_sem_registro_de_mascara`). Isso e esperado no primeiro processamento de caches antigos. Novos reparos gravam a assinatura `background-raw-mask.sha256` e avisam caso a mascara mude. Esse aviso nao significa que houve nova cobranca. A imagem `diferencas.jpg` ajuda a localizar areas onde a composicao diverge da master; ela nao substitui a revisao humana.
+
+Revise `comparacao.jpg` e `diferencas.jpg` antes de renderizar. Nao ha upload automatico.
