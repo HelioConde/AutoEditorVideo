@@ -6,6 +6,7 @@ Nenhum upload e nenhuma geração de imagens ocorrem neste módulo.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -13,7 +14,7 @@ import re
 import shutil
 import subprocess
 import sys
-from PIL import Image
+from PIL import Image, ImageChops, ImageFilter
 
 ROOT=Path(__file__).resolve().parents[1]
 MOTION=ROOT/'motion-remotion'
@@ -134,6 +135,61 @@ def layer_animation_metrics(image:Path)->dict:
         }
 
 
+def layer_motion_safety(layer,source:Path,ordered:list,ep_id:str,scene_id:str)->dict:
+    """Inspect already-approved RGBA only. Never rewrite source or pay for AI.
+
+    Non-character masks define objects/furniture. Their proximity identifies
+    places where the character should move less, including the upper body
+    contacting a table. A hero/hand overlap blocks only the attached person,
+    never another independently separated character.
+    """
+    with Image.open(source) as image:
+        if 'A' not in image.getbands():
+            raise ValueError('Animacao precisa de PNG RGBA aprovado')
+        alpha=image.getchannel('A')
+        original_box=alpha.getbbox()
+        if original_box is None:
+            return {'contactRisk':1.0,'heroRisk':1.0,
+                    'heightFraction':0.0,'motionSeed':0}
+        source_sha=hashlib.sha256(source.read_bytes()).hexdigest()
+        height_fraction=round((original_box[3]-original_box[1])/image.height,4)
+        # Thumbnail-sized mask statistics avoid per-frame GPU/image processing.
+        size=(160,240)
+        subject=alpha.resize(size,Image.Resampling.NEAREST).point(
+            lambda v:255 if v>=128 else 0)
+    area=sum(subject.histogram()[128:])
+    near=None
+    hero=None
+    for other,path in ordered:
+        if other is layer or path==source:
+            continue
+        if other.role not in ('occluder','object','hero_prop'):
+            continue
+        with Image.open(path) as item:
+            if item.size != image.size or 'A' not in item.getbands():
+                raise ValueError('Mascara de objeto incompatível para movimento')
+            mask=item.getchannel('A').resize(size,Image.Resampling.NEAREST).point(
+                lambda v:255 if v>=128 else 0)
+        if other.role=='hero_prop':
+            hero=mask if hero is None else ImageChops.lighter(hero,mask)
+        else:
+            # ~12px source-image halo around rigid scene furniture.
+            mask=mask.filter(ImageFilter.MaxFilter(5))
+            near=mask if near is None else ImageChops.lighter(near,mask)
+    def overlap_fraction(probe):
+        if probe is None or not area:return 0.
+        shared=ImageChops.darker(subject,probe)
+        return round(min(1.,sum(shared.histogram()[128:])/area),4)
+    return {
+        'contactRisk':overlap_fraction(near),
+        'heroRisk':overlap_fraction(hero),
+        'heightFraction':height_fraction,
+        'motionSeed':int(hashlib.sha256(
+            (ep_id+'/'+scene_id+'/'+layer.id+'/'+source_sha).encode('utf-8')
+        ).hexdigest()[:8],16),
+    }
+
+
 def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                 *,model:str='gpt-image-1.5',output:Path=OUT,
                 public:Path|None=None,animation_mode:str='cinematica',
@@ -161,6 +217,9 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                 record={'id':layer.id,'role':layer.role,'z':layer.z,
                     'src':f'generated/{ep["id"]}/{dest.name}',
                     **layer_animation_metrics(path)}
+                if layer.role in ('back_character','front_character'):
+                    record.update(layer_motion_safety(
+                        layer,path,multi['layers'],ep['id'],scene['id']))
                 if (animation_mode=='esqueleto2d' and
                         layer.id in ('l','light') and not has_hero_prop):
                     rig=approved_frames(entry['folder'],layer.id)
@@ -352,7 +411,7 @@ def main(argv:list[str]|None=None)->int:
     if not npm:raise RuntimeError('Node/npm não encontrado')
     # Never overwrite the previous still-image MP4 while introducing motion.
     # Never overwrite the previous originals or existing cinematic version.
-    suffix=(f'-master-multicenas-personagens-v2-{args.perfil_personagens}.mp4'
+    suffix=(f'-master-multicenas-personagens-v3-{args.perfil_personagens}.mp4'
             if args.animacao=='cinematica' else
             '-master-multicenas-esqueleto2d.mp4'
             if args.animacao=='esqueleto2d'

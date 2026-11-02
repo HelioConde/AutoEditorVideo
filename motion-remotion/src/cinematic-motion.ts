@@ -15,19 +15,17 @@ const clamp=(v:number,min:number,max:number)=>Math.min(max,Math.max(min,v));
 const ease=(v:number)=>{const x=clamp(v,0,1);return x*x*(3-2*x);};
 const interpolate=(a:number,b:number,t:number)=>a+(b-a)*t;
 
-export const profileForShot=(shotType:string|undefined,sceneId:string):ShotProfile=>{
-  switch(shotType){
-    case 'wide_duel': return 'establish';
-    case 'ots_light':case 'ots_l':return 'duel';
-    case 'light_moves_king':case 'king_hand_macro':return 'king';
-    case 'l_reaction':case 'light_reaction':case 'close_reaction_l':
-    case 'close_reaction_kira':return 'reaction';
-    case 'l_moves_king':return 'reply';
-    case 'final_checkmate':case 'top_board':return 'final';
-    default:
-      return ({'01':'establish','02':'duel','03':'king',
-        '04':'reaction','05':'reply','06':'final'} as Record<string,ShotProfile>)[sceneId]||'duel';
-  }
+export const profileForShot=(shotType:string|undefined,_sceneId:string):ShotProfile=>{
+  // These categories work across productions, genres and arbitrary scene ids.
+  // Previous logic assigned camera behavior by numbered Death Note shots.
+  const name=(shotType||'').toLowerCase();
+  if(/final|closing|outro|endcard|checkmate|top_board/.test(name))return 'final';
+  if(/wide|establish|overview|opening|intro|landscape/.test(name))return 'establish';
+  if(/reaction|close|portrait|emotion|face/.test(name))return 'reaction';
+  if(/reply|response|answer/.test(name))return 'reply';
+  if(/hand|move|action|detail|item|object|macro|king/.test(name))return 'king';
+  if(/duel|dialog|conversation|shoulder|(^|_)ots(_|$)/.test(name))return 'duel';
+  return 'establish';
 };
 
 // All pan values are in pixels inside the 940x1410 portrait content.
@@ -70,24 +68,8 @@ export const motionAtFrame=(
   };
 };
 
-export const characterMotion=(
-    layerRole:string,layerId:string,
-    alphaFraction:number,hasHeroProp:boolean,
-    breath:number,mode:AnimationMode):
-    {translateX:number;translateY:number;scaleY:number;enabled:boolean}=>{
-  if(mode==='desligada'||hasHeroProp||
-      (layerRole!=='back_character' && layerRole!=='front_character')||
-      !['l','light','subject'].includes(layerId)||
-      !Number.isFinite(alphaFraction)||alphaFraction>.57||alphaFraction<.025){
-    return {translateX:0,translateY:0,scaleY:1,enabled:false};
-  }
-  // Bigger and more foregrounded people need SMALLER deformation.
-  const weight=layerRole==='front_character'?0.65:1;
-  const area=Math.max(0.30,1-alphaFraction);
-  const magnitude=weight*area;
-  return {translateX:0,translateY:breath*1.25*magnitude,
-          scaleY:1+breath*0.0016*magnitude,enabled:true};
-};
+// Per-character idle motion is implemented by character-idle.ts using
+// automatic geometry from the source PNGs (no fixed names or episode IDs).
 
 export const cannotMoveSeparately=(role:string)=>[
   'occluder','object','hero_prop'

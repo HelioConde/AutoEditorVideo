@@ -717,3 +717,50 @@ para comparar a intensidade. Imagens, voz, legendas e aprovacoes
 existentes sao reutilizadas, sem recorte manual de personagem.
 O modo esqueleto2d anterior permanece opcional em laboratorio,
 nao faz parte do fluxo de producao automatico.
+
+
+## Motor V3 — movimentos automaticos e genericos para TODOS os videos
+
+As observacoes do teste V2 (uma cena boa, outras deformadas, parada ou
+repetitivas) foram corrigidas como REGRAS DO MOTOR, nao excecoes de
+Death Note:
+
+1. Nunca esticar o PNG inteiro em X/Y: a pose v3 usa somente movimento
+   rigido suave de translacao e rotacao pequena em torno do ancora
+   real da silhueta. Isso evita troncos e rostos deformados.
+2. Analisar automaticamente as mascaras RGBA ja aprovadas em baixa
+   resolucao. Calcular a proximidade de cada personagem com moveis e
+   objetos e a sua sobreposicao com maos/objetos principais. Quando
+   ha contato, reduzir o movimento daquele personagem. Quando uma
+   mascara hero esta realmente presa a ele, travar so o personagem
+   conectado, sem travar os demais. Nada disso depende de nome, anime
+   ou numero de cena.
+3. Cada personagem recebe um ritmo deterministico unico, derivado de
+   seu identificador, episodio, numero do plano e SHA da imagem:
+   frequencias lentas com duas harmonicas evitam repeticao mecanica.
+   O primeiro e o ultimo frame conservam posicao original.
+4. A camera passa a escolher movimento pelo tipo de shot
+   (wide/close/reaction/action/final), nao pelos IDs 01..06.
+   Uma pequena oscilacao global em plano com mascara hero
+   mantem objetos juntos, sem atravessar o cenario.
+5. Manter a intensidade ultrassutil como ponto de partida.
+   Os presets equilibrado e vivo continuam opcionais.
+
+Fluxo de uso completamente AUTOMATICO, sem Rigby2D, PSD, recortes
+anatomicos, imagens novas, ou novas revisoes de PNG ja aprovado:
+
+    cd C:\Users\helio\Documents\arquivo-otaku-github
+    git pull origin main
+    .\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar -PerfilPersonagens ultrassutil
+
+Saida: arquivo com final
+-master-multicenas-personagens-v3-ultrassutil.mp4.
+A versao V2 que o usuario gostou permanece intacta.
+Para outro episodio, troque apenas -Id; nao edite regras por cena.
+A analise de movimento e local e nao chama API de imagens.
+Se os PNGs nao estao aprovados, o bloqueio visual anterior continua.
+
+Limitacoes: uma imagem de personagem inteiro nao possibilita
+movimentar independendentemente olhos, boca ou articulacoes.
+O motor prioriza naturalidade, integridade visual e
+reprodutibilidade sobre movimentos exagerados.

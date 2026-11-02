@@ -6,6 +6,7 @@ import {CharacterPreset,characterPoseAtFrame} from './character-idle';
 export type SemanticLayer={
   id:string;role:string;z:number;src:string;
   alphaCoverage?:number;anchorX?:number;anchorY?:number;
+  contactRisk?:number;heroRisk?:number;heightFraction?:number;motionSeed?:number;
   rigFrames?:{fps:number;frames:string[]}
 };
 export type Scene={
@@ -32,8 +33,15 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
   // Image master has the 2:3 ratio. Never fill/cover the portrait: it would
   // crop heads or board. The WHOLE content, including the table, moves under
   // one fixed camera. This avoids character/prop penetration.
+  const normalized=Math.max(0,Math.min(1,
+    (frame-scene.startFrame)/Math.max(1,scene.endFrame-scene.startFrame)));
+  // If a hand/prop is attached to a character, don't displace that person
+  // away from it. A tiny common camera pulse adds life without breaking Z.
+  const heroPulse=hasHero&&mode==='cinematica'
+    ?Math.sin(frame/fps*2*Math.PI*0.27)*
+      Math.pow(Math.sin(Math.PI*normalized),2)*1.05:0;
   const camera='translate('+motion.panX.toFixed(3)+'px,'+
-    motion.panY.toFixed(3)+'px) scale('+motion.zoom.toFixed(5)+')';
+    (motion.panY+heroPulse).toFixed(3)+'px) scale('+motion.zoom.toFixed(5)+')';
   const ordered=(scene.layers||[]).slice().sort((a,b)=>a.z-b.z);
   return <AbsoluteFill style={{opacity,background:'#070912',overflow:'hidden'}}>
     <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
@@ -46,6 +54,8 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
         ? ordered.map(layer=>{
           const pose=characterPoseAtFrame({
             role:layer.role,id:layer.id,coverage:layer.alphaCoverage ?? NaN,
+            contactRisk:layer.contactRisk,heroRisk:layer.heroRisk,
+            heightFraction:layer.heightFraction,motionSeed:layer.motionSeed,
             hasHeroProp:hasHero,frame,sceneStart:scene.startFrame,
             sceneEnd:scene.endFrame,fps,preset,
             enabled:mode==='cinematica',shotType:scene.shotType,
@@ -62,11 +72,12 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
           // coordinates. Never animate a chess piece independently if its
           // alpha also contains a hand/arm or another person's sleeve.
           const staticLayer=cannotMoveSeparately(layer.role);
+          // Never stretch an entire painted character. Rigid-body motion
+          // avoids the torso distortion seen in the original trial.
           const transform=!staticLayer && pose.enabled
             ? 'translate('+pose.translateX.toFixed(3)+'px,'+
               pose.translateY.toFixed(3)+'px) rotate('+pose.rotateDeg.toFixed(4)+
-              'deg) scale('+pose.scaleX.toFixed(6)+','+
-              pose.scaleY.toFixed(6)+')'
+              'deg)'
             : undefined;
           return <Img key={layer.id} src={staticFile(imageSource)} style={{
             position:'absolute',inset:0,width:'100%',height:'100%',
