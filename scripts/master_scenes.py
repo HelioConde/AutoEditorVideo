@@ -361,6 +361,59 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     return result
 
 
+def production_storyboard(ep_id:str,max_hold:float,*,selected:Path|None=None,
+                          replan:bool=False)->Path:
+    """Keep a production snapshot stable across restarts and future plan changes.
+
+    Never silently relink to old generated images from unrelated prompts.
+    """
+    if selected is not None:
+        return selected
+    pinned=OUT/ep_id/'storyboard-producao.json'
+    if pinned.is_file() and not replan:
+        print(f'[STORYBOARD] Plano de producao fixado: {pinned}',flush=True)
+        return pinned
+    existing=ROOT/'assets'/'gerados'/'planos-visuais'/f'{ep_id}-master-dinamico.json'
+    if existing.is_file() and not replan:
+        try:
+            old=read_storyboard(existing)
+            if old['id']==ep_id:
+                pinned.parent.mkdir(parents=True,exist_ok=True)
+                atomic(pinned,existing.read_bytes())
+                print(f'[STORYBOARD] Plano existente preservado: {pinned}',flush=True)
+                return pinned
+        except (OSError,ValueError,KeyError):
+            pass
+    generated=save_plan(select_episode(ep_id),max_hold=max_hold)
+    pinned.parent.mkdir(parents=True,exist_ok=True)
+    if pinned.is_file():
+        backup=pinned.with_name('storyboard-producao-backup-'+sha(pinned.read_text(encoding='utf-8'))+'.json')
+        if not backup.is_file():
+            atomic(backup,pinned.read_bytes())
+    atomic(pinned,generated.read_bytes())
+    print(f'[STORYBOARD] Novo plano fixado: {pinned}',flush=True)
+    return pinned
+
+
+def describe_cache(ep:dict,scenes:list[dict],model:str)->None:
+    """Describe cache roots, without copying or trusting mismatched scene output."""
+    for scene in scenes:
+        expected=scene_dir(ep,scene,model)
+        root=expected.parent
+        print(f'[CACHE] Cena {scene["id"]} | esperado: {expected}')
+        for name in ('master.png','master-raw.png','foreground-raw.png',
+                     'background-raw.png','qa.json'):
+            print(f'  {name}: {"OK" if (expected/name).is_file() else "AUSENTE"}')
+        alternatives=sorted(p for p in root.glob(scene['id']+'-*')
+                            if p.is_dir() and p!=expected) if root.is_dir() else []
+        for alt in alternatives[:10]:
+            available=[x for x in ('master.png','foreground-raw.png','background-raw.png')
+                       if (alt/x).is_file()]
+            print('  [OUTRA VERSAO] '+str(alt)+' | '+', '.join(available))
+        if alternatives:
+            print('  [ATENCAO] Outro hash de prompt/modelo: nao reutilizar automaticamente.')
+
+
 def main(argv:list[str]|None=None)->int:
     ap=argparse.ArgumentParser(description='Gera master, recorta foreground e reconstrói cenário; não publica')
     ap.add_argument('--id',default='003-death-note-xadrez')
@@ -375,12 +428,15 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--offline',action='store_true')
     ap.add_argument('--validar',action='store_true')
     ap.add_argument('--reparar-fundo',action='store_true',help='Refaz somente o background via IA; faz backup do raw anterior')
+    ap.add_argument('--diagnosticar-cache',action='store_true',help='Lista os arquivos e hashes de cenas, sem usar IA')
+    ap.add_argument('--replanejar',action='store_true',help='Cria novo snapshot e preserva o storyboard anterior')
     args=ap.parse_args(argv)
     if not 0<=args.max_chamadas<=180:raise ValueError('Limite permitido: 0 a 180 chamadas')
     if args.master_existente and args.todas_cenas:raise ValueError('Master existente funciona somente com uma cena')
     if args.reparar_fundo and (args.offline or args.validar or args.planejar):
         raise ValueError('-RepararFundo exige geracao online, sem -Offline/-SomenteValidar/-SomentePlanejar')
-    plan_path=args.plano or save_plan(select_episode(args.id),max_hold=args.max_segundos_por_plano)
+    plan_path=production_storyboard(args.id,args.max_segundos_por_plano,
+                                     selected=args.plano,replan=args.replanejar)
     ep=read_storyboard(plan_path)
     if ep['id']!=args.id:raise ValueError('ID no storyboard diferente do solicitado')
     scenes=ep['scenes'] if args.todas_cenas else [next((s for s in ep['scenes'] if int(s['id'])==args.cena),None)]
@@ -390,6 +446,9 @@ def main(argv:list[str]|None=None)->int:
     print(f"[PLANO] {len(scenes)} de {len(ep['scenes'])} enquadramentos; "
           f"{len(missing)} chamadas adicionais previstas; orçamento {args.max_chamadas}.")
     for stage in missing:print('  [PENDENTE] '+stage)
+    if args.diagnosticar_cache:
+        describe_cache(ep,scenes,args.modelo)
+        return 0
     if args.planejar:return 0
     if args.validar:
         for scene in scenes:
@@ -410,7 +469,14 @@ def main(argv:list[str]|None=None)->int:
         if unexpected:
             raise RuntimeError('Reparo de fundo exige master e foreground em cache: '+
                                ', '.join(unexpected)+'. Nenhuma chamada enviada.')
-    if len(missing)>args.max_chamadas:raise RuntimeError('Orçamento de IA insuficiente; nenhum pedido enviado')
+    if len(missing)>args.max_chamadas:
+        if args.max_chamadas==0:
+            describe_cache(ep,scenes,args.modelo)
+            raise RuntimeError('CACHE INCOMPLETO para o storyboard atual. '
+                               'Nao foi feita consulta de login ou creditos. '
+                               'Use -DiagnosticarCache; verifique o hash e as pastas antigas.')
+        raise RuntimeError('Limite de chamadas definido menor que imagens pendentes; '
+                           'nenhum pedido enviado. Nao e erro de conexao.')
     generate=edit=None
     if missing:
         sys.path.insert(0,str(ROOT/'scripts'))
