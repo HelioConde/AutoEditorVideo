@@ -29,6 +29,7 @@ from qa_foreground_fidelity import foreground_fidelity
 from chess_composition_safety import master_static_for_chess_action
 from revisao_visual_cenas import read_review
 from extract_scene_layers import validate_multilayer
+from rigby2d_bridge import approved_frames
 from qa_multilayer_geometry import compose as compose_semantic_layers
 
 
@@ -142,6 +143,7 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
     target.mkdir(parents=True,exist_ok=True)
     bounds=assign_frames([e['scene'] for e in entries],seconds)
     scenes=[]
+    rigs_found=0
     for entry,(start,end) in zip(entries,bounds):
         scene=entry['scene']
         stem='scene-'+scene['id']
@@ -152,12 +154,25 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                 transparent=Image.new('RGBA',original.size,(0,0,0,0))
             transparent.save(target/f'{stem}-foreground.png')
             semantic=[]
+            has_hero_prop=any(layer.role=='hero_prop' for layer,_ in multi['layers'])
             for layer,path in multi['layers']:
                 dest=target/f'{stem}-layer-{layer.id}.png'
                 shutil.copy2(path,dest)
-                semantic.append({'id':layer.id,'role':layer.role,'z':layer.z,
+                record={'id':layer.id,'role':layer.role,'z':layer.z,
                     'src':f'generated/{ep["id"]}/{dest.name}',
-                    **layer_animation_metrics(path)})
+                    **layer_animation_metrics(path)}
+                if (animation_mode=='esqueleto2d' and
+                        layer.id in ('l','light') and not has_hero_prop):
+                    rig=approved_frames(entry['folder'],layer.id)
+                    if rig is not None:
+                        images=[]
+                        for index,asset in enumerate(rig['files']):
+                            rig_dest=target/f'{stem}-layer-{layer.id}-rig-{index:04d}.png'
+                            shutil.copy2(asset,rig_dest)
+                            images.append(f'generated/{ep["id"]}/{rig_dest.name}')
+                        record['rigFrames']={'fps':rig['fps'],'frames':images}
+                        rigs_found+=1
+                semantic.append(record)
         elif entry['render_mode']=='master_static':
             # A wrongly redrawn alpha layer may cover furniture and chess
             # pieces. Use the ORIGINAL master as a single still image.
@@ -182,8 +197,19 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                        'action':scene.get('action','')})
     shutil.copy2(voice,target/'voz.mp3')
     parent=select_episode(ep['id'])
-    if animation_mode not in ('cinematica','desligada'):
+    if animation_mode not in ('cinematica','desligada','esqueleto2d'):
         raise ValueError('Modo de animacao desconhecido')
+    if animation_mode=='esqueleto2d' and rigs_found==0:
+        raise ValueError(
+            'Nenhuma sequencia Rigby2D aprovada em cena segura. '
+            'Cenas com king_hand/rei estao protegidas contra movimento de '
+            'personagens que desalinhe a peca. Prepare um rig para uma '
+            'cena sem rei, como a 04, usando rigby2d_bridge.py. '
+            'MP4 anterior preservado; nenhuma imagem IA consumida.')
+    if animation_mode=='esqueleto2d':
+        print(f"[RIGBY2D] {rigs_found} sequencias articuladas aprovadas. "
+              "Outras camadas continuam estaticas, sem movimento enganoso.",
+              flush=True)
     if character_preset not in ('ultrassutil','equilibrado','vivo'):
         raise ValueError('Preset de personagens desconhecido')
     return {'id':ep['id'],'durationFrames':bounds[-1][1],
@@ -272,7 +298,7 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--modelo',default='gpt-image-1.5')
     ap.add_argument('--max-segundos-por-plano',type=float,default=6)
     ap.add_argument('--criar-voz',action='store_true')
-    ap.add_argument('--animacao',choices=['cinematica','desligada'],
+    ap.add_argument('--animacao',choices=['cinematica','desligada','esqueleto2d'],
                     default='cinematica',
                     help='Movimentos originais de camera, respiracao segura e luz')
     ap.add_argument('--perfil-personagens',
@@ -327,7 +353,9 @@ def main(argv:list[str]|None=None)->int:
     # Never overwrite the previous still-image MP4 while introducing motion.
     # Never overwrite the previous originals or existing cinematic version.
     suffix=(f'-master-multicenas-personagens-{args.perfil_personagens}.mp4'
-            if args.animacao=='cinematica'
+            if args.animacao=='cinematica' else
+            '-master-multicenas-esqueleto2d.mp4'
+            if args.animacao=='esqueleto2d'
             else '-master-multicenas-referencia-estatica.mp4')
     output=folder/f"{ep['id']}{suffix}"
     command=[npm,'run','render:master','--',str(output.resolve()),'--props',

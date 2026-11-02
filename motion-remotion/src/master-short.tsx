@@ -5,7 +5,8 @@ import {CharacterPreset,characterPoseAtFrame} from './character-idle';
 
 export type SemanticLayer={
   id:string;role:string;z:number;src:string;
-  alphaCoverage?:number;anchorX?:number;anchorY?:number
+  alphaCoverage?:number;anchorX?:number;anchorY?:number;
+  rigFrames?:{fps:number;frames:string[]}
 };
 export type Scene={
   id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
@@ -49,6 +50,14 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
             sceneEnd:scene.endFrame,fps,preset,
             enabled:mode==='cinematica',shotType:scene.shotType,
           });
+          // Rigby2D exports actual skeletal poses, one RGBA frame per pose.
+          // All poses retain original 1024x1536 canvas coordinates. Do not
+          // stack procedural transforms on top of authored bones.
+          const rig=mode==='esqueleto2d'?layer.rigFrames:undefined;
+          const rigIndex=rig?.frames.length && Number.isFinite(rig.fps)
+            ? Math.floor(Math.max(0,frame-scene.startFrame)*rig.fps/fps)%rig.frames.length
+            : 0;
+          const imageSource=rig?.frames[rigIndex]||layer.src;
           // Furniture, board and large hero masks are always STATIC in scene
           // coordinates. Never animate a chess piece independently if its
           // alpha also contains a hand/arm or another person's sleeve.
@@ -59,7 +68,7 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
               'deg) scale('+pose.scaleX.toFixed(6)+','+
               pose.scaleY.toFixed(6)+')'
             : undefined;
-          return <Img key={layer.id} src={staticFile(layer.src)} style={{
+          return <Img key={layer.id} src={staticFile(imageSource)} style={{
             position:'absolute',inset:0,width:'100%',height:'100%',
             objectFit:'contain',zIndex:layer.z,
             transform,
