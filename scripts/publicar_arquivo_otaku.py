@@ -58,6 +58,8 @@ def read_episode(path: Path = EPISODE) -> dict:
 
 def text_metadata(ep: dict) -> dict:
     series = (str(ep.get("serie") or "Death Note")).strip()
+    explicit_title = str(ep.get('titulo_youtube') or '').strip()
+    explicit_description = str(ep.get('descricao_youtube') or '').strip()
     if series.casefold() == "death note":
         # Respeita o novo titulo do plano editorial quando informado via --episodio,
         # mas preserva o titulo do piloto antigo quando o episodio nao tem plano novo.
@@ -71,7 +73,7 @@ def text_metadata(ep: dict) -> dict:
     else:
         title = (str(ep.get('titulo') or f'O segredo de {series}').strip()[:88] + " #Shorts")
         discussion = str(ep.get('tese_original') or ep.get('observacoes') or 'Uma análise original do tema e dos personagens.')
-    title = title[:100]
+    title = (explicit_title or title)[:100]
     description = (
         f"O que torna {series} tão interessante? 👀\n\n"
         f"Neste vídeo do Arquivo Otaku: {discussion}\n\n"
@@ -80,6 +82,8 @@ def text_metadata(ep: dict) -> dict:
         "pertencem aos respectivos titulares.\n\n"
         "#Anime #Otaku #AnimeBrasil #Shorts"
     )
+    if explicit_description:
+        description = explicit_description[:5000]
     # Nao repetir tags de Death Note nos proximos episodios de outras franquias.
     tags = (["Death Note", "Light Yagami", "L"] if series.casefold() == "death note" else [series])
     tags.extend(["Anime", "Otaku", "Anime Brasil", "Arquivo Otaku", "Anime Shorts"])
@@ -238,6 +242,8 @@ def _fit_text(draw, text: str, max_width: int, start_size: int, min_size: int = 
 
 
 def cover_hook(ep: dict) -> str:
+    if str(ep.get('capa_texto') or '').strip():
+        return str(ep['capa_texto']).strip()[:32].upper()
     if str(ep.get("serie", "")).lower() == "death note":
         return "SEM LUTAS?"
     title = str(ep.get("gancho") or ep.get("titulo") or "SEGREDO DO ANIME")
@@ -362,11 +368,11 @@ def prepare(args):
     if args.arte_ia and ai_available and (args.refazer or not (OUTPUT/"arte-youtube.jpg").is_file()):
         try:yt_source=generate_ai_image(YOUTUBE_PROMPT,args.modelo_imagem,"1536x1024",OUTPUT/"arte-youtube.jpg")
         except Exception as e:print(f"[AVISO] Falhou arte IA YouTube ({type(e).__name__}): {str(e)[:130]}. Usando quadro local.")
-    elif (OUTPUT/"arte-youtube.jpg").is_file():yt_source=OUTPUT/"arte-youtube.jpg"
+    elif not args.refazer and (OUTPUT/"arte-youtube.jpg").is_file():yt_source=OUTPUT/"arte-youtube.jpg"
     if args.arte_ia and ai_available and (args.refazer or not (OUTPUT/"arte-shorts.jpg").is_file()):
         try:short_source=generate_ai_image(TIKTOK_PROMPT,args.modelo_imagem,"1024x1536",OUTPUT/"arte-shorts.jpg")
         except Exception as e:print(f"[AVISO] Falhou arte IA Shorts ({type(e).__name__}): {str(e)[:130]}. Usando quadro local.")
-    elif (OUTPUT/"arte-shorts.jpg").is_file():short_source=OUTPUT/"arte-shorts.jpg"
+    elif not args.refazer and (OUTPUT/"arte-shorts.jpg").is_file():short_source=OUTPUT/"arte-shorts.jpg"
     cover_image(yt_source,OUTPUT/"miniatura-youtube.jpg",1280,720,cover_hook(ep),str(ep.get('serie') or 'ANIME').upper(),False)
     cover_image(short_source,OUTPUT/"capa-tiktok-shorts.jpg",1080,1920,cover_hook(ep),str(ep.get('serie') or 'ANIME').upper(),True)
     # Store exact source MP4 and generated files, avoid storing secrets.

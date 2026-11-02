@@ -1,0 +1,82 @@
+{
+  "id": "002-death-note-memoria",
+  "serie": "Death Note",
+  "titulo": "Light Yagami caçou Kira sem saber que era ele mesmo",
+  "roteiro": "Light Yagami caçou Kira... sem lembrar que ele mesmo era Kira. Parece impossível, mas essa foi a armadilha que ele preparou. Para escapar das suspeitas de L, Light abriu mão da posse do Death Note. E perdeu todas as lembranças ligadas ao caderno. Só que as mortes continuaram: outra pessoa recebeu o poder. Sem memória, Light passou a ajudar L a encontrar o novo Kira. Ele investigava de verdade! Mas quando tocou no caderno outra vez, todas as lembranças voltaram. A parte mais assustadora? Light tinha planejado até a própria inocência. Então me diz: isso foi genial... ou assustador?",
+  "roteiro_melhorado": "Light Yagami caçou Kira... sem lembrar que ele mesmo era Kira. Parece impossível, mas essa foi a armadilha que ele preparou. Para escapar das suspeitas de L, Light abriu mão da posse do Death Note. E perdeu todas as lembranças ligadas ao caderno. Só que as mortes continuaram: outra pessoa recebeu o poder. Sem memória, Light passou a ajudar L a encontrar o novo Kira. Ele investigava de verdade! Mas quando tocou no caderno outra vez, todas as lembranças voltaram. A parte mais assustadora? Light tinha planejado até a própria inocência. Então me diz: isso foi genial... ou assustador?",
+  "gancho_primeiros_segundos": "Light Yagami caçou Kira... sem lembrar que ele mesmo era Kira.",
+  "capa_texto": "LIGHT CAÇOU KIRA?!",
+  "titulo_youtube": "Light caçou Kira SEM SABER que era ele mesmo! 🤯 #Shorts",
+  "descricao_youtube": "Light Yagami investigou Kira sem lembrar que ele próprio tinha usado o Death Note. 🤯\n\nNeste Short do Arquivo Otaku, analisamos a perda de memória de Light e a investigação com L no arco Yotsuba. É um dos planos mais surpreendentes de Death Note!\n\nVocê acha essa estratégia genial ou assustadora? Conte nos comentários.\n\n⚠️ Contém spoilers do arco Yotsuba. Análise autoral com ilustrações geradas por IA; Death Note pertence aos seus titulares.\n\n#DeathNote #LightYagami #L #Anime #Shorts",
+  "estrutura_curto": {
+    "gancho": "0-2s: Light caçou Kira sem saber",
+    "conflito": "2-12s: entrega e perde memorias",
+    "virada": "12-25s: novo Kira e investigacao com L",
+    "revelacao": "25-35s: lembrancas retornam",
+    "fechamento": "35-40s: pergunta"
+  },
+  "identidade_visual": {
+    "formato": "9:16",
+    "estilo": "Japanese anime 2D cel shading early 2000s",
+    "paleta": "azul noturno e vermelho, rostos legiveis",
+    "observacao": "Primeiro quadro alto contraste, 2 personagens depois plano objeto e virada"
+  },
+  "cenas": [
+    {
+      "id": "01",
+      "tipo": "gancho-conflito",
+      "descricao": "Light Yagami from Death Note anime in a compelling split dramatic 2D portrait, one side young innocent Light in white shirt and red tie, other side ominous cold calculating Light in the same clothes, BOTH eyes visible, half warm investigative lighting and half crimson shadow, strong contrast, tight waist-up camera, striking suspense opening",
+      "movimento": "zoom",
+      "papel": "O paradoxo: Light procura Kira"
+    },
+    {
+      "id": "02",
+      "tipo": "objeto-decisao",
+      "descricao": "Close-up of a single mysterious black Death Note resting in a hand about to release it, Ryuk shinigami silhouette behind and a clear separation between black notebook and bright fingertips, anime cel shading, notebook center foreground, no text or logos",
+      "movimento": "zoom",
+      "papel": "Abandonar a posse do Death Note"
+    },
+    {
+      "id": "03",
+      "tipo": "personagem-perda",
+      "descricao": "Light Yagami with brown layered hair and white shirt sitting in an interrogation room, bright readable eyes looking sincerely confused and worried, clean hand-drawn anime, medium-shot, cool gray-blue light in otherwise dark suspense environment",
+      "movimento": "zoom",
+      "papel": "Perda de memória e transformação"
+    },
+    {
+      "id": "04",
+      "tipo": "outro-kira",
+      "descricao": "Mysterious adult Japanese businessman Kyosuke Higuchi in formal suit seen from over shoulder at a corporate desk, ominous black notebook under a desk lamp, reflection of city office lights, anxious expression, 2D Japanese anime, no readable writing",
+      "movimento": "zoom",
+      "papel": "Outro Kira passa a agir"
+    },
+    {
+      "id": "05",
+      "tipo": "dupla-investigacao",
+      "descricao": "L Lawliet with messy black hair and oversized white sweater sitting next to Light Yagami with brown hair and white shirt in a Japanese investigation command center, both looking at evidence board with unrecognizable paper shapes, TWO clearly recognizable distinct anime characters, medium shot eye level, soft screen light",
+      "movimento": "zoom",
+      "papel": "Light e L investigam o novo Kira"
+    },
+    {
+      "id": "06",
+      "tipo": "revelacao-objeto",
+      "descricao": "Extreme close-up of Light Yagami brown anime eyes widening in shock as his fingers touch the black Death Note in foreground, cinematic burst of red and blue memory-like light in the background, iconic hand drawn Japanese 2D animation, important details clearly visible",
+      "movimento": "zoom",
+      "papel": "O retorno das lembranças ao tocar no caderno"
+    },
+    {
+      "id": "07",
+      "tipo": "pergunta-final",
+      "descricao": "Light Yagami and L Lawliet in a tense mid-distance anime 2D composition across a desk, Light smirking discreetly while L looks suspicious, dark blue room with a striking warm rimlight on faces and red notebook in foreground, two-character dramatic framing, readable eyes and ample space center-lower for subtitles",
+      "movimento": "zoom",
+      "papel": "A armadilha que enganou ate o proprio Light"
+    }
+  ],
+  "tese_original": "A estrategia de Light inclui manipular seu proprio estado de memoria, fazendo sua investigacao parecer sincera.",
+  "prova_da_obra_a_verificar": "Death Note volume 5 da editora VIZ (perda de memórias) e arco Yotsuba/episodios da série.",
+  "fontes": [
+    "https://www.viz.com/manga-books/manga/death-note-volume-5/product/766/digital",
+    "https://www.viz.com/death-note"
+  ],
+  "observacoes": "Spoilers do arco Yotsuba. Revisar nomes, detalhes e miniatura antes da publicacao. Nao usar audio nem trechos copiados do anime."
+}

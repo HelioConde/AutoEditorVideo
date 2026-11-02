@@ -5,7 +5,8 @@ param(
   [switch]$SomenteConfigurar,
   [switch]$ApenasQA,
   [switch]$ReutilizarImagens,
-  [string]$PastaImagens = ''
+  [string]$PastaImagens = '',
+  [string]$Plano = ''
 )
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
@@ -19,12 +20,29 @@ if($SomenteConfigurar){$arguments+='--somente-configurar'}
 if($ApenasQA){$arguments+='--apenas-qa'}
 if($ReutilizarImagens){$arguments+='--reutilizar-imagens'}
 if($PastaImagens){$arguments+=@('--pasta-imagens',$PastaImagens)}
+if($Plano){$arguments+=@('--plano',$Plano)}
 Push-Location $root
 try {
   & $py @arguments
   if($LASTEXITCODE -ne 0){throw "Gerador retornou erro $LASTEXITCODE. Verifique as mensagens acima."}
   if(-not $SomenteConfigurar -and -not $ApenasQA){
-    $nome=if($ReutilizarImagens){'arquivo-otaku-piloto-v07-reuso.mp4'}else{'arquivo-otaku-piloto-codex-v07.mp4'}
+    $id = '001-death-note'
+    if ($Plano) {
+      $json = Get-Content -LiteralPath $Plano -Raw -Encoding UTF8 | ConvertFrom-Json
+      $id = [string]$json.id
+    }
+    if ($id -eq '001-death-note') {
+      $nome=if($ReutilizarImagens){'arquivo-otaku-piloto-v07-reuso.mp4'}else{'arquivo-otaku-piloto-codex-v07.mp4'}
+    } else {
+      if ($id -notmatch '^[a-z0-9]+(-[a-z0-9]+)*
+    $target=Join-Path $root ('assets\gerados\'+$nome)
+    if(Test-Path $target){Start-Process -FilePath $target}
+  }
+} finally { Pop-Location }
+) { throw 'ID invalido no JSON do episodio.' }
+      $modo=if($ReutilizarImagens){'reuso'}else{'codex'}
+      $nome="arquivo-otaku-$id-$modo.mp4"
+    }
     $target=Join-Path $root ('assets\gerados\'+$nome)
     if(Test-Path $target){Start-Process -FilePath $target}
   }

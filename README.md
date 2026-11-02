@@ -112,3 +112,37 @@ O modulo arquivo_otaku.pipeline aceita episodios independentes e legendas SRT. E
 ```powershell
 python -m arquivo_otaku.pipeline --episodio arquivo_otaku/episodios/death-note.json --srt caminho/legendas.srt
 ```
+
+## Segundo Short — Light investigando Kira (v0.9.2)
+
+O episodio 002 esta pronto para gerar no Windows, mas exige Codex Proxy com conta elegivel. Primeiro valide sem gastar cota:
+
+```powershell
+.\segundo-short-death-note.ps1 -Etapa plano
+```
+
+Para gerar as sete imagens novas, o video e as capas correspondentes:
+
+```powershell
+.\segundo-short-death-note.ps1 -Etapa criar -Modelo gpt-image-1.5
+```
+
+Para preparar capas/metadados novamente, sem gerar novas imagens:
+
+```powershell
+.\segundo-short-death-note.ps1 -Etapa preparar
+```
+
+Depois de assistir e revisar, enviar como privado:
+
+```powershell
+.\segundo-short-death-note.ps1 -Etapa publicar
+```
+
+Para publicar como publico, apenas apos revisao:
+
+```powershell
+.\segundo-short-death-note.ps1 -Etapa publicar -Privacidade public -ConfirmarPublico
+```
+
+A nova saida e `assets/gerados/arquivo-otaku-002-death-note-memoria-codex.mp4`. O video 001 permanece intacto. Consulte [30 pautas de Death Note](docs/DEATH-NOTE-PAUTAS-v1.md).

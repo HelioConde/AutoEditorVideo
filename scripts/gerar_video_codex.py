@@ -245,6 +245,16 @@ def mpt_args(mpt:Path,plan:dict,local_files:list[Path]) -> list[str]:
         '--stop-at','video']
 
 
+def output_filename(plan: dict, reused: bool) -> str:
+    """Ensure different episodes never silently overwrite a previous MP4."""
+    episode_id = str(plan.get('id', '')).strip()
+    if episode_id == '001-death-note':
+        return 'arquivo-otaku-piloto-v07-reuso.mp4' if reused else 'arquivo-otaku-piloto-codex-v07.mp4'
+    if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', episode_id) or len(episode_id) > 80:
+        raise ValueError('ID do episodio invalido para nome de arquivo')
+    return f'arquivo-otaku-{episode_id}-{"reuso" if reused else "codex"}.mp4'
+
+
 def main()->int:
     parser=argparse.ArgumentParser()
     parser.add_argument('--modelo',choices=['gpt-image-1.5','gpt-image-2'],default='gpt-image-1.5')
@@ -264,7 +274,7 @@ def main()->int:
     for aviso in editorial.get('alertas',[]):
         print('[EDITORIAL] '+aviso,flush=True)
     if args.somente_configurar:
-        print('[OK] Plano de 7 cenas validado; nenhuma imagem gerada e nenhum video enviado.')
+        print(f'[OK] Plano {plan["id"]} de {len(plan["cenas"])} cenas validado; nenhuma imagem gerada e nenhum video enviado.')
         return 0
     os.environ['MPT_HOME']=str(RUNTIME)
     if args.apenas_qa:
@@ -303,7 +313,7 @@ def main()->int:
     candidates=sorted((f for f in tasks.glob('*/final-*.mp4') if f.stat().st_mtime>=inicio),key=lambda x:x.stat().st_mtime,reverse=True)
     if not candidates:raise RuntimeError('Montagem concluiu, mas nenhum MP4 novo foi encontrado. Confira os logs do MoneyPrinterTurbo.')
     # Explicit distinct filename: never silently replace the already published pilot.
-    final=out/('arquivo-otaku-piloto-v07-reuso.mp4' if args.reutilizar_imagens else 'arquivo-otaku-piloto-codex-v07.mp4')
+    final=out/output_filename(plan,args.reutilizar_imagens)
     import shutil
     shutil.copy2(candidates[0],final)
     audio_report=normalize_video_audio(final)
