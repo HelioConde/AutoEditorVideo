@@ -19,6 +19,7 @@ import sys
 from PIL import Image, ImageChops, ImageFilter, ImageOps, ImageStat
 from roteiro_para_storyboard import select_episode, save_plan
 from diversidade_visual import similar_masters, storyboard_warnings
+from qa_foreground_fidelity import foreground_fidelity
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets'/'gerados'/'shorts-animados'
@@ -513,7 +514,18 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     print(f'[FUNDO] {scene["id"]}: cenário limpo usado diretamente '
           '(sem remontagem com a master).',flush=True)
     comp=compare(master,bg,fg,d/'comparacao.jpg')
+    # Check what the extraction model drew BEFORE Photoshop adjustments.
+    # Whole-image compositing difference can be small despite a duplicated
+    # torso or a body floating on the chessboard.
+    fidelity=foreground_fidelity(master,normalized_fg)
     mask_alerts=[] if clean_reference else background_mask_warnings(d,mask_content)
+    if fidelity['redrawn']:
+        mask_alerts.append('foreground_redesenhado')
+        print(f"[QA ALERTA] Cena {scene['id']}: foreground difere da master "
+              f"(MAE={fidelity['mean_difference']}, metade inferior="
+              f"{fidelity['lower_half_mean_difference']}). "
+              'Camadas 2.5D inseguras: usar master original estática no vídeo. '
+              'As imagens pagas e os arquivos raw foram preservados.',flush=True)
     if mask_alerts:
         print('[QA AVISO] '+scene['id']+': '+', '.join(mask_alerts)+
               '. Use -RepararFundo para nova edicao com a mascara atual.',
@@ -523,6 +535,7 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
             'background_compositing':'clean-direct',
             'foreground_offset':{'x':offset_x,'y':offset_y},
             'foreground_scale':foreground_scale,
+            'foreground_source_consistency':fidelity,
             'warnings':mask_alerts,
             'subject':scene['subject'],'alpha':report,'composition':comp,
             'status':'aguardando_revisao_visual','files':{
