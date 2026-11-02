@@ -44,6 +44,10 @@ if(($ReprovarCena -or $AprovarCena) -and ($Renderizar -or $CriarVoz -or $Somente
 }
 if($ReprovarCena -and $AprovarCena){throw 'Escolha -ReprovarCena ou -AprovarCena.'}
 if($Esqueleto2D -and $SemAnimacao){throw 'Escolha -Esqueleto2D ou -SemAnimacao.'}
+if($AprovarRig2D -and (-not $PSBoundParameters.ContainsKey('Motivo') -or
+                         -not $Motivo.Trim())){
+  throw '-AprovarRig2D precisa de -Motivo explicito depois da revisao manual dos frames.'
+}
 $rigOperations=@([int]$PrepararRig2D,[int][bool]$ImportarQuadrosRig2D,[int]$AprovarRig2D)
 if(($rigOperations | Measure-Object -Sum).Sum -gt 1){throw 'Escolha apenas uma operacao Rig2D por vez.'}
 if((($rigOperations | Measure-Object -Sum).Sum -gt 0) -and ($Renderizar -or $CriarVoz -or $TodasCenas -or $SomenteCapa -or $PrepararReprovadas)){
