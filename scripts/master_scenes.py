@@ -20,6 +20,7 @@ from PIL import Image, ImageChops, ImageFilter, ImageOps, ImageStat
 from roteiro_para_storyboard import select_episode, save_plan
 from diversidade_visual import similar_masters, storyboard_warnings
 from qa_foreground_fidelity import foreground_fidelity
+from chess_composition_safety import master_static_for_chess_action, hero_prop_prompt
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets'/'gerados'/'shorts-animados'
@@ -214,7 +215,8 @@ def foreground_prompt(scene:dict)->str:
             'Any arm resting on the table must stay at exactly its source pixel '
             'coordinates, with correct occlusion. If a body part is occluded by '
             'furniture, do NOT invent the hidden body. Do not move the subject. '
-            'Output real RGBA PNG alpha, never a green or opaque backdrop.')
+            'Output real RGBA PNG alpha, never a green or opaque backdrop. '
+            +hero_prop_prompt(scene))
 
 
 def background_prompt()->str:
@@ -527,7 +529,13 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     # torso or a body floating on the chessboard.
     fidelity=foreground_fidelity(master,normalized_fg)
     mask_alerts=[] if clean_reference else background_mask_warnings(d,mask_content)
-    if fidelity['redrawn']:
+    safe_hero=master_static_for_chess_action(scene)
+    if safe_hero:
+        mask_alerts.append('peca_xadrez_pode_sumir_na_recomposicao')
+        print(f"[QA PROTECAO] Cena {scene['id']}: movimento de rei/objeto essencial. "
+              'A comparacao 2.5D e diagnostica. O Short usara a master original '
+              'para preservar a peca e a mao. Nenhuma chamada de IA extra.',flush=True)
+    if fidelity['redrawn'] or safe_hero:
         mask_alerts.append('foreground_redesenhado')
         # Show the exact frame that the safety fallback will use, making it
         # possible to review the corrected video frame without rendering MP4.
@@ -535,14 +543,15 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
         with Image.open(master) as source_master:
             source_master.convert('RGB').save(preview,'JPEG',quality=94)
         fidelity['safe_preview']=str(preview)
-        print(f"[QA ALERTA] Cena {scene['id']}: foreground difere da master "
+        if fidelity['redrawn']:
+            print(f"[QA ALERTA] Cena {scene['id']}: foreground difere da master "
               f"(MAE={fidelity['mean_difference']}, metade inferior="
               f"{fidelity['lower_half_mean_difference']}). "
               'Camadas 2.5D inseguras: usar master original estática no vídeo. '
               'As imagens pagas e os arquivos raw foram preservados.',flush=True)
     if mask_alerts:
         print('[QA AVISO] '+scene['id']+': '+', '.join(mask_alerts)+
-              '. Use -RepararFundo para nova edicao com a mascara atual.',
+              '. Revise a master e a composicao; -RepararFundo apenas corrige inpainting.',
               flush=True)
     result={'version':'master-derived-v2','episode':ep['id'],'scene':scene['id'],
             'background_source':str(clean_reference) if clean_reference else 'inpainting',
@@ -550,6 +559,7 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
             'foreground_offset':{'x':offset_x,'y':offset_y},
             'foreground_scale':foreground_scale,
             'foreground_source_consistency':fidelity,
+            'render_mode_recommended': 'master_static' if safe_hero or fidelity['redrawn'] else '2_5d',
             'warnings':mask_alerts,
             'subject':scene['subject'],'alpha':report,'composition':comp,
             'status':'aguardando_revisao_visual','files':{
