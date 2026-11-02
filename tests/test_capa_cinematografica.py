@@ -77,6 +77,10 @@ def test_cover_selects_cached_layers_from_configured_scene(tmp_path,monkeypatch)
                                          fill=(205,177,140,255))
     background.save(folder/'background.png')
     foreground.save(folder/'foreground.png')
+    # New fidelity QA compares the extracted foreground to its original
+    # master at the same coordinates; the test needs a faithful source.
+    Image.alpha_composite(background.convert('RGBA'),foreground).convert('RGB').save(
+        folder/'master.png')
     monkeypatch.setattr(renderer,'scene_dir',lambda ep,scene,model:folder)
     monkeypatch.setattr(renderer,'cover_options',
                         lambda root,epid:{'scene':'06','zoom':1.06,

@@ -19,6 +19,7 @@ import sys
 from PIL import Image, ImageChops, ImageFilter, ImageOps, ImageStat
 from roteiro_para_storyboard import select_episode, save_plan
 from diversidade_visual import similar_masters, storyboard_warnings
+from qa_foreground_fidelity import foreground_fidelity
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets'/'gerados'/'shorts-animados'
@@ -202,10 +203,18 @@ def request_edit(master:Path,prompt:str,model:str,key:str,*,transparent:bool,
 
 def foreground_prompt(scene:dict)->str:
     thing='personagens, seus cabelos, roupas, mãos e acessórios visíveis' if scene['subject']=='personagens' else 'objeto de primeiro plano que é o foco'
-    return ('Edit the ATTACHED scene, keeping exact original 1024x1536 canvas and X/Y '
-            'placement. Isolate ONLY the '+thing+' and turn every other pixel '
-            'TRANSPARENT with real PNG alpha. No green, no scene elements, '
-            'do not create or redraw new poses, do not move the subject.')
+    return ('PIXEL-PRESERVING SEGMENTATION, NOT GENERATION. Copy each visible pixel '
+            'of ONLY the '+thing+' from the attached input into the EXACT SAME '
+            'X/Y position on the 1024x1536 canvas. Remove all other pixels using '
+            'true PNG transparency. DO NOT REDRAW the face, torso, limbs, hands, '
+            'feet or clothing; do not change skin, style, colors, proportions, '
+            'pose, perspective, body size or anatomy. No novel pixels, no new '
+            'objects or duplicates. NEVER include chessboard squares, table surface, '
+            'table legs, floor or background fragments in the extracted human layer. '
+            'Any arm resting on the table must stay at exactly its source pixel '
+            'coordinates, with correct occlusion. If a body part is occluded by '
+            'furniture, do NOT invent the hidden body. Do not move the subject. '
+            'Output real RGBA PNG alpha, never a green or opaque backdrop.')
 
 
 def background_prompt()->str:
@@ -513,7 +522,24 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     print(f'[FUNDO] {scene["id"]}: cenário limpo usado diretamente '
           '(sem remontagem com a master).',flush=True)
     comp=compare(master,bg,fg,d/'comparacao.jpg')
+    # Check what the extraction model drew BEFORE Photoshop adjustments.
+    # Whole-image compositing difference can be small despite a duplicated
+    # torso or a body floating on the chessboard.
+    fidelity=foreground_fidelity(master,normalized_fg)
     mask_alerts=[] if clean_reference else background_mask_warnings(d,mask_content)
+    if fidelity['redrawn']:
+        mask_alerts.append('foreground_redesenhado')
+        # Show the exact frame that the safety fallback will use, making it
+        # possible to review the corrected video frame without rendering MP4.
+        preview=d/'preview-render-seguro.jpg'
+        with Image.open(master) as source_master:
+            source_master.convert('RGB').save(preview,'JPEG',quality=94)
+        fidelity['safe_preview']=str(preview)
+        print(f"[QA ALERTA] Cena {scene['id']}: foreground difere da master "
+              f"(MAE={fidelity['mean_difference']}, metade inferior="
+              f"{fidelity['lower_half_mean_difference']}). "
+              'Camadas 2.5D inseguras: usar master original estática no vídeo. '
+              'As imagens pagas e os arquivos raw foram preservados.',flush=True)
     if mask_alerts:
         print('[QA AVISO] '+scene['id']+': '+', '.join(mask_alerts)+
               '. Use -RepararFundo para nova edicao com a mascara atual.',
@@ -523,6 +549,7 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
             'background_compositing':'clean-direct',
             'foreground_offset':{'x':offset_x,'y':offset_y},
             'foreground_scale':foreground_scale,
+            'foreground_source_consistency':fidelity,
             'warnings':mask_alerts,
             'subject':scene['subject'],'alpha':report,'composition':comp,
             'status':'aguardando_revisao_visual','files':{
