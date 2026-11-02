@@ -351,3 +351,74 @@ pasta/hash daquela versao. Nao aprove imagens erradas apenas para renderizar.
 
 A protecao do rei impede perda de um objeto importante na composicao, mas nao
 certifica automaticamente a anatomia. A revisao visual continua obrigatoria.
+
+
+## Novo motor multicamadas: `-ModoComposicao multicamadas`
+
+O fluxo tradicional usa duas imagens (fundo e foreground). Para xadrez,
+personagens sentados e objetos que precisam bloquear outros objetos, existe
+agora um modo **opcional** com perfis semanticos por cena. Usa o mesmo
+storyboard e cache da master, mas grava arquivos somente em
+`master-scenes/<hash>/multilayer/` e `scene-layers.json`, sem sobrescrever
+`foreground-raw.png`, `background-raw.png` ou o master aprovado.
+
+**Camadas de xadrez**: `background`, `table`, `board`, os personagens
+`light` e/ou `l` (cada um numa mascara independente) e `king_hand`
+quando o rei e movido. Perfis OTS posicionam a pessoa observada atras da
+mesa e a pessoa junto a camera na frente. A ordem Z fica no manifesto,
+incluindo `role`, `z` e caminhos relativos. Outros assuntos usam um
+perfil simplificado `background + subject`.
+
+**Uma execucao do programa nao significa uma unica chamada de IA**. O
+endpoint de edicao devolve apenas **uma imagem PNG por chamada**. Para
+cena 02 com mesa, tabuleiro, Light e L, o orcamento normal e **cinco
+edicoes**: quatro mascaras e um background limpo. Para a cena 03 com
+mesa, tabuleiro, Light e rei+mao, sao tambem cinco. Nenhuma chamada
+extra e feita automaticamente para repetir resultados ruins.
+`-DiagnosticarCache` lista o que falta antes de gastar, e
+`-MaxChamadas` limita o total de chamadas.
+
+As imagens RGBA de edicao sao usadas apenas para o canal **alpha**.
+Os RGB das camadas finais sao copiados dos mesmos pixels da master,
+evitando que a IA redesenhe pessoas e objetos. O fundo limpo e
+reconstruido por uma unica edicao com mascara conjunta. A reconstrucao
+do fundo preserva os pixels originais nao mascarados. A preview e o
+QA sao gerados **offline** no cache.
+
+```powershell
+cd C:\Users\helio\Documents\arquivo-otaku-github
+git pull origin main
+
+# Nenhuma chamada de IA, verificar custo por cena
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 2 -Modelo gpt-image-1.5 -ModoComposicao multicamadas -DiagnosticarCache -MaxChamadas 0
+
+# Uma execucao para todas as mascaras de uma cena (ate 5 chamadas)
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 2 -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 5
+
+# Depois de CONFERIR o PNG de preview, aprovar as camadas no cache atual
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 2 -Modelo gpt-image-1.5 -ModoComposicao multicamadas -AprovarMulticamadas -Motivo "Conferi mesa, personagens e tabuleiro"
+
+# Com todas as cenas restantes em cache e aprovadas, gerar MP4 offline
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Offline -Renderizar
+```
+
+No cache da cena, abra `multilayer/preview-composicao.png` e
+`scene-layers.json`. O Remotion usa as camadas aprovadas em ordem Z,
+com um movimento de camera **do quadro inteiro**, sem deslocar o corpo
+de um personagem atraves da mesa. Cenas sem manifesto continuam no
+pipeline antigo, inclusive o fallback master segura para o rei.
+A capa tambem pode usar camadas aprovadas.
+
+**Advertencias**: uma master que ja tem perna/corpo em posicao fisicamente
+errada nao se torna correta apenas por separar as camadas. Um cache
+`reprovado` bloqueia a nova extracao para evitar gasto desnecessario.
+Gere primeiro um take novo com anatomia correta. O algoritmo de QA mede
+fidelidade da recomposicao, conflitos das mascaras com o tabuleiro e
+ordem Z; **nao consegue validar sozinho toda a anatomia**. Por isso
+requer aprovacao visual explicita no novo `multilayer/review.json`,
+associada por hash ao manifesto. Se mudar a master ou o manifesto,
+a aprovacao caduca e o render fica bloqueado.
+
+**Seguranca e custos**: ninguem deve aprovar uma imagem apenas para
+forcar o render. O modo offline nao chama IA, o diagnostico nao publica
+nada e os recursos antigos permanecem intactos.
