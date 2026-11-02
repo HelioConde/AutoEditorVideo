@@ -94,7 +94,9 @@ export const characterPoseAtFrame=(args:{
   const strength=contactScale*extentScale*heroScale;
 
   const t=clamp((frame-sceneStart)/(sceneEnd-sceneStart),0,1);
-  const envelope=(t<=0||t>=1)?0:
+  // Prevent negative-zero residue and enforce bit-for-bit placement at cuts.
+  if(t<=0||t>=1)return {...flat('safe'),enabled:true};
+  const envelope=
     smoothstep(t/0.11)*smoothstep((1-t)/0.11);
   // Derive the rhythm from the character's ACTUAL identity and image hash,
   // not fixed scene 01..06 or "l"/"light". Two harmonics disrupt mechanical
