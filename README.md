@@ -156,3 +156,18 @@ Se o segundo Short gerou as 7 imagens e falhou no caminho `otaku-v07-*.partial.j
 ```
 
 A proxima execucao devera exibir `0 cenas exigem IA` e `[CACHE]` nas 7 cenas. O editor agora usa temporarios aleatorios e salva recortes em pastas proprias de cada episodio. Se houver novo `PermissionError`, confira as permissoes de escrita/Windows Defender na pasta `.mpt-runtime\storage\local_videos`. Nao apague imagens originais nem o cache.
+
+## Lote de 25 Shorts — planejamento e renderizacao local (v0.9.3)
+
+Foi adicionado um **gerenciador de fila** com 25 pautas diferentes de Death Note.
+Os roteiros ainda precisam ser preparados e revisados antes da renderizacao;
+o sistema recusa roteiros nao aprovados e **nao publica em massa**.
+
+```powershell
+.\lote-25.ps1 -Acao status
+.\lote-25.ps1 -Acao renderizar
+# Somente depois de aprovar episodios em dados/lote-25-pautas.json:
+.\lote-25.ps1 -Acao renderizar -ConfirmarRender
+```
+
+Leia [o guia do lote](docs/LOTE-25.md).

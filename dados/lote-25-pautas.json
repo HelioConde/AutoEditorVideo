@@ -1,0 +1,282 @@
+{
+  "schema": "arquivo-otaku/lote/v1",
+  "objetivo": 25,
+  "politica_publicacao": "Nunca publicar automaticamente; apos QA, o operador escolhe programacao e respeita limites do canal.",
+  "items": [
+    {
+      "id": "dn-l-regiao",
+      "serie": "Death Note",
+      "pauta": "Como L encontrou a regiao de Kira com uma transmissao falsa?",
+      "formato": "investigacao",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-batatas",
+      "serie": "Death Note",
+      "pauta": "A armadilha do Death Note escondido no pacote de batatas",
+      "formato": "objeto",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-naomi",
+      "serie": "Death Note",
+      "pauta": "Como Naomi Misora quase descobriu a identidade de Kira?",
+      "formato": "personagem",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-regra13",
+      "serie": "Death Note",
+      "pauta": "A regra dos 13 dias do Death Note era mentira?",
+      "formato": "regra",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-rem",
+      "serie": "Death Note",
+      "pauta": "Por que Rem se sacrificou por Misa?",
+      "formato": "dilema",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-light-sem-caderno",
+      "serie": "Death Note",
+      "pauta": "Light era outra pessoa sem as memorias do caderno?",
+      "formato": "psicologia",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-olhos",
+      "serie": "Death Note",
+      "pauta": "O acordo dos olhos do shinigami vale o preco?",
+      "formato": "regra",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-ryuk",
+      "serie": "Death Note",
+      "pauta": "Ryuk ajudava Light ou so queria se divertir?",
+      "formato": "personagem",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-folha",
+      "serie": "Death Note",
+      "pauta": "Uma folha arrancada do Death Note ainda funciona?",
+      "formato": "regra",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-relogio",
+      "serie": "Death Note",
+      "pauta": "O que Light escondia dentro de seu relogio?",
+      "formato": "objeto",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-yotsuba",
+      "serie": "Death Note",
+      "pauta": "O misterio por tras do Kira da Yotsuba",
+      "formato": "misterio",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-mello",
+      "serie": "Death Note",
+      "pauta": "Por que Mello foi tao importante no desfecho?",
+      "formato": "investigacao",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-near",
+      "serie": "Death Note",
+      "pauta": "O erro de Light que Near conseguiu explorar",
+      "formato": "analise",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-misa",
+      "serie": "Death Note",
+      "pauta": "Por que Misa confiava tanto em Light?",
+      "formato": "psicologia",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-soichiro",
+      "serie": "Death Note",
+      "pauta": "Qual foi o dilema mais dificil de Soichiro Yagami?",
+      "formato": "dilema",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-l-suspeita",
+      "serie": "Death Note",
+      "pauta": "Por que L continuou desconfiando de Light?",
+      "formato": "investigacao",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-segundo-kira",
+      "serie": "Death Note",
+      "pauta": "Como L descobriu que havia um segundo Kira?",
+      "formato": "misterio",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-controle",
+      "serie": "Death Note",
+      "pauta": "O que o Death Note pode controlar antes de matar?",
+      "formato": "regra",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-erro-tv",
+      "serie": "Death Note",
+      "pauta": "Qual foi o primeiro grande erro de Light na televisao?",
+      "formato": "investigacao",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-verdadeiro-nome",
+      "serie": "Death Note",
+      "pauta": "Por que descobrir o nome verdadeiro de L era tao dificil?",
+      "formato": "misterio",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-justica",
+      "serie": "Death Note",
+      "pauta": "Light buscava justica ou queria ser um deus?",
+      "formato": "dilema",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-caderno-mos",
+      "serie": "Death Note",
+      "pauta": "Quantos cadernos realmente aparecem na trama?",
+      "formato": "regra",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-troca",
+      "serie": "Death Note",
+      "pauta": "Como a troca de posse mudou a investigacao?",
+      "formato": "investigacao",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-final",
+      "serie": "Death Note",
+      "pauta": "O que o final de Death Note diz sobre o poder?",
+      "formato": "analise",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    },
+    {
+      "id": "dn-kira-hj",
+      "serie": "Death Note",
+      "pauta": "E se Kira existisse hoje? Uma hipotese de ficcao",
+      "formato": "hipotese",
+      "episodio": null,
+      "aprovado": false,
+      "checagem_factual": false,
+      "direitos_revisados": false,
+      "nota": "Pauta editorial; nao e roteiro aprovado nem video pronto."
+    }
+  ]
+}
