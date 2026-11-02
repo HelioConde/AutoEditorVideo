@@ -1,0 +1,19 @@
+{
+  "schema": "arquivo-otaku/cover-design/v1",
+  "description": "Padrao de capa cinematografica local, reutilizavel e sem IA. Usa camadas ja aprovadas; nunca salva originais/cache no GitHub.",
+  "default": {
+    "style": "duelo-cinematografico",
+    "zoom": 1.07,
+    "focus_x": 0.5,
+    "focus_y": 0.38
+  },
+  "episodes": {
+    "003-death-note-xadrez": {
+      "scene": "06",
+      "title": "XEQUE-MATE MENTAL",
+      "zoom": 1.1,
+      "focus_x": 0.5,
+      "focus_y": 0.38
+    }
+  }
+}
