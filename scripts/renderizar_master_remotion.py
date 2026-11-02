@@ -135,7 +135,8 @@ def layer_animation_metrics(image:Path)->dict:
 
 def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                 *,model:str='gpt-image-1.5',output:Path=OUT,
-                public:Path|None=None,animation_mode:str='cinematica')->dict:
+                public:Path|None=None,animation_mode:str='cinematica',
+                character_preset:str='equilibrado')->dict:
     entries=validate_scenes(ep,model,output)
     target=(public or MOTION/'public')/'generated'/ep['id']
     target.mkdir(parents=True,exist_ok=True)
@@ -183,8 +184,11 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
     parent=select_episode(ep['id'])
     if animation_mode not in ('cinematica','desligada'):
         raise ValueError('Modo de animacao desconhecido')
+    if character_preset not in ('ultrassutil','equilibrado','vivo'):
+        raise ValueError('Preset de personagens desconhecido')
     return {'id':ep['id'],'durationFrames':bounds[-1][1],
             'animationMode':animation_mode,
+            'characterPreset':character_preset,
             'audio':f'generated/{ep["id"]}/voz.mp3',
             'scenes':scenes,'captions':captions,'hook':parent.get('cover','')}
 
@@ -271,6 +275,10 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--animacao',choices=['cinematica','desligada'],
                     default='cinematica',
                     help='Movimentos originais de camera, respiracao segura e luz')
+    ap.add_argument('--perfil-personagens',
+                    choices=['ultrassutil','equilibrado','vivo'],
+                    default='equilibrado',
+                    help='Intensidade dos movimentos sutis de Light e L')
     ap.add_argument('--somente-voz',action='store_true',help='Gerar voz e legendas sem validar ou renderizar imagens')
     ap.add_argument('--renderizar',action='store_true')
     ap.add_argument('--somente-capa',action='store_true',help='Gera so a capa premium com imagens em cache; sem voz/Remotion/IA')
@@ -304,7 +312,8 @@ def main(argv:list[str]|None=None)->int:
     captions=captions_from_ass(ass,seconds)
     if not captions:raise RuntimeError('Narração sem legendas')
     props=build_props(ep,voice,captions,seconds,model=args.modelo,
-                      public=args.motor/'public',animation_mode=args.animacao)
+                      public=args.motor/'public',animation_mode=args.animacao,
+                      character_preset=args.perfil_personagens)
     propfile=args.motor/f"props-master-{ep['id']}.json"
     propfile.write_text(json.dumps(props,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f"[PREPARADO] {len(props['scenes'])} planos, {seconds:.1f}s e {len(captions)} legendas: {propfile}")
@@ -316,7 +325,10 @@ def main(argv:list[str]|None=None)->int:
     npm=shutil.which('npm.cmd' if sys.platform=='win32' else 'npm')
     if not npm:raise RuntimeError('Node/npm não encontrado')
     # Never overwrite the previous still-image MP4 while introducing motion.
-    suffix='-master-multicenas-animado.mp4' if args.animacao=='cinematica' else '-master-multicenas.mp4'
+    # Never overwrite the previous originals or existing cinematic version.
+    suffix=(f'-master-multicenas-personagens-{args.perfil_personagens}.mp4'
+            if args.animacao=='cinematica'
+            else '-master-multicenas-referencia-estatica.mp4')
     output=folder/f"{ep['id']}{suffix}"
     command=[npm,'run','render:master','--',str(output.resolve()),'--props',
              str(propfile.resolve()),'--concurrency','2']
@@ -329,6 +341,7 @@ def main(argv:list[str]|None=None)->int:
               'narrative_beats':ep.get('narrative_beats'),
               'visual_shots':len(props['scenes']),'captions':len(captions),
               'animation_mode':args.animacao,
+              'character_preset':args.perfil_personagens,
               'published':False,
               'visual_alerts':[{'scene':e['scene']['id'],
                   'margins':e['qa']['alpha'].get('margin_warning'),
