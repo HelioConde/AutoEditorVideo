@@ -1,0 +1,11 @@
+{
+  "schema": "arquivo-otaku/foreground-placements/v1",
+  "description": "Ajustes locais em pixels de 1024x1536; aplicados somente ao hash exato da cena. Raw sempre preservado.",
+  "placements": {
+    "003-death-note-xadrez/06-594007f1c10bb8": {
+      "x": 0,
+      "y": -211,
+      "note": "Alinhamento do foreground para corresponder a referencia manual no Photoshop; fundo limpo direto"
+    }
+  }
+}

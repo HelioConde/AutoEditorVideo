@@ -242,6 +242,43 @@ def background_mask_warnings(directory:Path,mask:Path)->list[str]:
     return []
 
 
+def foreground_placement(ep:dict,directory:Path)->tuple[int,int]:
+    """Manual per-cache alignment measured in original 1024x1536 pixels.
+
+    Changes are restricted to a specific scene hash, so new renders or models
+    cannot accidentally inherit an adjustment made for another composition.
+    """
+    config=ROOT/'configs'/'foreground-placements.json'
+    if not config.is_file():
+        return (0,0)
+    data=json.loads(config.read_text(encoding='utf-8'))
+    if data.get('schema')!='arquivo-otaku/foreground-placements/v1':
+        raise ValueError('Config de posicionamento invalida: schema desconhecido')
+    key=ep['id']+'/'+directory.name
+    placement=data.get('placements',{}).get(key)
+    if placement is None:
+        return (0,0)
+    x,y=placement.get('x',0),placement.get('y',0)
+    if (type(x) is not int or type(y) is not int or
+            abs(x)>512 or abs(y)>512):
+        raise ValueError('Posicao de foreground deve ter x/y inteiros entre -512 e 512')
+    return (x,y)
+
+
+def reposition_foreground(blob:bytes,x:int,y:int)->bytes:
+    """Translate the transparent foreground; never touch the paid raw layer."""
+    if x==0 and y==0:
+        return blob
+    with Image.open(io.BytesIO(blob)) as image:
+        if image.size!=SIZE or 'A' not in image.getbands():
+            raise ValueError('Foreground precisa ter 1024x1536 e alpha real')
+        layer=Image.new('RGBA',SIZE,(0,0,0,0))
+        layer.paste(image.convert('RGBA'),(x,y))
+        buffer=io.BytesIO()
+        layer.save(buffer,format='PNG',optimize=True)
+        return buffer.getvalue()
+
+
 def reconstruct(master:Path,edited:Path,mask:Path,out:Path)->None:
     with Image.open(master) as a, Image.open(edited) as b, Image.open(mask) as m:
         erase=ImageOps.invert(m.getchannel('A'))
@@ -320,9 +357,19 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
         content=edit(master,foreground_prompt(scene),model,transparent=True)
         atomic(fg_raw,content)
     normalized_fg=normalize_image(fg_raw.read_bytes(),alpha=True,stage=f"{scene['id']}/foreground")
-    report=validate_image(normalized_fg,alpha=True)
-    atomic(fg,normalized_fg)
-    make_mask(fg,mask)
+    validate_image(normalized_fg,alpha=True)
+    fg_normalized=d/'foreground-normalized.png'
+    atomic(fg_normalized,normalized_fg)
+    # The inpainting mask must use the original master coordinates, NOT the
+    # foreground's final animation/Photoshop positioning adjustment.
+    make_mask(fg_normalized,mask)
+    offset_x,offset_y=foreground_placement(ep,d)
+    placed_foreground=reposition_foreground(normalized_fg,offset_x,offset_y)
+    report=validate_image(placed_foreground,alpha=True)
+    atomic(fg,placed_foreground)
+    if offset_x or offset_y:
+        print(f'[POSICIONAMENTO] {scene["id"]}: foreground deslocado '
+              f'x={offset_x}, y={offset_y} px (raw preservado).',flush=True)
     if repair_background or not bg_raw.exists():
         if offline or edit is None:
             raise RuntimeError('Background ausente ou reparo solicitado em modo offline')
@@ -344,7 +391,20 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     atomic(working_bg,normalized_bg)
     clean_reference=find_clean_background(master,mask,d)
     source=clean_reference or working_bg
-    reconstruct(master,source,mask,bg)
+    # The inpainted clean plate is already the desired final scene background.
+    # Compositing it with the master using an imperfect mask resurrected hair,
+    # floating fingers and sleeves. Never reintroduce master pixels here.
+    with Image.open(source) as clean_image:
+        if clean_image.size!=SIZE:
+            raise ValueError('Background limpo com dimensoes invalidas')
+        if clean_image.mode!='RGB':
+            buffer=io.BytesIO()
+            clean_image.convert('RGB').save(buffer,format='PNG',optimize=True)
+            atomic(bg,buffer.getvalue())
+        else:
+            atomic(bg,source.read_bytes())
+    print(f'[FUNDO] {scene["id"]}: cenário limpo usado diretamente '
+          '(sem remontagem com a master).',flush=True)
     comp=compare(master,bg,fg,d/'comparacao.jpg')
     mask_alerts=[] if clean_reference else background_mask_warnings(d,mask)
     if mask_alerts:
@@ -353,6 +413,8 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
               flush=True)
     result={'version':'master-derived-v2','episode':ep['id'],'scene':scene['id'],
             'background_source':str(clean_reference) if clean_reference else 'inpainting',
+            'background_compositing':'clean-direct',
+            'foreground_offset':{'x':offset_x,'y':offset_y},
             'warnings':mask_alerts,
             'subject':scene['subject'],'alpha':report,'composition':comp,
             'status':'aguardando_revisao_visual','files':{

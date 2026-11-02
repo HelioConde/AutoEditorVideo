@@ -89,3 +89,38 @@ O reparo consome no maximo uma nova chamada de edicao por cena, preserva a maste
 O `qa.json` passou a registrar `warnings` de mascara obsoleta ou sem historico (`background_sem_registro_de_mascara`). Isso e esperado no primeiro processamento de caches antigos. Novos reparos gravam a assinatura `background-raw-mask.sha256` e avisam caso a mascara mude. Esse aviso nao significa que houve nova cobranca. A imagem `diferencas.jpg` ajuda a localizar areas onde a composicao diverge da master; ela nao substitui a revisao humana.
 
 Revise `comparacao.jpg` e `diferencas.jpg` antes de renderizar. Nao ha upload automatico.
+
+
+## Composição 2.5D com fundo limpo e foreground alinhado
+
+**Regra atualizada:** o `background.png` passa a usar diretamente o fundo
+`background-normalized.png` (ou um `background-clean.png` aprovado e alinhado),
+sem misturar pixels da master via `background-mask.png`. A mistura anterior
+recolocava fragmentos de cabelo, braço e mão na sala já reconstruída pela IA.
+
+A máscara continua existindo, mas serve **somente para solicitar a remoção dos
+personagens pela IA**. A camada para reprodução `foreground.png` pode receber
+um deslocamento independente, enquanto `foreground-normalized.png` e o
+`foreground-raw.png` preservam o recorte sem ajuste.
+
+Na cena 06 do episódio `003-death-note-xadrez`, foi aprovado o deslocamento
+**x=0, y=-211 pixels** para o cache **06-594007f1c10bb8**, reproduzindo o
+alinhamento feito no Photoshop. Os ajustes ficam em
+`configs/foreground-placements.json` e exigem correspondência **exata**
+entre episódio e diretório/hash da cena. Outros caches/modelos não herdam o
+deslocamento por engano. Para outras cenas, ajuste os valores em pixels originais
+de **1024×1536**, com `x` positivo para a direita e `y` positivo para baixo.
+
+Para reprocessar e conferir a cena sem custo de IA:
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 6 -MaxChamadas 0 -Offline
+```
+
+O processo preserva os três arquivos `*-raw.png`, aplica o deslocamento,
+gera `background.png`, `foreground.png`, `comparacao.jpg` e
+`diferencas.jpg`, atualizando o QA com `background_compositing=clean-direct`
+e `foreground_offset`. Se o hash atual for diferente de
+`06-594007f1c10bb8`, use `-DiagnosticarCache` antes de mudar a configuração.
+Confirme visualmente o resultado; um foreground redesenhado pela IA pode não
+coincidir totalmente com a master, apesar do alinhamento.
