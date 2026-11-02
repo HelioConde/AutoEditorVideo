@@ -1,0 +1,26 @@
+name: Rig2D — PowerShell 5.1
+on:
+  pull_request:
+    paths:
+      - 'gerar-shorts-master.ps1'
+      - 'tests/test-rig2d-switches.ps1'
+      - '.github/workflows/rig2d-powershell.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'gerar-shorts-master.ps1'
+      - 'tests/test-rig2d-switches.ps1'
+      - '.github/workflows/rig2d-powershell.yml'
+permissions:
+  contents: read
+jobs:
+  validate-native-windows:
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Smoke test no Windows PowerShell 5.1
+        shell: powershell
+        run: |
+          $PSVersionTable.PSVersion.ToString()
+          .\tests\test-rig2d-switches.ps1

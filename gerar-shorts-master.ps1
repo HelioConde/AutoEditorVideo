@@ -48,9 +48,14 @@ if($AprovarRig2D -and (-not $PSBoundParameters.ContainsKey('Motivo') -or
                          -not $Motivo.Trim())){
   throw '-AprovarRig2D precisa de -Motivo explicito depois da revisao manual dos frames.'
 }
-$rigOperations=@([int]$PrepararRig2D,[int][bool]$ImportarQuadrosRig2D,[int]$AprovarRig2D)
-if(($rigOperations | Measure-Object -Sum).Sum -gt 1){throw 'Escolha apenas uma operacao Rig2D por vez.'}
-if((($rigOperations | Measure-Object -Sum).Sum -gt 0) -and ($Renderizar -or $CriarVoz -or $TodasCenas -or $SomenteCapa -or $PrepararReprovadas)){
+# SwitchParameter (True/False) nao aceita [int] diretamente no Windows PowerShell 5.1.
+# Conte operacoes por condicoes logicas, sem conversoes numericas de switches.
+$rigOperationCount=0
+if($PrepararRig2D.IsPresent){$rigOperationCount++}
+if(-not [string]::IsNullOrWhiteSpace($ImportarQuadrosRig2D)){$rigOperationCount++}
+if($AprovarRig2D.IsPresent){$rigOperationCount++}
+if($rigOperationCount -gt 1){throw 'Escolha apenas uma operacao Rig2D por vez.'}
+if($rigOperationCount -gt 0 -and ($Renderizar -or $CriarVoz -or $TodasCenas -or $SomenteCapa -or $PrepararReprovadas)){
   throw 'Preparar/importar/aprovar Rig2D exige uma cena e nao renderiza no mesmo comando.'
 }
 if($AprovarMulticamadas -and ($ReprovarCena -or $AprovarCena -or $PrepararReprovadas -or $Renderizar -or $SomenteCapa -or $TodasCenas)){
