@@ -180,7 +180,7 @@ def estimate(ep:dict,scenes:list[dict],model:str,*,existing_master:Path|None=Non
     pending=[]
     for s in scenes:
         d=scene_dir(ep,s,model)
-        if not (d/'master.png').is_file() and existing_master is None:pending.append(s['id']+'/master')
+        if not (d/'master.png').is_file() and not (d/'master-raw.png').is_file() and existing_master is None:pending.append(s['id']+'/master')
         if not (d/'foreground-raw.png').is_file():pending.append(s['id']+'/foreground')
         if not (d/'background-raw.png').is_file():pending.append(s['id']+'/background')
     return pending
@@ -202,9 +202,15 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
                 if im.size!=SIZE:raise ValueError('Master importada precisa ter 1024x1536')
                 im.convert('RGB').save(master,'PNG')
         else:
-            if offline or generate is None:raise RuntimeError('Master não existe e geração por IA não está autorizada')
-            content=generate(master_prompt(ep,scene),model)
-            validate_image(content,alpha=False);atomic(master,content)
+            raw_master=d/'master-raw.png'
+            if raw_master.is_file():
+                content=raw_master.read_bytes()
+            else:
+                if offline or generate is None:raise RuntimeError('Master não existe e geração por IA não está autorizada')
+                content=generate(master_prompt(ep,scene),model)
+                atomic(raw_master,content)  # Preservar resposta paga mesmo se o formato estiver errado.
+            validate_image(content,alpha=False)
+            atomic(master,content)
     validate_image(master.read_bytes(),alpha=False)
     if not fg_raw.exists():
         if offline or edit is None:raise RuntimeError('Foreground ausente no cache; não gerar em offline')

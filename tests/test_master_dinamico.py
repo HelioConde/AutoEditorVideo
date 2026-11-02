@@ -98,3 +98,14 @@ def test_no_upload_or_background_requests_during_planning():
         content=(ROOT/'scripts'/name).read_text(encoding='utf-8')
         assert 'youtube.videos().insert' not in content
         assert 'publishAt' not in content
+
+
+def test_invalid_paid_master_is_preserved(tmp_path):
+    ep=s.build_storyboard(s.select_episode('003-death-note-xadrez'),max_hold=12)
+    shot=ep['scenes'][0]
+    jpeg=io.BytesIO()
+    Image.new('RGB',m.SIZE,'blue').save(jpeg,'JPEG')
+    def generate(prompt,model):return jpeg.getvalue()
+    with pytest.raises(ValueError,match='PNG'):
+        m.execute_scene(ep,shot,'gpt-image-1.5',directory=tmp_path,generate=generate)
+    assert (tmp_path/'master-raw.png').read_bytes()==jpeg.getvalue()
