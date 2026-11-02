@@ -8,6 +8,19 @@
 > anterior permanece integralmente na branch
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
+## Painel Shorts Studio (Windows)
+
+Para controlar o gerador de cenas por botões, acompanhar logs e verificar o
+Codex Proxy sem gerar imagens:
+
+```powershell
+.\abrir-shorts-studio.ps1
+```
+
+O painel roda apenas em `127.0.0.1` no seu computador. Ele identifica quando
+o storyboard mudou de hash e lista caches antigos sem confundir isso com
+créditos ou desconexão. Consulte [o guia Shorts Studio](docs/SHORTS-STUDIO.md).
+
 ## O que este projeto faz
 
 - **Radar de pautas**: 14 temas de anime e fila editorial diversa, com ganchos revisáveis;
