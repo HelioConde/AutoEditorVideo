@@ -218,20 +218,37 @@ def background_prompt()->str:
             'original 1024x1536 canvas.')
 
 
-def make_mask(fg:Path,target:Path)->None:
-    with Image.open(fg) as im:
-        alpha=im.getchannel('A')
-    # Binary closure catches narrow holes between strands/fingers before a wider dilation.
+def mask_png(fg:Path)->bytes:
+    """Build the removal mask in memory without touching any cached mask file.
+
+    Cached backgrounds need this only for QA/clean-plate matching; Windows may
+    reject overwriting background-mask.png if it is held open in another app.
+    """
+    with Image.open(fg) as source:
+        source.load()
+        if source.size!=SIZE or 'A' not in source.getbands():
+            raise ValueError('Foreground invalido para gerar mascara de fundo')
+        alpha=source.getchannel('A')
     solid=alpha.point(lambda v:255 if v>20 else 0)
     closed=solid.filter(ImageFilter.MaxFilter(11)).filter(ImageFilter.MinFilter(11))
     dilated=closed.filter(ImageFilter.MaxFilter(61))
     inv=ImageOps.invert(dilated.filter(ImageFilter.GaussianBlur(2)))
-    im=Image.new('RGBA',SIZE,(0,0,0,0));im.putalpha(inv)
-    im.save(target,'PNG',optimize=True)
-    if target.stat().st_size>=4_000_000:raise ValueError('Máscara de fundo acima do limite de 4MB')
+    output=Image.new('RGBA',SIZE,(0,0,0,0))
+    output.putalpha(inv)
+    buffer=io.BytesIO()
+    output.save(buffer,format='PNG',optimize=True)
+    blob=buffer.getvalue()
+    if len(blob)>=4_000_000:
+        raise ValueError('Máscara de fundo acima do limite de 4MB')
+    return blob
 
 
-def find_clean_background(master:Path,mask:Path,directory:Path)->Path|None:
+def make_mask(fg:Path,target:Path)->None:
+    """Write only when an AI background edit requires a mask on disk."""
+    atomic(target,mask_png(fg))
+
+
+def find_clean_background(master:Path,mask:Path|bytes,directory:Path)->Path|None:
     """Use only deliberately approved clean plates at compatible camera positions.
 
     A generated background.png may still contain isolated hair or hands. Do not
@@ -239,7 +256,8 @@ def find_clean_background(master:Path,mask:Path,directory:Path)->Path|None:
     """
     import numpy as np
     sample=(128,192)
-    with Image.open(master) as original, Image.open(mask) as mask_image:
+    mask_input=io.BytesIO(mask) if isinstance(mask,bytes) else mask
+    with Image.open(master) as original, Image.open(mask_input) as mask_image:
         base=np.asarray(original.convert('RGB').resize(sample),dtype=np.int16)
         keep=np.asarray(mask_image.getchannel('A').resize(sample),dtype=np.uint8)>245
     # Exclude letterbox black: matching empty margins proves nothing about geometry.
@@ -273,11 +291,11 @@ def find_clean_background(master:Path,mask:Path,directory:Path)->Path|None:
     return best
 
 
-def mask_fingerprint(mask:Path)->str:
-    return hashlib.sha256(mask.read_bytes()).hexdigest()
+def mask_fingerprint(mask:Path|bytes)->str:
+    return hashlib.sha256(mask if isinstance(mask,bytes) else mask.read_bytes()).hexdigest()
 
 
-def background_mask_warnings(directory:Path,mask:Path)->list[str]:
+def background_mask_warnings(directory:Path,mask:Path|bytes)->list[str]:
     """Report when a paid edit was produced using a different/unknown mask."""
     record=directory/'background-raw-mask.sha256'
     if not record.is_file():
@@ -406,9 +424,23 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     validate_image(normalized_fg,alpha=True)
     fg_normalized=d/'foreground-normalized.png'
     atomic(fg_normalized,normalized_fg)
-    # The inpainting mask must use the original master coordinates, NOT the
-    # foreground's final animation/Photoshop positioning adjustment.
-    make_mask(fg_normalized,mask)
+    # Generate the source-coordinate mask in memory. Do not touch a cached
+    # background-mask.png when only composing/reviewing existing paid assets:
+    # overwriting a Windows-open file can fail with [Errno 22].
+    needs_background_edit=repair_background or not bg_raw.exists()
+    mask_content=mask_png(fg_normalized)
+    if needs_background_edit:
+        try:
+            atomic(mask,mask_content)
+        except OSError as exc:
+            raise OSError(
+                f'Nao foi possivel atualizar {mask.name} para editar o fundo. '
+                'Feche Photoshop/visualizadores ou remova o bloqueio do arquivo '
+                'e tente novamente; os arquivos raw foram preservados.'
+            ) from exc
+    else:
+        print(f'[MASCARA] {scene["id"]}: calculada em memoria; '
+              'arquivo em disco preservado (cache existente).',flush=True)
     offset_x,offset_y=foreground_placement(ep,d)
     placed_foreground=reposition_foreground(normalized_fg,offset_x,offset_y)
     report=validate_image(placed_foreground,alpha=True)
@@ -416,7 +448,7 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     if offset_x or offset_y:
         print(f'[POSICIONAMENTO] {scene["id"]}: foreground deslocado '
               f'x={offset_x}, y={offset_y} px (raw preservado).',flush=True)
-    if repair_background or not bg_raw.exists():
+    if needs_background_edit:
         if offline or edit is None:
             raise RuntimeError('Background ausente ou reparo solicitado em modo offline')
         content=edit(master,background_prompt(),model,transparent=False,mask=mask)
@@ -435,7 +467,7 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     validate_image(normalized_bg,alpha=False)
     working_bg=d/'background-normalized.png'
     atomic(working_bg,normalized_bg)
-    clean_reference=find_clean_background(master,mask,d)
+    clean_reference=find_clean_background(master,mask_content,d)
     source=clean_reference or working_bg
     # The inpainted clean plate is already the desired final scene background.
     # Compositing it with the master using an imperfect mask resurrected hair,
@@ -452,7 +484,7 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     print(f'[FUNDO] {scene["id"]}: cenário limpo usado diretamente '
           '(sem remontagem com a master).',flush=True)
     comp=compare(master,bg,fg,d/'comparacao.jpg')
-    mask_alerts=[] if clean_reference else background_mask_warnings(d,mask)
+    mask_alerts=[] if clean_reference else background_mask_warnings(d,mask_content)
     if mask_alerts:
         print('[QA AVISO] '+scene['id']+': '+', '.join(mask_alerts)+
               '. Use -RepararFundo para nova edicao com a mascara atual.',
