@@ -1,11 +1,25 @@
 {
   "schema": "arquivo-otaku/foreground-placements/v1",
-  "description": "Ajustes locais em pixels de 1024x1536; aplicados somente ao hash exato da cena. Raw sempre preservado.",
+  "description": "Ajustes de exibição em pixels do canvas 1024x1536. x/y/scale só afetam foreground.png; raw, máscara e fundo limpo permanecem intactos. Regra exata por hash tem prioridade sobre regra por episódio/modelo/cena.",
   "placements": {
     "003-death-note-xadrez/06-594007f1c10bb8": {
       "x": 0,
       "y": -211,
       "note": "Alinhamento do foreground para corresponder a referencia manual no Photoshop; fundo limpo direto"
+    }
+  },
+  "scene_defaults": {
+    "003-death-note-xadrez/gpt-image-1.5/01": {
+      "scale": 1.03,
+      "x": -4,
+      "y": -15,
+      "note": "Ajustado pela imagem 3 enviada: ampliação visual leve e reposicionamento vertical; validar visualmente no Windows."
+    },
+    "003-death-note-xadrez/gpt-image-1.5/05": {
+      "scale": 1.1,
+      "x": -25,
+      "y": -88,
+      "note": "Ajustado pela imagem 6 enviada: aumentar personagens cerca de 10% e subir cerca de 88 px; validar visualmente no Windows."
     }
   }
 }
