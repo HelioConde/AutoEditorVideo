@@ -9,7 +9,8 @@ pytest.importorskip('numpy')
 Image = pytest.importorskip('PIL.Image')
 ImageDraw = pytest.importorskip('PIL.ImageDraw')
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
-from master_scenes import SIZE, estimate, execute_scene, find_clean_background, make_mask
+from master_scenes import (SIZE, estimate, execute_scene, find_clean_background,
+                           make_mask, background_mask_warnings, mask_fingerprint)
 
 
 def as_png(im):
@@ -48,7 +49,11 @@ def test_clean_background_requires_matching_camera(tmp_path):
     ImageDraw.Draw(mask).rectangle((325, 425, 695, 1175), fill=(0, 0, 0, 0))
     mask_path = current / 'background-mask.png'
     mask_path.write_bytes(as_png(mask))
-    plate = candidate / 'background.png'
+    # Generated backgrounds are NOT clean/approved by default.
+    unapproved = candidate / 'background.png'
+    unapproved.write_bytes(as_png(clean))
+    assert find_clean_background(master, mask_path, current) is None
+    plate = candidate / 'background-clean.png'
     plate.write_bytes(as_png(clean))
     assert find_clean_background(master, mask_path, current) == plate
     plate.write_bytes(as_png(Image.new('RGB', SIZE, (40, 40, 40))))
@@ -82,6 +87,9 @@ def test_repair_background_preserves_raw_backup(tmp_path):
     assert len(backups) == 1
     assert backups[0].read_bytes() == old
     assert (folder / 'background-raw.png').read_bytes() == replacement
+    assert (folder / 'background-raw-mask.sha256').read_text().strip() == mask_fingerprint(
+        folder / 'background-mask.png')
+    assert result['warnings'] == []
     assert result['background_source'] == 'inpainting'
     assert (folder / 'qa.json').is_file()
 
@@ -98,3 +106,26 @@ def test_estimate_counts_only_requested_background_repair(monkeypatch, tmp_path)
         (folder / name).write_bytes(b'existing')
     assert estimate(ep, [scene], 'gpt-image-1.5') == []
     assert estimate(ep, [scene], 'gpt-image-1.5', repair_background=True) == ['01/background-repair']
+
+
+def test_old_background_without_mask_record_is_flagged(tmp_path):
+    mask = tmp_path / 'background-mask.png'
+    mask.write_bytes(b'mask-1')
+    assert background_mask_warnings(tmp_path, mask) == ['background_sem_registro_de_mascara']
+    (tmp_path / 'background-raw-mask.sha256').write_text(mask_fingerprint(mask)+'\\n')
+    assert background_mask_warnings(tmp_path, mask) == []
+    mask.write_bytes(b'mask-2')
+    assert background_mask_warnings(tmp_path, mask) == ['background_gerado_com_mascara_diferente']
+
+
+def test_previously_approved_clean_plate_is_not_taken_from_another_camera(tmp_path):
+    scenes = tmp_path / 'master-scenes'
+    target = scenes / '05'
+    other = scenes / '04'
+    target.mkdir(parents=True)
+    other.mkdir(parents=True)
+    Image.new('RGB', SIZE, (180, 100, 80)).save(target / 'master.png')
+    Image.new('RGBA', SIZE, (0, 0, 0, 255)).save(target / 'background-mask.png')
+    Image.new('RGB', SIZE, (40, 120, 190)).save(other / 'background-clean.png')
+    assert find_clean_background(target / 'master.png',
+                                 target / 'background-mask.png', target) is None
