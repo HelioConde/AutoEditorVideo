@@ -1,0 +1,28 @@
+name: Remotion — compilação TypeScript
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'motion-remotion/**'
+      - '.github/workflows/remotion-typecheck.yml'
+  pull_request:
+    paths:
+      - 'motion-remotion/**'
+      - '.github/workflows/remotion-typecheck.yml'
+permissions:
+  contents: read
+jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependências sem executar geração
+        working-directory: motion-remotion
+        run: npm install --no-audit --no-fund
+      - name: Verificar TypeScript do motor
+        working-directory: motion-remotion
+        run: npx tsc --noEmit --project tsconfig.json
