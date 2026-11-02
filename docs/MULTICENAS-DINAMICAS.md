@@ -66,3 +66,20 @@ Não existe upload automático. O MP4 final, a capa e o relatório de QA são pr
 - A montagem produz uma prévia final com relatório, não uma aprovação visual automática.
 
 Documentação de terceiros: https://developers.openai.com/api/reference/resources/images/methods/edit e https://www.remotion.dev/docs/cli/render
+
+
+## Correcao de residuos de cabelo e maos no background
+
+A mascara de personagens foi reforcada. O gerador pode reaproveitar uma imagem de fundo limpa de outro enquadramento somente quando a geometria da camera corresponder. Para reprocessar a composicao usando apenas cache:
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 6 -MaxChamadas 0 -Offline
+```
+
+Se ainda houver residuos no background, use reparo de fundo na cena escolhida:
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 6 -RepararFundo -MaxChamadas 1
+```
+
+O reparo consome no maximo uma nova chamada de edicao por cena, preserva a master e o foreground em cache e faz backup do background raw anterior. Revise a comparacao visual antes de renderizar. Nao ha upload automatico.
