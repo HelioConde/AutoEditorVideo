@@ -9,3 +9,25 @@ test-results/
 .env.*
 !.env.example
 *.log
+
+# Arquivo Otaku - nao versionar segredos, imagens, videos ou ambientes
+.secrets/
+**/youtube-token.json
+**/youtube-oauth-client.json
+**/credentials.json
+.mpt-runtime/
+.g4f-venv/
+.venv/
+chatgpt-codex-proxy/
+assets/gerados/
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.png
+*.jpg
+*.jpeg
+*.webp
+__pycache__/
+.pytest_cache/
