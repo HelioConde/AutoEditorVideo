@@ -24,6 +24,40 @@ Ele deixa de replanejar automaticamente a cada execução, mantendo os mesmos ha
 .\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 6 -DiagnosticarCache -MaxChamadas 0
 ```
 
+
+### Solução para a cena 06 depois da correção no Photoshop
+
+A cena 06 do episódio `003-death-note-xadrez`, gerada com `gpt-image-1.5`,
+tem a versão revisada e preservada em `06-594007f1c10bb8`. O storyboard
+fixado posteriormente passou a procurar outro hash, embora o cache original
+estivesse salvo no Windows.
+
+O arquivo versionado `configs/scene-cache-pins.json` **seleciona
+explicitamente** essa pasta de cache para essa única combinação
+episódio + modelo + cena. Isso não copia, apaga, renomeia nem sincroniza
+imagens para o GitHub. O vínculo também preserva o ajuste `y=-211`
+definido em `configs/foreground-placements.json`.
+
+Depois de `git pull origin main`, execute:
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 6 -Modelo gpt-image-1.5 -DiagnosticarCache -MaxChamadas 0
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 6 -Modelo gpt-image-1.5 -MaxChamadas 0 -Offline
+```
+
+O diagnóstico deve mostrar `[SELECAO EXPLICITA]` e a execução deve
+mostrar `[CACHE FIXADO] 06: 06-594007f1c10bb8`. Se essa pasta foi
+movida ou não está completa, o programa **para antes de solicitar novas
+imagens** e informa os arquivos ausentes. Confirme que o
+`qa.json` da pasta corresponde ao episódio e à cena, sem editar nem
+transferir indiscriminadamente imagens de versões diferentes.
+
+Para outra cena ou modelo, não será aplicado esse pin. Para selecionar
+outra versão intencionalmente, revise `configs/scene-cache-pins.json`;
+nunca use o mesmo pin para modelos diferentes sem conferir a origem.
+O renderizador Remotion agora lê o mesmo storyboard fixado que o
+gerador, evitando divergência entre os passos.
+
 ## Conexão do Codex Proxy ≠ limite de chamadas
 
 ```powershell
