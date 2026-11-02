@@ -25,6 +25,7 @@ from roteiro_para_storyboard import select_episode, save_plan
 from narracao_shorts import ensure_voice
 from renderizar_com_remotion import audio_duration,captions_from_ass
 from capa_cinematografica import cover_options, render_cover
+from qa_foreground_fidelity import foreground_fidelity
 
 
 def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
@@ -42,10 +43,25 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
         report=json.loads(qa.read_text(encoding='utf-8'))
         if report.get('status')!='aguardando_revisao_visual':
             raise ValueError('Enquadramento sem relatório de extração válido')
+        # Recheck even old QA files: a previously cached scene may have been
+        # produced before the source-consistency test existed.
+        source=folder/'foreground-normalized.png'
+        if not source.is_file():
+            source=folder/'foreground-raw.png'
+        if not source.is_file():
+            source=paths['foreground']
+        fidelity=foreground_fidelity(paths['master'],source)
+        safe_2d=bool(fidelity.get('review_required') or fidelity['redrawn'])
         if report.get('warnings'):
             print(f"[QA AVISO] Cena {scene['id']}: {', '.join(report['warnings'])}. "
                   'Confira o background antes de publicar.')
-        verified.append({'scene':scene,'folder':folder,'files':paths,'qa':report})
+        if safe_2d:
+            print(f"[QA PROTECAO] Cena {scene['id']}: foreground redesenhado ou "
+                  'inconclusivo. Renderizando a master original como imagem '
+                  'inteira, sem recompor corpo/tabuleiro. Nenhuma IA usada.')
+        verified.append({'scene':scene,'folder':folder,'files':paths,
+                         'qa':report,'fidelity':fidelity,
+                         'render_mode':'master_static' if safe_2d else '2_5d'})
     return verified
 
 
@@ -74,9 +90,20 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
     for entry,(start,end) in zip(entries,bounds):
         scene=entry['scene']
         stem='scene-'+scene['id']
-        for kind in ('foreground','background'):
-            shutil.copy2(entry['files'][kind],target/f'{stem}-{kind}.png')
+        if entry['render_mode']=='master_static':
+            # A wrongly redrawn alpha layer may cover furniture and chess
+            # pieces. Use the ORIGINAL master as a single still image.
+            shutil.copy2(entry['files']['master'],target/f'{stem}-background.png')
+            with Image.open(entry['files']['master']) as source:
+                canvas=source.size
+            Image.new('RGBA',canvas,(0,0,0,0)).save(
+                target/f'{stem}-foreground.png',format='PNG')
+        else:
+            for kind in ('foreground','background'):
+                shutil.copy2(entry['files'][kind],target/f'{stem}-{kind}.png')
         scenes.append({'id':scene['id'],'subject':scene['subject'],
+                       'renderMode':entry['render_mode'],
+                       'foregroundQA':entry['fidelity'],
                        'startFrame':start,'endFrame':end,
                        'background':f'generated/{ep["id"]}/{stem}-background.png',
                        'foreground':f'generated/{ep["id"]}/{stem}-foreground.png',
@@ -105,9 +132,22 @@ def cover_from_master(ep:dict,model:str,destination:Path)->dict:
     if background.is_file() and foreground.is_file():
         validate_image(background.read_bytes(),alpha=False)
         validate_image(foreground.read_bytes(),alpha=True)
-        with Image.open(background) as bg, Image.open(foreground) as fg:
-            source=Image.alpha_composite(bg.convert('RGBA'),fg.convert('RGBA')).convert('RGB')
-        source_type='background+foreground'
+        unshifted=folder/'foreground-normalized.png'
+        if not unshifted.is_file():
+            unshifted=folder/'foreground-raw.png'
+        if not unshifted.is_file():
+            unshifted=foreground
+        fidelity=foreground_fidelity(master,unshifted)
+        if fidelity.get('review_required') or fidelity['redrawn']:
+            with Image.open(master) as im:
+                source=im.convert('RGB')
+            source_type='master-static-qa'
+            print(f'[CAPA PROTECAO] Cena {chosen}: extração redesenhada; '
+                  'usando imagem original completa.',flush=True)
+        else:
+            with Image.open(background) as bg, Image.open(foreground) as fg:
+                source=Image.alpha_composite(bg.convert('RGBA'),fg.convert('RGBA')).convert('RGB')
+            source_type='background+foreground'
     elif master.is_file():
         validate_image(master.read_bytes(),alpha=False)
         with Image.open(master) as im:
@@ -188,7 +228,9 @@ def main(argv:list[str]|None=None)->int:
                   'margins':e['qa']['alpha'].get('margin_warning'),
                   'alignment':e['qa']['composition'].get('alignment_warning'),
                   'background_source':e['qa'].get('background_source','desconhecido'),
-                  'background_warnings':e['qa'].get('warnings',[])}
+                  'background_warnings':e['qa'].get('warnings',[]),
+                  'render_mode':e['render_mode'],
+                  'foreground_source_consistency':e['fidelity']}
                   for e in validated]}
     (folder/'qa-master-multicenas.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f'[OK] Short pronto para revisão (NÃO publicado): {output}')
