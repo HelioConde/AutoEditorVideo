@@ -20,7 +20,7 @@ ROOT=Path(__file__).resolve().parents[1]
 HERE=Path(__file__).resolve().parent
 EP_ID=re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 MODELS={'gpt-image-1.5','gpt-image-2'}
-ACTIONS={'planejar','cache','validar','offline','reparar','gerar','render',
+ACTIONS={'planejar','cache','validar','offline','reparar','gerar','render','capa',
          'iniciar_proxy','login_proxy'}
 
 
@@ -67,6 +67,8 @@ def build_command(payload:dict,root:Path=ROOT,python:str|None=None,windows:bool=
         if all_scenes:
             raise ValueError('Reparo de fundo deve ser de uma cena por vez')
         return base+['-RepararFundo','-MaxChamadas','1']
+    if action=='capa':
+        return base+['-SomenteCapa','-MaxChamadas','0']
     if action=='render':
         return base+['-Offline','-MaxChamadas','0','-Renderizar']
     return base+['-MaxChamadas',str(budget)]
