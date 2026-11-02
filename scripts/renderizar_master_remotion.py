@@ -147,7 +147,7 @@ def main(argv:list[str]|None=None)->int:
         cover=folder/f'{ep["id"]}-master-capa.jpg'
         report=cover_from_master(ep,args.modelo,cover)
         (folder/'qa-capa.json').write_text(
-            json.dumps(report,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')
+            json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
         print('[PRONTO] Capa criada offline; nenhum video ou imagem IA gerada.')
         return 0
     validated=validate_scenes(ep,args.modelo)
