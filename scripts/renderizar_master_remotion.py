@@ -154,13 +154,15 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                 transparent=Image.new('RGBA',original.size,(0,0,0,0))
             transparent.save(target/f'{stem}-foreground.png')
             semantic=[]
+            has_hero_prop=any(layer.role=='hero_prop' for layer,_ in multi['layers'])
             for layer,path in multi['layers']:
                 dest=target/f'{stem}-layer-{layer.id}.png'
                 shutil.copy2(path,dest)
                 record={'id':layer.id,'role':layer.role,'z':layer.z,
                     'src':f'generated/{ep["id"]}/{dest.name}',
                     **layer_animation_metrics(path)}
-                if animation_mode=='esqueleto2d' and layer.id in ('l','light'):
+                if (animation_mode=='esqueleto2d' and
+                        layer.id in ('l','light') and not has_hero_prop):
                     rig=approved_frames(entry['folder'],layer.id)
                     if rig is not None:
                         images=[]
@@ -199,9 +201,10 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
         raise ValueError('Modo de animacao desconhecido')
     if animation_mode=='esqueleto2d' and rigs_found==0:
         raise ValueError(
-            'Nenhuma sequencia Rigby2D aprovada. Um corpo RGBA unico nao '
-            'possui ossos nem articulacoes. Prepare partes, exporte os '
-            'frames esqueléticos e importe com rigby2d_bridge.py. '
+            'Nenhuma sequencia Rigby2D aprovada em cena segura. '
+            'Cenas com king_hand/rei estao protegidas contra movimento de '
+            'personagens que desalinhe a peca. Prepare um rig para uma '
+            'cena sem rei, como a 04, usando rigby2d_bridge.py. '
             'MP4 anterior preservado; nenhuma imagem IA consumida.')
     if animation_mode=='esqueleto2d':
         print(f"[RIGBY2D] {rigs_found} sequencias articuladas aprovadas. "
