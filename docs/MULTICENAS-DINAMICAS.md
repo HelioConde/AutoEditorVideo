@@ -678,3 +678,42 @@ nao roda o runtime WebGL do editor dentro do Remotion. Nao executa o
 AutoRig automaticamente porque as partes de corpo atuais nao existem.
 Documentacao do editor:
 https://rigby2d.com/docs/autorig.html
+
+
+## Movimento AUTOMATICO de personagem v2 — sem usar Rigby2D
+
+A tentativa de Rigby2D precisa de recortes anatomicos manuais e nao
+atende ao objetivo de produzir Shorts em lote. O fluxo de producao
+NAO exige Rigby2D, PSD, esqueletos, partes de corpo ou novas
+chamadas de IA. O Remotion usa as camadas de personagem existentes.
+
+Na v1, os 3 presets moviam o personagem menos de um pixel depois
+das atenuacoes de tamanho e da curva de entrada/saida, ficando quase
+imperceptiveis. A v2 eleva amplitudes dentro de limites seguros:
+ultrassutil ate 3.2 px e inclinacao 0.32 grau;
+equilibrado (padrao) ate 6 px e 0.70 grau;
+vivo ate 10 px e 1.14 grau. Os movimentos reais sao reduzidos
+automaticamente para personagens grandes e camadas na frente;
+Light e L usam ritmos diferentes. A animacao acontece na maior
+parte da cena, e retorna a pose aprovada nos extremos.
+
+As transformacoes sao de FIGURA INTEIRA (respiracao, leve balanco
+e ombros), nao uma animacao de olhos ou cabeca separada. Mesa,
+tabuleiro e pecas sao estaticos em coordenadas de cena. Nos
+planos em que rei/mao estao juntos na mesma mascara hero_prop,
+os personagens continuam fixos para evitar deformacao de dedos
+e objetos, mas a camera do plano continua animada.
+
+Executar no PowerShell, com ZERO credito de imagem:
+
+    cd C:\Users\helio\Documents\arquivo-otaku-github
+    git pull origin main
+    .\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar -PerfilPersonagens equilibrado
+
+O MP4 gerado termina em
+-master-multicenas-personagens-v2-equilibrado.mp4, sem sobrescrever
+as versoes anteriores. Troque equilibrado por vivo ou ultrassutil
+para comparar a intensidade. Imagens, voz, legendas e aprovacoes
+existentes sao reutilizadas, sem recorte manual de personagem.
+O modo esqueleto2d anterior permanece opcional em laboratorio,
+nao faz parte do fluxo de producao automatico.
