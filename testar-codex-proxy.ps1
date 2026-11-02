@@ -1,9 +1,9 @@
 # Arquivo Otaku - teste isolado do projeto comunitario 10/chatgpt-codex-proxy.
-# PowerShell 5.1+; comandos: -Acao instalar, login, status, imagem, parar
+# PowerShell 5.1+; comandos: -Acao instalar, iniciar, login, status, imagem, parar
 # O login e um ato explicito do usuario; NUNCA cole tokens em chats.
 [CmdletBinding()]
 param(
-    [ValidateSet('instalar', 'login', 'status', 'imagem', 'parar')]
+    [ValidateSet('instalar', 'iniciar', 'login', 'status', 'imagem', 'parar')]
     [string]$Acao = 'status',
     [ValidateSet('gpt-image-2', 'gpt-image-1.5')]
     [string]$Modelo = 'gpt-image-2',
@@ -119,6 +119,26 @@ function Consultar-Contas {
 }
 
 switch ($Acao) {
+    'iniciar' {
+        Verificar-Comando 'docker'
+        if (-not(Test-Path $composePath) -or -not(Test-Path $envPath)) {
+            throw 'Proxy nao configurado. Use -Acao instalar uma unica vez antes de iniciar.'
+        }
+        $compose = [System.IO.File]::ReadAllText($composePath)
+        $localPort = '- "127.0.0.1:${PORT:-8080}:${PORT:-8080}"'
+        if (-not $compose.Contains($localPort)) {
+            throw 'Porta local do proxy nao validada. Execute -Acao instalar para restringir a 127.0.0.1.'
+        }
+        Confirmar-DockerEngine
+        Push-Location $repoDir
+        try {
+            $codigo = Executar-Nativo -Comando 'docker' -Argumentos @('compose', 'up', '-d')
+            if ($codigo -ne 0) { throw 'Nao foi possivel iniciar o container existente.' }
+        } finally { Pop-Location }
+        Verificar-Servidor
+        Write-Host '[OK] Proxy iniciado. Sessao pode exigir login manual se expirou.'
+        break
+    }
     'instalar' {
         Verificar-Comando 'git'
         Verificar-Comando 'docker'
