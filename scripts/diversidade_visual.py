@@ -9,7 +9,6 @@ from __future__ import annotations
 
 from collections import Counter
 from pathlib import Path
-from PIL import Image, ImageOps, ImageStat
 
 VERSION = "arquivo-otaku/visual-diversity/v1"
 
@@ -149,6 +148,9 @@ def storyboard_warnings(scenes: list[dict]) -> list[dict]:
 
 def image_fingerprint(image: Path) -> tuple[int, list[int]]:
     """Lightweight grayscale perceptual fingerprint, computed offline."""
+    # The storyboard planner needs no third-party packages; import PIL only
+    # when evaluating an image in the generation/QA pipeline.
+    from PIL import Image, ImageOps
     with Image.open(image) as source:
         gray=ImageOps.grayscale(source.convert("RGB"))
         small=list(gray.resize((9,8),Image.Resampling.BILINEAR).getdata())
