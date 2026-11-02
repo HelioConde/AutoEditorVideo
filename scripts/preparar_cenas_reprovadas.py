@@ -51,17 +51,24 @@ def prepare_rejected(ep_id:str,model:str,*,plan:Path|None=None)->dict:
             raise ValueError(
                 f"Cena {scene['id']}: cache fixado manualmente em config. "
                 'Desvincule esse pin explicitamente antes de preparar uma nova versao.')
-        if scene.get('correcao_visual',{}).get('schema')==REVISION_SCHEMA:
-            # This also safeguards malformed manual edits to an existing draft:
-            # no repeated auto-append to a prompt of a reviewed revision.
-            raise ValueError(f"Cena {scene['id']} ja tem revisao visual no storyboard; "
-                             'revise seu cache e nao prepare novamente por cima dela.')
+        old_revision=scene.get('correcao_visual') or {}
+        if old_revision and old_revision.get('schema')!=REVISION_SCHEMA:
+            raise ValueError(f"Cena {scene['id']}: versao de revisao desconhecida")
+        take=int(old_revision.get('take',1))+1
+        if not 2<=take<=15:
+            raise ValueError(f"Cena {scene['id']}: limite de 15 tentativas atingido; "
+                             'exige revisao manual da direcao visual.')
         proposal=dict(scene)
-        proposal['prompt']=scene['prompt'].rstrip()+'\n'+SAFETY_APPENDIX
+        # Strip the former correction suffix so repeated rejected attempts do
+        # not accumulate contradictory prompt instructions.
+        base_prompt=scene['prompt'].split('\nVISUAL REGENERATION / TAKE ',1)[0]
+        appendix=SAFETY_APPENDIX.replace('TAKE 2',f'TAKE {take}',1)
+        proposal['prompt']=base_prompt.rstrip()+'\n'+appendix
         proposal['correcao_visual']={
             'schema':REVISION_SCHEMA,
             'source_cache':previous.name,
             'review_reason':review.get('reason',''),
+            'take':take,
             'status':'nova_imagem_pendente',
             'requires_manual_approval':True,
         }
