@@ -16,6 +16,7 @@ param(
   [switch]$DiagnosticarCache,
   [switch]$StatusCodex,
   [switch]$Replanejar,
+  [switch]$SomenteCapa,
   [switch]$Renderizar,
   [switch]$CriarVoz,
   [switch]$Offline
@@ -24,6 +25,9 @@ $ErrorActionPreference='Stop'
 $env:PYTHONUNBUFFERED='1' # Enviar log ao Studio em tempo real.
 $root=$PSScriptRoot
 $py=Join-Path $root '.venv\Scripts\python.exe'
+if($SomenteCapa -and ($Renderizar -or $CriarVoz)){
+  throw '-SomenteCapa nao pode ser combinado com -Renderizar ou -CriarVoz.'
+}
 if($Renderizar -and -not $TodasCenas){ throw 'Para renderizar o Short inteiro, use -TodasCenas.' }
 if($MasterExistente -and $TodasCenas){ throw '-MasterExistente somente com uma cena.' }
 if($CriarVoz -and $Offline){ throw 'Nao e possivel gerar voz em modo offline.' }
@@ -106,6 +110,16 @@ if($Renderizar){
 $oldEnv=Join-Path $root '..\arquivo-otaku-kit\chatgpt-codex-proxy\.env'
 if((Test-Path $oldEnv) -and -not (Test-Path (Join-Path $root 'chatgpt-codex-proxy\.env'))){
   $env:ARQUIVO_OTAKU_PROXY_ENV=$oldEnv
+}
+if($SomenteCapa){
+  $capaArgs=@((Join-Path $root 'scripts\renderizar_master_remotion.py'),
+    '--id',$Id,'--modelo',$Modelo,'--somente-capa',
+    '--max-segundos-por-plano',$MaxSegundosPorPlano.ToString([cultureinfo]::InvariantCulture))
+  if($Plano){$capaArgs+=@('--plano',$Plano)}
+  & $py @capaArgs
+  if($LASTEXITCODE -ne 0){throw 'Falhou ao criar capa local. Imagens originais preservadas.'}
+  Write-Host '[OK] Capa premium gerada com cache local, sem IA ou upload.'
+  return
 }
 $script=Join-Path $root 'scripts\master_scenes.py'
 $argsList=@($script,'--id',$Id,'--cena',[string]$Cena,'--modelo',$Modelo,

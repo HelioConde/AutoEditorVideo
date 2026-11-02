@@ -143,3 +143,45 @@ Abra `comparacao.jpg` de cada cena no cache e verifique as bordas
 laterais antes de renderizar. Se a referência pedir ajustes finos,
 edite x/y/scale em `configs/foreground-placements.json` e execute
 os mesmos comandos: não há necessidade de chamadas adicionais à IA.
+
+
+## Novo padrão de capas cinematográficas (YouTube Shorts)
+
+O estilo `duelo-cinematografico` agora é o padrão para todas as capas criadas
+pelo fluxo `renderizar_master_remotion.py`. Ele segue a referência aprovada:
+retrato vertical **1080×1920**, personagens em enquadramento aproximado,
+contraste azul/vermelho, título editorial **branco, centralizado, grande e
+distribuído em duas ou três linhas**, regras luminosas finas e gradiente escuro
+suave. Não há mais grandes faixas pretas vazias nem a caixa retangular antiga.
+
+O algoritmo é **local e determinístico**, sem chamadas de imagem IA: compõe
+`background.png` e `foreground.png` já produzidos; se faltar uma dessas
+camadas, utiliza `master.png` da cena escolhida com um aviso. Ele pode
+aproximar/cortar a arte, mas **não cria expressões ou poses novas** como um
+editor generativo. Antes de publicar, confira se os rostos não foram cortados.
+
+As opções para cada episódio ficam em `configs/cover-design.json`.
+O exemplo `003-death-note-xadrez` usa a cena 06 e o título
+`XEQUE-MATE MENTAL`. Outros episódios herdam o estilo, mas usam a primeira
+cena e seu próprio gancho editorial, até uma escolha específica ser definida.
+Não envie imagens originais nem caches ao GitHub.
+
+### Recriar apenas a capa, sem renderizar vídeo ou gastar IA
+
+```powershell
+cd C:\Users\helio\Documents\arquivo-otaku-github
+git pull origin main
+
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Modelo gpt-image-1.5 -SomenteCapa -MaxChamadas 0
+```
+
+O arquivo final será
+`assets/gerados/shorts-animados/003-death-note-xadrez/003-death-note-xadrez-master-capa.jpg`;
+o relatório do layout será `qa-capa.json`. A opção **Gerar capa premium (0 IA)**
+também aparece no Shorts Studio. Renderizações futuras do Short usam esse
+mesmo padrão automaticamente.
+
+Valores como `zoom`, `focus_x`, `focus_y`, `scene` e `title` podem
+ser ajustados no JSON e testados com o mesmo comando de capa, sem refazer
+as imagens e sem gastar novas chamadas.
+

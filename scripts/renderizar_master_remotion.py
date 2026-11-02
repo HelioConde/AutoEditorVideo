@@ -13,7 +13,7 @@ import re
 import shutil
 import subprocess
 import sys
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 
 ROOT=Path(__file__).resolve().parents[1]
 MOTION=ROOT/'motion-remotion'
@@ -24,6 +24,7 @@ from master_scenes import read_storyboard,scene_dir,validate_image,production_st
 from roteiro_para_storyboard import select_episode, save_plan
 from narracao_shorts import ensure_voice
 from renderizar_com_remotion import audio_duration,captions_from_ass
+from capa_cinematografica import cover_options, render_cover
 
 
 def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
@@ -86,27 +87,43 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
             'scenes':scenes,'captions':captions,'hook':parent.get('cover','')}
 
 
-def cover_from_master(ep:dict,model:str,destination:Path)->None:
-    first=scene_dir(ep,ep['scenes'][0],model)/'master.png'
-    with Image.open(first) as im:
-        canvas=im.convert('RGB').resize((1080,1620),Image.Resampling.LANCZOS)
-    frame=Image.new('RGB',(1080,1920),'#0a0b14')
-    frame.paste(canvas,(0,145))
-    layer=Image.new('RGBA',frame.size,(0,0,0,0))
-    drawer=ImageDraw.Draw(layer)
-    drawer.rounded_rectangle((60,120,1020,310),radius=24,fill=(5,7,14,215))
-    label=select_episode(ep['id']).get('cover','ARQUIVO OTAKU')
-    try:
-        family='C:/Windows/Fonts/arialbd.ttf'
-        if not Path(family).exists():family='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
-        font=ImageFont.truetype(family,64)
-    except OSError:
-        font=ImageFont.load_default()
-    drawer.multiline_text((90,160),str(label)[:45],font=font,fill='white',
-                          stroke_width=3,stroke_fill='#14141a')
-    frame=Image.alpha_composite(frame.convert('RGBA'),layer).convert('RGB')
-    destination.parent.mkdir(parents=True,exist_ok=True)
-    frame.save(destination,'JPEG',quality=90,optimize=True)
+def cover_from_master(ep:dict,model:str,destination:Path)->dict:
+    """Create a premium cover from cached scene layers; never request new images."""
+    options=cover_options(ROOT,ep['id'])
+    chosen=options.get('scene',ep['scenes'][0]['id'])
+    scene=next((s for s in ep['scenes'] if s['id']==chosen),None)
+    if scene is None:
+        raise ValueError(f'Cena de capa {chosen} ausente no storyboard atual')
+    folder=scene_dir(ep,scene,model)
+    foreground=folder/'foreground.png'
+    background=folder/'background.png'
+    master=folder/'master.png'
+    if background.is_file() and foreground.is_file():
+        validate_image(background.read_bytes(),alpha=False)
+        validate_image(foreground.read_bytes(),alpha=True)
+        with Image.open(background) as bg, Image.open(foreground) as fg:
+            source=Image.alpha_composite(bg.convert('RGBA'),fg.convert('RGBA')).convert('RGB')
+        source_type='background+foreground'
+    elif master.is_file():
+        validate_image(master.read_bytes(),alpha=False)
+        with Image.open(master) as im:
+            source=im.convert('RGB')
+        source_type='master'
+        print(f'[CAPA AVISO] Cena {chosen}: camadas finais ausentes; '
+              'usando a master original.',flush=True)
+    else:
+        raise FileNotFoundError(
+            f'Nao ha imagens da cena {chosen} para gerar capa offline em {folder}. '
+            'Gere ou recupere o cache dessa cena.')
+    label=options.get('title') or select_episode(ep['id']).get('cover') or ep.get('title') or 'ARQUIVO OTAKU'
+    report=render_cover(source,str(label),destination,
+                        zoom=options.get('zoom',1.07),
+                        focus_x=options.get('focus_x',.5),
+                        focus_y=options.get('focus_y',.38))
+    report.update(scene=chosen,source=source_type,model=model,output=str(destination))
+    print(f'[CAPA] {report["style"]} | cena {chosen} | fonte: {source_type} | '
+          f'{destination}',flush=True)
+    return report
 
 
 def main(argv:list[str]|None=None)->int:
@@ -117,11 +134,22 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--max-segundos-por-plano',type=float,default=6)
     ap.add_argument('--criar-voz',action='store_true')
     ap.add_argument('--renderizar',action='store_true')
+    ap.add_argument('--somente-capa',action='store_true',help='Gera so a capa premium com imagens em cache; sem voz/Remotion/IA')
     ap.add_argument('--motor',type=Path,default=MOTION)
     args=ap.parse_args(argv)
     path=production_storyboard(args.id,args.max_segundos_por_plano,selected=args.plano)
     ep=read_storyboard(path)
     if ep['id']!=args.id:raise ValueError('ID de episódio divergente')
+    folder=OUT/args.id
+    if args.somente_capa:
+        if args.renderizar or args.criar_voz:
+            raise ValueError('--somente-capa nao combina com --renderizar/--criar-voz')
+        cover=folder/f'{ep["id"]}-master-capa.jpg'
+        report=cover_from_master(ep,args.modelo,cover)
+        (folder/'qa-capa.json').write_text(
+            json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        print('[PRONTO] Capa criada offline; nenhum video ou imagem IA gerada.')
+        return 0
     validated=validate_scenes(ep,args.modelo)
     print(f'[QA] {len(validated)} enquadramentos com PNG alfa e cenário correspondente.')
     folder=OUT/args.id
@@ -145,8 +173,9 @@ def main(argv:list[str]|None=None)->int:
              str(propfile.resolve()),'--concurrency','2']
     subprocess.run(command,cwd=args.motor,check=True,timeout=1800)
     cover=folder/f"{ep['id']}-master-capa.jpg"
-    cover_from_master(ep,args.modelo,cover)
+    cover_report=cover_from_master(ep,args.modelo,cover)
     manifest={'id':ep['id'],'status':'renderizado-aguardando-revisao',
+              'cover_design':cover_report,
               'mp4':str(output),'cover':str(cover),'duration_s':seconds,
               'narrative_beats':ep.get('narrative_beats'),
               'visual_shots':len(props['scenes']),'captions':len(captions),
