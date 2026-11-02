@@ -82,12 +82,16 @@ def validate_multilayer(ep:dict,scene:dict,model:str,folder:Path,
         if row.get("z")!=expected_layer.z or row.get("role")!=expected_layer.role:
             raise ValueError("Ordem Z incoerente para "+expected_layer.id)
         path=folder/"multilayer"/(expected_layer.id+".png")
+        if row.get("sha256")!=hashlib.sha256(path.read_bytes()).hexdigest():
+            raise ValueError("Camada alterada sem revisao: "+expected_layer.id)
         with Image.open(path) as img:
             if img.size!=SIZE or "A" not in img.getbands():
                 raise ValueError("Camada ausente/invalida: "+str(path))
         files.append((expected_layer,path))
     bg=folder/"multilayer"/"background.png"
     if not bg.is_file():raise FileNotFoundError("Background multicamadas ausente")
+    if document.get("background_sha256")!=hashlib.sha256(bg.read_bytes()).hexdigest():
+        raise ValueError("Fundo multicamadas alterado apos a revisao; gere novo QA")
     with Image.open(bg) as img:
         if img.size!=SIZE:raise ValueError("Fundo multicamadas invalido")
     qa=document.get("qa",{})
@@ -166,9 +170,11 @@ def process_multilayer(ep:dict,scene:dict,model:str,*,edit=None,
         "model":model,
         "master_sha256":hashlib.sha256(master.read_bytes()).hexdigest(),
         "background":"multilayer/background.png",
+        "background_sha256":hashlib.sha256((dest/"background.png").read_bytes()).hexdigest(),
         "preview":"multilayer/preview-composicao.png",
         "layers":[{"id":l.id,"role":l.role,"z":l.z,
                    "file":"multilayer/"+l.id+".png",
+                   "sha256":hashlib.sha256(paths(folder,l)[1].read_bytes()).hexdigest(),
                    "raw":"multilayer/"+l.id+"-raw.png"}
                   for l in layers],
         "qa":qa,
