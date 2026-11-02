@@ -50,7 +50,7 @@ def build_command(payload:dict,root:Path=ROOT,python:str|None=None,windows:bool=
     ps=['powershell.exe','-NoProfile','-ExecutionPolicy','Bypass','-File']
     if action in ('iniciar_proxy','login_proxy'):
         return ps+[str(root/'testar-codex-proxy.ps1'),
-                   '-Acao','instalar' if action=='iniciar_proxy' else 'login']
+                   '-Acao','iniciar' if action=='iniciar_proxy' else 'login']
     base=ps+[str(root/'gerar-shorts-master.ps1'),
              '-Id',episode,'-Modelo',model,'-Cena',str(scene)]
     if all_scenes or action=='render':
