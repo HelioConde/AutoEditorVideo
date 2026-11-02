@@ -302,7 +302,7 @@ def main()->int:
         print(f'[INFO] {len(missing)} cenas exigem IA; {len(plan["cenas"])-len(missing)} serao reaproveitadas.',flush=True)
         files=stage_images(plan,args.modelo,key)
     # Corte mais agil sem novas chamadas de IA: 2 recortes por cena.
-    shots=create_shot_sequence(files,MATERIAL_DIR/'arquivo-otaku-shots-v07')
+    shots=create_shot_sequence(files,MATERIAL_DIR/f'arquivo-otaku-shots-v07-{plan["id"]}')
     print(f'[EDICAO] {len(shots)} planos de {CUT_DURATION_SECONDS}s preparados; 0 chamadas de IA adicionais.',flush=True)
     print('[MPT] Montando video com cenas revisadas e narracao em portugues...',flush=True)
     inicio=datetime.now(timezone.utc).timestamp()-5

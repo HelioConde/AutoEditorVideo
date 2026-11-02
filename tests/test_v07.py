@@ -67,3 +67,37 @@ def test_new_episode_metadata_title_is_dynamic():
     meta=pub.text_metadata(plan)
     assert 'O segredo de Death Note' in meta['titulo']
     assert len(meta['titulo'])<=100
+
+
+def test_locked_old_partial_filename_no_longer_blocks(tmp_path):
+    source = tmp_path / 'source.jpg'
+    Image.new('RGB', (800, 1200), (190, 40, 55)).save(source)
+    destination = tmp_path / 'cuts'
+    destination.mkdir()
+    original = e.create_shot_sequence([source] * 3, destination)
+    first = original[0]
+    first.unlink()
+    first.with_suffix('.partial.jpg').mkdir()
+    recovered = e.create_shot_sequence([source] * 3, destination)
+    assert recovered[0].is_file()
+    with Image.open(recovered[0]) as im:
+        assert im.size == (800, 1200)
+    assert not list(destination.glob('*.tmp.jpg'))
+
+
+def test_cuts_are_cached_and_manifest_restored(tmp_path):
+    source = tmp_path / 'source.jpg'
+    Image.new('RGB', (800, 1200), (100, 140, 80)).save(source)
+    dest = tmp_path / 'cuts'
+    first = e.create_shot_sequence([source] * 3, dest)
+    before = [f.stat().st_mtime_ns for f in first]
+    second = e.create_shot_sequence([source] * 3, dest)
+    assert first == second
+    assert [f.stat().st_mtime_ns for f in second] == before
+
+
+def test_powershell_script_can_handle_different_episode_ids():
+    body=(ROOT/'gerar-video-codex.ps1').read_text(encoding='utf-8')
+    assert body.count('} finally { Pop-Location }') == 1
+    assert body.count("$target=Join-Path") == 1
+    assert 'if($Plano)' in body

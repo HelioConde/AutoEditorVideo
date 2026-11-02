@@ -1,4 +1,4 @@
-# Arquivo Otaku v0.7 — gera novo MP4 sem substituir o video ja enviado.
+# Arquivo Otaku v0.9.3 — preserva o video antigo e reusa cenas em cache.
 [CmdletBinding()]
 param(
   [ValidateSet('gpt-image-1.5','gpt-image-2')][string]$Modelo='gpt-image-1.5',
@@ -13,7 +13,7 @@ $root=$PSScriptRoot
 $py=Join-Path $root '.venv\Scripts\python.exe'
 $script=Join-Path $root 'scripts\gerar_video_codex.py'
 if (-not (Test-Path $py)) { throw 'Ambiente .venv ausente. Execute scripts\instalar-windows.ps1' }
-if (-not (Test-Path $script)) { throw 'Extraia o pacote v0.6 completo, incluindo scripts\.' }
+if (-not (Test-Path $script)) { throw 'Script Python do gerador ausente.' }
 $env:MPT_HOME=Join-Path $root '.mpt-runtime'
 $arguments=@($script,'--modelo',$Modelo)
 if($SomenteConfigurar){$arguments+='--somente-configurar'}
@@ -34,12 +34,7 @@ try {
     if ($id -eq '001-death-note') {
       $nome=if($ReutilizarImagens){'arquivo-otaku-piloto-v07-reuso.mp4'}else{'arquivo-otaku-piloto-codex-v07.mp4'}
     } else {
-      if ($id -notmatch '^[a-z0-9]+(-[a-z0-9]+)*
-    $target=Join-Path $root ('assets\gerados\'+$nome)
-    if(Test-Path $target){Start-Process -FilePath $target}
-  }
-} finally { Pop-Location }
-) { throw 'ID invalido no JSON do episodio.' }
+      if ($id -notmatch '^[a-z0-9]+(-[a-z0-9]+)*$') { throw 'ID invalido no JSON do episodio.' }
       $modo=if($ReutilizarImagens){'reuso'}else{'codex'}
       $nome="arquivo-otaku-$id-$modo.mp4"
     }

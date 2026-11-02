@@ -146,3 +146,13 @@ Para publicar como publico, apenas apos revisao:
 ```
 
 A nova saida e `assets/gerados/arquivo-otaku-002-death-note-memoria-codex.mp4`. O video 001 permanece intacto. Consulte [30 pautas de Death Note](docs/DEATH-NOTE-PAUTAS-v1.md).
+
+## Hotfix v0.9.3 — PermissionError ao salvar recortes
+
+Se o segundo Short gerou as 7 imagens e falhou no caminho `otaku-v07-*.partial.jpg`, os arquivos de IA **ja estao em cache**. Atualize o codigo, depois execute novamente:
+
+```powershell
+.\segundo-short-death-note.ps1 -Etapa criar -Modelo gpt-image-1.5
+```
+
+A proxima execucao devera exibir `0 cenas exigem IA` e `[CACHE]` nas 7 cenas. O editor agora usa temporarios aleatorios e salva recortes em pastas proprias de cada episodio. Se houver novo `PermissionError`, confira as permissoes de escrita/Windows Defender na pasta `.mpt-runtime\storage\local_videos`. Nao apague imagens originais nem o cache.
