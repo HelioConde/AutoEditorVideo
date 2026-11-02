@@ -38,7 +38,7 @@ async function launch(action) {
     if(!confirm('Autorizar até '+p.budget+' chamadas novas de imagem para este episódio?')) return;
   }
   if(action==='reparar' && !confirm('Refazer o fundo da cena '+p.scene+' com até 1 chamada de IA?')) return;
-  if(action==='iniciar_proxy' && !confirm('Iniciar ou instalar o serviço de terceiros no Docker? Credenciais existentes serão preservadas.')) return;
+  if(action==='iniciar_proxy' && !confirm('Iniciar o serviço de terceiros já instalado no Docker? Nenhuma conta será trocada.')) return;
   if(action==='login_proxy' && !confirm('Iniciar autorização de login manual no Codex Proxy de terceiros? Verifique o domínio mostrado no log.')) return;
   try {
     await api('/api/run',{method:'POST',headers:{'Content-Type':'application/json'},
