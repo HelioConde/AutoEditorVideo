@@ -115,3 +115,30 @@ def test_render_props_use_real_rigged_frames_only_after_approval(tmp_path,monkey
     for path in part["rigFrames"]["frames"]:
         assert (public/path).is_file()
     assert src.read_bytes()==source
+
+
+def test_skeletal_character_cannot_move_when_king_hand_is_present(
+        tmp_path,monkeypatch):
+    scene,src,source,exported=fixture(tmp_path)
+    shot={"id":"03","subject":"personagens","shot_type":"light_moves_king"}
+    master=scene/"master.png"
+    Image.new("RGB",rig.SIZE,(20,20,20)).save(master)
+    background=scene/"multilayer"/"background.png"
+    Image.new("RGB",rig.SIZE,(20,20,20)).save(background)
+    hero=scene/"multilayer"/"king_hand.png"
+    Image.new("RGBA",rig.SIZE,(0,0,0,0)).save(hero)
+    entry={"render_mode":"multilayer","scene":shot,"folder":scene,
+           "files":{"master":master},"fidelity":{},
+           "multi":{"background":background,"layers":[
+               (Layer("l","front_character",40,""),src),
+               (Layer("king_hand","hero_prop",50,""),hero)
+           ]}}
+    monkeypatch.setattr(renderer,"validate_scenes",lambda *a,**kw:[entry])
+    monkeypatch.setattr(renderer,"select_episode",lambda *_:{"cover":"chess"})
+    voice=tmp_path/"voice.mp3";voice.write_bytes(b"sound")
+    rig.import_sequence(scene,"l",exported,30)
+    rig.approve(scene,"l","Sequence approved")
+    with pytest.raises(ValueError,match="king_hand"):
+        renderer.build_props({"id":"ep","scenes":[shot]},voice,[],4,
+                             public=tmp_path/"public",
+                             animation_mode="esqueleto2d")
