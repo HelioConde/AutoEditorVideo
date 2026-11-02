@@ -245,6 +245,7 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--modelo',default='gpt-image-1.5')
     ap.add_argument('--max-segundos-por-plano',type=float,default=6)
     ap.add_argument('--criar-voz',action='store_true')
+    ap.add_argument('--somente-voz',action='store_true',help='Gerar voz e legendas sem validar ou renderizar imagens')
     ap.add_argument('--renderizar',action='store_true')
     ap.add_argument('--somente-capa',action='store_true',help='Gera so a capa premium com imagens em cache; sem voz/Remotion/IA')
     ap.add_argument('--motor',type=Path,default=MOTION)
@@ -253,6 +254,13 @@ def main(argv:list[str]|None=None)->int:
     ep=read_storyboard(path)
     if ep['id']!=args.id:raise ValueError('ID de episódio divergente')
     folder=OUT/args.id
+    if args.somente_voz:
+        if args.somente_capa or args.renderizar:
+            raise ValueError('--somente-voz nao pode renderizar video ou capa')
+        voice,subtitles=ensure_voice(select_episode(args.id),folder,create=args.criar_voz)
+        print(f'[VOZ PRONTA] Audio: {voice} | legendas: {subtitles}. '
+              'Nenhum render executado; aguardando aprovacao visual das imagens.')
+        return 0
     if args.somente_capa:
         if args.renderizar or args.criar_voz:
             raise ValueError('--somente-capa nao combina com --renderizar/--criar-voz')
