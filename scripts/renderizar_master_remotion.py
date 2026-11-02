@@ -20,7 +20,7 @@ MOTION=ROOT/'motion-remotion'
 OUT=ROOT/'assets'/'gerados'/'shorts-animados'
 FPS=30
 sys.path.insert(0,str(ROOT/'scripts'))
-from master_scenes import read_storyboard,scene_dir,validate_image
+from master_scenes import read_storyboard,scene_dir,validate_image,production_storyboard
 from roteiro_para_storyboard import select_episode, save_plan
 from narracao_shorts import ensure_voice
 from renderizar_com_remotion import audio_duration,captions_from_ass
@@ -119,7 +119,7 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--renderizar',action='store_true')
     ap.add_argument('--motor',type=Path,default=MOTION)
     args=ap.parse_args(argv)
-    path=args.plano or save_plan(select_episode(args.id),max_hold=args.max_segundos_por_plano)
+    path=production_storyboard(args.id,args.max_segundos_por_plano,selected=args.plano)
     ep=read_storyboard(path)
     if ep['id']!=args.id:raise ValueError('ID de episódio divergente')
     validated=validate_scenes(ep,args.modelo)
