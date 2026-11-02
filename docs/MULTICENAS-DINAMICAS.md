@@ -612,3 +612,69 @@ Novos arquivos:
 Todos reutilizam PNGs, voz e legendas aprovados, sem chamada de
 imagem. Opcional: `cd motion-remotion; npm.cmd run test:character`
 executa testes das curvas de movimento.
+
+
+## Novo fluxo de esqueleto 2D — Rigby2D (sem custo de IA)
+
+Os presets antigos moviam a imagem inteira entre fracoes de pixel; nao
+havia articulacoes de verdade. O novo fluxo opcional integra ao Remotion
+quadros esqueléticos exportados do editor open-source
+[Rigby2D](https://rigby2d.com/editor/), com ossos, IK e malhas.
+
+**Atencao:** as camadas atuais `l.png` e `light.png` separam os dois
+personagens, mas nao a cabeca, tronco e bracos DE CADA UM. AutoRig precisa
+de partes anatomicas separadas. O script nao finge que uma unica imagem
+achata tem esqueleto; prepara o pacote original e exige a etapa de rigging.
+
+### Passo 1 — preparar o personagem aprovado
+
+```powershell
+cd C:\Users\helio\Documents\arquivo-otaku-github
+git pull origin main
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 4 -Modelo gpt-image-1.5 -PrepararRig2D -PersonagemRig l -MaxChamadas 0
+```
+
+Na pasta da cena, abra `multilayer/rigby2d/l/character-reference.png`
+e `rigby2d-guide.json`. Prepare separadamente as partes de head,
+torso, upperarm_left/right, forearm_left/right e hand_left/right, em PSD
+com cada parte e posicao preservada. **O script nao cria partes falsas
+nem gera imagens pagas.**
+
+### Passo 2 — animar no Rigby2D
+
+Importe PSD no editor (File > Import > PSD), use AutoRig, confira juntas,
+pesos e oclusao com a mesa. Crie idle de respiracao, movimentos de cabeca
+e maos conforme as partes existentes. Exporte frames PNG transparentes
+de tamanho EXATO 1024x1536, alinhados ao original com o primeiro frame
+em pose de referencia. Recoloque o personagem no canvas completo se o
+editor exportar apenas a area recortada.
+
+### Passo 3 — importar quadros exportados, revisar e aprovar
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 4 -Modelo gpt-image-1.5 -ImportarQuadrosRig2D "C:\rigby-exports\l-cena04" -PersonagemRig l -RigFps 30 -MaxChamadas 0
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -Cena 4 -Modelo gpt-image-1.5 -AprovarRig2D -PersonagemRig l -Motivo "Rig, juntas e composicao revisados"
+```
+
+A ponte valida 3 a 240 frames RGBA, confere o primeiro frame com o
+personagem aprovado e grava hashes. Uma sequencia alterada invalida
+sua revisao. Nenhum raw antigo e alterado.
+
+### Passo 4 — renderizar Short com sequencia esquelética
+
+```powershell
+.\gerar-shorts-master.ps1 -Id 003-death-note-xadrez -TodasCenas -Modelo gpt-image-1.5 -ModoComposicao multicamadas -MaxChamadas 0 -Renderizar -Esqueleto2D
+```
+
+O Remotion substitui a camada do personagem pelos frames Rigby2D,
+mantendo Z, mesa, tabuleiro, rei, voz e legendas. Outros personagens
+sem rig continuam estaticos. Se nenhum rig estiver aprovado, o render
+falha explicitamente (nao simula esqueleto falso). Salva o video
+`003-death-note-xadrez-master-multicenas-esqueleto2d.mp4` sem
+sobrescrever os anteriores.
+
+Esta integracao importa **sequencias exportadas do Rigby2D**, ainda
+nao roda o runtime WebGL do editor dentro do Remotion. Nao executa o
+AutoRig automaticamente porque as partes de corpo atuais nao existem.
+Documentacao do editor:
+https://rigby2d.com/docs/autorig.html
