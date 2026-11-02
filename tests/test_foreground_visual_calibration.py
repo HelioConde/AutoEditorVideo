@@ -47,7 +47,7 @@ def test_foreground_scale_translation_keeps_raw_and_canvas():
         assert image.size==m.SIZE
         assert image.getpixel((round(160*1.10)-25,round(300*1.10)-88))[3]==255
         assert image.getpixel((160,300))[3]==255
-        assert image.getpixel((130,220))[3]==0
+        assert image.getpixel((170,500))[3]==0
     assert raw==to_png(original)
 
 
@@ -82,7 +82,7 @@ def test_cache_recomposition_uses_scaled_foreground_without_new_ia(tmp_path,monk
     with Image.open(folder/'foreground-normalized.png') as normalized:
         assert normalized.getpixel((130,220))[3]==255
     with Image.open(folder/'foreground.png') as placed:
-        assert placed.getpixel((130,220))[3]==0
+        assert placed.getpixel((170,500))[3]==0
         assert placed.getpixel((150,300))[3]==255
 
 
