@@ -20,21 +20,21 @@ Ela recorta as margens transparentes sem destruir as cores.
 
 Abra o PowerShell na raiz do projeto:
 
-\`\`\`powershell
+```powershell
 uv pip install --python .\.venv\Scripts\python.exe "Pillow>=10,<13" "numpy>=1.24,<3"
 cd .\motion-remotion
 npm.cmd install
 cd ..
-\`\`\`
+```
 
 ## Preparar e renderizar o xadrez
 
-\`\`\`powershell
+```powershell
 .\.venv\Scripts\python.exe .\scripts\renderizar_com_remotion.py --id 003-death-note-xadrez
 .\.venv\Scripts\python.exe .\scripts\renderizar_com_remotion.py --id 003-death-note-xadrez --renderizar
-\`\`\`
+```
 
-Saida: \`assets/gerados/shorts-animados/003-death-note-xadrez/003-death-note-xadrez-remotion.mp4\`.
+Saida: `assets/gerados/shorts-animados/003-death-note-xadrez/003-death-note-xadrez-remotion.mp4`.
 
 Demais IDs: 004-death-note-segundo-kira, 005-death-note-sangue,
 006-death-note-shinigami e 007-death-note-maca.
@@ -56,14 +56,14 @@ preparado em PSD com partes separadas.
 
 ## Integracao com a geracao de imagens
 
-A funcao \`request_image()\` aceita os novos parametros
-\`background="transparent"\` e \`output_format="png"\`.
+A funcao `request_image()` aceita os novos parametros
+`background="transparent"` e `output_format="png"`.
 Isso **somente pede** transparencia ao proxy. Se o proxy retornar imagem
-opaca ou rejeitar o parametro, o fluxo deve parar, preservar \`raw-*.png\`
+opaca ou rejeitar o parametro, o fluxo deve parar, preservar `raw-*.png`
 e avisar o usuario; nunca trocar por fundo verde silenciosamente.
 
 O gerador local de cinco Shorts incluído nos ZIPs anteriores **ainda nao
-constava neste repositorio**. O arquivo \`conteudos/testes-animados-5.json\`
+constava neste repositorio**. O arquivo `conteudos/testes-animados-5.json`
 foi versionado, e o novo motor consegue ler o cache local criado por ele.
 Para produzir novas imagens no Windows, instale a atualizacao de cinco Shorts
 com transparencia nativa disponibilizada no chat.

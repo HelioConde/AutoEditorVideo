@@ -23,9 +23,9 @@ Isso nao se resolve apenas trocando FFmpeg por Remotion: precisamos de
 ## Por que alpha nativo vem antes do rig
 
 O gerador antigo pedia fundo verde uniforme e tentava remove-lo com rembg.
-O provedor oficial de imagens suporta \`background: transparent\` para modelos
+O provedor oficial de imagens suporta `background: transparent` para modelos
 compativeis; isso nao garante que o proxy de terceiros preserve o parametro.
-A funcao \`request_image\` agora recebe os parametros opcionais e informa
+A funcao `request_image` agora recebe os parametros opcionais e informa
 quando o proxy os recusa. No motor Remotion, RGBs opacos e verde remanescente
 sao bloqueados antes de renderizar.
 
