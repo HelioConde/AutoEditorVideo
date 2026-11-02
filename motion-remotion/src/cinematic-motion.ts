@@ -15,19 +15,17 @@ const clamp=(v:number,min:number,max:number)=>Math.min(max,Math.max(min,v));
 const ease=(v:number)=>{const x=clamp(v,0,1);return x*x*(3-2*x);};
 const interpolate=(a:number,b:number,t:number)=>a+(b-a)*t;
 
-export const profileForShot=(shotType:string|undefined,sceneId:string):ShotProfile=>{
-  switch(shotType){
-    case 'wide_duel': return 'establish';
-    case 'ots_light':case 'ots_l':return 'duel';
-    case 'light_moves_king':case 'king_hand_macro':return 'king';
-    case 'l_reaction':case 'light_reaction':case 'close_reaction_l':
-    case 'close_reaction_kira':return 'reaction';
-    case 'l_moves_king':return 'reply';
-    case 'final_checkmate':case 'top_board':return 'final';
-    default:
-      return ({'01':'establish','02':'duel','03':'king',
-        '04':'reaction','05':'reply','06':'final'} as Record<string,ShotProfile>)[sceneId]||'duel';
-  }
+export const profileForShot=(shotType:string|undefined,_sceneId:string):ShotProfile=>{
+  // These categories work across productions, genres and arbitrary scene ids.
+  // Previous logic assigned camera behavior by numbered Death Note shots.
+  const name=(shotType||'').toLowerCase();
+  if(/final|closing|outro|endcard|checkmate|top_board/.test(name))return 'final';
+  if(/wide|establish|overview|opening|intro|landscape/.test(name))return 'establish';
+  if(/reaction|close|portrait|emotion|face/.test(name))return 'reaction';
+  if(/reply|response|answer/.test(name))return 'reply';
+  if(/hand|move|action|detail|item|object|macro|king/.test(name))return 'king';
+  if(/duel|dialog|conversation|shoulder|(^|_)ots(_|$)/.test(name))return 'duel';
+  return 'establish';
 };
 
 // All pan values are in pixels inside the 940x1410 portrait content.
