@@ -40,14 +40,14 @@ def test_reference_adjustments_apply_only_to_01_and_05_and_gpt_image_15():
 
 def test_foreground_scale_translation_keeps_raw_and_canvas():
     original=Image.new('RGBA',m.SIZE,(0,0,0,0))
-    ImageDraw.Draw(original).rectangle((130,220,290,510),fill=(210,30,50,255))
+    ImageDraw.Draw(original).rectangle((130,220,390,610),fill=(210,30,50,255))
     raw=to_png(original)
     result=m.reposition_foreground(raw,-25,-88,1.10)
     with Image.open(io.BytesIO(result)) as image:
         assert image.size==m.SIZE
         assert image.getpixel((round(160*1.10)-25,round(300*1.10)-88))[3]==255
         assert image.getpixel((160,300))[3]==255
-        assert image.getpixel((170,500))[3]==0
+        assert image.getpixel((170,600))[3]==0
     assert raw==to_png(original)
 
 
@@ -62,10 +62,10 @@ def test_cache_recomposition_uses_scaled_foreground_without_new_ia(tmp_path,monk
        'scene_defaults':{'ep-teste/gpt-image-1.5/05':{'scale':1.10,'x':-25,'y':-88}}
     }),encoding='utf-8')
     original=Image.new('RGB',m.SIZE,(20,40,70))
-    ImageDraw.Draw(original).rectangle((130,220,290,510),fill=(210,30,50))
+    ImageDraw.Draw(original).rectangle((130,220,390,610),fill=(210,30,50))
     (folder/'master.png').write_bytes(to_png(original))
     layer=Image.new('RGBA',m.SIZE,(0,0,0,0))
-    ImageDraw.Draw(layer).rectangle((130,220,290,510),fill=(210,30,50,255))
+    ImageDraw.Draw(layer).rectangle((130,220,390,610),fill=(210,30,50,255))
     foreground_raw=to_png(layer)
     (folder/'foreground-raw.png').write_bytes(foreground_raw)
     background_raw=to_png(Image.new('RGB',m.SIZE,(20,40,70)))
@@ -82,7 +82,7 @@ def test_cache_recomposition_uses_scaled_foreground_without_new_ia(tmp_path,monk
     with Image.open(folder/'foreground-normalized.png') as normalized:
         assert normalized.getpixel((130,220))[3]==255
     with Image.open(folder/'foreground.png') as placed:
-        assert placed.getpixel((170,500))[3]==0
+        assert placed.getpixel((170,600))[3]==0
         assert placed.getpixel((150,300))[3]==255
 
 
