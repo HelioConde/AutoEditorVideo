@@ -1,0 +1,67 @@
+{
+  "schema": "arquivo-otaku/shorts-animados/v1",
+  "voice": "pt-BR-AntonioNeural",
+  "episodes": [
+    {
+      "id": "003-death-note-xadrez",
+      "series": "Death Note",
+      "title": "Light e L: o xadrez mais perigoso dos animes? ♟️ #Shorts",
+      "cover": "XEQUE-MATE MENTAL",
+      "effect": "chess",
+      "character": "Light Yagami and L Lawliet standing on opposite sides of a chess board, waist up, 2D anime cel shading, dramatic expressions, no letters",
+      "object": "single black chess king, sculpted 2D chess piece standing on base, isolated",
+      "background": "empty investigation room in blue and red light, chess table in foreground, no characters, no chess pieces, 2D anime",
+      "extra_object": "single white chess queen sculpted chess piece standing on base, isolated",
+      "script": "Light e L não precisavam trocar socos para entrar em guerra. Em Death Note, cada conversa parecia uma jogada de xadrez. Light escondia o que sabia. L observava até os silêncios. Uma informação revelada cedo demais podia significar a derrota. Só que esse tabuleiro não tinha peças comuns: cada decisão colocava vidas em risco. O duelo virou uma corrida para descobrir a identidade do outro. E você, nessa partida mental, apostaria em Light ou em L?",
+      "editorial_note": "Xadrez é metáfora visual; não é uma partida literal do anime."
+    },
+    {
+      "id": "004-death-note-segundo-kira",
+      "series": "Death Note",
+      "title": "A chegada do SEGUNDO KIRA mudou tudo! 😱 #Shorts",
+      "cover": "SEGUNDO KIRA?!",
+      "effect": "second_kira",
+      "character": "Misa Amane, blonde pigtails, gothic black clothes, intense eyes, full upper body, anime cel shading, isolated",
+      "object": "one mysterious black Death Note notebook angled, isolated, no readable text",
+      "background": "dark television studio glowing red screens, distant Tokyo, no human figures, 2D anime",
+      "script": "L estava atrás de um único Kira. Então apareceu alguém capaz de matar usando o mesmo poder. O segundo Kira começou a enviar mensagens e complicou toda a investigação. Por trás da nova identidade estava Misa Amane, que tinha seus próprios motivos para procurar Light. Com ela, o jogo deixou de ser apenas entre dois gênios. Agora, cada decisão podia revelar mais de um segredo. Você acha que a chegada de Misa ajudou Light... ou colocou tudo em risco?",
+      "editorial_note": "Não afirmar que L sabia imediatamente a identidade de Misa."
+    },
+    {
+      "id": "005-death-note-sangue",
+      "series": "Death Note",
+      "title": "A escolha de Kira tinha um preço de SANGUE 🩸 #Shorts",
+      "cover": "QUAL ERA O PREÇO?",
+      "effect": "blood",
+      "character": "Light Yagami serious conflicted face, brown hair, white shirt and red tie, close up anime, isolated",
+      "object": "single stylized crimson red blood drop teardrop, non graphic, isolated",
+      "background": "empty wooden desk, blank sheet of paper, notebook shadow, blue investigation room, no people, 2D anime",
+      "script": "Em Death Note, o terror quase nunca precisa mostrar sangue. Basta alguém escrever um nome no caderno. Light dizia agir em nome da justiça. Mas quem dava a ele o direito de decidir quem merecia viver? A cada nova vítima, a distância entre justiça e poder ficava menor. O sangue que vemos aqui é uma metáfora visual para essas consequências, não uma cena literal da série. E você: Light estava combatendo o mal ou se tornando parte dele?",
+      "editorial_note": "Sangue é metáfora visual, não uma cena literal. Sem violência gráfica."
+    },
+    {
+      "id": "006-death-note-shinigami",
+      "series": "Death Note",
+      "title": "Ryuk: o anjo da morte que começou o caos? 👁️ #Shorts",
+      "cover": "RYUK QUERIA O QUÊ?",
+      "effect": "ryuk",
+      "character": "Ryuk shinigami, tall thin monster, black wings, pale face, yellow eyes, full body, 2D anime, isolated",
+      "object": "single black feather curved, 2D anime, isolated",
+      "background": "empty Tokyo alley at night, blue reflections and red neon, deep perspective, no people, 2D anime",
+      "script": "Ryuk é um shinigami, uma espécie de deus da morte. Mas ele não entregou o Death Note para salvar ninguém. Estava entediado. Ao deixar o caderno cair no mundo humano, abriu caminho para a história de Light. Enquanto pessoas arriscavam a vida, Ryuk observava tudo como uma diversão. Isso torna a presença dele ainda mais assustadora: o caos começou por curiosidade. Na sua opinião, Ryuk era só um espectador... ou o personagem mais perigoso de Death Note?",
+      "editorial_note": "Anjo da morte é expressão figurada; termo do anime: shinigami."
+    },
+    {
+      "id": "007-death-note-maca",
+      "series": "Death Note",
+      "title": "Por que Ryuk ama MAÇÃS em Death Note? 🍎 #Shorts",
+      "cover": "O VÍCIO DE RYUK",
+      "effect": "apple",
+      "character": "Ryuk shinigami, pale face, yellow eyes, open hand to catch apple, 2D anime isolated",
+      "object": "single bright red apple with stem, 2D cel shaded, isolated",
+      "background": "Japanese apartment at night, rainy window Tokyo skyline, no people, 2D anime",
+      "script": "Um deus da morte assustador... viciado em maçãs? Ryuk tem um detalhe inesperado: ele adora as maçãs do mundo humano. Em Death Note, esse gosto vira um contraste estranho com sua aparência e seu jeito de observar tudo. Enquanto Light tenta controlar o destino das pessoas, Ryuk só quer se divertir e aproveitar algo tão simples quanto uma fruta. A maçã vira até uma marca registrada do personagem. Agora me diz: o que é mais estranho, o poder do caderno ou o apetite de Ryuk?",
+      "editorial_note": "Não afirmar que maçãs são condição para usar os poderes do Death Note."
+    }
+  ]
+}

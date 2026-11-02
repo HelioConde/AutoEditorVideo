@@ -1,0 +1,5 @@
+node_modules/
+public/generated/
+props-*.json
+out/
+.cache/

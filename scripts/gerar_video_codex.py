@@ -51,12 +51,22 @@ def check_proxy_accounts(key:str, base:str='http://127.0.0.1:8080'):
         raise RuntimeError('Nenhuma conta elegivel no Codex Proxy. Verifique -Acao status/cota e nao gaste chamadas.')
 
 
-def request_image(prompt:str, model:str, key:str, size:str='1024x1536')->bytes:
+def request_image(prompt:str, model:str, key:str, size:str='1024x1536', *, background:str|None=None, output_format:str|None=None)->bytes:
     import requests
+    payload={'model':model,'prompt':prompt,'n':1,'size':size}
+    if background is not None:
+        if background not in ('transparent','opaque','auto'):
+            raise ValueError('background invalido')
+        payload['background']=background
+        payload['output_format']=output_format or 'png'
+    elif output_format is not None:
+        payload['output_format']=output_format
     r=requests.post('http://127.0.0.1:8080/v1/images/generations',
-        json={'model':model,'prompt':prompt,'n':1,'size':size},
+        json=payload,
         headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},timeout=(15,300))
     if not r.ok:
+        if background=='transparent':
+            raise RuntimeError(f'O Codex Proxy recusou background=transparent (HTTP {r.status_code}). Sem fallback verde: {r.text[:220]}')
         raise RuntimeError(f'Imagem recusada (HTTP {r.status_code}): {r.text[:220]}')
     items=r.json().get('data',[])
     if not items:raise RuntimeError('Resposta nao possui imagens')

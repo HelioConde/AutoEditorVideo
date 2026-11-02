@@ -171,3 +171,9 @@ o sistema recusa roteiros nao aprovados e **nao publica em massa**.
 ```
 
 Leia [o guia do lote](docs/LOTE-25.md).
+
+## Motor de animação Remotion (experimental)
+
+Foi integrado um segundo renderizador que anima personagem, objetos e câmera com movimentos por tipo de cena, reutilizando voz e legendas em cache. Ele **não faz upload**, não altera vídeos anteriores e bloqueia PNG opaco ou com verde residual.
+
+Documentação e instalação: [motion-remotion/README.md](motion-remotion/README.md). Análise dos motores GitHub: [docs/ESCOLHA-DO-MOTOR-DE-ANIMACAO.md](docs/ESCOLHA-DO-MOTOR-DE-ANIMACAO.md).
