@@ -1,11 +1,13 @@
 /**
- * Subtle procedural idle motion. Does not generate pixels or claim to animate
- * real eyelids/irises: those need separately approved closed-eye assets.
- * All values are deterministic per frame, character and shot.
+ * Automatic, visibly readable 2D character idle animation.
  *
- * One whole-character alpha layer can breathe / lean by subpixel amounts, but
- * rotating the head alone or blinking requires a different cutout. Do not
- * deform masks contaminated with hero objects or much of the frame.
+ * Light and L are already cut out as separate transparent PNG layers.
+ * Animate those approved layers in Remotion; NO skeletal editor, manual
+ * body-part separation, additional AI images, or export pipeline is required.
+ *
+ * This is whole-character 2D puppet motion (breathing, sway, slight lean).
+ * It does not fabricate facial expressions, blinks or arm articulation.
+ * The table, board and king/hand composites must never be independently moved.
  */
 export type CharacterPreset='ultrassutil'|'equilibrado'|'vivo';
 export type CharacterRole='back_character'|'front_character'|string;
@@ -19,20 +21,33 @@ export type CharacterPose={
   reason:'safe'|'off'|'hero-protected'|'mask-unsafe';
 };
 
-type Amp={breathingPx:number;shoulderFraction:number;headTiltDeg:number;driftPx:number};
+type Amp={
+  breathingPx:number;
+  shoulderFraction:number;
+  leanDeg:number;
+  driftPx:number;
+};
+
+// Previous versions were often <1px *after* size-based damping and fade.
+// These are 2D source-canvas pixels (the canvas is 1024x1536).
+// Bigger transforms are intentionally kept below a cinematic "puppet wobble".
 const PRESETS:Record<CharacterPreset,Amp>={
-  ultrassutil:{breathingPx:0.52,shoulderFraction:0.00027,headTiltDeg:0.055,driftPx:0.16},
-  equilibrado:{breathingPx:0.88,shoulderFraction:0.00042,headTiltDeg:0.092,driftPx:0.22},
-  vivo:{breathingPx:1.19,shoulderFraction:0.00058,headTiltDeg:0.145,driftPx:0.29},
+  ultrassutil:{breathingPx:3.2,shoulderFraction:0.0020,leanDeg:0.32,driftPx:1.4},
+  equilibrado:{breathingPx:6.0,shoulderFraction:0.0038,leanDeg:0.70,driftPx:2.8},
+  vivo:{breathingPx:10.0,shoulderFraction:0.0060,leanDeg:1.14,driftPx:4.6},
 };
 
 const flat=(reason:CharacterPose['reason']):CharacterPose=>({
   enabled:false,translateX:0,translateY:0,
   scaleX:1,scaleY:1,rotateDeg:0,reason
 });
-const finite=(x:number,low:number,high:number)=>Math.max(low,Math.min(high,x));
+const clamp=(x:number,a:number,b:number)=>Math.max(a,Math.min(b,x));
+const smoothstep=(x:number)=>{
+  const t=clamp(x,0,1);
+  return t*t*(3-2*t);
+};
+const finite=(x:number)=>Number.isFinite(x);
 
-/** Independent Light/L breathing cycles so both figures don't sway together. */
 export const characterPoseAtFrame=(args:{
   role:CharacterRole;
   id:string;
@@ -49,44 +64,44 @@ export const characterPoseAtFrame=(args:{
   const {role,id,coverage,hasHeroProp,frame,sceneStart,sceneEnd,fps,preset,enabled}=args;
   if(!enabled)return flat('off');
   if(hasHeroProp)return flat('hero-protected');
-  if(!['back_character','front_character'].includes(role)||
-     !['l','light','subject'].includes(id)||
-     !Number.isFinite(coverage)||coverage<0.025||coverage>0.55||
-     !Number.isFinite(fps)||fps<=0||!Number.isFinite(frame)||
-     !Number.isFinite(sceneStart)||!Number.isFinite(sceneEnd)||
-     !Number.isFinite(PRESETS[preset]?.breathingPx)){
+  if(!['back_character','front_character'].includes(role) ||
+     !['l','light','subject'].includes(id) ||
+     !finite(coverage)||coverage<0.020||coverage>0.58 ||
+     !finite(fps)||fps<=0||!finite(frame)||
+     !finite(sceneStart)||!finite(sceneEnd)||sceneEnd<=sceneStart||
+     !PRESETS[preset]){
     return flat('mask-unsafe');
   }
-  const duration=Math.max(1,sceneEnd-sceneStart);
-  const elapsed=finite((frame-sceneStart)/fps,0,duration/fps);
-  const t=finite((frame-sceneStart)/duration,0,1);
-  // Fades the first and last ~20% of the shot to the approved still.
-  // Exact zeros avoid floating-point residue on the first and final frames.
-  const envelope=t<=0||t>=1?0:Math.pow(Math.sin(Math.PI*t),2);
-  // Real-time breathing instead of scene-relative oscillation; L breathes
-  // slightly faster and more visibly than Light.
+
+  const duration=sceneEnd-sceneStart;
+  const t=clamp((frame-sceneStart)/duration,0,1);
+  const elapsed=t*duration/fps;
+
+  // Exact zero at scene boundaries, with a sustained (not sin²-damped)
+  // motion envelope for most of the shot. Fade avoids snapping on cuts.
+  const envelope=(t<=0||t>=1)?0:
+    smoothstep(t/0.13)*smoothstep((1-t)/0.13);
   const isLight=id==='light';
-  const frequency=isLight?0.255:0.305; // 3.92 s / 3.28 s per breath
-  const phase=isLight?0.67:2.08;
+  const frequency=isLight?0.235:0.290; // Light ~4.25s, L ~3.45s
+  const phase=isLight?0.53:1.74;
   const breath=Math.sin(2*Math.PI*frequency*elapsed+phase);
-  const nod=Math.sin(2*Math.PI*(frequency*0.53)*elapsed+phase+0.4);
-  const shoulder=Math.sin(2*Math.PI*frequency*elapsed+phase+1.1);
-  // More foregrounded or large layers are less safe to transform.
-  const coverageScale=finite((0.55-coverage)/0.45,0.23,1);
-  const frontScale=role==='front_character'?0.72:1;
-  const identityScale=isLight?0.77:1.0;
-  const magnitude=coverageScale*frontScale*identityScale*envelope;
-  const p=PRESETS[preset];
+  const lean=Math.sin(2*Math.PI*frequency*0.52*elapsed+phase+0.8);
+  const shoulders=Math.sin(2*Math.PI*frequency*elapsed+phase+0.9);
+  // Preserve table contact more tightly for large / front silhouettes.
+  const coverageScale=clamp((0.70-coverage)/0.56,0.38,1);
+  const frontScale=role==='front_character'?0.87:1;
+  const identityScale=isLight?0.84:1;
+  const magnitude=envelope*coverageScale*frontScale*identityScale;
+  const presetValues=PRESETS[preset];
   return {
     enabled:true,
-    translateX:finite(p.driftPx*nod*magnitude,-0.30,0.30),
-    translateY:finite(p.breathingPx*breath*magnitude,-1.25,1.25),
-    scaleX:1+finite(p.shoulderFraction*shoulder*magnitude,-0.0006,0.0006),
-    scaleY:1+finite(p.shoulderFraction*breath*magnitude*1.6,-0.001,0.001),
-    rotateDeg:finite(p.headTiltDeg*nod*magnitude,-0.15,0.15),
-    reason:'safe'
+    translateX:clamp(presetValues.driftPx*lean*magnitude,-4.6,4.6),
+    translateY:clamp(presetValues.breathingPx*breath*magnitude,-10,10),
+    scaleX:1+clamp(presetValues.shoulderFraction*shoulders*magnitude,-0.006,0.006),
+    scaleY:1+clamp(presetValues.shoulderFraction*breath*magnitude*1.15,-0.007,0.007),
+    rotateDeg:clamp(presetValues.leanDeg*lean*magnitude,-1.14,1.14),
+    reason:'safe',
   };
 };
 
-/** Utility used by tests/diagnostics and UI when presenting alternatives. */
 export const presetNames:CharacterPreset[]=['ultrassutil','equilibrado','vivo'];
