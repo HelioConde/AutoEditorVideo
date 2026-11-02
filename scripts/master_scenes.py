@@ -88,6 +88,36 @@ def validate_image(blob:bytes,*,alpha:bool)->dict:
             'green_ratio':round(spill,4),'bounds':bounds,'margin_warning':bool(warning)}
 
 
+def normalize_image(blob:bytes, *, alpha:bool, stage:str)->bytes:
+    """Normalize proxy output to the shared portrait canvas without stretching.
+
+    Keep raw paid responses untouched; normalize only the working copies.
+    A single contain-and-pad transform preserves the complete frame and alpha.
+    """
+    try:
+        with Image.open(io.BytesIO(blob)) as source:
+            source.load()
+            if source.format != 'PNG':
+                raise ValueError(f'{stage}: proxy retornou {source.format}, esperado PNG')
+            if alpha and 'A' not in source.getbands():
+                raise ValueError(f'{stage}: camada sem alpha real')
+            if source.size == SIZE:
+                return blob
+            original_size = source.size
+            canvas = ImageOps.pad(
+                source.convert('RGBA' if alpha else 'RGB'), SIZE,
+                method=Image.Resampling.LANCZOS, color=(0, 0, 0, 0) if alpha else (0, 0, 0),
+            )
+            buffer = io.BytesIO()
+            canvas.save(buffer, format='PNG', optimize=True)
+            print(f'[AJUSTE] {stage}: {original_size[0]}x{original_size[1]} -> '
+                  '1024x1536, proporcional e sem cortar (original em cache).',
+                  flush=True)
+            return buffer.getvalue()
+    except (OSError, Image.DecompressionBombError) as exc:
+        raise ValueError(f'{stage}: imagem PNG inválida: {exc}') from exc
+
+
 def image_url(image:Path)->str:
     data=image.read_bytes()
     if not data or len(data)>18_000_000:raise ValueError('Imagem de referência vazia ou acima de 18 MB')
@@ -209,22 +239,27 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
                 if offline or generate is None:raise RuntimeError('Master não existe e geração por IA não está autorizada')
                 content=generate(master_prompt(ep,scene),model)
                 atomic(raw_master,content)  # Preservar resposta paga mesmo se o formato estiver errado.
-            validate_image(content,alpha=False)
-            atomic(master,content)
+            normalized=normalize_image(content,alpha=False,stage=f"{scene['id']}/master")
+            validate_image(normalized,alpha=False)
+            atomic(master,normalized)
     validate_image(master.read_bytes(),alpha=False)
     if not fg_raw.exists():
         if offline or edit is None:raise RuntimeError('Foreground ausente no cache; não gerar em offline')
         content=edit(master,foreground_prompt(scene),model,transparent=True)
         atomic(fg_raw,content)
-    report=validate_image(fg_raw.read_bytes(),alpha=True)
-    if not fg.is_file():shutil.copy2(fg_raw,fg)
+    normalized_fg=normalize_image(fg_raw.read_bytes(),alpha=True,stage=f"{scene['id']}/foreground")
+    report=validate_image(normalized_fg,alpha=True)
+    atomic(fg,normalized_fg)
     make_mask(fg,mask)
     if not bg_raw.exists():
         if offline or edit is None:raise RuntimeError('Background ausente no cache; não gerar em offline')
         content=edit(master,background_prompt(),model,transparent=False,mask=mask)
         atomic(bg_raw,content)
-    validate_image(bg_raw.read_bytes(),alpha=False)
-    reconstruct(master,bg_raw,mask,bg)
+    normalized_bg=normalize_image(bg_raw.read_bytes(),alpha=False,stage=f"{scene['id']}/background")
+    validate_image(normalized_bg,alpha=False)
+    working_bg=d/'background-normalized.png'
+    atomic(working_bg,normalized_bg)
+    reconstruct(master,working_bg,mask,bg)
     comp=compare(master,bg,fg,d/'comparacao.jpg')
     result={'version':'master-derived-v2','episode':ep['id'],'scene':scene['id'],
             'subject':scene['subject'],'alpha':report,'composition':comp,
