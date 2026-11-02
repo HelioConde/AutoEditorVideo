@@ -17,6 +17,9 @@ param(
   [switch]$StatusCodex,
   [switch]$Replanejar,
   [switch]$SomenteCapa,
+  [switch]$ReprovarCena,
+  [switch]$AprovarCena,
+  [string]$Motivo='Defeito anatomico ou objeto atravessando a mesa',
   [switch]$Renderizar,
   [switch]$CriarVoz,
   [switch]$Offline
@@ -25,6 +28,10 @@ $ErrorActionPreference='Stop'
 $env:PYTHONUNBUFFERED='1' # Enviar log ao Studio em tempo real.
 $root=$PSScriptRoot
 $py=Join-Path $root '.venv\Scripts\python.exe'
+if(($ReprovarCena -or $AprovarCena) -and ($Renderizar -or $CriarVoz -or $SomenteCapa -or $TodasCenas)){
+  throw 'Revise uma cena de cada vez, sem -Renderizar, -CriarVoz, -SomenteCapa nem -TodasCenas.'
+}
+if($ReprovarCena -and $AprovarCena){throw 'Escolha -ReprovarCena ou -AprovarCena.'}
 if($SomenteCapa -and ($Renderizar -or $CriarVoz)){
   throw '-SomenteCapa nao pode ser combinado com -Renderizar ou -CriarVoz.'
 }
@@ -110,6 +117,16 @@ if($Renderizar){
 $oldEnv=Join-Path $root '..\arquivo-otaku-kit\chatgpt-codex-proxy\.env'
 if((Test-Path $oldEnv) -and -not (Test-Path (Join-Path $root 'chatgpt-codex-proxy\.env'))){
   $env:ARQUIVO_OTAKU_PROXY_ENV=$oldEnv
+}
+if($ReprovarCena -or $AprovarCena){
+  $reviewArgs=@((Join-Path $root 'scripts\revisao_visual_cenas.py'),
+    '--id',$Id,'--modelo',$Modelo,'--cena',[string]$Cena,
+    '--status',$(if($ReprovarCena){'reprovado'}else{'aprovado'}),
+    '--motivo',$Motivo)
+  if($Plano){$reviewArgs+=@('--plano',$Plano)}
+  & $py @reviewArgs
+  if($LASTEXITCODE -ne 0){throw 'Falhou o registro de revisao visual. Imagens mantidas.'}
+  return
 }
 if($SomenteCapa){
   $capaArgs=@((Join-Path $root 'scripts\renderizar_master_remotion.py'),
