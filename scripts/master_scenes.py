@@ -163,20 +163,68 @@ def foreground_prompt(scene:dict)->str:
 
 def background_prompt()->str:
     return ('Edit ONLY the masked region in the attached original image. '
-            'Remove the foreground subject and reconstruct the scene behind it, '
-            'including background geometry, furniture and lighting. '
-            'No characters in the removed area. Preserve camera perspective, '
-            'all unmasked pixels and original 1024x1536 canvas.')
+            'Completely remove the foreground subject, including every loose hair tip, '
+            'hand, finger, sleeve, arm and clothing fragment. Reconstruct the EMPTY '
+            'room and table behind the subject. Absolutely no floating hair, '
+            'disconnected silhouettes, remaining limbs or dark cutout remnants. '
+            'Keep the chessboard, furniture, walls, camera angle, reflections and '
+            'lighting consistent. Preserve all unmasked pixels and the exact '
+            'original 1024x1536 canvas.')
 
 
 def make_mask(fg:Path,target:Path)->None:
     with Image.open(fg) as im:
         alpha=im.getchannel('A')
-    dilated=alpha.filter(ImageFilter.MaxFilter(39)).point(lambda v:255 if v>35 else 0)
+    # Binary closure catches narrow holes between strands/fingers before a wider dilation.
+    solid=alpha.point(lambda v:255 if v>20 else 0)
+    closed=solid.filter(ImageFilter.MaxFilter(11)).filter(ImageFilter.MinFilter(11))
+    dilated=closed.filter(ImageFilter.MaxFilter(61))
     inv=ImageOps.invert(dilated.filter(ImageFilter.GaussianBlur(2)))
     im=Image.new('RGBA',SIZE,(0,0,0,0));im.putalpha(inv)
     im.save(target,'PNG',optimize=True)
     if target.stat().st_size>=4_000_000:raise ValueError('Máscara de fundo acima do limite de 4MB')
+
+
+def find_clean_background(master:Path,mask:Path,directory:Path)->Path|None:
+    """Reuse only same-camera clean plates: never substitute a merely similar room.
+
+    Explicit background-clean.png has priority. Other scenes are candidates only
+    when their unchanged, nonblack background pixels align closely with master.
+    """
+    import numpy as np
+    sample=(128,192)
+    with Image.open(master) as original, Image.open(mask) as mask_image:
+        base=np.asarray(original.convert('RGB').resize(sample),dtype=np.int16)
+        keep=np.asarray(mask_image.getchannel('A').resize(sample),dtype=np.uint8)>245
+    # Exclude letterbox black: matching empty margins proves nothing about geometry.
+    valid=keep & (base.mean(axis=2)>40)
+    if int(valid.sum())<2000:
+        return None
+    candidates=[directory/'background-clean.png']
+    if directory.parent.is_dir():
+        for sibling in sorted(directory.parent.iterdir()):
+            if sibling.is_dir() and sibling!=directory:
+                candidates.extend((sibling/'background-clean.png',sibling/'background.png'))
+    best=None
+    best_score=float('inf')
+    for candidate in candidates:
+        if not candidate.is_file():
+            continue
+        try:
+            with Image.open(candidate) as image:
+                if image.size!=SIZE or image.format!='PNG':
+                    continue
+                rgb=np.asarray(image.convert('RGB').resize(sample),dtype=np.int16)
+        except (OSError,ValueError):
+            continue
+        difference=np.abs(rgb-base).mean(axis=2)[valid]
+        mean=float(difference.mean())
+        q75=float(np.percentile(difference,75))
+        if mean<12 and q75<19 and mean<best_score:
+            best,best_score=candidate,mean
+    if best:
+        print(f'[FUNDO LIMPO] Referencia alinhada: {best} (erro {best_score:.1f})',flush=True)
+    return best
 
 
 def reconstruct(master:Path,edited:Path,mask:Path,out:Path)->None:
@@ -206,18 +254,23 @@ def atomic(path:Path,bytes_:bytes)->None:
     tmp.write_bytes(bytes_);tmp.replace(path)
 
 
-def estimate(ep:dict,scenes:list[dict],model:str,*,existing_master:Path|None=None)->list[str]:
+def estimate(ep:dict,scenes:list[dict],model:str,*,existing_master:Path|None=None,
+             repair_background:bool=False)->list[str]:
     pending=[]
     for s in scenes:
         d=scene_dir(ep,s,model)
         if not (d/'master.png').is_file() and not (d/'master-raw.png').is_file() and existing_master is None:pending.append(s['id']+'/master')
         if not (d/'foreground-raw.png').is_file():pending.append(s['id']+'/foreground')
-        if not (d/'background-raw.png').is_file():pending.append(s['id']+'/background')
+        if repair_background and (d/'background-raw.png').is_file():
+            pending.append(s['id']+'/background-repair')
+        elif not (d/'background-raw.png').is_file():
+            pending.append(s['id']+'/background')
     return pending
 
 
 def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
-                  supplied_master:Path|None=None,generate=None,edit=None,offline:bool=False)->dict:
+                  supplied_master:Path|None=None,generate=None,edit=None,offline:bool=False,
+                  repair_background:bool=False)->dict:
     d=directory or scene_dir(ep,scene,model)
     d.mkdir(parents=True,exist_ok=True)
     master=d/'master.png'
@@ -251,17 +304,29 @@ def execute_scene(ep:dict,scene:dict,model:str,*,directory:Path|None=None,
     report=validate_image(normalized_fg,alpha=True)
     atomic(fg,normalized_fg)
     make_mask(fg,mask)
-    if not bg_raw.exists():
-        if offline or edit is None:raise RuntimeError('Background ausente no cache; não gerar em offline')
+    if repair_background or not bg_raw.exists():
+        if offline or edit is None:
+            raise RuntimeError('Background ausente ou reparo solicitado em modo offline')
         content=edit(master,background_prompt(),model,transparent=False,mask=mask)
+        # Validate the new paid result BEFORE replacing any cached source.
+        normalized_new=normalize_image(content,alpha=False,stage=f"{scene['id']}/background")
+        validate_image(normalized_new,alpha=False)
+        if bg_raw.is_file():
+            previous=bg_raw.read_bytes()
+            backup=d/('background-raw-backup-'+hashlib.sha256(previous).hexdigest()[:12]+'.png')
+            if not backup.exists():
+                atomic(backup,previous)
         atomic(bg_raw,content)
     normalized_bg=normalize_image(bg_raw.read_bytes(),alpha=False,stage=f"{scene['id']}/background")
     validate_image(normalized_bg,alpha=False)
     working_bg=d/'background-normalized.png'
     atomic(working_bg,normalized_bg)
-    reconstruct(master,working_bg,mask,bg)
+    clean_reference=find_clean_background(master,mask,d)
+    source=clean_reference or working_bg
+    reconstruct(master,source,mask,bg)
     comp=compare(master,bg,fg,d/'comparacao.jpg')
     result={'version':'master-derived-v2','episode':ep['id'],'scene':scene['id'],
+            'background_source':str(clean_reference) if clean_reference else 'inpainting',
             'subject':scene['subject'],'alpha':report,'composition':comp,
             'status':'aguardando_revisao_visual','files':{
               name:str(d/name) for name in ('master.png','foreground.png','background.png','comparacao.jpg')}}
@@ -282,6 +347,7 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--planejar',action='store_true')
     ap.add_argument('--offline',action='store_true')
     ap.add_argument('--validar',action='store_true')
+    ap.add_argument('--reparar-fundo',action='store_true',help='Refaz somente o background via IA; faz backup do raw anterior')
     args=ap.parse_args(argv)
     if not 0<=args.max_chamadas<=180:raise ValueError('Limite permitido: 0 a 180 chamadas')
     if args.master_existente and args.todas_cenas:raise ValueError('Master existente funciona somente com uma cena')
@@ -290,7 +356,8 @@ def main(argv:list[str]|None=None)->int:
     if ep['id']!=args.id:raise ValueError('ID no storyboard diferente do solicitado')
     scenes=ep['scenes'] if args.todas_cenas else [next((s for s in ep['scenes'] if int(s['id'])==args.cena),None)]
     if scenes[0] is None:raise ValueError('Cena solicitada não existe')
-    missing=estimate(ep,scenes,args.modelo,existing_master=args.master_existente)
+    missing=estimate(ep,scenes,args.modelo,existing_master=args.master_existente,
+                     repair_background=args.reparar_fundo and not args.validar)
     print(f"[PLANO] {len(scenes)} de {len(ep['scenes'])} enquadramentos; "
           f"{len(missing)} chamadas adicionais previstas; orçamento {args.max_chamadas}.")
     for stage in missing:print('  [PENDENTE] '+stage)
@@ -315,7 +382,8 @@ def main(argv:list[str]|None=None)->int:
             image,prompt,model,key,transparent=transparent,mask=mask)
     for idx,scene in enumerate(scenes,1):
         result=execute_scene(ep,scene,args.modelo,supplied_master=args.master_existente,
-                             generate=generate,edit=edit,offline=args.offline)
+                             generate=generate,edit=edit,offline=args.offline,
+                             repair_background=args.reparar_fundo)
         print(f"[OK] {idx}/{len(scenes)} cena {scene['id']} | diferença média: "
               f"{result['composition']['mean_rgb_difference']} | margens: "
               f"{'REVER' if result['alpha']['margin_warning'] else 'OK'}")
