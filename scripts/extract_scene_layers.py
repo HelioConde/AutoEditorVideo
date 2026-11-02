@@ -242,6 +242,7 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument("--max-chamadas",type=int,default=0)
     ap.add_argument("--offline",action="store_true")
     ap.add_argument("--diagnosticar-cache",action="store_true")
+    ap.add_argument("--verificar-aprovacoes",action="store_true",help="Checa se todas as cenas estao liberadas para render, sem gerar imagens")
     ap.add_argument("--aprovar",action="store_true")
     ap.add_argument("--motivo",default="")
     ap.add_argument("--max-segundos-por-plano",type=float,default=6)
@@ -253,6 +254,17 @@ def main(argv:list[str]|None=None)->int:
     scenes=ep["scenes"] if args.todas_cenas else [
         next((s for s in ep["scenes"] if int(s["id"])==args.cena),None)]
     if scenes[0] is None:raise ValueError("Cena inexistente")
+    if args.verificar_aprovacoes:
+        # The renderer owns this check for both legacy scenes and semantic
+        # layers. Keep image generation disconnected from the approval check.
+        from renderizar_master_remotion import validate_scenes
+        try:
+            validated=validate_scenes(ep,args.modelo)
+        except (OSError,RuntimeError,ValueError,KeyError) as exc:
+            print("[RENDER AGUARDA REVISAO] "+str(exc),flush=True)
+            return 2
+        print(f"[RENDER LIBERADO] {len(validated)} cenas aprovadas e prontas.",flush=True)
+        return 0
     if args.aprovar:
         if args.todas_cenas:raise ValueError("Aprovacao deve ser individual")
         report=approve_multilayer(ep,scenes[0],args.modelo,args.motivo)
