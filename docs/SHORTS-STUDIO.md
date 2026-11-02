@@ -32,7 +32,7 @@ Ele deixa de replanejar automaticamente a cada execução, mantendo os mesmos ha
 
 A consulta gratuita (sem imagem) distingue: Docker/proxy offline, chave local ausente, falha na autenticação, conta conectada sem elegibilidade e proxy conectado com conta elegível. A disponibilidade muda conforme o servidor e a conta. **Não há garantia de login permanente nem de acesso ilimitado**. `-MaxChamadas` limita **quantas novas imagens a execução pode solicitar**; é uma proteção de custo, não a cota do Codex e não deve ser substituída por um teste de login.
 
-O Studio verifica a conexão periodicamente enquanto está aberto. Use **Iniciar proxy** para executar explicitamente o instalador local de Docker Compose, caso confie no serviço comunitário, e **Fazer login** para iniciar autenticação com autorização manual. Nunca copie chaves ou códigos de login para o GitHub.
+O Studio verifica a conexão periodicamente enquanto está aberto. Use **Iniciar proxy** para ligar uma instalação existente do Docker Compose (sem rebuild), caso confie no serviço comunitário, e **Fazer login** para iniciar autenticação com autorização manual. Nunca copie chaves ou códigos de login para o GitHub.
 
 ### Manter o serviço disponível
 
