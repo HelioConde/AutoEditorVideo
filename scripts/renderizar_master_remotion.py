@@ -26,6 +26,7 @@ from narracao_shorts import ensure_voice
 from renderizar_com_remotion import audio_duration,captions_from_ass
 from capa_cinematografica import cover_options, render_cover
 from qa_foreground_fidelity import foreground_fidelity
+from chess_composition_safety import master_static_for_chess_action
 from revisao_visual_cenas import read_review
 
 
@@ -43,6 +44,11 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
             raise ValueError(f"Cena {scene['id']} REPROVADA manualmente: "
                              f"{manual['reason']}. Corrija/regenere a imagem e "
                              'revise a nova versão antes de renderizar.')
+        if scene.get('correcao_visual',{}).get('requires_manual_approval') and (
+                not manual or manual['status']!='aprovado'):
+            raise ValueError(f"Cena {scene['id']}: nova versao requer APROVACAO "
+                             'visual explicita antes de entrar no Short. '
+                             'Use -AprovarCena so apos conferir master e comparacao.')
         qa=folder/'qa.json'
         if not qa.is_file():
             raise ValueError(f'Enquadramento {scene["id"]}: falta QA da composição')
@@ -57,14 +63,16 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
         if not source.is_file():
             source=paths['foreground']
         fidelity=foreground_fidelity(paths['master'],source)
-        safe_2d=bool(fidelity.get('review_required') or fidelity['redrawn'])
+        hero_master=master_static_for_chess_action(scene)
+        safe_2d=bool(hero_master or fidelity.get('review_required') or fidelity['redrawn'])
         if report.get('warnings'):
             print(f"[QA AVISO] Cena {scene['id']}: {', '.join(report['warnings'])}. "
                   'Confira o background antes de publicar.')
         if safe_2d:
-            print(f"[QA PROTECAO] Cena {scene['id']}: foreground redesenhado ou "
-                  'inconclusivo. Renderizando a master original como imagem '
-                  'inteira, sem recompor corpo/tabuleiro. Nenhuma IA usada.')
+            reason='rei/tabuleiro preservados' if hero_master else 'foreground inseguro'
+            print(f"[QA PROTECAO] Cena {scene['id']}: {reason}. "
+                  'Renderizando master intacta (camera global, sem parallax 2.5D). '
+                  'Nenhuma chamada de IA.')
         verified.append({'scene':scene,'folder':folder,'files':paths,
                          'qa':report,'fidelity':fidelity,
                          'render_mode':'master_static' if safe_2d else '2_5d'})
@@ -139,6 +147,9 @@ def cover_from_master(ep:dict,model:str,destination:Path)->dict:
     if manual and manual['status']=='reprovado':
         raise ValueError(f"Capa bloqueada: cena {chosen} reprovada: "
                          f"{manual['reason']}. Escolha cena aprovada no JSON.")
+    if scene.get('correcao_visual',{}).get('requires_manual_approval') and (
+            not manual or manual['status']!='aprovado'):
+        raise ValueError(f"Capa bloqueada: nova cena {chosen} ainda nao foi aprovada.")
     if background.is_file() and foreground.is_file():
         validate_image(background.read_bytes(),alpha=False)
         validate_image(foreground.read_bytes(),alpha=True)
@@ -148,7 +159,8 @@ def cover_from_master(ep:dict,model:str,destination:Path)->dict:
         if not unshifted.is_file():
             unshifted=foreground
         fidelity=foreground_fidelity(master,unshifted)
-        if fidelity.get('review_required') or fidelity['redrawn']:
+        if (master_static_for_chess_action(scene) or
+                fidelity.get('review_required') or fidelity['redrawn']):
             with Image.open(master) as im:
                 source=im.convert('RGB')
             source_type='master-static-qa'
