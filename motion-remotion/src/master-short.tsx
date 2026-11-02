@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill,Audio,Img,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
-import {AnimationMode,characterMotion,cannotMoveSeparately,motionAtFrame} from './cinematic-motion';
+import {AnimationMode,cannotMoveSeparately,motionAtFrame} from './cinematic-motion';
+import {CharacterPreset,characterPoseAtFrame} from './character-idle';
 
 export type SemanticLayer={
   id:string;role:string;z:number;src:string;
@@ -14,12 +15,14 @@ export type Scene={
 export type Caption={startFrame:number;endFrame:number;text:string};
 export type MasterProps={
   id:string;durationFrames:number;audio:string;scenes:Scene[];
-  captions:Caption[];hook:string;animationMode?:AnimationMode
+  captions:Caption[];hook:string;animationMode?:AnimationMode;
+  characterPreset?:CharacterPreset
 };
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
 
-const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode}>=({scene,opacity,mode})=>{
+const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:CharacterPreset}>=({scene,opacity,mode,preset})=>{
   const frame=useCurrentFrame();
+  const {fps}=useVideoConfig();
   const motion=motionAtFrame(frame,scene.startFrame,scene.endFrame,
                             scene.shotType,scene.id,mode);
   const hasHero=Boolean(scene.layers?.some(l=>l.role==='hero_prop'));
@@ -40,15 +43,21 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode}>=({scene,opa
         objectFit:'contain'}}/>
       {scene.renderMode==='multilayer' && ordered.length
         ? ordered.map(layer=>{
-          const pose=characterMotion(layer.role,layer.id,layer.alphaCoverage ?? NaN,
-                hasHero,motion.breath,mode);
+          const pose=characterPoseAtFrame({
+            role:layer.role,id:layer.id,coverage:layer.alphaCoverage ?? NaN,
+            hasHeroProp:hasHero,frame,sceneStart:scene.startFrame,
+            sceneEnd:scene.endFrame,fps,preset,
+            enabled:mode==='cinematica',shotType:scene.shotType,
+          });
           // Furniture, board and large hero masks are always STATIC in scene
           // coordinates. Never animate a chess piece independently if its
           // alpha also contains a hand/arm or another person's sleeve.
           const staticLayer=cannotMoveSeparately(layer.role);
           const transform=!staticLayer && pose.enabled
             ? 'translate('+pose.translateX.toFixed(3)+'px,'+
-              pose.translateY.toFixed(3)+'px) scaleY('+pose.scaleY.toFixed(6)+')'
+              pose.translateY.toFixed(3)+'px) rotate('+pose.rotateDeg.toFixed(4)+
+              'deg) scale('+pose.scaleX.toFixed(6)+','+
+              pose.scaleY.toFixed(6)+')'
             : undefined;
           return <Img key={layer.id} src={staticFile(layer.src)} style={{
             position:'absolute',inset:0,width:'100%',height:'100%',
@@ -75,7 +84,8 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode}>=({scene,opa
 };
 
 export const MasterShort:React.FC<MasterProps>=({
-  scenes,audio,captions,hook,animationMode='cinematica'
+  scenes,audio,captions,hook,animationMode='cinematica',
+  characterPreset='equilibrado'
 })=>{
   const frame=useCurrentFrame();
   const {fps}=useVideoConfig();
@@ -88,8 +98,8 @@ export const MasterShort:React.FC<MasterProps>=({
     [current.startFrame,current.startFrame+7],[0,1],clamp):1;
   const caption=captions.find(c=>frame>=c.startFrame&&frame<c.endFrame);
   return <AbsoluteFill style={{background:'#080a14',fontFamily:'Arial,sans-serif'}}>
-    {previous&&fade<1?<Shot scene={previous} opacity={1} mode={animationMode}/>:null}
-    <Shot scene={current} opacity={fade} mode={animationMode}/>
+    {previous&&fade<1?<Shot scene={previous} opacity={1} mode={animationMode} preset={characterPreset}/>:null}
+    <Shot scene={current} opacity={fade} mode={animationMode} preset={characterPreset}/>
     <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(0,0,0,.15),transparent 20%,rgba(0,0,0,.13) 55%,rgba(0,0,0,.65) 100%)'}}/>
     {hook&&frame<fps*2.2?<div style={{position:'absolute',top:100,left:75,right:75,
       fontSize:76,lineHeight:1.1,color:'#fff',textAlign:'center',fontWeight:900,
