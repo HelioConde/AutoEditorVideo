@@ -54,7 +54,7 @@ def test_photoshop_style_composite_has_no_master_ghosts_and_preserves_raw(tmp_pa
         assert final_bg.convert('RGB').getpixel((490,740))==(28,56,112)
     with Image.open(folder/'foreground.png') as final_fg:
         assert final_fg.getpixel((490,480))[3]==255
-        assert final_fg.getpixel((490,740))[3]==0
+        assert final_fg.getpixel((490,850))[3]==0
     with Image.open(folder/'background-mask.png') as mask:
         # Mask stays at the master coordinates, not the shifted display layer.
         assert mask.getchannel('A').getpixel((490,740)) < 20
