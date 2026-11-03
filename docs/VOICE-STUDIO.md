@@ -79,6 +79,50 @@ outro modelo cujos termos autorizem esse uso. Em caso de 403 persistente,
 envie o novo erro com o codigo retornado. Nao exponha chaves, tokens
 nem dados de conta.
 
+## HTTP 500: sidecar OmniVoice nao respondeu em 300 segundos
+
+Este erro indica um limite interno do motor do VoiceStudio, nao do YouTube,
+da licenca, nem do Edge TTS. O OmniVoice e pesado para CPUs antigas e pode
+exceder o tempo de resposta do seu subprocesso.
+
+**Primeiro diagnostico (sem gerar imagens ou publicar):**
+
+```powershell
+cd "$HOME\Documents\arquivo-otaku-github"
+git pull --ff-only origin main
+.\testar-voz-studio.ps1 -Id 401-jujutsu-kaisen-ep01 -AmostraCurta -CompararEdge
+```
+
+O modo `-AmostraCurta` usa apenas uma frase de Jujutsu Kaisen e salva a
+comparacao numa pasta independente:
+`assets/gerados/shorts-animados/401-jujutsu-kaisen-ep01/teste-voz-curta/`.
+Ele **nao altera** o MP3, as legendas, o MP4 ou a capa do episodio completo.
+
+Se OmniVoice continuar silencioso mesmo com a amostra curta, use no VoiceStudio
+**Catálogo de modelos → Supertonic-3 → Instalar**, leia sua licenca OpenRAIL-M
+(e aceite apenas se o uso pretendido for permitido). Supertonic-3 usa ONNX na
+CPU e suporta portugues com `language="pt"`. Para um preset masculino:
+
+```powershell
+.\testar-voz-studio.ps1 -Id 401-jujutsu-kaisen-ep01 -AmostraCurta -CompararEdge -ModeloVoiceStudio supertonic3 -PerfilVoiceStudio M1
+```
+
+A instalacao e selecao do modelo alternativo sao feitas no VoiceStudio, nao pelo
+script do Otaku Multicena. Mesmo com outro TTS, o alinhamento ainda necessita
+de um modelo Whisper configurado.
+
+**Ajuste avancado de timeout** (opcional, caso a amostra curta de OmniVoice
+funcione, mas um roteiro maior exceda o prazo): o backend usa
+`OMNIVOICE_SIDECAR_RECV_TIMEOUT_S` (padrao 300 segundos). Pode-se aumentar
+para 600 segundos nas configuracoes do ambiente do VoiceStudio e reiniciar o
+aplicativo, mas isso apenas amplia a espera, nao torna o modelo mais rapido.
+Evite repetir um teste que já travou, principalmente com 16 GB de RAM.
+O limite do adaptador do AutoEditorVideo e independente do limite interno.
+
+Os pesos padrão OmniVoice sao nao comerciais. Supertonic-3 utiliza OpenRAIL-M
+com condicoes proprias. Revisar a licenca do motor e do audio antes de
+qualquer publicacao ou monetizacao. O primeiro teste permanece privado.
+
 ## Producao opcional, SEM PUBLICAR
 
 Depois de validar a voz e as licencas dos pesos baixados:
