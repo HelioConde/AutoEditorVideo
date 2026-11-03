@@ -1,0 +1,37 @@
+{
+  "schema": "arquivo-otaku/formatos-editoriais-60s/v1",
+  "language": "pt-BR",
+  "visual_policy": "all-ai-generated",
+  "format_types": [
+    "curiosidade",
+    "voce-lembra"
+  ],
+  "episodes": [
+    {
+      "id": "201-death-note-rosto-nome",
+      "series": "Death Note",
+      "format_type": "curiosidade",
+      "title": "O Death Note NÃO funciona apenas com um nome! 😱 #Shorts",
+      "cover": "SÓ O NOME NÃO BASTA",
+      "effect": "curiosity",
+      "character": "Light Yagami, brown-haired Japanese student in white shirt, anxious as he holds a supernatural black notebook; two different adult Japanese people with similar silhouette seen only as abstract figures, no readable text",
+      "object": "single black supernatural notebook, a single open handwritten page without readable words and one drawn human portrait",
+      "background": "dark blue Japanese bedroom with desk lamp, noir library wall, soft violet and red rim lighting; no existing anime frames",
+      "script": "Você sabia que escrever um nome no Death Note não é suficiente para matar alguém? Tem uma regra que muda tudo: quem escreve precisa imaginar o rosto da pessoa ao mesmo tempo. E isso evita um problema assustador. Imagine dois desconhecidos com exatamente o mesmo nome. Sem essa regra, o caderno poderia atingir a pessoa errada. Mas, quando Light escreve um nome, precisa saber a quem ele pertence. É por isso que descobrir identidades e esconder rostos se torna tão importante na história. Agora pensa: se alguém soubesse apenas o seu nome, você estaria realmente em perigo? Comenta sua teoria! E inscreva-se para descobrir mais segredos dos animes!",
+      "editorial_note": "A regra é canônica: ao escrever o nome, o usuário deve visualizar o rosto; protege homônimos. Fonte: Death Note manga, How to Use It I. Conteúdo independente do resumo de episódios, 100% arte IA e comentário original."
+    },
+    {
+      "id": "301-death-note-voce-lembra-justica",
+      "series": "Death Note",
+      "format_type": "voce-lembra",
+      "title": "VOCÊ LEMBRA quando Death Note fazia você torcer por Kira? 🖤 #Shorts",
+      "cover": "VOCÊ LEMBRA DE KIRA?",
+      "effect": "nostalgia",
+      "character": "Light Yagami as a contemplative brown-haired Japanese student with a black notebook, and a mysterious detective represented by distant dark silhouette; expressive cinematic anime-style faces, original AI illustrations",
+      "object": "an old television with white glow, a black notebook on a desk, a silhouette of a detective and a delicate red apple, no readable letters",
+      "background": "cozy nostalgic bedroom at night with old television and rain on window, dark blue and warm amber tones; original imaginary composition with no screenshots",
+      "script": "Você lembra da primeira vez que Death Note fez você questionar quem era o herói? No começo, Light parecia só um estudante querendo acabar com os crimes. Então ele encontrou um caderno que podia tirar vidas. E, de repente, aquela ideia de justiça começou a ficar assustadora. Cada novo nome escrito mudava a forma como a gente enxergava Kira. Quando L entrou na história, era impossível não escolher um lado. O mais curioso? Mesmo sem grandes batalhas, uma conversa já fazia o coração acelerar. Agora quero saber: você assistiu Death Note pela primeira vez em que época? E torcia por Light ou por L? Comenta sua lembrança e inscreva-se para reviver mais animes!",
+      "editorial_note": "Quadro de nostalgia e memória afetiva, não descrição de um episódio único. Não usar áudio nem cenas originais; evite afirmar que todo espectador torcia por Kira."
+    }
+  ]
+}
