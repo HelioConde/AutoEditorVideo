@@ -379,6 +379,8 @@ def main(argv:list[str]|None=None)->int:
     ap.add_argument('--modelo',default='gpt-image-1.5')
     ap.add_argument('--max-segundos-por-plano',type=float,default=6)
     ap.add_argument('--criar-voz',action='store_true')
+    ap.add_argument('--voz-motor',choices=['edge','voicestudio'],default='edge',
+                    help='Edge TTS original (padrão) ou VoiceStudio local com ASR')
     ap.add_argument('--animacao',choices=['cinematica','desligada','esqueleto2d'],
                     default='cinematica',
                     help='Movimentos originais de camera, respiracao segura e luz')
@@ -398,7 +400,7 @@ def main(argv:list[str]|None=None)->int:
     if args.somente_voz:
         if args.somente_capa or args.renderizar:
             raise ValueError('--somente-voz nao pode renderizar video ou capa')
-        voice,subtitles=ensure_voice(select_episode(args.id),folder,create=args.criar_voz)
+        voice,subtitles=ensure_voice(select_episode(args.id),folder,create=args.criar_voz,engine=args.voz_motor)
         validate_planned_audio(audio_duration(voice),stage=f'Voz PT {args.id}')
         print(f'[VOZ PRONTA] Audio: {voice} | legendas: {subtitles}. '
               'Nenhum render executado; aguardando aprovacao visual das imagens.')
@@ -415,7 +417,7 @@ def main(argv:list[str]|None=None)->int:
     validated=validate_scenes(ep,args.modelo)
     print(f'[QA] {len(validated)} enquadramentos com PNG alfa e cenário correspondente.')
     folder=OUT/args.id
-    voice,ass=ensure_voice(select_episode(args.id),folder,create=args.criar_voz)
+    voice,ass=ensure_voice(select_episode(args.id),folder,create=args.criar_voz,engine=args.voz_motor)
     seconds=validate_planned_audio(audio_duration(voice),stage=f'Pre-render PT {args.id}')
     captions=captions_from_ass(ass,seconds)
     if not captions:raise RuntimeError('Narração sem legendas')
