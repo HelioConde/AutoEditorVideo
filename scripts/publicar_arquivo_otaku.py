@@ -374,7 +374,25 @@ def prepare(args):
         except Exception as e:print(f"[AVISO] Falhou arte IA Shorts ({type(e).__name__}): {str(e)[:130]}. Usando quadro local.")
     elif not args.refazer and (OUTPUT/"arte-shorts.jpg").is_file():short_source=OUTPUT/"arte-shorts.jpg"
     cover_image(yt_source,OUTPUT/"miniatura-youtube.jpg",1280,720,cover_hook(ep),str(ep.get('serie') or 'ANIME').upper(),False)
-    cover_image(short_source,OUTPUT/"capa-tiktok-shorts.jpg",1080,1920,cover_hook(ep),str(ep.get('serie') or 'ANIME').upper(),True)
+    if args.capa_final_shorts:
+        from PIL import Image
+        approved = args.capa_final_shorts.expanduser().resolve()
+        if not approved.is_file():
+            raise RuntimeError("Capa aprovada de Shorts ausente: " + str(approved))
+        with Image.open(approved) as image:
+            image.load()
+            width, height = image.size
+            if height < 640 or abs(width / height - 9 / 16) > .02:
+                raise RuntimeError("Capa aprovada deve ser vertical 9:16 e ter pelo menos 640px de altura")
+            destination = OUTPUT / "capa-tiktok-shorts.jpg"
+            if approved != destination.resolve():
+                if image.format == "JPEG":
+                    shutil.copy2(approved, destination)
+                else:
+                    image.convert("RGB").save(destination, "JPEG", quality=94, optimize=True)
+        print("[CAPA] Usando a capa 9:16 final aprovada, sem redesenhar: "+str(approved))
+    else:
+        cover_image(short_source,OUTPUT/"capa-tiktok-shorts.jpg",1080,1920,cover_hook(ep),str(ep.get('serie') or 'ANIME').upper(),True)
     # Store exact source MP4 and generated files, avoid storing secrets.
     manifest={"video":str(args.video.resolve()),"miniatura_youtube":str((OUTPUT/"miniatura-youtube.jpg").resolve()),"capa_shorts":str((OUTPUT/"capa-tiktok-shorts.jpg").resolve()),"metadata":str(METADATA.resolve()),"prompts":{"youtube":YOUTUBE_PROMPT,"shorts":TIKTOK_PROMPT}}
     (OUTPUT/"manifesto.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
@@ -474,13 +492,19 @@ def upload(args):
                 media=MediaFileUpload(str(thumb),mimetype="image/jpeg",resumable=False)
                 youtube.thumbnails().set(videoId=video_id,media_body=media).execute()
                 previous["thumbnail_status"]="success"
+                previous["thumbnail_file"]=str(thumb.resolve())
                 save_state(previous,historical_state)
                 print("[OK] Miniatura anexada ao YouTube")
             except HttpError as exc:
                 code=getattr(exc.resp,"status","?")
                 previous["thumbnail_status"]=f"error_http_{code}"
+                previous["thumbnail_file"]=str(thumb.resolve())
+                previous["thumbnail_error"]=str(exc)[:350]
                 save_state(previous,historical_state)
-                print(f"[AVISO] Video ENVIADO; YouTube recusou miniatura (HTTP {code}). Para Shorts, use YouTube Studio quando habilitado. Nao repita o upload.")
+                print(f"[AVISO] VIDEO ENVIADO, mas YouTube recusou a capa (HTTP {code}). "
+                      f"A capa correta ficou em {thumb}. Abra o YouTube Studio no computador "
+                      "e use Shorts > Detalhes > Miniatura > Enviar arquivo. "
+                      "Nao repita o upload do MP4.")
     print("[FINAL] YouTube: https://youtu.be/"+video_id)
     print("[FINAL] Estado por video: "+str(historical_state))
 
@@ -500,6 +524,7 @@ def main():
     p.add_argument("--video",type=Path,default=PREVIEW_VIDEO)
     p.add_argument("--episodio",type=Path,default=EPISODE)
     p.add_argument("--imagem-fonte",type=Path)
+    p.add_argument("--capa-final-shorts",type=Path,help="Usa JPG/PNG vertical aprovado sem redesenhar a capa")
     p.add_argument("--privacidade",choices=["private","unlisted","public"],default="public")
     p.add_argument("--modelo-imagem",choices=["gpt-image-1.5","gpt-image-2"],default="gpt-image-1.5")
     p.add_argument("--modelo-texto",default="gpt-6.1-sol")
