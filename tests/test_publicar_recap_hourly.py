@@ -21,10 +21,17 @@ def record(id: str, at: datetime, privacy: str = "public") -> hourly.UploadRecor
     return hourly.UploadRecord(id, f"vid_{id}", privacy, at)
 
 
-def test_default_experiment_has_only_prepared_episodes():
+def test_default_experiment_cycles_between_content_formats():
     ids = hourly.DEFAULT_IDS
-    assert ids == (ID2, ID3)
-    assert all(i in hourly.registered_episodes() for i in ids)
+    assert ids == (
+        ID2, "201-death-note-rosto-nome",
+        "301-death-note-voce-lembra-justica", ID3,
+    )
+    catalog = hourly.registered_episodes()
+    assert all(i in catalog for i in ids)
+    assert tuple(hourly.editorial_role(catalog[i]) for i in ids) == (
+        "episodio", "curiosidade", "voce-lembra", "episodio",
+    )
     assert hourly.DEFAULT_MINUTES == 60
 
 
@@ -166,3 +173,64 @@ def test_uploaded_state_requires_matching_mp4_hash_and_timestamp(tmp_path, monke
     state_file.write_text(json.dumps(state), encoding="utf-8")
     with pytest.raises(hourly.SchedulingError, match="hash"):
         hourly.existing_upload(ID2, "equilibrado")
+
+
+def test_new_content_has_original_scripts_and_correct_youtube_metadata():
+    from metadata_shorts import publisher_episode
+    from roteiro_para_storyboard import select_episode, build_storyboard
+    for episode_id, role in (
+        ("201-death-note-rosto-nome", "curiosidade"),
+        ("301-death-note-voce-lembra-justica", "voce-lembra"),
+    ):
+        item = select_episode(episode_id)
+        assert item["format_type"] == role
+        assert item["series"] == "Death Note"
+        assert "Inscreva-se" in item["script"] or "inscreva-se" in item["script"]
+        assert 80 <= len(item["script"].split()) <= 135
+        assert item["cover"] and len(item["cover"]) >= 8
+        meta = publisher_episode(item)
+        assert meta["titulo_youtube"] == item["title"]
+        assert "geradas por IA" in meta["descricao_youtube"]
+        assert "#Shorts" in meta["descricao_youtube"]
+        scenes = build_storyboard(item, max_hold=6)["scenes"]
+        assert 2 <= len(scenes) <= 60
+
+
+def test_full_editorial_cycle_publishes_four_formats_in_order_with_hourly_intervals():
+    beginning = datetime(2026, 11, 3, 10, 0, tzinfo=timezone.utc)
+    current = [beginning]
+    published = {}
+    uploads = []
+    def reader(episode_id, profile):
+        return published.get(episode_id)
+    def execute(command):
+        episode_id = command[command.index("-Id") + 1]
+        uploads.append((episode_id, current[0]))
+        published[episode_id] = record(episode_id, current[0])
+        return 0
+    def nap(seconds):
+        current[0] += timedelta(seconds=seconds)
+    results = hourly.process(
+        list(hourly.DEFAULT_IDS), minutes=60, privacy="public",
+        profile="equilibrado", model="gpt-image-1.5", budget=45,
+        publish=True, reader=reader, execute=execute,
+        clock=lambda: current[0], sleep=nap,
+    )
+    assert [row[0] for row in uploads] == list(hourly.DEFAULT_IDS)
+    assert [row.episode_id for row in results] == list(hourly.DEFAULT_IDS)
+    assert all(
+        uploads[i+1][1] - uploads[i][1] >= timedelta(hours=1)
+        for i in range(len(uploads)-1)
+    )
+
+
+def test_no_reordering_if_old_schedule_already_published_episode_three():
+    t = datetime(2026, 11, 3, 10, 0, tzinfo=timezone.utc)
+    published = {ID2: record(ID2, t), ID3: record(ID3, t + timedelta(hours=1))}
+    with pytest.raises(hourly.SchedulingError, match="fora de ordem"):
+        hourly.process(
+            list(hourly.DEFAULT_IDS), minutes=60, privacy="public",
+            profile="equilibrado", model="gpt-image-1.5", budget=45,
+            publish=True, reader=lambda i, _: published.get(i),
+            execute=lambda *_: pytest.fail("No uploads after prior EP03 publication"),
+        )
