@@ -40,6 +40,24 @@ interrompem o fluxo. O QA tecnico nao garante ausencia de defeitos artisticos.
 O upload nao e refeito cegamente se o resultado estiver ambiguo ou ja constar
 no registro local. Consulte o [guia do Short EN](docs/OTAKU-REFRAME-DID-YOU-KNOW-201-EN.md).
 
+## Melhorias Shorts a partir de 8 auditorias do vidIQ
+
+Os 8 check-ins do Otaku Multicena mostraram aberturas longas com imagem
+parada e legendas difíceis de ler. O Remotion master e legado agora
+fazem cortes de câmera no início, legendas de alto contraste e blocos
+de 2–3 palavras alinhados ao TTS. O pipeline detecta mudanças do
+renderizador para não reutilizar MP4 antigo.
+
+Confira [o diagnóstico dos 8 Shorts e o plano de QA](docs/VIDIQ-OTAKU-MULTICENA-QA.md).
+Essas mudanças **não alteram vídeos já publicados** nem fazem upload sozinhas.
+
+Para testar localmente sem gastar chamadas de imagem:
+
+```powershell
+git pull --ff-only origin main
+.\criar-publicar-short.ps1 -Id 401-jujutsu-kaisen-ep01 -VozMotor edge -Modelo gpt-image-1.5 -MaxChamadas 0 -Refazer
+```
+
 ## Voz opcional — VoiceStudio + Edge TTS
 
 O **Edge TTS continua sendo o motor padrao**. Para testar uma segunda narração
