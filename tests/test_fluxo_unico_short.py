@@ -96,6 +96,14 @@ def test_missing_approved_cover_prevents_publication(tmp_path, monkeypatch):
     cached.mkdir(parents=True)
     (cached / "voz-master.mp3").write_bytes(b"legacy-edge-test")
     (cached / "legendas.ass").write_text("test", encoding="utf-8")
+    from narracao_shorts import VOICE, RATE
+    import hashlib
+    script = select_episode("101-death-note-ep01")["script"]
+    (cached / "marcacoes-voz.json").write_text(json.dumps({
+        "voice": VOICE, "rate": RATE,
+        "script_sha256": hashlib.sha256(script.encode("utf-8")).hexdigest(),
+        "words": []
+    }), encoding="utf-8")
     monkeypatch.setattr(flow, "validate_video", lambda *_args, **_kwargs: 55)
     monkeypatch.setattr(flow, "run_command", lambda *_args, **_kwargs: True)
     with pytest.raises(flow.PipelineError, match="Capa vertical ausente"):
