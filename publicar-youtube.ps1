@@ -8,6 +8,7 @@ param(
     [switch]$TextoIA,
     [switch]$GerarVideo,
     [string]$Video='',
+    [string]$ImagemFonte='',
     [string]$Episodio='',
     [switch]$Refazer
 )
@@ -48,6 +49,7 @@ if ($ArteIA) {$argsForPython+='--arte-ia'}
 if ($TextoIA) {$argsForPython+='--texto-ia'}
 if ($Refazer) {$argsForPython+='--refazer'}
 if ($Video) {$argsForPython+=@('--video',$Video)}
+if ($ImagemFonte) {$argsForPython+=@('--imagem-fonte',$ImagemFonte)}
 if ($Episodio) {$argsForPython+=@('--episodio',$Episodio)}
 Write-Host "[INFO] Etapa: $Etapa; privacidade solicitada: $Privacidade; IA de arte: $ArteIA; IA texto: $TextoIA"
 & $py @argsForPython
