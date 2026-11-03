@@ -254,3 +254,19 @@ O editor bloqueia automaticamente a montagem quando a narração mais a margem u
 
 Implementação: [scripts/shorts_duration.py](scripts/shorts_duration.py) · Testes: [tests/test_shorts_duration.py](tests/test_shorts_duration.py) · Política para agentes: [AGENTS.md](AGENTS.md).
 
+
+## Produzir e publicar um Short completo em um comando
+
+Use o novo modo de geração, narração, cenas com IA, animação, capa, descrição e upload YouTube. O processo retoma cenas em cache após falhas recuperáveis, respeita limite total de **60 segundos** e nunca publica um vídeo incompleto.
+
+```powershell
+cd "C:\Users\helio\Documents\arquivo-otaku-github"
+git pull --ff-only origin main
+.\criar-publicar-short.ps1 -Id 101-death-note-ep01 -Publicar -Privacidade public
+```
+
+Outros episódios: `102-death-note-ep02` e `103-death-note-ep03`.
+Para gerar sem publicar, basta omitir `-Publicar`. Publicação direta exige credenciais YouTube OAuth já configuradas; o upload registra hash/ID e a capa correta é preservada localmente mesmo se a API do YouTube bloquear a miniatura do Short.
+
+Guia: [Comando único para Shorts](docs/COMANDO-UNICO-SHORTS.md).
+
