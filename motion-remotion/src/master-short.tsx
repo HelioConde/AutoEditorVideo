@@ -42,16 +42,21 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
   const heroPulse=hasHero&&mode==='cinematica'
     ?Math.sin(frame/fps*2*Math.PI*0.27)*
       Math.pow(Math.sin(Math.PI*normalized),2)*1.05:0;
-  // Stronger purposeful camera push on the first 7 seconds. Unlike random
-  // shake, this starts on frame 1 and stays within approved image margins.
-  // Other shots retain the calm cinematic choreography.
-  const opening=mode==='cinematica' && scene.startFrame<fps*7;
-  const local=Math.max(0,Math.min(1,
-    (frame-scene.startFrame)/Math.max(1,Math.min(scene.endFrame,fps*7)-scene.startFrame)));
-  const openingEase=opening?1-Math.pow(1-local,2):0;
-  const openingZoom=openingEase*0.045;
-  const camera='translate('+(motion.panX+(opening?openingEase*8:0)).toFixed(3)+'px,'+
-    (motion.panY+heroPulse+(opening?openingEase*-7:0)).toFixed(3)+
+  // vidIQ feedback: a static first five seconds loses viewers.
+  // Two continuous, deterministic camera beats (0–1.9s push, 1.9–5s
+  // lateral refocus). No synthetic character/body transforms, flashes or
+  // unapproved artwork. First frame remains the exact approved scene.
+  const opening=mode==='cinematica' && scene.startFrame<fps*5;
+  const clamp01=(value:number)=>Math.max(0,Math.min(1,value));
+  const ease01=(value:number)=>{
+    const x=clamp01(value);
+    return x*x*(3-2*x);
+  };
+  const beat1=opening?ease01(frame/(fps*1.9)):0;
+  const beat2=opening?ease01((frame/fps-1.9)/3.1):0;
+  const openingZoom=beat1*.048+beat2*.024;
+  const camera='translate('+(motion.panX+beat1*15-beat2*22).toFixed(3)+'px,'+
+    (motion.panY+heroPulse-beat1*14-beat2*7).toFixed(3)+
     'px) scale('+(motion.zoom+openingZoom).toFixed(5)+')';
   const ordered=(scene.layers||[]).slice().sort((a,b)=>a.z-b.z);
   return <AbsoluteFill style={{opacity,background:'#070912',overflow:'hidden'}}>
@@ -155,12 +160,14 @@ export const MasterShort:React.FC<MasterProps>=({
         opacity:interpolate(frame-current.startFrame,[0,5,fps*1.38,fps*1.65],[0,1,1,0],clamp),
         transform:'translateY('+interpolate(frame-current.startFrame,[0,8],[22,0],clamp)+'px)',
       }}>{current.headline}</div>:null}
-    {caption?<div style={{position:'absolute',top:1288,left:88,right:88,
-      padding:'10px 16px',borderRadius:18,
-      background:'linear-gradient(90deg,transparent,rgba(3,6,17,.56) 14%,rgba(3,6,17,.56) 86%,transparent)',
-      fontSize:65,lineHeight:1.15,fontWeight:900,textAlign:'center',color:'#fff',
-      WebkitTextStroke:'1px rgba(2,4,15,.85)',
-      textShadow:'0 4px 9px #000,0 0 13px rgba(240,240,255,.24)'}}>
+    {caption?<div style={{position:'absolute',top:1258,left:78,right:78,
+      padding:'18px 25px',borderRadius:22,
+      background:'rgba(2,5,15,.85)',
+      border:'2px solid rgba(255,255,255,.18)',
+      boxShadow:'0 12px 32px rgba(0,0,0,.68)',
+      fontSize:79,lineHeight:1.12,fontWeight:900,textAlign:'center',color:'#fff',
+      WebkitTextStroke:'2px rgba(1,3,9,.96)',
+      textShadow:'0 5px 13px #000,0 0 15px rgba(240,240,255,.2)'}}>
       {caption.words?.length
         ? caption.words.map((word,index)=>{
           const active=frame>=word.startFrame && frame<word.endFrame;
