@@ -336,6 +336,8 @@ def send_one(item: dict, mode: str, privacy: str, token: dict,
             "disable_duet": False,
             "disable_stitch": False,
             "is_aigc": True,
+            "brand_content_toggle": False,
+            "brand_organic_toggle": False,
         }
     route = "video/init/" if mode == "direto" else "inbox/video/init/"
     response = api_post(route, token["access_token"], payload)
