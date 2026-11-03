@@ -8,6 +8,32 @@
 > anterior permanece integralmente na branch
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
+## Producao oficial de Shorts — Otaku Reframe (ingles)
+
+O unico editor aprovado para os Shorts dos nossos canais e o **AutoEditorVideo
+deste GitHub**, executado no computador Windows. A cadeia final e:
+**Codex Proxy (artes anime com QA) → Edge TTS (ingles) → Remotion/FFmpeg
+(cortes, movimentos e captions) → MP4 local revisado**. Nao substituir por
+slideshow vetorial, previews de compositores externos ou clips genericos.
+
+O proximo Short em ingles e o **Did You Know? / Death Note — a regra do nome e
+do rosto** (`201-death-note-rosto-nome`). Dentro do clone local:
+
+```powershell
+git switch main
+git pull --ff-only origin main
+.\gerar-otaku-reframe.ps1 -Acao Preparar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
+.\gerar-otaku-reframe.ps1 -Acao Diagnosticar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
+```
+
+Depois, com orcamento explicito de chamadas de IA e Codex Proxy disponivel,
+use `-Acao GerarImagens -MaxChamadas 60`; inspecione e aprove cada cena
+individualmente com `gerar-shorts-master.ps1 -AprovarCena -Plano <caminho do
+storyboard EN>`. Somente apos todas as aprovacoes, use `-Acao Validar`
+e `-Acao Renderizar -ConfirmarRevisaoVisual`. O comando de validacao
+bloqueia cenas pendentes e voz/legendas ausentes. **Nada e publicado
+automaticamente**. [Guia detalhado](docs/OTAKU-REFRAME-DID-YOU-KNOW-201-EN.md).
+
 ## Painel Shorts Studio (Windows)
 
 Para controlar o gerador de cenas por botões, acompanhar logs e verificar o
