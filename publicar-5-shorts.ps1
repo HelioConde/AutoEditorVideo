@@ -1,4 +1,4 @@
-# Publica os cinco Shorts aprovados, com metadados por episodio.
+﻿# Publica os cinco Shorts aprovados, com metadados por episodio.
 # Nao gera imagens/voz e nao modifica arquivos MP4.
 [CmdletBinding()]
 param(
@@ -17,6 +17,8 @@ $ids=@(
 $manifestPath=Join-Path $root 'conteudos\testes-animados-5.json'
 $oauth=Join-Path $root '.secrets\youtube-oauth-client.json'
 $publisher=Join-Path $root 'publicar-youtube.ps1'
+$py=Join-Path $root '.venv\Scripts\python.exe'
+if(-not(Test-Path $py)){throw 'Python .venv ausente; execute scripts\instalar-windows.ps1'}
 $published=Join-Path $root 'assets\gerados\publicacao-youtube'
 $metadataDir=Join-Path $published 'episodios'
 
@@ -73,33 +75,16 @@ Push-Location $root
 try {
   foreach($item in $items){
     $id=$item.id
-    $ep=$item.episode
-    $description=("Análise e comentário sobre "+$ep.series+".`n`n"+$ep.script+
-      "`n`nIlustrações geradas por IA e edição autoral. Personagens e obra pertencem aos seus titulares."+
-      "`n`n#DeathNote #Anime #Shorts #ArquivoOtaku")
-    $details=@{
-      serie=[string]$ep.series
-      titulo=[string]$ep.title
-      titulo_youtube=[string]$ep.title
-      descricao_youtube=[string]$description
-      capa_texto=[string]$ep.cover
-      roteiro=[string]$ep.script
-    }
     $episodeFile=Join-Path $metadataDir ($id+'.json')
-    $details | ConvertTo-Json -Depth 4 | Set-Content -LiteralPath $episodeFile -Encoding UTF8
+    # Gerar a descricao via Python UTF-8, nunca como literal PowerShell 5.1.
+    & $py (Join-Path $root 'scripts\metadata_shorts.py') --id $id --destino $episodeFile
+    if($LASTEXITCODE -ne 0){throw "Falha ao gerar metadados UTF-8 para $id"}
     $cover=Join-Path $root ("assets\gerados\shorts-animados\$id\$id-master-capa.jpg")
     if(-not(Test-Path $cover)){
-      if(-not(Get-Command ffmpeg -ErrorAction SilentlyContinue)){
-        throw "Capa de $id ausente e FFmpeg indisponivel."
-      }
-      $cover=Join-Path $metadataDir ($id+'-frame.jpg')
-      & ffmpeg -hide_banner -loglevel error -y -ss 2 -i $item.video -frames:v 1 $cover
-      if($LASTEXITCODE -ne 0 -or -not(Test-Path $cover)){
-        throw "Falha ao extrair quadro para capa de $id"
-      }
+      throw "Capa final de $id ausente: $cover. Gere com -SomenteCapa antes de publicar."
     }
     Write-Host "`n=== PUBLICANDO $id ($Privacidade) ===" -ForegroundColor Cyan
-    & $publisher -Etapa tudo -Privacidade $Privacidade -Video $item.video -Episodio $episodeFile -ImagemFonte $cover -Refazer
+    & $publisher -Etapa tudo -Privacidade $Privacidade -Video $item.video -Episodio $episodeFile -ImagemFonte $cover -CapaFinalShorts $cover -Refazer
     if($LASTEXITCODE -ne 0){throw "Publicacao falhou em $id; confira YouTube Studio antes de repetir."}
     Write-Host "[OK] Publicador concluiu: $id" -ForegroundColor Green
   }
