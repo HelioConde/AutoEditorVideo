@@ -59,6 +59,8 @@ test('long static holds are recut after 5 seconds without new assets',()=>{
   assert.equal(hold(150,0,100,fps,'cinematica').zoom,0);
   assert.equal(hold(150,0,last,fps,'desligada').zoom,0);
   assert.equal(hold(150,0,last,fps,'esqueleto2d').zoom,0);
+  assert.equal(hold(180,180,last,fps,'cinematica').zoom,0);
+  assert.ok(hold(192,180,last,fps,'cinematica').zoom>.02);
   assert.equal(hold(last,0,last,fps,'cinematica').zoom,0);
 });
 
