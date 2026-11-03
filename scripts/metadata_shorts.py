@@ -11,9 +11,14 @@ MANIFEST = ROOT / "conteudos" / "testes-animados-5.json"
 RECAPS_MANIFEST = ROOT / "conteudos" / "death-note-recaps-60s.json"
 
 
-def load_episodes(path: Path = MANIFEST) -> dict[str, dict]:
+def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dict[str, dict]:
+    """Original five by default; opt in to the new recap catalog explicitly.
+
+    The already-published repair workflow must never accidentally treat new
+    recaps as part of its fixed five-video historical upload batch.
+    """
     sources = [path]
-    if path == MANIFEST and RECAPS_MANIFEST.is_file():
+    if include_recaps and path == MANIFEST and RECAPS_MANIFEST.is_file():
         sources.append(RECAPS_MANIFEST)
     items = []
     for source in sources:
@@ -23,7 +28,6 @@ def load_episodes(path: Path = MANIFEST) -> dict[str, dict]:
     if len(result) != len(items):
         raise ValueError("IDs duplicados no catálogo")
     return result
-
 
 def description_for(episode: dict) -> str:
     series = str(episode["series"]).strip()
@@ -75,7 +79,7 @@ def main() -> int:
     parser.add_argument("--id", required=True)
     parser.add_argument("--destino", required=True, type=Path)
     args = parser.parse_args()
-    episodes = load_episodes()
+    episodes = load_episodes(include_recaps=True)
     if args.id not in episodes:
         parser.error("Episódio não encontrado no manifesto")
     args.destino.parent.mkdir(parents=True, exist_ok=True)
