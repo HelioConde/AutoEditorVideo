@@ -8,14 +8,20 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "conteudos" / "testes-animados-5.json"
+RECAPS_MANIFEST = ROOT / "conteudos" / "death-note-recaps-60s.json"
 
 
 def load_episodes(path: Path = MANIFEST) -> dict[str, dict]:
-    data = json.loads(path.read_text(encoding="utf-8-sig"))
-    items = data["episodes"]
+    sources = [path]
+    if path == MANIFEST and RECAPS_MANIFEST.is_file():
+        sources.append(RECAPS_MANIFEST)
+    items = []
+    for source in sources:
+        data = json.loads(source.read_text(encoding="utf-8-sig"))
+        items.extend(data["episodes"])
     result = {ep["id"]: ep for ep in items}
     if len(result) != len(items):
-        raise ValueError("IDs duplicados no manifesto")
+        raise ValueError("IDs duplicados no catálogo")
     return result
 
 
@@ -24,13 +30,25 @@ def description_for(episode: dict) -> str:
     script = str(episode["script"]).strip()
     if not series or not script:
         raise ValueError("Série ou roteiro ausente")
-    description = (
-        f"Análise e comentário sobre {series}.\n\n"
-        f"{script}\n\n"
-        "Ilustrações geradas por IA e edição autoral. "
-        "A obra e os personagens pertencem aos respectivos titulares.\n\n"
-        "#DeathNote #Anime #Shorts #ArquivoOtaku"
-    )
+    if episode.get("episode_number"):
+        description = (
+            f"{series} — episódio {episode['episode_number']} recontado em até 60 segundos. "
+            "Uma recapitulação narrativa com spoilers, ilustrações geradas por IA, "
+            "narração e edição originais.\n\n"
+            f"{script}\n\n"
+            "Curtiu a história? Inscreva-se para acompanhar a continuação!\n\n"
+            "Análise e adaptação editorial independente, não oficial. "
+            "Obra e personagens pertencem aos respectivos titulares.\n\n"
+            "#DeathNote #Anime #ResumoDeAnime #Shorts #ArquivoOtaku"
+        )
+    else:
+        description = (
+            f"Análise e comentário sobre {series}.\n\n"
+            f"{script}\n\n"
+            "Ilustrações geradas por IA e edição autoral. "
+            "A obra e os personagens pertencem aos respectivos titulares.\n\n"
+            "#DeathNote #Anime #Shorts #ArquivoOtaku"
+        )
     if any(marker in description for marker in ("Ã¡", "Ã©", "Ã§", "Ã£", "\ufffd")):
         raise ValueError("Descrição contém caracteres corrompidos")
     if len(description) > 5000:
