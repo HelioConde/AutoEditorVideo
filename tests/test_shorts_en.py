@@ -122,7 +122,9 @@ def test_upload_separates_title_language_and_privacy(tmp_path, monkeypatch):
     assert uploader.read_json(uploader.STATE)["items"]["unique-en-sha"]["status"] == "enviado"
     assert uploader.TOKEN.name == "youtube-en-token.json"
     assert uploader.STATE.name == "estado.json"
-    assert "publicacao-youtube-en" in str(uploader.STATE)
+    # STATE is intentionally monkeypatched into a temporary EN directory.
+    assert uploader.STATE.parent.name == "en"
+    assert uploader.TOKEN.name != "youtube-token.json"
 
 
 def test_preflight_must_not_authenticate(tmp_path, monkeypatch):
