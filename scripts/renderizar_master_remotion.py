@@ -193,9 +193,13 @@ def layer_motion_safety(layer,source:Path,ordered:list,ep_id:str,scene_id:str)->
 def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                 *,model:str='gpt-image-1.5',output:Path=OUT,
                 public:Path|None=None,animation_mode:str='cinematica',
-                character_preset:str='equilibrado')->dict:
+                character_preset:str='equilibrado',
+                asset_namespace:str|None=None,hook_override:str|None=None)->dict:
     entries=validate_scenes(ep,model,output)
-    target=(public or MOTION/'public')/'generated'/ep['id']
+    namespace=asset_namespace or ep['id']
+    if not re.fullmatch(r'[a-z0-9-]+',namespace):
+        raise ValueError('Namespace de assets invalido')
+    target=(public or MOTION/'public')/'generated'/namespace
     target.mkdir(parents=True,exist_ok=True)
     bounds=assign_frames([e['scene'] for e in entries],seconds)
     scenes=[]
@@ -215,7 +219,7 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                 dest=target/f'{stem}-layer-{layer.id}.png'
                 shutil.copy2(path,dest)
                 record={'id':layer.id,'role':layer.role,'z':layer.z,
-                    'src':f'generated/{ep["id"]}/{dest.name}',
+                    'src':f'generated/{namespace}/{dest.name}',
                     **layer_animation_metrics(path)}
                 if layer.role in ('back_character','front_character'):
                     record.update(layer_motion_safety(
@@ -228,7 +232,7 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                         for index,asset in enumerate(rig['files']):
                             rig_dest=target/f'{stem}-layer-{layer.id}-rig-{index:04d}.png'
                             shutil.copy2(asset,rig_dest)
-                            images.append(f'generated/{ep["id"]}/{rig_dest.name}')
+                            images.append(f'generated/{namespace}/{rig_dest.name}')
                         record['rigFrames']={'fps':rig['fps'],'frames':images}
                         rigs_found+=1
                 semantic.append(record)
@@ -248,8 +252,8 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                        'renderMode':entry['render_mode'],
                        'foregroundQA':entry['fidelity'],
                        'startFrame':start,'endFrame':end,
-                       'background':f'generated/{ep["id"]}/{stem}-background.png',
-                       'foreground':f'generated/{ep["id"]}/{stem}-foreground.png',
+                       'background':f'generated/{namespace}/{stem}-background.png',
+                       'foreground':f'generated/{namespace}/{stem}-foreground.png',
                        'shotType':scene.get('shot_type','legacy'),
                        'cameraAngle':scene.get('camera_angle',''),
                        'focusSubject':scene.get('focus_subject',''),
@@ -274,11 +278,11 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
     return {'id':ep['id'],'durationFrames':bounds[-1][1],
             'animationMode':animation_mode,
             'characterPreset':character_preset,
-            'audio':f'generated/{ep["id"]}/voz.mp3',
-            'scenes':scenes,'captions':captions,'hook':parent.get('cover','')}
+            'audio':f'generated/{namespace}/voz.mp3',
+            'scenes':scenes,'captions':captions,'hook':(hook_override if hook_override is not None else parent.get('cover',''))}
 
 
-def cover_from_master(ep:dict,model:str,destination:Path)->dict:
+def cover_from_master(ep:dict,model:str,destination:Path,*,title_override:str|None=None)->dict:
     """Create a premium cover from cached scene layers; never request new images."""
     options=cover_options(ROOT,ep['id'])
     chosen=options.get('scene',ep['scenes'][0]['id'])
@@ -289,7 +293,7 @@ def cover_from_master(ep:dict,model:str,destination:Path)->dict:
     if (folder/'scene-layers.json').is_file():
         multi=validate_multilayer(ep,scene,model,folder)
         source=compose_semantic_layers(multi['background'],multi['layers'])
-        label=options.get('title') or select_episode(ep['id']).get('cover') or ep.get('title') or 'ARQUIVO OTAKU'
+        label=title_override or options.get('title') or select_episode(ep['id']).get('cover') or ep.get('title') or 'ARQUIVO OTAKU'
         report=render_cover(source,str(label),destination,
                             zoom=options.get('zoom',1.07),
                             focus_x=options.get('focus_x',.5),
@@ -339,7 +343,7 @@ def cover_from_master(ep:dict,model:str,destination:Path)->dict:
         raise FileNotFoundError(
             f'Nao ha imagens da cena {chosen} para gerar capa offline em {folder}. '
             'Gere ou recupere o cache dessa cena.')
-    label=options.get('title') or select_episode(ep['id']).get('cover') or ep.get('title') or 'ARQUIVO OTAKU'
+    label=title_override or options.get('title') or select_episode(ep['id']).get('cover') or ep.get('title') or 'ARQUIVO OTAKU'
     report=render_cover(source,str(label),destination,
                         zoom=options.get('zoom',1.07),
                         focus_x=options.get('focus_x',.5),
