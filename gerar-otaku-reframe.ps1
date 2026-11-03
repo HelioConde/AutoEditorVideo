@@ -30,6 +30,7 @@ if(-not (Test-Path -LiteralPath $python -PathType Leaf)){
 $render=Join-Path $root 'scripts\renderizar_shorts_en.py'
 $master=Join-Path $root 'gerar-shorts-master.ps1'
 $manifestPath=if([IO.Path]::IsPathRooted($Manifesto)){$Manifesto}else{Join-Path $root $Manifesto}
+$enPlan=Join-Path $root ("assets\gerados\shorts-animados\{0}\en-US\storyboard-reframe-v2.json" -f $Id)
 foreach($path in @($render,$master,$manifestPath)){
   if(-not (Test-Path -LiteralPath $path -PathType Leaf)){
     throw "Arquivo necessario nao encontrado: $path. Confira a branch do GitHub."
@@ -65,6 +66,11 @@ function Invoke-English {
 
 function Invoke-Master {
   param([Parameter(Mandatory=$true)][hashtable]$Options)
+  if(Test-Path -LiteralPath $script:enPlan -PathType Leaf){
+    $Options['Plano']=$script:enPlan
+  } elseif($script:Id -eq '101-death-note-ep01'){
+    throw 'Storyboard EN nao encontrado. Execute -Acao Preparar antes de usar imagens ou render.'
+  }
   & $script:master -Id $script:Id -Modelo $script:Modelo @Options
   # O script filho valida seus proprios exit codes e lanca erros.
   if(-not $?){
@@ -75,10 +81,10 @@ function Invoke-Master {
 Write-Host "[OTAKU REFRAME] $Id | $Acao | en-US" -ForegroundColor Cyan
 switch($Acao){
   'Preparar' {
-    # Diagnostico sem chamadas de imagem: fixa o storyboard existente,
-    # instala as dependencias e prepara edge-tts sem gerar voz portuguesa.
-    Invoke-Master @{DiagnosticarCache=$true;TodasCenas=$true;CriarVoz=$true;MaxChamadas=0;MaxSegundosPorPlano=4.5}
+    # Primeiro cria o storyboard EN separado. Jamais usa o plano PT antigo.
     Invoke-English 'planejar'
+    # Diagnostico sem chamadas de imagem; prepara dependencias do TTS.
+    Invoke-Master @{DiagnosticarCache=$true;TodasCenas=$true;CriarVoz=$true;MaxChamadas=0;MaxSegundosPorPlano=4.5}
     Invoke-English 'voz'
     Write-Host '[OK] Plano, voz EN e diagnostico preparados. Revise o cache antes de gerar imagens.' -ForegroundColor Green
   }
