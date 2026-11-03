@@ -1,0 +1,44 @@
+{
+  "schema": "arquivo-otaku/recaps-60s/v1",
+  "language": "pt-BR",
+  "series": "Death Note",
+  "format": "um-episodio-em-60-segundos",
+  "episodes": [
+    {
+      "id": "101-death-note-ep01",
+      "episode_number": 1,
+      "title": "Death Note EP. 1 em 60s: o nascimento de Kira! 📓 #Shorts",
+      "cover": "O CADERNO QUE MATA",
+      "effect": "recap",
+      "character": "Light Yagami, Japanese student with brown hair, white school shirt, thoughtful and startled expressions; and Ryuk, gaunt winged shinigami with yellow eyes",
+      "object": "a single black supernatural notebook with blank cover, a handwritten page with no readable words",
+      "background": "Japanese classroom, ordinary suburban street, and Light's bedroom at night, moody blue and red lighting",
+      "script": "Um caderno caiu do céu… e um estudante ganhou o poder de matar. Light Yagami encontra o Death Note e lê uma regra impossível: quem tiver o nome escrito ali morrerá. Ele testa com um criminoso que aparece na televisão. O homem morre. Light tenta de novo… e percebe que não foi coincidência. Em poucos dias, começa a eliminar criminosos, convencido de que pode criar um mundo melhor. Então Ryuk aparece. O deus da morte admite que deixou o caderno no mundo humano porque estava entediado. E Light não demonstra arrependimento: quer se tornar o deus de um novo mundo. Só que alguém vai perceber o padrão dessas mortes. Quem poderá deter Kira? Inscreva-se para acompanhar a continuação!",
+      "editorial_note": "Recap original do primeiro episódio: Light testa o caderno, Ryuk aparece e Light expõe seus objetivos. Não confundir com o desafio de L, que ocorre no episódio 2."
+    },
+    {
+      "id": "102-death-note-ep02",
+      "episode_number": 2,
+      "title": "Death Note EP. 2 em 60s: Kira cai na armadilha de L! 📺 #Shorts",
+      "cover": "KIRA CAIU NA ARMADILHA",
+      "effect": "recap",
+      "character": "Light Yagami, Japanese student with brown hair and tense eyes, confronting an anonymous detective whose face is not revealed",
+      "object": "black supernatural notebook and a vintage television broadcasting a mysterious silhouette, no readable text",
+      "background": "Light Yagami's room with a glowing television at night, alternating with a dimly lit anonymous detective investigation office",
+      "script": "Kira achava que jamais seria encontrado… até cair numa armadilha ao vivo. Enquanto criminosos morrem pelo mundo, um homem aparece na televisão dizendo ser o detetive L. Ele chama Kira de assassino. Furioso, Light escreve seu nome no Death Note, e o homem morre diante das câmeras. Mas era uma isca: Lind L. Tailor era um condenado, não o verdadeiro L. A transmissão só tinha sido exibida na região de Kanto, no Japão. Sem perceber, Light revelou onde estava. L também confirma que Kira precisa conhecer o rosto e o nome da vítima. Agora os dois se desafiam, cada um convencido de que fará justiça. Quem vai cometer o próximo erro? Inscreva-se para acompanhar essa guerra de inteligência!",
+      "editorial_note": "Recap do episódio 2: transmissão regional, falso L e início do confronto. Evitar descrever o verdadeiro rosto de L como se aparecesse na TV."
+    },
+    {
+      "id": "103-death-note-ep03",
+      "episode_number": 3,
+      "title": "Death Note EP. 3 em 60s: alguém está seguindo Light! 👁️ #Shorts",
+      "cover": "METADE DA SUA VIDA",
+      "effect": "recap",
+      "character": "Light Yagami, Japanese student with brown hair looking over his shoulder; Ryuk, tall winged shinigami, pale face with glowing yellow eyes",
+      "object": "black notebook, dim home computer displaying abstract data without text, silhouetted undercover investigator",
+      "background": "Japanese family home at night with computer monitor, quiet street with distant shadowy investigator, moody detective atmosphere",
+      "script": "E se Kira estivesse lendo os arquivos secretos da própria polícia? L percebe que muitas mortes acontecem nos horários de um estudante. Mas Light, filho de um investigador, consegue acessar dados do caso pelo computador do pai. Ao notar as suspeitas, muda os horários das mortes para confundir L. O plano tem um efeito inesperado: agora parece que Kira recebe informações de dentro da polícia. Agentes do FBI passam a vigiar pessoas ligadas à investigação. Ryuk percebe que alguém segue Light e oferece uma saída assustadora: olhos capazes de enxergar o nome das pessoas, em troca de metade de sua vida restante. Light aceitaria pagar esse preço? Inscreva-se para descobrir como a perseguição continua!",
+      "editorial_note": "Recap do episódio 3: suspeita dos horários, acesso a dados policiais, vigilância e oferta dos olhos de shinigami. Não revelar antecipadamente eventos posteriores."
+    }
+  ]
+}
