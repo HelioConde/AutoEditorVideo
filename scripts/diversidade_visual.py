@@ -112,6 +112,19 @@ def direction_prompt(episode: dict, selected: dict, *, previous: dict | None = N
                f"distance: {selected['camera_distance']}; focal point: {selected['focus_subject']}; "
                f"visible ACTION: {selected['action']}; emotion: {selected['emotion']}. "
                f"{selected['visual_instruction']} ")
+    if selected.get('shot_type') in ('establishing', 'wide_duel'):
+        # vidIQ feedback across 8 Shorts: first 4-15s looked like a frozen
+        # portrait. Next-generation art should begin with a readable conflict,
+        # not a passive profile shot. Keep the action canonical to spoken hook.
+        context += (
+            "OPENING HOOK COMPOSITION: Show the decisive action, threatening "
+            "object, or interaction explicitly described in the first narrated "
+            "line. Avoid a solitary motionless portrait staring into camera. "
+            "If the hook names two characters, stage their relationship visibly "
+            "when consistent with the story. Keep faces and hands readable, "
+            "leave clear safe space for a top hook and bottom subtitles. "
+            "Do NOT invent a later event or a noncanonical interaction. "
+        )
     if previous:
         context += (f"CRITICAL: Do NOT repeat the previous {previous['shot_type']} shot "
                     f"({previous['camera_angle']}). Change camera perspective, subject "
