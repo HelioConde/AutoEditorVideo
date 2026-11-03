@@ -43,6 +43,24 @@ O MP4 será salvo em `assets/gerados/shorts-animados/101-death-note-ep01/en-US/`
 
 Parâmetros opcionais: `-Modelo gpt-image-2`, `-Perfil equilibrado`, `-Refazer` (somente na renderização), `-Id` e `-Manifesto` para futuros episódios presentes nos catálogos de produção.
 
+## Feedback implementado — retencao e visual v2
+
+A revisao do Short publicado em 2026-11-03 identificou: fotos paradas por ate 7s no inicio, legendas simples, muitos crossfades, ambientes repetitivos e aparicao precoce de Ryuk.
+
+**Implementacao nesta branch (nao republica o video antigo):**
+- Camera cinematica: zoom/pan progressivos **desde os primeiros frames** dos primeiros 7 segundos, mantendo limites da composicao e sem tremores.
+- Hook com contorno sutil, brilho e sombra real, entrada em escala; safe zones respeitadas.
+- Legenda EN agrupada em blocos de ate 3 palavras e ate 23 caracteres, com cada palavra ativa destacada pela temporizacao do TTS.
+- Corte seco nos momentos de virada; crossfade so quando indicado pelo storyboard.
+- Storyboard v2 exclusivo do idioma EN, com novas locacoes em cada beat (patio da escola, quarto, TV, rua, skyline, reino sobrenatural); nunca usa automaticamente cenas antigas brasileiras.
+- Ryuk nao deve ser visivel ate o beat **10** (aparicao em Light's room); prompts anteriores incluem bloqueio explicito.
+- Duracao estimada de cada enquadramento <=4,2s; a duracao real depende da voz final, sempre com limite total <=60s.
+- Todo novo quadro exige aprovacao manual, inclusive no modo semantic multilayer. Falta de camadas ou revisao bloqueia o render.
+- MP4 v2 exportado com nome distinto: `101-death-note-ep01-en-US-retention-v2.mp4`; o arquivo ja publicado fica inalterado.
+- Os testes `tests/test_otaku_reframe_direction.py`, `tests/test_english_caption_design.py`, o workflow EN e o typecheck Remotion validam as novas regras.
+
+**Importante:** mudar o codigo nao modifica um video que ja esta no YouTube. Para testar estas mudancas, produza um **novo render local**, confira o storyboard e as novas imagens, e revise o MP4 antes de qualquer envio. Nao publique um segundo EP01 automaticamente.
+
 ## Retention beat map
 
 - **0–2s:** "One name. One death." Reveal the notebook immediately, tight zoom and high-contrast emphasis.
