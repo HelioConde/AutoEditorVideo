@@ -144,7 +144,7 @@ def test_rejects_short_interval_duplicate_ids_and_unknown_episode():
     with pytest.raises(hourly.SchedulingError, match="distintos"):
         hourly.process([ID2, ID2], minutes=60, **base)
     with pytest.raises(hourly.SchedulingError, match="nao cadastrado"):
-        hourly.process([ID2, "104-death-note-ep04"], minutes=60, **base)
+        hourly.process([ID2, "999-death-note-ep999"], minutes=60, **base)
 
 
 def test_uploaded_state_requires_matching_mp4_hash_and_timestamp(tmp_path, monkeypatch):
