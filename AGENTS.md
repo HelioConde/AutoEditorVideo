@@ -4,6 +4,18 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
+## MOTOR DE VOZ OPCIONAL: VOICESTUDIO
+
+- Edge TTS e a opcao **padrao** e nunca deve ser removida nem substituida silenciosamente.
+- `-VozMotor voicestudio` seleciona o VoiceStudio apenas explicitamente no pipeline PT-BR.
+- Primeiro teste: `testar-voz-studio.ps1`; nenhuma imagem, render ou upload.
+- No VoiceStudio, legendar **somente** com tempos reais de ASR; falha de servidor,
+  modelo, transcricao ou tempos bloqueia a geracao. Nao fabricar word boundaries,
+  nao misturar cache de Edge e VoiceStudio e nao reutilizar MP4 com voz incorreta.
+- Restrito a API local 127.0.0.1 / localhost, sem credenciais publicadas no repo.
+- Licencas dos modelos de voz precisam ser verificadas antes de uso monetizado;
+  pesos OmniVoice padrao podem ter restricao NC. Conservar audio em cache local.
+
 ## REGRA PERMANENTE: PRODUCAO AUTOMATICA PELO AUTOEDITORVIDEO
 
 - Todos os Shorts EN e PT-BR continuam usando o motor deste repositorio, com
