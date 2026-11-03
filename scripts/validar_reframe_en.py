@@ -49,6 +49,8 @@ def validate_item(item: dict, model: str, *, mode: str = 'automatico', out: Path
     plan = read_storyboard(path)
     if plan["id"] != item["id"]:
         raise ValueError("Storyboard EN divergente.")
+    if mode == "manual":
+        require_approved_scenes(plan, model)
     checked, review = prepare_qa_storyboard(plan, model, mode)
     qa_results = master.validate_scenes(checked, model=model)
     if len(qa_results) != len(plan["scenes"]):
