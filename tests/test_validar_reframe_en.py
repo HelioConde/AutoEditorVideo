@@ -57,6 +57,9 @@ def test_after_review_checks_audio_captions_and_image_qa(monkeypatch, tmp_path):
     monkeypatch.setattr(gate, "read_storyboard", lambda p: _plan())
     monkeypatch.setattr(gate, "scene_dir", lambda *a: tmp_path)
     monkeypatch.setattr(gate, "read_review", lambda p: {"status": "aprovado"})
+    monkeypatch.setattr(gate, "prepare_qa_storyboard", lambda plan, model, mode:
+                        (plan, {"mode": mode, "explicitly_approved": len(plan["scenes"]),
+                                "auto_checked": 0}))
     monkeypatch.setattr(gate.master, "validate_scenes", lambda *a, **kw: [1, 2])
     monkeypatch.setattr(gate, "audio_for", lambda *a, **kw: (tmp_path / "en.mp3", tmp_path / "en.ass"))
     monkeypatch.setattr(gate, "audio_duration", lambda *_: 52.0)
