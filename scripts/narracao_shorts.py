@@ -5,9 +5,11 @@ Não altera narrações existentes nem envia nada ao YouTube.
 """
 from __future__ import annotations
 import asyncio
+import hashlib
 import json
 from pathlib import Path
 import re
+import unicodedata
 
 VOICE='pt-BR-AntonioNeural'
 RATE='+8%'
@@ -44,21 +46,56 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     return header+'\n'.join(rows)+'\n'
 
 
+def _script_digest(script:str)->str:
+    return hashlib.sha256(script.encode('utf-8')).hexdigest()
+
+
+def _spoken_words(text:str)->str:
+    # Legacy Edge WordBoundary records have no script hash. Compare the full
+    # transcript (not just a fuzzy prefix) before trusting an old cached MP3.
+    deaccented=unicodedata.normalize('NFKD',text.casefold())
+    deaccented=''.join(ch for ch in deaccented if not unicodedata.combining(ch))
+    return ' '.join(re.findall(r'[a-z0-9]+',deaccented))
+
+
+def _edge_cache_matches(marker:Path,script:str,voice:str)->bool:
+    if not marker.is_file():
+        return False
+    try:
+        data=json.loads(marker.read_text(encoding='utf-8'))
+        if data.get('voice')!=voice or data.get('rate')!=RATE:
+            return False
+        if data.get('script_sha256'):
+            return data['script_sha256']==_script_digest(script)
+        words=data.get('words')
+        if not isinstance(words,list) or not words:
+            return False
+        recorded=' '.join(str(w.get('text') or '') for w in words
+                          if isinstance(w,dict))
+        return _spoken_words(recorded)==_spoken_words(script)
+    except (ValueError,TypeError,OSError):
+        return False
+
+
 def ensure_voice(episode:dict,folder:Path,*,create:bool=False,voice:str=VOICE,engine:str='edge')->tuple[Path,Path]:
     if engine == 'voicestudio':
         from voice_studio_adapter import ensure_voice_studio
         return ensure_voice_studio(episode,folder,create=create)
     if engine != 'edge':
         raise ValueError('Motor de voz desconhecido: '+str(engine))
-    # Nunca reutilizar o audio VoiceStudio como se fosse Edge TTS.
-    cached=sorted((p for p in folder.glob('voz-*.mp3') if not p.name.startswith('voz-voicestudio-')),
-                  key=lambda p:p.stat().st_mtime,reverse=True)
-    subtitles=folder/'legendas.ass'
-    if cached and subtitles.is_file():return cached[0],subtitles
-    if not create:
-        raise FileNotFoundError('Voz/legendas não encontradas. Use -CriarVoz para gerar uma única vez.')
+    # Never reuse an MP3 whose spoken words belong to an older script.
     script=episode.get('script','').strip()
     if not script:raise ValueError('Roteiro de narração ausente')
+    mp3=folder/'voz-master.mp3'
+    subtitles=folder/'legendas.ass'
+    marker=folder/'marcacoes-voz.json'
+    if mp3.is_file() and subtitles.is_file() and _edge_cache_matches(marker,script,voice):
+        return mp3,subtitles
+    if not create:
+        raise FileNotFoundError(
+            'Voz Edge ausente ou desatualizada para o roteiro atual. '
+            'Use --criar-voz para atualizar narração e legendas sem apagar outros caches.'
+        )
     async def render():
         import edge_tts
         speaker=edge_tts.Communicate(script,voice,rate=RATE,boundary='WordBoundary')
@@ -75,11 +112,12 @@ def ensure_voice(episode:dict,folder:Path,*,create:bool=False,voice:str=VOICE,en
         return bytes(data),words
     audio,words=asyncio.run(render())
     folder.mkdir(parents=True,exist_ok=True)
-    mp3=folder/'voz-master.mp3'
     temp=mp3.with_suffix('.partial')
-    temp.write_bytes(audio);temp.replace(mp3)
+    temp.write_bytes(audio)
+    temp.replace(mp3)
     subtitles.write_text(ass_dialogues(words),encoding='utf-8')
-    (folder/'marcacoes-voz.json').write_text(json.dumps({
-        'voice':voice,'rate':RATE,'source':'edge-tts WordBoundary','words':words
+    marker.write_text(json.dumps({
+        'voice':voice,'rate':RATE,'source':'edge-tts WordBoundary',
+        'script_sha256':_script_digest(script),'words':words
     },ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     return mp3,subtitles
