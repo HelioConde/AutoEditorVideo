@@ -33,7 +33,18 @@ from planejador_editorial import audit_plan
 
 
 def proxy_key(path:Path=PROXY_ENV)->str:
-    if not path.is_file(): raise RuntimeError('Proxy nao encontrado. Rode testar-codex-proxy.ps1 -Acao instalar')
+    """Recognize the configured proxy in this repo or the older kit folder."""
+    if path == PROXY_ENV and not path.is_file():
+        from estado_codex_proxy import credentials_file
+        alternative = credentials_file(ROOT)
+        if alternative is not None:
+            path = alternative
+    if not path.is_file():
+        raise RuntimeError(
+            'Credenciais Codex Proxy nao encontradas nas pastas local ou antiga. '
+            'Use testar-codex-proxy.ps1 -Acao iniciar (se instalado) ou '
+            '-Acao instalar (primeira configuracao).'
+        )
     m=re.search(r'(?m)^PROXY_API_KEY\s*=\s*(.*?)\s*$',path.read_text(encoding='utf-8-sig'))
     if not m: raise RuntimeError('PROXY_API_KEY ausente em chatgpt-codex-proxy/.env')
     key=m.group(1).strip().strip("\"'")
