@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill,Audio,Img,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
-import {AnimationMode,cannotMoveSeparately,motionAtFrame,openingCutAtFrame} from './cinematic-motion';
+import {AnimationMode,cannotMoveSeparately,motionAtFrame,openingCutAtFrame,longHoldCutAtFrame} from './cinematic-motion';
 import {CharacterPreset,characterPoseAtFrame} from './character-idle';
 
 export type SemanticLayer={
@@ -45,9 +45,10 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
   // Visible virtual cuts start at 1.25s and 2.45s. The entire approved
   // composition moves as one: never fake a character action or separate props.
   const opener=openingCutAtFrame(frame,fps,mode);
-  const safeZoom=Math.min(1.14,motion.zoom+opener.zoom);
-  const camera='translate('+(motion.panX+opener.panX).toFixed(3)+'px,'+
-    (motion.panY+heroPulse+opener.panY).toFixed(3)+
+  const hold=longHoldCutAtFrame(frame,scene.startFrame,scene.endFrame,fps,mode);
+  const safeZoom=Math.min(1.14,motion.zoom+opener.zoom+hold.zoom);
+  const camera='translate('+(motion.panX+opener.panX+hold.panX).toFixed(3)+'px,'+
+    (motion.panY+heroPulse+opener.panY+hold.panY).toFixed(3)+
     'px) scale('+safeZoom.toFixed(5)+')';
   const ordered=(scene.layers||[]).slice().sort((a,b)=>a.z-b.z);
   return <AbsoluteFill style={{opacity,background:'#070912',overflow:'hidden'}}>
