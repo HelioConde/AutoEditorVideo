@@ -245,3 +245,12 @@ do Channel ID antes de qualquer upload para não misturar os dois canais.
 
 Guia completo: [Criar e publicar no segundo canal em inglês](docs/CANAL-INGLES.md).
 
+
+## REGRA MESTRA — Shorts de no máximo 60 segundos
+
+**Todos os Shorts do Arquivo Otaku e Otaku Archives (YouTube PT/EN e TikTok) precisam durar 60,000 segundos ou menos no arquivo MP4 final.** Inclui abertura, narrativa, final de suspense, CTA de inscrição e a margem de renderização. A faixa recomendada para escrever e editar é **55–59 segundos**.
+
+O editor bloqueia automaticamente a montagem quando a narração mais a margem ultrapassa 60 segundos e recusa publicar qualquer MP4 cuja duração real exceda esse teto (checagem via FFprobe). Não acelere a voz nem corte o gancho/CTA para contornar a regra. **Reescreva o roteiro, regrave e renderize novamente**.
+
+Implementação: [scripts/shorts_duration.py](scripts/shorts_duration.py) · Testes: [tests/test_shorts_duration.py](tests/test_shorts_duration.py) · Política para agentes: [AGENTS.md](AGENTS.md).
+
