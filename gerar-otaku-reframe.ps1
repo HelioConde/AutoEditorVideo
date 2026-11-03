@@ -68,8 +68,8 @@ function Invoke-Master {
   param([Parameter(Mandatory=$true)][hashtable]$Options)
   if(Test-Path -LiteralPath $script:enPlan -PathType Leaf){
     $Options['Plano']=$script:enPlan
-  } elseif($script:Id -eq '101-death-note-ep01'){
-    throw 'Storyboard EN nao encontrado. Execute -Acao Preparar antes de usar imagens ou render.'
+  } else {
+    throw 'Storyboard exclusivo EN nao encontrado. Execute -Acao Preparar antes de gerar imagens ou render.'
   }
   & $script:master -Id $script:Id -Modelo $script:Modelo @Options
   # O script filho valida seus proprios exit codes e lanca erros.
