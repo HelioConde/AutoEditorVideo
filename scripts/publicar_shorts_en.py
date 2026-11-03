@@ -140,7 +140,7 @@ def candidates(profile: str, episode_id: str, limit: int,
         if not report_file.is_file():
             raise ValueError(f"QA em ingles ausente: {ep['id']}. Reprocesse e revise.")
         qa = read_json(report_file)
-        if qa.get("status") != "renderizado_aguardando_revisao":
+        if qa.get("status") not in ("renderizado_aguardando_revisao", "renderizado_qa_automatico"):
             raise ValueError("QA invalido para " + ep["id"])
         if ep.get("scenes"):
             # Upload only immutable outputs actually rendered by the local
