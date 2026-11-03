@@ -22,7 +22,8 @@ function Expect-Blocked {
   if(-not $blocked){throw "Comando perigoso nao foi bloqueado: $($Options -join ' ')"}
 }
 Expect-Blocked @{Acao='GerarImagens';MaxChamadas=0} 'orcamento explicito'
-Expect-Blocked @{Acao='Renderizar'} 'ConfirmarRevisaoVisual'
+Expect-Blocked @{Acao='Renderizar';ModoQA='manual'} 'ConfirmarRevisaoVisual'
+Expect-Blocked @{Acao='Automatizar';ModoQA='manual'} 'ModoQA automatico'
 Expect-Blocked @{Acao='Preparar';MaxChamadas=1} 'MaxChamadas so pode'
 Expect-Blocked @{Acao='Preparar';ConfirmarRevisaoVisual=$true} 'so pode ser usado'
 Write-Host '[OK] Launcher PowerShell: sintaxe e bloqueios basicos.'
