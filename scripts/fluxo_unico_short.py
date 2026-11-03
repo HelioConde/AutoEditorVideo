@@ -94,6 +94,47 @@ def generate_scene_with_retry(
     return False
 
 
+def assert_image_provider_ready(status_fn=None) -> dict:
+    """Fail once before attempting missing scene generation (read-only check).
+
+    Existing approved caches can be rendered without a running proxy.
+    The diagnostic does not start containers, log in or spend image quota.
+    """
+    if status_fn is None:
+        from estado_codex_proxy import connection_status
+        status_fn = connection_status
+    status = status_fn()
+    if status.get("state") == "conectado" and status.get("eligible", 0) > 0:
+        print("[CODEX] Proxy acessivel; conta elegivel para gerar imagens.", flush=True)
+        return status
+    state = status.get("state", "desconhecido")
+    guide = {
+        "offline": (
+            "O servidor local nao esta acessivel. Abra o Docker Desktop e use "
+            ".\\testar-codex-proxy.ps1 -Acao iniciar; se ainda nao instalou, "
+            "use -Acao instalar."
+        ),
+        "sem_chave": (
+            "Nao encontrei PROXY_API_KEY no .env local nem no kit antigo. "
+            "Verifique a instalacao sem enviar sua chave a ninguem."
+        ),
+        "sem_conta_elegivel": (
+            "Proxy conectado, mas nenhuma conta pode gerar agora. "
+            "Use .\\testar-codex-proxy.ps1 -Acao status; nao contorne a cota."
+        ),
+    }
+    message = guide.get(
+        state,
+        "Proxy nao autenticado ou consulta de contas falhou. Use "
+        ".\\testar-codex-proxy.ps1 -Acao status e revise o Docker."
+    )
+    raise PipelineError(
+        f"[CODEX PROXY: {state}] {message} "
+        "Nenhuma chamada de geracao de imagens foi enviada. "
+        "O cache e os uploads ja confirmados serao preservados."
+    )
+
+
 def generate_scenes(episode_id: str, *, model: str, budget: int,
                     attempts: int, max_hold: float) -> dict:
     from renderizar_master_remotion import validate_scenes
@@ -107,6 +148,11 @@ def generate_scenes(episode_id: str, *, model: str, budget: int,
             f"Cenas requerem {outstanding} chamadas mas -MaxChamadas={budget}. "
             "Nenhuma geracao iniciada. Aumente o orcamento ou reutilize cache."
         )
+    if outstanding:
+        assert_image_provider_ready()
+    else:
+        print("[CACHE] Todas as camadas de imagens ja existem. "
+              "Nao e necessario iniciar o Codex Proxy.", flush=True)
     remaining = [budget]
     failed = []
     for scene in scenes:
