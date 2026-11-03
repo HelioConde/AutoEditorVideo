@@ -224,7 +224,7 @@ def renderer_signature() -> tuple[str, int]:
         if not file.is_file():
             raise PipelineError("Fonte do renderizador ausente: " + str(file))
         digest.update(relative.encode("utf-8"))
-        digest.update(b"\\0")
+        digest.update(bytes([0]))
         digest.update(file.read_bytes())
         latest = max(latest, file.stat().st_mtime_ns)
     return digest.hexdigest(), latest
