@@ -61,7 +61,7 @@ function Invoke-English {
 }
 
 function Invoke-Master {
-  param([Parameter(Mandatory=$true)][string[]]$Options)
+  param([Parameter(Mandatory=$true)][object[]]$Options)
   & $script:master -Id $script:Id -Modelo $script:Modelo @Options
   if(-not $? -or $LASTEXITCODE -ne 0){
     throw "Falha no gerador de imagens para $($script:Id)."
@@ -72,8 +72,14 @@ Write-Host "[OTAKU REFRAME] $Id | $Acao | en-US" -ForegroundColor Cyan
 switch($Acao){
   'Preparar' {
     Invoke-English 'planejar'
-    # 4.5s de referencia para o storyboard, sem replanejar cenas fixadas.
-    Invoke-Master @('-SomentePlanejar','-MaxSegundosPorPlano','4.5')
+    # Nao sobrescreva nenhum storyboard local existente sem revisao.
+    $pinned=Join-Path $root ("assets\\gerados\\shorts-animados\\{0}\\storyboard-producao.json" -f $Id)
+    $existing=Join-Path $root ("assets\\gerados\\planos-visuais\\{0}-master-dinamico.json" -f $Id)
+    if(-not (Test-Path -LiteralPath $pinned) -and -not (Test-Path -LiteralPath $existing)){
+      Invoke-Master @('-SomentePlanejar','-MaxSegundosPorPlano',[double]4.5)
+    } else {
+      Write-Host '[STORYBOARD] Plano local existente preservado (sem replanejar).' -ForegroundColor Yellow
+    }
     Invoke-English 'voz'
     Invoke-Master @('-DiagnosticarCache','-TodasCenas','-MaxChamadas','0')
     Write-Host '[OK] Plano, voz EN e diagnostico preparados. Revise o cache antes de gerar imagens.' -ForegroundColor Green
@@ -83,7 +89,7 @@ switch($Acao){
     Invoke-Master @('-DiagnosticarCache','-TodasCenas','-MaxChamadas','0')
   }
   'GerarImagens' {
-    Invoke-Master @('-TodasCenas','-MaxChamadas',[string]$MaxChamadas,'-MaxSegundosPorPlano','4.5')
+    Invoke-Master @('-TodasCenas','-MaxChamadas',[string]$MaxChamadas,'-MaxSegundosPorPlano',[double]4.5)
     Write-Host '[REVISAO] Confira todas as imagens e camadas. Nenhum MP4 foi publicado.' -ForegroundColor Yellow
   }
   'Validar' {
