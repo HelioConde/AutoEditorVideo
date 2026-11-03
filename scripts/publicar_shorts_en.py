@@ -16,6 +16,7 @@ import subprocess
 import sys
 
 from renderizar_shorts_en import load_english, english_metadata, OUT, ROOT
+from shorts_duration import validate_seconds
 
 CLIENT = ROOT / ".secrets" / "youtube-oauth-client.json"
 TOKEN = ROOT / ".secrets" / "youtube-en-token.json"
@@ -116,8 +117,7 @@ def validate_mp4(path: Path) -> None:
     width, height = int(video["width"]), int(video["height"])
     if abs(width / height - 9 / 16) > 0.03:
         raise ValueError("Short ingles deve ser 9:16")
-    if float(data.get("format", {}).get("duration", 0)) <= 1:
-        raise ValueError("Duracao invalida")
+    validate_seconds(float(data.get("format", {}).get("duration", 0)),stage=f'Upload YouTube EN {path.name}')
 
 
 def candidates(profile: str, episode_id: str, limit: int) -> list[dict]:
