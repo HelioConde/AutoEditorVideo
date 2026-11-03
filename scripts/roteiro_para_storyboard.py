@@ -14,6 +14,7 @@ from diversidade_visual import direction, direction_prompt, storyboard_warnings
 
 ROOT=Path(__file__).resolve().parents[1]
 MANIFEST=ROOT/'conteudos'/'testes-animados-5.json'
+RECAPS_MANIFEST=ROOT/'conteudos'/'death-note-recaps-60s.json'
 OUTPUT=ROOT/'assets'/'gerados'/'planos-visuais'
 ID=re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 
@@ -126,11 +127,17 @@ def build_storyboard(episode: dict, max_hold: float=6.0,
 
 
 def select_episode(ep_id: str, path: Path=MANIFEST)->dict:
-    data=json.loads(path.read_text(encoding='utf-8-sig'))
-    episodes=data.get('episodes',[])
-    episode=next((ep for ep in episodes if ep.get('id')==ep_id),None)
-    if episode is None:raise ValueError('Episódio não encontrado no manifesto')
-    return episode
+    # Keep explicit manifest paths strict; only the default catalog is extended.
+    sources=[path]
+    if path==MANIFEST and RECAPS_MANIFEST.is_file():
+        sources.append(RECAPS_MANIFEST)
+    matches=[]
+    for source in sources:
+        data=json.loads(source.read_text(encoding='utf-8-sig'))
+        matches.extend(ep for ep in data.get('episodes',[]) if ep.get('id')==ep_id)
+    if len(matches)!=1:
+        raise ValueError('Episódio não encontrado ou duplicado no catálogo: '+ep_id)
+    return matches[0]
 
 
 def save_plan(ep:dict, *, max_hold:float=6, duration:float|None=None,
