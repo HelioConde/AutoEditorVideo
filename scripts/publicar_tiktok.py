@@ -20,6 +20,8 @@ import webbrowser
 
 import requests
 
+from shorts_duration import validate_seconds
+
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "conteudos" / "testes-animados-5.json"
 APP_PATH = ROOT / ".secrets" / "tiktok-app.json"
@@ -219,8 +221,10 @@ def ffprobe_video(path: Path) -> dict:
     if not 23 <= fps <= 60:
         raise TikTokError("FPS fora de 23 a 60: " + str(fps))
     duration = float(info.get("format", {}).get("duration", 0))
-    if not 1 <= duration <= 600:
-        raise TikTokError("Duracao invalida para TikTok: " + str(duration))
+    try:
+        validate_seconds(duration,stage=f"Upload TikTok {path.name}")
+    except ValueError as exc:
+        raise TikTokError(str(exc)) from exc
     return {"duration": duration, "width": width, "height": height, "fps": fps}
 
 
