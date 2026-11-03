@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from narracao_shorts import ensure_voice
 from master_scenes import read_storyboard, production_storyboard
 from renderizar_com_remotion import audio_duration, captions_from_ass
+from shorts_duration import validate_planned_audio, validate_video
 import renderizar_master_remotion as master
 
 LANG = ROOT / "conteudos" / "testes-animados-5-en.json"
@@ -113,17 +114,19 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         return {"id": episode_id, "status": "capa_pronta", "cover": str(cover)}
     if action == "voz":
         voice, ass = audio_for(item, folder, create=True)
+        validate_planned_audio(audio_duration(voice), stage=f'Voz EN {episode_id}')
         print(f"[EN VOZ] {voice} | {ass}")
         return {"id": episode_id, "status": "voz_pronta"}
 
     output = folder / f"{episode_id}-en-US-master-multicenas-personagens-v3-{profile}.mp4"
     if output.is_file() and not overwrite:
+        validate_video(output,stage=f'Cache EN {episode_id}')
         print(f"[EN CACHE] Ja renderizado: {output} (use -Refazer para substituir)")
         return {"id": episode_id, "status": "cache", "mp4": str(output)}
     # Audio MUST be English and fresh before rendering English subtitles.
     voice, ass = audio_for(item, folder, create=True)
     confirmed = master.validate_scenes(ep, model=model)
-    seconds = audio_duration(voice) + .4
+    seconds = validate_planned_audio(audio_duration(voice),stage=f'Pre-render EN {episode_id}')
     captions = captions_from_ass(ass, seconds)
     if not captions:
         raise ValueError("Faltam legendas sincronizadas inglesas")
@@ -147,11 +150,12 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     subprocess.run(command, cwd=MOTION, check=True, timeout=1800)
     if not output.is_file() or output.stat().st_size < 100000:
         raise RuntimeError("Remotion finalizou mas nao produziu um MP4 valido")
+    actual_seconds = validate_video(output,stage=f'Export EN {episode_id}')
     cover = prepare_cover(ep, item, folder, model)
     report = {
         "id": episode_id, "status": "renderizado_aguardando_revisao",
         "language": "en-US", "voice": VOICE, "video": str(output),
-        "cover": str(cover), "duration_s": seconds, "scenes": len(confirmed),
+        "cover": str(cover), "duration_s": actual_seconds, "scenes": len(confirmed),
         "captions": len(captions), "published": False,
         "uses_cached_images": True,
     }
