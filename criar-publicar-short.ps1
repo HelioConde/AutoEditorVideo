@@ -8,6 +8,7 @@ param(
     [ValidateRange(0,180)][int]$MaxChamadas=45,
     [ValidateRange(1,3)][int]$Tentativas=2,
     [ValidateSet('private','unlisted','public')][string]$Privacidade='private',
+    [string]$AgendarEm='',
     [switch]$Publicar,
     [switch]$Refazer,
     [switch]$SomenteValidar
@@ -82,6 +83,7 @@ $params=@($program,'--id',$Id,'--modelo',$Modelo,'--perfil',$Perfil,
           '--tentativas',[string]$Tentativas,
           '--privacidade',$Privacidade)
 if($Publicar){$params+='--publicar'}
+if($AgendarEm){$params+=@('--agendar-em',$AgendarEm)}
 if($Refazer){$params+='--refazer'}
 if($SomenteValidar){$params+='--somente-validar'}
 & $py @params
