@@ -212,8 +212,12 @@ def ensure_render(
     voice_digest = hashlib.sha256(voice_file.read_bytes()).hexdigest()
     build_state = OUTPUT / episode_id / f'build-voz-{profile}.json'
     recorded = json.loads(build_state.read_text(encoding='utf-8')) if build_state.is_file() else {}
-    # A legacy Edge video without a sidecar can be reused on the default path.
-    legacy_edge = voice_motor == 'edge' and not recorded
+    # Legacy Edge renders have no sidecar. Reuse only when the MP4 is newer
+    # than the spoken MP3; a revised script regenerates voice and invalidates it.
+    legacy_edge = (
+        voice_motor == 'edge' and not recorded and video.is_file()
+        and voice_file.stat().st_mtime_ns <= video.stat().st_mtime_ns
+    )
     cache_matches = (legacy_edge or
                      (recorded.get('voice_motor') == voice_motor and
                       recorded.get('voice_sha256') == voice_digest))
