@@ -9,7 +9,7 @@
     "render:master": "remotion render src/index.ts ArquivoOtakuMaster",
     "test:character": "node --test tests/character-idle.test.cjs",
     "test:shorts": "node --test tests/shorts-pacing.test.cjs",
-    "test:qa": "node --test tests/*.test.cjs",
+    "test:qa": "node --test tests/character-idle.test.cjs tests/shorts-pacing.test.cjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
