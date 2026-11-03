@@ -419,8 +419,17 @@ def main(argv:list[str]|None=None)->int:
     folder=OUT/args.id
     voice,ass=ensure_voice(select_episode(args.id),folder,create=args.criar_voz,engine=args.voz_motor)
     seconds=validate_planned_audio(audio_duration(voice),stage=f'Pre-render PT {args.id}')
-    captions=captions_from_ass(ass,seconds)
+    # Prefer real word boundaries from the chosen audio engine. Legacy ASS
+    # remains available only when older recordings have no metadata file.
+    from legendas_precisas import captions_from_markers
+    source_script=select_episode(args.id)['script']
+    captions=captions_from_markers(voice,source_script,seconds)
+    caption_source='Edge/ASR WordBoundary'
+    if captions is None:
+        captions=captions_from_ass(ass,seconds)
+        caption_source='ASS legado'
     if not captions:raise RuntimeError('Narração sem legendas')
+    print(f'[LEGENDAS] {len(captions)} blocos | fonte: {caption_source}',flush=True)
     props=build_props(ep,voice,captions,seconds,model=args.modelo,
                       public=args.motor/'public',animation_mode=args.animacao,
                       character_preset=args.perfil_personagens)
