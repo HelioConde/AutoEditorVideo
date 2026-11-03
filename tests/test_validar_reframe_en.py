@@ -48,7 +48,7 @@ def test_no_audio_render_if_review_is_missing(monkeypatch, tmp_path):
     monkeypatch.setattr(gate, "audio_for", lambda *a, **kw:
                         pytest.fail("audio QA must not start before approval"))
     with pytest.raises(ValueError, match="ainda nao aprovada"):
-        gate.validate_item(item, "gpt-image-1.5", out=tmp_path)
+        gate.validate_item(item, "gpt-image-1.5", mode="manual", out=tmp_path)
 
 
 def test_after_review_checks_audio_captions_and_image_qa(monkeypatch, tmp_path):
@@ -68,7 +68,7 @@ def test_after_review_checks_audio_captions_and_image_qa(monkeypatch, tmp_path):
     ])
     result = gate.validate_item(item, "gpt-image-1.5", out=tmp_path)
     assert result["status"] == "pronto_para_render_local"
-    assert result["approved_visual_shots"] == 2
+    assert result["verified_visual_shots"] == 2
     assert result["captions"] >= 1
     assert result["renderer"] == "AutoEditorVideo/Remotion"
     assert result["youtube_published"] is False
