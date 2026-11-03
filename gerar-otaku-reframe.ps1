@@ -3,7 +3,7 @@
 # Nao publica nem altera o canal brasileiro.
 [CmdletBinding()]
 param(
-  [ValidateSet('Preparar','Diagnosticar','GerarImagens','Validar','Renderizar')]
+  [ValidateSet('Preparar','Diagnosticar','GerarImagens','Revisar','Validar','Renderizar')]
   [string]$Acao='Preparar',
   [string]$Id='101-death-note-ep01',
   [string]$Manifesto='conteudos/otaku-reframe-ep01-en.json',
@@ -112,7 +112,21 @@ switch($Acao){
   }
   'GerarImagens' {
     Invoke-Master @{TodasCenas=$true;MaxChamadas=$MaxChamadas;MaxSegundosPorPlano=4.5}
-    Write-Host '[REVISAO] Confira todas as imagens e camadas. Nenhum MP4 foi publicado.' -ForegroundColor Yellow
+    Write-Host '[REVISAO] Para conferir e aprovar cada cena, execute -Acao Revisar.' -ForegroundColor Yellow
+  }
+  'Revisar' {
+    if(-not (Test-Path -LiteralPath $enPlan -PathType Leaf)){
+      throw 'Storyboard EN nao encontrado. Execute -Acao Preparar primeiro.'
+    }
+    $reviewer=Join-Path $root 'scripts\revisar_reframe_en.py'
+    if(-not (Test-Path -LiteralPath $reviewer -PathType Leaf)){
+      throw 'Assistente de revisao ausente. Atualize com git pull.'
+    }
+    $venv=Join-Path $root '.venv\Scripts\python.exe'
+    $runner=if(Test-Path -LiteralPath $venv -PathType Leaf){$venv}else{$python}
+    & $runner $reviewer '--plano' $enPlan '--id' $Id '--modelo' $Modelo '--acao' 'revisar'
+    if($LASTEXITCODE -ne 0){throw 'Revisao interrompida. Nenhuma imagem foi aprovada automaticamente.'}
+    Write-Host '[REVISAO] A aprovacao registrada pertence apenas ao cache exato da cena.' -ForegroundColor Cyan
   }
   'Validar' {
     Invoke-Master @{SomenteValidar=$true;TodasCenas=$true;MaxChamadas=0}

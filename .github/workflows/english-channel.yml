@@ -11,6 +11,8 @@ on:
       - 'tests/test_otaku_reframe_fact_201_en.py'
       - 'scripts/otaku_reframe_production.py'
       - 'scripts/validar_reframe_en.py'
+      - 'scripts/revisar_reframe_en.py'
+      - 'tests/test_revisar_reframe_en.py'
       - 'tests/test_otaku_reframe_production.py'
       - 'tests/test_validar_reframe_en.py'
       - 'AGENTS.md'
@@ -32,6 +34,8 @@ on:
       - 'tests/test_otaku_reframe_fact_201_en.py'
       - 'scripts/otaku_reframe_production.py'
       - 'scripts/validar_reframe_en.py'
+      - 'scripts/revisar_reframe_en.py'
+      - 'tests/test_revisar_reframe_en.py'
       - 'tests/test_otaku_reframe_production.py'
       - 'tests/test_validar_reframe_en.py'
       - 'AGENTS.md'
@@ -55,4 +59,4 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
       - name: English manifest, safe OAuth, isolated render and publisher
-        run: python -m pytest -q tests/test_shorts_en.py tests/test_otaku_reframe_direction.py tests/test_otaku_reframe_fact_201_en.py tests/test_english_caption_design.py tests/test_otaku_reframe_production.py tests/test_validar_reframe_en.py
+        run: python -m pytest -q tests/test_shorts_en.py tests/test_otaku_reframe_direction.py tests/test_otaku_reframe_fact_201_en.py tests/test_english_caption_design.py tests/test_otaku_reframe_production.py tests/test_validar_reframe_en.py tests/test_revisar_reframe_en.py

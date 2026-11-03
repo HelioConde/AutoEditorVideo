@@ -37,6 +37,30 @@ The notebook requires a face in the writer's mind while writing the target's nam
 
 **Assets:** All 12 beats have distinct English art directions, no licensed footage, no Portuguese text. Motion is activated from the beginning and captions use up to 3 words and active-word highlight. The new scene master cache requires human approval on each original image. Real length is validated from generated audio and with ffprobe after Remotion; hard maximum 60s.
 
+## Revisao visual guiada (apos gerar imagens)
+
+O comando `-Acao Validar` **nao pode liberar o render sem aprovacao
+visual manual**. A mensagem `Cena 01 ainda nao aprovada` indica que
+o cache existe, mas ainda nao foi conferido pelo usuario.
+
+Use este atalho para abrir o `comparacao.jpg` e o `master.png` de cada
+uma das cenas no visualizador padrao do Windows:
+
+```powershell
+.\gerar-otaku-reframe.ps1 -Acao Revisar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
+```
+
+Para cada cena, somente depois de ver as imagens, digite `APROVAR 01`
+(usando o numero exato mostrado), ou `REPROVAR 01`. O programa pede
+um motivo por cena. `PULAR` mantem pendente e `SAIR` interrompe com
+o progresso salvo. Nao ha opcao de aprovar tudo automaticamente. Ao
+executar novamente, as cenas aprovadas sao puladas.
+
+Revisar rostos, dedos, corpo, coesao de anime, continuação da historia,
+quebras de cenario, qualidade do fundo e sobreposicoes. Se faltar arquivo
+de comparacao, a cena nao pode ser aprovada. O QA posterior verifica
+as camadas e a voz em ingles antes da montagem Remotion.
+
 ## Commands (PowerShell in repository root)
 
 ```powershell

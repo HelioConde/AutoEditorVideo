@@ -31,9 +31,10 @@ def require_approved_scenes(plan: dict, model: str) -> int:
         if not review or review.get("status") != "aprovado":
             raise ValueError(
                 "Cena " + str(scene["id"]) + " ainda nao aprovada manualmente. "
-                "Confira master.png, comparacao.jpg, foreground/background; "
-                "depois execute gerar-shorts-master.ps1 -AprovarCena "
-                "com o -Plano EN e um -Motivo explicito."
+                "Confira master.png, comparacao.jpg, foreground/background. "
+                "Use .\\gerar-otaku-reframe.ps1 -Acao Revisar -Id " + plan["id"] +
+                " -Manifesto <manifesto-EN> para analisar e decidir uma cena "
+                "de cada vez; a aprovacao nunca e automatica."
             )
         count += 1
     return count
