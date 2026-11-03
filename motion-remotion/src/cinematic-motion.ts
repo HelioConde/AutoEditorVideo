@@ -86,6 +86,7 @@ export const openingCutAtFrame=(frame:number,fps:number,
   if(mode!=='cinematica'||!Number.isFinite(frame)||!Number.isFinite(fps)||
      frame<0||fps<=0||frame>=5*fps)return flat;
   const t=frame/fps;
+  if(t===0)return {zoom:0,panX:0,panY:0,beat:0};
   // Direct camera cuts, not dissolves. Zoom is capped by the Shot renderer.
   if(t<1.25){
     const k=ease(t/1.25);
