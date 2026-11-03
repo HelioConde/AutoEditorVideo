@@ -215,5 +215,16 @@
         }
       ]
     }
-  ]
+  ],
+  "production": {
+    "engine": "AutoEditorVideo",
+    "runtime": "local-windows",
+    "images": "codex-proxy",
+    "narration": "edge-tts",
+    "captions": "WordBoundary",
+    "editor": "remotion",
+    "qa": "manual-per-scene",
+    "external_rendering": false,
+    "auto_publish": false
+  }
 }
