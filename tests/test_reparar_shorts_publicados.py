@@ -88,3 +88,76 @@ def test_covers_reject_landscape_and_are_checked_before_network(tmp_path):
         repair.validate_cover(cover)
     Image.new("RGB", (1080, 1920), "red").save(cover)
     repair.validate_cover(cover)
+
+
+
+def test_rate_limit_stops_later_thumbnail_attempts_but_finishes_descriptions(tmp_path, monkeypatch):
+    class FakeChannels:
+        def list(self, **kwargs):
+            return self
+
+        def execute(self):
+            return {"items": [{"id": "channel_owner"}]}
+
+    class FakeYouTube:
+        def channels(self):
+            return FakeChannels()
+
+    items = [
+        {"id": ep_id, "video_id": f"video_{i}",
+         "cover": tmp_path / f"{ep_id}.jpg"}
+        for i, ep_id in enumerate(repair.IDS)
+    ]
+    monkeypatch.setattr(repair, "plan_items", lambda profile: items)
+    monkeypatch.setattr(repair, "oauth_service", lambda: FakeYouTube())
+    monkeypatch.setattr(repair, "OUTPUT", tmp_path)
+    calls = []
+
+    def fake_update(_, item, owner_id, *, send_cover):
+        assert owner_id == "channel_owner"
+        calls.append(send_cover)
+        return {
+            "id": item["id"], "video_id": item["video_id"],
+            "descricao_status": "corrigida",
+            "capa_status": ("erro_http_429" if send_cover else "nao_tentada"),
+        }
+
+    monkeypatch.setattr(repair, "update_one", fake_update)
+    assert repair.main(["--aplicar"]) == 0
+    assert calls == [True, False, False, False, False]
+    report = json.loads((tmp_path / "reparo-5-shorts.json").read_text(encoding="utf-8"))
+    assert len(report["resultados"]) == 5
+    assert report["resultados"][0]["capa_status"] == "erro_http_429"
+
+
+def test_description_only_never_attempts_thumbnail_upload(tmp_path, monkeypatch):
+    class FakeChannels:
+        def list(self, **kwargs):
+            return self
+
+        def execute(self):
+            return {"items": [{"id": "owner"}]}
+
+    class FakeYouTube:
+        def channels(self):
+            return FakeChannels()
+
+    items = [
+        {"id": ep_id, "video_id": f"video_{i}", "cover": tmp_path / "capa.jpg"}
+        for i, ep_id in enumerate(repair.IDS)
+    ]
+    monkeypatch.setattr(repair, "plan_items", lambda profile: items)
+    monkeypatch.setattr(repair, "oauth_service", lambda: FakeYouTube())
+    monkeypatch.setattr(repair, "OUTPUT", tmp_path)
+    calls = []
+
+    def fake_update(_, item, owner_id, *, send_cover):
+        calls.append(send_cover)
+        return {
+            "id": item["id"], "video_id": item["video_id"],
+            "descricao_status": "ja_corrigida", "capa_status": "nao_tentada",
+        }
+
+    monkeypatch.setattr(repair, "update_one", fake_update)
+    assert repair.main(["--aplicar", "--sem-capas"]) == 0
+    assert calls == [False] * 5
