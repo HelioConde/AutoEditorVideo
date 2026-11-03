@@ -1,4 +1,4 @@
-# Teste por intervalos: Death Note episodio 2 agora, episodio 3 1h depois.
+# Ciclo editorial: EP02 -> curiosidade -> voce lembra -> EP03, com 1h entre uploads.
 # Um unico processo local, com comprovantes do YouTube, retomada e sem duplicar.
 [CmdletBinding()]
 param(
@@ -32,7 +32,7 @@ $argsList=@(
 )
 if($Publicar){$argsList+='--publicar'}
 if($Publicar){
-    Write-Host '[TESTE] Publicacao explicita autorizada: episodio 2 e depois episodio 3.' -ForegroundColor Cyan
+    Write-Host '[TESTE] Publicacao autorizada: EP02 -> Curiosidade -> Voce lembra? -> EP03.' -ForegroundColor Cyan
     Write-Host "[INTERVALO] Pelo menos $IntervaloMinutos minutos entre uploads confirmados." -ForegroundColor Cyan
     Write-Host '[IMPORTANTE] Mantenha este PowerShell aberto e o computador ligado.' -ForegroundColor Yellow
 }else{
