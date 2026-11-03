@@ -6,27 +6,42 @@ Create an **original English-language short** about Death Note episode 1, using 
 
 **Manifest:** `conteudos/otaku-reframe-ep01-en.json` (`101-death-note-ep01`). The published Portuguese EP01 must never be replaced. English files go to `assets/gerados/shorts-animados/101-death-note-ep01/en-US/`.
 
-## Commands (Windows PowerShell, at repository root)
+## Comando PowerShell unificado (Windows)
+
+O script `gerar-otaku-reframe.ps1` usa o manifesto do episódio 1 por padrão. **Não faz upload**.
+
+Primeira utilização, dentro de um clone local:
 
 ```powershell
-git pull
-# Safe metadata plan: no image generation, speech, OAuth or publication
-python scripts/renderizar_shorts_en.py --manifesto conteudos/otaku-reframe-ep01-en.json --acao planejar --id 101-death-note-ep01
-
-# English neural narration + timed word boundaries. Independent of approved image cache.
-python scripts/renderizar_shorts_en.py --manifesto conteudos/otaku-reframe-ep01-en.json --acao voz --id 101-death-note-ep01
-
-# Audit existing PT image cache before spending quotas.
-.\gerar-shorts-master.ps1 -Id 101-death-note-ep01 -DiagnosticarCache
-
-# Visual planning is free; target shorter shots to prevent stagnant frames.
-.\gerar-shorts-master.ps1 -Id 101-death-note-ep01 -SomentePlanejar -MaxSegundosPorPlano 4.5
-
-# ONLY after source art and its layers have been approved:
-python scripts/renderizar_shorts_en.py --manifesto conteudos/otaku-reframe-ep01-en.json --acao renderizar --id 101-death-note-ep01 --perfil vivo
+cd "$HOME\Documents\arquivo-otaku-github"
+git fetch origin feature/otaku-reframe-ep01-en
+git switch feature/otaku-reframe-ep01-en
+git pull --ff-only origin feature/otaku-reframe-ep01-en
+.\gerar-otaku-reframe.ps1 -Acao Preparar
 ```
 
-If scene images are missing, use the master generator within available quota, review master/foreground/background, then retry rendering. The Python English renderer does **not** generate new images or publish anything. Do not claim success until MP4, word-timed captions and final duration are validated.
+Para consultar os arquivos de arte existentes sem gastar cota:
+
+```powershell
+.\gerar-otaku-reframe.ps1 -Acao Diagnosticar
+```
+
+Somente com orçamento explícito e proxy de imagem configurado, gere as imagens que estiverem faltando (o limite é de **chamadas**, não uma estimativa de preço):
+
+```powershell
+.\gerar-otaku-reframe.ps1 -Acao GerarImagens -MaxChamadas 36
+```
+
+Após inspecionar/ajustar as imagens, validar e confirmar a revisão visual:
+
+```powershell
+.\gerar-otaku-reframe.ps1 -Acao Validar
+.\gerar-otaku-reframe.ps1 -Acao Renderizar -ConfirmarRevisaoVisual
+```
+
+O MP4 será salvo em `assets/gerados/shorts-animados/101-death-note-ep01/en-US/`. Se a geração da voz neural exceder o limite, o fluxo para; o roteiro deve ser encurtado antes de renderizar. Se faltarem camadas, a validação impede renderização. Se houver cenas ainda não revisadas, não use `-ConfirmarRevisaoVisual` prematuramente.
+
+Parâmetros opcionais: `-Modelo gpt-image-2`, `-Perfil equilibrado`, `-Refazer` (somente na renderização), `-Id` e `-Manifesto` para futuros episódios presentes nos catálogos de produção.
 
 ## Retention beat map
 
