@@ -24,6 +24,7 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from master_scenes import read_storyboard,scene_dir,validate_image,production_storyboard
 from roteiro_para_storyboard import select_episode, save_plan
 from narracao_shorts import ensure_voice
+from shorts_duration import validate_planned_audio, validate_video
 from renderizar_com_remotion import audio_duration,captions_from_ass
 from capa_cinematografica import cover_options, render_cover
 from qa_foreground_fidelity import foreground_fidelity
@@ -381,6 +382,7 @@ def main(argv:list[str]|None=None)->int:
         if args.somente_capa or args.renderizar:
             raise ValueError('--somente-voz nao pode renderizar video ou capa')
         voice,subtitles=ensure_voice(select_episode(args.id),folder,create=args.criar_voz)
+        validate_planned_audio(audio_duration(voice),stage=f'Voz PT {args.id}')
         print(f'[VOZ PRONTA] Audio: {voice} | legendas: {subtitles}. '
               'Nenhum render executado; aguardando aprovacao visual das imagens.')
         return 0
@@ -397,7 +399,7 @@ def main(argv:list[str]|None=None)->int:
     print(f'[QA] {len(validated)} enquadramentos com PNG alfa e cenário correspondente.')
     folder=OUT/args.id
     voice,ass=ensure_voice(select_episode(args.id),folder,create=args.criar_voz)
-    seconds=audio_duration(voice)+.4
+    seconds=validate_planned_audio(audio_duration(voice),stage=f'Pre-render PT {args.id}')
     captions=captions_from_ass(ass,seconds)
     if not captions:raise RuntimeError('Narração sem legendas')
     props=build_props(ep,voice,captions,seconds,model=args.modelo,
@@ -424,11 +426,12 @@ def main(argv:list[str]|None=None)->int:
     command=[npm,'run','render:master','--',str(output.resolve()),'--props',
              str(propfile.resolve()),'--concurrency','2']
     subprocess.run(command,cwd=args.motor,check=True,timeout=1800)
+    actual_seconds=validate_video(output,stage=f'Export PT {args.id}')
     cover=folder/f"{ep['id']}-master-capa.jpg"
     cover_report=cover_from_master(ep,args.modelo,cover)
     manifest={'id':ep['id'],'status':'renderizado-aguardando-revisao',
               'cover_design':cover_report,
-              'mp4':str(output),'cover':str(cover),'duration_s':seconds,
+              'mp4':str(output),'cover':str(cover),'duration_s':actual_seconds,
               'narrative_beats':ep.get('narrative_beats'),
               'visual_shots':len(props['scenes']),'captions':len(captions),
               'animation_mode':args.animacao,
