@@ -5,6 +5,14 @@ imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
 Regras obrigatórias:
+- **LOTE DE 24 SHORTS**: 8 ciclos completos de episodio -> curiosidade ->
+  voce lembra, usando conteudos/lote-24-shorts.json; EP01 publicado fica de fora.
+  Todos os roteiros devem iniciar com o campo `hook` e terminar com `cta`
+  explicitamente pedindo inscricao; o validador final deve recusar MP4 >60,000s.
+- **AGENDAMENTO YOUTUBE**: video enviado como `private` com `status.publishAt`
+  futuro em UTC e confirmacao retornada pela API; jamais publicar em horario
+  passado, jamais assumir sucesso sem id/hora confirmados. Sem `-Agendar`, nao
+  gerar materiais nem consumir cota; nao duplicar uploads agendados.
 - **REGRA DE DISTRIBUICAO EDITORIAL**: alternar `Um episodio em 60s` -> `Curiosidade` ->
   `Voce lembra?` -> proximo episodio, e repetir o ciclo quando houver
   roteiros novos aprovados. Nao publicar episodios consecutivos na fila
