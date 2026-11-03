@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill,Audio,Img,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
-import {AnimationMode,cannotMoveSeparately,motionAtFrame} from './cinematic-motion';
+import {AnimationMode,cannotMoveSeparately,motionAtFrame,openingCutAtFrame} from './cinematic-motion';
 import {CharacterPreset,characterPoseAtFrame} from './character-idle';
 
 export type SemanticLayer={
@@ -42,22 +42,13 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
   const heroPulse=hasHero&&mode==='cinematica'
     ?Math.sin(frame/fps*2*Math.PI*0.27)*
       Math.pow(Math.sin(Math.PI*normalized),2)*1.05:0;
-  // vidIQ feedback: a static first five seconds loses viewers.
-  // Two continuous, deterministic camera beats (0–1.9s push, 1.9–5s
-  // lateral refocus). No synthetic character/body transforms, flashes or
-  // unapproved artwork. First frame remains the exact approved scene.
-  const opening=mode==='cinematica' && scene.startFrame<fps*5;
-  const clamp01=(value:number)=>Math.max(0,Math.min(1,value));
-  const ease01=(value:number)=>{
-    const x=clamp01(value);
-    return x*x*(3-2*x);
-  };
-  const beat1=opening?ease01(frame/(fps*1.9)):0;
-  const beat2=opening?ease01((frame/fps-1.9)/3.1):0;
-  const openingZoom=beat1*.048+beat2*.024;
-  const camera='translate('+(motion.panX+beat1*15-beat2*22).toFixed(3)+'px,'+
-    (motion.panY+heroPulse-beat1*14-beat2*7).toFixed(3)+
-    'px) scale('+(motion.zoom+openingZoom).toFixed(5)+')';
+  // Visible virtual cuts start at 1.25s and 2.45s. The entire approved
+  // composition moves as one: never fake a character action or separate props.
+  const opener=openingCutAtFrame(frame,fps,mode);
+  const safeZoom=Math.min(1.14,motion.zoom+opener.zoom);
+  const camera='translate('+(motion.panX+opener.panX).toFixed(3)+'px,'+
+    (motion.panY+heroPulse+opener.panY).toFixed(3)+
+    'px) scale('+safeZoom.toFixed(5)+')';
   const ordered=(scene.layers||[]).slice().sort((a,b)=>a.z-b.z);
   return <AbsoluteFill style={{opacity,background:'#070912',overflow:'hidden'}}>
     <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
