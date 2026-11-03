@@ -26,7 +26,11 @@ def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dic
     items = []
     for source in sources:
         data = json.loads(source.read_text(encoding="utf-8-sig"))
-        items.extend(data["episodes"])
+        for ep in data["episodes"]:
+            normalized = dict(ep)
+            if not normalized.get("series") and data.get("series"):
+                normalized["series"] = data["series"]
+            items.append(normalized)
     result = {ep["id"]: ep for ep in items}
     if len(result) != len(items):
         raise ValueError("IDs duplicados no catálogo")
@@ -84,11 +88,17 @@ def description_for(episode: dict) -> str:
 
 
 def publisher_episode(episode: dict) -> dict:
+    series = str(episode.get("series") or episode.get("serie") or "").strip()
+    if not series:
+        raise ValueError(
+            f"Episódio {episode.get('id', '<sem id>')} sem série: informe "
+            "'series' no episódio ou no manifesto."
+        )
     title = str(episode["title"]).strip()
     if not 1 <= len(title) <= 100:
         raise ValueError("Título inválido para YouTube")
     return {
-        "serie": episode["series"],
+        "serie": series,
         "titulo": title,
         "titulo_youtube": title,
         "descricao_youtube": description_for(episode),
