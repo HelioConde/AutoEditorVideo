@@ -426,6 +426,46 @@ def auth_youtube():
         TOKEN.write_text(credentials.to_json(),encoding="utf-8")
     return build("youtube","v3",credentials=credentials,cache_discovery=False)
 
+def parse_publish_at(raw: str) -> datetime:
+    """Convert a future ISO8601 timestamp to UTC; never silently publish now."""
+    if not raw.strip():
+        raise ValueError("Data/hora de publicacao vazia")
+    try:
+        value = datetime.fromisoformat(raw.strip().replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise ValueError("Use data e hora ISO8601 com fuso, por exemplo 2026-11-05T12:00:00Z") from exc
+    if value.tzinfo is None:
+        raise ValueError("Horario de agendamento precisa de fuso explicito")
+    return value.astimezone(timezone.utc)
+
+
+def schedule_status(privacy: str, when: datetime | None, *, now: datetime | None = None) -> dict:
+    """Construct the exact video status for the YouTube insert API."""
+    if when is None:
+        return {"privacyStatus": privacy}
+    if privacy != "private":
+        raise ValueError("Agendamento exige privacidade private no upload")
+    if now is None:
+        now = datetime.now(timezone.utc)
+    if when <= now + __import__("datetime").timedelta(minutes=15):
+        raise ValueError(
+            "Horario agendado esta vencido ou a menos de 15 minutos. "
+            "Interrompido para nao publicar acidentalmente agora."
+        )
+    return {"privacyStatus": "private", "publishAt": when.isoformat().replace("+00:00", "Z")}
+
+
+def confirmed_schedule(response: dict, requested: datetime) -> bool:
+    status = response.get("status") or {}
+    if status.get("privacyStatus") != "private" or not status.get("publishAt"):
+        return False
+    try:
+        recorded = parse_publish_at(str(status["publishAt"]))
+    except ValueError:
+        return False
+    return recorded == requested
+
+
 def video_digest(path: Path) -> str:
     h = hashlib.sha256()
     with path.open('rb') as f:
@@ -458,6 +498,9 @@ def upload(args):
     desc=meta.get("descricao","").strip()
     if not (1<=len(title)<=100):raise RuntimeError("Titulo obrigatorio: preencha titulo em metadata.json (ate 100 caracteres)")
     if len(desc)>5000:raise RuntimeError("Descricao excede 5000 caracteres")
+    scheduled_for = parse_publish_at(args.agendar_em) if args.agendar_em else None
+    if scheduled_for is not None:
+        schedule_status(args.privacidade, scheduled_for)
     current_digest=video_digest(args.video)
     historical_state=OUTPUT/('estado-upload-'+current_digest[:12]+'.json')
     previous={}
@@ -470,9 +513,23 @@ def upload(args):
     youtube=auth_youtube()
     video_id=previous.get("video_id")
     if video_id:
+        if scheduled_for is not None:
+            recorded_time = str(previous.get("agendado_para") or "")
+            if not recorded_time or parse_publish_at(recorded_time) != scheduled_for:
+                raise RuntimeError(
+                    "MP4 ja enviado ao YouTube sem este agendamento confirmado. "
+                    "Verifique o video no Studio; nunca reenviar nem alterar sem revisao."
+                )
+            if previous.get("agendamento_confirmado") is not True:
+                raise RuntimeError(
+                    "Upload anterior com agendamento ainda nao confirmado. "
+                    "Verifique data/hora no Studio antes de retomar."
+                )
         print("[OK] Upload ja registrado. Nao repetindo video: https://youtu.be/"+video_id)
     else:
-        body={"snippet":{"title":title,"description":desc,"tags":meta.get("tags",[]),"categoryId":str(meta.get("categoria",24)),"defaultLanguage":meta.get("idioma","pt-BR")},"status":{"privacyStatus":args.privacidade,"selfDeclaredMadeForKids":bool(meta.get("feito_para_criancas",False))}}
+        status = schedule_status(args.privacidade, scheduled_for)
+        status["selfDeclaredMadeForKids"] = bool(meta.get("feito_para_criancas",False))
+        body={"snippet":{"title":title,"description":desc,"tags":meta.get("tags",[]),"categoryId":str(meta.get("categoria",24)),"defaultLanguage":meta.get("idioma","pt-BR")},"status":status}
         media=MediaFileUpload(str(args.video),mimetype="video/mp4",chunksize=4*1024*1024,resumable=True)
         request=youtube.videos().insert(part="snippet,status",body=body,media_body=media)
         response=None
@@ -483,9 +540,25 @@ def upload(args):
             if progress is not None:print(f"[INFO] Upload: {progress.progress()*100:.1f}%",flush=True)
         video_id=response.get("id")
         if not video_id:raise RuntimeError("API nao retornou ID de video; confira YouTube Studio antes de repetir")
+        scheduled_ok = (
+            confirmed_schedule(response, scheduled_for)
+            if scheduled_for is not None else False
+        )
         previous={"video_id":video_id,"link":"https://youtu.be/"+video_id,"privacidade_solicitada":args.privacidade,"enviado_em":datetime.now(timezone.utc).isoformat(),"thumbnail_status":"pending","video_path":str(args.video.resolve()), "video_sha256":current_digest}
+        if scheduled_for is not None:
+            previous["agendado_para"] = scheduled_for.isoformat().replace("+00:00", "Z")
+            previous["agendamento_confirmado"] = scheduled_ok
         save_state(previous,historical_state)
-        print("[OK] Video enviado: https://youtu.be/"+video_id)
+        if scheduled_for is not None and not scheduled_ok:
+            raise RuntimeError(
+                "YouTube recebeu o MP4, mas a resposta NAO confirmou "
+                "status.publishAt e privacidade private. Nao reenvie. "
+                "Verifique o agendamento manualmente no YouTube Studio."
+            )
+        if scheduled_for is not None:
+            print("[AGENDADO] "+previous["agendado_para"]+" | https://youtu.be/"+video_id)
+        else:
+            print("[OK] Video enviado: https://youtu.be/"+video_id)
     if previous.get("thumbnail_status") != "success":
         thumb=OUTPUT/"capa-tiktok-shorts.jpg" if args.usar_capa_shorts else OUTPUT/"miniatura-youtube.jpg"
         if not thumb.is_file():print("[AVISO] Sem miniatura JPG. Execute -Etapa preparar.")
@@ -529,6 +602,7 @@ def main():
     p.add_argument("--imagem-fonte",type=Path)
     p.add_argument("--capa-final-shorts",type=Path,help="Usa JPG/PNG vertical aprovado sem redesenhar a capa")
     p.add_argument("--privacidade",choices=["private","unlisted","public"],default="public")
+    p.add_argument("--agendar-em",default="",help="ISO8601 com fuso; publica via agendamento nativo do YouTube (privacidade private)")
     p.add_argument("--modelo-imagem",choices=["gpt-image-1.5","gpt-image-2"],default="gpt-image-1.5")
     p.add_argument("--modelo-texto",default="gpt-6.1-sol")
     p.add_argument("--arte-ia",action="store_true",help="gera duas novas artes; consome cota do Codex Proxy")
@@ -540,6 +614,10 @@ def main():
     if args.etapa == "diagnostico":
         diagnose(args)
         return
+    if args.agendar_em:
+        if args.etapa not in ("enviar","tudo"):
+            raise RuntimeError("--agendar-em exige etapa enviar ou tudo")
+        schedule_status(args.privacidade, parse_publish_at(args.agendar_em))
     if args.etapa in ("enviar","tudo"):
         validate_video(args.video,stage="Preflight upload YouTube PT")
         verify_oauth_config()  # Before calling AI services or changing generated files.
