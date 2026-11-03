@@ -1,5 +1,6 @@
 """VoiceStudio test doubles: no API, no models, no uploads, no generated video."""
 from pathlib import Path
+import json
 import sys
 
 import pytest
@@ -74,8 +75,15 @@ def test_voicestudio_and_edge_are_independent(monkeypatch, tmp_path):
 
     monkeypatch.setattr(vs, "_client", lambda: pytest.fail("cache should be used"))
     assert ensure_voice(EP, tmp_path, create=False, engine="voicestudio") == (mp3, ass)
+    import hashlib
+    from narracao_shorts import VOICE, RATE
     (tmp_path / "voz-master.mp3").write_bytes(b"old-edge-voice")
     (tmp_path / "legendas.ass").write_text("edge captions", encoding="utf-8")
+    (tmp_path / "marcacoes-voz.json").write_text(json.dumps({
+        "voice": VOICE, "rate": RATE,
+        "script_sha256": hashlib.sha256(EP["script"].encode("utf-8")).hexdigest(),
+        "words": []
+    }), encoding="utf-8")
     edge, edge_sub = ensure_voice(EP, tmp_path, create=False, engine="edge")
     assert edge.name == "voz-master.mp3"
     assert edge_sub.name == "legendas.ass"
