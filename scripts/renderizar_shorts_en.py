@@ -24,6 +24,7 @@ from shorts_duration import validate_planned_audio, validate_video
 import renderizar_master_remotion as master
 from otaku_reframe_direction import ensure_english_plan
 from english_caption_design import grouped_captions
+from qa_automatico_reframe_en import prepare_qa_storyboard
 from otaku_reframe_production import validate_english_production
 
 LANG = ROOT / "conteudos" / "testes-animados-5-en.json"
@@ -111,7 +112,8 @@ def prepare_cover(ep: dict, item: dict, folder: Path, model: str) -> Path:
     return cover
 
 
-def process(item: dict, action: str, *, profile: str, model: str, overwrite: bool) -> dict:
+def process(item: dict, action: str, *, profile: str, model: str, overwrite: bool,
+            qa_mode: str = "automatico") -> dict:
     episode_id = item["id"]
     # Render ONLY through the local AutoEditorVideo + Remotion engine.
     # External cloud previews are not an acceptable source for this pipeline.
@@ -141,6 +143,9 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     ep = read_storyboard(path)
     if ep["id"] != episode_id:
         raise ValueError("Storyboard divergente do episodio em ingles")
+    review = {"mode": "legacy", "auto_checked": 0, "explicitly_approved": 0}
+    if item.get("scenes"):
+        ep, review = prepare_qa_storyboard(ep, model, qa_mode)
     if action == "capa":
         cover = prepare_cover(ep, item, folder, model)
         print(f"[EN CAPA] {cover}")
@@ -150,6 +155,13 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     output = folder / f"{episode_id}-en-US-{suffix}.mp4"
     if output.is_file() and not overwrite:
         validate_video(output,stage=f'Cache EN {episode_id}')
+        report_file = folder / "qa-en-US.json"
+        if item.get("scenes"):
+            if not report_file.is_file():
+                raise ValueError("MP4 em cache sem QA EN; use -Refazer.")
+            previous = json.loads(report_file.read_text(encoding="utf-8"))
+            if previous.get("video_sha256") != hashlib.sha256(output.read_bytes()).hexdigest():
+                raise ValueError("MP4 em cache sem assinatura QA correspondente. Use -Refazer.")
         print(f"[EN CACHE] Ja renderizado: {output} (use -Refazer para substituir)")
         return {"id": episode_id, "status": "cache", "mp4": str(output)}
     # Audio MUST be English and fresh before rendering English subtitles.
@@ -190,6 +202,12 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         "cover": str(cover), "duration_s": actual_seconds, "scenes": len(confirmed),
         "captions": len(captions), "published": False,
         "uses_cached_images": True,
+        "visual_qa_mode": review["mode"],
+        "automatic_technical_qa": review["mode"] == "automatico",
+        "manual_approvals_forged": False,
+        "manual_approvals": review["explicitly_approved"],
+        "video_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
+        "video_qa_description": "Auto technical checks; artistic quality reviewed by creator after upload",
         "production_pipeline": production,
         "render_origin": "AutoEditorVideo/local/remotion",
         "editorial_profile": props["editorialProfile"],
@@ -210,6 +228,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--modelo", choices=("gpt-image-1.5", "gpt-image-2"), default="gpt-image-1.5")
     parser.add_argument("--perfil", choices=("equilibrado", "vivo", "ultrassutil"), default="equilibrado")
     parser.add_argument("--refazer", action="store_true")
+    parser.add_argument("--modo-qa", choices=("automatico","manual"), default="automatico")
     args = parser.parse_args(argv)
     entries = load_english(Path(args.manifesto))
     if args.id:
@@ -220,7 +239,7 @@ def main(argv: list[str] | None = None) -> int:
     for item in entries:
         try:
             process(item, args.acao, profile=args.perfil, model=args.modelo,
-                    overwrite=args.refazer)
+                    overwrite=args.refazer, qa_mode=args.modo_qa)
         except Exception as exc:
             problems.append((item["id"], str(exc)))
             print(f"[EN FALHOU] {item['id']}: {exc}", file=sys.stderr, flush=True)
