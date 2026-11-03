@@ -137,7 +137,14 @@ def select_episode(ep_id: str, path: Path=MANIFEST)->dict:
     matches=[]
     for source in sources:
         data=json.loads(source.read_text(encoding='utf-8-sig'))
-        matches.extend(ep for ep in data.get('episodes',[]) if ep.get('id')==ep_id)
+        for ep in data.get('episodes',[]):
+            if ep.get('id') == ep_id:
+                # Metadados comuns do manifesto (por exemplo "series") são
+                # herdados quando o episódio não repete o campo.
+                normalized = dict(ep)
+                if not normalized.get('series') and data.get('series'):
+                    normalized['series'] = data['series']
+                matches.append(normalized)
     if len(matches)!=1:
         raise ValueError('Episódio não encontrado ou duplicado no catálogo: '+ep_id)
     return matches[0]
