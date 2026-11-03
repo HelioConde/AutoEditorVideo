@@ -4,6 +4,19 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
+## REGRA EDITORIAL: CTA SEM MARCA NA NARRACAO
+
+- Em novos roteiros PT-BR, manter um CTA curto e natural, como
+  `Inscreva-se para acompanhar o proximo episodio!`.
+- **Nao narrar o nome "Otaku Multicena"** no CTA final. A marca continua
+  no titulo, descricao, hashtags, capa e elementos visuais quando apropriado.
+- Aplicar em roteiros novos ou em edicoes explicitamente solicitadas; nao
+  reescrever audios de Shorts ja publicados sem pedido.
+- Quando editar o campo `script`, atualizar o campo `cta` correspondente e
+  invalidar voz/legendas/MP4 em cache se as palavras faladas mudarem.
+- Edge TTS segue o motor padrao. Nenhum upload automatico decorrente de revisao
+  textual; exigir o sinalizador de publicacao explicito.
+
 ## MOTOR DE VOZ OPCIONAL: VOICESTUDIO
 
 - Edge TTS e a opcao **padrao** e nunca deve ser removida nem substituida silenciosamente.
