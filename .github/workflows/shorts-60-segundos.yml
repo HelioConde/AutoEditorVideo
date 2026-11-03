@@ -1,0 +1,36 @@
+name: Regra-mestra - Shorts maximo 60s
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/shorts_duration.py'
+      - 'scripts/renderizar_master_remotion.py'
+      - 'scripts/renderizar_shorts_en.py'
+      - 'scripts/publicar_arquivo_otaku.py'
+      - 'scripts/publicar_shorts_en.py'
+      - 'scripts/publicar_tiktok.py'
+      - 'publicar-5-shorts.ps1'
+      - 'tests/test_shorts_duration.py'
+      - 'tests/test_voice_before_approval.py'
+      - 'tests/test_shorts_en.py'
+      - 'AGENTS.md'
+      - '.github/workflows/shorts-60-segundos.yml'
+  pull_request:
+    paths:
+      - 'scripts/**'
+      - 'publicar-5-shorts.ps1'
+      - 'tests/**'
+      - '.github/workflows/shorts-60-segundos.yml'
+permissions:
+  contents: read
+jobs:
+  guardrail:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+      - run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
+      - name: Testar teto exato de 60s e protecao de upload
+        run: python -m pytest -q tests/test_shorts_duration.py tests/test_voice_before_approval.py tests/test_shorts_en.py
