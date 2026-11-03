@@ -52,7 +52,11 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
                     f"Cena {scene['id']}: multicamadas novas exigem aprovacao "
                     "manual explicita antes de renderizar."
                 )
-            validated=validate_multilayer(ep,scene,model,folder)
+            # Auto mode retains deterministic layer/hash/blocker QA but does
+            # not require manual per-image clicks. Explicit rejections still
+            # block above, for both modes.
+            auto_qa=bool(scene.get('correcao_visual', {}).get('automatic_technical_qa'))
+            validated=validate_multilayer(ep,scene,model,folder,approval=not auto_qa)
             report={'status':'aguardando_revisao_visual',
                     'alpha':{'margin_warning':False},
                     'composition':{'alignment_warning':False},
@@ -301,7 +305,11 @@ def cover_from_master(ep:dict,model:str,destination:Path,*,title_override:str|No
         raise ValueError(f'Cena de capa {chosen} ausente no storyboard atual')
     folder=scene_dir(ep,scene,model)
     if (folder/'scene-layers.json').is_file():
-        multi=validate_multilayer(ep,scene,model,folder)
+        auto_qa=bool(scene.get('correcao_visual', {}).get('automatic_technical_qa'))
+        manual=read_review(folder)
+        if manual and manual['status']=='reprovado':
+            raise ValueError(f"Capa bloqueada: cena {chosen} reprovada.")
+        multi=validate_multilayer(ep,scene,model,folder,approval=not auto_qa)
         source=compose_semantic_layers(multi['background'],multi['layers'])
         label=title_override or options.get('title') or select_episode(ep['id']).get('cover') or ep.get('title') or 'ARQUIVO OTAKU'
         report=render_cover(source,str(label),destination,
