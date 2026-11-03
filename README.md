@@ -8,31 +8,37 @@
 > anterior permanece integralmente na branch
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
-## Producao oficial de Shorts — Otaku Reframe (ingles)
+## Otaku Reframe (EN): producao e envio automaticos
 
-O unico editor aprovado para os Shorts dos nossos canais e o **AutoEditorVideo
-deste GitHub**, executado no computador Windows. A cadeia final e:
-**Codex Proxy (artes anime com QA) → Edge TTS (ingles) → Remotion/FFmpeg
-(cortes, movimentos e captions) → MP4 local revisado**. Nao substituir por
-slideshow vetorial, previews de compositores externos ou clips genericos.
+O AutoEditorVideo Windows e o UNICO motor de edicao aprovado: artes originais
+pelo Codex Proxy, narracao Edge TTS, movimento Remotion, legendas e ffprobe.
+Nao usar videos montados externamente. A revisao humana e do MP4 completo
+no YouTube Studio, **nao de cada uma das 18 imagens**.
 
-O proximo Short em ingles e o **Did You Know? / Death Note — a regra do nome e
-do rosto** (`201-death-note-rosto-nome`). Dentro do clone local:
+Com seu clone local atualizado, crie e envie automaticamente o Short
+`Did You Know? Death Note — regra do nome e rosto`:
 
 ```powershell
+cd "$HOME\Documents\arquivo-otaku-github"
 git switch main
 git pull --ff-only origin main
-.\gerar-otaku-reframe.ps1 -Acao Preparar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
-.\gerar-otaku-reframe.ps1 -Acao Diagnosticar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
+.\gerar-otaku-reframe.ps1 -Acao Automatizar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json -MaxChamadas 60 -Visibilidade private
 ```
 
-Depois, com orcamento explicito de chamadas de IA e Codex Proxy disponivel,
-use `-Acao GerarImagens -MaxChamadas 60`; inspecione e aprove cada cena
-individualmente com `gerar-shorts-master.ps1 -AprovarCena -Plano <caminho do
-storyboard EN>`. Somente apos todas as aprovacoes, use `-Acao Validar`
-e `-Acao Renderizar -ConfirmarRevisaoVisual`. O comando de validacao
-bloqueia cenas pendentes e voz/legendas ausentes. **Nada e publicado
-automaticamente**. [Guia detalhado](docs/OTAKU-REFRAME-DID-YOU-KNOW-201-EN.md).
+As imagens ja em cache sao reutilizadas; o numero 60 e apenas o **maximo
+de chamadas adicionais de imagem**, nao estimativa de preco. Se o cache
+estiver completo, use `-MaxChamadas 0`. O comando prepara o storyboard/voz,
+faz QA tecnico automatico, renderiza MP4 pelo Remotion e envia via OAuth
+ao **canal ingles confirmado**. O arquivo vai ao YouTube como **privado**
+por padrao para voce revisar a versao pronta. Use `-Visibilidade public`
+somente quando quiser que o Short seja publicado publicamente sem nova revisao.
+O comando nao consegue trabalhar se o PC local estiver desligado.
+
+Erros reais (cota indisponivel, cache inexistente/corrompido, cena explicitamente
+reprovada, voz/legenda incompleta, duracao acima de 60 segundos, OAuth errado)
+interrompem o fluxo. O QA tecnico nao garante ausencia de defeitos artisticos.
+O upload nao e refeito cegamente se o resultado estiver ambiguo ou ja constar
+no registro local. Consulte o [guia do Short EN](docs/OTAKU-REFRAME-DID-YOU-KNOW-201-EN.md).
 
 ## Painel Shorts Studio (Windows)
 
