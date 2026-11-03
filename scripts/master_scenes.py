@@ -750,7 +750,11 @@ def main(argv:list[str]|None=None)->int:
     if missing:
         sys.path.insert(0,str(ROOT/'scripts'))
         from gerar_video_codex import proxy_key,check_proxy_accounts,request_image
-        key=proxy_key(Path(os.environ['ARQUIVO_OTAKU_PROXY_ENV'])) if os.environ.get('ARQUIVO_OTAKU_PROXY_ENV') else proxy_key()
+        # Use the explicit environment override only when its file exists.
+        # A stale path must not override the working project/legacy credentials.
+        override=os.environ.get('ARQUIVO_OTAKU_PROXY_ENV','').strip()
+        env_file=Path(override) if override else None
+        key=proxy_key(env_file) if env_file is not None and env_file.is_file() else proxy_key()
         check_proxy_accounts(key)
         generate=lambda prompt,model:request_image(prompt,model,key,size='1024x1536',output_format='png')
         edit=lambda image,prompt,model,*,transparent,mask=None:request_edit(
