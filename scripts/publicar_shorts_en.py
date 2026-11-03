@@ -47,6 +47,17 @@ def expected_channel() -> str:
     return val
 
 
+def verify_channel_identity(actual: list[dict], channel_id: str) -> str:
+    """Refuse to upload if OAuth is linked to any different YouTube channel."""
+    if len(actual) != 1 or actual[0].get("id") != channel_id:
+        raise RuntimeError(
+            "CONTA ERRADA. O OAuth nao corresponde ao Channel ID do canal em ingles. "
+            "Nenhum video foi enviado. Revise a identidade escolhida no navegador; "
+            "para reconectar, exclua SOMENTE .secrets/youtube-en-token.json."
+        )
+    return str(actual[0].get("snippet", {}).get("title", ""))
+
+
 def channel_auth():
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
@@ -72,13 +83,8 @@ def channel_auth():
         TOKEN.write_text(credential.to_json(), encoding="utf-8")
     youtube = build("youtube", "v3", credentials=credential, cache_discovery=False)
     actual = youtube.channels().list(part="id,snippet", mine=True).execute().get("items", [])
-    if len(actual) != 1 or actual[0].get("id") != channel_id:
-        raise RuntimeError(
-            "CONTA ERRADA. O OAuth nao corresponde ao Channel ID do canal em ingles. "
-            "Nenhum video foi enviado. Revise a identidade escolhida no navegador; "
-            "para reconectar, exclua SOMENTE .secrets/youtube-en-token.json."
-        )
-    print(f"[CANAL EN VERIFICADO] {actual[0].get('snippet', {}).get('title', '')}: {channel_id}")
+    title = verify_channel_identity(actual, channel_id)
+    print(f"[CANAL EN VERIFICADO] {title}: {channel_id}")
     return youtube
 
 
