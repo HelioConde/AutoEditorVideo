@@ -54,7 +54,7 @@ def _http_error_message(exc: requests.exceptions.HTTPError, stage: str) -> str:
     message = str(error.get("message") or detail_obj.get("message") or
                   (detail if isinstance(detail, str) else "")).strip()
     # Keep diagnostics short and avoid dumping an API response or request text.
-    message = re.sub(r"[\\r\\n\\t]+", " ", message)[:260]
+    message = "".join(" " if ord(ch) < 32 else ch for ch in message)[:260]
 
     if status == 403 and code == "model_licence_required":
         models = detail_obj.get("models")
