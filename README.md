@@ -289,3 +289,21 @@ O computador deve permanecer ligado. Os dois videos intermediarios
 sao novos e usam imagens geradas por IA. O EP01 nao sera reenviado.
 Guia: [Rodizio de Shorts com intervalo de uma hora](docs/TESTE-INTERVALO-YOUTUBE.md).
 
+
+## Agendar 24 Shorts pelo proprio YouTube
+
+O lote contem 8 episodios (EP02-EP09), 8 curiosidades e 8 videos "Voce lembra?".
+O primeiro horario e 09:00 (America/Sao_Paulo), com intervalo padrao de 1 hora.
+
+```cmd
+cd /d C:\Users\helio\Documents\arquivo-otaku-github
+git pull --ff-only origin main
+programar-24-shorts.cmd planejar 2026-11-05
+programar-24-shorts.cmd agendar 2026-11-05
+```
+
+O modo `agendar` gera e envia os 24 videos (quando aprovados), todos privados,
+com `status.publishAt` futuro para publicacao pelo YouTube. O computador nao
+precisa permanecer ligado nos horarios de liberacao, apenas durante producao/upload.
+**Nenhum video e agendado no YouTube pelo simples ato de atualizar o GitHub.**
+Guia: [Agendar 24 Shorts](docs/AGENDAR-24-SHORTS-YOUTUBE.md).
