@@ -66,7 +66,8 @@ function Invoke-English {
 function Invoke-Master {
   param([Parameter(Mandatory=$true)][hashtable]$Options)
   & $script:master -Id $script:Id -Modelo $script:Modelo @Options
-  if(-not $? -or $LASTEXITCODE -ne 0){
+  # O script filho valida seus proprios exit codes e lanca erros.
+  if(-not $?){
     throw "Falha no gerador de imagens para $($script:Id)."
   }
 }
