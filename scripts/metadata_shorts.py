@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "conteudos" / "testes-animados-5.json"
 RECAPS_MANIFEST = ROOT / "conteudos" / "death-note-recaps-60s.json"
 FORMATS_MANIFEST = ROOT / "conteudos" / "death-note-formatos-60s.json"
+JUJUTSU_MANIFEST = ROOT / "conteudos" / "jujutsu-kaisen-recaps-60s.json"
 
 
 def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dict[str, dict]:
@@ -20,7 +21,7 @@ def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dic
     """
     sources = [path]
     if include_recaps and path == MANIFEST:
-        sources.extend(extra for extra in (RECAPS_MANIFEST, FORMATS_MANIFEST)
+        sources.extend(extra for extra in (RECAPS_MANIFEST, FORMATS_MANIFEST, JUJUTSU_MANIFEST)
                        if extra.is_file())
     items = []
     for source in sources:
@@ -32,6 +33,11 @@ def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dic
     return result
 
 def description_for(episode: dict) -> str:
+    explicit = str(episode.get('description_youtube') or '').strip()
+    if explicit:
+        if len(explicit) > 5000 or any(marker in explicit for marker in ('Ã¡', 'Ã©', 'Ã§', 'Ã£', '\ufffd')):
+            raise ValueError('Descrição explícita inválida ou com caracteres corrompidos')
+        return explicit
     series = str(episode["series"]).strip()
     script = str(episode["script"]).strip()
     if not series or not script:
