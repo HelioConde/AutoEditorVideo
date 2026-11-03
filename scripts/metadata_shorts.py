@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "conteudos" / "testes-animados-5.json"
 RECAPS_MANIFEST = ROOT / "conteudos" / "death-note-recaps-60s.json"
+FORMATS_MANIFEST = ROOT / "conteudos" / "death-note-formatos-60s.json"
 
 
 def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dict[str, dict]:
@@ -18,8 +19,9 @@ def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dic
     recaps as part of its fixed five-video historical upload batch.
     """
     sources = [path]
-    if include_recaps and path == MANIFEST and RECAPS_MANIFEST.is_file():
-        sources.append(RECAPS_MANIFEST)
+    if include_recaps and path == MANIFEST:
+        sources.extend(extra for extra in (RECAPS_MANIFEST, FORMATS_MANIFEST)
+                       if extra.is_file())
     items = []
     for source in sources:
         data = json.loads(source.read_text(encoding="utf-8-sig"))
@@ -44,6 +46,21 @@ def description_for(episode: dict) -> str:
             "Análise e adaptação editorial independente, não oficial. "
             "Obra e personagens pertencem aos respectivos titulares.\n\n"
             "#DeathNote #Anime #ResumoDeAnime #Shorts #ArquivoOtaku"
+        )
+    elif episode.get("format_type") in ("curiosidade", "voce-lembra"):
+        category = episode["format_type"]
+        opening = ("Curiosidade de anime: um detalhe de Death Note que muda tudo."
+                   if category == "curiosidade"
+                   else "Você lembra? Vamos reviver Death Note com uma nova narrativa.")
+        hashtags = ("#DeathNote #CuriosidadesAnime #Anime #Shorts #ArquivoOtaku"
+                    if category == "curiosidade"
+                    else "#DeathNote #VoceLembra #NostalgiaAnime #Shorts #ArquivoOtaku")
+        description = (
+            f"{opening}\n\n{script}\n\n"
+            "Comente sua opinião ou lembrança e inscreva-se para mais histórias!\n\n"
+            "Imagens geradas por IA, narração, roteiro e edição autorais. "
+            "Conteúdo não oficial; obra e personagens pertencem aos respectivos titulares.\n\n"
+            + hashtags
         )
     else:
         description = (
