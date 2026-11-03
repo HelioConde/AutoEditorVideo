@@ -20,6 +20,8 @@ import subprocess
 import sys
 import time
 
+from shorts_duration import validate_video
+
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets" / "gerados"
 PREVIEW_VIDEO = ASSETS / "arquivo-otaku-piloto-codex.mp4"
@@ -450,6 +452,7 @@ def upload(args):
     if not METADATA.is_file():
         raise RuntimeError("Nao ha metadata.json. Execute -Etapa preparar primeiro")
     if not args.video.is_file(): raise RuntimeError("MP4 nao encontrado")
+    validate_video(args.video,stage="Upload YouTube PT")
     meta=json.loads(METADATA.read_text(encoding="utf-8-sig"))
     title=meta.get("titulo","").strip()
     desc=meta.get("descricao","").strip()
@@ -538,6 +541,7 @@ def main():
         diagnose(args)
         return
     if args.etapa in ("enviar","tudo"):
+        validate_video(args.video,stage="Preflight upload YouTube PT")
         verify_oauth_config()  # Before calling AI services or changing generated files.
     if args.etapa in ("preparar","tudo"):prepare(args)
     if args.etapa in ("enviar","tudo"):upload(args)
