@@ -185,10 +185,11 @@ def paths(episode_id: str, profile: str) -> tuple[Path, Path]:
             folder / f"{episode_id}-master-capa.jpg")
 
 
-def ensure_voice(episode_id: str, *, model: str, attempts: int) -> None:
+def ensure_voice(episode_id: str, *, model: str, attempts: int, voice_motor: str = 'edge') -> None:
     base = [
         sys.executable, str(ROOT / "scripts" / "renderizar_master_remotion.py"),
         "--id", episode_id, "--modelo", model, "--somente-voz", "--criar-voz",
+        "--voz-motor", voice_motor,
     ]
     for attempt in range(1, attempts + 1):
         if run_command(base, label=f"Voz e legendas — tentativa {attempt}/{attempts}"):
@@ -202,10 +203,22 @@ def ensure_voice(episode_id: str, *, model: str, attempts: int) -> None:
 
 def ensure_render(
     episode_id: str, *, model: str, profile: str, refazer: bool,
-    attempts: int,
+    attempts: int, voice_motor: str = 'edge',
 ) -> tuple[Path, Path]:
     video, cover = paths(episode_id, profile)
-    if video.is_file() and not refazer:
+    from narracao_shorts import ensure_voice as locate_voice
+    voice_file, _ = locate_voice(select_episode(episode_id), OUTPUT / episode_id,
+                                 create=False, engine=voice_motor)
+    voice_digest = hashlib.sha256(voice_file.read_bytes()).hexdigest()
+    build_state = OUTPUT / episode_id / f'build-voz-{profile}.json'
+    recorded = json.loads(build_state.read_text(encoding='utf-8')) if build_state.is_file() else {}
+    # A legacy Edge video without a sidecar can be reused on the default path.
+    legacy_edge = voice_motor == 'edge' and not recorded
+    cache_matches = (legacy_edge or
+                     (recorded.get('voice_motor') == voice_motor and
+                      recorded.get('voice_sha256') == voice_digest))
+    must_render = refazer or not cache_matches
+    if video.is_file() and not must_render:
         seconds = validate_video(video, stage=f"MP4 em cache {episode_id}")
         print(f"[CACHE MP4] Reutilizando video valido ({seconds:.2f}s): {video}",
               flush=True)
@@ -213,7 +226,7 @@ def ensure_render(
         args = [
             sys.executable, str(ROOT / "scripts" / "renderizar_master_remotion.py"),
             "--id", episode_id, "--modelo", model, "--renderizar",
-            "--perfil-personagens", profile,
+            "--perfil-personagens", profile, "--voz-motor", voice_motor,
         ]
         for attempt in range(1, attempts + 1):
             if run_command(args, label=f"Render Remotion — tentativa {attempt}/{attempts}"):
@@ -221,6 +234,10 @@ def ensure_render(
         else:
             raise PipelineError("Renderizacao falhou. Nenhum video sera enviado.")
         validate_video(video, stage=f"MP4 final {episode_id}")
+        build_state.write_text(json.dumps({
+            'voice_motor': voice_motor, 'voice_sha256': voice_digest,
+            'audio_file': voice_file.name
+        }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     # Always regenerate the episode-specific cover from approved AI scene layers.
     require_success([
         sys.executable, str(ROOT / "scripts" / "renderizar_master_remotion.py"),
@@ -331,6 +348,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--id", default="101-death-note-ep01")
     parser.add_argument("--modelo", choices=MODELS, default="gpt-image-1.5")
+    parser.add_argument("--voz-motor", choices=("edge", "voicestudio"), default="edge")
     parser.add_argument("--perfil", choices=PROFILES, default="equilibrado")
     parser.add_argument("--max-chamadas", type=int, default=45)
     parser.add_argument("--tentativas", type=int, default=2)
@@ -370,12 +388,12 @@ def main(argv: list[str] | None = None) -> int:
     print(f"[INICIO] {episode['title']} | publicar={args.publicar} | "
           f"privacidade={args.privacidade} | max chamadas IA={args.max_chamadas}",
           flush=True)
-    ensure_voice(args.id, model=args.modelo, attempts=args.tentativas)
+    ensure_voice(args.id, model=args.modelo, attempts=args.tentativas, voice_motor=args.voz_motor)
     generate_scenes(args.id, model=args.modelo, budget=args.max_chamadas,
                     attempts=args.tentativas, max_hold=args.max_segundos_por_plano)
     video, cover = ensure_render(args.id, model=args.modelo,
                                  profile=args.perfil, refazer=args.refazer,
-                                 attempts=args.tentativas)
+                                 attempts=args.tentativas, voice_motor=args.voz_motor)
     metadata = metadata_for(args.id)
     print(f"[PRONTO] {video}\n[CAPA] {cover}", flush=True)
     if args.publicar:
