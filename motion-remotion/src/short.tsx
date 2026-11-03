@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Easing, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
-import {openingCutAtFrame} from './cinematic-motion';
+import {openingCutAtFrame,longHoldCutAtFrame} from './cinematic-motion';
 import {groupLegacyCaptionWords} from './caption-pacing';
 
 type Motion='breathe'|'reveal'|'float'|'chess-slide'|'blood-drop'|'feather'|'apple-bounce';
@@ -43,9 +43,10 @@ export const Short:React.FC<ShortProps>=(props)=>{
   const active=grouped.find(c=>frame>=c.startFrame&&frame<c.endFrame);
   const hookOn=frame<2.2*fps;
   const opener=openingCutAtFrame(frame,fps,'cinematica');
-  const zoom=Math.min(1.14,1.025+frame/Math.max(props.durationFrames,1)*.015+opener.zoom);
-  const camera='translate('+opener.panX.toFixed(2)+'px,'+opener.panY.toFixed(2)+
-    'px) scale('+zoom.toFixed(5)+')';
+  const hold=longHoldCutAtFrame(frame,0,props.durationFrames,fps,'cinematica');
+  const zoom=Math.min(1.14,1.025+frame/Math.max(props.durationFrames,1)*.015+opener.zoom+hold.zoom);
+  const camera='translate('+(opener.panX+hold.panX).toFixed(2)+'px,'+
+    (opener.panY+hold.panY).toFixed(2)+'px) scale('+zoom.toFixed(5)+')';
   return <AbsoluteFill style={{backgroundColor:'#090b15',overflow:'hidden',fontFamily:'Arial, sans-serif'}}>
     {/* Reframe both art and props together; static 15s openings are no longer
         possible in the cinematic preview without distorting character masks. */}
