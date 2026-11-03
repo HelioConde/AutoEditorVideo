@@ -9,6 +9,7 @@ param(
     [switch]$GerarVideo,
     [string]$Video='',
     [string]$ImagemFonte='',
+    [string]$CapaFinalShorts='',
     [string]$Episodio='',
     [switch]$Refazer
 )
@@ -50,6 +51,7 @@ if ($TextoIA) {$argsForPython+='--texto-ia'}
 if ($Refazer) {$argsForPython+='--refazer'}
 if ($Video) {$argsForPython+=@('--video',$Video)}
 if ($ImagemFonte) {$argsForPython+=@('--imagem-fonte',$ImagemFonte)}
+if ($CapaFinalShorts) {$argsForPython+=@('--capa-final-shorts',$CapaFinalShorts)}
 if ($Episodio) {$argsForPython+=@('--episodio',$Episodio)}
 Write-Host "[INFO] Etapa: $Etapa; privacidade solicitada: $Privacidade; IA de arte: $ArteIA; IA texto: $TextoIA"
 & $py @argsForPython
