@@ -278,13 +278,13 @@ O novo fluxo local publica os recaps **Death Note EP02 e EP03** com pelo menos
 60 minutos entre os uploads confirmados, evitando duplicatas e retomando
 um upload anterior sem reenvio:
 
-\`\`\`powershell
+```powershell
 cd "C:\Users\helio\Documents\arquivo-otaku-github"
 git pull --ff-only origin main
 .\publicar-recaps-por-hora.ps1 -Publicar -Privacidade public
-\`\`\`
+```
 
-Sem \`-Publicar\`, apenas planeja. O computador precisa permanecer ligado e o
+Sem `-Publicar`, apenas planeja. O computador precisa permanecer ligado e o
 PowerShell aberto. A fila só inclui os episódios 2 e 3 cadastrados.
 Não há envio remoto pelo GitHub ou execução em segundo plano pelo ChatGPT.
 Guia: [Teste de intervalo de uma hora](docs/TESTE-INTERVALO-YOUTUBE.md).
