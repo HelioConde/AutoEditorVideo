@@ -4,6 +4,12 @@ on:
     branches: [main]
     paths:
       - 'scripts/renderizar_shorts_en.py'
+      - 'scripts/english_caption_design.py'
+      - 'scripts/otaku_reframe_direction.py'
+      - 'conteudos/otaku-reframe-ep01-en.json'
+      - 'tests/test_otaku_reframe_direction.py'
+      - 'tests/test_english_caption_design.py'
+      - 'gerar-otaku-reframe.ps1'
       - 'scripts/publicar_shorts_en.py'
       - 'scripts/renderizar_master_remotion.py'
       - 'conteudos/testes-animados-5-en.json'
@@ -12,6 +18,12 @@ on:
   pull_request:
     paths:
       - 'scripts/renderizar_shorts_en.py'
+      - 'scripts/english_caption_design.py'
+      - 'scripts/otaku_reframe_direction.py'
+      - 'conteudos/otaku-reframe-ep01-en.json'
+      - 'tests/test_otaku_reframe_direction.py'
+      - 'tests/test_english_caption_design.py'
+      - 'gerar-otaku-reframe.ps1'
       - 'scripts/publicar_shorts_en.py'
       - 'scripts/renderizar_master_remotion.py'
       - 'conteudos/testes-animados-5-en.json'
@@ -29,4 +41,4 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
       - name: English manifest, safe OAuth, isolated render and publisher
-        run: python -m pytest -q tests/test_shorts_en.py
+        run: python -m pytest -q tests/test_shorts_en.py tests/test_otaku_reframe_direction.py tests/test_english_caption_design.py
