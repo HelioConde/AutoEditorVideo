@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publicar episodios, um por vez, com pelo menos uma hora entre uploads.
+"""Fila editorial ciclica: episodio, curiosidade, nostalgia, proximo episodio.
 
 Este programa e executado LOCALMENTE no Windows. Nao usa GitHub Actions
 como relogio, nao envia arquivos para o GitHub e nunca faz upload sem
@@ -21,9 +21,18 @@ from typing import Callable
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "conteudos" / "death-note-recaps-60s.json"
+FORMATS_CATALOG = ROOT / "conteudos" / "death-note-formatos-60s.json"
 PUBLICATIONS = ROOT / "assets" / "gerados" / "publicacao-youtube"
 SHORTS = ROOT / "assets" / "gerados" / "shorts-animados"
-DEFAULT_IDS = ("102-death-note-ep02", "103-death-note-ep03")
+# The published EP01 is not republished. Start with EP02, then alternate
+# content formats before returning to the next episode.
+DEFAULT_IDS = (
+    "102-death-note-ep02",
+    "201-death-note-rosto-nome",
+    "301-death-note-voce-lembra-justica",
+    "103-death-note-ep03",
+)
+EDITORIAL_CYCLE = ("episodio", "curiosidade", "voce-lembra")
 DEFAULT_MINUTES = 60
 
 
@@ -44,8 +53,29 @@ class UploadRecord:
 
 
 def registered_episodes() -> dict[str, dict]:
-    document = json.loads(CATALOG.read_text(encoding="utf-8-sig"))
-    return {item["id"]: item for item in document["episodes"]}
+    items: dict[str,dict] = {}
+    for source in (CATALOG, FORMATS_CATALOG):
+        document = json.loads(source.read_text(encoding="utf-8-sig"))
+        for episode in document["episodes"]:
+            episode_id = episode["id"]
+            if episode_id in items:
+                raise SchedulingError("ID duplicado nos catalogos: " + episode_id)
+            items[episode_id] = episode
+    return items
+
+
+def editorial_role(episode: dict) -> str:
+    return "episodio" if episode.get("episode_number") else episode.get("format_type", "")
+
+
+def verify_default_cycle(catalog: dict[str, dict]) -> None:
+    expected = ("episodio", "curiosidade", "voce-lembra", "episodio")
+    roles = tuple(editorial_role(catalog[episode_id]) for episode_id in DEFAULT_IDS)
+    if roles != expected:
+        raise SchedulingError(
+            "A fila padrao deve respeitar episodio -> curiosidade -> voce-lembra "
+            f"-> episodio. Detectado: {roles!r}"
+        )
 
 
 def video_file(episode_id: str, profile: str) -> Path:
@@ -134,6 +164,7 @@ def process(
     sleep: Callable[[float], None] = time.sleep,
 ) -> list[UploadRecord]:
     catalog = registered_episodes()
+    verify_default_cycle(catalog)
     if not episode_ids or len(set(episode_ids)) != len(episode_ids):
         raise SchedulingError("Selecione episodios distintos, em ordem.")
     for episode_id in episode_ids:
@@ -143,6 +174,21 @@ def process(
         raise SchedulingError(
             "O experimento exige no minimo 60 minutos entre uploads confirmados."
         )
+
+    # Do not start an earlier missing slot if a later slot is already public.
+    # This protects a previously run EP02 -> EP03 queue from silently adding
+    # curiosity/nostalgia out of order after EP03.
+    existing = [reader(item, profile) for item in episode_ids]
+    later_already_sent = False
+    for item, recorded in zip(reversed(episode_ids), reversed(existing)):
+        if recorded is not None:
+            later_already_sent = True
+        elif later_already_sent:
+            raise SchedulingError(
+                f"A fila esta fora de ordem: {item} ainda nao foi enviado, "
+                "mas um video posterior ja foi publicado. "
+                "Revise a ordem manualmente; nenhum upload sera iniciado."
+            )
 
     previous_at: datetime | None = None
     results: list[UploadRecord] = []
@@ -221,7 +267,7 @@ def process(
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Publica recaps 02 e 03 separados por 1 hora, ou planeja offline"
+        description="Publica EP02, curiosidade, nostalgia e EP03 com intervalo >=1h; ou planeja offline"
     )
     parser.add_argument("--ids", nargs="+", default=list(DEFAULT_IDS))
     parser.add_argument("--intervalo-minutos", type=int, default=DEFAULT_MINUTES)
