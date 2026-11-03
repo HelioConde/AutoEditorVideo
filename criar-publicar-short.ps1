@@ -4,6 +4,7 @@
 param(
     [string]$Id='101-death-note-ep01',
     [ValidateSet('gpt-image-1.5','gpt-image-2')][string]$Modelo='gpt-image-1.5',
+    [ValidateSet('edge','voicestudio')][string]$VozMotor='edge',
     [ValidateSet('ultrassutil','equilibrado','vivo')][string]$Perfil='equilibrado',
     [ValidateRange(0,180)][int]$MaxChamadas=45,
     [ValidateRange(1,3)][int]$Tentativas=2,
@@ -78,7 +79,7 @@ if($Publicar){
         New-Item -ItemType File -Path $marker -Force | Out-Null
     }
 }
-$params=@($program,'--id',$Id,'--modelo',$Modelo,'--perfil',$Perfil,
+$params=@($program,'--id',$Id,'--modelo',$Modelo,'--voz-motor',$VozMotor,'--perfil',$Perfil,
           '--max-chamadas',[string]$MaxChamadas,
           '--tentativas',[string]$Tentativas,
           '--privacidade',$Privacidade)
