@@ -7,6 +7,21 @@
 **Manifesto EN:** `conteudos/otaku-reframe-did-you-know-201-en.json`
 **Video output:** `assets/gerados/shorts-animados/201-death-note-rosto-nome/en-US/201-death-note-rosto-nome-en-US-retention-v2.mp4`
 
+## Status e origem oficial do MP4
+
+A demonstracao vetorial hospedada fora do GitHub foi **reprovada pelo usuario**.
+Nao usar essa previa, suas imagens, trilha, voz, nem links externos como insumos
+do render final. O Short deve ser gerado com as artes em camadas do
+`gerar-shorts-master.ps1`, aprovacao humana por cena, narracao/legendas Edge TTS
+e `renderizar_shorts_en.py` + Remotion local.
+
+`-Acao Validar` agora verifica **todas** as aprovacoes visuais (inclusive
+multicamadas), a voz EN e os captions, alem dos PNGs. E' intencional que
+a validacao falhe se os arquivos ainda nao estiverem presentes/ revisados.
+
+O processo nao foi executado no PC do usuario por esta alteracao no GitHub,
+portanto nao ha MP4 original aprovado ate a geracao local e a revisao.
+
 ## Editorial canon
 
 The notebook requires a face in the writer's mind while writing the target's name; people who share the same name are not all affected. As documented in the manga rule "How To Use It: I", and adapted to the anime. Keep the fact accurate: a name by itself isn't enough; you cannot infer that no one wearing a mask could ever be targeted (the writer may already know what they look like).
