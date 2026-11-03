@@ -44,8 +44,15 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
     return header+'\n'.join(rows)+'\n'
 
 
-def ensure_voice(episode:dict,folder:Path,*,create:bool=False,voice:str=VOICE)->tuple[Path,Path]:
-    cached=sorted(folder.glob('voz-*.mp3'),key=lambda p:p.stat().st_mtime,reverse=True)
+def ensure_voice(episode:dict,folder:Path,*,create:bool=False,voice:str=VOICE,engine:str='edge')->tuple[Path,Path]:
+    if engine == 'voicestudio':
+        from voice_studio_adapter import ensure_voice_studio
+        return ensure_voice_studio(episode,folder,create=create)
+    if engine != 'edge':
+        raise ValueError('Motor de voz desconhecido: '+str(engine))
+    # Nunca reutilizar o audio VoiceStudio como se fosse Edge TTS.
+    cached=sorted((p for p in folder.glob('voz-*.mp3') if not p.name.startswith('voz-voicestudio-')),
+                  key=lambda p:p.stat().st_mtime,reverse=True)
     subtitles=folder/'legendas.ass'
     if cached and subtitles.is_file():return cached[0],subtitles
     if not create:
