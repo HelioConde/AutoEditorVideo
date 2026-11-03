@@ -12,13 +12,15 @@ export type SemanticLayer={
 export type Scene={
   id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
   background:string;foreground:string;renderMode?:string;layers?:SemanticLayer[];
-  shotType?:string;cameraAngle?:string;focusSubject?:string;action?:string
+  shotType?:string;cameraAngle?:string;focusSubject?:string;action?:string;
+  transitionStyle?:'hard'|'crossfade';beatRole?:string
 };
-export type Caption={startFrame:number;endFrame:number;text:string};
+export type Caption={startFrame:number;endFrame:number;text:string;
+  words?:{startFrame:number;endFrame:number;text:string}[]};
 export type MasterProps={
   id:string;durationFrames:number;audio:string;scenes:Scene[];
   captions:Caption[];hook:string;animationMode?:AnimationMode;
-  characterPreset?:CharacterPreset
+  characterPreset?:CharacterPreset;editorialProfile?:string
 };
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
 
@@ -40,8 +42,17 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
   const heroPulse=hasHero&&mode==='cinematica'
     ?Math.sin(frame/fps*2*Math.PI*0.27)*
       Math.pow(Math.sin(Math.PI*normalized),2)*1.05:0;
-  const camera='translate('+motion.panX.toFixed(3)+'px,'+
-    (motion.panY+heroPulse).toFixed(3)+'px) scale('+motion.zoom.toFixed(5)+')';
+  // Stronger purposeful camera push on the first 7 seconds. Unlike random
+  // shake, this starts on frame 1 and stays within approved image margins.
+  // Other shots retain the calm cinematic choreography.
+  const opening=mode==='cinematica' && scene.startFrame<fps*7;
+  const local=Math.max(0,Math.min(1,
+    (frame-scene.startFrame)/Math.max(1,Math.min(scene.endFrame,fps*7)-scene.startFrame)));
+  const openingEase=opening?1-Math.pow(1-local,2):0;
+  const openingZoom=openingEase*0.045;
+  const camera='translate('+(motion.panX+(opening?openingEase*8:0)).toFixed(3)+'px,'+
+    (motion.panY+heroPulse+(opening?openingEase*-7:0)).toFixed(3)+
+    'px) scale('+(motion.zoom+openingZoom).toFixed(5)+')';
   const ordered=(scene.layers||[]).slice().sort((a,b)=>a.z-b.z);
   return <AbsoluteFill style={{opacity,background:'#070912',overflow:'hidden'}}>
     <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
@@ -114,20 +125,41 @@ export const MasterShort:React.FC<MasterProps>=({
   if(idx<0)idx=frame<scenes[0].startFrame?0:scenes.length-1;
   const current=scenes[idx];
   const previous=idx>0?scenes[idx-1]:null;
-  const fade=previous?interpolate(frame,
-    [current.startFrame,current.startFrame+7],[0,1],clamp):1;
+  const hardCut=current.transitionStyle==='hard' ||
+    ['hook','rehook','twist','ryuk_reveal'].includes(current.beatRole||'');
+  const fade=previous && !hardCut?interpolate(frame,
+    [current.startFrame,current.startFrame+5],[0,1],clamp):1;
   const caption=captions.find(c=>frame>=c.startFrame&&frame<c.endFrame);
   return <AbsoluteFill style={{background:'#080a14',fontFamily:'Arial,sans-serif'}}>
     {previous&&fade<1?<Shot scene={previous} opacity={1} mode={animationMode} preset={characterPreset}/>:null}
     <Shot scene={current} opacity={fade} mode={animationMode} preset={characterPreset}/>
     <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(0,0,0,.15),transparent 20%,rgba(0,0,0,.13) 55%,rgba(0,0,0,.65) 100%)'}}/>
-    {hook&&frame<fps*2.2?<div style={{position:'absolute',top:100,left:75,right:75,
-      fontSize:76,lineHeight:1.1,color:'#fff',textAlign:'center',fontWeight:900,
-      textShadow:'0 4px 14px #000,0 1px 5px #000',
-      opacity:interpolate(frame,[0,6,fps*1.8,fps*2.2],[0,1,1,0],clamp)}}>{hook}</div>:null}
-    {caption?<div style={{position:'absolute',top:1290,left:88,right:88,
-      fontSize:65,lineHeight:1.18,fontWeight:900,textAlign:'center',color:'#fff',
-      textShadow:'0 3px 7px #000,3px 3px 5px #000,-2px -2px 6px #000'}}>{caption.text}</div>:null}
+    {hook&&frame<fps*2.2?<div style={{position:'absolute',top:102,left:75,right:75,
+      fontSize:76,lineHeight:1.08,color:'#fff',textAlign:'center',fontWeight:900,
+      letterSpacing:'0.016em',
+      WebkitTextStroke:'1.2px rgba(4,7,18,.95)',
+      textShadow:'0 5px 18px rgba(0,0,0,.95), 0 0 15px rgba(252,78,78,.45), 0 0 3px #fff',
+      filter:'drop-shadow(0 7px 8px rgba(0,0,0,.8))',
+      transform:'scale('+interpolate(frame,[0,8,fps*2],[.92,1.025,1],clamp)+')',
+      opacity:interpolate(frame,[0,3,fps*1.8,fps*2.2],[.85,1,1,0],clamp)}}>{hook}</div>:null}
+    {caption?<div style={{position:'absolute',top:1288,left:88,right:88,
+      padding:'10px 16px',borderRadius:18,
+      background:'linear-gradient(90deg,transparent,rgba(3,6,17,.56) 14%,rgba(3,6,17,.56) 86%,transparent)',
+      fontSize:65,lineHeight:1.15,fontWeight:900,textAlign:'center',color:'#fff',
+      WebkitTextStroke:'1px rgba(2,4,15,.85)',
+      textShadow:'0 4px 9px #000,0 0 13px rgba(240,240,255,.24)'}}>
+      {caption.words?.length
+        ? caption.words.map((word,index)=>{
+          const active=frame>=word.startFrame && frame<word.endFrame;
+          return <React.Fragment key={index}>
+            {index>0?' ':null}
+            <span style={{
+              color:active?'#ffd166':'#fff',
+              textShadow:active?'0 0 16px rgba(255,195,75,.6),0 4px 8px #000':undefined,
+            }}>{word.text}</span>
+          </React.Fragment>;
+        }):caption.text}
+    </div>:null}
     {audio?<Audio src={staticFile(audio)}/>:null}
   </AbsoluteFill>;
 };

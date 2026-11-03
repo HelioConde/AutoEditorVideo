@@ -46,6 +46,12 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
             if base_review and base_review['status']=='reprovado':
                 raise ValueError(f"Cena {scene['id']}: master reprovada; "
                                  'multicamadas nao consertam anatomia ruim.')
+            if scene.get('correcao_visual', {}).get('requires_manual_approval') and (
+                    not base_review or base_review['status'] != 'aprovado'):
+                raise ValueError(
+                    f"Cena {scene['id']}: multicamadas novas exigem aprovacao "
+                    "manual explicita antes de renderizar."
+                )
             validated=validate_multilayer(ep,scene,model,folder)
             report={'status':'aguardando_revisao_visual',
                     'alpha':{'margin_warning':False},
@@ -258,7 +264,9 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                        'shotType':scene.get('shot_type','legacy'),
                        'cameraAngle':scene.get('camera_angle',''),
                        'focusSubject':scene.get('focus_subject',''),
-                       'action':scene.get('action','')})
+                       'action':scene.get('action',''),
+                       'transitionStyle':scene.get('transition_style','crossfade'),
+                       'beatRole':scene.get('beat_role','')})
     shutil.copy2(voice,target/'voz.mp3')
     parent=select_episode(ep['id'])
     if animation_mode not in ('cinematica','desligada','esqueleto2d'):

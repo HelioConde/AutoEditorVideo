@@ -22,6 +22,8 @@ from master_scenes import read_storyboard, production_storyboard
 from renderizar_com_remotion import audio_duration, captions_from_ass
 from shorts_duration import validate_planned_audio, validate_video
 import renderizar_master_remotion as master
+from otaku_reframe_direction import ensure_english_plan
+from english_caption_design import grouped_captions
 
 LANG = ROOT / "conteudos" / "testes-animados-5-en.json"
 OUT = ROOT / "assets" / "gerados" / "shorts-animados"
@@ -34,8 +36,12 @@ def load_english(path: Path = LANG) -> list[dict]:
     if data.get("schema") != "arquivo-otaku/shorts-english/v1":
         raise ValueError("Manifesto ingles nao reconhecido")
     items = data.get("episodes", [])
-    if len(items) != 5 or len(set(ep["id"] for ep in items)) != len(items):
-        raise ValueError("Exatamente cinco episodios ingleses distintos sao obrigatorios")
+    if not items or len(set(ep["id"] for ep in items)) != len(items):
+        raise ValueError("Manifesto ingles sem episodios ou com IDs duplicados")
+    if path == LANG and len(items) != 5:
+        raise ValueError("O lote original em ingles deve conservar exatamente cinco episodios")
+    for item in items:
+        item.setdefault("channel", data.get("channel", "Otaku Reframe"))
     for item in items:
         if len(item["script"].split()) < 50 or not item["cover"].strip():
             raise ValueError("Episodio ingles precisa de roteiro e capa: " + item["id"])
@@ -45,6 +51,8 @@ def load_english(path: Path = LANG) -> list[dict]:
 
 
 def english_metadata(item: dict) -> dict:
+    brand = item.get("channel", "Otaku Reframe")
+    hashtag = "".join(ch for ch in brand if ch.isalnum())
     return {
         "titulo": item["title"],
         "descricao": (
@@ -52,9 +60,9 @@ def english_metadata(item: dict) -> dict:
             f"{item['script']}\n\n"
             "English narration and original editorial adaptation with AI-generated illustrations. "
             "The anime and its characters belong to their respective rights holders.\n\n"
-            "#DeathNote #Anime #AnimeAnalysis #OtakuArchives #Shorts"
+            f"#DeathNote #Anime #AnimeAnalysis #{hashtag} #Shorts"
         ),
-        "tags": ["Death Note", "Anime", "Anime Analysis", "Otaku Archives", "English Anime Shorts"],
+        "tags": ["Death Note", "Anime", "Anime Analysis", brand, "English Anime Shorts"],
         "categoria": "24",
         "idioma": "en",
         "feito_para_criancas": False,
@@ -101,10 +109,21 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         encoding="utf-8",
     )
     if action == "planejar":
+        if item.get("scenes"):
+            plan = ensure_english_plan(item, folder)
+            print(f"[EN STORYBOARD] {plan} — cenas e continuidade especificas do roteiro.")
         print(f"[PLANO EN] {episode_id}: {item['title']}; sem IA ou upload.")
         return {"id": episode_id, "status": "planejado"}
-    # Reuse exactly the Portuguese production storyboard: no retranslation of art prompts.
-    path = production_storyboard(episode_id, 6)
+    # Generating English voice does not require image assets or a completed storyboard.
+    if action == "voz":
+        voice, ass = audio_for(item, folder, create=True)
+        validate_planned_audio(audio_duration(voice), stage=f"Voz EN {episode_id}")
+        print(f"[EN VOZ] {voice} | {ass}")
+        return {"id": episode_id, "status": "voz_pronta"}
+    # New editorial episodes have their OWN immutable EN storyboard.
+    # Older translations continue to reuse approved PT imagery.
+    path = (ensure_english_plan(item, folder)
+            if item.get("scenes") else production_storyboard(episode_id, 6))
     ep = read_storyboard(path)
     if ep["id"] != episode_id:
         raise ValueError("Storyboard divergente do episodio em ingles")
@@ -112,13 +131,9 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         cover = prepare_cover(ep, item, folder, model)
         print(f"[EN CAPA] {cover}")
         return {"id": episode_id, "status": "capa_pronta", "cover": str(cover)}
-    if action == "voz":
-        voice, ass = audio_for(item, folder, create=True)
-        validate_planned_audio(audio_duration(voice), stage=f'Voz EN {episode_id}')
-        print(f"[EN VOZ] {voice} | {ass}")
-        return {"id": episode_id, "status": "voz_pronta"}
-
-    output = folder / f"{episode_id}-en-US-master-multicenas-personagens-v3-{profile}.mp4"
+    suffix = ("retention-v2" if item.get("scenes")
+              else f"master-multicenas-personagens-v3-{profile}")
+    output = folder / f"{episode_id}-en-US-{suffix}.mp4"
     if output.is_file() and not overwrite:
         validate_video(output,stage=f'Cache EN {episode_id}')
         print(f"[EN CACHE] Ja renderizado: {output} (use -Refazer para substituir)")
@@ -127,7 +142,9 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     voice, ass = audio_for(item, folder, create=True)
     confirmed = master.validate_scenes(ep, model=model)
     seconds = validate_planned_audio(audio_duration(voice),stage=f'Pre-render EN {episode_id}')
-    captions = captions_from_ass(ass, seconds)
+    # Consistent readable word groups for every English render, whether
+    # translated from an older episode or built with the new visual storyboard.
+    captions = grouped_captions(captions_from_ass(ass, seconds))
     if not captions:
         raise ValueError("Faltam legendas sincronizadas inglesas")
     props = master.build_props(
@@ -138,6 +155,7 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         hook_override=item["cover"],
     )
     props["language"] = "en-US"
+    props["editorialProfile"] = "retention-v2" if item.get("scenes") else "legacy"
     propfile = MOTION / f"props-master-{episode_id}-en-US.json"
     propfile.write_text(json.dumps(props, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if not (MOTION / "node_modules").is_dir():
@@ -158,6 +176,8 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         "cover": str(cover), "duration_s": actual_seconds, "scenes": len(confirmed),
         "captions": len(captions), "published": False,
         "uses_cached_images": True,
+        "editorial_profile": props["editorialProfile"],
+        "visual_continuity": "ryuk-reveal-after-beat-9" if item.get("scenes") else "legacy",
     }
     (folder / "qa-en-US.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
@@ -169,12 +189,13 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Renderiza Shorts EN sem novas imagens nem upload")
     parser.add_argument("--acao", choices=("planejar", "voz", "capa", "renderizar"), default="planejar")
+    parser.add_argument("--manifesto", default=str(LANG), help="JSON de Shorts EN; padrao: cinco originais")
     parser.add_argument("--id", default="")
     parser.add_argument("--modelo", choices=("gpt-image-1.5", "gpt-image-2"), default="gpt-image-1.5")
     parser.add_argument("--perfil", choices=("equilibrado", "vivo", "ultrassutil"), default="equilibrado")
     parser.add_argument("--refazer", action="store_true")
     args = parser.parse_args(argv)
-    entries = load_english()
+    entries = load_english(Path(args.manifesto))
     if args.id:
         entries = [item for item in entries if item["id"] == args.id]
         if not entries:

@@ -1,0 +1,117 @@
+{
+  "schema": "arquivo-otaku/shorts-english/v1",
+  "channel": "Otaku Reframe",
+  "language": "en-US",
+  "voice": "en-US-GuyNeural",
+  "editorial_rules": {
+    "target_duration_seconds": "55-59",
+    "max_duration_seconds": 60,
+    "maximum_unchanged_shot_seconds": 4.8,
+    "required_hook_by_second": 2,
+    "re_hooks_seconds": [
+      15,
+      30
+    ],
+    "subtitles": "English word-level emphasis via Edge TTS WordBoundary",
+    "rights": "Original AI illustrations, commentary; no unlicensed footage or music",
+    "publishing": "No automatic upload; require human QA and verified English channel"
+  },
+  "episodes": [
+    {
+      "id": "101-death-note-ep01",
+      "title": "He Found a Notebook That Could KILL Anyone… 📓 | Death Note #Shorts",
+      "cover": "ONE NAME. ONE DEATH.",
+      "series": "Death Note",
+      "hook": "One name. One death. That's all this notebook needs.",
+      "cta": "Hero or villain? Would you write a name? Follow Otaku Reframe for part two.",
+      "script": "One name. One death. That's all this notebook needs. Light Yagami finds the Death Note, and thinks it's a cruel prank. Then he writes a criminal's name while watching the news. Forty seconds later... the man drops dead on live television. Maybe a coincidence? Light tests the notebook one more time. Another death. And now he knows the rules are real. So he chooses to punish criminals, believing he's creating a better world. But here's the terrifying twist: the notebook wasn't lost by accident. Ryuk, a bored god of death, dropped it just to entertain himself. He appears in Light's room, expecting fear. But Light has a different plan. He vows to become the god of a new world. Kira is born. Hero or villain? Would you write a name? Follow Otaku Reframe for part two.",
+      "scenes": [
+        {
+          "number": 1,
+          "role": "hook",
+          "narration": "One name. One death. That's all this notebook needs.",
+          "headline": "ONE NAME. ONE DEATH.",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 2,
+          "role": "setup",
+          "narration": "Light Yagami finds the Death Note, and thinks it's a cruel prank.",
+          "headline": "A DEADLY DISCOVERY",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 3,
+          "role": "test",
+          "narration": "Then he writes a criminal's name while watching the news.",
+          "headline": "HE WRITES A NAME",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 4,
+          "role": "death",
+          "narration": "Forty seconds later... the man drops dead on live television.",
+          "headline": "40 SECONDS LATER...",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 5,
+          "role": "rehook",
+          "narration": "Maybe a coincidence? Light tests the notebook one more time.",
+          "headline": "COINCIDENCE?",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 6,
+          "role": "confirmation",
+          "narration": "Another death. And now he knows the rules are real.",
+          "headline": "IT WORKS. AGAIN.",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 7,
+          "role": "stakes",
+          "narration": "So he chooses to punish criminals, believing he's creating a better world.",
+          "headline": "HE CHOOSES JUSTICE",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 8,
+          "role": "twist",
+          "narration": "But here's the terrifying twist: the notebook wasn't lost by accident.",
+          "headline": "IT WASN'T AN ACCIDENT",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 9,
+          "role": "ryuk_reveal",
+          "narration": "Ryuk, a bored god of death, dropped it just to entertain himself.",
+          "headline": "MEET RYUK",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 10,
+          "role": "confrontation",
+          "narration": "He appears in Light's room, expecting fear. But Light has a different plan.",
+          "headline": "NO FEAR. JUST POWER.",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 11,
+          "role": "climax",
+          "narration": "He vows to become the god of a new world. Kira is born.",
+          "headline": "KIRA IS BORN.",
+          "target_unchanged_shot_max_seconds": 4.8
+        },
+        {
+          "number": 12,
+          "role": "cta",
+          "narration": "Hero or villain? Would you write a name? Follow Otaku Reframe for part two.",
+          "headline": "HERO... OR VILLAIN?",
+          "target_unchanged_shot_max_seconds": 4.8
+        }
+      ],
+      "editorial_note": "Episode 1 only: first use of the notebook, Ryuk and Light's ambition. The televised trap with L belongs to Episode 2, not Episode 1."
+    }
+  ]
+}
