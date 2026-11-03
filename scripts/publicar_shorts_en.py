@@ -148,8 +148,6 @@ def candidates(profile: str, episode_id: str, limit: int) -> list[dict]:
 
 
 def upload(youtube, row: dict, privacy: str, saved: dict) -> dict:
-    from googleapiclient.http import MediaFileUpload
-
     key = row["sha"]
     previous = saved["items"].get(key)
     if previous:
@@ -164,6 +162,8 @@ def upload(youtube, row: dict, privacy: str, saved: dict) -> dict:
     saved["items"][key] = record
     save_json(STATE, saved)
     # If the process crashes after videos.insert, do not blindly repeat.
+    from googleapiclient.http import MediaFileUpload
+
     media = MediaFileUpload(str(row["path"]), mimetype="video/mp4",
                             chunksize=4 * 1024 * 1024, resumable=True)
     command = youtube.videos().insert(
