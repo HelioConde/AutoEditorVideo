@@ -1,0 +1,24 @@
+name: Otaku Reframe - PowerShell safety tests
+on:
+  pull_request:
+    paths:
+      - 'gerar-otaku-reframe.ps1'
+      - 'tests/test-otaku-reframe-powershell.ps1'
+      - '.github/workflows/otaku-reframe-powershell.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'gerar-otaku-reframe.ps1'
+      - 'tests/test-otaku-reframe-powershell.ps1'
+      - '.github/workflows/otaku-reframe-powershell.yml'
+permissions:
+  contents: read
+jobs:
+  test-windows:
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate launcher without images, TTS or upload
+        shell: powershell
+        run: .\tests\test-otaku-reframe-powershell.ps1
