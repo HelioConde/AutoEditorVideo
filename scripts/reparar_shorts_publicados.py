@@ -146,7 +146,7 @@ def build_snippet_update(remote: dict, new_description: str) -> dict:
     return {"id": remote["id"], "snippet": snippet}
 
 
-def update_one(youtube, item: dict, owner_id: str) -> dict:
+def update_one(youtube, item: dict, owner_id: str, *, send_cover: bool = True) -> dict:
     from googleapiclient.http import MediaFileUpload
     from googleapiclient.errors import HttpError
 
@@ -180,6 +180,12 @@ def update_one(youtube, item: dict, owner_id: str) -> dict:
         result["descricao_status"] = "erro"
         result["descricao_erro"] = str(exc)[:350]
 
+    if not send_cover:
+        result["capa_status"] = "nao_tentada"
+        print(f"[CAPA] {item['id']}: sem nova chamada de upload; "
+              f"arquivo local: {item['cover']}", flush=True)
+        return result
+
     try:
         image_type = "image/png" if item["cover"].suffix.lower() == ".png" else "image/jpeg"
         media = MediaFileUpload(str(item["cover"]), mimetype=image_type, resumable=False)
@@ -190,11 +196,16 @@ def update_one(youtube, item: dict, owner_id: str) -> dict:
         write_json(item["state_path"], item["state"])
         print(f"[CAPA] {item['id']}: API aceitou a imagem. Confira no YouTube Studio.", flush=True)
     except HttpError as exc:
-        result["capa_status"] = f"erro_http_{exc.resp.status}"
+        code = int(exc.resp.status)
+        result["capa_status"] = f"erro_http_{code}"
         result["capa_erro"] = str(exc)[:350]
-        print(f"[CAPA] {item['id']}: HTTP {exc.resp.status}; "
-              f"suba manualmente pelo Studio: https://studio.youtube.com/video/{video_id}/edit",
-              flush=True)
+        if code == 429:
+            print(f"[CAPA] {item['id']}: limite de envios de miniaturas (HTTP 429). "
+                  "Interrompendo novas tentativas de capa nesta execucao.", flush=True)
+        else:
+            print(f"[CAPA] {item['id']}: HTTP {code}; "
+                  f"use o Studio: https://studio.youtube.com/video/{video_id}/edit",
+                  flush=True)
     except Exception as exc:
         result["capa_status"] = "erro"
         result["capa_erro"] = str(exc)[:350]
@@ -205,6 +216,8 @@ def update_one(youtube, item: dict, owner_id: str) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Repara somente uploads existentes, sem reenviar MP4")
     parser.add_argument("--aplicar", action="store_true", help="Envia as alteracoes a API do YouTube")
+    parser.add_argument("--sem-capas", action="store_true",
+                        help="Corrige somente as descricoes; nao tenta enviar capas")
     parser.add_argument("--perfil-personagens", choices=("equilibrado", "vivo", "ultrassutil"),
                         default="equilibrado")
     args = parser.parse_args(argv)
@@ -223,20 +236,32 @@ def main(argv: list[str] | None = None) -> int:
         raise RuntimeError("Nao foi possivel determinar um unico canal autenticado")
     owner_id = mine[0]["id"]
     report = []
+    uploads_allowed = not args.sem_capas
     for item in planned:
-        report.append(update_one(youtube, item, owner_id))
+        row = update_one(youtube, item, owner_id, send_cover=uploads_allowed)
+        report.append(row)
+        if row["capa_status"] == "erro_http_429":
+            uploads_allowed = False
         write_json(OUTPUT / "reparo-5-shorts.json", {
             "updated_at": datetime.now(timezone.utc).isoformat(), "resultados": report,
         })
-    failures = sum(
+    failed_descriptions = sum(
         1 for row in report
         if row["descricao_status"] not in ("corrigida", "ja_corrigida")
-        or row["capa_status"] != "aceita_pela_api"
     )
-    print(f"[RESUMO] {len(report)} videos tratados, {failures} com pendencias. "
+    covers_pending = sum(
+        1 for row in report if row["capa_status"] != "aceita_pela_api"
+    )
+    print(f"[RESUMO] Descricoes com erro: {failed_descriptions}; "
+          f"capas pendentes: {covers_pending}. "
           f"Relatorio: {OUTPUT / 'reparo-5-shorts.json'}")
+    if covers_pending:
+        print("[CAPAS] O YouTube pode limitar uploads por canal. Nao repita "
+              "o reparo imediatamente. Use YouTube Studio em um computador "
+              "para enviar a capa 9:16 de cada Short.")
     print("[IMPORTANTE] Nenhum MP4 foi reenviado e nenhuma privacidade foi alterada.")
-    return 1 if failures else 0
+    # Miniaturas pendentes sao uma advertencia, nao falha da correcao das descricoes.
+    return 1 if failed_descriptions else 0
 
 
 if __name__ == "__main__":
