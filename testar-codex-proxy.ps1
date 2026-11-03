@@ -12,6 +12,15 @@ param(
 $ErrorActionPreference = 'Stop'
 $baseUrl = 'http://127.0.0.1:8080'
 $repoDir = Join-Path $PSScriptRoot 'chatgpt-codex-proxy'
+$legacyDir = Join-Path $PSScriptRoot '..\arquivo-otaku-kit\chatgpt-codex-proxy'
+# Iniciar/status/login também reconhecem a instalação anterior, se a nova não existir.
+# A ação 'instalar' continua explícita e sempre configura a pasta atual.
+if($Acao -ne 'instalar' -and
+   -not(Test-Path (Join-Path $repoDir 'compose.yaml')) -and
+   (Test-Path (Join-Path $legacyDir 'compose.yaml'))){
+    $repoDir=(Resolve-Path -LiteralPath $legacyDir).Path
+    Write-Host '[PROXY] Usando instalação existente do kit anterior.' -ForegroundColor Cyan
+}
 $envPath = Join-Path $repoDir '.env'
 $composePath = Join-Path $repoDir 'compose.yaml'
 $loginIdPath = Join-Path $PSScriptRoot '.codex-proxy-login-id.txt'
