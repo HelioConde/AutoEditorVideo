@@ -21,7 +21,10 @@ CLIENT = ROOT / ".secrets" / "youtube-oauth-client.json"
 TOKEN = ROOT / ".secrets" / "youtube-en-token.json"
 CHANNEL_FILE = ROOT / ".secrets" / "youtube-en-channel-id.txt"
 STATE = ROOT / "assets" / "gerados" / "publicacao-youtube-en" / "estado.json"
-SCOPES = ["https://www.googleapis.com/auth/youtube"]
+SCOPES = [
+    "https://www.googleapis.com/auth/youtube.upload",
+    "https://www.googleapis.com/auth/youtube.readonly",
+]
 
 
 def read_json(path: Path) -> dict:
