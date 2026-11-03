@@ -223,8 +223,9 @@
     "narration": "edge-tts",
     "captions": "WordBoundary",
     "editor": "remotion",
-    "qa": "manual-per-scene",
+    "qa": "automatic-technical",
     "external_rendering": false,
-    "auto_publish": false
+    "auto_publish": false,
+    "post_upload_review": true
   }
 }

@@ -3,7 +3,7 @@
 # Nao publica nem altera o canal brasileiro.
 [CmdletBinding()]
 param(
-  [ValidateSet('Preparar','Diagnosticar','GerarImagens','Revisar','Validar','Renderizar')]
+  [ValidateSet('Preparar','Diagnosticar','GerarImagens','Revisar','Validar','Renderizar','Automatizar')]
   [string]$Acao='Preparar',
   [string]$Id='101-death-note-ep01',
   [string]$Manifesto='conteudos/otaku-reframe-ep01-en.json',
@@ -14,6 +14,10 @@ param(
   [ValidateRange(0,180)]
   [int]$MaxChamadas=0,
   [switch]$ConfirmarRevisaoVisual,
+  [ValidateSet('automatico','manual')]
+  [string]$ModoQA='automatico',
+  [ValidateSet('private','unlisted','public')]
+  [string]$Visibilidade='private',
   [switch]$Refazer
 )
 
@@ -39,14 +43,17 @@ foreach($path in @($render,$master,$manifestPath)){
 if($Id -notmatch '^[a-z0-9]+(?:-[a-z0-9]+)*$'){
   throw 'ID invalido: use apenas letras minusculas, numeros e hifens.'
 }
-if($Acao -ne 'GerarImagens' -and $MaxChamadas -ne 0){
-  throw 'MaxChamadas so pode ser usado em -Acao GerarImagens. Nenhuma IA foi chamada.'
+if($Acao -notin @('GerarImagens','Automatizar') -and $MaxChamadas -ne 0){
+  throw 'MaxChamadas so pode ser usado em -Acao GerarImagens ou Automatizar.'
 }
 if($Acao -eq 'GerarImagens' -and $MaxChamadas -lt 1){
   throw 'GerarImagens exige -MaxChamadas com orcamento explicito maior que zero.'
 }
 if($Acao -ne 'Renderizar' -and $ConfirmarRevisaoVisual){
   throw 'ConfirmarRevisaoVisual so pode ser usado em -Acao Renderizar.'
+}
+if($Acao -eq 'Automatizar' -and $ModoQA -ne 'automatico'){
+  throw 'Automatizar exige -ModoQA automatico. O modo manual fica em -Acao Revisar.'
 }
 if($Acao -ne 'Renderizar' -and $Refazer){
   throw 'Refazer so pode ser usado em -Acao Renderizar.'
@@ -57,6 +64,7 @@ function Invoke-English {
   $argv=@($script:render,'--manifesto',$script:manifestPath,'--acao',$Step,
           '--id',$script:Id,'--modelo',$script:Modelo,'--perfil',$script:Perfil)
   if($script:Refazer -and $Step -eq 'renderizar'){$argv+='--refazer'}
+  $argv+=@('--modo-qa',$script:ModoQA)
   # O gerador master pode criar a .venv na etapa anterior.
   $venv=Join-Path $script:root '.venv\Scripts\python.exe'
   $runner=if(Test-Path -LiteralPath $venv -PathType Leaf){$venv}else{$script:python}
@@ -85,26 +93,40 @@ function Invoke-StrictEnglishQA {
   }
   $venv=Join-Path $script:root '.venv\Scripts\python.exe'
   $runner=if(Test-Path -LiteralPath $venv -PathType Leaf){$venv}else{$script:python}
-  & $runner $validator '--manifesto' $script:manifestPath '--id' $script:Id '--modelo' $script:Modelo
+  & $runner $validator '--manifesto' $script:manifestPath '--id' $script:Id '--modelo' $script:Modelo '--modo-qa' $script:ModoQA
   if($LASTEXITCODE -ne 0){
     throw 'Imagens, aprovacao manual, voz ou legendas EN ainda nao validas. Nao renderizar.'
   }
 }
 
+function Invoke-Preparation {
+  $preflight=@((Join-Path $script:root 'scripts\otaku_reframe_direction.py'),
+               '--manifesto',$script:manifestPath,'--id',$script:Id)
+  & $script:python @preflight
+  if($LASTEXITCODE -ne 0){throw 'Falha ao preparar storyboard EN (sem IA).'}
+  # Instala dependencias, imprime cache, sem gerar imagens nem narracao PT.
+  Invoke-Master @{DiagnosticarCache=$true;TodasCenas=$true;CriarVoz=$true;MaxChamadas=0;MaxSegundosPorPlano=4.5}
+  Invoke-English 'planejar'
+  Invoke-English 'voz'
+}
+
+function Invoke-YoutubeEnglish {
+  $upload=Join-Path $script:root 'scripts\publicar_shorts_en.py'
+  if(-not (Test-Path -LiteralPath $upload -PathType Leaf)){
+    throw 'Uploader EN nao encontrado; atualize com git pull.'
+  }
+  $venv=Join-Path $script:root '.venv\Scripts\python.exe'
+  $runner=if(Test-Path -LiteralPath $venv -PathType Leaf){$venv}else{$script:python}
+  & $runner $upload '--acao' 'enviar' '--manifesto' $script:manifestPath '--id' $script:Id `
+      '--perfil' $script:Perfil '--privacidade' $script:Visibilidade '--confirmar'
+  if($LASTEXITCODE -ne 0){throw 'Upload EN nao confirmado; confira estado.json e Studio antes de repetir.'}
+}
+
 Write-Host "[OTAKU REFRAME] $Id | $Acao | en-US" -ForegroundColor Cyan
 switch($Acao){
   'Preparar' {
-    # O planejador abaixo usa apenas a biblioteca padrao do Python e
-    # pode rodar ANTES de instalar Pillow/numpy e demais dependencias.
-    $preflight=@((Join-Path $root 'scripts\otaku_reframe_direction.py'),
-                 '--manifesto',$manifestPath,'--id',$Id)
-    & $python @preflight
-    if($LASTEXITCODE -ne 0){throw 'Falha ao preparar plano visual EN sem IA.'}
-    # Agora o gerador principal instala/verifica as dependencias do projeto.
-    Invoke-Master @{DiagnosticarCache=$true;TodasCenas=$true;CriarVoz=$true;MaxChamadas=0;MaxSegundosPorPlano=4.5}
-    Invoke-English 'planejar'
-    Invoke-English 'voz'
-    Write-Host '[OK] Plano, voz EN e diagnostico preparados. Revise o cache antes de gerar imagens.' -ForegroundColor Green
+    Invoke-Preparation
+    Write-Host '[OK] Storyboard, voz EN e diagnostico preparados. Sem upload.' -ForegroundColor Green
   }
   'Diagnosticar' {
     Invoke-English 'planejar'
@@ -134,8 +156,8 @@ switch($Acao){
     Write-Host '[OK] Todas as cenas aprovadas, voz/legendas EN e camadas verificadas. Nao publicado.' -ForegroundColor Green
   }
   'Renderizar' {
-    if(-not $ConfirmarRevisaoVisual){
-      throw 'Reveja as cenas e informe -ConfirmarRevisaoVisual para liberar o MP4. Nenhum upload sera feito.'
+    if($ModoQA -eq 'manual' -and -not $ConfirmarRevisaoVisual){
+      throw 'QA manual exige -ConfirmarRevisaoVisual; para automatizar use -ModoQA automatico.'
     }
     Invoke-Master @{SomenteValidar=$true;TodasCenas=$true;MaxChamadas=0}
     Invoke-StrictEnglishQA
@@ -144,5 +166,18 @@ switch($Acao){
     $folder=Join-Path $root ("assets\gerados\shorts-animados\{0}\en-US" -f $Id)
     Write-Host "[MP4 EN] Procure o arquivo final em: $folder" -ForegroundColor Green
     Write-Host '[SEGURANCA] Arquivo local; nenhum upload ao YouTube/TikTok.' -ForegroundColor Cyan
+  }
+  'Automatizar' {
+    Write-Host '[AUTO EN] Iniciando pipeline do AutoEditorVideo. Destino: YouTube EN.' -ForegroundColor Cyan
+    Write-Host "[UPLOAD] Privacidade: $Visibilidade. QA tecnico nao garante qualidade artistica." -ForegroundColor Yellow
+    Invoke-Preparation
+    Invoke-Master @{TodasCenas=$true;MaxChamadas=$MaxChamadas;MaxSegundosPorPlano=4.5}
+    Invoke-Master @{SomenteValidar=$true;TodasCenas=$true;MaxChamadas=0}
+    Invoke-StrictEnglishQA
+    Invoke-English 'renderizar'
+    # Upload ocorre somente apos Remotion gerar e validar um MP4 assinado.
+    # Conta OAuth precisa corresponder ao canal EN, nunca ao BR.
+    Invoke-YoutubeEnglish
+    Write-Host '[AUTO EN OK] Confira o Short completo no YouTube Studio do canal EN.' -ForegroundColor Green
   }
 }

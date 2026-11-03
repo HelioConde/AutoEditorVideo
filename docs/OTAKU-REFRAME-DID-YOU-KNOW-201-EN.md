@@ -7,20 +7,42 @@
 **Manifesto EN:** `conteudos/otaku-reframe-did-you-know-201-en.json`
 **Video output:** `assets/gerados/shorts-animados/201-death-note-rosto-nome/en-US/201-death-note-rosto-nome-en-US-retention-v2.mp4`
 
-## Status e origem oficial do MP4
+## Producao 100% automatizada pelo AutoEditorVideo
 
-A demonstracao vetorial hospedada fora do GitHub foi **reprovada pelo usuario**.
-Nao usar essa previa, suas imagens, trilha, voz, nem links externos como insumos
-do render final. O Short deve ser gerado com as artes em camadas do
-`gerar-shorts-master.ps1`, aprovacao humana por cena, narracao/legendas Edge TTS
-e `renderizar_shorts_en.py` + Remotion local.
+O video vetorial produzido externamente foi reprovado. O unico render final
+valido usa: storyboard EN -> imagens originais Codex Proxy -> camadas
+master/foreground/background -> voz Edge TTS com WordBoundary -> Remotion
+-> MP4 9:16 <=60s -> upload ao canal Otaku Reframe verificado.
 
-`-Acao Validar` agora verifica **todas** as aprovacoes visuais (inclusive
-multicamadas), a voz EN e os captions, alem dos PNGs. E' intencional que
-a validacao falhe se os arquivos ainda nao estiverem presentes/ revisados.
+O usuario revisa a qualidade do **video completo no YouTube**, nao cada
+imagem. A opcao `-Acao Revisar` continua disponivel apenas para diagnostico
+manual voluntario; NAO e um requisito para novos videos EN.
 
-O processo nao foi executado no PC do usuario por esta alteracao no GitHub,
-portanto nao ha MP4 original aprovado ate a geracao local e a revisao.
+```powershell
+cd "$HOME\Documents\arquivo-otaku-github"
+git switch main
+git pull --ff-only origin main
+
+.\gerar-otaku-reframe.ps1 -Acao Automatizar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json -MaxChamadas 60 -Visibilidade private
+```
+
+`-MaxChamadas 60` e orcamento maximo de imagens adicionais, nao numero
+de imagens que serao feitas ou valor monetario. Imagens existentes sao
+reaproveitadas. Para trabalhar somente com cache completo:
+`-MaxChamadas 0`.
+
+`-Visibilidade private` (padrao) envia para a aba Conteudo do YouTube
+Studio ingles, onde o criador revisa o Short inteiro. `-Visibilidade
+public` e opt-in para publicacao automatica. O programa nao faz
+upload duplicado, nao toca no canal BR e falha se OAuth/Channel ID
+nao forem do canal EN. O token OAuth e salvo apenas em `.secrets/` local.
+
+O QA automatico verifica cenas completas, hash/cache, alfa e composicao
+das camadas, voz e sincronizacao de legendas, MP4 e duracao via ffprobe.
+Ele nao finge uma certificacao estetica nem escreve aprovacoes manuais.
+Cenas que tenham sido reprovadas explicitamente continuam bloqueando o
+render. Quando falhar, consulte os logs; nenhuma parte incompleta e
+publicada.
 
 ## Editorial canon
 
@@ -35,58 +57,13 @@ The notebook requires a face in the writer's mind while writing the target's nam
 - 43–51s: big conceptual payoff "POWER HAS A LIMIT".
 - Last seconds: direct question and explicit subscription CTA.
 
-**Assets:** All 12 beats have distinct English art directions, no licensed footage, no Portuguese text. Motion is activated from the beginning and captions use up to 3 words and active-word highlight. The new scene master cache requires human approval on each original image. Real length is validated from generated audio and with ffprobe after Remotion; hard maximum 60s.
+**Assets:** All 12 beats have distinct English art directions, no licensed footage, no Portuguese text. Motion is activated from the beginning and captions use up to 3 words and active-word highlight. The new scene cache uses automatic technical QA; manual image review is optional. Real length is validated from generated audio and with ffprobe after Remotion; hard maximum 60s.
 
-## Revisao visual guiada (apos gerar imagens)
+## Revisao manual opcional
 
-O comando `-Acao Validar` **nao pode liberar o render sem aprovacao
-visual manual**. A mensagem `Cena 01 ainda nao aprovada` indica que
-o cache existe, mas ainda nao foi conferido pelo usuario.
-
-Use este atalho para abrir o `comparacao.jpg` e o `master.png` de cada
-uma das cenas no visualizador padrao do Windows:
-
-```powershell
-.\gerar-otaku-reframe.ps1 -Acao Revisar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
-```
-
-Para cada cena, somente depois de ver as imagens, digite `APROVAR 01`
-(usando o numero exato mostrado), ou `REPROVAR 01`. O programa pede
-um motivo por cena. `PULAR` mantem pendente e `SAIR` interrompe com
-o progresso salvo. Nao ha opcao de aprovar tudo automaticamente. Ao
-executar novamente, as cenas aprovadas sao puladas.
-
-Revisar rostos, dedos, corpo, coesao de anime, continuação da historia,
-quebras de cenario, qualidade do fundo e sobreposicoes. Se faltar arquivo
-de comparacao, a cena nao pode ser aprovada. O QA posterior verifica
-as camadas e a voz em ingles antes da montagem Remotion.
-
-## Commands (PowerShell in repository root)
-
-```powershell
-cd "$HOME\Documents\arquivo-otaku-github"
-git switch main
-git pull --ff-only origin main
-
-# 0 image credits: EN storyboard, voice (Edge TTS), cache diagnosis
-.\gerar-otaku-reframe.ps1 -Acao Preparar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
-
-# Optional: review estimated image calls and missing source files
-.\gerar-otaku-reframe.ps1 -Acao Diagnosticar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
-
-# Only if generation is budgeted and image proxy is configured. The cap is calls, not money:
-.\gerar-otaku-reframe.ps1 -Acao GerarImagens -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json -MaxChamadas 60
-
-# Inspect each master + foreground + background; approve each scene individually:
-# .\gerar-shorts-master.ps1 -Id 201-death-note-rosto-nome -Plano assets\gerados\shorts-animados\201-death-note-rosto-nome\en-US\storyboard-reframe-v2.json -Cena 1 -AprovarCena -Motivo "Manual QA verified" 
-
-.\gerar-otaku-reframe.ps1 -Acao Validar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json
-
-# Only after all assets/voice are manually reviewed:
-.\gerar-otaku-reframe.ps1 -Acao Renderizar -Id 201-death-note-rosto-nome -Manifesto conteudos/otaku-reframe-did-you-know-201-en.json -ConfirmarRevisaoVisual
-```
-
-If the proxy has no available account, do NOT switch identity, bypass quotas, or publish partial renders. Keep cached approved assets and retry only when access is valid. No YouTube or TikTok upload is performed by these commands.
+Se voce quiser inspecionar uma imagem defeituosa, pode usar `-Acao Revisar`
+para consultar o cache, sem mudar o fluxo principal. Nenhum clique
+individual e necessario para `-Acao Automatizar`.
 
 ## Metadata
 

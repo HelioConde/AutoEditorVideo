@@ -120,8 +120,9 @@ def validate_mp4(path: Path) -> None:
     validate_seconds(float(data.get("format", {}).get("duration", 0)),stage=f'Upload YouTube EN {path.name}')
 
 
-def candidates(profile: str, episode_id: str, limit: int) -> list[dict]:
-    episodes = load_english()
+def candidates(profile: str, episode_id: str, limit: int,
+               manifest_path: Path | None = None) -> list[dict]:
+    episodes = load_english(manifest_path) if manifest_path else load_english()
     if episode_id:
         episodes = [x for x in episodes if x["id"] == episode_id]
         if not episodes:
@@ -131,14 +132,25 @@ def candidates(profile: str, episode_id: str, limit: int) -> list[dict]:
     result = []
     for ep in episodes:
         folder = OUT / ep["id"] / "en-US"
-        path = folder / f"{ep['id']}-en-US-master-multicenas-personagens-v3-{profile}.mp4"
+        filename = (f"{ep['id']}-en-US-retention-v2.mp4" if ep.get("scenes")
+                    else f"{ep['id']}-en-US-master-multicenas-personagens-v3-{profile}.mp4")
+        path = folder / filename
         validate_mp4(path)
         report_file = folder / "qa-en-US.json"
         if not report_file.is_file():
             raise ValueError(f"QA em ingles ausente: {ep['id']}. Reprocesse e revise.")
         qa = read_json(report_file)
-        if qa.get("status") != "renderizado_aguardando_revisao":
+        if qa.get("status") not in ("renderizado_aguardando_revisao", "renderizado_qa_automatico"):
             raise ValueError("QA invalido para " + ep["id"])
+        if ep.get("scenes"):
+            # Upload only immutable outputs actually rendered by the local
+            # AutoEditorVideo/Remotion pipeline, not external preview clips.
+            if qa.get("render_origin") != "AutoEditorVideo/local/remotion":
+                raise ValueError("MP4 EN sem origem Remotion local verificada: " + ep["id"])
+            if qa.get("video_sha256") != sha256(path):
+                raise ValueError("MP4 EN alterado ou sem checksum QA: " + ep["id"])
+            if qa.get("language") != "en-US" or not qa.get("automatic_technical_qa"):
+                raise ValueError("QA tecnico EN automatico ausente para " + ep["id"])
         title = english_metadata(ep)["titulo"]
         if not 1 <= len(title) <= 100:
             raise ValueError("Titulo em ingles invalido")
@@ -150,6 +162,14 @@ def candidates(profile: str, episode_id: str, limit: int) -> list[dict]:
 def upload(youtube, row: dict, privacy: str, saved: dict) -> dict:
     key = row["sha"]
     previous = saved["items"].get(key)
+    # A second encode/revision must not silently produce duplicate uploads of
+    # the same episode. Any later replacement must be a deliberate workflow.
+    for old in saved["items"].values():
+        if old.get("id") == row["id"] and old.get("video_id") and old.get("sha256") != key:
+            raise RuntimeError(
+                "Short ja enviado com outro hash/MP4; nenhuma segunda publicacao automatica. "
+                "Revise o registro do YouTube antes de duplicar."
+            )
     if previous:
         print(f"[EN CACHE] {row['id']}: registro anterior {previous['status']}; "
               "nao reenviando; confira o Studio.")
@@ -200,6 +220,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="YouTube English channel - publication separated from PT")
     parser.add_argument("--acao", choices=("verificar", "conectar", "enviar"), default="verificar")
     parser.add_argument("--id", default="")
+    parser.add_argument("--manifesto", type=Path, default=None,
+                        help="Catalogo EN especifico (201, 101 etc); default lote legado")
     parser.add_argument("--limite", type=int, default=1)
     parser.add_argument("--perfil", choices=("equilibrado", "vivo", "ultrassutil"),
                         default="equilibrado")
@@ -211,7 +233,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.acao == "conectar":
         channel_auth()
         return 0
-    rows = candidates(args.perfil, args.id, args.limite)
+    rows = candidates(args.perfil, args.id, args.limite, args.manifesto)
     saved = read_json(STATE) if STATE.is_file() else {"schema": "arquivo-otaku/youtube-en/v1", "items": {}}
     for row in rows:
         existing = saved["items"].get(row["sha"], {})

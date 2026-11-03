@@ -21,6 +21,7 @@ from renderizar_shorts_en import audio_for, load_english
 from english_caption_design import grouped_captions
 from otaku_reframe_direction import ensure_english_plan
 from shorts_duration import validate_planned_audio
+from qa_automatico_reframe_en import prepare_qa_storyboard
 
 
 def require_approved_scenes(plan: dict, model: str) -> int:
@@ -40,7 +41,7 @@ def require_approved_scenes(plan: dict, model: str) -> int:
     return count
 
 
-def validate_item(item: dict, model: str, *, out: Path | None = None) -> dict:
+def validate_item(item: dict, model: str, *, mode: str = 'automatico', out: Path | None = None) -> dict:
     if not item.get("scenes"):
         raise ValueError("Esta validacao estrita exige storyboard EN original.")
     folder = (out or ROOT / "assets" / "gerados" / "shorts-animados") / item["id"] / "en-US"
@@ -48,9 +49,11 @@ def validate_item(item: dict, model: str, *, out: Path | None = None) -> dict:
     plan = read_storyboard(path)
     if plan["id"] != item["id"]:
         raise ValueError("Storyboard EN divergente.")
-    approved_count = require_approved_scenes(plan, model)
-    qa_results = master.validate_scenes(plan, model=model)
-    if len(qa_results) != approved_count:
+    if mode == "manual":
+        require_approved_scenes(plan, model)
+    checked, review = prepare_qa_storyboard(plan, model, mode)
+    qa_results = master.validate_scenes(checked, model=model)
+    if len(qa_results) != len(plan["scenes"]):
         raise ValueError("QA de imagem nao conferiu todos os planos.")
     voice, ass = audio_for(item, folder, create=False)
     seconds = validate_planned_audio(audio_duration(voice), stage="Voice EN preflight")
@@ -60,7 +63,11 @@ def validate_item(item: dict, model: str, *, out: Path | None = None) -> dict:
     return {
         "id": item["id"],
         "status": "pronto_para_render_local",
-        "approved_visual_shots": approved_count,
+        "verified_visual_shots": len(qa_results),
+        "manual_approvals": review["explicitly_approved"],
+        "automatic_technical_qa": mode == "automatico",
+        "manual_approvals_forged": False,
+        "visual_qa_mode": mode,
         "captions": len(captions),
         "audio_duration_s": round(seconds, 3),
         "renderer": "AutoEditorVideo/Remotion",
@@ -72,16 +79,18 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="QA EN local; nao gera nem publica")
     parser.add_argument("--manifesto", type=Path, required=True)
     parser.add_argument("--id", required=True)
+    parser.add_argument("--modo-qa", choices=("automatico","manual"), default="automatico")
     parser.add_argument("--modelo", choices=("gpt-image-1.5", "gpt-image-2"),
                         default="gpt-image-1.5")
     args = parser.parse_args(argv)
     chosen = [ep for ep in load_english(args.manifesto) if ep["id"] == args.id]
     if len(chosen) != 1:
         raise ValueError("Episodio EN nao encontrado no manifesto.")
-    result = validate_item(chosen[0], args.modelo)
+    result = validate_item(chosen[0], args.modelo, mode=args.modo_qa)
     print(
-        "[EN QA APROVADO] {approved_visual_shots} cenas, {captions} legendas, "
-        "voz {audio_duration_s:.2f}s. Render via {renderer}, sem upload.".format(**result),
+        "[EN QA TECNICO] {verified_visual_shots} cenas verificadas, {captions} legendas, "
+        "voz {audio_duration_s:.2f}s. Modo {visual_qa_mode}. "
+        "Nao certifica a qualidade artistica; render via {renderer}.".format(**result),
         flush=True,
     )
     return 0
