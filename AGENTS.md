@@ -4,6 +4,25 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
+## PADRAO VISUAL SHORTS — FEEDBACK VIDIQ 2026-11-03
+
+- Otaku Multicena / Jujutsu Kaisen EP01 recebeu previsao (nao garantia)
+  de 654-4519 views em 14 dias; foi identificado um ponto de melhoria
+  principal nos 2 primeiros segundos. Nao usar forecast como resultado real.
+- Para novos Shorts PT-BR com Remotion master, manter **movimento de camera
+  perceptivel no gancho** (push 0–1,9s e reposicionamento 1,9–5s), mas sem
+  alterar o rosto, criar gestos falsos ou recortar cabelo/maos.
+- Legendas em blocos curtos (ate 3 palavras), fonte maior, fundo escuro
+  opaco e contorno forte. Destacar cada palavra usando o instante real de
+  `WordBoundary` (Edge TTS) ou ASR verificado; nao fabricar sincronismo.
+- Legendas ASS de acervos anteriores sao fallback; marcacoes existentes so
+  podem ser reaproveitadas apos verificar texto ou hash do roteiro.
+- Aplicar melhorias em **novas renderizacoes**; Shorts ja publicados nao
+  sao editados/reenviados automaticamente. Para comparar, renderizar local
+  com `-Refazer -MaxChamadas 0` e SEM `-Publicar`.
+- Antes de liberar, rodar QA de FPS/duracao <=60s e testar legibilidade
+  num enquadramento de celular. Nao usar imagem IA adicional sem autorizacao.
+
 ## REGRA EDITORIAL: CTA SEM MARCA NA NARRACAO
 
 - Em novos roteiros PT-BR, manter um CTA curto e natural, como
