@@ -8,6 +8,7 @@ on:
       - 'scripts/roteiro_para_storyboard.py'
       - 'scripts/metadata_shorts.py'
       - 'conteudos/death-note-recaps-60s.json'
+      - 'conteudos/death-note-formatos-60s.json'
       - 'tests/test_fluxo_unico_short.py'
       - 'tests/test_publicar_recap_hourly.py'
       - 'criar-publicar-short.ps1'
@@ -20,6 +21,7 @@ on:
       - 'scripts/roteiro_para_storyboard.py'
       - 'scripts/metadata_shorts.py'
       - 'conteudos/death-note-recaps-60s.json'
+      - 'conteudos/death-note-formatos-60s.json'
       - 'tests/test_fluxo_unico_short.py'
       - 'tests/test_publicar_recap_hourly.py'
       - 'criar-publicar-short.ps1'
@@ -36,5 +38,5 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
-      - name: Validate 3 recaps, recovery, distinct metadata and upload safety
+      - name: Validate recaps, curiosity, nostalgia, hourly cycle and upload safety
         run: python -m pytest -q tests/test_fluxo_unico_short.py tests/test_publicar_recap_hourly.py tests/test_shorts_duration.py tests/test_voice_before_approval.py
