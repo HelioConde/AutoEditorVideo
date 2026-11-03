@@ -107,7 +107,8 @@ def test_native_scheduling_is_private_and_requires_a_future_time():
     assert publisher.parse_publish_at("2026-11-05T09:00:00-03:00") == target
 
 
-def test_schedule_only_three_new_videos_then_safe_resume():
+def test_schedule_only_three_new_videos_then_safe_resume(tmp_path, monkeypatch):
+    monkeypatch.setattr(batch, "UPLOADS", tmp_path)
     slots = batch.all_slots()
     times = batch.timestamps(date(2026, 11, 5), "09:00", 60, slots)
     plan = batch.create_plan(slots, times, start_day=date(2026, 11, 5),
@@ -147,6 +148,7 @@ def test_schedule_only_three_new_videos_then_safe_resume():
     assert second["new_uploads"] == 21
     assert len(second["confirmed"]) == 24
     assert len(calls) == 24
+    assert len(list((tmp_path / "lote24-comprovantes").glob("*.json"))) == 24
     third = batch.process(
         plan, agendar=True, max_new=24,
         model="gpt-image-1.5", profile="equilibrado", budget=20,
@@ -198,3 +200,25 @@ def test_invalid_count_and_interval_fail_before_any_upload():
         batch.timestamps(date(2026, 11, 5), "09:00", 59, slots)
     with pytest.raises(batch.ScheduleError, match="Hora invalida"):
         batch.timestamps(date(2026, 11, 5), "25:00", 60, slots)
+
+
+def test_receipt_survives_deleted_mp4_and_prevents_duplicate_id(tmp_path, monkeypatch):
+    monkeypatch.setattr(batch, "UPLOADS", tmp_path)
+    monkeypatch.setattr(batch, "CLIPS", tmp_path / "clips")
+    episode_id = "102-death-note-ep02"
+    record = {
+        "video_id": "youtube_abc123",
+        "agendamento_confirmado": True,
+        "privacidade_solicitada": "private",
+        "agendado_para": "2026-11-05T12:00:00Z",
+    }
+    batch.save_episode_record(episode_id, record)
+    assert batch.read_state(episode_id, "equilibrado") == record
+    other = dict(record, video_id="other_video")
+    with pytest.raises(batch.ScheduleError, match="Conflito de video_id"):
+        batch.save_episode_record(episode_id, other)
+
+
+def test_invalid_record_name_cannot_escape_schedule_folder():
+    with pytest.raises(batch.ScheduleError, match="inseguro"):
+        batch.episode_record("../../secrets")
