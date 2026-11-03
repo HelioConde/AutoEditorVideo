@@ -266,7 +266,8 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                        'focusSubject':scene.get('focus_subject',''),
                        'action':scene.get('action',''),
                        'transitionStyle':scene.get('transition_style','crossfade'),
-                       'beatRole':scene.get('beat_role','')})
+                       'beatRole':scene.get('beat_role',''),
+                       'headline':scene.get('headline','')})
     shutil.copy2(voice,target/'voz.mp3')
     parent=select_episode(ep['id'])
     if animation_mode not in ('cinematica','desligada','esqueleto2d'):
