@@ -96,7 +96,39 @@ def timestamps(start_day: date, hour: str, interval_minutes: int,
             for i in range(len(slots))]
 
 
+def episode_record(episode_id: str) -> Path:
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", episode_id):
+        raise ScheduleError("ID inseguro para nome de arquivo")
+    return UPLOADS / "lote24-comprovantes" / f"{episode_id}.json"
+
+
+def save_episode_record(episode_id: str, state: dict) -> None:
+    """Protect against duplicate uploads if render/cache MP4 changes later."""
+    target = episode_record(episode_id)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if target.is_file():
+        existing = json.loads(target.read_text(encoding="utf-8-sig"))
+        if existing.get("video_id") != state.get("video_id"):
+            raise ScheduleError(
+                f"Conflito de video_id de {episode_id}; confira YouTube Studio."
+            )
+    temporary = target.with_suffix(".tmp")
+    temporary.write_text(
+        json.dumps(state, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    temporary.replace(target)
+
+
 def read_state(episode_id: str, profile: str) -> dict | None:
+    marker = episode_record(episode_id)
+    if marker.is_file():
+        recorded = json.loads(marker.read_text(encoding="utf-8-sig"))
+        if not recorded.get("video_id"):
+            raise ScheduleError(
+                f"Comprovante sem video_id de {episode_id}; verifique Studio."
+            )
+        return recorded
     path = CLIPS / episode_id / (
         f"{episode_id}-master-multicenas-personagens-v3-{profile}.mp4"
     )
@@ -179,6 +211,8 @@ def process(plan: dict, *, agendar: bool, max_new: int, model: str,
         existing = reader(episode_id, profile)
         if existing:
             confirmed_state(existing, when, episode_id)
+            if agendar:
+                save_episode_record(episode_id, existing)
             print(f"[JA AGENDADO] {local} | {episode_id} | "
                   f"https://youtu.be/{existing['video_id']}", flush=True)
             summary["confirmed"].append(episode_id)
@@ -220,6 +254,7 @@ def process(plan: dict, *, agendar: bool, max_new: int, model: str,
                 "Interrompido para evitar duplicata."
             )
         confirmed_state(verified, when, episode_id)
+        save_episode_record(episode_id, verified)
         print(f"[YOUTUBE AGENDOU] {local} | "
               f"https://youtu.be/{verified['video_id']}", flush=True)
         summary["confirmed"].append(episode_id)
