@@ -1,0 +1,161 @@
+{
+  "schema": "arquivo-otaku/lote-programacao-youtube/v1",
+  "series": "Death Note",
+  "locale": "pt-BR",
+  "timezone": "America/Sao_Paulo",
+  "first_local_time": "09:00",
+  "interval_minutes": 60,
+  "publishing": "youtube-native-status.publishAt",
+  "format_rotation": [
+    "episodio",
+    "curiosidade",
+    "voce-lembra"
+  ],
+  "note": "24 inéditos planejados, EP01 já publicado não entra. Horários são planejados, não implicam agendamento no YouTube até a execução e confirmação.",
+  "slots": [
+    {
+      "position": 1,
+      "cycle": 1,
+      "format": "episodio",
+      "id": "102-death-note-ep02"
+    },
+    {
+      "position": 2,
+      "cycle": 1,
+      "format": "curiosidade",
+      "id": "201-death-note-rosto-nome"
+    },
+    {
+      "position": 3,
+      "cycle": 1,
+      "format": "voce-lembra",
+      "id": "301-death-note-voce-lembra-justica"
+    },
+    {
+      "position": 4,
+      "cycle": 2,
+      "format": "episodio",
+      "id": "103-death-note-ep03"
+    },
+    {
+      "position": 5,
+      "cycle": 2,
+      "format": "curiosidade",
+      "id": "202-death-note-40-segundos"
+    },
+    {
+      "position": 6,
+      "cycle": 2,
+      "format": "voce-lembra",
+      "id": "302-death-note-lembra-ryuk"
+    },
+    {
+      "position": 7,
+      "cycle": 3,
+      "format": "episodio",
+      "id": "104-death-note-ep04"
+    },
+    {
+      "position": 8,
+      "cycle": 3,
+      "format": "curiosidade",
+      "id": "203-death-note-6-min-40"
+    },
+    {
+      "position": 9,
+      "cycle": 3,
+      "format": "voce-lembra",
+      "id": "303-death-note-lembra-primeiro-teste"
+    },
+    {
+      "position": 10,
+      "cycle": 4,
+      "format": "episodio",
+      "id": "105-death-note-ep05"
+    },
+    {
+      "position": 11,
+      "cycle": 4,
+      "format": "curiosidade",
+      "id": "204-death-note-olhos-shinigami"
+    },
+    {
+      "position": 12,
+      "cycle": 4,
+      "format": "voce-lembra",
+      "id": "304-death-note-lembra-transmissao-l"
+    },
+    {
+      "position": 13,
+      "cycle": 5,
+      "format": "episodio",
+      "id": "106-death-note-ep06"
+    },
+    {
+      "position": 14,
+      "cycle": 5,
+      "format": "curiosidade",
+      "id": "205-death-note-pagina-arrancada"
+    },
+    {
+      "position": 15,
+      "cycle": 5,
+      "format": "voce-lembra",
+      "id": "305-death-note-lembra-l-olhar"
+    },
+    {
+      "position": 16,
+      "cycle": 6,
+      "format": "episodio",
+      "id": "107-death-note-ep07"
+    },
+    {
+      "position": 17,
+      "cycle": 6,
+      "format": "curiosidade",
+      "id": "206-death-note-morte-impossivel"
+    },
+    {
+      "position": 18,
+      "cycle": 6,
+      "format": "voce-lembra",
+      "id": "306-death-note-lembra-naomi"
+    },
+    {
+      "position": 19,
+      "cycle": 7,
+      "format": "episodio",
+      "id": "108-death-note-ep08"
+    },
+    {
+      "position": 20,
+      "cycle": 7,
+      "format": "curiosidade",
+      "id": "207-death-note-nome-irreversivel"
+    },
+    {
+      "position": 21,
+      "cycle": 7,
+      "format": "voce-lembra",
+      "id": "307-death-note-lembra-batatas"
+    },
+    {
+      "position": 22,
+      "cycle": 8,
+      "format": "episodio",
+      "id": "109-death-note-ep09"
+    },
+    {
+      "position": 23,
+      "cycle": 8,
+      "format": "curiosidade",
+      "id": "208-death-note-toque-ryuk"
+    },
+    {
+      "position": 24,
+      "cycle": 8,
+      "format": "voce-lembra",
+      "id": "308-death-note-lembra-universidade"
+    }
+  ]
+}
