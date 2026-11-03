@@ -3,6 +3,28 @@
 O Edge TTS continua **padrao** e nao foi removido. A integracao apenas adiciona
 `-VozMotor voicestudio` ao fluxo brasileiro do `criar-publicar-short.ps1`.
 
+## Decisao de produto — 2026-11-03
+
+**STATUS: ADIADO / BACKLOG, SEM ALTERAR O DEFAULT.** A primeira avaliacao de voz
+local do VoiceStudio no Windows (i5-12400, 16 GB RAM, RX 580) nao atingiu a
+naturalidade desejada para as narracoes do canal Otaku Multicena. Na captura de
+diagnostico, RAM em 15,1/15,8 GB, CPU em ~73% e GPU Radeon sem uso detectado.
+
+- **Producao atual:** manter Edge TTS (`-VozMotor edge`) como escolha padrao
+  para roteiros PT-BR. Nao substituir por VoiceStudio automaticamente.
+- **VoiceStudio:** conservar adapter, script de testes, caches independentes e
+  documentacao, sem excluir os modelos locais nem apagar narrações existentes.
+- **Quando retestar:** apenas quando os resultados do projeto justificarem
+  investir em hardware novo e houver GPU compatível com o motor escolhido.
+  Uma GPU melhor pode diminuir a latencia, mas **nao garante** voz mais humana;
+  comparar naturalidade, licenca dos pesos, VRAM e compatibilidade do motor.
+- **Criterio de adocao:** teste A/B cego com roteiro idêntico de Death Note ou
+  Jujutsu Kaisen, avaliando naturalidade, emocao, pronuncia PT-BR e tempo de
+  geracao, antes de promover qualquer motor a padrao.
+- **Nao publicar** audio de modelos com restricao nao comercial em canais
+  destinados a monetizacao sem direitos apropriados.
+
+
 ## Primeira instalacao
 
 1. Instale a versao Windows x64 de https://github.com/debpalash/VoiceStudio/releases/latest
