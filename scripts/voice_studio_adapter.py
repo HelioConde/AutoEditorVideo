@@ -28,6 +28,65 @@ def _local_endpoint() -> str:
     return raw
 
 
+def _client() -> requests.Session:
+    # Requests honors HTTP_PROXY by default, even for some loopback setups.
+    # Never send the text/audio of a local VoiceStudio job through a proxy.
+    client = requests.Session()
+    client.trust_env = False
+    return client
+
+
+def _http_error_message(exc: requests.exceptions.HTTPError, stage: str) -> str:
+    response = exc.response
+    if response is None:
+        return f"Falha HTTP do VoiceStudio na etapa {stage}: {exc}"
+    status = response.status_code
+    try:
+        payload = response.json()
+        payload = payload if isinstance(payload, dict) else {}
+    except (ValueError, TypeError):
+        payload = {}
+    error = payload.get("error")
+    error = error if isinstance(error, dict) else {}
+    detail = payload.get("detail")
+    detail_obj = detail if isinstance(detail, dict) else {}
+    code = str(error.get("code") or detail_obj.get("code") or "").strip()
+    message = str(error.get("message") or detail_obj.get("message") or
+                  (detail if isinstance(detail, str) else "")).strip()
+    # Keep diagnostics short and avoid dumping an API response or request text.
+    message = re.sub(r"[\\r\\n\\t]+", " ", message)[:260]
+
+    if status == 403 and code == "model_licence_required":
+        models = detail_obj.get("models")
+        names = [
+            str(m.get("repo_id") or "") for m in models
+            if isinstance(m, dict) and m.get("repo_id")
+        ] if isinstance(models, list) else []
+        suffix = f" Modelos: {', '.join(names[:4])}." if names else ""
+        return (
+            f"[LICENÇA PENDENTE] VoiceStudio recusou {stage} (HTTP 403, "
+            "model_licence_required)." + suffix +
+            " Abra Catálogo de modelos no VoiceStudio > Licença, leia e confirme "
+            "somente os termos permitidos para seu uso. Não aceitamos licenças "
+            "automaticamente. OmniVoice padrão pode ter restrição não comercial; "
+            "não use para monetização sem autorização apropriada."
+        )
+    if status == 403:
+        return (
+            f"[ACESSO NEGADO] VoiceStudio recusou {stage} (HTTP 403). "
+            f"Motivo informado: {message or code or 'sem detalhe'}. "
+            "Use a API local em 127.0.0.1:3900, confira as permissões e "
+            "as licenças na interface do VoiceStudio."
+        )
+    if status == 409 and stage == "transcrição ASR":
+        return (
+            "[MODELO ASR AUSENTE] VoiceStudio não está pronto para sincronizar "
+            "legendas: configure um Whisper compatível com timestamps por palavra. "
+            f"Resposta: {message or code or 'HTTP 409'}."
+        )
+    return f"VoiceStudio falhou em {stage} (HTTP {status}): {message or code or 'sem detalhe'}."
+
+
 def _normalized(s: str) -> str:
     s = unicodedata.normalize("NFKD", s.casefold())
     s = "".join(c for c in s if not unicodedata.combining(c))
@@ -87,22 +146,27 @@ def ensure_voice_studio(episode: dict, folder: Path, *, create: bool = False) ->
     base = _local_endpoint()
     model = os.environ.get("OTAKU_VOICESTUDIO_MODEL", "tts-1").strip()
     voice = os.environ.get("OTAKU_VOICESTUDIO_VOICE", "default").strip()
+    stage = "geração TTS"
     try:
-        speech = requests.post(base + "/v1/audio/speech",
-            json={"model": model, "voice": voice, "input": script,
-                  "language": "pt", "response_format": "mp3", "speed": 1.0},
-            timeout=(10, 900))
-        speech.raise_for_status()
-        audio = speech.content
-        if len(audio) < 1000 or "json" in speech.headers.get("Content-Type", "").lower():
-            raise RuntimeError("VoiceStudio não retornou áudio MP3 válido")
-        asr = requests.post(base + "/v1/audio/transcriptions",
-            data=[("model", "whisper-1"), ("language", "pt"),
-                  ("response_format", "verbose_json"), ("timestamp_granularities[]", "word")],
-            files={"file": ("narracao.mp3", audio, "audio/mpeg")},
-            timeout=(10, 900))
-        asr.raise_for_status()
-        words = _words(asr.json(), script)
+        with _client() as client:
+            speech = client.post(base + "/v1/audio/speech",
+                json={"model": model, "voice": voice, "input": script,
+                      "language": "pt", "response_format": "mp3", "speed": 1.0},
+                timeout=(10, 900))
+            speech.raise_for_status()
+            audio = speech.content
+            if len(audio) < 1000 or "json" in speech.headers.get("Content-Type", "").lower():
+                raise RuntimeError("VoiceStudio não retornou áudio MP3 válido")
+            stage = "transcrição ASR"
+            asr = client.post(base + "/v1/audio/transcriptions",
+                data=[("model", "whisper-1"), ("language", "pt"),
+                      ("response_format", "verbose_json"), ("timestamp_granularities[]", "word")],
+                files={"file": ("narracao.mp3", audio, "audio/mpeg")},
+                timeout=(10, 900))
+            asr.raise_for_status()
+            words = _words(asr.json(), script)
+    except requests.exceptions.HTTPError as exc:
+        raise RuntimeError(_http_error_message(exc, stage)) from exc
     except requests.exceptions.RequestException as exc:
         raise RuntimeError(
             "VoiceStudio local indisponível ou não pronto. Abra VoiceStudio, instale "
