@@ -142,9 +142,9 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     voice, ass = audio_for(item, folder, create=True)
     confirmed = master.validate_scenes(ep, model=model)
     seconds = validate_planned_audio(audio_duration(voice),stage=f'Pre-render EN {episode_id}')
-    captions = captions_from_ass(ass, seconds)
-    if item.get("scenes"):
-        captions = grouped_captions(captions)
+    # Consistent readable word groups for every English render, whether
+    # translated from an older episode or built with the new visual storyboard.
+    captions = grouped_captions(captions_from_ass(ass, seconds))
     if not captions:
         raise ValueError("Faltam legendas sincronizadas inglesas")
     props = master.build_props(
