@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import argparse
 import base64
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import io
 import hashlib
 import json
@@ -447,7 +447,7 @@ def schedule_status(privacy: str, when: datetime | None, *, now: datetime | None
         raise ValueError("Agendamento exige privacidade private no upload")
     if now is None:
         now = datetime.now(timezone.utc)
-    if when <= now + __import__("datetime").timedelta(minutes=15):
+    if when <= now + timedelta(minutes=15):
         raise ValueError(
             "Horario agendado esta vencido ou a menos de 15 minutos. "
             "Interrompido para nao publicar acidentalmente agora."
