@@ -40,6 +40,24 @@ interrompem o fluxo. O QA tecnico nao garante ausencia de defeitos artisticos.
 O upload nao e refeito cegamente se o resultado estiver ambiguo ou ja constar
 no registro local. Consulte o [guia do Short EN](docs/OTAKU-REFRAME-DID-YOU-KNOW-201-EN.md).
 
+## Voz opcional — VoiceStudio + Edge TTS
+
+O **Edge TTS continua sendo o motor padrao**. Para testar uma segunda narração
+com o VoiceStudio local (sem produzir video e sem publicar):
+
+```powershell
+cd "$HOME\Documents\arquivo-otaku-github"
+git pull --ff-only origin main
+.\testar-voz-studio.ps1 -Id 401-jujutsu-kaisen-ep01 -CompararEdge
+```
+
+Para produzir um Short com VoiceStudio apos configurar o modelo de fala e o
+Whisper ASR de timestamps por palavra, use
+`./criar-publicar-short.ps1 -Id 401-jujutsu-kaisen-ep01 -VozMotor voicestudio`.
+Sem `-Publicar`, o comando nao faz upload. Os arquivos de cada motor ficam
+separados e o video e rerenderizado quando a voz de origem mudar.
+Instalacao, cautelas de licenca e erros: [Guia VoiceStudio](docs/VOICE-STUDIO.md).
+
 ## Painel Shorts Studio (Windows)
 
 Para controlar o gerador de cenas por botões, acompanhar logs e verificar o
