@@ -4,7 +4,8 @@ param(
     [string]$Id='401-jujutsu-kaisen-ep01',
     [string]$ModeloVoiceStudio='tts-1',
     [string]$PerfilVoiceStudio='default',
-    [switch]$CompararEdge
+    [switch]$CompararEdge,
+    [switch]$AmostraCurta
 )
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
@@ -17,6 +18,7 @@ try {
     $env:OTAKU_VOICESTUDIO_VOICE=$PerfilVoiceStudio
     $params=@((Join-Path $root 'scripts\testar_vozes.py'),'--id',$Id)
     if($CompararEdge){$params+='--comparar-edge'}
+    if($AmostraCurta){$params+='--amostra-curta'}
     & $py @params
     if($LASTEXITCODE -ne 0){throw 'Teste de voz nao passou; nenhum video foi enviado.'}
 } finally {
