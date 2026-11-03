@@ -177,3 +177,43 @@ def test_409_without_asr_model(monkeypatch, tmp_path):
     monkeypatch.setattr(vs, "_client", lambda: SessionStub(generate_then_refuse))
     with pytest.raises(RuntimeError, match="MODELO ASR AUSENTE"):
         ensure_voice(EP, tmp_path, create=True, engine="voicestudio")
+
+
+def test_500_omnivoice_silent_sidecar_is_actionable(monkeypatch, tmp_path):
+    def timeout(url, **kwargs):
+        return Reply(
+            data={"detail": ("omnivoice-subprocess sidecar sent nothing "
+                             "for 300s, so VoiceStudio stopped it.")},
+            status_code=500,
+        )
+    monkeypatch.setattr(vs, "_client", lambda: SessionStub(timeout))
+    with pytest.raises(RuntimeError, match="TIMEOUT DO MOTOR") as exc:
+        ensure_voice(EP, tmp_path, create=True, engine="voicestudio")
+    assert "-AmostraCurta" in str(exc.value)
+    assert "supertonic3" in str(exc.value)
+    assert not list(tmp_path.glob("voz-voicestudio-*"))
+
+
+def test_short_sample_is_separate_and_never_publishes(monkeypatch, tmp_path):
+    import testar_vozes as test_cli
+    episode = dict(EP)
+    episode["id"] = "voice-test"
+    monkeypatch.setattr(test_cli, "ROOT", tmp_path)
+    monkeypatch.setattr(test_cli, "select_episode", lambda _id: episode)
+    calls = []
+    def fake_voice(e, folder, *, create, engine):
+        calls.append((e["script"], folder, create, engine))
+        return folder / "fake.mp3", folder / "fake.ass"
+    monkeypatch.setattr(test_cli, "ensure_voice", fake_voice)
+    monkeypatch.setattr(
+        sys, "argv", ["testar_vozes.py", "--id", "voice-test",
+                       "--amostra-curta", "--comparar-edge"]
+    )
+    assert test_cli.main() == 0
+    assert len(calls) == 2
+    for script, folder, create, engine in calls:
+        assert len(script.split()) < 20
+        assert str(folder).endswith("teste-voz-curta")
+        assert create is True
+    assert {item[3] for item in calls} == {"edge", "voicestudio"}
+    assert episode["script"] == EP["script"]  # original episode not mutated
