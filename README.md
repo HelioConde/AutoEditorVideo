@@ -210,3 +210,19 @@ O clone inclui geração de storyboards com quantidade variável de enquadrament
 ```
 
 Guia completo: [docs/MULTICENAS-DINAMICAS.md](docs/MULTICENAS-DINAMICAS.md).
+
+
+## TikTok — upload oficial dos cinco Shorts (Content Posting API)
+
+O projeto agora oferece publicação no TikTok por meio da **API oficial**, reutilizando os MP4s já renderizados. O modo padrão envia **rascunhos** para finalizar pelo aplicativo TikTok; a publicação direta só funciona com o escopo `video.publish` aprovado e está sujeita à auditoria e às opções de privacidade da conta.
+
+```powershell
+# Primeiro leia docs/PUBLICAR-TIKTOK.md e configure seu aplicativo em developers.tiktok.com
+.\publicar-tiktok.ps1 -Acao diagnostico
+.\publicar-tiktok.ps1 -Acao preparar -Limite 5
+.\publicar-tiktok.ps1 -Acao conectar -Modo rascunho
+.\publicar-tiktok.ps1 -Acao enviar -Modo rascunho -Limite 1 -ConfirmarEnvio
+.\publicar-tiktok.ps1 -Acao status -Modo rascunho
+```
+
+Guia: [Publicar no TikTok](docs/PUBLICAR-TIKTOK.md). Tokens locais ficam em `.secrets/` e não vão ao GitHub. Os envios possuem histórico por hash para evitar duplicatas; não há publicação automática sem consentimento explícito.
