@@ -108,6 +108,50 @@ sem alterar silenciosamente videos ja agendados.
   todos os roteiros, imagens e narrações deste lote sao originais,
   sem prometer ausencia de reivindicacoes de direitos.
 
+
+## Erro "Proxy nao encontrado" ao criar a Curiosidade 1
+
+Se o EP02 foi agendado, mas o segundo Short falhou por faltar o Codex Proxy,
+**nao exclua nem reenvie o primeiro**. O comprovante local preserva o ID do
+episodio e o horario de 05/11/2026 09:00 (Brasilia).
+
+A correção atual reconhece tanto
+`chatgpt-codex-proxy/.env` quanto
+`../arquivo-otaku-kit/chatgpt-codex-proxy/.env` (instalacao antiga), sem
+copiar segredos para o GitHub e sem trocar conta automaticamente.
+
+No **PowerShell** em `C:\Users\helio\Documents\arquivo-otaku-github`:
+
+```powershell
+git pull --ff-only origin main
+.\testar-codex-proxy.ps1 -Acao iniciar
+.\testar-codex-proxy.ps1 -Acao status
+```
+
+Se `iniciar` disser que o proxy ainda nao foi instalado, abra o Docker
+Desktop e rode `.\testar-codex-proxy.ps1 -Acao instalar` somente se
+necessario. Esse comando baixa/inicia um servico de terceiros; revise o
+projeto antes de autorizar uma conta. Se o status indicar nenhuma conta,
+o login requer sua autorizacao explicita e pode ser feito com
+`.\testar-codex-proxy.ps1 -Acao login`. Nao compartilhe tokens no chat.
+Se não há conta elegível por limite de uso, aguarde a disponibilidade
+normal em vez de contornar a cota.
+
+Quando o status confirmar uma conta elegivel, retome sem duplicar uploads:
+
+```cmd
+programar-24-shorts.cmd agendar 2026-11-05
+```
+
+O pipeline agora faz um teste read-only antes de tentar imagens pendentes;
+se o proxy estiver indisponivel, para **uma vez**, sem repetir tentativas
+identicas em todas as cenas. Se todas as imagens ja estiverem em cache,
+nao e necessario ter o proxy ligado.
+
+Se o YouTube retornar **HTTP 429 no envio da capa**, isso nao invalida o
+agendamento do MP4. Nao reenvie o video: a miniatura pode precisar ser
+ajustada no aplicativo YouTube quando o canal permitir.
+
 ## Arquivos implementados
 
 - \`programar-24-shorts.cmd\`: atalho para planejar ou agendar.
