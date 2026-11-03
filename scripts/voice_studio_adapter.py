@@ -78,6 +78,20 @@ def _http_error_message(exc: requests.exceptions.HTTPError, stage: str) -> str:
             "Use a API local em 127.0.0.1:3900, confira as permissões e "
             "as licenças na interface do VoiceStudio."
         )
+    if (status in (500, 503, 504) and stage == "geração TTS"
+            and ("sidecar sent nothing" in message.lower()
+                 or "recv timeout" in message.lower()
+                 or "receive timeout" in message.lower())):
+        return (
+            "[TIMEOUT DO MOTOR] O VoiceStudio recebeu o roteiro, mas o motor "
+            "ficou sem produzir saída até o limite de segurança do sidecar. "
+            "Teste primeiro uma frase curta (-AmostraCurta) e, em computadores "
+            "CPU-only, considere Supertonic-3 (modelo 'supertonic3') no "
+            "Catálogo de modelos. Aumentar o limite "
+            "OMNIVOICE_SIDECAR_RECV_TIMEOUT_S exige reiniciar o VoiceStudio "
+            "e só faz sentido depois de validar a amostra curta; não altera "
+            "o Edge TTS. Detalhe: " + message[:180]
+        )
     if status == 409 and stage == "transcrição ASR":
         return (
             "[MODELO ASR AUSENTE] VoiceStudio não está pronto para sincronizar "
