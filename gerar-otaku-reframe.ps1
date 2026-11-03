@@ -56,7 +56,10 @@ function Invoke-English {
   $argv=@($script:render,'--manifesto',$script:manifestPath,'--acao',$Step,
           '--id',$script:Id,'--modelo',$script:Modelo,'--perfil',$script:Perfil)
   if($script:Refazer -and $Step -eq 'renderizar'){$argv+='--refazer'}
-  & $script:python @argv
+  # O gerador master pode criar a .venv na etapa anterior.
+  $venv=Join-Path $script:root '.venv\Scripts\python.exe'
+  $runner=if(Test-Path -LiteralPath $venv -PathType Leaf){$venv}else{$script:python}
+  & $runner @argv
   if($LASTEXITCODE -ne 0){throw "Falha na etapa EN: $Step (codigo $LASTEXITCODE)."}
 }
 
@@ -71,17 +74,11 @@ function Invoke-Master {
 Write-Host "[OTAKU REFRAME] $Id | $Acao | en-US" -ForegroundColor Cyan
 switch($Acao){
   'Preparar' {
+    # Diagnostico sem chamadas de imagem: fixa o storyboard existente,
+    # instala as dependencias e prepara edge-tts sem gerar voz portuguesa.
+    Invoke-Master @('-DiagnosticarCache','-TodasCenas','-CriarVoz','-MaxChamadas','0','-MaxSegundosPorPlano',[double]4.5)
     Invoke-English 'planejar'
-    # Nao sobrescreva nenhum storyboard local existente sem revisao.
-    $pinned=Join-Path $root ("assets\\gerados\\shorts-animados\\{0}\\storyboard-producao.json" -f $Id)
-    $existing=Join-Path $root ("assets\\gerados\\planos-visuais\\{0}-master-dinamico.json" -f $Id)
-    if(-not (Test-Path -LiteralPath $pinned) -and -not (Test-Path -LiteralPath $existing)){
-      Invoke-Master @('-SomentePlanejar','-MaxSegundosPorPlano',[double]4.5)
-    } else {
-      Write-Host '[STORYBOARD] Plano local existente preservado (sem replanejar).' -ForegroundColor Yellow
-    }
     Invoke-English 'voz'
-    Invoke-Master @('-DiagnosticarCache','-TodasCenas','-MaxChamadas','0')
     Write-Host '[OK] Plano, voz EN e diagnostico preparados. Revise o cache antes de gerar imagens.' -ForegroundColor Green
   }
   'Diagnosticar' {
