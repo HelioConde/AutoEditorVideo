@@ -14,7 +14,8 @@ REQUIRED = {
     "narration": "edge-tts",
     "captions": "WordBoundary",
     "editor": "remotion",
-    "qa": "manual-per-scene",
+    "qa": "automatic-technical",
+    "post_upload_review": True,
     "external_rendering": False,
     "auto_publish": False,
 }
@@ -34,7 +35,7 @@ def validate_english_production(item: dict, production: dict | None) -> dict:
     if mismatch:
         raise ValueError(
             "Pipeline EN invalido: somente AutoEditorVideo local, imagens pelo "
-            "Codex Proxy, Edge TTS, Remotion e QA manual; campos: "
+            "Codex Proxy, Edge TTS, Remotion e QA tecnico; campos: "
             + ", ".join(mismatch)
         )
     return dict(REQUIRED)
