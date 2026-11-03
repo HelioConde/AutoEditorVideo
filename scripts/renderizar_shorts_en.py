@@ -43,7 +43,9 @@ def load_english(path: Path = LANG) -> list[dict]:
         raise ValueError("O lote original em ingles deve conservar exatamente cinco episodios")
     for item in items:
         item.setdefault("channel", data.get("channel", "Otaku Reframe"))
-        validate_english_production(item, data.get("production"))
+        if item.get("scenes"):
+            item.setdefault("production", data.get("production"))
+        validate_english_production(item, item.get("production"))
     for item in items:
         if len(item["script"].split()) < 50 or not item["cover"].strip():
             raise ValueError("Episodio ingles precisa de roteiro e capa: " + item["id"])
