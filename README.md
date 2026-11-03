@@ -272,11 +272,11 @@ Guia: [Comando único para Shorts](docs/COMANDO-UNICO-SHORTS.md).
 
 
 
-## Experimento: um Short por hora no YouTube
+## Experimento: episodio -> curiosidade -> voce lembra? -> proximo episodio
 
-O novo fluxo local publica os recaps **Death Note EP02 e EP03** com pelo menos
-60 minutos entre os uploads confirmados, evitando duplicatas e retomando
-um upload anterior sem reenvio:
+O novo fluxo local alterna **quatro publicacoes ineditas**: EP02 (historia),
+curiosidade sobre nome e rosto, video nostalgico "Voce lembra?" e EP03.
+Cada upload ocorre pelo menos 60 minutos depois da confirmacao do anterior.
 
 ```powershell
 cd "C:\Users\helio\Documents\arquivo-otaku-github"
@@ -284,8 +284,8 @@ git pull --ff-only origin main
 .\publicar-recaps-por-hora.ps1 -Publicar -Privacidade public
 ```
 
-Sem `-Publicar`, apenas planeja. O computador precisa permanecer ligado e o
-PowerShell aberto. A fila só inclui os episódios 2 e 3 cadastrados.
-Não há envio remoto pelo GitHub ou execução em segundo plano pelo ChatGPT.
-Guia: [Teste de intervalo de uma hora](docs/TESTE-INTERVALO-YOUTUBE.md).
+Sem `-Publicar`, o comando apenas planeja e nao gasta cota de imagem.
+O computador deve permanecer ligado. Os dois videos intermediarios
+sao novos e usam imagens geradas por IA. O EP01 nao sera reenviado.
+Guia: [Rodizio de Shorts com intervalo de uma hora](docs/TESTE-INTERVALO-YOUTUBE.md).
 
