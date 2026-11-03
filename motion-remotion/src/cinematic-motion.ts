@@ -68,6 +68,41 @@ export const motionAtFrame=(
   };
 };
 
+
+
+/**
+ * Three unmistakable virtual cuts from the SAME approved art in the opening.
+ *
+ * The old 0–6s Ken Burns drift was frequently perceived as a static still.
+ * We use two jump cuts at 1.25s and 2.45s, then recover a calm composition
+ * before 5s. Only the common camera moves: actors, hands and furniture stay
+ * together. No AI calls, invented gestures or audio changes.
+ *
+ * Off and Rigby2D modes keep their original motion behaviour.
+ */
+export const openingCutAtFrame=(frame:number,fps:number,
+                               mode:AnimationMode):{zoom:number;panX:number;panY:number;beat:number}=>{
+  const flat={zoom:0,panX:0,panY:0,beat:-1};
+  if(mode!=='cinematica'||!Number.isFinite(frame)||!Number.isFinite(fps)||
+     frame<0||fps<=0||frame>=5*fps)return flat;
+  const t=frame/fps;
+  // Direct camera cuts, not dissolves. Zoom is capped by the Shot renderer.
+  if(t<1.25){
+    const k=ease(t/1.25);
+    return {zoom:.055*k,panX:8*k,panY:-9*k,beat:0};
+  }
+  if(t<2.45){
+    const k=ease((t-1.25)/1.2);
+    return {zoom:.082+.008*k,panX:20+4*k,panY:-14-2*k,beat:1};
+  }
+  if(t<3.55){
+    const k=ease((t-2.45)/1.10);
+    return {zoom:.041+.011*k,panX:-14-5*k,panY:-6-3*k,beat:2};
+  }
+  const k=ease((t-3.55)/1.45);
+  return {zoom:.034*(1-k),panX:7*(1-k),panY:-5*(1-k),beat:3};
+};
+
 // Per-character idle motion is implemented by character-idle.ts using
 // automatic geometry from the source PNGs (no fixed names or episode IDs).
 
