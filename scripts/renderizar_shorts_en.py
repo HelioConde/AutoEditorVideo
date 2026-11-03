@@ -53,21 +53,28 @@ def load_english(path: Path = LANG) -> list[dict]:
 def english_metadata(item: dict) -> dict:
     brand = item.get("channel", "Otaku Reframe")
     hashtag = "".join(ch for ch in brand if ch.isalnum())
+    authored = str(item.get("description", "")).strip()
+    description = authored or (
+        f"An original English commentary on {item['series']}.\n\n"
+        f"{item['script']}\n\n"
+        "English narration and original editorial adaptation with AI-generated illustrations. "
+        "The anime and its characters belong to their respective rights holders.\n\n"
+        f"#DeathNote #Anime #AnimeAnalysis #{hashtag} #Shorts"
+    )
+    tags = item.get("tags") or [
+        "Death Note", "Anime", "Anime Analysis", brand, "English Anime Shorts"
+    ]
+    if not isinstance(tags, list) or not tags or any(
+            not isinstance(tag, str) or not tag.strip() for tag in tags):
+        raise ValueError("Tags EN devem ser uma lista de termos relevantes")
     return {
         "titulo": item["title"],
-        "descricao": (
-            f"An original English commentary on {item['series']}.\n\n"
-            f"{item['script']}\n\n"
-            "English narration and original editorial adaptation with AI-generated illustrations. "
-            "The anime and its characters belong to their respective rights holders.\n\n"
-            f"#DeathNote #Anime #AnimeAnalysis #{hashtag} #Shorts"
-        ),
-        "tags": ["Death Note", "Anime", "Anime Analysis", brand, "English Anime Shorts"],
-        "categoria": "24",
+        "descricao": description,
+        "tags": tags,
+        "categoria": "1",  # Film & Animation
         "idioma": "en",
         "feito_para_criancas": False,
     }
-
 
 def audio_for(item: dict, folder: Path, *, create: bool) -> tuple[Path, Path]:
     digest = hashlib.sha256(
