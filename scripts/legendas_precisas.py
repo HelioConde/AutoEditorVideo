@@ -10,6 +10,7 @@ from hashlib import sha256
 import json
 import math
 from pathlib import Path
+from narracao_shorts import _spoken_words
 
 
 FPS = 30
@@ -37,12 +38,20 @@ def captions_from_markers(voice: Path, script: str, duration: float,
         return None
     data = json.loads(marker.read_text(encoding="utf-8"))
     checksum = sha256(script.strip().encode("utf-8")).hexdigest()
-    if data.get("script_sha256") != checksum:
-        # Never pretend a stale audio/marker pair is synchronized.
-        raise ValueError("Marcações de legenda não correspondem ao roteiro atual")
     raw = data.get("words")
     if not isinstance(raw, list) or not raw:
         raise ValueError("Áudio sem limites reais de palavra para as legendas")
+    known_checksum = data.get("script_sha256")
+    if known_checksum:
+        valid = known_checksum == checksum
+    else:
+        # Pre-upgrade Edge files had no SHA but their genuine WordBoundary
+        # transcript can be compared word for word. Never accept a mismatch.
+        spoken = " ".join(str(w.get("text") or w.get("word") or "")
+                          for w in raw if isinstance(w, dict))
+        valid = _spoken_words(spoken) == _spoken_words(script)
+    if not valid:
+        raise ValueError("Marcações de legenda não correspondem ao roteiro atual")
     total_frames = math.ceil(duration * fps)
     words = []
     last_start = -1
