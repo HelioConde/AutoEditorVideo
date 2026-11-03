@@ -226,3 +226,22 @@ O projeto agora oferece publicação no TikTok por meio da **API oficial**, reut
 ```
 
 Guia: [Publicar no TikTok](docs/PUBLICAR-TIKTOK.md). Tokens locais ficam em `.secrets/` e não vão ao GitHub. Os envios possuem histórico por hash para evitar duplicatas; não há publicação automática sem consentimento explícito.
+
+## Canal internacional — Otaku Archives (EN)
+
+O pipeline pode adaptar os cinco Shorts existentes para inglês sem gerar novas imagens.
+Produz nova voz `en-US`, legendas sincronizadas, capa inglesa e MP4 separado em
+`assets/gerados/shorts-animados/<ID>/en-US/`. Nenhum upload ocorre durante a geração.
+
+```powershell
+.\gerar-shorts-en.ps1 -Acao planejar
+.\gerar-shorts-en.ps1 -Acao voz
+.\gerar-shorts-en.ps1 -Acao renderizar
+```
+
+O novo canal YouTube precisa ser criado pelo usuário no YouTube. O publicador
+`publicar-shorts-en.ps1` exige autenticação OAuth **separada**, com conferência
+do Channel ID antes de qualquer upload para não misturar os dois canais.
+
+Guia completo: [Criar e publicar no segundo canal em inglês](docs/CANAL-INGLES.md).
+
