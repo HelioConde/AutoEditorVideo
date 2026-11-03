@@ -103,3 +103,25 @@ def ensure_english_plan(item: dict, folder: Path) -> Path:
     # No touching PT storyboard, existing MP4s or generated images.
     path.write_text(json.dumps(plan, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return path
+
+
+def main(argv: list[str] | None = None) -> int:
+    """First-time bootstrap: pure stdlib visual planning before Pillow is installed."""
+    import argparse
+    parser = argparse.ArgumentParser(description="Pin EN-only visual storyboard; no AI or TTS")
+    parser.add_argument("--manifesto", type=Path, required=True)
+    parser.add_argument("--id", required=True)
+    args = parser.parse_args(argv)
+    data = json.loads(args.manifesto.read_text(encoding="utf-8-sig"))
+    items = [ep for ep in data.get("episodes", []) if ep.get("id") == args.id]
+    if len(items) != 1:
+        raise ValueError("EP nao encontrado ou duplicado no manifesto EN")
+    root = Path(__file__).resolve().parents[1]
+    folder = root / "assets" / "gerados" / "shorts-animados" / args.id / "en-US"
+    plan = ensure_english_plan(items[0], folder)
+    print(f"[EN PLAN PINNED] {plan} (no image credits or uploads)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
