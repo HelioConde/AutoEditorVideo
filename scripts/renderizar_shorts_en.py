@@ -34,8 +34,12 @@ def load_english(path: Path = LANG) -> list[dict]:
     if data.get("schema") != "arquivo-otaku/shorts-english/v1":
         raise ValueError("Manifesto ingles nao reconhecido")
     items = data.get("episodes", [])
-    if len(items) != 5 or len(set(ep["id"] for ep in items)) != len(items):
-        raise ValueError("Exatamente cinco episodios ingleses distintos sao obrigatorios")
+    if not items or len(set(ep["id"] for ep in items)) != len(items):
+        raise ValueError("Manifesto ingles sem episodios ou com IDs duplicados")
+    if path == LANG and len(items) != 5:
+        raise ValueError("O lote original em ingles deve conservar exatamente cinco episodios")
+    for item in items:
+        item.setdefault("channel", data.get("channel", "Otaku Reframe"))
     for item in items:
         if len(item["script"].split()) < 50 or not item["cover"].strip():
             raise ValueError("Episodio ingles precisa de roteiro e capa: " + item["id"])
@@ -45,6 +49,8 @@ def load_english(path: Path = LANG) -> list[dict]:
 
 
 def english_metadata(item: dict) -> dict:
+    brand = item.get("channel", "Otaku Reframe")
+    hashtag = "".join(ch for ch in brand if ch.isalnum())
     return {
         "titulo": item["title"],
         "descricao": (
@@ -52,9 +58,9 @@ def english_metadata(item: dict) -> dict:
             f"{item['script']}\n\n"
             "English narration and original editorial adaptation with AI-generated illustrations. "
             "The anime and its characters belong to their respective rights holders.\n\n"
-            "#DeathNote #Anime #AnimeAnalysis #OtakuArchives #Shorts"
+            f"#DeathNote #Anime #AnimeAnalysis #{hashtag} #Shorts"
         ),
-        "tags": ["Death Note", "Anime", "Anime Analysis", "Otaku Archives", "English Anime Shorts"],
+        "tags": ["Death Note", "Anime", "Anime Analysis", brand, "English Anime Shorts"],
         "categoria": "24",
         "idioma": "en",
         "feito_para_criancas": False,
@@ -103,7 +109,13 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     if action == "planejar":
         print(f"[PLANO EN] {episode_id}: {item['title']}; sem IA ou upload.")
         return {"id": episode_id, "status": "planejado"}
-    # Reuse exactly the Portuguese production storyboard: no retranslation of art prompts.
+    # Generating English voice does not require image assets or a completed storyboard.
+    if action == "voz":
+        voice, ass = audio_for(item, folder, create=True)
+        validate_planned_audio(audio_duration(voice), stage=f"Voz EN {episode_id}")
+        print(f"[EN VOZ] {voice} | {ass}")
+        return {"id": episode_id, "status": "voz_pronta"}
+    # Reuse approved original visual layers; English text/audio stay isolated.
     path = production_storyboard(episode_id, 6)
     ep = read_storyboard(path)
     if ep["id"] != episode_id:
@@ -112,12 +124,6 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         cover = prepare_cover(ep, item, folder, model)
         print(f"[EN CAPA] {cover}")
         return {"id": episode_id, "status": "capa_pronta", "cover": str(cover)}
-    if action == "voz":
-        voice, ass = audio_for(item, folder, create=True)
-        validate_planned_audio(audio_duration(voice), stage=f'Voz EN {episode_id}')
-        print(f"[EN VOZ] {voice} | {ass}")
-        return {"id": episode_id, "status": "voz_pronta"}
-
     output = folder / f"{episode_id}-en-US-master-multicenas-personagens-v3-{profile}.mp4"
     if output.is_file() and not overwrite:
         validate_video(output,stage=f'Cache EN {episode_id}')
@@ -169,12 +175,13 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Renderiza Shorts EN sem novas imagens nem upload")
     parser.add_argument("--acao", choices=("planejar", "voz", "capa", "renderizar"), default="planejar")
+    parser.add_argument("--manifesto", default=str(LANG), help="JSON de Shorts EN; padrao: cinco originais")
     parser.add_argument("--id", default="")
     parser.add_argument("--modelo", choices=("gpt-image-1.5", "gpt-image-2"), default="gpt-image-1.5")
     parser.add_argument("--perfil", choices=("equilibrado", "vivo", "ultrassutil"), default="equilibrado")
     parser.add_argument("--refazer", action="store_true")
     args = parser.parse_args(argv)
-    entries = load_english()
+    entries = load_english(Path(args.manifesto))
     if args.id:
         entries = [item for item in entries if item["id"] == args.id]
         if not entries:
