@@ -197,7 +197,10 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     actual_seconds = validate_video(output,stage=f'Export EN {episode_id}')
     cover = prepare_cover(ep, item, folder, model)
     report = {
-        "id": episode_id, "status": "renderizado_aguardando_revisao",
+        "id": episode_id,
+        "status": ("renderizado_qa_automatico"
+                   if item.get("scenes") and qa_mode == "automatico"
+                   else "renderizado_aguardando_revisao"),
         "language": "en-US", "voice": VOICE, "video": str(output),
         "cover": str(cover), "duration_s": actual_seconds, "scenes": len(confirmed),
         "captions": len(captions), "published": False,
