@@ -81,10 +81,15 @@ function Invoke-Master {
 Write-Host "[OTAKU REFRAME] $Id | $Acao | en-US" -ForegroundColor Cyan
 switch($Acao){
   'Preparar' {
-    # Primeiro cria o storyboard EN separado. Jamais usa o plano PT antigo.
-    Invoke-English 'planejar'
-    # Diagnostico sem chamadas de imagem; prepara dependencias do TTS.
+    # O planejador abaixo usa apenas a biblioteca padrao do Python e
+    # pode rodar ANTES de instalar Pillow/numpy e demais dependencias.
+    $preflight=@((Join-Path $root 'scripts\otaku_reframe_direction.py'),
+                 '--manifesto',$manifestPath,'--id',$Id)
+    & $python @preflight
+    if($LASTEXITCODE -ne 0){throw 'Falha ao preparar plano visual EN sem IA.'}
+    # Agora o gerador principal instala/verifica as dependencias do projeto.
     Invoke-Master @{DiagnosticarCache=$true;TodasCenas=$true;CriarVoz=$true;MaxChamadas=0;MaxSegundosPorPlano=4.5}
+    Invoke-English 'planejar'
     Invoke-English 'voz'
     Write-Host '[OK] Plano, voz EN e diagnostico preparados. Revise o cache antes de gerar imagens.' -ForegroundColor Green
   }
