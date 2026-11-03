@@ -16,6 +16,7 @@ ROOT=Path(__file__).resolve().parents[1]
 MANIFEST=ROOT/'conteudos'/'testes-animados-5.json'
 RECAPS_MANIFEST=ROOT/'conteudos'/'death-note-recaps-60s.json'
 FORMATOS_MANIFEST=ROOT/'conteudos'/'death-note-formatos-60s.json'
+JUJUTSU_MANIFEST=ROOT/'conteudos'/'jujutsu-kaisen-recaps-60s.json'
 OUTPUT=ROOT/'assets'/'gerados'/'planos-visuais'
 ID=re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 
@@ -131,7 +132,7 @@ def select_episode(ep_id: str, path: Path=MANIFEST)->dict:
     # Keep explicit manifest paths strict; only the default catalog is extended.
     sources=[path]
     if path==MANIFEST:
-        sources.extend(extra for extra in (RECAPS_MANIFEST,FORMATOS_MANIFEST)
+        sources.extend(extra for extra in (RECAPS_MANIFEST,FORMATOS_MANIFEST,JUJUTSU_MANIFEST)
                        if extra.is_file())
     matches=[]
     for source in sources:
