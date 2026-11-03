@@ -5,6 +5,14 @@ imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
 Regras obrigatórias:
+- **REGRA DE DISTRIBUICAO EDITORIAL**: alternar `Um episodio em 60s` -> `Curiosidade` ->
+  `Voce lembra?` -> proximo episodio, e repetir o ciclo quando houver
+  roteiros novos aprovados. Nao publicar episodios consecutivos na fila
+  automatica. Respeitar intervalo minimo de 60 minutos entre uploads
+  confirmados, sem inferir que isso seja uma regra oficial do YouTube.
+  No experimento atual: 102-death-note-ep02 -> 201-death-note-rosto-nome ->
+  301-death-note-voce-lembra-justica -> 103-death-note-ep03.
+  Nunca reutilizar videos antigos apenas para preencher o ciclo.
 - **REGRA MESTRA INEGOCIAVEL: TODO Short deve ter duracao FINAL menor ou igual a 60,000 segundos**.
   Inclui gancho, historia, suspense, CTA de inscricao, pausas, transicoes e qualquer margem de render.
   Planejar entre 55 e 59 segundos; medir o MP4 com ffprobe, nao estimar apenas pelo roteiro.
