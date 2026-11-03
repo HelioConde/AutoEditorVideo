@@ -92,6 +92,10 @@ def test_no_spend_if_lacks_budget_for_one_scene(monkeypatch):
 
 def test_missing_approved_cover_prevents_publication(tmp_path, monkeypatch):
     monkeypatch.setattr(flow, "OUTPUT", tmp_path / "shorts-animados")
+    cached = flow.OUTPUT / "101-death-note-ep01"
+    cached.mkdir(parents=True)
+    (cached / "voz-master.mp3").write_bytes(b"legacy-edge-test")
+    (cached / "legendas.ass").write_text("test", encoding="utf-8")
     monkeypatch.setattr(flow, "validate_video", lambda *_args, **_kwargs: 55)
     monkeypatch.setattr(flow, "run_command", lambda *_args, **_kwargs: True)
     with pytest.raises(flow.PipelineError, match="Capa vertical ausente"):
@@ -136,3 +140,20 @@ def test_metadata_correct_for_each_episode_separately(tmp_path, monkeypatch):
         seen.append(data["titulo_youtube"])
         assert data["capa_texto"] == select_episode(ep_id)["cover"]
     assert len(set(seen)) == 3
+
+
+def test_invalid_metadata_stops_before_voice_images_or_render(monkeypatch):
+    """The former JJK KeyError must fail before expensive image generation."""
+    ep = select_episode("401-jujutsu-kaisen-ep01")
+    monkeypatch.setattr(flow, "select_episode", lambda *_args: ep)
+    def bad_metadata(_episode_id):
+        raise ValueError("Metadados invalidos de teste")
+    monkeypatch.setattr(flow, "metadata_for", bad_metadata)
+    monkeypatch.setattr(flow, "ensure_voice", lambda *_a, **_k:
+                        pytest.fail("Voz nao pode iniciar antes do metadata preflight"))
+    monkeypatch.setattr(flow, "generate_scenes", lambda *_a, **_k:
+                        pytest.fail("Imagens nao podem iniciar antes do metadata preflight"))
+    monkeypatch.setattr(flow, "ensure_render", lambda *_a, **_k:
+                        pytest.fail("Render nao pode iniciar antes do metadata preflight"))
+    with pytest.raises(ValueError, match="Metadados invalidos"):
+        flow.main(["--id", ep["id"], "--max-chamadas", "0"])
