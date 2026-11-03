@@ -1,5 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Easing, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
+import {openingCutAtFrame} from './cinematic-motion';
 
 type Motion='breathe'|'reveal'|'float'|'chess-slide'|'blood-drop'|'feather'|'apple-bounce';
 type Layer={src:string;motion:Motion;x:number;y:number;width:number;dx:number;dy:number;delay:number};
@@ -36,18 +37,31 @@ export const Short:React.FC<ShortProps>=(props)=>{
   const {fps}=useVideoConfig();
   const active=props.captions.find(c=>frame>=c.startFrame&&frame<c.endFrame);
   const hookOn=frame<2.2*fps;
-  const zoom=1.035+frame/Math.max(props.durationFrames,1)*.03;
+  const opener=openingCutAtFrame(frame,fps,'cinematica');
+  const zoom=Math.min(1.14,1.025+frame/Math.max(props.durationFrames,1)*.015+opener.zoom);
+  const camera='translate('+opener.panX.toFixed(2)+'px,'+opener.panY.toFixed(2)+
+    'px) scale('+zoom.toFixed(5)+')';
   return <AbsoluteFill style={{backgroundColor:'#090b15',overflow:'hidden',fontFamily:'Arial, sans-serif'}}>
-    {props.background?<Img src={staticFile(props.background)} style={{width:'100%',height:'100%',objectFit:'cover',transform:'scale('+zoom+')'}}/>:null}
-    <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(0,0,0,.22),transparent 32%,rgba(0,0,0,.45) 100%)'}}/>
-    {props.layers.map((p,i)=><AnimatedLayer key={i} part={p}/>)}
-    {hookOn?<div style={{position:'absolute',top:170,left:82,right:82,color:'#fff',fontSize:80,
-      textAlign:'center',fontWeight:900,textShadow:'0 5px 15px black, 0 2px 4px black',
-      opacity:interpolate(frame,[0,6,59,66],[0,1,1,0],clamp)}}>{props.hook}</div>:null}
-    {active?<div style={{position:'absolute',top:1345,left:100,right:100,fontSize:67,
-      fontWeight:900,letterSpacing:-1.5,color:'#fff',textAlign:'center',lineHeight:1.2,
-      textShadow:'4px 4px 5px black, -3px -3px 4px black, 0 0 12px black',
-      WebkitTextStroke:'1px #111'}}>{active.text}</div>:null}
+    {/* Reframe both art and props together; static 15s openings are no longer
+        possible in the cinematic preview without distorting character masks. */}
+    <AbsoluteFill style={{transform:camera,transformOrigin:'center center'}}>
+      {props.background?<Img src={staticFile(props.background)} style={{width:'100%',height:'100%',objectFit:'cover'}}/>:null}
+      <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(0,0,0,.22),transparent 32%,rgba(0,0,0,.45) 100%)'}}/>
+      {props.layers.map((p,i)=><AnimatedLayer key={i} part={p}/>)}
+    </AbsoluteFill>
+    {hookOn?<div style={{position:'absolute',top:115,left:70,right:70,
+      padding:'18px 24px',borderRadius:20,
+      background:'rgba(4,7,19,.82)',border:'2px solid rgba(255,255,255,.18)',
+      color:'#fff',fontSize:props.hook.length>44?65:78,lineHeight:1.10,
+      textAlign:'center',fontWeight:900,textShadow:'0 6px 15px black,0 2px 5px black',
+      opacity:interpolate(frame,[0,4,54,66],[0.94,1,1,0],clamp)}}>{props.hook}</div>:null}
+    {active?<div style={{position:'absolute',top:1280,left:78,right:78,
+      padding:'18px 25px',borderRadius:22,background:'rgba(2,5,15,.86)',
+      border:'2px solid rgba(255,255,255,.18)',
+      boxShadow:'0 12px 30px rgba(0,0,0,.7)',
+      fontSize:77,fontWeight:900,letterSpacing:-1,color:'#fff',
+      textAlign:'center',lineHeight:1.12,
+      textShadow:'0 5px 12px #000',WebkitTextStroke:'2px #070914'}}>{active.text}</div>:null}
     {props.audio?<Audio src={staticFile(props.audio)}/>:null}
   </AbsoluteFill>;
 };
