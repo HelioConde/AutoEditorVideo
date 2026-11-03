@@ -64,7 +64,7 @@ function Invoke-English {
 }
 
 function Invoke-Master {
-  param([Parameter(Mandatory=$true)][object[]]$Options)
+  param([Parameter(Mandatory=$true)][hashtable]$Options)
   & $script:master -Id $script:Id -Modelo $script:Modelo @Options
   if(-not $? -or $LASTEXITCODE -ne 0){
     throw "Falha no gerador de imagens para $($script:Id)."
@@ -76,28 +76,28 @@ switch($Acao){
   'Preparar' {
     # Diagnostico sem chamadas de imagem: fixa o storyboard existente,
     # instala as dependencias e prepara edge-tts sem gerar voz portuguesa.
-    Invoke-Master @('-DiagnosticarCache','-TodasCenas','-CriarVoz','-MaxChamadas','0','-MaxSegundosPorPlano',[double]4.5)
+    Invoke-Master @{DiagnosticarCache=$true;TodasCenas=$true;CriarVoz=$true;MaxChamadas=0;MaxSegundosPorPlano=4.5}
     Invoke-English 'planejar'
     Invoke-English 'voz'
     Write-Host '[OK] Plano, voz EN e diagnostico preparados. Revise o cache antes de gerar imagens.' -ForegroundColor Green
   }
   'Diagnosticar' {
     Invoke-English 'planejar'
-    Invoke-Master @('-DiagnosticarCache','-TodasCenas','-MaxChamadas','0')
+    Invoke-Master @{DiagnosticarCache=$true;TodasCenas=$true;MaxChamadas=0;MaxSegundosPorPlano=4.5}
   }
   'GerarImagens' {
-    Invoke-Master @('-TodasCenas','-MaxChamadas',[string]$MaxChamadas,'-MaxSegundosPorPlano',[double]4.5)
+    Invoke-Master @{TodasCenas=$true;MaxChamadas=$MaxChamadas;MaxSegundosPorPlano=4.5}
     Write-Host '[REVISAO] Confira todas as imagens e camadas. Nenhum MP4 foi publicado.' -ForegroundColor Yellow
   }
   'Validar' {
-    Invoke-Master @('-SomenteValidar','-TodasCenas','-MaxChamadas','0')
+    Invoke-Master @{SomenteValidar=$true;TodasCenas=$true;MaxChamadas=0}
     Write-Host '[OK] Camadas locais verificadas. Ouça tambem a voz e revise as cenas.' -ForegroundColor Green
   }
   'Renderizar' {
     if(-not $ConfirmarRevisaoVisual){
       throw 'Reveja as cenas e informe -ConfirmarRevisaoVisual para liberar o MP4. Nenhum upload sera feito.'
     }
-    Invoke-Master @('-SomenteValidar','-TodasCenas','-MaxChamadas','0')
+    Invoke-Master @{SomenteValidar=$true;TodasCenas=$true;MaxChamadas=0}
     Invoke-English 'renderizar'
     $folder=Join-Path $root ("assets\gerados\shorts-animados\{0}\en-US" -f $Id)
     Write-Host "[MP4 EN] Procure o arquivo final em: $folder" -ForegroundColor Green
