@@ -1,6 +1,7 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Img, Easing, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {openingCutAtFrame} from './cinematic-motion';
+import {groupLegacyCaptionWords} from './caption-pacing';
 
 type Motion='breathe'|'reveal'|'float'|'chess-slide'|'blood-drop'|'feather'|'apple-bounce';
 type Layer={src:string;motion:Motion;x:number;y:number;width:number;dx:number;dy:number;delay:number};
@@ -35,7 +36,11 @@ const AnimatedLayer:React.FC<{part:Layer}>=({part})=>{
 export const Short:React.FC<ShortProps>=(props)=>{
   const frame=useCurrentFrame();
   const {fps}=useVideoConfig();
-  const active=props.captions.find(c=>frame>=c.startFrame&&frame<c.endFrame);
+  const grouped=React.useMemo(
+    ()=>groupLegacyCaptionWords(props.captions,fps),
+    [props.captions,fps]
+  );
+  const active=grouped.find(c=>frame>=c.startFrame&&frame<c.endFrame);
   const hookOn=frame<2.2*fps;
   const opener=openingCutAtFrame(frame,fps,'cinematica');
   const zoom=Math.min(1.14,1.025+frame/Math.max(props.durationFrames,1)*.015+opener.zoom);
@@ -61,7 +66,12 @@ export const Short:React.FC<ShortProps>=(props)=>{
       boxShadow:'0 12px 30px rgba(0,0,0,.7)',
       fontSize:77,fontWeight:900,letterSpacing:-1,color:'#fff',
       textAlign:'center',lineHeight:1.12,
-      textShadow:'0 5px 12px #000',WebkitTextStroke:'2px #070914'}}>{active.text}</div>:null}
+      textShadow:'0 5px 12px #000',WebkitTextStroke:'2px #070914'}}>
+      {active.words?.length?active.words.map((word,index)=><React.Fragment key={index}>
+        {index>0?' ':null}<span style={{
+          color:frame>=word.startFrame&&frame<word.endFrame?'#ffd166':'#fff',
+        }}>{word.text}</span>
+      </React.Fragment>):active.text}</div>:null}
     {props.audio?<Audio src={staticFile(props.audio)}/>:null}
   </AbsoluteFill>;
 };
