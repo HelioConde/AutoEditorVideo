@@ -24,6 +24,7 @@ from shorts_duration import validate_planned_audio, validate_video
 import renderizar_master_remotion as master
 from otaku_reframe_direction import ensure_english_plan
 from english_caption_design import grouped_captions
+from otaku_reframe_production import validate_english_production
 
 LANG = ROOT / "conteudos" / "testes-animados-5-en.json"
 OUT = ROOT / "assets" / "gerados" / "shorts-animados"
@@ -42,6 +43,9 @@ def load_english(path: Path = LANG) -> list[dict]:
         raise ValueError("O lote original em ingles deve conservar exatamente cinco episodios")
     for item in items:
         item.setdefault("channel", data.get("channel", "Otaku Reframe"))
+        if item.get("scenes"):
+            item.setdefault("production", data.get("production"))
+        validate_english_production(item, item.get("production"))
     for item in items:
         if len(item["script"].split()) < 50 or not item["cover"].strip():
             raise ValueError("Episodio ingles precisa de roteiro e capa: " + item["id"])
@@ -53,21 +57,28 @@ def load_english(path: Path = LANG) -> list[dict]:
 def english_metadata(item: dict) -> dict:
     brand = item.get("channel", "Otaku Reframe")
     hashtag = "".join(ch for ch in brand if ch.isalnum())
+    authored = str(item.get("description", "")).strip()
+    description = authored or (
+        f"An original English commentary on {item['series']}.\n\n"
+        f"{item['script']}\n\n"
+        "English narration and original editorial adaptation with AI-generated illustrations. "
+        "The anime and its characters belong to their respective rights holders.\n\n"
+        f"#DeathNote #Anime #AnimeAnalysis #{hashtag} #Shorts"
+    )
+    tags = item.get("tags") or [
+        "Death Note", "Anime", "Anime Analysis", brand, "English Anime Shorts"
+    ]
+    if not isinstance(tags, list) or not tags or any(
+            not isinstance(tag, str) or not tag.strip() for tag in tags):
+        raise ValueError("Tags EN devem ser uma lista de termos relevantes")
     return {
         "titulo": item["title"],
-        "descricao": (
-            f"An original English commentary on {item['series']}.\n\n"
-            f"{item['script']}\n\n"
-            "English narration and original editorial adaptation with AI-generated illustrations. "
-            "The anime and its characters belong to their respective rights holders.\n\n"
-            f"#DeathNote #Anime #AnimeAnalysis #{hashtag} #Shorts"
-        ),
-        "tags": ["Death Note", "Anime", "Anime Analysis", brand, "English Anime Shorts"],
-        "categoria": "24",
+        "descricao": description,
+        "tags": tags,
+        "categoria": "1",  # Film & Animation
         "idioma": "en",
         "feito_para_criancas": False,
     }
-
 
 def audio_for(item: dict, folder: Path, *, create: bool) -> tuple[Path, Path]:
     digest = hashlib.sha256(
@@ -102,6 +113,9 @@ def prepare_cover(ep: dict, item: dict, folder: Path, model: str) -> Path:
 
 def process(item: dict, action: str, *, profile: str, model: str, overwrite: bool) -> dict:
     episode_id = item["id"]
+    # Render ONLY through the local AutoEditorVideo + Remotion engine.
+    # External cloud previews are not an acceptable source for this pipeline.
+    production = validate_english_production(item, item.get("production"))
     folder = OUT / episode_id / "en-US"
     folder.mkdir(parents=True, exist_ok=True)
     folder.joinpath("metadata-en.json").write_text(
@@ -176,6 +190,8 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         "cover": str(cover), "duration_s": actual_seconds, "scenes": len(confirmed),
         "captions": len(captions), "published": False,
         "uses_cached_images": True,
+        "production_pipeline": production,
+        "render_origin": "AutoEditorVideo/local/remotion",
         "editorial_profile": props["editorialProfile"],
         "visual_continuity": "ryuk-reveal-after-beat-9" if item.get("scenes") else "legacy",
     }

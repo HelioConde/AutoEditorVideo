@@ -1,0 +1,230 @@
+{
+  "schema": "arquivo-otaku/shorts-english/v1",
+  "channel": "Otaku Reframe",
+  "language": "en-US",
+  "voice": "en-US-GuyNeural",
+  "editorial_rules": {
+    "target_duration_seconds": "55-59",
+    "max_duration_seconds": 60,
+    "max_unchanged_shot_seconds": 4.2,
+    "required_hook_by_second": 2,
+    "rehook_approx_seconds": [
+      16,
+      31
+    ],
+    "captions": "English word-level highlight with up to 3-word groups",
+    "published": false,
+    "copyright": "Use original generated illustrations, commentary and original licensed sounds only"
+  },
+  "episodes": [
+    {
+      "id": "201-death-note-rosto-nome",
+      "title": "Did You Know? The Death Note Needs MORE Than Your Name 📓 #Shorts",
+      "cover": "YOUR NAME ISN'T ENOUGH!",
+      "series": "Death Note",
+      "format": "did-you-know",
+      "channel": "Otaku Reframe",
+      "hook": "Did you know? A name alone isn't enough for the Death Note to work.",
+      "cta": "Would you hide your face or your name from Kira? Tell me below, and subscribe to Otaku Reframe for more anime secrets!",
+      "script": "Did you know? A name alone isn't enough for the Death Note to work. Light must picture the person's face while writing their real name. Without that rule, two strangers with the same name could be in danger. Imagine two people called Alex. The notebook sees the same letters. So which Alex is the target? Here's the twist. The writer must connect that name to one specific face. No face in mind? The notebook doesn't activate. Suddenly, hidden identities become a real defense against Kira. A masked stranger is harder to identify. A fake name creates another obstacle. And a famous face? That could make someone easier to target. The world's scariest notebook has a weakness: it still needs information. Would you hide your face or your name from Kira? Tell me below, and subscribe to Otaku Reframe for more anime secrets!",
+      "editorial_note": "Canon rule: writer must picture the intended person's face while writing their name. Shared names alone never affect all people; no explicit violence. Does not retell the published EP01.",
+      "description": "Your name alone can't activate the Death Note. The writer needs your face too. But what happens when two people share the same name? Discover one of Death Note's most important rules, then decide: would you hide your face or your name from Kira? Subscribe to Otaku Reframe for more anime mysteries!\n\n#DeathNote #Anime #Shorts",
+      "tags": [
+        "Death Note",
+        "Death Note rules",
+        "Death Note facts",
+        "Did You Know anime",
+        "Otaku Reframe",
+        "Death Note anime",
+        "Kira",
+        "Light Yagami",
+        "name and face rule",
+        "anime facts",
+        "anime trivia",
+        "anime Shorts",
+        "anime mysteries"
+      ],
+      "scenes": [
+        {
+          "number": 1,
+          "role": "hook",
+          "narration": "Did you know? A name alone isn't enough for the Death Note to work.",
+          "headline": "YOUR NAME ISN'T ENOUGH",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Moonlit Tokyo rooftop",
+            "action": "an extreme macro of a single black supernatural notebook while an unseen writer's hand hesitates, thin red glow from the page",
+            "allowed_people": "No recognizable people",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 2,
+          "role": "rule",
+          "narration": "Light must picture the person's face while writing their real name.",
+          "headline": "NAME + FACE",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Japanese school library desk",
+            "action": "Light Yagami thoughtfully holding a small photographic portrait over an open black notebook, deliberate face-to-name connection",
+            "allowed_people": "Light Yagami",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 3,
+          "role": "stakes",
+          "narration": "Without that rule, two strangers with the same name could be in danger.",
+          "headline": "SAME NAME. TWO FACES.",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Evening Tokyo subway train",
+            "action": "two different adult commuters in the same train car, contrasting hair and clothes, clearly different faces, no labels drawn into art",
+            "allowed_people": "Two fictional adult commuters",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 4,
+          "role": "example",
+          "narration": "Imagine two people called Alex. The notebook sees the same letters.",
+          "headline": "TWO PEOPLE. ONE NAME.",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Rainy metropolitan pedestrian crossing",
+            "action": "two separate adult men with distinctly different faces standing near a shopwindow as a dramatic reflection doubles the city lights",
+            "allowed_people": "Two fictional adult men",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 5,
+          "role": "rehook",
+          "narration": "So which Alex is the target? Here's the twist.",
+          "headline": "WHICH ONE?",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Dim investigative evidence room",
+            "action": "tight cinematic camera on two distinct anonymous portrait photographs pinned to one detective board, hand poised between them",
+            "allowed_people": "Two different faces in photos",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 6,
+          "role": "answer",
+          "narration": "The writer must connect that name to one specific face.",
+          "headline": "THE FACE IS THE KEY",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "High-angle close-up over a notebook",
+            "action": "a single photo in one hand and a pen above an open black notebook in the other hand, eye reflection on glossy paper",
+            "allowed_people": "Hands only",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 7,
+          "role": "rule_confirm",
+          "narration": "No face in mind? The notebook doesn't activate.",
+          "headline": "NO FACE. NO EFFECT.",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Abstract black void with drifting paper",
+            "action": "a floating blank-face silhouette dissolving into ink while the notebook remains closed and inert, non-graphic",
+            "allowed_people": "No recognizable people",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 8,
+          "role": "implication",
+          "narration": "Suddenly, hidden identities become a real defense against Kira.",
+          "headline": "IDENTITY IS DEFENSE",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Noir subway station entrance at dusk",
+            "action": "unidentified investigator seen from behind blending into a crowd under directional streetlights",
+            "allowed_people": "Unknown investigator with back to camera",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 9,
+          "role": "disguise",
+          "narration": "A masked stranger is harder to identify. A fake name creates another obstacle.",
+          "headline": "HIDE YOUR IDENTITY",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Quiet rain-soaked alley with illuminated signs",
+            "action": "original masked fictional detective in trench coat turning away from a wall of shadows, identity obscured by mask",
+            "allowed_people": "One fictional masked adult",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 10,
+          "role": "celebrity",
+          "narration": "And a famous face? That could make someone easier to target.",
+          "headline": "FAME IS A RISK",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "City plaza with TV billboards at night",
+            "action": "public celebrity portrait displayed on bright billboards, strangers watching from below, no readable names",
+            "allowed_people": "Fictional adult celebrity on billboard",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 11,
+          "role": "conclusion",
+          "narration": "The world's scariest notebook has a weakness: it still needs information.",
+          "headline": "POWER HAS A LIMIT",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Overhead view of scattered photographs on a dark table",
+            "action": "black notebook between a name-card with deliberately illegible glyphs and a portrait silhouette obscured by darkness, hand pausing",
+            "allowed_people": "Hands only",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        },
+        {
+          "number": 12,
+          "role": "cta",
+          "narration": "Would you hide your face or your name from Kira? Tell me below, and subscribe to Otaku Reframe for more anime secrets!",
+          "headline": "FACE OR NAME?",
+          "target_unchanged_shot_max_seconds": 4.2,
+          "visual_direction": {
+            "setting": "Tokyo rooftop before dawn",
+            "action": "dynamic two-point perspective of a dark notebook with a theatrical mask and empty name card in the foreground, city lights below",
+            "allowed_people": "No recognizable people",
+            "transition_style": "hard",
+            "exclude": "No Ryuk; no L; no anime subtitles, text, logos or watermarks painted into the artwork"
+          }
+        }
+      ]
+    }
+  ],
+  "production": {
+    "engine": "AutoEditorVideo",
+    "runtime": "local-windows",
+    "images": "codex-proxy",
+    "narration": "edge-tts",
+    "captions": "WordBoundary",
+    "editor": "remotion",
+    "qa": "manual-per-scene",
+    "external_rendering": false,
+    "auto_publish": false
+  }
+}

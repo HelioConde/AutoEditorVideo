@@ -13,7 +13,7 @@ export type Scene={
   id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
   background:string;foreground:string;renderMode?:string;layers?:SemanticLayer[];
   shotType?:string;cameraAngle?:string;focusSubject?:string;action?:string;
-  transitionStyle?:'hard'|'crossfade';beatRole?:string
+  transitionStyle?:'hard'|'crossfade';beatRole?:string;headline?:string
 };
 export type Caption={startFrame:number;endFrame:number;text:string;
   words?:{startFrame:number;endFrame:number;text:string}[]};
@@ -142,6 +142,19 @@ export const MasterShort:React.FC<MasterProps>=({
       filter:'drop-shadow(0 7px 8px rgba(0,0,0,.8))',
       transform:'scale('+interpolate(frame,[0,8,fps*2],[.92,1.025,1],clamp)+')',
       opacity:interpolate(frame,[0,3,fps*1.8,fps*2.2],[.85,1,1,0],clamp)}}>{hook}</div>:null}
+    {current.headline && frame-current.startFrame<fps*1.65 &&
+      ['rehook','answer','rule_confirm','cta'].includes(current.beatRole||'')
+      ? <div style={{position:'absolute',top:200,left:98,right:98,
+        padding:'22px 30px',borderRadius:22,
+        border:'2px solid rgba(255,113,139,.55)',
+        background:'linear-gradient(100deg,rgba(11,8,31,.93),rgba(72,10,40,.85))',
+        boxShadow:'0 16px 36px rgba(0,0,0,.5),0 0 32px rgba(240,45,83,.18)',
+        textAlign:'center',fontWeight:900,fontSize:55,lineHeight:1.07,
+        letterSpacing:'0.04em',color:'#fff',
+        textShadow:'0 3px 8px #000,0 0 12px rgba(255,180,180,.35)',
+        opacity:interpolate(frame-current.startFrame,[0,5,fps*1.38,fps*1.65],[0,1,1,0],clamp),
+        transform:'translateY('+interpolate(frame-current.startFrame,[0,8],[22,0],clamp)+'px)',
+      }}>{current.headline}</div>:null}
     {caption?<div style={{position:'absolute',top:1288,left:88,right:88,
       padding:'10px 16px',borderRadius:18,
       background:'linear-gradient(90deg,transparent,rgba(3,6,17,.56) 14%,rgba(3,6,17,.56) 86%,transparent)',

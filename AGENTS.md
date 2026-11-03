@@ -4,6 +4,37 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
+## REGRA PERMANENTE: PRODUCAO DE VIDEOS PELO AUTOEDITORVIDEO NO GITHUB
+
+- **TODOS os novos Shorts do Otaku Reframe (EN) e Otaku Multicena (PT-BR)** devem
+  ser produzidos pelo pipeline deste repositorio: roteiro/manifesto local,
+  storyboard, artes originais geradas pelo Codex Proxy configurado neste projeto,
+  vozes sincronizadas pelo Edge TTS, composicao Remotion/FFmpeg, QA e export MP4.
+- **NAO usar editores ou compositores externos** (vidIQ Compose, Cloudinary video
+  transformations, geradores de video avulsos, montagens vetoriais externas,
+  slideshows ou demos graficas) como substitutos do render final do AutoEditorVideo.
+  Links de previas externas nunca sao considerados um video do projeto aprovado.
+- Para novos Shorts originais EN, o manifesto deve trazer `production` com
+  `engine=AutoEditorVideo`, `images=codex-proxy`, `narration=edge-tts`,
+  `captions=WordBoundary`, `editor=remotion`, `qa=manual-per-scene`,
+  `external_rendering=false` e `auto_publish=false`.
+- **Bloqueio obrigatorio:** se faltar imagem, camada alfa, storyboard EN, voz,
+  legenda, revisao visual de QUALQUER cena ou duracao <=60s, **nao renderizar
+  como pronto, nao entregar como final e nao publicar**. Diagnosticar sem gastar
+  chamadas de IA; preservar caches e arquivos ja publicados.
+- O fluxo oficial do canal EN e `gerar-otaku-reframe.ps1` com
+  `-Acao Preparar`, `-Acao GerarImagens` (orcamento explicito),
+  `-Acao Validar` (aprovacoes obrigatorias) e
+  `-Acao Renderizar -ConfirmarRevisaoVisual`.
+- Os arquivos de producao locais, video, imagem e credenciais **nao** devem ser
+  enviados para o GitHub. GitHub armazena codigo, roteiros, prompts e testes;
+  execucao das artes e do render e feita no Windows local do usuario.
+- **Nao efetuar upload ao YouTube/TikTok** sem pedido e aprovacao explicitos.
+  O video EN existente de Death Note EP01 nao deve ser substituido.
+- O usuario rejeitou o preview experimental em graficos vetoriais para o
+  `201-death-note-rosto-nome`. Descarta-lo como saida, gerar imagens originais
+  pelo Codex Proxy e revisar todas antes de considerar o Short concluido.
+
 Regras obrigatórias:
 - **LOTE DE 24 SHORTS**: 8 ciclos completos de episodio -> curiosidade ->
   voce lembra, usando conteudos/lote-24-shorts.json; EP01 publicado fica de fora.

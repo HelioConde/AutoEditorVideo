@@ -33,63 +33,99 @@ BEATS = (
 
 
 def build_english_plan(item: dict, *, max_hold: float = MAX_HOLD) -> dict:
+    """Storyboard canonico: EP01 legado ou episodio EN com direcoes por beat."""
     beats = item.get("scenes") or []
-    if not beats or len(beats) != len(BEATS):
-        raise ValueError("O roteiro de EP01 requer 12 blocos de continuidade.")
-    if item.get("id") != "101-death-note-ep01":
-        raise ValueError("Esta direcao visual cobre apenas Death Note EP01.")
+    if not beats or not isinstance(beats, list):
+        raise ValueError("Short EN precisa de cenas narrativas.")
+    legacy = item.get("id") == "101-death-note-ep01"
+    if legacy and len(beats) != len(BEATS):
+        raise ValueError("O roteiro EP01 requer 12 blocos de continuidade.")
+    if not legacy and not all(isinstance(b.get("visual_direction"), dict) for b in beats):
+        raise ValueError("Direcao visual automatica disponivel apenas Death Note EP01; "
+                         "outros Shorts exigem visual_direction em cada beat.")
+    script = item.get("script", "")
+    if " ".join(b["narration"] for b in beats) != script:
+        raise ValueError("Blocos EN precisam preservar exatamente o roteiro narrado.")
+
     episode = dict(item)
     episode.update(
-        effect="recap",
+        effect=item.get("effect", "recap"),
         character="Light Yagami, brown-haired Japanese high school student",
         object="single plain black Death Note notebook",
-        background="location changes between school, town street, city and bedroom",
+        background="scene-specific places, never one repetitive dark room",
         blocos_visuais=[beat["narration"] for beat in beats],
     )
     storyboard = build_storyboard(episode, max_hold=max_hold, duration=56)
     for shot in storyboard["scenes"]:
         beat_idx = int(shot["bloco_id"]) - 1
-        location, action, allowed, transition = BEATS[beat_idx]
-        no_ryuk = beat_idx < 9
-        # High-priority directions go first, before generic shot/style text.
+        beat = beats[beat_idx]
+        instructions = beat.get("visual_direction")
+        if instructions:
+            required = ("setting", "action", "allowed_people", "transition_style")
+            if any(not str(instructions.get(k, "")).strip() for k in required):
+                raise ValueError(f"Direcao EN incompleta no beat {beat_idx + 1}")
+            location, action, allowed = (
+                instructions["setting"], instructions["action"], instructions["allowed_people"]
+            )
+            transition = instructions["transition_style"]
+            if transition not in ("hard", "crossfade"):
+                raise ValueError("Transicao EN invalida")
+        else:
+            location, action, allowed, transition = BEATS[beat_idx]
         direction = (
-            f"CANON CONTINUITY — scene {beat_idx + 1}/12. SETTING: {location}. "
-            f"VISUAL ACTION: {action}. ALLOWED PEOPLE: {allowed}. "
-            "Change location, light and camera framing from the previous shot. "
-            "Illustrate this precise narration beat, not a generic character poster. "
-            "Only one coherent cinematic shot, no split screen, no overlaid typography. "
+            f"CANON CONTINUITY — beat {beat_idx + 1}/{len(beats)}. "
+            f"SETTING: {location}. VISUAL ACTION: {action}. "
+            f"ALLOWED PEOPLE: {allowed}. "
+            "Change location, lighting, camera perspective and focal subject "
+            "from previous shots. The image must represent the narrated fact, "
+            "not a generic anime poster. Compose one coherent vertical cinematic "
+            "image only, no collage, typography, captions or watermark. "
         )
-        if no_ryuk:
+        if legacy and beat_idx < 9:
             direction += (
                 "HARD EXCLUSION: Ryuk must NOT appear; no shinigami, demon, "
                 "winged silhouette, yellow eyes or supernatural figure. "
-                "His first visible appearance is reserved for scene 10. "
+                "His first visible appearance is reserved for beat 10. "
             )
-        if beat_idx == 9:
-            direction += "Reveal Ryuk for the FIRST TIME here: a strong cinematic surprise. "
+        if legacy and beat_idx == 9:
+            direction += "Reveal Ryuk for the FIRST TIME here, as a surprise. "
+        if instructions and instructions.get("exclude"):
+            direction += "HARD EXCLUSION: " + str(instructions["exclude"]) + ". "
         shot["prompt"] = direction + shot["prompt"]
         shot["setting"] = location
-        shot["beat_role"] = beats[beat_idx]["role"]
+        shot["beat_role"] = beat["role"]
+        shot["headline"] = beat.get("headline", "")
         shot["transition_style"] = transition
         shot["correcao_visual"] = {
             "requires_manual_approval": True,
-            "reason": "New English visual continuity and no-Ryuk-before-reveal policy",
+            "reason": "New English editorial visual direction; individual human QA is mandatory",
         }
     storyboard["language"] = "en-US"
     storyboard["editorial_revision"] = "otaku-reframe/retention-v2"
     storyboard["source_script_sha256"] = hashlib.sha256(
-        item["script"].encode("utf-8")
+        script.encode("utf-8")
     ).hexdigest()
-    storyboard["visual_rule"] = "first Ryuk reveal in beat 10; unique locations; <=4.2s holds"
+    storyboard["source_visual_sha256"] = hashlib.sha256(
+        json.dumps(beats, ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()
+    storyboard["visual_rule"] = (
+        "first Ryuk reveal in beat 10; distinctive locations; <=4.2s holds"
+        if legacy else "unique visual beats; original EN narrative; <=4.2s holds"
+    )
     return storyboard
-
 
 def ensure_english_plan(item: dict, folder: Path) -> Path:
     """Fail closed on changed narration, preserving any approved local cache."""
     path = folder / "storyboard-reframe-v2.json"
     fingerprint = hashlib.sha256(item["script"].encode("utf-8")).hexdigest()
+    visual_fingerprint = hashlib.sha256(
+        json.dumps(item.get("scenes", []), ensure_ascii=False, sort_keys=True).encode("utf-8")
+    ).hexdigest()
     if path.is_file():
         current = json.loads(path.read_text(encoding="utf-8"))
+        if current.get("source_visual_sha256") and (
+                current["source_visual_sha256"] != visual_fingerprint):
+            raise ValueError("Direcao visual EN mudou; revise o cache fixado antes de regenerar.")
         if current.get("source_script_sha256") != fingerprint:
             raise ValueError(
                 "Roteiro EN mudou desde o plano fixado; revise manualmente o "
