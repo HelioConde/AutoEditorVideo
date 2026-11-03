@@ -226,7 +226,7 @@ def exclusive_upload():
 
 
 def publish(episode_id: str, *, video: Path, cover: Path, metadata: Path,
-            privacy: str) -> None:
+            privacy: str, schedule: str = "") -> None:
     if not OAUTH.is_file():
         raise PipelineError("OAuth YouTube ausente. Configure " + str(OAUTH))
     validate_video(video, stage="Antes do envio ao YouTube")
@@ -242,6 +242,8 @@ def publish(episode_id: str, *, video: Path, cover: Path, metadata: Path,
             "-CapaFinalShorts", str(cover),
             "-Refazer",
         ]
+        if schedule:
+            args.extend(["-AgendarEm", schedule])
         # Do not retry a remote upload automatically; the HTTP response can be
         # lost even when YouTube has accepted the media.
         require_success(args, label=f"Upload YouTube {episode_id} ({privacy})")
@@ -257,6 +259,16 @@ def publish(episode_id: str, *, video: Path, cover: Path, metadata: Path,
         state = json.loads(record.read_text(encoding="utf-8-sig"))
         if not state.get("video_id"):
             raise PipelineError("Nao foi possivel confirmar ID do video. Verifique Studio.")
+        if schedule:
+            from publicar_arquivo_otaku import parse_publish_at
+            recorded = state.get("agendado_para", "")
+            if (not state.get("agendamento_confirmado") or
+                    not recorded or parse_publish_at(recorded) != parse_publish_at(schedule)):
+                raise PipelineError(
+                    "MP4 enviado mas agendamento nao confirmado. "
+                    "Confira no Studio e nao reenvie."
+                )
+            print(f"[AGENDADO] {state['agendado_para']}", flush=True)
         print(f"[YOUTUBE] https://youtu.be/{state['video_id']}", flush=True)
         if state.get("thumbnail_status") != "success":
             print(
@@ -280,6 +292,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--privacidade", choices=("private", "unlisted", "public"),
                         default="private")
     parser.add_argument("--publicar", action="store_true")
+    parser.add_argument("--agendar-em", default="",
+                        help="Data/hora ISO8601 com fuso para agendamento nativo do YouTube")
     parser.add_argument("--refazer", action="store_true")
     parser.add_argument("--somente-validar", action="store_true")
     args = parser.parse_args(argv)
@@ -289,6 +303,11 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--tentativas precisa estar entre 1 e 3")
     if not 2.5 <= args.max_segundos_por_plano <= 12:
         parser.error("--max-segundos-por-plano precisa estar entre 2.5 e 12")
+    if args.agendar_em:
+        from publicar_arquivo_otaku import parse_publish_at, schedule_status
+        schedule_status(args.privacidade, parse_publish_at(args.agendar_em))
+        if not args.publicar:
+            raise PipelineError("Agendamento exige --publicar explicitamente.")
     episode = select_episode(args.id)
     if not episode.get("cover") or not episode.get("script"):
         raise PipelineError("Episodio sem roteiro/capa no catalogo.")
@@ -315,7 +334,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f"[PRONTO] {video}\n[CAPA] {cover}", flush=True)
     if args.publicar:
         publish(args.id, video=video, cover=cover,
-                metadata=metadata, privacy=args.privacidade)
+                metadata=metadata, privacy=args.privacidade,
+                schedule=args.agendar_em)
     else:
         print("[SEM UPLOAD] Gere primeiro e reveja o resultado; para "
               "publicar, use -Publicar no comando PowerShell.", flush=True)
