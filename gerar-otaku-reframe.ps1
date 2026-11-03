@@ -78,6 +78,19 @@ function Invoke-Master {
   }
 }
 
+function Invoke-StrictEnglishQA {
+  $validator=Join-Path $script:root 'scripts\validar_reframe_en.py'
+  if(-not (Test-Path -LiteralPath $validator -PathType Leaf)){
+    throw 'QA EN local ausente; atualize o AutoEditorVideo com git pull.'
+  }
+  $venv=Join-Path $script:root '.venv\Scripts\python.exe'
+  $runner=if(Test-Path -LiteralPath $venv -PathType Leaf){$venv}else{$script:python}
+  & $runner $validator '--manifesto' $script:manifestPath '--id' $script:Id '--modelo' $script:Modelo
+  if($LASTEXITCODE -ne 0){
+    throw 'Imagens, aprovacao manual, voz ou legendas EN ainda nao validas. Nao renderizar.'
+  }
+}
+
 Write-Host "[OTAKU REFRAME] $Id | $Acao | en-US" -ForegroundColor Cyan
 switch($Acao){
   'Preparar' {
@@ -103,13 +116,16 @@ switch($Acao){
   }
   'Validar' {
     Invoke-Master @{SomenteValidar=$true;TodasCenas=$true;MaxChamadas=0}
-    Write-Host '[OK] Camadas locais verificadas. Ouça tambem a voz e revise as cenas.' -ForegroundColor Green
+    Invoke-StrictEnglishQA
+    Write-Host '[OK] Todas as cenas aprovadas, voz/legendas EN e camadas verificadas. Nao publicado.' -ForegroundColor Green
   }
   'Renderizar' {
     if(-not $ConfirmarRevisaoVisual){
       throw 'Reveja as cenas e informe -ConfirmarRevisaoVisual para liberar o MP4. Nenhum upload sera feito.'
     }
     Invoke-Master @{SomenteValidar=$true;TodasCenas=$true;MaxChamadas=0}
+    Invoke-StrictEnglishQA
+    # Somente o compositor local Remotion do AutoEditorVideo gera o MP4.
     Invoke-English 'renderizar'
     $folder=Join-Path $root ("assets\gerados\shorts-animados\{0}\en-US" -f $Id)
     Write-Host "[MP4 EN] Procure o arquivo final em: $folder" -ForegroundColor Green
