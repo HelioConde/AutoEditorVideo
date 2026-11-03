@@ -43,6 +43,42 @@ no backend local):
 .\testar-voz-studio.ps1 -Id 401-jujutsu-kaisen-ep01 -ModeloVoiceStudio "tts-1" -PerfilVoiceStudio "default"
 ```
 
+## Erro HTTP 403 durante o primeiro teste
+
+Abrir `http://127.0.0.1:3900/v1/audio/speech` no navegador faz um
+**GET** e pode responder 404 Not Found. Isso nao testa a API TTS:
+a rota valida e `POST /v1/audio/speech` com JSON.
+
+Se o teste retornar 403, a integracao agora mostra o codigo e o
+motivo conhecido. Os casos comuns sao:
+
+- **model_licence_required** (licenca pendente): abra o VoiceStudio,
+  acesse o Catalogo de modelos, escolha o motor OmniVoice e abra
+  **Licenca**. Leia os termos e aceite somente se seu teste for
+  permitido; se o Whisper estiver bloqueado, faca o mesmo com o ASR.
+  Nenhuma licenca e aceita pelo script.
+- **Request refused / unrecognized host** (acesso negado): use a API
+  em `http://127.0.0.1:3900` e confira configuracao do VoiceStudio.
+  O adaptador desabilita proxies de ambiente para trafego local
+  (`HTTP_PROXY`, `HTTPS_PROXY`), mantendo audio e roteiro no PC.
+- **409 / ASR model missing**: instale e ative um motor Whisper para
+  transcrever e sincronizar as legendas.
+
+Depois da revisao das licencas e instalacao do modelo, execute:
+
+```powershell
+cd "$HOME\Documents\arquivo-otaku-github"
+git pull --ff-only origin main
+.\testar-voz-studio.ps1 -Id 401-jujutsu-kaisen-ep01 -CompararEdge
+```
+
+**Importante:** os pesos padrao OmniVoice possuem restricao nao
+comercial. Aceitar a licenca nao autoriza monetizar Shorts. O teste e
+somente privado e comparativo; para publicar ou monetizar, selecione
+outro modelo cujos termos autorizem esse uso. Em caso de 403 persistente,
+envie o novo erro com o codigo retornado. Nao exponha chaves, tokens
+nem dados de conta.
+
 ## Producao opcional, SEM PUBLICAR
 
 Depois de validar a voz e as licencas dos pesos baixados:
