@@ -64,3 +64,18 @@ def test_legacy_audio_without_marker_uses_ass_fallback(tmp_path):
 def test_voicestudio_marker_stays_separate(tmp_path):
     voice=tmp_path/("voz-voicestudio-"+"1"*16+".mp3")
     assert marker_for_voice(voice).name=="marcacoes-voicestudio-"+"1"*16+".json"
+
+
+def test_legacy_marker_without_hash_is_verified_by_actual_spoken_words(tmp_path):
+    script="Yuji engoliu um dedo!"
+    audio=tmp_path/"voz-master.mp3"
+    audio.write_bytes(b"mp3")
+    words=[{"text":w,"start":i*.4,"end":i*.4+.3}
+           for i,w in enumerate(script.split())]
+    (tmp_path/"marcacoes-voz.json").write_text(
+        json.dumps({"voice":"pt-BR-AntonioNeural","words":words}),
+        encoding="utf-8"
+    )
+    assert captions_from_markers(audio,script,3) is not None
+    with pytest.raises(ValueError,match="roteiro atual"):
+        captions_from_markers(audio,"Yuji rejeitou o dedo!",3)
