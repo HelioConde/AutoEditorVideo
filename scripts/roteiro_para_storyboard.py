@@ -15,6 +15,7 @@ from diversidade_visual import direction, direction_prompt, storyboard_warnings
 ROOT=Path(__file__).resolve().parents[1]
 MANIFEST=ROOT/'conteudos'/'testes-animados-5.json'
 RECAPS_MANIFEST=ROOT/'conteudos'/'death-note-recaps-60s.json'
+FORMATOS_MANIFEST=ROOT/'conteudos'/'death-note-formatos-60s.json'
 OUTPUT=ROOT/'assets'/'gerados'/'planos-visuais'
 ID=re.compile(r'^[a-z0-9]+(?:-[a-z0-9]+)*$')
 
@@ -129,8 +130,9 @@ def build_storyboard(episode: dict, max_hold: float=6.0,
 def select_episode(ep_id: str, path: Path=MANIFEST)->dict:
     # Keep explicit manifest paths strict; only the default catalog is extended.
     sources=[path]
-    if path==MANIFEST and RECAPS_MANIFEST.is_file():
-        sources.append(RECAPS_MANIFEST)
+    if path==MANIFEST:
+        sources.extend(extra for extra in (RECAPS_MANIFEST,FORMATOS_MANIFEST)
+                       if extra.is_file())
     matches=[]
     for source in sources:
         data=json.loads(source.read_text(encoding='utf-8-sig'))
