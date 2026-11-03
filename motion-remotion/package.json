@@ -7,7 +7,10 @@
     "render": "remotion render src/index.ts ArquivoOtaku",
     "compositions": "remotion compositions src/index.ts",
     "render:master": "remotion render src/index.ts ArquivoOtakuMaster",
-    "test:character": "node --test tests/character-idle.test.cjs"
+    "test:character": "node --test tests/character-idle.test.cjs",
+    "test:shorts": "node --test tests/shorts-pacing.test.cjs",
+    "test:qa": "node --test tests/*.test.cjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
