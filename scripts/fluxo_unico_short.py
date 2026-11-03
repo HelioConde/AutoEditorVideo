@@ -201,6 +201,35 @@ def ensure_voice(episode_id: str, *, model: str, attempts: int, voice_motor: str
     )
 
 
+
+# Render-only sources that affect visual output but do not change the narration.
+# A previously published MP4 is never overwritten on YouTube automatically.
+RENDER_SOURCES = (
+    "scripts/renderizar_master_remotion.py",
+    "scripts/legendas_precisas.py",
+    "motion-remotion/src/master-short.tsx",
+    "motion-remotion/src/cinematic-motion.ts",
+    "motion-remotion/src/character-idle.ts",
+    "motion-remotion/src/caption-pacing.ts",
+    "motion-remotion/src/short.tsx",
+)
+
+
+def renderer_signature() -> tuple[str, int]:
+    """Fingerprint the visual renderer, plus most recent source-file mtime."""
+    digest = hashlib.sha256()
+    latest = 0
+    for relative in RENDER_SOURCES:
+        file = ROOT / relative
+        if not file.is_file():
+            raise PipelineError("Fonte do renderizador ausente: " + str(file))
+        digest.update(relative.encode("utf-8"))
+        digest.update(b"\\0")
+        digest.update(file.read_bytes())
+        latest = max(latest, file.stat().st_mtime_ns)
+    return digest.hexdigest(), latest
+
+
 def ensure_render(
     episode_id: str, *, model: str, profile: str, refazer: bool,
     attempts: int, voice_motor: str = 'edge',
@@ -210,6 +239,7 @@ def ensure_render(
     voice_file, _ = locate_voice(select_episode(episode_id), OUTPUT / episode_id,
                                  create=False, engine=voice_motor)
     voice_digest = hashlib.sha256(voice_file.read_bytes()).hexdigest()
+    render_digest, render_mtime = renderer_signature()
     build_state = OUTPUT / episode_id / f'build-voz-{profile}.json'
     recorded = json.loads(build_state.read_text(encoding='utf-8')) if build_state.is_file() else {}
     # Legacy Edge renders have no sidecar. Reuse only when the MP4 is newer
@@ -217,10 +247,12 @@ def ensure_render(
     legacy_edge = (
         voice_motor == 'edge' and not recorded and video.is_file()
         and voice_file.stat().st_mtime_ns <= video.stat().st_mtime_ns
+        and render_mtime <= video.stat().st_mtime_ns
     )
     cache_matches = (legacy_edge or
                      (recorded.get('voice_motor') == voice_motor and
-                      recorded.get('voice_sha256') == voice_digest))
+                      recorded.get('voice_sha256') == voice_digest and
+                      recorded.get('renderer_sha256') == render_digest))
     must_render = refazer or not cache_matches
     if video.is_file() and not must_render:
         seconds = validate_video(video, stage=f"MP4 em cache {episode_id}")
@@ -240,6 +272,7 @@ def ensure_render(
         validate_video(video, stage=f"MP4 final {episode_id}")
         build_state.write_text(json.dumps({
             'voice_motor': voice_motor, 'voice_sha256': voice_digest,
+            'renderer_sha256': render_digest,
             'audio_file': voice_file.name
         }, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     # Always regenerate the episode-specific cover from approved AI scene layers.
