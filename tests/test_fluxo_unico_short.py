@@ -15,7 +15,7 @@ from roteiro_para_storyboard import select_episode, build_storyboard
 
 
 def test_death_note_first_three_recaps_registered_in_both_catalogs():
-    catalog = load_episodes()
+    catalog = load_episodes(include_recaps=True)
     for num in (1, 2, 3):
         ep_id = f"10{num}-death-note-ep0{num}"
         assert ep_id in catalog
