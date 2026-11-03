@@ -54,7 +54,7 @@ def ensure_voice(episode:dict,folder:Path,*,create:bool=False,voice:str=VOICE)->
     if not script:raise ValueError('Roteiro de narração ausente')
     async def render():
         import edge_tts
-        speaker=edge_tts.Communicate(script,voice,rate=RATE)
+        speaker=edge_tts.Communicate(script,voice,rate=RATE,boundary='WordBoundary')
         data=bytearray();words=[]
         async for event in speaker.stream():
             if event['type']=='audio':
