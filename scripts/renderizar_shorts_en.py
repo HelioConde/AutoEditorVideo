@@ -22,6 +22,8 @@ from master_scenes import read_storyboard, production_storyboard
 from renderizar_com_remotion import audio_duration, captions_from_ass
 from shorts_duration import validate_planned_audio, validate_video
 import renderizar_master_remotion as master
+from otaku_reframe_direction import ensure_english_plan
+from english_caption_design import grouped_captions
 
 LANG = ROOT / "conteudos" / "testes-animados-5-en.json"
 OUT = ROOT / "assets" / "gerados" / "shorts-animados"
@@ -107,6 +109,9 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         encoding="utf-8",
     )
     if action == "planejar":
+        if item.get("scenes"):
+            plan = ensure_english_plan(item, folder)
+            print(f"[EN STORYBOARD] {plan} — cenas e continuidade especificas do roteiro.")
         print(f"[PLANO EN] {episode_id}: {item['title']}; sem IA ou upload.")
         return {"id": episode_id, "status": "planejado"}
     # Generating English voice does not require image assets or a completed storyboard.
@@ -115,8 +120,10 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         validate_planned_audio(audio_duration(voice), stage=f"Voz EN {episode_id}")
         print(f"[EN VOZ] {voice} | {ass}")
         return {"id": episode_id, "status": "voz_pronta"}
-    # Reuse approved original visual layers; English text/audio stay isolated.
-    path = production_storyboard(episode_id, 6)
+    # New editorial episodes have their OWN immutable EN storyboard.
+    # Older translations continue to reuse approved PT imagery.
+    path = (ensure_english_plan(item, folder)
+            if item.get("scenes") else production_storyboard(episode_id, 6))
     ep = read_storyboard(path)
     if ep["id"] != episode_id:
         raise ValueError("Storyboard divergente do episodio em ingles")
@@ -124,7 +131,9 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         cover = prepare_cover(ep, item, folder, model)
         print(f"[EN CAPA] {cover}")
         return {"id": episode_id, "status": "capa_pronta", "cover": str(cover)}
-    output = folder / f"{episode_id}-en-US-master-multicenas-personagens-v3-{profile}.mp4"
+    suffix = ("retention-v2" if item.get("scenes")
+              else f"master-multicenas-personagens-v3-{profile}")
+    output = folder / f"{episode_id}-en-US-{suffix}.mp4"
     if output.is_file() and not overwrite:
         validate_video(output,stage=f'Cache EN {episode_id}')
         print(f"[EN CACHE] Ja renderizado: {output} (use -Refazer para substituir)")
@@ -134,6 +143,8 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     confirmed = master.validate_scenes(ep, model=model)
     seconds = validate_planned_audio(audio_duration(voice),stage=f'Pre-render EN {episode_id}')
     captions = captions_from_ass(ass, seconds)
+    if item.get("scenes"):
+        captions = grouped_captions(captions)
     if not captions:
         raise ValueError("Faltam legendas sincronizadas inglesas")
     props = master.build_props(
@@ -144,6 +155,7 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         hook_override=item["cover"],
     )
     props["language"] = "en-US"
+    props["editorialProfile"] = "retention-v2" if item.get("scenes") else "legacy"
     propfile = MOTION / f"props-master-{episode_id}-en-US.json"
     propfile.write_text(json.dumps(props, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if not (MOTION / "node_modules").is_dir():
@@ -164,6 +176,8 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         "cover": str(cover), "duration_s": actual_seconds, "scenes": len(confirmed),
         "captions": len(captions), "published": False,
         "uses_cached_images": True,
+        "editorial_profile": props["editorialProfile"],
+        "visual_continuity": "ryuk-reveal-after-beat-9" if item.get("scenes") else "legacy",
     }
     (folder / "qa-en-US.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
