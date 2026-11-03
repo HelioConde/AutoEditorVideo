@@ -385,6 +385,8 @@ def main(argv: list[str] | None = None) -> int:
         metadata_for(args.id)
         print("[PREVIEW] Video/capa prontos. Nenhum pedido de IA ou upload.")
         return 0
+    # Fail fast on invalid metadata before paid image generation or rendering.
+    metadata = metadata_for(args.id)
     print(f"[INICIO] {episode['title']} | publicar={args.publicar} | "
           f"privacidade={args.privacidade} | max chamadas IA={args.max_chamadas}",
           flush=True)
@@ -394,7 +396,6 @@ def main(argv: list[str] | None = None) -> int:
     video, cover = ensure_render(args.id, model=args.modelo,
                                  profile=args.perfil, refazer=args.refazer,
                                  attempts=args.tentativas, voice_motor=args.voz_motor)
-    metadata = metadata_for(args.id)
     print(f"[PRONTO] {video}\n[CAPA] {cover}", flush=True)
     if args.publicar:
         publish(args.id, video=video, cover=cover,
