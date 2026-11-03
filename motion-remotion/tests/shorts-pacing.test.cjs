@@ -14,7 +14,9 @@ function load(relative) {
   new Function('module','exports',js)(module,module.exports);
   return {exports:module.exports,source};
 }
-const opening=load('cinematic-motion.ts').exports.openingCutAtFrame;
+const camera=load('cinematic-motion.ts').exports;
+const opening=camera.openingCutAtFrame;
+const hold=camera.longHoldCutAtFrame;
 const captions=load('caption-pacing.ts').exports.groupLegacyCaptionWords;
 const master=fs.readFileSync(path.join(__dirname,'../src/master-short.tsx'),'utf8');
 const legacy=fs.readFileSync(path.join(__dirname,'../src/short.tsx'),'utf8');
@@ -41,6 +43,23 @@ test('first five seconds have obvious camera cuts without fabricated body moveme
     assert.ok(Math.abs(shot.panX)<=24.01);
     assert.ok(Math.abs(shot.panY)<=16.01);
   }
+});
+
+test('long static holds are recut after 5 seconds without new assets',()=>{
+  const fps=30;
+  const last=450;
+  assert.equal(hold(120,0,last,fps,'cinematica').beat,-1);
+  const atFive=hold(150,0,last,fps,'cinematica');
+  assert.equal(atFive.beat,0);
+  assert.ok(atFive.zoom>.02);
+  const next=hold(232,0,last,fps,'cinematica');
+  assert.equal(next.beat,1);
+  assert.ok(Math.abs(next.panX-atFive.panX)>20);
+  assert.ok(hold(330,0,last,fps,'cinematica').beat>=2);
+  assert.equal(hold(150,0,100,fps,'cinematica').zoom,0);
+  assert.equal(hold(150,0,last,fps,'desligada').zoom,0);
+  assert.equal(hold(150,0,last,fps,'esqueleto2d').zoom,0);
+  assert.equal(hold(last,0,last,fps,'cinematica').zoom,0);
 });
 
 test('disabled or skeletal modes never add virtual cuts',()=>{
@@ -80,6 +99,8 @@ test('word breaks preserve punctuation, long gaps, and existing phrases',()=>{
 
 test('both renderers consume opening cuts and keep captions off the face',()=>{
   assert.ok(master.includes('openingCutAtFrame(frame,fps,mode)'));
+  assert.ok(master.includes('longHoldCutAtFrame(frame,scene.startFrame,scene.endFrame,fps,mode)'));
+  assert.ok(legacy.includes('longHoldCutAtFrame(frame,0,props.durationFrames,fps'));
   assert.ok(legacy.includes("openingCutAtFrame(frame,fps,'cinematica')"));
   assert.ok(master.includes("safeZoom=Math.min(1.14"));
   assert.ok(legacy.includes("background:'rgba(2,5,15,.86)'"));
