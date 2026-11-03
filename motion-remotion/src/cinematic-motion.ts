@@ -124,10 +124,13 @@ export const longHoldCutAtFrame=(
   const local=(elapsed-beat*2.7)/2.7;
   const t=ease(local);
   const even=beat%2===0;
+  // A newly entered scene must start on its original approved pixels.
+  // The first long hold (scene starting at 0s) still cuts at 5s.
+  const enter=startFrame>=5*fps?ease(elapsed/.3):1;
   return {
-    zoom:(even?.032:.055)+.012*t,
-    panX:even?-12-5*t:13+6*t,
-    panY:even?-5-4*t:-11+3*t,
+    zoom:((even?.032:.055)+.012*t)*enter,
+    panX:(even?-12-5*t:13+6*t)*enter,
+    panY:(even?-5-4*t:-11+3*t)*enter,
     beat,
   };
 };
