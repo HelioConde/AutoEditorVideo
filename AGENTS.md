@@ -11,7 +11,9 @@ miniaturas e upload OAuth para YouTube.
   texto/legenda. Forecast nao e resultado real nem garantia de visualizacoes.
 - Em novos Shorts PT-BR, renderizadores **master e legado** usam camera de
   gancho com cortes virtuais perceptiveis em **1,25s** e **2,45s**,
-  com movimento suave restante ate 5s. A arte aprovada inteira pode
+  com movimento suave restante ate 5s. Para cenas >4,5s que permanecam
+  em tela depois do inicio, adicionar reenquadramentos discretos a cada
+  2,7s (sempre usando a mesma arte aprovada). A arte inteira pode
   movimentar-se, mas nao deformar corpos, membros, maos ou objetos em contato.
   Manter limite de zoom e enquadramento seguro e evitar luz piscando.
 - Na proxima geracao de imagens, o primeiro prompt deve mostrar uma acao,
