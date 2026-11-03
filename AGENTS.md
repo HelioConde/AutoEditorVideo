@@ -4,24 +4,32 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
-## PADRAO VISUAL SHORTS — FEEDBACK VIDIQ 2026-11-03
+## PADRAO VISUAL SHORTS — 8 RELATORIOS VIDIQ (2026-11-03)
 
-- Otaku Multicena / Jujutsu Kaisen EP01 recebeu previsao (nao garantia)
-  de 654-4519 views em 14 dias; foi identificado um ponto de melhoria
-  principal nos 2 primeiros segundos. Nao usar forecast como resultado real.
-- Para novos Shorts PT-BR com Remotion master, manter **movimento de camera
-  perceptivel no gancho** (push 0–1,9s e reposicionamento 1,9–5s), mas sem
-  alterar o rosto, criar gestos falsos ou recortar cabelo/maos.
-- Legendas em blocos curtos (ate 3 palavras), fonte maior, fundo escuro
-  opaco e contorno forte. Destacar cada palavra usando o instante real de
-  `WordBoundary` (Edge TTS) ou ASR verificado; nao fabricar sincronismo.
-- Legendas ASS de acervos anteriores sao fallback; marcacoes existentes so
-  podem ser reaproveitadas apos verificar texto ou hash do roteiro.
-- Aplicar melhorias em **novas renderizacoes**; Shorts ja publicados nao
-  sao editados/reenviados automaticamente. Para comparar, renderizar local
-  com `-Refazer -MaxChamadas 0` e SEM `-Publicar`.
-- Antes de liberar, rodar QA de FPS/duracao <=60s e testar legibilidade
-  num enquadramento de celular. Nao usar imagem IA adicional sem autorizacao.
+- Referencia: `docs/VIDIQ-OTAKU-MULTICENA-QA.md`. Nos 8 relatorios fornecidos
+  pelo criador, todos apontam aberturas estaticas; 6 citam problemas de
+  texto/legenda. Forecast nao e resultado real nem garantia de visualizacoes.
+- Em novos Shorts PT-BR, renderizadores **master e legado** usam camera de
+  gancho com cortes virtuais perceptiveis em **1,25s** e **2,45s**,
+  com movimento suave restante ate 5s. A arte aprovada inteira pode
+  movimentar-se, mas nao deformar corpos, membros, maos ou objetos em contato.
+  Manter limite de zoom e enquadramento seguro e evitar luz piscando.
+- Na proxima geracao de imagens, o primeiro prompt deve mostrar uma acao,
+  objeto essencial ou interacao explicitamente citada no gancho (quando
+  canonicalmente coerente); nao iniciar sempre com retrato passivo.
+  Nao fabricar acontecimentos e nao gerar imagens extras sem cota autorizada.
+- Legendas em grupos de ate 3 palavras, fonte grande, fundo opaco e contorno
+  forte na faixa inferior. Destacar palavra atual usando timestamps reais
+  `WordBoundary`/ASR; nao inventar sincronismo nem atrasar artificialmente.
+  Os renderizadores master/legado preservam registros antigos verificados.
+- **Invalidez de cache:** se roteiro, voz ou fontes de render alterarem,
+  refazer MP4 local. Usar fingerprint do motor de imagem/camera/legendas
+  (scripts/fluxo_unico_short.py), nao confiar somente no SHA do MP3.
+- Aplicar melhorias somente em novas renderizacoes. Shorts ja publicados nao
+  sao apagados/atualizados/reenviados automaticamente. Exigir `-Publicar`
+  explicito para qualquer upload. QA tecnico antes de publicar:
+  `npm.cmd run typecheck`, `npm.cmd run test:qa`, `pytest`,
+  revisão de quadros 0s/1,3s/2,5s/5s e MP4 <=60,000s por ffprobe.
 
 ## REGRA EDITORIAL: CTA SEM MARCA NA NARRACAO
 
