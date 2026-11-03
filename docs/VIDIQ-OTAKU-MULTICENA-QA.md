@@ -24,6 +24,8 @@ o algoritmo penaliza formalmente imagens estáticas, nem que as previsões se cu
 
 1. **Remotion master e legado:** abertura em três enquadramentos virtuais com
    jump cuts em **1,25s e 2,45s**, a partir das imagens já aprovadas.
+   Em cenas longas (como a imagem de 15s do Short de Light/Ryuk), entram
+   reenquadramentos adicionais a cada **2,7s depois dos 5s iniciais**.
    Movimento é de câmera global, não manipulação física independente de faces,
    mãos, móveis, tabuleiro ou corpo; zoom total do master limitado a 1,14.
    Não consome cota de imagem e não altera áudio.
