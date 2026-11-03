@@ -11,6 +11,7 @@ param(
     [string]$ImagemFonte='',
     [string]$CapaFinalShorts='',
     [string]$Episodio='',
+    [string]$AgendarEm='',
     [switch]$Refazer
 )
 $ErrorActionPreference='Stop'
@@ -53,6 +54,7 @@ if ($Video) {$argsForPython+=@('--video',$Video)}
 if ($ImagemFonte) {$argsForPython+=@('--imagem-fonte',$ImagemFonte)}
 if ($CapaFinalShorts) {$argsForPython+=@('--capa-final-shorts',$CapaFinalShorts)}
 if ($Episodio) {$argsForPython+=@('--episodio',$Episodio)}
+if ($AgendarEm) {$argsForPython+=@('--agendar-em',$AgendarEm)}
 Write-Host "[INFO] Etapa: $Etapa; privacidade solicitada: $Privacidade; IA de arte: $ArteIA; IA texto: $TextoIA"
 & $py @argsForPython
 if ($LASTEXITCODE -ne 0) { throw 'Pipeline interrompido. Confira a mensagem de erro acima.' }
