@@ -5,6 +5,14 @@ imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
 Regras obrigatórias:
+- **REGRA MESTRA INEGOCIAVEL: TODO Short deve ter duracao FINAL menor ou igual a 60,000 segundos**.
+  Inclui gancho, historia, suspense, CTA de inscricao, pausas, transicoes e qualquer margem de render.
+  Planejar entre 55 e 59 segundos; medir o MP4 com ffprobe, nao estimar apenas pelo roteiro.
+  Validar antes da renderizacao (voz + margem final), depois de renderizar e ANTES de
+  qualquer upload (YouTube PT-BR/EN e TikTok). Rejeitar duracoes >60s, sem excecoes.
+  Se ultrapassar, editar/reduzir o roteiro, gerar a voz novamente e renderizar.
+  Nao acelerar artificialmente a voz, nao cortar o CTA nem ocultar erros de duracao.
+  Guard de codigo: scripts/shorts_duration.py. Testes: tests/test_shorts_duration.py.
 - Nunca enviar `.env`, `.secrets`, tokens OAuth, credenciais de terceiros, vídeos,
   imagens geradas, caches nem dados de conta ao repositório.
 - Toda geração de imagens deve considerar cotas e respeitar `no available accounts`.
