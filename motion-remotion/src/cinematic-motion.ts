@@ -104,6 +104,34 @@ export const openingCutAtFrame=(frame:number,fps:number,
   return {zoom:.034*(1-k),panX:7*(1-k),panY:-5*(1-k),beat:3};
 };
 
+/**
+ * A few archived Shorts kept one approved still for 6–15 seconds. Continuing
+ * tiny smooth zoom after the first five seconds is not enough. When a scene
+ * lasts longer than 4.5s, alternate a gentle crop/pan every 2.7s without
+ * replacing its source image, altering narrative timing or separating masks.
+ */
+export const longHoldCutAtFrame=(
+    frame:number,startFrame:number,endFrame:number,fps:number,
+    mode:AnimationMode):{zoom:number;panX:number;panY:number;beat:number}=>{
+  const flat={zoom:0,panX:0,panY:0,beat:-1};
+  if(mode!=='cinematica'||![frame,startFrame,endFrame,fps].every(Number.isFinite)||
+     fps<=0||frame<startFrame||frame>=endFrame||
+     endFrame-startFrame<4.5*fps)return flat;
+  const start=Math.max(startFrame,5*fps);
+  if(frame<start)return flat;
+  const elapsed=(frame-start)/fps;
+  const beat=Math.floor(elapsed/2.7);
+  const local=(elapsed-beat*2.7)/2.7;
+  const t=ease(local);
+  const even=beat%2===0;
+  return {
+    zoom:(even?.032:.055)+.012*t,
+    panX:even?-12-5*t:13+6*t,
+    panY:even?-5-4*t:-11+3*t,
+    beat,
+  };
+};
+
 // Per-character idle motion is implemented by character-idle.ts using
 // automatic geometry from the source PNGs (no fixed names or episode IDs).
 
