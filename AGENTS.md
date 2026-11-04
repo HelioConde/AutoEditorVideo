@@ -212,6 +212,23 @@ Regras obrigatórias:
 - Nao editar videos publicados, enviar rascunhos, fazer uploads ou alterar
   privacidade/horarios sem aprovacao explicita. Caches e IDs locais preservados.
 
+## POWERHELL DEDICADO — GAMES PT-BR / OTAKU REFRAME EN
+
+- `canal-gamer.ps1` encaminha EXCLUSIVAMENTE `-Canal games` ao motor
+  `piloto-canais-v3.ps1`. Recusar IDs Kids, forcar IDs individuais para
+  `Voz` e `Renderizar`, nunca publicar ou usar OAuth.
+- `canal-ingles.ps1` encaminha `PublicadosBR` ao preparador EN V3
+  e ao renderizador EN; aceita `Legado` isoladamente. Voz `en-US-GuyNeural`
+  e canal-alvo Otaku Reframe `UCBoNbQjaMYdpJqPLRZAFkvQ`.
+- EN `Enviar` exige `-Id`, `-ConfirmarEnvio`, canal ID local identico,
+  e `-ConfirmarPublico` adicional para privacidade `public`. Privacidade
+  default `private`. Nunca enviar lotes acidentalmente.
+- O canal Kids usa o `piloto-canais-v3.ps1 -Canal kids` existente.
+- Teste `tests/test_channel_launchers.ps1` em Windows com motores fake,
+  sem acessar YouTube, TTS ou imagens. Leia
+  `docs/POWERSHELL-CANAIS-GAMER-INGLES.md`.
+- Nenhuma mudanca nos scripts do canal anime BR sem pedido explicito.
+
 ## GAMES + KIDS — PILOTO 3x2 PT-BR
 
 - Os dois novos canais sao totalmente PT-BR; NAO usar Otaku Reframe/ingles.
