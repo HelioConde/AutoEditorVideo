@@ -52,23 +52,19 @@ def test_storyboard_works_for_first_middle_and_nostalgic_episodes():
         assert 'visual_diversity_qa' in plan
 
 
-def test_index_ranges_and_schedule_are_safe():
+def test_index_ranges_and_no_scheduling_controls():
     queue=grade.load_queue()
     assert grade.selection(queue,1,1)[0]['id']==queue[0]['id']
     assert grade.selection(queue,45,6)[-1]['id']==queue[-1]['id']
     with pytest.raises(ValueError):
         grade.selection(queue,49,5)
-    with pytest.raises(ValueError):
-        grade.scheduled_at('2026-11-20T09:00:00',0,24)
-    start=(datetime.now(timezone.utc)+timedelta(days=5)).isoformat()
-    first=datetime.fromisoformat(grade.scheduled_at(start,0,24))
-    second=datetime.fromisoformat(grade.scheduled_at(start,1,24))
-    assert (second-first)==timedelta(hours=24)
+    assert 'agendar' not in grade.parser()._option_string_actions['--acao'].choices
+    assert '--inicio-agendamento' not in grade.parser()._option_string_actions
 
 
 def test_publication_without_confirmation_never_invokes_external_commands(monkeypatch):
-    args=grade.parser().parse_args(['--acao','agendar','--inicio-na-lista','1',
-                                  '--quantidade','2'])
+    args=grade.parser().parse_args(['--acao','produzir-publicar',
+                                   '--inicio-na-lista','1','--quantidade','2'])
     monkeypatch.setattr(grade.sys,'platform','win32')
     calls=[]
     monkeypatch.setattr(grade,'invoke',lambda *_a,**_k:calls.append('called'))
@@ -78,8 +74,10 @@ def test_publication_without_confirmation_never_invokes_external_commands(monkey
 
 
 def test_production_with_nonzero_image_budget_needs_confirmation(monkeypatch):
-    args=grade.parser().parse_args(['--acao','produzir','--inicio-na-lista','1',
-                                  '--quantidade','1','--max-chamadas-por-video','27'])
+    args=grade.parser().parse_args(['--acao','produzir-publicar',
+                                   '--inicio-na-lista','1','--quantidade','1',
+                                   '--max-chamadas-por-video','27',
+                                   '--confirmar-publicacao'])
     monkeypatch.setattr(grade.sys,'platform','win32')
     calls=[]
     monkeypatch.setattr(grade,'invoke',lambda *_a,**_k:calls.append('called'))
@@ -88,14 +86,62 @@ def test_production_with_nonzero_image_budget_needs_confirmation(monkeypatch):
     assert calls==[]
 
 
-def test_schedule_upload_is_private_and_uses_zero_new_image_calls():
-    args=grade.parser().parse_args(['--acao','agendar','--inicio-na-lista','1',
-                                  '--quantidade','1','--confirmar-publicacao',
-                                  '--inicio-agendamento','2027-03-10T09:00:00-03:00'])
-    cmd=grade.local_command(grade.load_queue()[0],args,publish=True,
-                            schedule='2027-03-10T09:00:00-03:00')
+def test_immediate_upload_is_public_and_uses_zero_new_image_calls():
+    args=grade.parser().parse_args(['--acao','produzir-publicar',
+                                   '--inicio-na-lista','1','--quantidade','1',
+                                   '--confirmar-publicacao'])
+    cmd=grade.local_command(grade.load_queue()[0],args,publish=True)
     assert '-Publicar' in cmd
-    assert '-Privacidade' in cmd and cmd[cmd.index('-Privacidade')+1]=='private'
+    assert '-Privacidade' in cmd and cmd[cmd.index('-Privacidade')+1]=='public'
     assert '-MaxChamadas' in cmd and cmd[cmd.index('-MaxChamadas')+1]=='0'
-    assert '-AgendarEm' in cmd
+    assert '-AgendarEm' not in cmd
     assert '-Refazer' not in cmd
+
+
+def test_produces_validates_then_uploads_one_public_video(monkeypatch,tmp_path):
+    args=grade.parser().parse_args(['--acao','produzir-publicar',
+                                   '--inicio-na-lista','1','--quantidade','1',
+                                   '--confirmar-publicacao'])
+    monkeypatch.setattr(grade.sys,'platform','win32')
+    ep=grade.load_queue()[0]
+    video=tmp_path/'ready.mp4'
+    video.write_bytes(b'mocked-video-no-real-upload')
+    monkeypatch.setattr(grade,'video_paths',lambda *_: (video,tmp_path/'cover.jpg'))
+    events=[]
+    journal={}
+    monkeypatch.setattr(grade,'load_journal',lambda:journal)
+    monkeypatch.setattr(grade,'save_journal',lambda value:events.append(('journal',value[ep['id']]['status'])))
+    monkeypatch.setattr(grade,'ensure_ready',lambda *_a:events.append(('qa',ep['id'])) or video)
+    def fake_invoke(cmd,*,label):
+        events.append(('invoke','-Publicar' in cmd))
+    monkeypatch.setattr(grade,'invoke',fake_invoke)
+    lookup={'count':0}
+    def fake_existing(_):
+        lookup['count']+=1
+        if lookup['count']>=3:
+            return {'video_id':'test1234567','privacidade_solicitada':'public',
+                    'publicacao_publica_confirmada':True,
+                    'thumbnail_status':'pending_processing'}
+        return None
+    monkeypatch.setattr(grade,'confirmed_existing_upload',fake_existing)
+    assert grade.run(args)==0
+    assert events[:4]==[
+        ('invoke',False),('qa',ep['id']),
+        ('journal','upload_iniciado'),('invoke',True)]
+    assert journal[ep['id']]['status']=='publicado-publico'
+    assert journal[ep['id']]['thumbnail_status']=='pending_processing'
+
+
+def test_resume_after_ambiguous_upload_never_reuploads(monkeypatch):
+    args=grade.parser().parse_args(['--acao','produzir-publicar',
+                                   '--inicio-na-lista','1','--quantidade','1',
+                                   '--confirmar-publicacao'])
+    monkeypatch.setattr(grade.sys,'platform','win32')
+    ep=grade.load_queue()[0]
+    monkeypatch.setattr(grade,'load_journal',
+                        lambda:{ep['id']:{'status':'upload_indeterminado'}})
+    events=[]
+    monkeypatch.setattr(grade,'invoke',lambda *_a,**_k:events.append('run'))
+    with pytest.raises(RuntimeError,match='Confira o YouTube Studio'):
+        grade.run(args)
+    assert events==[]
