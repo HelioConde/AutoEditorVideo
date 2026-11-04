@@ -1,4 +1,5 @@
 import React from 'react';
+import {KidsBackgroundMusic, KidsMusic} from './kids-background-music';
 import {AbsoluteFill, Audio, Img, interpolate, staticFile,
   useCurrentFrame} from 'remotion';
 
@@ -16,6 +17,7 @@ export type EmanuellyProps = {
   episodeId:string; title:string; brand:string; chapter:string;
   durationFrames:number; frames:EmanuellyFrame[];
   captions:EmanuellyCaption[]; audio:string; referenceSha:string;
+  music?:KidsMusic;
   madeForKids:true;
 };
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
@@ -90,6 +92,7 @@ export const EmanuellyShort:React.FC<EmanuellyProps>=(props)=>{
      color:'#f5faff',fontFamily:'Arial,sans-serif',
      fontSize:30,fontWeight:700,opacity:.86,
      textShadow:'0 2px 6px #00172d'}}>{brand}</div>
+   <KidsBackgroundMusic music={props.music} durationFrames={durationFrames}/>
    {audio&&<Audio src={staticFile(audio)}/>}
  </AbsoluteFill>;
 };
