@@ -258,7 +258,20 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
         else:
             for kind in ('foreground','background'):
                 shutil.copy2(entry['files'][kind],target/f'{stem}-{kind}.png')
+        # Real character movement requires safe separately masked RGBA art.
+        movable_count=0
+        if entry['render_mode']=='multilayer':
+            for item in semantic:
+                if item['role'] not in ('back_character','front_character'):
+                    continue
+                area=item.get('alphaCoverage')
+                risk=item.get('heroRisk', .065 if has_hero_prop else 0)
+                if isinstance(area,(int,float)) and isinstance(risk,(int,float)):
+                    if .015<=area<=.72 and risk<.04:
+                        movable_count+=1
         scenes.append({'id':scene['id'],'subject':scene['subject'],
+                       'motionCapability':'character-layer' if movable_count else 'camera-only',
+                       'movableCharacterLayers':movable_count,
                        'layers':semantic if entry['render_mode']=='multilayer' else [],
                        'renderMode':entry['render_mode'],
                        'foregroundQA':entry['fidelity'],
@@ -433,6 +446,10 @@ def main(argv:list[str]|None=None)->int:
     props=build_props(ep,voice,captions,seconds,model=args.modelo,
                       public=args.motor/'public',animation_mode=args.animacao,
                       character_preset=args.perfil_personagens)
+    camera_only=sum(s.get('motionCapability')=='camera-only' for s in props['scenes'])
+    print(f'[MOVIMENTO] {len(props["scenes"])-camera_only} cenas com movimento '
+          f'de camada de personagem; {camera_only} apenas com zoom suave. '
+          'A arte plana nao cria gestos reais.',flush=True)
     propfile=args.motor/f"props-master-{ep['id']}.json"
     propfile.write_text(json.dumps(props,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f"[PREPARADO] {len(props['scenes'])} planos, {seconds:.1f}s e {len(captions)} legendas: {propfile}")
@@ -463,6 +480,7 @@ def main(argv:list[str]|None=None)->int:
               'narrative_beats':ep.get('narrative_beats'),
               'visual_shots':len(props['scenes']),'captions':len(captions),
               'animation_mode':args.animacao,
+              'camera_only_scenes':camera_only,
               'character_preset':args.perfil_personagens,
               'published':False,
               'visual_alerts':[{'scene':e['scene']['id'],
