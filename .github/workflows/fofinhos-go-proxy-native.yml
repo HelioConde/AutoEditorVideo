@@ -24,7 +24,6 @@ jobs:
     timeout-minutes: 20
     env:
       PROXY_API_KEY: 'fofinhos-smoke-only-not-a-real-secret-123456789'
-      DATA_DIR: ${{ runner.temp }}/fofinhos-native-proxy-empty-state
       DEBUG_LOG_PAYLOADS: 'false'
       GIN_MODE: release
       PORT: '8080'
@@ -54,6 +53,8 @@ jobs:
         run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/fofinhos-codex-proxy" ./cmd/api
       - name: Launch and test native Go proxy on loopback
         shell: bash
+        env:
+          DATA_DIR: ${{ runner.temp }}/fofinhos-native-proxy-empty-state
         run: |
           set -euo pipefail
           mkdir -p "$DATA_DIR"
