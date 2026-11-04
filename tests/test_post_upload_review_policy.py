@@ -58,7 +58,7 @@ def test_unreviewed_legacy_cover_can_be_created(tmp_path, monkeypatch):
     monkeypatch.setattr(renderer, "cover_options", lambda *_a: {
         "scene": "01", "title": "História", "zoom": 1.07,
     })
-    monkeypatch.setattr(renderer, "render_cover", lambda *_a, **_kw: {"source": "test"})
+    monkeypatch.setattr(renderer, "render_cover", lambda *_a, **_kw: {"style": "test"})
     report = renderer.cover_from_master(
         episode, "gpt-image-1.5", tmp_path / "cover.jpg"
     )
