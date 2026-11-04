@@ -40,23 +40,39 @@ interrompem o fluxo. O QA tecnico nao garante ausencia de defeitos artisticos.
 O upload nao e refeito cegamente se o resultado estiver ambiguo ou ja constar
 no registro local. Consulte o [guia do Short EN](docs/OTAKU-REFRAME-DID-YOU-KNOW-201-EN.md).
 
-## Melhorias Shorts a partir de 8 auditorias do vidIQ
+## Otaku Multicena — 50 roteiros + fila de produção/publicação
 
-Os 8 check-ins do Otaku Multicena mostraram aberturas longas com imagem
-parada e legendas difíceis de ler. O Remotion master e legado agora
-fazem cortes de câmera no início, legendas de alto contraste e blocos
-de 2–3 palavras alinhados ao TTS. O pipeline detecta mudanças do
-renderizador para não reutilizar MP4 antigo.
+A grade reúne 50 animes, dos atuais aos nostálgicos, com **roteiros
+originais completos, ganchos, direção visual e metadados PT-BR**.
+O código de Remotion removeu os jump cuts virtuais que causavam
+"fliques", substituindo-os por zoom in/out suave e movimento visível
+de personagens RGBA seguros. Arte plana continua sem gestos reais;
+o QA distingue movimento de câmera de camadas de personagem.
 
-Confira [o diagnóstico dos 8 Shorts e o plano de QA](docs/VIDIQ-OTAKU-MULTICENA-QA.md).
-Essas mudanças **não alteram vídeos já publicados** nem fazem upload sozinhas.
-
-Para testar localmente sem gastar chamadas de imagem:
+**Não há 50 MP4s ou uploads realizados no GitHub**. Para preparar
+os materiais locais sem chamadas de IA nem publicar:
 
 ```powershell
+cd "$HOME\Documents\arquivo-otaku-github"
 git pull --ff-only origin main
-.\criar-publicar-short.ps1 -Id 401-jujutsu-kaisen-ep01 -VozMotor edge -Modelo gpt-image-1.5 -MaxChamadas 0 -Refazer
+.\grade-50-shorts.ps1 -Acao Validar -Quantidade 50
+.\grade-50-shorts.ps1 -Acao Preparar -Quantidade 50
 ```
+
+Veja [o guia completo com produção, orçamento e agendamento](docs/OTAKU-GRADE-50.md).
+A publicação em lote exige vídeos completos, OAuth local,
+`-ConfirmarPublicacao` e horário futuro. Não tenta publicá-los
+automaticamente ao adicionar o catálogo.
+
+## Melhorias Shorts a partir de 8 auditorias do vidIQ
+
+Os oito relatórios apontaram enquadramento estático e legendas difíceis.
+**Correção final após feedback visual do criador:** câmera com zoom suave
+no lugar de jump cuts internos; legendas contrastadas e palavras alinhadas
+aos timestamps reais do TTS. O pipeline invalida MP4s antigos quando
+código visual muda. Não reenvia vídeos antigos automaticamente.
+
+Relatório: [diagnóstico dos oito Shorts](docs/VIDIQ-OTAKU-MULTICENA-QA.md).
 
 ## Voz opcional — VoiceStudio + Edge TTS
 
