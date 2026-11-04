@@ -1,7 +1,6 @@
 """Offline QA: batch of 50 distinct anime Shorts, no uploads or image calls."""
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import sys
 
@@ -103,6 +102,8 @@ def test_produces_validates_then_uploads_one_public_video(monkeypatch,tmp_path):
                                    '--inicio-na-lista','1','--quantidade','1',
                                    '--confirmar-publicacao'])
     monkeypatch.setattr(grade.sys,'platform','win32')
+    import publicar_arquivo_otaku as publisher
+    monkeypatch.setattr(publisher,'verify_oauth_config',lambda:None)
     ep=grade.load_queue()[0]
     video=tmp_path/'ready.mp4'
     video.write_bytes(b'mocked-video-no-real-upload')
@@ -137,6 +138,8 @@ def test_resume_after_ambiguous_upload_never_reuploads(monkeypatch):
                                    '--inicio-na-lista','1','--quantidade','1',
                                    '--confirmar-publicacao'])
     monkeypatch.setattr(grade.sys,'platform','win32')
+    import publicar_arquivo_otaku as publisher
+    monkeypatch.setattr(publisher,'verify_oauth_config',lambda:None)
     ep=grade.load_queue()[0]
     monkeypatch.setattr(grade,'load_journal',
                         lambda:{ep['id']:{'status':'upload_indeterminado'}})
@@ -145,3 +148,28 @@ def test_resume_after_ambiguous_upload_never_reuploads(monkeypatch):
     with pytest.raises(RuntimeError,match='Confira o YouTube Studio'):
         grade.run(args)
     assert events==[]
+
+
+def test_existing_public_receipt_is_reconciled_without_reupload(monkeypatch,tmp_path):
+    args=grade.parser().parse_args(['--acao','produzir-publicar',
+                                   '--inicio-na-lista','1','--quantidade','1',
+                                   '--confirmar-publicacao'])
+    monkeypatch.setattr(grade.sys,'platform','win32')
+    import publicar_arquivo_otaku as publisher
+    monkeypatch.setattr(publisher,'verify_oauth_config',lambda:None)
+    ep=grade.load_queue()[0]
+    video=tmp_path/'previous.mp4'
+    video.write_bytes(b'previous video data')
+    monkeypatch.setattr(grade,'video_paths',lambda *_:(video,tmp_path/'cover.jpg'))
+    state={ep['id']:{'status':'upload_indeterminado'}}
+    monkeypatch.setattr(grade,'load_journal',lambda:state)
+    monkeypatch.setattr(grade,'save_journal',lambda *_:None)
+    monkeypatch.setattr(grade,'confirmed_existing_upload',lambda _:{
+        'video_id':'abc123def45','privacidade_solicitada':'public',
+        'publicacao_publica_confirmada':True,'thumbnail_status':'success'})
+    uploads=[]
+    monkeypatch.setattr(grade,'invoke',lambda *_a,**_k:uploads.append('called'))
+    assert grade.run(args)==0
+    assert not uploads
+    assert state[ep['id']]['video_id']=='abc123def45'
+    assert state[ep['id']]['status']=='publicado-publico'
