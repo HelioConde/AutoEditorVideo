@@ -167,3 +167,25 @@ Regras obrigatórias:
 - Interface do GitHub Pages é informativa, não executa o backend Windows.
 - Usar `python -m pytest -q tests` antes de entregar mudanças funcionais.
 - Para conteúdos de anime, revisar direitos de imagem, música e fontes originais.
+
+## OTAKU MULTICENA 3.0 — DIRETRIZ EDITORIAL E CRESCIMENTO
+
+- Para pautas novas, aplicar as regras do [guia 3.0](docs/OTAKU-MULTICENA-3-0.md):
+  audiencia brasileira de anime, especialmente nao seguidores; gancho compreensivel
+  nos primeiros segundos, conflito concreto, roteiro original e conclusao satisfatoria.
+- Antes de gerar imagens, revisar cinco enfoques do gancho (curiosidade,
+  contradicao, decisao, misterio, consequencia) sem prometer fatos inexistentes.
+  A geracao desses enfoques NAO equivale a verificacao factual automatica.
+- `scripts/otaku_growth_v3.py` realiza auditoria offline; a validacao da grade
+  agora imprime informacoes editoriais. O modo `-ExigirGatesEditoriais` bloqueia
+  apenas defeitos objetivos e nao aprova animacao, direitos ou fidelidade ao anime.
+- Reaproveitar o QA de MP4/cenas e os modos estritos ja existentes; zoom suave
+  NAO e animacao articulada. Nunca relatar movimento facial/corporal sem provas.
+- Aprendizado: comparar visualizacoes, feed, retencao e engajamento nas mesmas
+  idades (1, 6, 24, 72 horas e 7 dias), preservando `null` para dados ausentes.
+  Nao supor um teto de tres Shorts recomendados por dia.
+- Publicar ou alterar videos, contas, visibilidade e horarios continua exigindo
+  autorizacao explicita; nenhum comando de auditoria pode gerar imagens,
+  consumir cota, alterar MP4 ou usar credenciais.
+- As regras e caches preexistentes dos fluxos PT/EN continuam validos.
+  O guia 3.0 e incremental: nao presumir que todas as fases estao implementadas.

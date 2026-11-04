@@ -15,6 +15,8 @@ param(
     [switch]$ConfirmarCotaImagem,
     [switch]$ConfirmarPublicacao,
     [switch]$ExigirMovimentoPersonagem,
+    [switch]$AuditarEditorial,
+    [switch]$ExigirGatesEditoriais,
     [switch]$ContinuarAposFalha,
     [switch]$Refazer
 )
@@ -48,6 +50,8 @@ $argsList=@(
 if($ConfirmarCotaImagem){$argsList+='--confirmar-cota-imagem'}
 if($ConfirmarPublicacao){$argsList+='--confirmar-publicacao'}
 if($ExigirMovimentoPersonagem){$argsList+='--exigir-movimento-personagem'}
+if($AuditarEditorial){$argsList+='--auditar-editorial'}
+if($ExigirGatesEditoriais){$argsList+='--exigir-gates-editoriais'}
 if($ContinuarAposFalha){$argsList+='--continuar-apos-falha'}
 if($Refazer){$argsList+='--refazer'}
 & $py @argsList
