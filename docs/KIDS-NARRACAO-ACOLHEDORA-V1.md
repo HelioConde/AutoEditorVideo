@@ -26,7 +26,7 @@ O módulo scripts/kids_narracao_acolhedora_v1.py:
 4. Adiciona silêncio PCM real e exporta narração.mp3, verificada com FFprobe.
 5. Preserva marcações de tempo de cada palavra, 13 estados visuais, legendas sem texto durante pausas e divisão de cinco cenas. Registra `pause_adaptation` com pausas originais, efetivas e tempo economizado.
 6. Guarda versões anteriores de narração e vídeo em historico-voz e historico-renders.
-6. Interrompe se a voz não for gerada ou se ultrapassar 59,2s; nunca inventa áudio ou acelera a fala automaticamente.
+7. Interrompe se a voz não for gerada ou se ultrapassar 59,2s; nunca inventa áudio ou acelera a fala automaticamente.
 
 A animação Remotion mantém movimentos leves durante as pausas e mostra as casinhas no momento certo. Não há animações piscantes, sustos, CTA de comentários/inscrições, nem upload embutido.
 
