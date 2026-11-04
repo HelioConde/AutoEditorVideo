@@ -57,3 +57,6 @@ tests/_out_tmp/
 
 # Arquivo Otaku: credenciais e arquivos de publicacao
 assets/gerados/publicacao-youtube/
+
+# Props/JSON locais da previa canonica; podem conter identificadores e assinaturas.
+/motion-remotion/public/generated/fofinhos-ep01-parte01/

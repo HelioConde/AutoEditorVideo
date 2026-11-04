@@ -11,6 +11,14 @@ if($errors.Count -gt 0){throw 'PowerShell serie Kids tem erros sintaticos'}
 $temp=Join-Path ([IO.Path]::GetTempPath()) ('serie-kids-test-'+[Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path (Join-Path $temp 'scripts') -Force | Out-Null
 try{
+  # Novo motor separado: os testes usam stub e nao sintetizam voz real.
+  Copy-Item -LiteralPath (Join-Path (Split-Path -Parent $PSScriptRoot) 'fofinhos-ep01.ps1') -Destination (Join-Path $temp 'fofinhos-ep01.ps1')
+  @'
+import sys,json
+from pathlib import Path
+Path(__file__).resolve().parents[1].joinpath("args-fofinhos.json").write_text(
+  json.dumps(sys.argv[1:]),encoding="utf8")
+'@ | Set-Content -LiteralPath (Join-Path $temp 'scripts\fofinhos_ep01_render.py') -Encoding UTF8
   Copy-Item -LiteralPath $source -Destination (Join-Path $temp 'gerar-historia-kids.ps1')
   @'
 import json,sys
@@ -20,10 +28,20 @@ Path(__file__).resolve().parent.parent.joinpath("registro.json").write_text(
 '@ | Set-Content -LiteralPath (Join-Path $temp 'scripts\serie_kids_emanuelly_v1.py') -Encoding UTF8
   $wrapper=Join-Path $temp 'gerar-historia-kids.ps1'
   & $wrapper -Acao Planejar -Parte 1 | Out-Null
+  $argsNew=Get-Content -LiteralPath (Join-Path $temp 'args-fofinhos.json') -Raw | ConvertFrom-Json
+  if(-not ($argsNew -contains 'planejar') -or ($argsNew -contains 'renderizar')){
+    throw 'Planejar Parte 1 precisa usar o roteiro aprovado Fofinhos'
+  }
+  & $wrapper -Acao Voz -Parte 1 | Out-Null
+  $argsNew=Get-Content -LiteralPath (Join-Path $temp 'args-fofinhos.json') -Raw | ConvertFrom-Json
+  if(-not ($argsNew -contains 'voz')){
+    throw 'Voz Parte 1 precisa usar a narracao canônica de 15 cenas'
+  }
+  & $wrapper -Acao Planejar -Parte 2 | Out-Null
   $argsPy=Get-Content -LiteralPath (Join-Path $temp 'registro.json') -Raw | ConvertFrom-Json
   if($argsPy[0] -ne '--acao' -or $argsPy[1] -ne 'planejar' -or
-     -not ($argsPy -contains '--parte') -or -not ($argsPy -contains '1')){
-    throw 'Planejar nao repassou os argumentos'
+     -not ($argsPy -contains '--parte') -or -not ($argsPy -contains '2')){
+    throw 'Planejar Parte 2 deve continuar no motor antigo'
   }
   $blocked=$false
   try{& $wrapper -Acao Gerar -Parte 1 -MaxChamadas 9 | Out-Null}catch{$blocked=$true}

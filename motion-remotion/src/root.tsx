@@ -27,4 +27,8 @@ export const Root:React.FC=()=> <>
  <Composition id="EmanuellySerieV1" component={EmanuellyShort}
    durationInFrames={900} fps={30} width={1080} height={1920} defaultProps={emanu}
    calculateMetadata={({props})=>({durationInFrames:Math.max(30,Math.min(1800,props.durationFrames||900))})}/>
+ <Composition id="FofinhosEP01Canonico" component={EmanuellyShort}
+   durationInFrames={1800} fps={30} width={1080} height={1920} defaultProps={{...emanu,
+    episodeId:'fofinhos-ep01-parte01-canonico',brand:'Fofinhos',chapter:'EP 01 · O OVO AZUL'}}
+   calculateMetadata={({props})=>({durationInFrames:Math.max(30,Math.min(18000,props.durationFrames||1800))})}/>
 </>;

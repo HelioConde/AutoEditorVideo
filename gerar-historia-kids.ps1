@@ -22,6 +22,25 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
+# Parte 1 aprovada: delegar somente Voz/Planejar/Verificar/Renderizar/Abrir
+# para o novo motor, sem reativar o roteiro antigo de 9 cenas.
+if($Parte -eq '1' -and $Acao -in @('Voz','Planejar','Verificar','Renderizar','Abrir')){
+  $new=Join-Path $root 'fofinhos-ep01.ps1'
+  if(-not(Test-Path -LiteralPath $new -PathType Leaf)){
+    throw 'Motor Fofinhos aprovado nao encontrado. Atualize a branch main.'
+  }
+  $names=@{
+    'Voz'='Voz'; 'Planejar'='Planejar'; 'Verificar'='Planejar';
+    'Renderizar'='Renderizar'; 'Abrir'='Abrir'
+  }
+  $name=$names[$Acao]
+  if($Acao -eq 'Abrir'){
+    & $new -Acao $name
+  }else{
+    & $new -Acao $name -Refazer:$Refazer
+  }
+  return
+}
 $program=Join-Path $root 'scripts\serie_kids_emanuelly_v1.py'
 if(-not(Test-Path -LiteralPath $program -PathType Leaf)){
   throw 'Motor da serie ausente. Execute git pull --ff-only origin main.'
