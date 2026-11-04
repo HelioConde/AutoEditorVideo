@@ -49,6 +49,5 @@ if($InicioAgendamento){$argsList+=@('--inicio-agendamento',$InicioAgendamento)}
 if($Refazer){$argsList+='--refazer'}
 & $py @argsList
 if($LASTEXITCODE -ne 0){
-    throw "Grade de 50 Shorts interrompida (codigo $LASTEXITCODE). '
-          + 'NENHUM reenvio automatico; verifique os logs e a pasta local."
+    throw "Grade de 50 Shorts interrompida (codigo $LASTEXITCODE). NENHUM reenvio automatico; verifique os logs e a pasta local."
 }
