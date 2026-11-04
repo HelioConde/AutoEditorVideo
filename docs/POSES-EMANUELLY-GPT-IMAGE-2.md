@@ -50,6 +50,46 @@ Para refazer apenas a pose ajoelhada sem destruir o arquivo anterior:
 
 As oito poses são: em-pe, caminhando, observando, ajoelhada, estendendo-mao, segurando-ovo (mãos em concha mas sem ovo desenhado), preparando-caminha (sem objetos) e surpresa.
 
+## Correção — personagem perto da borda (pose caminhando)
+
+Se o GPT Image 2 desenhar Emanuelly perto demais de uma borda,
+o sistema tenta **reenquadrar o mesmo PNG localmente**, ajustando
+escala e margens sem criar outra imagem ou consumir outra chamada.
+As cores, roupa, cabelo e rosto da fonte permanecem inalterados.
+O prompt também reserva espaço à esquerda, direita, em cima e embaixo.
+
+**Importante:** redimensionar uma imagem não reconstrói
+um braço, mão ou pé que o modelo já tenha desenhado cortado.
+Quando a silhueta do PNG original tocar a borda, o arquivo será marcado
+`source_may_already_be_cropped=true` para revisão visual, mesmo quando
+o reenquadramento técnico funcionar. Não publicar nem incorporar
+automaticamente uma pose visualmente incompleta.
+
+Para impedir perda de respostas pagas, cada PNG bruto retornado pelo
+modelo agora é salvo **antes da validação** em `poses/brutos/`
+com SHA-256 e assinatura da referência. Se uma etapa local falhar,
+o mesmo arquivo poderá ser recuperado na execução seguinte
+sem outra chamada de IA. O comando Planejar mostra
+`bruto_recuperavel_sem_ia` quando for possível.
+
+A versão anterior NÃO salvou a saída reprovada de `caminhando`.
+Portanto, para essa falha específica do programa antigo será
+necessária uma chamada nova; futuras reprovações conservarão
+a resposta bruta.
+
+Após atualizar o GitHub, execute:
+
+    .\gerar-poses-emanuelly.ps1 -Acao Planejar
+
+Caso somente `em-pe` esteja aprovada, o plano deve indicar
+**sete chamadas** para terminar as oito poses:
+
+    .\gerar-poses-emanuelly.ps1 -Acao Gerar -Pose Todas -MaxChamadas 7
+
+A pose `em-pe` já gerada é preservada com sua assinatura antiga.
+Não use `-Refazer` para essa retomada normal: refazer
+significa pedir novas gerações, e pode consumir as oito chamadas.
+
 ## Arquivos gerados
 
     assets\gerados\kids-emanuelly\biblioteca-personagens\emanuelly\poses\
