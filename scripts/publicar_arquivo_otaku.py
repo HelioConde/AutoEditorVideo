@@ -483,6 +483,40 @@ def save_state(value: dict, per_video: Path) -> None:
         temporary.replace(path)
 
 
+def wait_for_thumbnail_processing(youtube, video_id: str, *, attempts: int = 12,
+                                  delay: float = 6.0, sleeper=time.sleep) -> str:
+    """Only attach a Short thumbnail after Google's processingStatus=succeeded.
+
+    A missing/forbidden processingDetails response must never cause a false
+    success claim. Do not retry the MP4 when thumbnail processing is pending.
+    Returns: succeeded | pending | failed | unknown.
+    """
+    from googleapiclient.errors import HttpError
+    for attempt in range(attempts):
+        try:
+            response=youtube.videos().list(
+                part="processingDetails",id=video_id).execute()
+        except (HttpError,ValueError,OSError) as exc:
+            print(f"[CAPA] Status de processamento indisponivel: {type(exc).__name__}. "
+                  "Nao enviarei thumbnail antes de confirmar processamento.",
+                  flush=True)
+            return "unknown"
+        items=response.get("items") or []
+        if not items:
+            return "unknown"
+        status=(items[0].get("processingDetails") or {}).get("processingStatus")
+        if status=="succeeded":
+            return "succeeded"
+        if status in ("failed","terminated"):
+            return "failed"
+        if status not in ("processing","pending"):
+            return "unknown"
+        if attempt<attempts-1:
+            sleeper(delay)
+    return "pending"
+
+
+
 def upload(args):
     try:
         from googleapiclient.http import MediaFileUpload
@@ -544,7 +578,19 @@ def upload(args):
             confirmed_schedule(response, scheduled_for)
             if scheduled_for is not None else False
         )
-        previous={"video_id":video_id,"link":"https://youtu.be/"+video_id,"privacidade_solicitada":args.privacidade,"enviado_em":datetime.now(timezone.utc).isoformat(),"thumbnail_status":"pending","video_path":str(args.video.resolve()), "video_sha256":current_digest}
+        # The YouTube API can sometimes force an upload to private even when
+        # public was requested (e.g. an unverified API project). Record truth.
+        public_confirmed=(
+            args.privacidade=="public"
+            and (response.get("status") or {}).get("privacyStatus")=="public"
+        )
+        previous={"video_id":video_id,"link":"https://youtu.be/"+video_id,
+                  "privacidade_solicitada":args.privacidade,
+                  "publicacao_publica_confirmada":public_confirmed,
+                  "enviado_em":datetime.now(timezone.utc).isoformat(),
+                  "thumbnail_status":"pending",
+                  "video_path":str(args.video.resolve()),
+                  "video_sha256":current_digest}
         if scheduled_for is not None:
             previous["agendado_para"] = scheduled_for.isoformat().replace("+00:00", "Z")
             previous["agendamento_confirmado"] = scheduled_ok
@@ -555,32 +601,48 @@ def upload(args):
                 "status.publishAt e privacidade private. Nao reenvie. "
                 "Verifique o agendamento manualmente no YouTube Studio."
             )
+        if args.privacidade=="public" and not public_confirmed:
+            raise RuntimeError(
+                "YouTube recebeu o MP4, mas nao confirmou privacidade PUBLICA. "
+                "Verifique o status no YouTube Studio, nunca reenvie o MP4."
+            )
         if scheduled_for is not None:
             print("[AGENDADO] "+previous["agendado_para"]+" | https://youtu.be/"+video_id)
         else:
             print("[OK] Video enviado: https://youtu.be/"+video_id)
     if previous.get("thumbnail_status") != "success":
         thumb=OUTPUT/"capa-tiktok-shorts.jpg" if args.usar_capa_shorts else OUTPUT/"miniatura-youtube.jpg"
-        if not thumb.is_file():print("[AVISO] Sem miniatura JPG. Execute -Etapa preparar.")
+        if not thumb.is_file():
+            previous["thumbnail_status"]="missing_file"
+            save_state(previous,historical_state)
+            print("[CAPA PENDENTE] JPG ausente. Nao reenvie o video.")
         else:
-            try:
-                # Shorts thumbnail upload availability depends on channel eligibility and API.
-                media=MediaFileUpload(str(thumb),mimetype="image/jpeg",resumable=False)
-                youtube.thumbnails().set(videoId=video_id,media_body=media).execute()
-                previous["thumbnail_status"]="success"
+            status=wait_for_thumbnail_processing(youtube,video_id)
+            if status=="succeeded":
+                try:
+                    media=MediaFileUpload(str(thumb),mimetype="image/jpeg",
+                                          resumable=False)
+                    youtube.thumbnails().set(videoId=video_id,media_body=media).execute()
+                    previous["thumbnail_status"]="success"
+                    previous["thumbnail_file"]=str(thumb.resolve())
+                    previous.pop("thumbnail_error",None)
+                    save_state(previous,historical_state)
+                    print("[CAPA OK] Miniatura vertical 9:16 anexada ao Short.")
+                except HttpError as exc:
+                    code=getattr(exc.resp,"status","?")
+                    previous["thumbnail_status"]=f"error_http_{code}"
+                    previous["thumbnail_file"]=str(thumb.resolve())
+                    previous["thumbnail_error"]=str(exc)[:350]
+                    save_state(previous,historical_state)
+                    print(f"[CAPA PENDENTE] YouTube recusou miniatura (HTTP {code}). "
+                          "Verifique elegibilidade do canal ou anexe pelo Studio. "
+                          "Video ja enviado; NAO reenvie o MP4.")
+            else:
+                previous["thumbnail_status"]="pending_processing" if status=="pending" else "pending_manual"
                 previous["thumbnail_file"]=str(thumb.resolve())
                 save_state(previous,historical_state)
-                print("[OK] Miniatura anexada ao YouTube")
-            except HttpError as exc:
-                code=getattr(exc.resp,"status","?")
-                previous["thumbnail_status"]=f"error_http_{code}"
-                previous["thumbnail_file"]=str(thumb.resolve())
-                previous["thumbnail_error"]=str(exc)[:350]
-                save_state(previous,historical_state)
-                print(f"[AVISO] VIDEO ENVIADO, mas YouTube recusou a capa (HTTP {code}). "
-                      f"A capa correta ficou em {thumb}. Abra o YouTube Studio no computador "
-                      "e use Shorts > Detalhes > Miniatura > Enviar arquivo. "
-                      "Nao repita o upload do MP4.")
+                print(f"[CAPA PENDENTE] Processamento do YouTube: {status}. "
+                      "Capa salva; pode ajustar pelo Studio. Nao reenvie MP4.")
     print("[FINAL] YouTube: https://youtu.be/"+video_id)
     print("[FINAL] Estado por video: "+str(historical_state))
 
