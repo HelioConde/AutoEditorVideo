@@ -1,0 +1,118 @@
+name: Fofinhos - Environment image-generation (read-only)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/fofinhos-image-generation-environment.yml'
+      - 'scripts/proxy_accounts_private_stage.py'
+      - 'scripts/image_env_policy_guard.py'
+      - 'scripts/image_session_readonly_probe.py'
+      - 'tests/test_image_generation_environment.py'
+      - 'configurar-ambiente-imagens-github.ps1'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fofinhos-image-generation-environment.yml'
+      - 'scripts/proxy_accounts_private_stage.py'
+      - 'scripts/image_env_policy_guard.py'
+      - 'scripts/image_session_readonly_probe.py'
+      - 'tests/test_image_generation_environment.py'
+      - 'configurar-ambiente-imagens-github.ps1'
+  workflow_dispatch:
+    inputs:
+      validate_private_session:
+        type: boolean
+        description: 'Validar sessao privada SEM gerar imagens (somente apos proteger Environment)'
+        default: false
+        required: false
+
+# Private OAuth state is NEVER supplied to pull requests or push builds.
+# The real check is manually opt-in from main and requires a separately
+# verified main-only Environment before the protected job is scheduled.
+permissions:
+  contents: read
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test runner
+        run: python -m pip install 'pytest>=8,<10'
+      - name: Security unit tests (no credentials and no API calls)
+        run: python -m pytest -q tests/test_image_generation_environment.py
+
+  validate-protection:
+    if: github.event_name == 'workflow_dispatch' && inputs.validate_private_session == true && github.ref == 'refs/heads/main'
+    needs: offline-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check that image-generation exists and permits ONLY main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  inspect-private-session:
+    if: github.event_name == 'workflow_dispatch' && inputs.validate_private_session == true && github.ref == 'refs/heads/main'
+    needs: [offline-tests, validate-protection]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: image-generation
+    concurrency:
+      group: image-generation-private-readonly
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout pinned original Go proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: native-go-proxy-source
+          persist-credentials: false
+      - name: Install native Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: native-go-proxy-source/go.mod
+          cache: false
+      - name: Compile the pinned Go binary BEFORE loading secrets
+        working-directory: native-go-proxy-source
+        shell: bash
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/fofinhos-native-proxy" ./cmd/api
+      - name: Restore and inspect temporary private account state - READ ONLY
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          state_dir="$RUNNER_TEMP/fofinhos-private-image-proxy"
+          test ! -e "$state_dir"
+          mkdir -m 700 "$state_dir"
+          proxy_pid=''
+          cleanup() {
+            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$state_dir"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$state_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/fofinhos-native-proxy" > "$RUNNER_TEMP/fofinhos-proxy-session.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/image_session_readonly_probe.py
+          echo '[SAFETY] EPHEMERAL_STATE_CLEANUP_COMPLETED_ON_EXIT'
+
