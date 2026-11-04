@@ -9,6 +9,28 @@
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
 
+## Gerador de Emanuelly com foto privada de referência (4 Shorts)
+
+A série infantil agora tem um motor de geração de quatro vídeos PT-BR,
+usando cada cena com a **foto original do elenco como entrada obrigatória**
+do Codex Proxy images/edits; nunca gerar a partir de texto somente quando
+a foto está ausente. A foto local é privada e ignorada pelo Git.
+
+    .\gerar-historia-kids.ps1 -Acao Planejar -Parte Todas
+    .\gerar-historia-kids.ps1 -Acao Gerar -Parte 1 -MaxChamadas 9
+    .\gerar-historia-kids.ps1 -Acao Abrir -Parte 1
+
+Os comandos seguintes geram as outras partes (10, 9 e 9 imagens novas),
+somente com um orçamento explícito de chamadas. Cada vídeo é um MP4
+local de até 60 segundos, com voz Kids acolhedora, pausas reais,
+imagens baseadas na referência e QA técnico; **não faz upload**.
+A arte gera quadros distintos com efeitos 2D auxiliares animados,
+não rigging articulado dos personagens.
+
+Antes de gerar, instale o PNG de referência em
+assets/referencias-privadas/emanuelly-elenco.png.
+Consulte [Guia do gerador Kids com foto](docs/GERAR-SERIE-KIDS-EMANUELLY.md).
+
 ## Nova serie Kids: Emanuelly e seus Amigos de Pelucia
 
 A historia original **EP 01 — O Ovo Azul e o Nascimento de Fofinho**
