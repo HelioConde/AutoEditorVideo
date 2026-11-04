@@ -44,9 +44,14 @@ miniaturas e upload OAuth para YouTube.
   `ConfirmarCotaImagem` e exigido quando `MaxChamadasPorVideo>0`.
   O limite e POR VIDEO, nao custo total garantido. Nao iniciar lote
   grande sem explicitar o pior caso (50x30 = 1500 chamadas).
-- Antes de enviar: MP4 <=60s, capa vertical valida, QA de movimento
-  `camera_only_scenes` (bloquear episodio com 100% cenas planas),
-  som Edge TTS e legendas sincronizadas. Zoom nao e animacao facial.
+- Antes de enviar: MP4 <=60s, capa vertical valida, QA vinculada ao
+  arquivo `mp4`, som Edge TTS e legendas sincronizadas.
+  `camera_only_scenes` e informativo por padrao: o pipeline gera
+  principalmente camadas 2.5D ou masters inteiras, e rejeitar
+  automaticamente 100% camera-only bloqueava toda a fila.
+  Usar `-ExigirMovimentoPersonagem` se o usuario quiser um modo
+  estrito e aceitar o bloqueio; caso contrario publico com zoom suave.
+  Nao chamar zoom de animacao facial ou gesto corporal.
 - **Thumbnail:** enviar JPG vertical do editor por `thumbnails.set`
   apenas quando `processingDetails.processingStatus=succeeded`.
   Pode falhar por elegibilidade da conta; registrar pendencia, NUNCA
