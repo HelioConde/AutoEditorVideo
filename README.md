@@ -52,6 +52,27 @@ Estas etapas dependem do proxy de imagens e preservam quadros antigos
 em histórico. O usuário deve conferir o novo MP4; a IA não oferece
 garantia de detecção automática de todos os erros de elenco.
 
+
+## Fofinho — imagens oficiais para TODOS os 4 Shorts
+
+O comando animar-emanuelly.ps1 agora permite -Parte 1, 2, 3, 4
+ou Todas e -Acao Catalogo para ver as referências exatas a reutilizar.
+
+    .\animar-emanuelly.ps1 -Acao Catalogo -Parte Todas
+    .\animar-emanuelly.ps1 -Acao Planejar -Parte Todas
+    .\animar-emanuelly.ps1 -Acao GerarImagens -Recurso ovo-rachado -MaxChamadas 1
+    .\animar-emanuelly.ps1 -Acao Renderizar -Parte Todas
+
+Jardim, quarto e ovo são referências imutáveis. Casca rachada,
+casca aberta, Fofinho azul, poses de patinhas/miado/descanso,
+caminha e gotinha usam os mesmos recursos e assinaturas em
+todos os episódios. Fofinho nasce somente na Parte 2 cena 6;
+as gêmeas, Raposo e Porco-espinho ficam reservados para
+episódios futuros. A ação GerarImagens é opcional,
+exige autorização e gpt-image-2; não gera nem publica vídeos.
+
+Guia: docs/KIDS-FOFINHO-TODOS-VIDEOS-REFERENCIAS-V2.md
+
 ## Série Kids — animação por camadas com cenários fixos
 
 Agora é possível produzir uma **prévia local da Parte 1** sem novas
