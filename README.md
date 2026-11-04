@@ -9,6 +9,27 @@
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
 
+## Correção de cronologia da série Emanuelly — referência isolada
+
+A versão de continuidade v2 corrige o problema dos quadros **03 e 08**
+mostrando bichinhos antes do nascimento. Todos os 9 quadros da Parte 1
+devem mostrar **somente Emanuelly e o ovo azul fechado**. Antes do quadro
+06 da Parte 2, Fofinho também não pode aparecer. As Fofinhas gêmeas,
+Raposo e Porco-espinho só entram nos futuros capítulos próprios.
+
+Agora a prancha do elenco é usada apenas para preparar **duas referências
+isoladas**. O gerador de cena NUNCA envia a prancha inteira ao modelo.
+Fluxos com imagem de referência usam **gpt-image-2 exclusivamente**.
+A política invalida automaticamente os caches antigos na renderização.
+
+    .\gerar-historia-kids.ps1 -Acao PrepararReferencias -MaxChamadas 2
+    .\gerar-historia-kids.ps1 -Acao Planejar -Parte 1
+    .\gerar-historia-kids.ps1 -Acao Imagens -Parte 1 -MaxChamadas 9 -Refazer
+
+Estas etapas dependem do proxy de imagens e preservam quadros antigos
+em histórico. O usuário deve conferir o novo MP4; a IA não oferece
+garantia de detecção automática de todos os erros de elenco.
+
 ## Gerador de Emanuelly com foto privada de referência (4 Shorts)
 
 A série infantil agora tem um motor de geração de quatro vídeos PT-BR,
