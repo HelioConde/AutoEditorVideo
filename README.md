@@ -40,6 +40,27 @@ interrompem o fluxo. O QA tecnico nao garante ausencia de defeitos artisticos.
 O upload nao e refeito cegamente se o resultado estiver ambiguo ou ja constar
 no registro local. Consulte o [guia do Short EN](docs/OTAKU-REFRAME-DID-YOU-KNOW-201-EN.md).
 
+## Otaku Multicena 3.0 — auditoria editorial e crescimento (fase 1)
+
+O projeto agora inclui auditoria editorial **offline**, com checagens de gancho,
+roteiro, marca, metadados e repeticao de aberturas; e comparacao de metricas
+coletadas nas mesmas idades do video. Nada disso usa imagem IA, publica ou altera
+os videos existentes.
+
+```powershell
+.\grade-50-shorts.ps1 -Acao Validar -Quantidade 50
+.\grade-50-shorts.ps1 -Acao Validar -Quantidade 1 -ExigirGatesEditoriais
+.\.venv\Scripts\python.exe .\scripts\otaku_growth_v3.py --saida assets\gerados\growth-v3-audit.json
+```
+
+Os gates automaticos nao substituem verificacao factual, audiovisual, de
+movimento de personagens e direitos. Para exigir camadas de movimento de personagem
+na producao, a grade ja possui `-ExigirMovimentoPersonagem`. Nao afirmar que
+zoom de camera e animacao real. Nenhuma nova publicacao e executada apenas
+por atualizar o GitHub.
+
+Detalhes: [Otaku Multicena 3.0](docs/OTAKU-MULTICENA-3-0.md).
+
 ## Otaku Multicena — 50 Shorts com publicação imediata
 
 50 roteiros e metadados estão cadastrados para novos e nostálgicos
