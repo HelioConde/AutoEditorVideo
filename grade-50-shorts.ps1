@@ -32,9 +32,11 @@ if(-not(Test-Path $py)){
         throw 'Ambiente .venv ausente. Execute primeiro .\criar-publicar-short.ps1.'
     }
 }
+$modoPy=$Acao.ToLowerInvariant()
+if($Acao -eq 'ProduzirPublicar'){$modoPy='produzir-publicar'}
 $argsList=@(
     $program,
-    '--acao',$(if($Acao -eq 'ProduzirPublicar'){'produzir-publicar'}else{$Acao.ToLowerInvariant()}),
+    '--acao',$modoPy,
     '--inicio-na-lista',[string]$InicioNaLista,
     '--quantidade',[string]$Quantidade,
     '--modelo',$Modelo,
