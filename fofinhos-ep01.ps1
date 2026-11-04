@@ -36,10 +36,11 @@ if($Acao -eq 'Abrir'){
 if($Refazer -and $Acao -notin @('Voz','Renderizar')){
   throw 'Refazer valido somente para Voz/Renderizar.'
 }
-$argsPy=@($program,'--acao',@{
+$map=@{
   'Planejar'='planejar'; 'Voz'='voz';
   'GuiaFlores'='guia-flores'; 'Renderizar'='renderizar'
-}[$Acao])
+}
+$argsPy=@($program,'--acao',$map[$Acao])
 if($Refazer){$argsPy+='--refazer'}
 Write-Host "[FOFINHOS EP01] $Acao | 15 cenas aprovadas | ZERO chamadas de imagem | ZERO uploads" -ForegroundColor Cyan
 & $python @argsPy
