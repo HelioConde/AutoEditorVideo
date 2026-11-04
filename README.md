@@ -61,6 +61,25 @@ por atualizar o GitHub.
 
 Detalhes: [Otaku Multicena 3.0](docs/OTAKU-MULTICENA-3-0.md).
 
+## Entradas PowerShell separadas: Gamer PT-BR e Otaku Reframe EN
+
+Agora existem dois launchers dedicados, sem alterar o canal Kids:
+
+    .\canal-gamer.ps1 -Acao Validar
+    .\canal-gamer.ps1 -Acao Preparar
+    .\canal-gamer.ps1 -Acao Voz -Id game-001-minecraft-um-coracao
+    .\canal-ingles.ps1 -Acao Resumo
+    .\canal-ingles.ps1 -Acao Preparar
+    .\canal-ingles.ps1 -Acao Planejar -Id 003-death-note-xadrez
+
+O Gamer usa **pt-BR**, exige cinco clips de gameplay real por Short e nao
+possui publicacao. O Otaku Reframe usa **en-US**, manifesto/voz/QA exclusivos
+e **nao envia** sem `-Acao Enviar -Id ... -ConfirmarEnvio`.
+O envio EN privado e o padrao; publico exige confirmacao adicional.
+Nenhum canal ou MP4 foi criado so por adicionar os scripts.
+
+Veja [PowerShell por canal](docs/POWERSHELL-CANAIS-GAMER-INGLES.md).
+
 ## Dois novos canais PT-BR — Games + Kids (piloto 3x2)
 
 Novo projeto independente com **3 Shorts Games** e **3 Shorts Kids**,
