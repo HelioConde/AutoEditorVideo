@@ -1,0 +1,243 @@
+{
+  "schema": "otaku-multicena/english-editorial-v3",
+  "language": "en-US",
+  "target_channel": "Otaku Reframe",
+  "hook_types": [
+    "curiosity",
+    "contradiction",
+    "decision",
+    "mystery",
+    "consequence"
+  ],
+  "editorial_review": "proposed_needs_factual_and_language_review",
+  "episodes": [
+    {
+      "id": "5001-black-clover",
+      "series": "Black Clover",
+      "title": "Black Clover: Born With ZERO Magic?! Asta's Secret ⚔️ #Shorts",
+      "cover": "ZERO MAGIC?!",
+      "script": "In a world ruled by magic, Asta was born with none. Everyone around him could cast spells, yet he still dreamed of becoming the Wizard King. Instead of giving up, he trained his body harder than anyone expected. Then an unusual power entered the picture: anti-magic, the ability to cancel the spells others rely on. But that power doesn't erase years of effort. It makes his refusal to surrender even more striking. If you lived in the Clover Kingdom, would you bet on Asta or Yuno?",
+      "selected_hook": "In a world ruled by magic, Asta was born with none.",
+      "hook_options": [
+        "In a world ruled by magic, Asta was born with none.",
+        "Asta has no magic. So why can he threaten powerful mages?",
+        "Would you chase the Wizard King's throne without a single spell?",
+        "What makes Asta different from every other magic knight?",
+        "The boy everyone underestimated gained the power to cancel magic."
+      ],
+      "description": "⚔️ Asta was born without magic in a world where everyone depends on it. His determination and anti-magic challenge everything the Clover Kingdom believes.\n\nWould you bet on Asta or Yuno?\n\nOriginal English storytelling, narration and editing with AI-generated illustrations. Independent fan commentary, not an official anime release.\n\n#BlackClover #Asta #AntiMagic #AnimeAnalysis #OtakuReframe #Shorts",
+      "tags": [
+        "Black Clover",
+        "Asta",
+        "Asta Black Clover",
+        "Asta no magic",
+        "Anti Magic",
+        "Anti Magic Sword",
+        "Yuno",
+        "Wizard King",
+        "anime analysis",
+        "Otaku Reframe",
+        "Anime Shorts"
+      ],
+      "production_note": "Re-use BR-approved visuals only if compatible with English narration and no baked-in PT text; verify full EN render before upload."
+    },
+    {
+      "id": "5002-apothecary-diaries",
+      "series": "The Apothecary Diaries",
+      "title": "The Apothecary Diaries: How Does Maomao Notice EVERYTHING? 🧪 #Shorts",
+      "cover": "SHE NOTICED IT",
+      "script": "Maomao doesn't use magic. She notices what everyone else misses. In The Apothecary Diaries, her knowledge of medicine and her attention to tiny details turn ordinary clues into dangerous discoveries. A strange illness, an unfamiliar scent, even someone's routine can reveal more than people intend. But solving mysteries inside the imperial palace is risky. Powerful people don't always want the truth to come out. Maomao needs more than intelligence: she needs to know when to speak and when to stay quiet. Would you trust her with your biggest secret?",
+      "selected_hook": "Maomao doesn't use magic. She notices what everyone else misses.",
+      "hook_options": [
+        "Maomao doesn't use magic. She notices what everyone else misses.",
+        "How can a palace mystery unravel because of one tiny clue?",
+        "Maomao could ignore the evidence. She rarely does.",
+        "What's hiding behind the strange symptoms at the imperial palace?",
+        "Finding the truth can make Maomao the next target."
+      ],
+      "description": "🧪 No magic, no superpowers—just observation. Maomao uses her knowledge of medicine to uncover the hidden truths of the imperial palace.\n\nWould you trust Maomao with your biggest secret?\n\nOriginal English analysis, narration and editing using AI-generated illustrations. Independent, unofficial fan content.\n\n#TheApothecaryDiaries #Maomao #KusuriyaNoHitorigoto #AnimeMystery #OtakuReframe #Shorts",
+      "tags": [
+        "The Apothecary Diaries",
+        "Maomao",
+        "Kusuriya no Hitorigoto",
+        "Maomao anime",
+        "imperial palace",
+        "apothecary anime",
+        "anime mystery",
+        "anime analysis",
+        "Otaku Reframe",
+        "Anime Shorts"
+      ],
+      "production_note": "Re-use BR-approved visuals only if compatible with English narration and no baked-in PT text; verify full EN render before upload."
+    },
+    {
+      "id": "5003-cyberpunk-edgerunners",
+      "series": "Cyberpunk: Edgerunners",
+      "title": "Cyberpunk: Edgerunners — David's Power Had a PRICE 🦾 #Shorts",
+      "cover": "POWER HAS A PRICE",
+      "script": "In Night City, getting stronger can cost you everything. David Martinez lives in a world where money and cybernetic implants decide who gets a chance. Every upgrade promises more speed, strength, and freedom. But the price isn't always written on the label. What makes Cyberpunk: Edgerunners hurt isn't just the violence or the action. It's watching David fight to hold on to his humanity in a city that treats people like disposable parts. As his power grows, so does the danger. Would you install an upgrade if you knew what it might take away?",
+      "selected_hook": "In Night City, getting stronger can cost you everything.",
+      "hook_options": [
+        "In Night City, getting stronger can cost you everything.",
+        "David could become stronger. But should he?",
+        "Would you trade your humanity for a cybernetic upgrade?",
+        "What does Night City take from people chasing power?",
+        "Every upgrade gives David strength and adds another risk."
+      ],
+      "description": "🦾 Every implant promises an advantage. In Cyberpunk: Edgerunners, David Martinez discovers the human cost of power in Night City.\n\nWould you take the upgrade?\n\nOriginal English commentary and narration, edited with AI-generated illustrations. Independent fan work; not affiliated with the anime.\n\n#CyberpunkEdgerunners #DavidMartinez #NightCity #AnimeAnalysis #OtakuReframe #Shorts",
+      "tags": [
+        "Cyberpunk Edgerunners",
+        "David Martinez",
+        "Night City",
+        "Cyberpunk anime",
+        "cybernetic implants",
+        "David Edgerunners",
+        "anime analysis",
+        "Otaku Reframe",
+        "Anime Shorts"
+      ],
+      "production_note": "Re-use BR-approved visuals only if compatible with English narration and no baked-in PT text; verify full EN render before upload."
+    },
+    {
+      "id": "5004-jojo-steel-ball-run",
+      "series": "JoJo's Bizarre Adventure: Steel Ball Run",
+      "title": "Steel Ball Run: Would You Trust Your Rival? 🐎 #Shorts",
+      "cover": "TRUST YOUR RIVAL?",
+      "script": "This horse race is about much more than crossing the finish line. In JoJo's Bizarre Adventure: Steel Ball Run, every competitor has a reason to keep riding, and not everyone wants the same prize. Johnny Joestar and Gyro Zeppeli face a journey where courage, strategy, and trust matter as much as speed. Each new stretch can turn an opponent into an ally—or make a small mistake impossible to undo. That's what makes the race a story about people, not only horses. If winning meant depending on a rival, would you take the risk?",
+      "selected_hook": "This horse race is about much more than crossing the finish line.",
+      "hook_options": [
+        "This horse race is about much more than crossing the finish line.",
+        "How far would you ride if the finish line changed your life?",
+        "Would you trust a rival in the world's strangest horse race?",
+        "Why do Johnny and Gyro need more than speed to survive?",
+        "One wrong choice can change the entire Steel Ball Run."
+      ],
+      "description": "🐎 A massive horse race, dangerous decisions, and an unlikely partnership. Johnny Joestar and Gyro Zeppeli make Steel Ball Run much more than a competition.\n\nWould you trust a rival to reach the finish line?\n\nOriginal English anime commentary with AI-generated illustrations, narration and editing. Unofficial fan content.\n\n#SteelBallRun #JoJosBizarreAdventure #JohnnyJoestar #GyroZeppeli #OtakuReframe #Shorts",
+      "tags": [
+        "Steel Ball Run",
+        "JoJo's Bizarre Adventure",
+        "Johnny Joestar",
+        "Gyro Zeppeli",
+        "JoJo Part 7",
+        "Steel Ball Run race",
+        "JoJo anime",
+        "anime analysis",
+        "Otaku Reframe",
+        "Anime Shorts"
+      ],
+      "production_note": "Re-use BR-approved visuals only if compatible with English narration and no baked-in PT text; verify full EN render before upload."
+    },
+    {
+      "id": "202-death-note-40-segundos",
+      "series": "Death Note",
+      "title": "Death Note: Why Do the First 40 Seconds Matter? ⏱️ #Shorts",
+      "cover": "40 SECONDS",
+      "script": "One name. One face. Forty seconds. That's one of the first rules Light discovers in Death Note. When he writes a criminal's name while picturing the person's face, the notebook proves its terrifying power. If no other cause of death is specified, the victim dies of a heart attack after forty seconds. But there's a twist: those forty seconds are also the window for specifying a different cause. Not every death caused by the notebook follows the same countdown. The most frightening part is what Light does after he realizes the rule is real. Would you keep writing?",
+      "selected_hook": "One name. One face. Forty seconds.",
+      "hook_options": [
+        "One name. One face. Forty seconds.",
+        "Why does Death Note give you exactly forty seconds?",
+        "Would you keep writing once you knew the notebook was real?",
+        "What's the rule behind Death Note's forty-second countdown?",
+        "A single rule changes everything Light believes he can control."
+      ],
+      "description": "⏱️ One of Death Note's first rules involves a name, a face, and forty seconds. But the countdown has an important detail.\n\nWould you stop after the first test?\n\nOriginal English commentary and narration with AI-generated illustrations. Not an official Death Note production.\n\n#DeathNote #LightYagami #AnimeRules #OtakuReframe #Shorts",
+      "tags": [
+        "Death Note",
+        "40 seconds Death Note",
+        "Death Note rules",
+        "Light Yagami",
+        "Death Note explained",
+        "anime mysteries",
+        "Otaku Reframe",
+        "Anime Shorts"
+      ],
+      "production_note": "Re-use BR-approved visuals only if compatible with English narration and no baked-in PT text; verify full EN render before upload."
+    },
+    {
+      "id": "401-jujutsu-kaisen-ep01",
+      "series": "Jujutsu Kaisen",
+      "title": "Jujutsu Kaisen: Yuji Swallowed WHAT?! 👀 #Shorts",
+      "cover": "HE ATE THE FINGER",
+      "script": "Yuji swallowed a cursed finger to save his friends. Until that moment, Yuji Itadori was an unusually strong student with a mostly ordinary life. Then a sealed object at school drew dangerous curses. Megumi tried to help, but the situation kept getting worse. Yuji made a choice that nobody could call safe: he swallowed one of Sukuna's fingers. The King of Curses awakened inside him. And then came the impossible part—Yuji managed to take control of his own body again. He saved his friends, but could that choice make him the next threat?",
+      "selected_hook": "Yuji swallowed a cursed finger to save his friends.",
+      "hook_options": [
+        "Yuji swallowed a cursed finger to save his friends.",
+        "Would you eat something cursed if it could save someone?",
+        "Yuji made a choice even a sorcerer wouldn't recommend.",
+        "What happened when Sukuna woke up inside Yuji?",
+        "Saving his friends put Yuji in danger of becoming a threat."
+      ],
+      "description": "👀 Yuji Itadori makes an unbelievable decision in Jujutsu Kaisen: swallowing Sukuna's cursed finger to save his friends.\n\nWould you make the same choice?\n\nOriginal English recap, narration and editing with AI-generated illustrations. Unofficial commentary; contains anime spoilers.\n\n#JujutsuKaisen #YujiItadori #Sukuna #AnimeRecap #OtakuReframe #Shorts",
+      "tags": [
+        "Jujutsu Kaisen",
+        "Yuji Itadori",
+        "Sukuna",
+        "Sukuna finger",
+        "JJK episode 1",
+        "Jujutsu Kaisen recap",
+        "anime recap",
+        "Otaku Reframe",
+        "Anime Shorts"
+      ],
+      "production_note": "Re-use BR-approved visuals only if compatible with English narration and no baked-in PT text; verify full EN render before upload."
+    },
+    {
+      "id": "102-death-note-ep02",
+      "series": "Death Note",
+      "title": "Death Note: How L Trapped Kira on LIVE TV 📺 #Shorts",
+      "cover": "L'S FIRST TRAP",
+      "script": "Kira thought no one could find him. Then L went on television. A man claiming to be the detective challenged Kira on live TV. Furious, Light wrote his name in the notebook, and the man died on screen. But the real L was never there. The broadcast used a condemned prisoner named Lind L. Tailor, and it aired only in Japan's Kanto region. Without leaving his room, Light had just revealed where Kira was operating. One impulsive decision gave his enemy the first real clue. Who made the smarter move?",
+      "selected_hook": "Kira thought no one could find him. Then L went on television.",
+      "hook_options": [
+        "Kira thought no one could find him. Then L went on television.",
+        "One live TV broadcast was enough to narrow down Kira's location.",
+        "Light made a choice that L was waiting for.",
+        "Who was the man challenging Kira on television?",
+        "L's first trap worked because Light couldn't ignore the insult."
+      ],
+      "description": "📺 L's first public challenge turned Light's anger into evidence. Here's how the legendary Death Note broadcast trap worked.\n\nWho won that round—Light or L?\n\nOriginal English episode commentary, narration and AI-assisted illustrations. Unofficial fan recap with spoilers.\n\n#DeathNote #LightYagami #L #Kira #AnimeRecap #OtakuReframe #Shorts",
+      "tags": [
+        "Death Note",
+        "L vs Kira",
+        "Lind L Tailor",
+        "Light Yagami",
+        "Death Note episode 2",
+        "Death Note TV trap",
+        "anime mind games",
+        "anime recap",
+        "Otaku Reframe",
+        "Anime Shorts"
+      ],
+      "production_note": "Re-use BR-approved visuals only if compatible with English narration and no baked-in PT text; verify full EN render before upload."
+    },
+    {
+      "id": "103-death-note-ep03",
+      "series": "Death Note",
+      "title": "Death Note: Kira Had Access to POLICE Files?! 👁️ #Shorts",
+      "cover": "KIRA WAS WATCHED",
+      "script": "What if Kira could read the police investigation against him? In Death Note, L notices that many deaths happen on a student's schedule. But Light has a dangerous advantage: his father works on the case, and Light can access sensitive police information. He changes the timing of deaths to throw L off. Instead, the pattern suggests that Kira might have a connection to the investigation itself. Soon, FBI agents are watching people close to the police. Then Ryuk offers Light a terrifying bargain: the Shinigami Eyes, in exchange for half his remaining lifespan. Would you take that deal?",
+      "selected_hook": "What if Kira could read the police investigation against him?",
+      "hook_options": [
+        "What if Kira could read the police investigation against him?",
+        "Light changed the timing of the deaths. L noticed something worse.",
+        "Would you trade half your remaining life to learn people's names?",
+        "Why did the investigation start suspecting someone inside the police?",
+        "Light tried to mislead L and ended up raising new suspicions."
+      ],
+      "description": "👁️ Light tries to outsmart the police investigation, but his unusual access to information creates a new problem. Then Ryuk offers a dangerous bargain.\n\nWould you accept the Shinigami Eyes deal?\n\nOriginal English anime recap and narration with AI-generated illustrations. Unofficial commentary; spoilers included.\n\n#DeathNote #LightYagami #L #ShinigamiEyes #OtakuReframe #Shorts",
+      "tags": [
+        "Death Note",
+        "Light Yagami",
+        "L detective",
+        "Shinigami Eyes",
+        "Kira investigation",
+        "Death Note episode 3",
+        "anime mysteries",
+        "Otaku Reframe",
+        "Anime Shorts"
+      ],
+      "production_note": "Re-use BR-approved visuals only if compatible with English narration and no baked-in PT text; verify full EN render before upload."
+    }
+  ]
+}

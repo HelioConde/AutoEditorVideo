@@ -1,0 +1,147 @@
+{
+  "schema": "otaku-multicena/published-br-snapshot/v3",
+  "observed_date": "2026-11-04",
+  "source": "vidIQ connected owner uploads (public shorts)",
+  "source_channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "target_channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+  "target_channel_name": "Otaku Reframe",
+  "verified_en_preexisting": {
+    "101-death-note-ep01": "tPurNjxbnx0",
+    "201-death-note-rosto-nome": "gZt7V7L5L9c"
+  },
+  "notes": [
+    "Snapshot of published videos, not a live continuously refreshed list.",
+    "source_unconfirmed items are never queued for rendering or upload.",
+    "Only 101 is an established match to an existing EN upload; 201 already exists in EN but no BR pairing is assumed.",
+    "No local MP4/caches were inspected; English output remains pending."
+  ],
+  "videos": [
+    {
+      "video_id": "78ICmUFT--Q",
+      "title": "Steel Ball Run: A corrida que muda tudo 🏁 #Shorts",
+      "episode_id": "5004-jojo-steel-ball-run",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "Zu87-dVMmkg",
+      "title": "Cyberpunk: Edgerunners — David pagou caro pelo poder? 🦾 #Shorts",
+      "episode_id": "5003-cyberpunk-edgerunners",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "wbxMcCPWXIM",
+      "title": "The Apothecary Diaries: O método genial da Maomao 🧪 #Shorts",
+      "episode_id": "5002-apothecary-diaries",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "B8KCPSDL7kg",
+      "title": "Black Clover: SEM MAGIA?! O segredo do Asta ⚔️ #Shorts",
+      "episode_id": "5001-black-clover",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "h5ZcSCQuldk",
+      "title": "Death Note: por que 40 SEGUNDOS mudam tudo? ⏱️ #Shorts",
+      "episode_id": "202-death-note-40-segundos",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "aazx0nhTDpc",
+      "title": "A pior decisão da vida do Yuji Itadori 😭🔥 #jujutsukaisen #jjk",
+      "episode_id": "401-jujutsu-kaisen-ep01",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "Jwd_BUp9Y98",
+      "title": "Death Note EP. 3 em 60s: alguém está seguindo Light! 👁️ #Shorts",
+      "episode_id": "103-death-note-ep03",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "m28-KzLSh1k",
+      "title": "Light Yagami: herói ou vilão? A verdade que ninguém admite 🖤 #DeathNote #Kira #Anime",
+      "episode_id": null,
+      "status": "source_unconfirmed",
+      "privacy": "public"
+    },
+    {
+      "video_id": "zwyLeTzeCn4",
+      "title": "A regra secreta do Death Note que você não sabia 📓 #DeathNote #Anime #Otaku",
+      "episode_id": null,
+      "status": "source_unconfirmed",
+      "privacy": "public"
+    },
+    {
+      "video_id": "wZ0Kx0UyB0s",
+      "title": "Death Note EP. 2: a armadilha de L que revelou Kira! 📺",
+      "episode_id": "102-death-note-ep02",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "w6eSdUGk6aE",
+      "title": "Death Note EP. 1: como Light se tornou Kira 📓",
+      "episode_id": "101-death-note-ep01",
+      "status": "already_on_english",
+      "privacy": "public",
+      "existing_en_video_id": "tPurNjxbnx0"
+    },
+    {
+      "video_id": "onPMOtF1EfA",
+      "title": "Por que Ryuk ama MAÇÃS em Death Note? 🍎",
+      "episode_id": "007-death-note-maca",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "NNOK0WDy6T0",
+      "title": "Ryuk deixou o Death Note cair por TÉDIO? 👁️",
+      "episode_id": "006-death-note-shinigami",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "Zg2mSwipw3I",
+      "title": "Light virou o mal tentando fazer justiça? 🩸 | Death Note",
+      "episode_id": "005-death-note-sangue",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "yTAyi97LKoI",
+      "title": "O segundo Kira colocou o plano de Light em risco! 😱",
+      "episode_id": "004-death-note-segundo-kira",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "ZKkfQejnYaA",
+      "title": "Light vs. L: quem venceria esse xadrez mortal? ♟️",
+      "episode_id": "003-death-note-xadrez",
+      "status": "ready",
+      "privacy": "public"
+    },
+    {
+      "video_id": "mP34eFfMIRI",
+      "title": "Light caçou Kira SEM SABER que era ele mesmo! 🤯 #Shorts",
+      "episode_id": null,
+      "status": "source_unconfirmed",
+      "privacy": "public"
+    },
+    {
+      "video_id": "VfliGg3N4rU",
+      "title": "Por que Death Note prende tanto SEM LUTAS? 🧠 #Shorts",
+      "episode_id": null,
+      "status": "source_unconfirmed",
+      "privacy": "public"
+    }
+  ]
+}

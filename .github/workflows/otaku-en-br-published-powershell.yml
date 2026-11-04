@@ -1,0 +1,43 @@
+name: Otaku Reframe V3 - Windows launcher syntax
+
+on:
+  pull_request:
+    paths:
+      - 'preparar-publicados-en.ps1'
+      - 'gerar-shorts-en.ps1'
+      - 'publicar-shorts-en.ps1'
+      - '.github/workflows/otaku-en-br-published-powershell.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'preparar-publicados-en.ps1'
+      - 'gerar-shorts-en.ps1'
+      - 'publicar-shorts-en.ps1'
+      - '.github/workflows/otaku-en-br-published-powershell.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  parse-windows-launchers:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse EN launchers without executing them or touching OAuth
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $files = @('preparar-publicados-en.ps1', 'gerar-shorts-en.ps1', 'publicar-shorts-en.ps1')
+          foreach ($file in $files) {
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              (Join-Path (Get-Location) $file), [ref]$tokens, [ref]$errors
+            ) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error $_.ToString() }
+              throw "PowerShell syntax invalid: $file"
+            }
+            Write-Host "[OK] $file"
+          }

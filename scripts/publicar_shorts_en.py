@@ -15,7 +15,7 @@ import re
 import subprocess
 import sys
 
-from renderizar_shorts_en import load_english, english_metadata, OUT, ROOT
+from renderizar_shorts_en import load_english, english_metadata, OUT, ROOT, EN_CHANNEL_V3
 from shorts_duration import validate_seconds
 
 CLIENT = ROOT / ".secrets" / "youtube-oauth-client.json"
@@ -142,6 +142,16 @@ def candidates(profile: str, episode_id: str, limit: int,
         qa = read_json(report_file)
         if qa.get("status") not in ("renderizado_aguardando_revisao", "renderizado_qa_automatico"):
             raise ValueError("QA invalido para " + ep["id"])
+        if ep.get("source_br_video_id"):
+            # Applies also to legacy five when reused from a verified BR public video.
+            if qa.get("render_origin") != "AutoEditorVideo/local/remotion":
+                raise ValueError("Video EN nao pertence ao renderer local: " + ep["id"])
+            if qa.get("video_sha256") != sha256(path):
+                raise ValueError("Checksum QA nao confere com MP4 EN: " + ep["id"])
+            if (qa.get("language") != "en-US"
+                    or qa.get("source_br_video_id") != ep["source_br_video_id"]
+                    or qa.get("source_pt_script_sha256") != ep["source_pt_script_sha256"]):
+                raise ValueError("Fonte BR e narracao EN sem rastreabilidade no QA: " + ep["id"])
         if ep.get("scenes"):
             # Upload only immutable outputs actually rendered by the local
             # AutoEditorVideo/Remotion pipeline, not external preview clips.
@@ -233,6 +243,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.acao == "conectar":
         channel_auth()
         return 0
+    # Manifesto BR->EN tem destino fixo. Exigir canal explicitamente correto
+    # no envio; modo verificar continua inteiramente offline.
+    source_manifest = (read_json(args.manifesto) if args.manifesto else {})
+    target = source_manifest.get("target_channel_id")
+    if target and target != EN_CHANNEL_V3:
+        raise ValueError("Manifesto nao pertence ao canal Otaku Reframe")
     rows = candidates(args.perfil, args.id, args.limite, args.manifesto)
     saved = read_json(STATE) if STATE.is_file() else {"schema": "arquivo-otaku/youtube-en/v1", "items": {}}
     for row in rows:
@@ -244,6 +260,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if not args.confirmar:
         raise RuntimeError("Envio desabilitado. Revise e passe -ConfirmarEnvio.")
+    if target and expected_channel() != target:
+        raise RuntimeError("CANAL EN INCORRETO: ID local divergente do manifesto; upload bloqueado.")
     youtube = channel_auth()  # strict channel check BEFORE any videos.insert
     for row in rows:
         upload(youtube, row, args.privacidade, saved)

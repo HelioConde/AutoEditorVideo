@@ -1,3 +1,14 @@
+# Atualizacao — Otaku Reframe ja esta criado (04/11/2026)
+
+Canal ingles confirmado: Otaku Reframe, https://www.youtube.com/@otakureframe,
+ID UCBoNbQjaMYdpJqPLRZAFkvQ. Nao crie outro canal para esta tarefa.
+O guia original abaixo e historico; o fluxo de adaptacao de Shorts ja publicados
+no BR esta em [Otaku Reframe BR->EN V3](OTAKU-REFRAME-PUBLICADOS-BR-EN-V3.md).
+
+A preparacao nao faz upload, nao consome imagens IA e nao altera a conta BR.
+
+---
+
 # Otaku Archives — segundo canal em inglês
 
 Objetivo: abrir um canal internacional separado do Arquivo Otaku (PT-BR),
