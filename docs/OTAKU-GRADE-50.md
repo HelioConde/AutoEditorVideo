@@ -31,9 +31,16 @@ suave porém mais perceptível no preset equilibrado: sem distorcer rostos,
 dedos e roupas. Em artes planas, só há animação de câmera, **não há
 animação real de braços, boca ou rosto**. O relatório
 `qa-master-multicenas.json` registra `camera_only_scenes`.
-A publicação de um Short com 100% das cenas apenas em arte plana é bloqueada
-até que exista ao menos uma cena com personagem em camada segura; o produtor
-não inventa movimento que não existe.
+O fluxo padrão produz sobretudo **2.5D/imagem plana**. Essas cenas
+podem ser publicadas normalmente após os demais testes de QA, usando
+**zoom in/out suave**. O QA avisa que não existe movimento independente
+de personagens, sem fingir gestos que a arte não possui.
+
+Quem quiser um modo mais rigoroso pode adicionar
+`-ExigirMovimentoPersonagem`: somente nesse caso o lote bloqueia
+vídeos sem nenhuma camada de personagem RGBA segura. O padrão NÃO usa
+esse bloqueio, pois ele impedia a publicação de vídeos válidos como o
+`5001-black-clover`.
 
 ## Etapa 1 — validar e preparar sem gastar IA
 
@@ -85,9 +92,10 @@ usam créditos de imagem nem enviam vídeos.
 ## Proteções e envio da miniatura
 
 - Não publica vídeos incompletos: exige MP4 válido de até 60 segundos,
-  JPEG 9:16, QA de animação recente e ao menos uma cena com personagem
-  em camada RGBA segura. Imagens planas podem ser exibidas com zoom,
-  mas não são consideradas animação verdadeira de personagem.
+  JPEG 9:16, QA recente e relatório correspondente ao arquivo de vídeo.
+  Cenas 2.5D/planas com zoom suave **são permitidas**; não são
+  consideradas animação independente de personagem. Use
+  `-ExigirMovimentoPersonagem` se quiser bloquear essas produções.
 - Publica **um vídeo por vez**, como `public` — nunca `private` ou
   `publishAt`. Se o YouTube não confirmar a visibilidade pública,
   a fila para e registra a incerteza; verifique o Studio.
