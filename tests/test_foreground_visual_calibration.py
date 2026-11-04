@@ -25,8 +25,28 @@ def to_png(im):
     return out.getvalue()
 
 
-def test_reference_adjustments_apply_only_to_01_and_05_and_gpt_image_15():
+def test_reference_adjustments_require_explicit_config_and_remain_model_scoped(tmp_path,monkeypatch):
+    """Calibration must be explicitly configured, not silently hardcoded.
+
+    Shipped defaults are empty. The creator's private local adjustments are
+    never fabricated or overwritten. A model-specific placement is opt-in.
+    """
+    monkeypatch.setattr(m,'ROOT',tmp_path)
     ep={'id':'003-death-note-xadrez'}
+    for scene in ('01','05','06'):
+        assert m.foreground_transform(ep,Path(scene+'-otherhash'),'gpt-image-1.5')==(0,0,1.0)
+    config=tmp_path/'configs'/'foreground-placements.json'
+    config.parent.mkdir()
+    config.write_text(json.dumps({
+        'schema':'arquivo-otaku/foreground-placements/v1',
+        'scene_defaults':{
+            '003-death-note-xadrez/gpt-image-1.5/01':{'x':-4,'y':-15,'scale':1.03},
+            '003-death-note-xadrez/gpt-image-1.5/05':{'x':-25,'y':-88,'scale':1.10},
+        },
+        'placements':{
+            '003-death-note-xadrez/06-594007f1c10bb8':{'x':0,'y':-211}
+        },
+    }),encoding='utf-8')
     assert m.foreground_transform(ep,Path('01-otherhash'),'gpt-image-1.5')==(-4,-15,1.03)
     assert m.foreground_transform(ep,Path('05-otherhash'),'gpt-image-1.5')==(-25,-88,1.10)
     for number in ('02','03','04'):
@@ -36,7 +56,6 @@ def test_reference_adjustments_apply_only_to_01_and_05_and_gpt_image_15():
         assert m.foreground_transform(ep,Path(number+'-otherhash'),'gpt-image-2')==(0,0,1.0)
         assert m.foreground_transform({'id':'outro-episodio'},
                                       Path(number+'-otherhash'),'gpt-image-1.5')==(0,0,1.0)
-
 
 def test_foreground_scale_translation_keeps_raw_and_canvas():
     original=Image.new('RGBA',m.SIZE,(0,0,0,0))
