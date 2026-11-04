@@ -59,6 +59,11 @@ def classify(source: Path, *, root: Path = ROOT) -> Video | None:
         return None
     if parts[0].casefold() == "biblioteca-videos":
         return None
+    if parts[0] == "kids-emanuelly":
+        if (len(parts) == 3 and parts[2] == "final.mp4"
+                and re.fullmatch(r"kids-emanuelly-ep01-p0[1-4]-[a-z0-9-]+", parts[1])):
+            return Video(source, "Kids", _safe_component(parts[1]))
+        return None
     if parts[0] == "piloto-canais-v3":
         # Nunca copiar trechos de captura como se fossem videos finais.
         if len(parts) != 4 or parts[1] not in ("games", "kids") or parts[3] != "final.mp4":
@@ -94,7 +99,7 @@ def scan(root: Path = ROOT) -> tuple[list[Video], list[Path]]:
         raise ValueError("assets/gerados existe, mas nao e uma pasta")
     videos, unknown = [], []
     # Restrict scanning to known output locations to avoid copying game captures.
-    roots = [gen / "shorts-animados", gen / "piloto-canais-v3"]
+    roots = [gen / "shorts-animados", gen / "piloto-canais-v3", gen / "kids-emanuelly"]
     files = [p for p in gen.glob("*.mp4") if p.is_file()]
     for candidate in roots:
         if candidate.is_dir():
