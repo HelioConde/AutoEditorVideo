@@ -16,8 +16,18 @@ import sys,json
 from pathlib import Path
 Path(__file__).resolve().parents[1].joinpath("args.json").write_text(
   json.dumps(sys.argv[1:]),encoding="utf8")
-'@ | Set-Content -LiteralPath (Join-Path $temp 'scripts\kids_emanuelly_cenarios_camadas_v1.py') -Encoding UTF8
+'@ | Set-Content -LiteralPath (Join-Path $temp 'scripts\kids_emanuelly_todos_videos_v2.py') -Encoding UTF8
   $runner=Join-Path $temp 'animar-emanuelly.ps1'
+  & $runner -Acao Catalogo -Parte Todas | Out-Null
+  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'args.json') -Raw | ConvertFrom-Json
+  if(-not ($argsPy -contains 'catalogo') -or -not ($argsPy -contains 'Todas')){
+    throw 'Catalogo das quatro partes nao chegou ao motor'
+  }
+  & $runner -Acao Planejar -Parte 3 | Out-Null
+  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'args.json') -Raw | ConvertFrom-Json
+  if(-not ($argsPy -contains 'planejar') -or -not ($argsPy -contains '3')){
+    throw 'Planejar Parte 3 nao foi encaminhado'
+  }
   & $runner -Acao Planejar | Out-Null
   $argsPy=Get-Content -LiteralPath (Join-Path $temp 'args.json') -Raw | ConvertFrom-Json
   if(-not ($argsPy -contains 'planejar')){
@@ -42,9 +52,16 @@ Path(__file__).resolve().parents[1].joinpath("args.json").write_text(
   if(-not ($argsPy -contains 'props')){
     throw 'Compositor nao recebeu acao Preparar'
   }
-  & $runner -Acao Renderizar -Refazer | Out-Null
+  & $runner -Acao GerarImagens -Parte 2 -Recurso ovo-rachado -MaxChamadas 1 | Out-Null
   $argsPy=Get-Content -LiteralPath (Join-Path $temp 'args.json') -Raw | ConvertFrom-Json
-  if(-not ($argsPy -contains 'renderizar') -or
+  if(-not ($argsPy -contains 'gerar-imagens') -or
+     -not ($argsPy -contains 'ovo-rachado') -or
+     -not ($argsPy -contains '1')){
+    throw 'GerarImagem obrigatoriamente seleciona recurso e limite'
+  }
+  & $runner -Acao Renderizar -Parte 4 -Refazer | Out-Null
+  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'args.json') -Raw | ConvertFrom-Json
+  if(-not ($argsPy -contains '4') -or -not ($argsPy -contains 'renderizar') -or
      -not ($argsPy -contains '--refazer')){
     throw 'Renderizar nao encaminhou os argumentos'
   }
