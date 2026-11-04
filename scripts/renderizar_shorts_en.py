@@ -148,8 +148,29 @@ def prepare_cover(ep: dict, item: dict, folder: Path, model: str) -> Path:
     return cover
 
 
+def assess_character_motion(props: dict, *, strict: bool = False) -> dict:
+    """Medir capacidade de camada por cena, sem chamar zoom de animacao."""
+    character = [s for s in props.get("scenes", []) if s.get("subject") == "personagens"]
+    movable = [s for s in character if s.get("motionCapability") == "character-layer"
+               and s.get("movableCharacterLayers", 0) > 0]
+    camera_only = [str(s.get("id", "?")) for s in character if s not in movable]
+    if strict and camera_only:
+        raise ValueError(
+            "EN sem movimento independente dos personagens nas cenas: "
+            + ", ".join(camera_only)
+            + ". Zoom de camera nao substitui animacao; melhorar camadas antes de renderizar."
+        )
+    return {
+        "character_scenes": len(character),
+        "character_layer_scenes": len(movable),
+        "camera_only_character_scene_ids": camera_only,
+        "character_motion_verified": not camera_only and bool(character),
+        "note": "Camada movel nao garante rigging articulado; verificar video inteiro",
+    }
+
+
 def process(item: dict, action: str, *, profile: str, model: str, overwrite: bool,
-            qa_mode: str = "automatico") -> dict:
+            qa_mode: str = "automatico", require_character_motion: bool = False) -> dict:
     episode_id = item["id"]
     # Render ONLY through the local AutoEditorVideo + Remotion engine.
     # External cloud previews are not an acceptable source for this pipeline.
@@ -226,6 +247,11 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         asset_namespace=f"{episode_id}-en-us",
         hook_override=item["cover"],
     )
+    motion_qa = assess_character_motion(props, strict=require_character_motion)
+    if motion_qa["camera_only_character_scene_ids"]:
+        print("[AVISO EN MOVIMENTO] Cenas apenas com camera: " +
+              ", ".join(motion_qa["camera_only_character_scene_ids"]) +
+              "; nao confundir com animacao do personagem.", flush=True)
     props["language"] = "en-US"
     props["editorialProfile"] = "retention-v2" if item.get("scenes") else "legacy"
     propfile = MOTION / f"props-master-{episode_id}-en-US.json"
@@ -263,6 +289,8 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         "source_br_video_id": item.get("source_br_video_id"),
         "source_pt_script_sha256": item.get("source_pt_script_sha256"),
         "english_visual_review_required": bool(item.get("source_br_video_id")),
+        "character_motion_qa": motion_qa,
+        "require_character_motion": require_character_motion,
         "visual_continuity": "ryuk-reveal-after-beat-9" if item.get("scenes") else "legacy",
     }
     (folder / "qa-en-US.json").write_text(
@@ -280,6 +308,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--modelo", choices=("gpt-image-1.5", "gpt-image-2"), default="gpt-image-1.5")
     parser.add_argument("--perfil", choices=("equilibrado", "vivo", "ultrassutil"), default="equilibrado")
     parser.add_argument("--refazer", action="store_true")
+    parser.add_argument("--exigir-movimento-personagem", action="store_true",
+                        help="Bloqueia cenas com personagens sem camadas moveis reais")
     parser.add_argument("--modo-qa", choices=("automatico","manual"), default="automatico")
     args = parser.parse_args(argv)
     entries = load_english(Path(args.manifesto))
@@ -291,7 +321,8 @@ def main(argv: list[str] | None = None) -> int:
     for item in entries:
         try:
             process(item, args.acao, profile=args.perfil, model=args.modelo,
-                    overwrite=args.refazer, qa_mode=args.modo_qa)
+                    overwrite=args.refazer, qa_mode=args.modo_qa,
+                    require_character_motion=args.exigir_movimento_personagem)
         except Exception as exc:
             problems.append((item["id"], str(exc)))
             print(f"[EN FALHOU] {item['id']}: {exc}", file=sys.stderr, flush=True)
