@@ -14,6 +14,7 @@ param(
     [ValidateRange(0,180)][int]$MaxChamadasPorVideo=0,
     [switch]$ConfirmarCotaImagem,
     [switch]$ConfirmarPublicacao,
+    [switch]$ExigirMovimentoPersonagem,
     [switch]$Refazer
 )
 $ErrorActionPreference='Stop'
@@ -45,6 +46,7 @@ $argsList=@(
 )
 if($ConfirmarCotaImagem){$argsList+='--confirmar-cota-imagem'}
 if($ConfirmarPublicacao){$argsList+='--confirmar-publicacao'}
+if($ExigirMovimentoPersonagem){$argsList+='--exigir-movimento-personagem'}
 if($Refazer){$argsList+='--refazer'}
 & $py @argsList
 if($LASTEXITCODE -ne 0){
