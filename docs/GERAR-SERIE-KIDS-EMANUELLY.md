@@ -6,6 +6,35 @@ Produção LOCAL do EP 1 da série Emanuelly e seus Amigos de Pelúcia, dividido
 
 **A foto do elenco é obrigatória para PREPARAR as referências isoladas; cada imagem de história usa somente a referência da fase correta.** O arquivo privado não é versionado no GitHub: fica somente em assets/referencias-privadas/emanuelly-elenco.png, com proteção explícita no .gitignore. Cada nova imagem é solicitada ao endpoint de edição do Codex Proxy em http://127.0.0.1:8080/v1/images/edits, com o PNG da referência codificado na requisição. O proxy pode encaminhar a foto ao provedor configurado. Execute somente se autorizar esse envio. Sem suporte a edições, o programa falha — não produz imagem genérica de substituição.
 
+## Nova trilha sonora Kids (duas musicas)
+
+Os dois MP3 colocados na raiz foram integrados aos Shorts infantis:
+
+| Episodio | Musica de fundo |
+|---|---|
+| Emanuelly Parte 1 e Parte 3 | `Wondertrail _Main Theme_.mp3` |
+| Emanuelly Parte 2 e Parte 4 | `Wondertrail _Main Theme_2.mp3` |
+| Estrelinha Azul, Casinha de Formas | Primeira musica |
+| Cinco Passarinhos | Segunda musica |
+
+O Remotion coloca a trilha em loop, com nivel inicial discreto de
+**7,5%** e fade de **1,5 segundo** no inicio e fim. Isso nao altera
+o audio TTS: frases e pausas continuam naturais. A musica nao
+eh adicionada aos videos Gamer ou Otaku.
+
+O projeto copia os MP3 de origem para uma pasta local de build
+`motion-remotion/public/generated/kids-musicas/`; os arquivos
+originais nao sao alterados. O QA registra fonte, SHA-256 e
+`music_rights_review=pending_before_publication`. Se o MP3 mudar,
+o MP4 anterior fica marcado como desatualizado e exige `-Refazer`
+para obter uma versao com a nova trilha.
+
+**Aviso de direitos:** o nome das musicas nao prova licenca
+de sincronizacao para video. Antes de publicar qualquer video com
+essas trilhas, confirme autorizacao do titular para YouTube, Shorts
+e monetizacao. Esta integracao e apenas para geracao local e
+avaliacao; o pipeline NAO faz uploads.
+
 ## CORREÇÃO v2 — elenco isolado e cronologia obrigatória
 
 O problema dos quadros **03 e 08 da Parte 1** era sério: o modelo
