@@ -273,8 +273,16 @@ def render(channel: dict, episode: dict, *, replace: bool = False,
         "upload_approved": False,
         "published": False,
     }
+    qa["visual_review_stage"] = "post_upload_youtube_studio"
     qa_file.write_text(json.dumps(qa, ensure_ascii=False, indent=2) + "\n",
                        encoding="utf-8")
+    try:
+        from organizar_videos_por_canal import refresh_library_after_render
+        archive = refresh_library_after_render(root)
+        if archive["status"] == "updated":
+            print("[BIBLIOTECA] Shorts novos sincronizados: " + str(archive["videos"]))
+    except (OSError, ValueError) as exc:
+        print("[BIBLIOTECA AVISO] MP4 preservado: " + str(exc))
     return {"status": "renderizado_aguardando_revisao", "file": str(final),
             "seconds": status["duration"], "video_sha256": sha, "published": False}
 
