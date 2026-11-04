@@ -85,8 +85,8 @@ async def _synthesize(script: str, voice: str, rate: str) -> tuple[bytes, list[d
             if duration > 0:
                 words.append({"start": round(start, 4), "end": round(start + duration, 4),
                               "text": packet.get("text", "")})
-    if len(audio) < 1000 or len(words) < 10:
-        raise RuntimeError("Edge TTS não retornou narração e alinhamento válidos")
+    if len(audio) < 1000 or len(words) < 1:
+        raise RuntimeError("Edge TTS não retornou audio e WordBoundary validos para a fala")
     return bytes(audio), words
 
 
@@ -375,7 +375,13 @@ def main(argv: list[str] | None = None) -> int:
     if args.acao == "inspecionar":
         result = {"voice": BR_VOICES[channel["id"]], "locale": "pt-BR",
                   "requires_gameplay": channel["id"] == "games", "published": False,
-                  "voice_present": (folder_of(channel, episode) / "narracao.mp3").is_file()}
+                  "voice_present": (folder_of(channel, episode) / "narracao.mp3").is_file(),
+                  "narration_style": episode.get("narration_style", "standard"),
+                  "planned_duration_s": episode.get("planned_duration_seconds"),
+                  "planned_pause_s": round(sum(
+                      b["pause_after_s"] for b in episode.get("narration_timeline", [])
+                  ), 2),
+                  "note": "Pausas Kids serao reais no MP3, nao marcadores lidos em voz alta."}
     elif args.acao == "voz":
         result = create_voice(channel, episode, replace=args.refazer)
     else:
