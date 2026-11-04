@@ -48,7 +48,14 @@ git pull --ff-only origin main
 Essas ações geram/validam storyboards e metadados locais. **Nenhum upload**.
 Também podem ser usadas com `-InicioNaLista 1 -Quantidade 3`.
 
-## Etapa 2 — testar o primeiro vídeo, sem publicar
+## Etapa 2 — gerar E PUBLICAR como público, vídeo por vídeo
+
+A preferência atual do criador é **sem agendamento**. Assim que o Short
+estiver renderizado, com duração/capa/QA aprovados, o lote fará o upload
+**público**, verificará o ID e tentará enviar a miniatura 9:16.
+Só depois começa o próximo anime. Não haverá pausa de aprovação manual
+entre os vídeos, portanto faça primeiro um teste pequeno se quiser
+comparar a aparência das animações.
 
 ```powershell
 Push-Location .\motion-remotion
@@ -57,61 +64,55 @@ npm.cmd run test:qa
 Pop-Location
 .\.venv\Scripts\python.exe -m pytest -q tests/test_grade_50_shorts.py
 
-# Até 30 chamadas adicionais para este episódio. É um teto, não uma previsão
-# de custo ou garantia de render concluído; requer proxy elegível.
-.\grade-50-shorts.ps1 -Acao Produzir -InicioNaLista 1 -Quantidade 1 `
+# Primeiro Short: produz e publica como PUBLICO automaticamente.
+.\grade-50-shorts.ps1 -Acao ProduzirPublicar -InicioNaLista 1 -Quantidade 1 `
   -Modelo gpt-image-2 -Perfil equilibrado `
-  -MaxChamadasPorVideo 30 -ConfirmarCotaImagem
+  -MaxChamadasPorVideo 30 -ConfirmarCotaImagem -ConfirmarPublicacao
 ```
 
-Use `-MaxChamadasPorVideo 0` para trabalhar só com cache. Se o episódio
-precisar de mais imagens, o editor interromperá **antes de começar** a geração
-daquele episódio; ajuste o teto conscientemente. Não use 50×30 sem considerar
-o custo/limite: o máximo teórico é **1.500 chamadas**.
+Para processar **todos os 50** em sequência, altere `-Quantidade 1`
+para `-Quantidade 50`. `30` é o teto **por vídeo**; 50×30 permite
+até **1.500 chamadas de imagem**, não é uma previsão de gasto nem
+garantia de conclusão. Cenas podem exigir mais de 30 chamadas. Sem
+`-ConfirmarCotaImagem`, nenhuma chamada de geração é liberada quando
+o teto é maior que zero. Com `-MaxChamadasPorVideo 0`, a etapa de
+produção usa somente imagens já em cache.
 
-Antes de publicar, **assista ao MP4** em tamanho de celular e confira:
-1. Abertura sem pulos de posição; zoom suave perceptível.
-2. Camadas do personagem realmente se movimentam quando seguras; sem
-   braços/rosto esticados e sem arte tremendo.
-3. Legendas no tempo certo, legíveis e fora do rosto.
-4. Identidade do personagem, cenário e objeto corretos.
-5. Duração real até 60,000s aferida por ffprobe.
-6. Correção editorial e direitos de uso de toda arte/áudio.
+Para **somente produzir, sem publicar**, use `-Acao Produzir`.
+`-Acao Validar` e `-Acao Preparar` continuam disponíveis e não
+usam créditos de imagem nem enviam vídeos.
 
-Para produzir outros episódios, ajuste `-InicioNaLista` e `-Quantidade`.
-O lote para após a primeira falha; o cache e o estado anterior são preservados.
+## Proteções e envio da miniatura
 
-## Etapa 3 — agendar **somente vídeos prontos** no YouTube
-
-O agendamento exige aprovação **explícita** e data futura com fuso.
-Publicações são enviadas como **private** com `publishAt` confirmado pela API
-do YouTube; tornam-se públicas na data marcada, não imediatamente.
-Por exemplo, depois de produzir e conferir toda a grade:
-
-```powershell
-.\grade-50-shorts.ps1 -Acao Agendar -InicioNaLista 1 -Quantidade 50 `
-  -InicioAgendamento "2026-12-01T09:00:00-03:00" `
-  -IntervaloHoras 24 -ConfirmarPublicacao
-```
-
-**Altere a data para uma futura quando for executar.**
-A fila usa a posição original 1–50 para calcular as datas; cada vídeo
-fica separado por 24 horas na programação. Com `-Quantidade 3`, você
-pode validar os primeiros três sem enviar os demais.
-
-Proteções: antes de qualquer upload, verifica os MP4s, capas, duração e
-metadados de animação; não aceita 50 vídeos sem personagem realmente
-separado em camada; usa `-MaxChamadas 0` na publicação; não reenvia
-conteúdo que já tem estado confirmado, nem tenta repetir um upload remoto
-que falhou de modo ambíguo. Guarde o estado
-`assets/gerados/publicacao-youtube/grade-50-estado.json` no PC.
+- Não publica vídeos incompletos: exige MP4 válido de até 60 segundos,
+  JPEG 9:16, QA de animação recente e ao menos uma cena com personagem
+  em camada RGBA segura. Imagens planas podem ser exibidas com zoom,
+  mas não são consideradas animação verdadeira de personagem.
+- Publica **um vídeo por vez**, como `public` — nunca `private` ou
+  `publishAt`. Se o YouTube não confirmar a visibilidade pública,
+  a fila para e registra a incerteza; verifique o Studio.
+- O publicador espera a API do YouTube confirmar
+  `processingDetails.processingStatus=succeeded` antes de chamar
+  `thumbnails.set` para a **capa vertical gerada pelo editor**.
+  A disponibilidade depende de verificação/permissões da conta.
+  Se houver 403, processamento pendente ou recurso indisponível,
+  a capa continua salva em `assets/gerados/publicacao-youtube`,
+  o vídeo continua publicado e **não é reenviado**.
+  Miniaturas personalizadas de Shorts também podem ser ajustadas
+  no YouTube Studio para desktop, em canais elegíveis.
+- Os registros de vídeo e SHA de MP4 são preservados em
+  `assets/gerados/publicacao-youtube/grade-50-estado.json`.
+  Em falhas ambíguas de upload, interrompe e pede verificação no
+  YouTube Studio em vez de arriscar duplicação.
+- O software só consegue executar enquanto o processo PowerShell
+  estiver rodando no PC. Os arquivos no GitHub não iniciam tarefas
+  automaticamente.
 
 ## Estratégia recomendada
 
-A lista contém animes recentes, populares e nostálgicos. Não foi
-projetada como 50 publicações ao mesmo instante: faça testes de desempenho
-das primeiras 3–10 publicações e compare retenção inicial, visualizações
-intencionais e inscritos antes de usar todo o orçamento.
+A lista contém animes recentes, populares e nostálgicos. Embora o modo automático já permita 50 uploads públicos sequenciais,
+vale medir os primeiros resultados e a qualidade visual para evitar
+repetir problemas nos próximos vídeos.
 
 **Não é possível transformar uma imagem chapada em animação facial real
 apenas com zoom**. Quando isso for essencial, prepare outras camadas
