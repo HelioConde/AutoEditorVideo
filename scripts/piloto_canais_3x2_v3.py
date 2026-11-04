@@ -89,10 +89,36 @@ def validate(data: dict) -> None:
             beats = ep.get("narration_beats")
             if not isinstance(beats, list) or len(beats) != 5 or " ".join(beats) != script:
                 raise ValueError("Roteiro narrativo nao coincide com cinco cenas: " + ep_id)
+            pacing = ep.get("kids_pacing")
+            if pacing is not None:
+                if not children or pacing.get("schema") != "mini-mundo/narracao-acolhedora/v1":
+                    raise ValueError("Ritmo acolhedor pertence somente ao Kids")
+                target = pacing.get("target_seconds", {})
+                if target != {"min": 45, "max": 55}:
+                    raise ValueError("Kids acolhedor deve mirar de 45 a 55 segundos")
+                segments = pacing.get("segments")
+                if not isinstance(segments, list) or not 5 <= len(segments) <= 30:
+                    raise ValueError("Narração acolhedora precisa de frases separadas")
+                all_ids = [segment.get("scene") for segment in segments]
+                if all_ids != sorted(all_ids) or set(all_ids) != {
+                    "01", "02", "03", "04", "05"
+                }:
+                    raise ValueError("Segmentos acolhedores fora de ordem ou sem cenas")
+                for segment in segments:
+                    if not segment.get("text", "").strip() or not segment.get("cue") or not segment.get("headline"):
+                        raise ValueError("Segmento acolhedor sem fala ou indicações")
+                    pause = segment.get("pause_after_s")
+                    if not isinstance(pause, (int, float)) or not 0 <= pause <= 2.5:
+                        raise ValueError("Pausa Kids precisa ficar entre 0 e 2,5 segundos")
+                    if segment["cue"].endswith("-question") and pause < 1.5:
+                        raise ValueError("Dar 1,5s ou mais para a criança responder")
+                if [ " ".join(seg["text"] for seg in segments if seg["scene"] == f"{i+1:02d}")
+                     for i in range(5)] != beats:
+                    raise ValueError("Roteiro acolhedor diverge das cinco cenas")
             scenes = ep.get("scenes")
             if not isinstance(scenes, list) or len(scenes) != 5:
                 raise ValueError("Storyboard deve ter cinco cenas: " + ep_id)
-            expected_duration = 28 if children else 38
+            expected_duration = (55 if pacing is not None else 28) if children else 38
             if ep.get("planned_duration_seconds") != expected_duration:
                 raise ValueError("Duracao planejada invalida: " + ep_id)
             if children:
