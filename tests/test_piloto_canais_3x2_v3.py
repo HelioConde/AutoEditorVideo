@@ -165,6 +165,7 @@ def test_voice_generation_and_render_are_distinct_user_actions(tmp_path, monkeyp
     monkeypatch.setattr(producer, "OUT", tmp_path)
     with pytest.raises(FileNotFoundError, match="Narração"):
         producer.read_voice(games, ep)
+    (tmp_path / "mock.mp3").write_bytes(b"MP3" * 1200)
     monkeypatch.setattr(producer, "read_voice",
                         lambda *_args, **_kwargs: (tmp_path / "mock.mp3",
                           {"words": [{"start": 0, "end": .4, "text": "oi"}] * 65}))
