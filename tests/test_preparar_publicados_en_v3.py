@@ -163,3 +163,24 @@ def test_no_runtime_upload_in_preparer_and_wrapper_has_no_upload_flag():
     assert "MediaFileUpload" not in script
     assert "youtube-en-token.json" not in script
     assert "ConfirmarEnvio" not in ps
+
+
+def test_english_motion_report_never_confuses_camera_with_character_animation():
+    props = {"scenes": [
+        {"id": "01", "subject": "personagens", "motionCapability": "camera-only",
+         "movableCharacterLayers": 0},
+        {"id": "02", "subject": "objeto", "motionCapability": "camera-only",
+         "movableCharacterLayers": 0},
+        {"id": "03", "subject": "personagens", "motionCapability": "character-layer",
+         "movableCharacterLayers": 1},
+    ]}
+    report = render.assess_character_motion(props)
+    assert report["character_scenes"] == 2
+    assert report["character_layer_scenes"] == 1
+    assert report["camera_only_character_scene_ids"] == ["01"]
+    assert report["character_motion_verified"] is False
+    with pytest.raises(ValueError, match="Zoom de camera"):
+        render.assess_character_motion(props, strict=True)
+    assert render.assess_character_motion({
+        "scenes": [props["scenes"][2]]
+    }, strict=True)["character_motion_verified"] is True
