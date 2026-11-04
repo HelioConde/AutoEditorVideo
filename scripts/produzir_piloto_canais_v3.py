@@ -17,6 +17,11 @@ import subprocess
 import sys
 
 from piloto_canais_3x2_v3 import load_manifest, selected, verify_video, ROOT
+from kids_narracao_acolhedora import (
+    STYLE as KIDS_ACOLHEDORA,
+    compose_timeline as compose_kids_timeline,
+    timeline_fingerprint,
+)
 
 OUT = ROOT / "assets" / "gerados" / "piloto-canais-v3"
 MOTION = ROOT / "motion-remotion"
@@ -46,6 +51,11 @@ def read_voice(channel: dict, episode: dict) -> tuple[Path, dict]:
         raise ValueError("Roteiro mudou: cache da narração antiga bloqueado")
     if data.get("voice") != voice or data.get("rate") != rate:
         raise ValueError("Idioma, voz ou velocidade não correspondem ao canal")
+    if episode.get("narration_style") == KIDS_ACOLHEDORA:
+        if data.get("timeline_sha256") != timeline_fingerprint(episode):
+            raise ValueError("Pausas ou falas Kids mudaram; regenere voz com -Refazer")
+        if data.get("style") != KIDS_ACOLHEDORA or not data.get("segments"):
+            raise ValueError("Cache Kids antigo sem alinhamento das pausas; use -Refazer")
     words = data.get("words", [])
     if not isinstance(words, list) or not words:
         raise ValueError("Voz sem tempos reais das palavras")
@@ -91,7 +101,14 @@ def create_voice(channel: dict, episode: dict, *, replace: bool = False) -> dict
     if (folder / "narracao.mp3").exists() and not replace:
         raise ValueError("Cache de voz anterior diverge; especifique --refazer para renovar")
     folder.mkdir(parents=True, exist_ok=True)
-    blob, words = asyncio.run(_synthesize(episode["script"], voice, rate))
+    extra = {}
+    if episode.get("narration_style") == KIDS_ACOLHEDORA:
+        blob, extra = asyncio.run(compose_kids_timeline(
+            episode, voice, rate, _synthesize,
+        ))
+        words = extra["words"]
+    else:
+        blob, words = asyncio.run(_synthesize(episode["script"], voice, rate))
     # Write new audio atomically without destroying approved data on failure.
     tmp = folder / "narracao.partial.mp3"
     tmp.write_bytes(blob)
@@ -104,6 +121,7 @@ def create_voice(channel: dict, episode: dict, *, replace: bool = False) -> dict
         "script_sha256": hash_script(episode["script"]),
         "words": words,
         "review_required": True,
+        **extra,
     }
     marker.write_text(json.dumps(content, ensure_ascii=False, indent=2) + "\n",
                       encoding="utf-8")
@@ -153,11 +171,19 @@ def _scenes_with_audio_timings(episode: dict, words: list[dict],
 
 
 def _caption_groups(words: list[dict], duration_frames: int) -> list[dict]:
+    """Group captions without bridging the thinking pauses between Kids beats."""
     captions: list[dict] = []
-    for start in range(0, len(words), 3):
-        segment = words[start:start+3]
-        if not segment:
-            continue
+    groups: list[list[dict]] = []
+    current: list[dict] = []
+    for word in words:
+        if current and (len(current) >= 3 or
+                        word.get("beat_id") != current[-1].get("beat_id")):
+            groups.append(current)
+            current = []
+        current.append(word)
+    if current:
+        groups.append(current)
+    for segment in groups:
         t1 = max(0, round(segment[0]["start"] * FPS))
         t2 = min(duration_frames, round(segment[-1]["end"] * FPS) + 2)
         if t2 <= t1:
@@ -169,6 +195,36 @@ def _caption_groups(words: list[dict], duration_frames: int) -> list[dict]:
     if not captions:
         raise ValueError("Sem legendas baseadas na narração")
     return captions
+
+
+def _kids_scenes_with_pauses(episode: dict, marker: dict, duration_frames: int) -> list[dict]:
+    """True frame offsets from the PCM-composed audio, including question holds."""
+    segments = marker.get("segments", [])
+    if not segments:
+        raise ValueError("Narração Kids sem timeline de pausas")
+    scenes = []
+    previous_end = 0
+    for idx, segment in enumerate(segments):
+        start = round(segment["start"] * FPS)
+        next_start = (
+            round(segments[idx+1]["start"] * FPS)
+            if idx+1 < len(segments) else duration_frames
+        )
+        if start != previous_end or next_start <= start:
+            raise ValueError("Cortes Kids fora da timeline PCM")
+        if next_start > duration_frames:
+            raise ValueError("Segmento Kids ultrapassou o MP3")
+        scenes.append({
+            "id": segment["id"],
+            "beat": segment["id"],
+            "startFrame": start,
+            "endFrame": next_start,
+            "headline": segment["headline"],
+            "visual": segment["text"],
+            "video": None,
+        })
+        previous_end = next_start
+    return scenes
 
 
 def ffprobe_capture(clip: Path, required_s: float) -> None:
@@ -196,7 +252,11 @@ def prepare_props(channel: dict, episode: dict, *, root: Path = ROOT) -> tuple[d
     if seconds > 59.2:
         raise ValueError("Narração ultrapassa limite interno de 60s; revisar roteiro sem acelerar")
     total_frames = math.ceil((seconds + 0.45) * FPS)
-    scenes = _scenes_with_audio_timings(episode, marker["words"], total_frames)
+    scenes = (
+        _kids_scenes_with_pauses(episode, marker, total_frames)
+        if episode.get("narration_style") == KIDS_ACOLHEDORA
+        else _scenes_with_audio_timings(episode, marker["words"], total_frames)
+    )
     captions = _caption_groups(marker["words"], total_frames)
     target = root / "motion-remotion" / "public" / "generated" / "piloto-canais-v3" / channel["id"] / episode["id"]
     target.mkdir(parents=True, exist_ok=True)
@@ -217,6 +277,8 @@ def prepare_props(channel: dict, episode: dict, *, root: Path = ROOT) -> tuple[d
         "durationFrames": total_frames,
         "scenes": scenes,
         "captions": captions,
+        "narrationStyle": episode.get("narration_style", "standard"),
+        "totalPauseSeconds": marker.get("total_pause_s", 0),
         "audio": f"generated/piloto-canais-v3/{channel['id']}/{episode['id']}/narracao.mp3",
     }
     props_file = root / "motion-remotion" / f"props-{episode['id']}-v3.json"
@@ -237,7 +299,12 @@ def render(channel: dict, episode: dict, *, replace: bool = False,
         digest = hashlib.sha256(final.read_bytes()).hexdigest()
         if (qa.get("video_sha256") == digest and
                 qa.get("script_sha256") == hash_script(episode["script"]) and
-                qa.get("channel") == channel["id"]):
+                qa.get("channel") == channel["id"] and
+                qa.get("narration_timeline_sha256") == (
+                    timeline_fingerprint(episode)
+                    if episode.get("narration_style") == KIDS_ACOLHEDORA
+                    else None
+                )):
             return {"status": "render_existente_sem_publicacao", "file": str(final)}
         raise ValueError("MP4 existente diverge do roteiro ou assinatura; usar --refazer")
     props, propfile, _ = prepare_props(channel, episode, root=root)
@@ -263,6 +330,14 @@ def render(channel: dict, episode: dict, *, replace: bool = False,
         "schema": "piloto-canais/render-qa/v3",
         "channel": channel["id"], "locale": "pt-BR",
         "episode_id": episode["id"], "video_sha256": sha,
+        "narration_style": episode.get("narration_style", "standard"),
+        "narration_timeline_sha256": (
+            timeline_fingerprint(episode)
+            if episode.get("narration_style") == KIDS_ACOLHEDORA else None
+        ),
+        "total_pause_s": (
+            read_voice(channel, episode)[1].get("total_pause_s", 0)
+        ),
         "script_sha256": hash_script(episode["script"]),
         "motion": ("original_animated_vectors" if channel["id"] == "kids"
                    else "original_gameplay_capture_required"),
