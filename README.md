@@ -52,6 +52,25 @@ Estas etapas dependem do proxy de imagens e preservam quadros antigos
 em histórico. O usuário deve conferir o novo MP4; a IA não oferece
 garantia de detecção automática de todos os erros de elenco.
 
+## Pose oficial Emanuelly — gpt-image-2 + referência obrigatória
+
+Para evitar que a identidade da protagonista mude a cada imagem, use o
+novo gerador de **oito poses em PNG com fundo transparente**, sempre a
+partir da referência visual privada aprovada. Cada saída é um asset
+reutilizável em camadas sobre os cenários fixos.
+
+    .\gerar-poses-emanuelly.ps1 -Acao Planejar
+    .\gerar-poses-emanuelly.ps1 -Acao Gerar -Pose em-pe -MaxChamadas 1
+    .\gerar-poses-emanuelly.ps1 -Acao Gerar -Pose Todas -MaxChamadas 7
+
+O gerador só faz requisições à API de edição com gpt-image-2;
+não aceita fundo opaco, personagem recortado, imagem sem referência,
+ou calls acima do teto fornecido. Guarda assets e QA em
+assets/gerados/kids-emanuelly/biblioteca-personagens/emanuelly/poses.
+**Não altera o render do vídeo ou publica conteúdo.**
+
+Guia: docs/POSES-EMANUELLY-GPT-IMAGE-2.md
+
 ## Gerador de Emanuelly com foto privada de referência (4 Shorts)
 
 A série infantil agora tem um motor de geração de quatro vídeos PT-BR,
