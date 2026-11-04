@@ -211,3 +211,14 @@ Regras obrigatórias:
   ffprobe apenas checa duracao, formato e presenca de audio.
 - Nao editar videos publicados, enviar rascunhos, fazer uploads ou alterar
   privacidade/horarios sem aprovacao explicita. Caches e IDs locais preservados.
+
+## OTAKU REFRAME EN V3 — ADAPTACAO DE SHORTS BR JA PUBLICADOS
+
+- Escopo: somente videos publicos BR com episodio-fonte mapeado no snapshot de 2026-11-04. O levantamento tem 18 Shorts BR: 13 fontes para preparar EN, 1 episodio ja em ingles e 4 sem fonte confirmada.
+- Canal BR: UCXGYTuBYn-0Ziqin5ajKhOw. Canal EN ja existente Otaku Reframe: UCBoNbQjaMYdpJqPLRZAFkvQ. Nunca misturar OAuth/tokens, IDs ou estados.
+- Episodios 101 e 201 ja possuem publicacoes em ingles. Nao duplicar; itens com status source_unconfirmed ficam fora da fila.
+- O preparador scripts/preparar_publicados_en_v3.py nao executa audio, proxy de imagem, video ou upload; valida a correspondencia dos roteiros BR e EN e cinco abordagens de gancho.
+- Usar ingles natural, narracao e legendas EN, metadados proprios, imagem inicial compreensivel e historia com recompensa real, sem conteudo enganoso.
+- Reusar imagens PT somente se preservam continuidade e nao trazem texto PT gravado na arte. QA de video inteiro deve verificar pronuncia, movimento de personagens alem de zoom, direitos e MP4 completo.
+- O publicador EN exige manifestos de origem coerentes, QA assinado e destino Otaku Reframe; upload privado por padrao e apenas com confirmacao explicita. Nunca publicar automaticamente durante o preparo.
+- Consultar docs/OTAKU-REFRAME-PUBLICADOS-BR-EN-V3.md. Action verde nao comprova caches ou videos renderizados no Windows.
