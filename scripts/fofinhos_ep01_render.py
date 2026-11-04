@@ -403,7 +403,8 @@ def layout(scene: dict, positions: dict) -> dict:
         "showEgg": scene["egg_location"] != "ausente",
         "nestX": .69, "nestY": .83, "nestSize": .35,
         "animation": animation,
-        "night": scene["night"], "magic": index in (4, 9, 15),
+        # A camada nova concentra brilhos ao redor do ovo: sem faíscas espalhadas.
+        "night": scene["night"], "magic": False,
         "futureGlow": False, "kittenMotion": "idle",
         "waterCount": 0,
         "eggLocation": scene["egg_location"],
