@@ -9,6 +9,49 @@
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
 
+## Duas musicas de fundo no canal Kids
+
+As faixas adicionadas pelo criador na raiz do repositorio,
+`Wondertrail _Main Theme_.mp3` e `Wondertrail _Main Theme_2.mp3`,
+estao integradas aos **Shorts Kids** (Emanuelly e os pilotos).
+
+O gerador alterna musica 1 nas Partes 1/3 e musica 2 nas Partes 2/4;
+a estrelinha usa a musica 1, os passarinhos a 2 e as formas a 1.
+O Remotion faz loop, volume de fundo **7,5%**, fade-in e fade-out
+de 1,5s, mantendo a narracao acolhedora em destaque.
+O canal Gamer e os dois canais Otaku nao recebem essas faixas.
+
+A faixa original nao e modificada; apenas copias locais
+sao preparadas em `motion-remotion/public/generated/kids-musicas/`.
+O cache do MP4 Kids e invalidado quando a musica muda, preservando
+versoes anteriores nos historicos. Nenhum upload automatico.
+
+**IMPORTANTE: licenca/direitos das duas faixas ainda nao verificados.**
+A integracao e apenas para render e revisao local. Antes de publicar,
+comprovar direito de uso no YouTube (incluindo monetizacao, se aplicavel).
+Veja `docs/GERAR-SERIE-KIDS-EMANUELLY.md`.
+
+## Correção de cronologia da série Emanuelly — referência isolada
+
+A versão de continuidade v2 corrige o problema dos quadros **03 e 08**
+mostrando bichinhos antes do nascimento. Todos os 9 quadros da Parte 1
+devem mostrar **somente Emanuelly e o ovo azul fechado**. Antes do quadro
+06 da Parte 2, Fofinho também não pode aparecer. As Fofinhas gêmeas,
+Raposo e Porco-espinho só entram nos futuros capítulos próprios.
+
+Agora a prancha do elenco é usada apenas para preparar **duas referências
+isoladas**. O gerador de cena NUNCA envia a prancha inteira ao modelo.
+Fluxos com imagem de referência usam **gpt-image-2 exclusivamente**.
+A política invalida automaticamente os caches antigos na renderização.
+
+    .\gerar-historia-kids.ps1 -Acao PrepararReferencias -MaxChamadas 2
+    .\gerar-historia-kids.ps1 -Acao Planejar -Parte 1
+    .\gerar-historia-kids.ps1 -Acao Imagens -Parte 1 -MaxChamadas 9 -Refazer
+
+Estas etapas dependem do proxy de imagens e preservam quadros antigos
+em histórico. O usuário deve conferir o novo MP4; a IA não oferece
+garantia de detecção automática de todos os erros de elenco.
+
 ## Gerador de Emanuelly com foto privada de referência (4 Shorts)
 
 A série infantil agora tem um motor de geração de quatro vídeos PT-BR,

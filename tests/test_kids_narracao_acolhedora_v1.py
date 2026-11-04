@@ -207,7 +207,11 @@ def test_render_props_use_kids_beats_not_inferred_word_ratios(tmp_path, monkeypa
     monkeypatch.setattr(producer, "read_voice", lambda *_a: (voice, marker))
     monkeypatch.setattr(producer, "audio_seconds", lambda *_a: clock)
     monkeypatch.setattr(producer, "ffprobe_capture", lambda *_a: None)
+    for filename in ("Wondertrail _Main Theme_.mp3", "Wondertrail _Main Theme_2.mp3"):
+        (tmp_path / filename).write_bytes(b"ID3" + b"\\x00" * 120_000)
     props, path, target = producer.prepare_props(channel, episode, root=tmp_path)
+    assert props["music"]["volume"] < 0.12
+    assert props["music"]["source_name"] == "Wondertrail _Main Theme_.mp3"
     assert path.is_file()
     assert props["kidsBeats"][7]["cue"] == "blue-reveal"
     assert props["kidsBeats"][8]["cue"] == "blue-question"

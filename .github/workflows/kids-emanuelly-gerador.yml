@@ -4,24 +4,40 @@ on:
   pull_request:
     paths:
       - "scripts/serie_kids_emanuelly_v1.py"
+      - "scripts/kids_musicas_fundo_v1.py"
+      - "scripts/produzir_piloto_canais_v3.py"
+      - "motion-remotion/src/kids-background-music.tsx"
+      - "motion-remotion/src/pilot-short.tsx"
+      - "tests/test_kids_musicas_fundo_v1.py"
+      - "tests/test_kids_narracao_acolhedora_v1.py"
       - "scripts/organizar_videos_por_canal.py"
       - "motion-remotion/src/emanuelly-short.tsx"
       - "motion-remotion/src/root.tsx"
       - "motion-remotion/package.json"
       - "gerar-historia-kids.ps1"
       - "tests/test_serie_kids_emanuelly_v1.py"
+      - "scripts/kids_emanuelly_continuidade_v2.py"
+      - "tests/test_kids_emanuelly_continuidade_v2.py"
       - "tests/test_gerar_historia_kids_powershell.ps1"
       - ".github/workflows/kids-emanuelly-gerador.yml"
   push:
     branches: [main]
     paths:
       - "scripts/serie_kids_emanuelly_v1.py"
+      - "scripts/kids_musicas_fundo_v1.py"
+      - "scripts/produzir_piloto_canais_v3.py"
+      - "motion-remotion/src/kids-background-music.tsx"
+      - "motion-remotion/src/pilot-short.tsx"
+      - "tests/test_kids_musicas_fundo_v1.py"
+      - "tests/test_kids_narracao_acolhedora_v1.py"
       - "scripts/organizar_videos_por_canal.py"
       - "motion-remotion/src/emanuelly-short.tsx"
       - "motion-remotion/src/root.tsx"
       - "motion-remotion/package.json"
       - "gerar-historia-kids.ps1"
       - "tests/test_serie_kids_emanuelly_v1.py"
+      - "scripts/kids_emanuelly_continuidade_v2.py"
+      - "tests/test_kids_emanuelly_continuidade_v2.py"
       - "tests/test_gerar_historia_kids_powershell.ps1"
       - ".github/workflows/kids-emanuelly-gerador.yml"
 
@@ -39,8 +55,8 @@ jobs:
           python-version: "3.11"
       - name: Install local isolated test packages
         run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
-      - name: Confirm 37 reference-guided images, budgets, voice markers and Kid safety
-        run: python -m pytest -q tests/test_serie_kids_emanuelly_v1.py tests/test_kids_emanuelly_serie.py tests/test_organizar_videos_por_canal.py
+      - name: Confirm cast continuity, both Kids soundtracks, narration, image budgets and QA
+        run: python -m pytest -q tests/test_serie_kids_emanuelly_v1.py tests/test_kids_emanuelly_continuidade_v2.py tests/test_kids_musicas_fundo_v1.py tests/test_kids_narracao_acolhedora_v1.py tests/test_kids_emanuelly_serie.py tests/test_organizar_videos_por_canal.py
   typescript:
     runs-on: ubuntu-latest
     timeout-minutes: 10

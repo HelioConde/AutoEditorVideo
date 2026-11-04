@@ -17,6 +17,7 @@ import subprocess
 import sys
 
 from piloto_canais_3x2_v3 import load_manifest, selected, verify_video, ROOT
+from kids_musicas_fundo_v1 import MUSIC_POLICY, music_signature, prepare_kids_music, choose_track
 from kids_narracao_acolhedora_v1 import (
     assemble_paced_voice, commit_voice, scene_props, signature as pacing_signature,
 )
@@ -246,6 +247,7 @@ def prepare_props(channel: dict, episode: dict, *, root: Path = ROOT) -> tuple[d
             scene["video"] = (
                 f"generated/piloto-canais-v3/{channel['id']}/{episode['id']}/{dest.name}"
             )
+    music = prepare_kids_music(root, episode["id"]) if channel["id"] == "kids" else None
     props = {
         "episodeId": episode["id"], "channel": channel["id"],
         "brand": channel["name"],
@@ -253,6 +255,7 @@ def prepare_props(channel: dict, episode: dict, *, root: Path = ROOT) -> tuple[d
         "scenes": scenes,
         "captions": captions,
         "kidsBeats": kids_beats,
+        "music": music,
         "audio": f"generated/piloto-canais-v3/{channel['id']}/{episode['id']}/narracao.mp3",
     }
     props_file = root / "motion-remotion" / f"props-{episode['id']}-v3.json"
@@ -276,7 +279,10 @@ def render(channel: dict, episode: dict, *, replace: bool = False,
                 qa.get("pacing_sha256") == (
                     pacing_signature(episode["kids_pacing"]) if episode.get("kids_pacing") else None
                 ) and
-                qa.get("channel") == channel["id"]):
+                qa.get("channel") == channel["id"] and
+                (channel["id"] != "kids" or
+                 (qa.get("music_policy") == MUSIC_POLICY and
+                  qa.get("music_sha256") == music_signature(root, episode["id"])))):
             return {"status": "render_existente_sem_publicacao", "file": str(final)}
         raise ValueError("MP4 existente diverge do roteiro ou assinatura; usar --refazer")
     props, propfile, _ = prepare_props(channel, episode, root=root)
@@ -320,6 +326,12 @@ def render(channel: dict, episode: dict, *, replace: bool = False,
         "motion": ("original_animated_vectors" if channel["id"] == "kids"
                    else "original_gameplay_capture_required"),
         "render_engine": "AutoEditorVideo/local/remotion",
+        "music_policy": MUSIC_POLICY if channel["id"] == "kids" else None,
+        "music_sha256": (music_signature(root, episode["id"])
+                         if channel["id"] == "kids" else None),
+        "music_source": (choose_track(episode["id"])[1]
+                         if channel["id"] == "kids" else None),
+        "music_rights_review": ("pending_before_publication" if channel["id"] == "kids" else None),
         "technical": status,
         "pause_total_s": sum(b["pause_after_s"] for b in episode.get("kids_pacing", {}).get("segments", [])),
         "human_visual_audio_rights_review": "pending",

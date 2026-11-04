@@ -1,4 +1,5 @@
 import React from 'react';
+import {KidsBackgroundMusic, KidsMusic} from './kids-background-music';
 import {AbsoluteFill, Audio, OffthreadVideo, Sequence, interpolate,
   staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 
@@ -17,6 +18,7 @@ export type PilotProps = {
   episodeId:string;channel:'games'|'kids';durationFrames:number;
   scenes:PilotScene[];audio:string;captions:PilotCaption[];brand:string;
   kidsBeats?:KidsBeat[];
+  music?:KidsMusic;
 };
 const clamp = {extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
 const W=1080,H=1920;
@@ -215,6 +217,7 @@ export const PilotShort:React.FC<PilotProps>=(props)=>{
      opacity:kids?.8:.65
    }}>{brand}</div>
    <Captions items={captions} kids={kids}/>
+   {kids&&<KidsBackgroundMusic music={props.music} durationFrames={durationFrames}/>}
    {audio&&<Audio src={staticFile(audio)}/>}
  </AbsoluteFill>;
 };

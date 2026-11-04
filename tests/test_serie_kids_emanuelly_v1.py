@@ -13,13 +13,32 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import serie_kids_emanuelly_v1 as story
 import organizar_videos_por_canal as archive
+import kids_emanuelly_continuidade_v2 as continuity
 
 
 def reference(tmp_path, *, color=(120, 70, 210)) -> Path:
     path = tmp_path / "assets/referencias-privadas/emanuelly-elenco.png"
     path.parent.mkdir(parents=True, exist_ok=True)
     Image.new("RGB", (1024, 1536), color).save(path)
+    install_fake_isolated_references(path)
+    for name in ("Wondertrail _Main Theme_.mp3", "Wondertrail _Main Theme_2.mp3"):
+        (tmp_path / name).write_bytes(b"ID3" + b"\x00" * 120_000)
     return path
+
+
+def install_fake_isolated_references(photo: Path):
+    for role in continuity.REFERENCE_ROLES:
+        target = continuity.isolated_reference(photo, role)
+        Image.new("RGB", (1024, 1536), (20, 70, 155)).save(target)
+        target.with_suffix(".json").write_text(json.dumps({
+            "schema": continuity.POLICY,
+            "model": continuity.MODEL,
+            "reference_role": role,
+            "source_sha256": story.sha(photo.read_bytes()),
+            "derived_sha256": story.sha(target.read_bytes()),
+            "prompt_signature": continuity.reference_signature(photo.read_bytes(), role),
+        }), encoding="utf-8")
+
 
 
 def fake_png() -> bytes:
@@ -59,7 +78,7 @@ def test_reference_never_uploaded_to_github_or_used_as_static_final_frame(tmp_pa
 def test_strict_missing_reference_and_budget_zero_do_not_call_ai(tmp_path):
     part = story.load_parts()[0]
     with pytest.raises(FileNotFoundError, match="Foto de referencia"):
-        story.image_plan([part], tmp_path / "not-found.png", "gpt-image-1.5", tmp_path)
+        story.image_plan([part], tmp_path / "not-found.png", "gpt-image-2", tmp_path)
     photo = reference(tmp_path)
     called = []
     def editor(*args, **kwargs):
@@ -82,11 +101,13 @@ def test_reference_supplied_to_every_image_edit_and_cache_is_idempotent(tmp_path
                                editor=editor, key_provider=lambda: "test-key")
     assert result["generated"] == 9
     assert len(observations) == 9
-    assert all(item[0] == photo for item in observations)
-    assert all("attached PRIVATE CAST REFERENCE IMAGE" in item[1] for item in observations)
-    assert all(item[2] == "gpt-image-1.5" and item[3] == "test-key"
+    assert all(item[0] == continuity.isolated_reference(photo, "emanuelly-solo")
+               for item in observations)
+    assert all("VISIBLE CAST: EXACTLY ONE CHARACTER" in item[1] for item in observations)
+    assert all("Scene 08 must NOT show ANY second character" in item[1] for item in observations)
+    assert all(item[2] == "gpt-image-2" and item[3] == "test-key"
                and item[4] is False for item in observations)
-    assert all(story.valid_frame(part, beat, "gpt-image-1.5",
+    assert all(story.valid_frame(part, beat, "gpt-image-2",
                                 story.reference_hash(photo), root=tmp_path)
                for beat in part["segments"])
     again = story.make_images([part], reference=photo, budget=0, root=tmp_path,
@@ -107,6 +128,7 @@ def test_reference_change_blocks_old_cache_until_explicit_rebuild(tmp_path):
     with pytest.raises(ValueError, match="outro roteiro/referencia"):
         story.make_images([part], reference=photo, budget=9, root=tmp_path,
                           editor=lambda *_a, **_kw: pytest.fail("No overwrite"))
+    install_fake_isolated_references(photo)
     recreated = story.make_images([part], reference=photo, budget=9, root=tmp_path,
                                   regenerate=True,
                                   editor=lambda *_a, **_kw: fake_png(),
@@ -187,7 +209,7 @@ def test_existing_mp4_with_mismatched_voice_is_not_reused(tmp_path):
         "video_sha256": story.sha((folder / "final.mp4").read_bytes()),
         "script_sha256": story.sha(part["narration"].encode()),
         "reference_sha256": story.reference_hash(photo),
-        "model": "gpt-image-1.5",
+        "model": "gpt-image-2",
         "image_sha256": [], "voice_sha256": "old",
     }))
     with pytest.raises(ValueError, match="outro roteiro ou referencia"):

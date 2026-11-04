@@ -64,7 +64,7 @@
           "index": 3,
           "spoken_text": "No mundo dela, os bichinhos de pelúcia podiam ganhar vida!",
           "pause_after_s": 0.6,
-          "visual_cue": "Pequenos brinquedos de pelúcia se movem com delicadeza",
+          "visual_cue": "Emanuelly sozinha em seu mundo acolhedor; pequenos brilhos de magia ao redor de brinquedos guardados FORA DO QUADRO. Nenhuma pelúcia ou outro personagem visível.",
           "emotion": "calmo_acolhedor"
         },
         {
@@ -99,14 +99,14 @@
           "index": 8,
           "spoken_text": "Quando a lua apareceu, o ovo balançou... toc, toc!",
           "pause_after_s": 0.9,
-          "visual_cue": "Ovo mexe devagar; duas batidinhas suaves",
+          "visual_cue": "Somente Emanuelly e o MESMO ovo azul FECHADO na almofada, dentro do quarto à noite. Ovo balança levemente, sem nenhum bichinho de pelúcia ou personagem ao lado.",
           "emotion": "surpresa_afetuosa"
         },
         {
           "index": 9,
           "spoken_text": "Emanuelly se aproximou. Quem será que estava lá dentro?",
           "pause_after_s": 1.8,
-          "visual_cue": "Emanuelly observa o ovo com curiosidade, sem revelar seu interior",
+          "visual_cue": "Emanuelly sozinha aproxima-se do ovo azul ainda INTACTO e FECHADO, sem revelar quem está dentro e sem personagens extras.",
           "emotion": "curiosidade"
         }
       ],
@@ -367,5 +367,37 @@
       "voice": "pt-BR-FranciscaNeural",
       "estimated_duration_status": "nao_cronometrado_por_tts"
     }
-  ]
+  ],
+  "visual_continuity_policy": {
+    "schema": "emanuelly/character-continuity/v2",
+    "image_model": "gpt-image-2",
+    "full_cast_sheet_usable_as_scene_reference": false,
+    "scene_reference_stages": {
+      "before_birth": "emanuelly-solo",
+      "after_birth": "emanuelly-fofinho"
+    },
+    "first_appearance_rules": {
+      "Fofinho": "EP 01 Part 02 Beat 06 — após casca abrir",
+      "Fofinha Arco-Íris": "EP futuros, um ano depois de Fofinho",
+      "Fofinha Rosa": "EP futuros, gêmea da Arco-Íris",
+      "Raposo": "somente quando apresentado em episódio futuro",
+      "Porco-espinho": "somente quando apresentado em episódio futuro"
+    },
+    "never_before_birth": [
+      "Fofinho",
+      "Fofinha Arco-Íris",
+      "Fofinha Rosa",
+      "Raposo",
+      "Porco-espinho"
+    ],
+    "ep01_part1": {
+      "allowed_visible_characters": [
+        "Emanuelly"
+      ],
+      "allowed_object": "O único ovo azul fechado e intacto",
+      "forbidden": "Não mostrar nenhum pelúcia, gato, onça, porco-espinho, reflexo de personagem ou silhueta de personagens",
+      "frames_03_08": "Emanuelly sozinha. Quadro 03: sugestão abstrata de magia sem pelúcias. Quadro 08: apenas Manu, ovo e quarto noturno."
+    },
+    "qa_note": "As regras técnicas não são reconhecimento visual garantido. Revisar os MP4 completos antes de publicar."
+  }
 }
