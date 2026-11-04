@@ -112,8 +112,7 @@ def confirmed_existing_upload(video:Path)->dict|None:
     return data
 
 
-def local_command(ep:dict,args:argparse.Namespace, *, publish:bool=False,
-                  )->list[str]:
+def local_command(ep:dict,args:argparse.Namespace, *, publish:bool=False)->list[str]:
     command=['powershell.exe','-NoProfile','-ExecutionPolicy','Bypass','-File',
              str(PS_SCRIPT),'-Id',ep['id'],'-VozMotor','edge',
              '-Modelo',args.modelo,'-Perfil',args.perfil,
@@ -169,8 +168,9 @@ def run(args:argparse.Namespace)->int:
     chosen=selection(queue,args.inicio_na_lista,args.quantidade)
     for ep in chosen:
         print(f"[{ep['queue_position']:02d}/50] {ep['series']} — {ep['id']}",flush=True)
-    print(f'[VALIDADO] {len(queue)} roteiros originais / {len(chosen)} selecionados; '
-          'nada enviado ao YouTube.',flush=True)
+    print(f'[VALIDADO] {len(queue)} roteiros originais / {len(chosen)} selecionados. '
+          'Upload somente na acao produzir-publicar com confirmacao explicita.',
+          flush=True)
     if args.acao=='validar':
         return 0
     if args.acao=='preparar':
@@ -207,17 +207,29 @@ def run(args:argparse.Namespace)->int:
         if prior.get('video_id'):
             print('[JA PUBLICADO] '+ep_id+' id='+str(prior['video_id']),flush=True)
             continue
+        # A previous process may have finished the remote upload but died
+        # before writing the queue journal. Reconcile against the publisher
+        # per-MP4 receipt first, without attempting a second upload.
+        previous=confirmed_existing_upload(video)
+        if previous:
+            if previous.get('publicacao_publica_confirmada') is True:
+                journal[ep_id]={'video_id':previous['video_id'],
+                                'status':'publicado-publico',
+                                'thumbnail_status':previous.get('thumbnail_status','pending'),
+                                'video_sha256':digest(video)}
+                save_journal(journal)
+                print('[JA ENVIADO] '+ep_id+' https://youtu.be/'+
+                      previous['video_id']+'. Nao duplicar.',flush=True)
+                continue
+            raise RuntimeError('Existe upload anterior de '+ep_id+
+                               ' com visibilidade nao confirmada. '
+                               'Confira o Studio antes de prosseguir.')
         if prior.get('status') in ('upload_iniciado','upload_indeterminado'):
             raise RuntimeError(
                 'Upload anterior sem confirmacao local: '+ep_id+
                 '. Confira o YouTube Studio antes de retomar; '
                 'nenhum reenvio automatico.'
             )
-        previous=confirmed_existing_upload(video)
-        if previous:
-            print('[JA ENVIADO] '+ep_id+' https://youtu.be/'+
-                  previous['video_id']+'. Nao duplicar.',flush=True)
-            continue
         invoke(local_command(ep,args),label='Produzir '+ep_id)
         if not publish_now:
             continue
