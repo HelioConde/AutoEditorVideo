@@ -61,6 +61,18 @@ por atualizar o GitHub.
 
 Detalhes: [Otaku Multicena 3.0](docs/OTAKU-MULTICENA-3-0.md).
 
+## Otaku Multicena 3.0 — expansao TikTok e Kwai
+
+A nova fase prioriza transferencia **responsavel** dos aprendizados de YouTube e Instagram
+para plataformas onde o alcance ainda nao foi comprovado. A ferramenta
+scripts/plano_multiplataforma_v3.py prepara legendas adaptadas e verifica o MP4
+local opcionalmente, **sem uploads e sem consumir cota de IA**. Ela tambem registra
+o status de som removido no TikTok por video (nao tenta alterar o audio ou reenviar).
+
+Leia [o piloto multiplataforma de 14 dias](docs/CRESCIMENTO-MULTIPLATAFORMA-3-0.md)
+antes de tentar qualquer publicacao. A integracao oficial TikTok existente
+permanece separada, e Kwai nao possui publicador automatico configurado.
+
 ## Otaku Multicena — 50 Shorts com publicação imediata
 
 50 roteiros e metadados estão cadastrados para novos e nostálgicos

@@ -189,3 +189,25 @@ Regras obrigatórias:
   consumir cota, alterar MP4 ou usar credenciais.
 - As regras e caches preexistentes dos fluxos PT/EN continuam validos.
   O guia 3.0 e incremental: nao presumir que todas as fases estao implementadas.
+
+
+## OTAKU MULTICENA 3.0 — CRESCIMENTO DE REDES COM POUCA TRACAO
+
+- Priorizar adaptacoes para TikTok e Kwai, preservando os sinais ja observados no
+  YouTube e Instagram. Nao prometer a mesma audiencia em outras plataformas.
+- Nova ferramenta offline: scripts/plano_multiplataforma_v3.py; gera propostas de
+  legenda/QA para YouTube, Instagram, TikTok e Kwai, sem publicacao, IA ou alteracoes
+  remotas. Consulte docs/CRESCIMENTO-MULTIPLATAFORMA-3-0.md.
+- TikTok: o criador relatou som removido em videos anteriores; conferir o motivo
+  real e o resultado do recurso no aplicativo antes de novos envios.
+  Nao presumir que uma unica palavra tenha causado a remocao. Nao tentar burlar
+  moderacao mudando termos, voz ou reenviando material recusado.
+- Kwai: na ausencia de autorizacao/integracao confirmada, somente propostas
+  para publicacao manual. Nunca afirmar que conta, API ou monetizacao estao ativos.
+- Metas devem usar intervalos comparaveis de idade do video (1, 6, 24, 72, 168h)
+  e levar em conta retencao, distribuicao, compartilhamentos e seguidores.
+  Ausencia de dados nao e zero; nao atribuir causalidade a amostras pequenas.
+- Direitos de trilha, voz, imagens e regras atuais sao revisao obrigatoria;
+  ffprobe apenas checa duracao, formato e presenca de audio.
+- Nao editar videos publicados, enviar rascunhos, fazer uploads ou alterar
+  privacidade/horarios sem aprovacao explicita. Caches e IDs locais preservados.
