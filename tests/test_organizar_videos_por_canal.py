@@ -117,3 +117,19 @@ def test_cli_preview_and_organize_without_network(tmp_path, capsys):
     report = json.loads(capsys.readouterr().out)
     assert report["files"][0]["status"] == "copiado"
     assert (tmp_path / "assets/gerados/biblioteca-videos/Kids").is_dir()
+
+
+def test_auto_refresh_only_after_library_is_initialized(tmp_path):
+    game = file_at(tmp_path, "piloto-canais-v3/games/game-002-roblox-obby/final.mp4", b"ROBO")
+    report = library.refresh_library_after_render(tmp_path)
+    assert report["status"] == "not_initialized"
+    assert not (tmp_path / "assets/gerados/biblioteca-videos").exists()
+    library.organize(root=tmp_path, preview=False)
+    next_video = file_at(tmp_path, "piloto-canais-v3/kids/kids-003-formas-casinha/final.mp4", b"KIDS NOVO")
+    result = library.refresh_library_after_render(tmp_path)
+    assert result["status"] == "updated"
+    assert result["copied"] == 1
+    target = tmp_path / "assets/gerados/biblioteca-videos/Kids/kids-003-formas-casinha/final.mp4"
+    assert target.read_bytes() == b"KIDS NOVO"
+    assert game.read_bytes() == b"ROBO"
+    assert next_video.read_bytes() == b"KIDS NOVO"
