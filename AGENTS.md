@@ -59,6 +59,16 @@ miniaturas e upload OAuth para YouTube.
 - Em falha ambigua de API, guardar estado local e exigir inspecao no
   Studio; nao duplicar uploads. Mantem `grade-50-estado.json` fora
   do Git. Publicacao real depende do Windows com OAuth/caches locais.
+- Erros `images/edits` do Codex Proxy (como 5005 Bleach cenas 01/06/07):
+  **nao inventar arte** para cobrir falhas. `master_scenes.py` persiste
+  `scene-failure.json` por cena, sem corpo bruto de resposta/token.
+  HTTP 400/401/403/404/415/422/429 nao deve consumir retries imediatos;
+  408/5xx podem usar as tentativas limitadas. Sempre preservar raw/cache.
+- `-ContinuarAposFalha` e opcional em `grade-50-shorts.ps1`: pula apenas
+  producao falha, nunca video parcial nem falha de upload. Para apos tres
+  falhas de producao consecutivas; a grade parcial retorna codigo 2.
+  Falhas pendentes podem ser retomadas depois sem reenviar os Shorts
+  que ja tem recibo de upload publico.
 - Ver `docs/OTAKU-GRADE-50.md` e o guia anterior de vidIQ.
 
 ## REGRA EDITORIAL: CTA SEM MARCA NA NARRACAO
