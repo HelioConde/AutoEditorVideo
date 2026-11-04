@@ -10,6 +10,19 @@ Ambos os canais serao **portugues brasileiro integral**: roteiro, voz, legendas,
 
 Nomes e IDs de canais ainda NAO foram confirmados ou criados. Nenhuma conta nova, OAuth, MP4 ou upload foi realizado pelo GitHub.
 
+## Piloto de Narração Acolhedora (estrelinha azul)
+
+Somente o primeiro Short Kids foi atualizado para **13 falas curtas**,
+estilo acolhedor, pausas reais somando 11,8 segundos e três esperas de
+1,8 segundo antes das respostas. A meta é 45–55 segundos, mas a duração
+real depende do TTS, com teto de 60 segundos. Os outros dois Kids
+mantêm os roteiros anteriores. O Gamer não foi afetado.
+
+Veja [roteiro, tempos e como testar](KIDS-NARRACAO-ACOLHEDORA-V1.md).
+Para atualizar uma narração antiga, use
+`-Acao voz -Canal kids -Id kids-001-estrela-azul -Refazer`,
+seguido de `-Acao renderizar` também com `-Refazer`.
+
 ## Fontes oficiais
 
 - Made for Kids: https://support.google.com/youtube/answer/9527654?hl=pt-BR
@@ -54,7 +67,7 @@ IDs Games: game-001-minecraft-um-coracao, game-002-roblox-obby, game-003-tillfol
 
 IDs Kids: kids-001-estrela-azul, kids-002-cinco-passarinhos, kids-003-formas-casinha.
 
-O roteiro e storyboard preveem aproximadamente 38s Games e 28s Kids; o tempo real precisa seguir a voz e permanecer dentro de 60s. A saída, se renderizada e aprovada tecnicamente, fica em:
+O roteiro prevê aproximadamente 38s Games, 28s nos dois Kids ainda não alterados e 52s como alvo da estrelinha azul. O tempo real segue a voz gerada e não pode ultrapassar 60s. A saída, se renderizada e aprovada tecnicamente, fica em:
 
     assets\gerados\piloto-canais-v3\<canal>\<id>\final.mp4
 
