@@ -135,8 +135,15 @@ def invoke(command:list[str], *,label:str)->None:
 
 def ensure_ready(ep:dict,profile:str)->Path:
     video,cover=video_paths(ep['id'],profile)
-    if not cover.is_file():
-        raise FileNotFoundError('Capa do Short ausente: '+str(cover))
+    if not cover.is_file() or cover.stat().st_size<10000:
+        raise FileNotFoundError('Capa do Short ausente ou incompleta: '+str(cover))
+    from PIL import Image
+    with Image.open(cover) as image:
+        image.load()
+        width,height=image.size
+        if (image.format!='JPEG' or height<640 or
+                abs(width/height-9/16)>.02):
+            raise ValueError('Thumbnail do Short nao e JPEG vertical 9:16: '+ep['id'])
     validate_video(video,stage='Fila grade 50 '+ep['id'])
     # Mandatory technical QA for new uploads: the user specifically rejected
     # still characters and abrupt virtual cuts. A video with zero independently
@@ -145,6 +152,9 @@ def ensure_ready(ep:dict,profile:str)->Path:
     if not qa_file.is_file():
         raise RuntimeError('QA visual nao encontrado; renderize com o motor atualizado: '+ep['id'])
     qa=json.loads(qa_file.read_text(encoding='utf-8-sig'))
+    if (qa.get('id')!=ep['id'] or
+        Path(str(qa.get('mp4',''))).resolve()!=video.resolve()):
+        raise RuntimeError('QA nao pertence ao MP4 atual: '+ep['id'])
     total=qa.get('visual_shots',0)
     camera_only=qa.get('camera_only_scenes')
     if qa.get('animation_mode')!='cinematica' or not isinstance(camera_only,int):
