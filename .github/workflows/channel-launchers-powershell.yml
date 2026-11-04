@@ -1,0 +1,26 @@
+name: PowerShell - Gamer PT-BR and Otaku Reframe EN
+on:
+  pull_request:
+    paths:
+      - "canal-gamer.ps1"
+      - "canal-ingles.ps1"
+      - "tests/test_channel_launchers.ps1"
+      - ".github/workflows/channel-launchers-powershell.yml"
+  push:
+    branches: [main]
+    paths:
+      - "canal-gamer.ps1"
+      - "canal-ingles.ps1"
+      - "tests/test_channel_launchers.ps1"
+      - ".github/workflows/channel-launchers-powershell.yml"
+permissions:
+  contents: read
+jobs:
+  windows-routes-no-real-upload:
+    runs-on: windows-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check parsers, channel routing, voice/render IDs, OAuth and publishing guards
+        shell: powershell
+        run: .\tests\test_channel_launchers.ps1
