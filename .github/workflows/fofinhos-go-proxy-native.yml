@@ -1,0 +1,63 @@
+name: Fofinhos - Go proxy nativo sem Docker (sem imagens)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/fofinhos-go-proxy-native.yml'
+      - 'scripts/proxy_go_native_smoke.py'
+      - 'docs/FOFINHOS-PROXY-NATIVO-SEM-DOCKER.md'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fofinhos-go-proxy-native.yml'
+      - 'scripts/proxy_go_native_smoke.py'
+  workflow_dispatch:
+
+# Runs upstream third-party Go code pinned to a reviewed commit.
+# NO GitHub Secrets, OAuth tokens, private photos, image requests or uploads.
+permissions:
+  contents: read
+
+jobs:
+  native-go-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PROXY_API_KEY: 'fofinhos-smoke-only-not-a-real-secret-123456789'
+      DATA_DIR: ${{ runner.temp }}/fofinhos-native-proxy-empty-state
+      DEBUG_LOG_PAYLOADS: 'false'
+      GIN_MODE: release
+      PORT: '8080'
+    steps:
+      - name: Checkout AutoEditorVideo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout upstream Go source pinned to a specific commit
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: proxy-source
+          persist-credentials: false
+      - name: Setup native Go toolchain (no Docker)
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: proxy-source/go.mod
+          cache: false
+      - name: Test pinned original Go project
+        working-directory: proxy-source
+        run: go test ./...
+      - name: Compile native Linux binary
+        working-directory: proxy-source
+        shell: bash
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/fofinhos-codex-proxy" ./cmd/api
+      - name: Launch and test native Go proxy on loopback
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$DATA_DIR"
+          "$RUNNER_TEMP/fofinhos-codex-proxy" > "$RUNNER_TEMP/fofinhos-proxy-native.log" 2>&1 &
+          proxy_pid=$!
+          trap 'kill "$proxy_pid" 2>/dev/null || true' EXIT
+          python scripts/proxy_go_native_smoke.py
