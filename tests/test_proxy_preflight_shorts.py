@@ -66,3 +66,21 @@ def test_unconfigured_proxy_never_invents_or_logs_credentials(tmp_path, monkeypa
     monkeypatch.setattr(codex_status, "credentials_file", lambda root: None)
     with pytest.raises(RuntimeError, match="Credenciais Codex Proxy nao encontradas"):
         video_codex.proxy_key(missing)
+
+
+def test_actions_secret_key_takes_precedence_without_printing(tmp_path, monkeypatch, capsys):
+    old_env = tmp_path / "proxy.env"
+    old_env.write_text("PROXY_API_KEY=valid-old-local-1234567890\n", encoding="utf-8")
+    monkeypatch.setattr(video_codex, "PROXY_ENV", old_env)
+    monkeypatch.setenv("PROXY_API_KEY", "valid-github-actions-secret-12345")
+    assert video_codex.proxy_key(old_env) == "valid-github-actions-secret-12345"
+    assert capsys.readouterr().out == ""
+
+
+def test_invalid_actions_secret_never_silently_falls_back(tmp_path, monkeypatch):
+    old_env = tmp_path / "proxy.env"
+    old_env.write_text("PROXY_API_KEY=valid-old-local-1234567890\n", encoding="utf-8")
+    monkeypatch.setattr(video_codex, "PROXY_ENV", old_env)
+    monkeypatch.setenv("PROXY_API_KEY", "change-me-insecure")
+    with pytest.raises(RuntimeError, match="configurada mas invalida"):
+        video_codex.proxy_key(old_env)

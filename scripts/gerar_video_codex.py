@@ -33,7 +33,13 @@ from planejador_editorial import audit_plan
 
 
 def proxy_key(path:Path=PROXY_ENV)->str:
-    """Recognize the configured proxy in this repo or the older kit folder."""
+    """Read a GitHub Actions secret or a legacy local .env without logging it."""
+    if path == PROXY_ENV:
+        configured = os.environ.get('PROXY_API_KEY', '').strip()
+        if configured:
+            if len(configured) < 15 or configured.lower().startswith('change-me'):
+                raise RuntimeError('PROXY_API_KEY configurada mas invalida')
+            return configured
     if path == PROXY_ENV and not path.is_file():
         from estado_codex_proxy import credentials_file
         alternative = credentials_file(ROOT)
