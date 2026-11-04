@@ -133,7 +133,8 @@ def invoke(command:list[str], *,label:str)->None:
                            'estado local preservado. Nao reenviar cegamente.')
 
 
-def ensure_ready(ep:dict,profile:str)->Path:
+def ensure_ready(ep:dict,profile:str,*,
+                 require_character_motion:bool=False)->Path:
     video,cover=video_paths(ep['id'],profile)
     if not cover.is_file() or cover.stat().st_size<10000:
         raise FileNotFoundError('Capa do Short ausente ou incompleta: '+str(cover))
@@ -161,15 +162,31 @@ def ensure_ready(ep:dict,profile:str)->Path:
         raise RuntimeError('QA de movimento antigo; refaça a renderização: '+ep['id'])
     if not isinstance(total,int) or total<1 or camera_only<0 or camera_only>total:
         raise RuntimeError('Contagem de cenas inválida no QA: '+ep['id'])
+    # The standard pipeline generates approved 2.5D foreground/background
+    # assets, not automatically isolated semantic character RGBA masks.
+    # Therefore camera_only==total is common and NOT evidence of corrupt media.
+    # The author asked for smooth zoom AND immediate PUBLIC publishing; do not
+    # deadlock the whole queue on an optional animation quality preference.
     if camera_only==total:
-        raise RuntimeError(
-            'Bloqueado para upload: nenhuma cena tem personagem em camada '
-            'independente segura. Apenas zoom de imagem; revise as camadas: '+ep['id']
-        )
-    if camera_only:
+        if require_character_motion:
+            raise RuntimeError(
+                'QA estrito: nenhuma cena possui personagem animavel em '
+                'camada RGBA segura: '+ep['id']+
+                '. Extraia/aprove multicamadas antes de usar '
+                '-ExigirMovimentoPersonagem.'
+            )
         print(f'[AVISO MOVIMENTO] {ep["id"]}: {camera_only}/{total} '
-              'cenas com zoom de arte plana; restantes com personagem em camada.',
+              'cenas com arte plana/2.5D. Render permitido com zoom '
+              'in/out continuo e sem flicker; NAO possui gestos reais de '
+              'personagem. Use -ExigirMovimentoPersonagem para bloquear.',
               flush=True)
+    elif camera_only:
+        print(f'[AVISO MOVIMENTO] {ep["id"]}: {camera_only}/{total} '
+              'cenas com zoom de arte plana/2.5D; demais com personagem '
+              'em camada RGBA animavel.',flush=True)
+    else:
+        print(f'[MOVIMENTO] {ep["id"]}: {total} cenas com camadas '
+              'de personagem animaveis.',flush=True)
     return video
 
 
@@ -251,7 +268,9 @@ def run(args:argparse.Namespace)->int:
         if not publish_now:
             continue
         # The generated video is validated before the irreversible upload.
-        ready_video=ensure_ready(ep,args.perfil)
+        ready_video=ensure_ready(
+            ep,args.perfil,
+            require_character_motion=args.exigir_movimento_personagem)
         if confirmed_existing_upload(ready_video):
             print('[JA ENVIADO] '+ep_id+' encontrado apos render. Pular.',flush=True)
             continue
@@ -308,6 +327,9 @@ def parser()->argparse.ArgumentParser:
     ap.add_argument('--confirmar-cota-imagem',action='store_true')
     ap.add_argument('--confirmar-publicacao',action='store_true')
     ap.add_argument('--refazer',action='store_true')
+    ap.add_argument('--exigir-movimento-personagem',action='store_true',
+                    help='QA estrito opcional: bloqueia se todas as cenas '
+                         'forem apenas 2.5D/imagem plana com zoom')
     return ap
 
 
