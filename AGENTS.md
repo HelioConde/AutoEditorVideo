@@ -28,24 +28,33 @@ miniaturas e upload OAuth para YouTube.
 - Alteracoes no motor de render invalidam MP4 local (renderer_sha256).
   Nao reenviar videos antigos automaticamente.
 
-## GRADE DE 50 ANIMES — PRODUCAO / PUBLICACAO
+## GRADE DE 50 ANIMES — PUBLICAR IMEDIATAMENTE COMO PUBLICO
 
 - Catalogos: `conteudos/otaku-multicena-grade-50-a.json` e
   `conteudos/otaku-multicena-grade-50-b.json`: 50 Shorts originais,
-  ordenados dos lancamentos atuais aos nostalgicos, IDs 5001..5050.
-- Comando Windows: `grade-50-shorts.ps1` — Validar/Preparar/Produzir/Agendar.
-  `Validar` e `Preparar` sao offline e nao fazem upload ou chamadas IA.
-- `Produzir` exige cota de imagem autorizada explicitamente e conserva
-  caches. Padrao `MaxChamadasPorVideo=0`: nunca inferir custo/contas.
-- `Agendar` exige `ConfirmarPublicacao`, `InicioAgendamento` com fuso,
-  `IntervaloHoras>=1`, video/capa completos e privacidade `private`
-  com `publishAt` validado. Nao fazer 50 uploads publicos instantaneos.
-  A publicacao sera futura pelo YouTube quando o agendamento for confirmado.
-- Confirmar registros de video ID, bloquear duplicados e interromper apos
-  erro de upload sem reenvio automatico. Salvar estado somente em assets local.
-- **ChatGPT/GitHub nao tem acesso ao cache de imagens, OAuth nem PC local.**
-  Arquivos no repo significam roteiros prontos, NAO videos ja produzidos
-  nem 50 Shorts publicados. Ver `docs/OTAKU-GRADE-50.md`.
+  do anime atual ao nostalgico, IDs 5001..5050.
+- `grade-50-shorts.ps1`: Validar/Preparar/Produzir/**ProduzirPublicar**.
+  **Nao agendar, nao usar publishAt** nesta fila: o usuario pediu
+  publicar como `public` imediatamente quando terminar cada MP4.
+- `ProduzirPublicar` executa producao, QA, depois publica aquele episodio
+  como `public` usando `-MaxChamadas 0` apenas no passo do upload.
+  Avanca ao proximo somente apos confirmar video_id e status PUBLIC.
+  O processo e sequencial, nao faz upload concorrente.
+- `ConfirmarPublicacao` e indispensavel para qualquer envio remoto.
+  `ConfirmarCotaImagem` e exigido quando `MaxChamadasPorVideo>0`.
+  O limite e POR VIDEO, nao custo total garantido. Nao iniciar lote
+  grande sem explicitar o pior caso (50x30 = 1500 chamadas).
+- Antes de enviar: MP4 <=60s, capa vertical valida, QA de movimento
+  `camera_only_scenes` (bloquear episodio com 100% cenas planas),
+  som Edge TTS e legendas sincronizadas. Zoom nao e animacao facial.
+- **Thumbnail:** enviar JPG vertical do editor por `thumbnails.set`
+  apenas quando `processingDetails.processingStatus=succeeded`.
+  Pode falhar por elegibilidade da conta; registrar pendencia, NUNCA
+  reenviar MP4 para corrigir capa.
+- Em falha ambigua de API, guardar estado local e exigir inspecao no
+  Studio; nao duplicar uploads. Mantem `grade-50-estado.json` fora
+  do Git. Publicacao real depende do Windows com OAuth/caches locais.
+- Ver `docs/OTAKU-GRADE-50.md` e o guia anterior de vidIQ.
 
 ## REGRA EDITORIAL: CTA SEM MARCA NA NARRACAO
 
