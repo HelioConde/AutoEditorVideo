@@ -1,8 +1,9 @@
-# Grade Otaku Multicena: 50 Shorts. Never uploads unless -Acao Agendar
-# AND -ConfirmarPublicacao; production uses an explicit AI call budget.
+# Grade Otaku Multicena: 50 Shorts, no scheduling.
+# -Acao ProduzirPublicar publishes each finished video as PUBLIC immediately,
+# but only with -ConfirmarPublicacao. Image budget is separately authorized.
 [CmdletBinding()]
 param(
-    [ValidateSet('Validar','Preparar','Produzir','Agendar')]
+    [ValidateSet('Validar','Preparar','Produzir','ProduzirPublicar')]
     [string]$Acao='Validar',
     [ValidateRange(1,50)][int]$InicioNaLista=1,
     [ValidateRange(1,50)][int]$Quantidade=50,
@@ -12,8 +13,6 @@ param(
     [string]$Perfil='equilibrado',
     [ValidateRange(0,180)][int]$MaxChamadasPorVideo=0,
     [switch]$ConfirmarCotaImagem,
-    [string]$InicioAgendamento='',
-    [ValidateRange(1,168)][int]$IntervaloHoras=24,
     [switch]$ConfirmarPublicacao,
     [switch]$Refazer
 )
@@ -35,17 +34,15 @@ if(-not(Test-Path $py)){
 }
 $argsList=@(
     $program,
-    '--acao',$Acao.ToLowerInvariant(),
+    '--acao',$(if($Acao -eq 'ProduzirPublicar'){'produzir-publicar'}else{$Acao.ToLowerInvariant()}),
     '--inicio-na-lista',[string]$InicioNaLista,
     '--quantidade',[string]$Quantidade,
     '--modelo',$Modelo,
     '--perfil',$Perfil,
-    '--max-chamadas-por-video',[string]$MaxChamadasPorVideo,
-    '--intervalo-horas',[string]$IntervaloHoras
+    '--max-chamadas-por-video',[string]$MaxChamadasPorVideo
 )
 if($ConfirmarCotaImagem){$argsList+='--confirmar-cota-imagem'}
 if($ConfirmarPublicacao){$argsList+='--confirmar-publicacao'}
-if($InicioAgendamento){$argsList+=@('--inicio-agendamento',$InicioAgendamento)}
 if($Refazer){$argsList+='--refazer'}
 & $py @argsList
 if($LASTEXITCODE -ne 0){
