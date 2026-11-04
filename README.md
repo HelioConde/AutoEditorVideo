@@ -40,29 +40,37 @@ interrompem o fluxo. O QA tecnico nao garante ausencia de defeitos artisticos.
 O upload nao e refeito cegamente se o resultado estiver ambiguo ou ja constar
 no registro local. Consulte o [guia do Short EN](docs/OTAKU-REFRAME-DID-YOU-KNOW-201-EN.md).
 
-## Otaku Multicena — 50 roteiros + fila de produção/publicação
+## Otaku Multicena — 50 Shorts com publicação imediata
 
-A grade reúne 50 animes, dos atuais aos nostálgicos, com **roteiros
-originais completos, ganchos, direção visual e metadados PT-BR**.
-O código de Remotion removeu os jump cuts virtuais que causavam
-"fliques", substituindo-os por zoom in/out suave e movimento visível
-de personagens RGBA seguros. Arte plana continua sem gestos reais;
-o QA distingue movimento de câmera de camadas de personagem.
+50 roteiros e metadados estão cadastrados para novos e nostálgicos
+animes. O motor Remotion usa **zoom suave**, sem flicker dos antigos
+jump cuts; personagens só se movimentam de forma independente quando
+há camadas RGBA seguras.
 
-**Não há 50 MP4s ou uploads realizados no GitHub**. Para preparar
-os materiais locais sem chamadas de IA nem publicar:
+**Novo fluxo pedido:** gera um vídeo, valida QA, publica **público
+imediatamente**, tenta enviar a thumbnail vertical depois que o YouTube
+processar o Short, e avança para o próximo. **Sem agendamento.**
 
 ```powershell
 cd "$HOME\Documents\arquivo-otaku-github"
 git pull --ff-only origin main
+
+# Preflight offline, sem publicar
 .\grade-50-shorts.ps1 -Acao Validar -Quantidade 50
-.\grade-50-shorts.ps1 -Acao Preparar -Quantidade 50
+
+# Publica o primeiro Short como publico assim que pronto
+.\grade-50-shorts.ps1 -Acao ProduzirPublicar -InicioNaLista 1 -Quantidade 1 `
+  -Modelo gpt-image-2 -Perfil equilibrado `
+  -MaxChamadasPorVideo 30 -ConfirmarCotaImagem -ConfirmarPublicacao
 ```
 
-Veja [o guia completo com produção, orçamento e agendamento](docs/OTAKU-GRADE-50.md).
-A publicação em lote exige vídeos completos, OAuth local,
-`-ConfirmarPublicacao` e horário futuro. Não tenta publicá-los
-automaticamente ao adicionar o catálogo.
+Para toda a grade, use `-Quantidade 50`, ciente de que 30 chamadas
+por vídeo autorizam um teto de **1.500 chamadas de imagem**. Sem
+`-ConfirmarPublicacao` não há upload. A função só roda no Windows local
+com imagens, credenciais e proxy configurados.
+
+Guia: [produção e publicação imediata de 50 Shorts](docs/OTAKU-GRADE-50.md).
+O GitHub contém o código e os roteiros, não os 50 MP4s publicados.
 
 ## Melhorias Shorts a partir de 8 auditorias do vidIQ
 
