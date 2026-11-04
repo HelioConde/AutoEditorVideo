@@ -24,7 +24,7 @@ O módulo scripts/kids_narracao_acolhedora_v1.py:
 2. Usa FFmpeg para decodificar os trechos de MP3 em PCM mono 48kHz.
 3. Mede o tempo real da fala e calcula as pausas efetivas. Se a soma original ficar longa demais (ex.: **62,2 s = 49,1 s de fala + 13,1 s de pausas**), reduz somente pausas secundárias e mantém **1,8 s** nas perguntas. Para esse exemplo, a estimativa é cerca de **58,5 s**. Não acelera a voz nem elimina perguntas. Se nem as pausas mínimas couberem, bloqueia e informa quantos segundos de roteiro precisam ser cortados.
 4. Adiciona silêncio PCM real e exporta narração.mp3, verificada com FFprobe.
-4. Preserva marcações de tempo de cada palavra, 13 estados visuais, legendas sem texto durante pausas e divisão de cinco cenas.
+5. Preserva marcações de tempo de cada palavra, 13 estados visuais, legendas sem texto durante pausas e divisão de cinco cenas. Registra `pause_adaptation` com pausas originais, efetivas e tempo economizado.
 5. Guarda versões anteriores de narração e vídeo em historico-voz e historico-renders.
 6. Interrompe se a voz não for gerada ou se ultrapassar 59,2s; nunca inventa áudio ou acelera a fala automaticamente.
 
