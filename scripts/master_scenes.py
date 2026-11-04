@@ -15,6 +15,7 @@ from pathlib import Path
 import re
 import shutil
 import sys
+from datetime import datetime, timezone
 
 from PIL import Image, ImageChops, ImageFilter, ImageOps, ImageStat
 from roteiro_para_storyboard import select_episode, save_plan
@@ -413,6 +414,69 @@ def atomic(path:Path,bytes_:bytes)->None:
     tmp.write_bytes(bytes_);tmp.replace(path)
 
 
+def scene_failure_report(ep:dict,scene:dict,model:str,exc:Exception)->dict:
+    """Persist a safe per-scene failure reason. Never store proxy body or keys.
+
+    Raw AI responses and existing approved images stay untouched. Failure
+    metadata helps distinguish unsupported edits from transient server errors.
+    """
+    directory=scene_dir(ep,scene,model)
+    if not (directory/'master.png').is_file():
+        stage='master'
+    elif not (directory/'foreground-raw.png').is_file():
+        stage='foreground'
+    elif not (directory/'background-raw.png').is_file():
+        stage='background'
+    else:
+        stage='normalizacao_ou_qa'
+    message=str(exc)
+    found=re.search(r'(?:images/edits|images/generations).*?HTTP\s*(\d{3})',message,re.I)
+    if not found:
+        found=re.search(r'HTTP\s*(\d{3})',message,re.I)
+    status=int(found.group(1)) if found else None
+    if status in (401,403):
+        cause='autenticacao_ou_permissao'
+        remedy='Verifique Codex Proxy/conta elegivel. Nao tente contornar limites.'
+    elif status==404:
+        cause='endpoint_de_edicao_indisponivel'
+        remedy='Verifique suporte a /v1/images/edits no proxy e modelo escolhido.'
+    elif status in (400,415,422):
+        cause='payload_ou_modelo_incompativel'
+        remedy='Verifique suporte ao modelo, mascara e transparencia nas edicoes.'
+    elif status==429:
+        cause='limite_ou_cooldown'
+        remedy='Aguarde disponibilidade de cota; nao repita automaticamente.'
+    elif status is not None and 500<=status<=599:
+        cause='erro_temporario_servidor'
+        remedy='Verifique estado do proxy. Retome uma vez quando normalizar.'
+    elif status in (408,):
+        cause='timeout_servidor'
+        remedy='Verifique conectividade com o proxy local.'
+    elif isinstance(exc,(ValueError,KeyError)):
+        cause='cache_ou_qa_invalido'
+        remedy='Inspecione os arquivos raw/normalized e o QA; nao apague o cache.'
+    else:
+        cause='falha_local_ou_desconhecida'
+        remedy='Consulte a mensagem [ERRO] acima e diagnostique o cache offline.'
+    report={
+        'schema':'otaku/scene-failure/v1',
+        'episode':ep['id'],'scene':scene['id'],'model':model,
+        'stage':stage,'http_status':status,'category':cause,
+        'error_type':type(exc).__name__,
+        # Only 5xx and timeouts can be retried immediately. Quota, auth,
+        # invalid image, missing feature or cached corrupt raw need attention.
+        'retryable':status==408 or (status is not None and 500<=status<=599),
+        'remedy':remedy,
+        'generated_at':datetime.now(timezone.utc).isoformat(),
+    }
+    atomic(directory/'scene-failure.json',
+           (json.dumps(report,ensure_ascii=False,indent=2)+'\n').encode('utf-8'))
+    print(f'[DIAGNOSTICO CENA] {scene["id"]} | etapa {stage} | '
+          f'HTTP {status or "-"} | {cause}. {remedy} '
+          'Raw/PNG existentes preservados.',flush=True)
+    return report
+
+
 def estimate(ep:dict,scenes:list[dict],model:str,*,existing_master:Path|None=None,
              repair_background:bool=False)->list[str]:
     pending=[]
@@ -760,11 +824,16 @@ def main(argv:list[str]|None=None)->int:
         edit=lambda image,prompt,model,*,transparent,mask=None:request_edit(
             image,prompt,model,key,transparent=transparent,mask=mask)
     for idx,scene in enumerate(scenes,1):
-        result=execute_scene(ep,scene,args.modelo,supplied_master=args.master_existente,
-                             generate=generate,edit=edit,offline=args.offline,
-                             repair_background=args.reparar_fundo)
-        result=review_visual_diversity(
-            ep,scene,args.modelo,scene_dir(ep,scene,args.modelo),result)
+        try:
+            result=execute_scene(ep,scene,args.modelo,supplied_master=args.master_existente,
+                                 generate=generate,edit=edit,offline=args.offline,
+                                 repair_background=args.reparar_fundo)
+            result=review_visual_diversity(
+                ep,scene,args.modelo,scene_dir(ep,scene,args.modelo),result)
+        except (ValueError,OSError,RuntimeError,KeyError) as exc:
+            scene_failure_report(ep,scene,args.modelo,exc)
+            raise
+        (scene_dir(ep,scene,args.modelo)/'scene-failure.json').unlink(missing_ok=True)
         print(f"[OK] {idx}/{len(scenes)} cena {scene['id']} | diferença média: "
               f"{result['composition']['mean_rgb_difference']} | margens: "
               f"{'REVER' if result['alpha']['margin_warning'] else 'OK'}")
