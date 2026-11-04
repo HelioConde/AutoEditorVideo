@@ -38,7 +38,9 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
-          python -m pip install 'Pillow>=10,<13'
+          python -m pip install 'Pillow>=10,<13' 'pytest>=8,<10'
+      - name: Run cloud probe and visual QA offline unit tests
+        run: python -m pytest -q tests/test_cloud_credentials_probe.py tests/test_cloud_smoke_qa.py
       - name: Install Remotion from lockfile
         working-directory: motion-remotion
         run: npm ci --no-audit --no-fund
