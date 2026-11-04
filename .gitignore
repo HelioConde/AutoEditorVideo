@@ -27,6 +27,10 @@ chatgpt-codex-proxy/
 node_modules/
 storage/
 
+# Foto privada de referencia visual: nunca versionar foto infantil ou base64.
+/assets/referencias-privadas/
+/motion-remotion/props-emanuelly-*.json
+
 # Video, audio, arquivos gerados e mídia sem licença para versionamento
 *.mp4
 *.mkv
