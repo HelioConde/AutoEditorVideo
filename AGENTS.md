@@ -212,6 +212,28 @@ Regras obrigatórias:
 - Nao editar videos publicados, enviar rascunhos, fazer uploads ou alterar
   privacidade/horarios sem aprovacao explicita. Caches e IDs locais preservados.
 
+## GAMES + KIDS — PILOTO 3x2 PT-BR
+
+- Os dois novos canais sao totalmente PT-BR; NAO usar Otaku Reframe/ingles.
+- Games (nome provisório Checkpoint Pixel): 3 Shorts com Minecraft, Roblox
+  e TILLFOLK; requires first-party or licensed gameplay from local captures;
+  jamais simular jogadas, vitória ou mecânicas não implementadas.
+- Kids (nome provisório MiniMundo Curioso): 3 Shorts educativos originais
+  sobre cores, contagem 1-5 e formas, para crianças de aproximadamente 4-7.
+  Conteúdo dirigido a crianças: marcar Made for Kids true; nao pedir comentarios,
+  inscricoes, compras ou engajamento; materiais suaves e apropriados à idade.
+- As vozes são pt-BR-AntonioNeural para Games e pt-BR-FranciscaNeural para Kids.
+- Conteudos/piloto-games-kids-3x2-v3.json é a fonte dos seis storyboards e
+  metadados. O Remotion possui composicao original PilotoCanaisV3, com SVG Kids
+  e videos capturados reais para Games. Nao inventar assets faltantes.
+- Nomes e IDs dos canais ainda nao existem no projeto: youtube_channel_id=null.
+  Nunca utilizar tokens, channel IDs ou uploads Otaku para novos canais.
+- O piloto-canais-v3.ps1 so prepara/inspeciona/gera voz/renderiza localmente,
+  sem autenticar/publicar. Cada render depende de TTS PT-BR e QA tecnico.
+  Publicar só após criação, verificação OAuth independente e autorização explícita.
+- Contar resultados por 1/6/24/72/168 horas e não presumir 3 impulsos diários.
+- Docs: docs/PILOTO-GAMES-KIDS-3X2-V3.md.
+
 ## OTAKU REFRAME EN V3 — ADAPTACAO DE SHORTS BR JA PUBLICADOS
 
 - Escopo: somente videos publicos BR com episodio-fonte mapeado no snapshot de 2026-11-04. O levantamento tem 18 Shorts BR: 13 fontes para preparar EN, 1 episodio ja em ingles e 4 sem fonte confirmada.
