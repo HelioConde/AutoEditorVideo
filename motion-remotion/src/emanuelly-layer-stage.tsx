@@ -11,6 +11,12 @@ export type EmanuellyLayeredScene = {
  eggX:number; eggY:number; eggSize:number;
  animation:'still'|'walk'|'approach'|'lift'|'prepare'|'promise'|'rock'|'wonder';
  magic?:boolean; night?:boolean;
+ kitty?:string|null; kittyX?:number; kittyY?:number; kittySize?:number;
+ kittenMotion?:'idle'|'pop'|'meow'|'paws'|'hop'|'snuggle'|'approach';
+ nest?:string|null; nestX?:number; nestY?:number; nestSize?:number;
+ water?:string|null; waterCount?:number;
+ waterX?:number; waterY?:number; waterSize?:number;
+ futureGlow?:boolean;
 };
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
 const ease=(n:number)=>{const t=clamp(n);return t*t*(3-2*t);};
@@ -39,6 +45,13 @@ export const EmanuellyLayerStage:React.FC<{
     {scene.night&&<AbsoluteFill style={{
       backgroundColor:'rgba(14,25,70,.35)',pointerEvents:'none',
     }}/>}
+    {scene.nest&&<Img src={staticFile(scene.nest)}
+      style={{
+        position:'absolute',width:pct(scene.nestSize??.34),
+        height:'auto',objectFit:'contain',
+        left:pct(scene.nestX??.67),top:pct(scene.nestY??.82),
+        transform:'translate(-50%,-50%)',
+      }}/>}
     {scene.pose&&<Img src={staticFile(scene.pose)}
       style={{
         position:'absolute',
@@ -66,6 +79,56 @@ export const EmanuellyLayerStage:React.FC<{
           transformOrigin:'50% 75%',
         }}/>
     </>}
+    {scene.kitty&&<Img src={staticFile(scene.kitty)}
+      style={{
+        position:'absolute',
+        width:pct(scene.kittySize??.23),height:'auto',
+        objectFit:'contain',
+        left:pct((scene.kittyX??.67)+
+          (scene.kittenMotion==='approach'?
+            -.16*(1-t):0)),
+        top:pct((scene.kittyY??.76)+
+          (scene.kittenMotion==='pop'?
+            .09*(1-t):0)),
+        transform:'translate(-50%,-50%) translateY('+
+          (scene.kittenMotion==='hop'?
+            (-18*Math.abs(Math.sin(local*.23))):
+           scene.kittenMotion==='paws'?(-6*Math.sin(local*.35)):
+           scene.kittenMotion==='snuggle'?(2*Math.sin(local*.15)):0)+
+          'px) rotate('+
+          (scene.kittenMotion==='meow'?
+            (3*Math.sin(local*.2)):0)+'deg)',
+        opacity:scene.kittenMotion==='pop'?Math.min(1,t*2):1,
+      }}/>}
+    {scene.water&&Array.from({
+      length:Math.max(0,Math.min(6,scene.waterCount??0)),
+    },(_,i)=><Img key={i} src={staticFile(scene.water!)}
+      style={{
+        position:'absolute',
+        width:pct(scene.waterSize??.07),height:'auto',
+        left:pct((scene.waterX??.56)+
+          (i-1)*.07+Math.sin(local*.04+i)*.025),
+        top:pct((scene.waterY??.61)-
+          Math.abs(Math.sin(local*.06+i))* .065),
+        transform:'translate(-50%,-50%) rotate('+
+          (Math.sin(local*.045+i)*12)+'deg)',
+        opacity:Math.min(1,local/10),
+      }}/>)}
+    {scene.futureGlow&&<svg viewBox="0 0 1080 1920"
+      style={{position:'absolute',inset:0,width:'100%',height:'100%',
+              pointerEvents:'none'}}>
+      {Array.from({length:2},(_,i)=>{
+        const x=370+i*315;
+        const y=1150-25*Math.sin(local*.025+i);
+        const a=.13+.15*Math.abs(Math.sin(local*.032+i));
+        return <g key={i}>
+          <ellipse cx={x} cy={y} rx={94} ry={139}
+            fill="#f7f2fe" opacity={a}/>
+          <ellipse cx={x} cy={y} rx={108} ry={158}
+            fill="none" stroke="#fff7fc" strokeWidth={7} opacity={a}/>
+        </g>;
+      })}
+    </svg>}
     {scene.magic&&<svg viewBox="0 0 1080 1920" width="100%" height="100%"
       style={{position:'absolute',inset:0,pointerEvents:'none'}}>
       {Array.from({length:14},(_,i)=>{
