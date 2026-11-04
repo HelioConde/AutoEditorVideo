@@ -20,10 +20,11 @@ export type CharacterPose={
 
 type Amplitude={vertical:number;horizontal:number;rotation:number};
 const PRESETS:Record<CharacterPreset,Amplitude>={
-  // The previously approved ultrassutil is the starting intensity.
-  ultrassutil:{vertical:3.2,horizontal:0.65,rotation:0.12},
-  equilibrado:{vertical:5.2,horizontal:1.1,rotation:0.18},
-  vivo:{vertical:7.5,horizontal:1.7,rotation:0.25},
+  // Visible but physically gentle whole-layer idle (never stretching a face).
+  // Flat images cannot articulate characters; only safe separated RGBA masks.
+  ultrassutil:{vertical:4.2,horizontal:1.0,rotation:0.13},
+  equilibrado:{vertical:8.8,horizontal:2.1,rotation:0.28},
+  vivo:{vertical:11.8,horizontal:3.2,rotation:0.38},
 };
 const clamp=(x:number,a:number,b:number)=>Math.max(a,Math.min(b,x));
 const smoothstep=(x:number)=>{
@@ -118,11 +119,11 @@ export const characterPoseAtFrame=(args:{
   const amp=PRESETS[preset];
   return {
     enabled:true,
-    translateX:clamp(amp.horizontal*lean*strength*envelope,-1.7,1.7),
-    translateY:clamp(amp.vertical*breathe*strength*envelope,-7.5,7.5),
+    translateX:clamp(amp.horizontal*lean*strength*envelope,-3.2,3.2),
+    translateY:clamp(amp.vertical*breathe*strength*envelope,-11.8,11.8),
     scaleX:1,
     scaleY:1,
-    rotateDeg:clamp(amp.rotation*lean*strength*envelope,-0.25,0.25),
+    rotateDeg:clamp(amp.rotation*lean*strength*envelope,-0.38,0.38),
     reason:'safe',
   };
 };
