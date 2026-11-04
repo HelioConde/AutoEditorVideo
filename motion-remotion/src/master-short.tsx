@@ -42,11 +42,11 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
   const heroPulse=hasHero&&mode==='cinematica'
     ?Math.sin(frame/fps*2*Math.PI*0.27)*
       Math.pow(Math.sin(Math.PI*normalized),2)*1.05:0;
-  // Visible virtual cuts start at 1.25s and 2.45s. The entire approved
-  // composition moves as one: never fake a character action or separate props.
+  // Smooth centered zoom only: no internal camera jump cuts or large pans.
+  // Safe separated RGBA characters can visibly idle without camera competition.
   const opener=openingCutAtFrame(frame,fps,mode);
   const hold=longHoldCutAtFrame(frame,scene.startFrame,scene.endFrame,fps,mode);
-  const safeZoom=Math.min(1.14,motion.zoom+opener.zoom+hold.zoom);
+  const safeZoom=Math.min(1.115,motion.zoom+opener.zoom+hold.zoom);
   const camera='translate('+(motion.panX+opener.panX+hold.panX).toFixed(3)+'px,'+
     (motion.panY+heroPulse+opener.panY+hold.panY).toFixed(3)+
     'px) scale('+safeZoom.toFixed(5)+')';
@@ -125,7 +125,7 @@ export const MasterShort:React.FC<MasterProps>=({
   const hardCut=current.transitionStyle==='hard' ||
     ['hook','rehook','twist','ryuk_reveal'].includes(current.beatRole||'');
   const fade=previous && !hardCut?interpolate(frame,
-    [current.startFrame,current.startFrame+5],[0,1],clamp):1;
+    [current.startFrame,current.startFrame+10],[0,1],clamp):1;
   const caption=captions.find(c=>frame>=c.startFrame&&frame<c.endFrame);
   return <AbsoluteFill style={{background:'#080a14',fontFamily:'Arial,sans-serif'}}>
     {previous&&fade<1?<Shot scene={previous} opacity={1} mode={animationMode} preset={characterPreset}/>:null}
