@@ -130,6 +130,23 @@ def install_directory(folder: Path, *, root: Path = ROOT, replace: bool = False)
     missing=[slot for slot in SLOTS if not (folder / f"{slot}.png").is_file()]
     if missing:
         raise FileNotFoundError("Faltam imagens na pasta: "+", ".join(missing))
+    # Check ALL images/alpha BEFORE copying even the first asset; a bad egg
+    # must never leave half a canonical garden/bedroom library installed.
+    for slot in SLOTS:
+        with Image.open(folder / f"{slot}.png") as im:
+            im.load()
+            if min(im.size) < 640:
+                raise ValueError("Imagem pequena no lote: "+slot)
+            alpha=im.convert("RGBA").getchannel("A")
+            if slot == "ovo-azul":
+                if alpha.getextrema()[0] >= 200 or (
+                    sum(alpha.histogram()[:10]) < alpha.width*alpha.height*.025
+                ):
+                    raise ValueError("Ovo sem alfa real no lote: "+slot)
+            elif alpha.getextrema()[0] < 255 and (
+                sum(alpha.histogram()[:180]) > alpha.width*alpha.height*.10
+            ):
+                raise ValueError("Cenário com transparência excessiva: "+slot)
     # Preflight identity change without touching other saved files.
     for slot in SLOTS:
         target=official(slot, root)
