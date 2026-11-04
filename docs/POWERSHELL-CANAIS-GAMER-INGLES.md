@@ -15,6 +15,20 @@ UCBoNbQjaMYdpJqPLRZAFkvQ.
 
 Ambos os PowerShells foram desenhados para **nao publicar por padrao**.
 
+## Nova politica de revisao e biblioteca
+
+O renderizador nao exige mais aprovacao manual de cada PNG ou multicamada;
+a revisao artistica sera feita no MP4 inteiro **depois do envio privado** ao
+YouTube Studio. Hash/QA tecnico e cache expressamente reprovado permanecem
+bloqueios. Para EN, `-ExigirMovimentoPersonagem` e um modo estrito opcional;
+nao o passe se deseja ver as cenas camera-only no upload privado.
+
+Separe todos os MP4s salvos com:
+`./organizar-videos.ps1 -Acao Prever` e
+`./organizar-videos.ps1 -Acao Organizar`.
+Os quatro canais ficarao em `assets/gerados/biblioteca-videos/`.
+Para detalhes consulte [Biblioteca de videos](BIBLIOTECA-VIDEOS-CANAIS-POST-UPLOAD.md).
+
 ## 1. Gamer em PT-BR
 
 No PowerShell Windows:
