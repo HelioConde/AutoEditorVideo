@@ -62,6 +62,29 @@ def pending_calls(plan: dict, scene: dict, model: str) -> int:
     return len(estimate(plan, [scene], model))
 
 
+def read_scene_failure(plan:dict,scene:dict,model:str)->dict|None:
+    """Load the latest scene-specific error after a failed child process.
+
+    Mismatched/stale artifacts and legacy unit-test fake plans are ignored.
+    """
+    if not scene.get('prompt'):
+        return None
+    from master_scenes import scene_dir
+    try:
+        file=scene_dir(plan,scene,model)/'scene-failure.json'
+        if not file.is_file():
+            return None
+        data=json.loads(file.read_text(encoding='utf-8-sig'))
+    except (OSError,ValueError,KeyError,TypeError):
+        return None
+    if (data.get('schema')!='otaku/scene-failure/v1' or
+        data.get('episode')!=plan.get('id') or
+        data.get('scene')!=scene.get('id') or
+        data.get('model')!=model):
+        return None
+    return data
+
+
 def generate_scene_with_retry(
     plan: dict, scene: dict, *, model: str, budget: list[int], attempts: int,
     runner=run_command,
@@ -88,6 +111,15 @@ def generate_scene_with_retry(
         budget[0] -= min(budget[0], (max(1, made) if not ok else made))
         if ok:
             return True
+        report=read_scene_failure(plan,scene,model)
+        if report and report.get('retryable') is False:
+            print(f"[SEM RETRY] Cena {scene['id']}: {report.get('category')} "
+                  f"(HTTP {report.get('http_status') or '-'}, "
+                  f"etapa {report.get('stage')}). "
+                  f"{report.get('remedy')} "
+                  "Repetir imediatamente nao resolve esta falha; "
+                  "cache preservado.",flush=True)
+            return False
         if attempt < attempts:
             print(f"[RETOMADA] Cena {scene['id']} falhou; usando respostas em cache "
                   "e tentando apenas o que falta.", flush=True)
@@ -160,10 +192,21 @@ def generate_scenes(episode_id: str, *, model: str, budget: int,
                 plan, scene, model=model, budget=remaining, attempts=attempts):
             failed.append(scene["id"])
     if failed:
+        details=[]
+        for scene_id in failed:
+            scene=next((s for s in scenes if s['id']==scene_id),None)
+            report=read_scene_failure(plan,scene,model) if scene else None
+            if report:
+                details.append(f"{scene_id} [{report.get('stage')}, "
+                               f"HTTP {report.get('http_status') or '-'}, "
+                               f"{report.get('category')}]")
+            else:
+                details.append(scene_id)
         raise PipelineError(
-            "A geracao foi retomada quando possivel, mas estas cenas continuam "
-            "sem resultado aprovado: " + ", ".join(failed) +
-            ". Nao publicar video parcial. Execute o mesmo comando para retomar."
+            "Cenas nao concluidas: " + ", ".join(details) +
+            ". NENHUM upload parcial. Consulte scene-failure.json na pasta "
+            "master-scenes de cada cena e o estado do proxy; o cache foi "
+            "preservado. Retome o mesmo episodio quando corrigir a causa."
         )
     try:
         valid = validate_scenes(plan, model)
