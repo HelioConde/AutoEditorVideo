@@ -52,6 +52,27 @@ Estas etapas dependem do proxy de imagens e preservam quadros antigos
 em histórico. O usuário deve conferir o novo MP4; a IA não oferece
 garantia de detecção automática de todos os erros de elenco.
 
+## Catálogo v2 de animações Kids — 54 poses da Emanuelly
+
+Além das oito poses existentes, foram planejadas 46 poses novas
+para carinho, abraços, gestos, expressão, brincadeiras e ações diárias.
+O gerador mantém as poses aprovadas no cache e só envia ao modelo
+as poses ausentes selecionadas explicitamente.
+
+    .\gerar-poses-emanuelly.ps1 -Acao Catalogo
+    .\gerar-poses-emanuelly.ps1 -Acao Planejar -Grupo Ep01
+    .\gerar-poses-emanuelly.ps1 -Acao Gerar -Pose fazendo-carinho -MaxChamadas 1
+    .\gerar-poses-emanuelly.ps1 -Acao Gerar -Grupo Carinho -Quantidade 2 -MaxChamadas 2
+
+As categorias são Essenciais, Ep01, Carinho, Emocoes, Movimento,
+Brincadeiras, Cotidiano, Futuras e Todas. A biblioteca completa
+tem 54 poses. A ação Catalogo nunca gera imagens; -Quantidade permite
+avaliar poucos arquivos antes de gastar créditos em novos lotes.
+Modelo fixo gpt-image-2 e personagem isolada com fundo transparente.
+Objetos e personagens futuros permanecem em camadas separadas.
+
+Guia: docs/CATALOGO-POSES-EMANUELLY-V2.md
+
 ## Pose oficial Emanuelly — gpt-image-2 + referência obrigatória
 
 Para evitar que a identidade da protagonista mude a cada imagem, use o

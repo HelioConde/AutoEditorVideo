@@ -93,6 +93,32 @@ miniaturas e upload OAuth para YouTube.
   ou outros canais. Nenhum upload ou publicação automática.
 - Testar regressão em `tests/test_gerar_poses_emanuelly_gpt_image_2.py`.
 
+## KIDS — CATALOGO DE POSES V2 ATUAIS E FUTURAS
+
+- Usar scripts/kids_emanuelly_catalogo_poses_v2.py como fonte de
+  46 novas poses e grupos. As 8 poses legadas EM POSE devem manter
+  strings e SHA dos prompts originais: NÃO invalidar cache pago.
+- Um total de 54 poses, divididas por Essenciais, Ep01, Carinho,
+  Emocoes, Movimento, Brincadeiras, Cotidiano, Futuras e Todas.
+- O PowerShell gerar-poses-emanuelly.ps1 recebe -Grupo, -Pose,
+  -Quantidade, -MaxChamadas e ações Catalogo/Planejar/Gerar.
+  O padrão continua Essenciais. A ação Catalogo não faz chamadas.
+- Exemplo recomendado: -Acao Gerar -Pose fazendo-carinho
+  -MaxChamadas 1, ou -Grupo Carinho -Quantidade 2 -MaxChamadas 2.
+  Preferir lotes pequenos para inspecionar a fidelidade facial.
+- Em poses de carinho, NÃO desenhar Fofinho ou qualquer outro
+  personagem dentro do PNG: braços e mãos interagem com amigos ou
+  objetos invisíveis que serão sobrepostos como camadas independentes.
+  Respeitar a cronologia da série, incluindo as gêmeas e Raposo.
+- Categorias de movimento e sequências são planejamento editorial,
+  NÃO alegar rigging automático ou movimento de membros no Remotion.
+- Continuar obrigatório GPT Image 2, PNG RGBA, referência privada
+  em cada chamada, validação de alpha, cache de PNG bruto e histórico.
+  A geração nunca publica vídeos, não toca trilha, narração ou outros canais.
+- Documentação: docs/CATALOGO-POSES-EMANUELLY-V2.md.
+  Testes: tests/test_kids_emanuelly_catalogo_poses_v2.py e
+  suite Python/PowerShell legada de poses.
+
 ## EMANUELLY — ASSETS PARA ANIMACAO POR CAMADAS
 
 - A personagem NÃO pode ser redesenhada com rosto, cabelo, roupa

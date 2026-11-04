@@ -4,16 +4,23 @@
 # Nao gera videos e NAO faz upload no YouTube.
 [CmdletBinding()]
 param(
-  [ValidateSet('Planejar','InstalarReferencia','Gerar','Verificar','Abrir')]
+  [ValidateSet('Planejar','Catalogo','InstalarReferencia','Gerar','Verificar','Abrir')]
   [string]$Acao='Planejar',
 
-  [ValidateSet('Todas','em-pe','caminhando','observando','ajoelhada',
-               'estendendo-mao','segurando-ovo','preparando-caminha','surpresa')]
+  # -Pose recebe qualquer slug oficial do catalogo; validacao rigorosa no Python.
   [string]$Pose='Todas',
+
+  [ValidateSet('Essenciais','Ep01','Carinho','Emocoes','Movimento',
+               'Brincadeiras','Cotidiano','Futuras','Todas')]
+  [string]$Grupo='Essenciais',
+
+  # Produzir poucas poses por vez, priorizando as que faltam no cache.
+  [ValidateRange(0,100)]
+  [int]$Quantidade=0,
 
   [string]$Referencia='',
 
-  [ValidateRange(0,8)]
+  [ValidateRange(0,100)]
   [int]$MaxChamadas=0,
 
   [switch]$Refazer
@@ -42,8 +49,11 @@ if($Acao -eq 'InstalarReferencia'){
     throw '-Referencia so pode ser usado com -Acao InstalarReferencia.'
   }
 }
-if($Acao -in @('Planejar','Verificar','Abrir') -and $Refazer){
+if($Acao -in @('Planejar','Catalogo','Verificar','Abrir') -and $Refazer){
   throw '-Refazer permitido apenas para InstalarReferencia ou Gerar.'
+}
+if($Acao -ne 'Gerar' -and $Quantidade -gt 0){
+  throw '-Quantidade e permitido somente com -Acao Gerar.'
 }
 if($Acao -eq 'Gerar'){
   if(-not (Test-Path -LiteralPath $installed -PathType Leaf)){
@@ -57,19 +67,21 @@ if($Acao -eq 'Gerar'){
 }
 $map=@{
   Planejar='planejar'
+  Catalogo='catalogo'
   InstalarReferencia='instalar-referencia'
   Gerar='gerar'
   Verificar='verificar'
   Abrir='abrir'
 }
 $arguments=@($script,'--acao',$map[$Acao],'--pose',$Pose,
+             '--grupo',$Grupo,'--quantidade',"$Quantidade",
              '--max-chamadas',"$MaxChamadas")
 if($Acao -eq 'InstalarReferencia'){
   $resolved=(Resolve-Path -LiteralPath $Referencia -ErrorAction Stop).Path
   $arguments+=@('--referencia',$resolved)
 }
 if($Refazer){$arguments+='--refazer'}
-Write-Host "[EMANUELLY POSES] $Acao | $Pose | gpt-image-2 | ZERO upload" -ForegroundColor Cyan
+Write-Host "[EMANUELLY POSES] $Acao | Grupo $Grupo | Pose $Pose | gpt-image-2 | ZERO upload" -ForegroundColor Cyan
 & $python @arguments
 if($LASTEXITCODE -ne 0){
   throw 'A geracao das poses foi interrompida. Imagens antigas preservadas, nenhum upload.'
