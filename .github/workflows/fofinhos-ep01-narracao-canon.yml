@@ -1,0 +1,41 @@
+name: Fofinhos - narracao aprovada e continuidade do EP01
+
+on:
+  pull_request:
+    paths:
+      - "conteudos/fofinhos-ep01-parte01-narracao-aprovada-v1.json"
+      - "conteudos/kids-emanuelly-ep01-shortserie-v1.json"
+      - "scripts/fofinhos_ep01_canon.py"
+      - "scripts/serie_kids_emanuelly_v1.py"
+      - "scripts/kids_emanuelly_todos_videos_v2.py"
+      - "tests/test_fofinhos_ep01_canon.py"
+      - ".github/workflows/fofinhos-ep01-narracao-canon.yml"
+  push:
+    branches: [main]
+    paths:
+      - "conteudos/fofinhos-ep01-parte01-narracao-aprovada-v1.json"
+      - "conteudos/kids-emanuelly-ep01-shortserie-v1.json"
+      - "scripts/fofinhos_ep01_canon.py"
+      - "scripts/serie_kids_emanuelly_v1.py"
+      - "scripts/kids_emanuelly_todos_videos_v2.py"
+      - "tests/test_fofinhos_ep01_canon.py"
+      - ".github/workflows/fofinhos-ep01-narracao-canon.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  canonical-story:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install isolated test dependencies
+        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
+      - name: Check narration, scene placement, old cache blocks and chronology
+        run: python -m pytest -q tests/test_fofinhos_ep01_canon.py tests/test_kids_emanuelly_serie.py
+      - name: Check read-only canonical continuity report
+        run: python scripts/fofinhos_ep01_canon.py --acao revisar
