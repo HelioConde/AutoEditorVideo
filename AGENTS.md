@@ -11,7 +11,10 @@ miniaturas e upload OAuth para YouTube.
   e pausas reais para a criança entender e responder. NAO apenas reduzir
   a velocidade global nem narrar literalmente "pausa".
 - Somente kids-001-estrela-azul recebeu kids_pacing (13 frases,
-  13,1s de pausas totais, 1,8s após perguntas). Meta 45–55s e
+  13,1s de pausas **solicitadas**, podendo diminuir automaticamente apenas pausas
+  secundárias após medir o TTS, e **1,8s intocáveis** após perguntas).
+  Exemplo de 62,2s é ajustado para cerca de 58,5s; não acelerar a voz.
+  Meta 45–55s e
   limite técnico de áudio 59,2s, vídeo final <=60s.
 - Gerar TTS em blocos com Edge pt-BR-FranciscaNeural, PCM 48kHz e
   silêncio real; preservar WordBoundary, hash do roteiro/pausas, áudio
