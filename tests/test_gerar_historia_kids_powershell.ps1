@@ -37,6 +37,12 @@ Path(__file__).resolve().parent.parent.joinpath("registro.json").write_text(
      -not ($argsPy -contains '9') -or -not ($argsPy -contains '1')){
     throw 'Gerar deve ser um unico Short com limite explicito de imagens'
   }
+  & $wrapper -Acao PrepararReferencias -Parte Todas -MaxChamadas 2 | Out-Null
+  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'registro.json') -Raw | ConvertFrom-Json
+  if(-not ($argsPy -contains 'preparar-referencias') -or
+     -not ($argsPy -contains '--modelo') -or -not ($argsPy -contains 'gpt-image-2')){
+    throw 'PrepararReferencias deve usar o gpt-image-2'
+  }
   & $wrapper -Acao Imagens -Parte Todas -MaxChamadas 0 | Out-Null
   $argsPy=Get-Content -LiteralPath (Join-Path $temp 'registro.json') -Raw | ConvertFrom-Json
   if($argsPy -contains '--parte'){
