@@ -128,7 +128,7 @@ def test_voice_uses_approved_15_scenes_precise_pauses_not_legacy(tmp_path):
     assert "entre as flores" in called[6]
     marker = json.loads(production.voice_paths(tmp_path)[1].read_text())
     assert [marker["segments"][i-1]["pause_after_s"] for i in (4, 6, 14)] == [1, .8, 1.8]
-    assert marker["duration_s"] == expected_seconds
+    assert marker["duration_s"] == pytest.approx(expected_seconds, abs=.0001)
     assert marker["no_speech_cuts"] is True
     cached = production.make_voice(
         tmp_path, synthesizer=lambda *_: pytest.fail("should use cache")
