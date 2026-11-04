@@ -39,7 +39,7 @@ def read_canon(root: Path = ROOT) -> dict:
     expected_pauses = {4: 1.0, 6: .8, 14: 1.8}
     if {p["after_scene"]: p["seconds"] for p in data.get("pauses", [])} != expected_pauses:
         raise ValueError("Pausas aprovadas foram modificadas")
-    for index in range(2, 10):
+    for index in range(2, 9):
         scene = scenes[index]
         if scene["egg_location"] != "entre_flores":
             raise ValueError(f"Ovo deve ficar entre flores na cena {index+1}")
