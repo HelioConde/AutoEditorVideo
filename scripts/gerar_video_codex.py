@@ -30,6 +30,7 @@ from diretor_visual import load_plan,scene_prompt,scene_digest,process_file,dupl
 from editor_shorts import create_shot_sequence, CUT_DURATION_SECONDS
 from finalizador_audio import normalize_video_audio
 from planejador_editorial import audit_plan
+from proxy_endpoint import proxy_api_url, proxy_base_url
 
 
 def proxy_key(path:Path=PROXY_ENV)->str:
@@ -59,8 +60,9 @@ def proxy_key(path:Path=PROXY_ENV)->str:
     return key
 
 
-def check_proxy_accounts(key:str, base:str='http://127.0.0.1:8080'):
+def check_proxy_accounts(key:str, base:str|None=None):
     import requests
+    base = base or proxy_base_url()
     r=requests.get(base+'/admin/accounts',headers={'Authorization':'Bearer '+key},timeout=(5,20))
     r.raise_for_status()
     accounts=r.json().get('accounts',[])
@@ -78,7 +80,7 @@ def request_image(prompt:str, model:str, key:str, size:str='1024x1536', *, backg
         payload['output_format']=output_format or 'png'
     elif output_format is not None:
         payload['output_format']=output_format
-    r=requests.post('http://127.0.0.1:8080/v1/images/generations',
+    r=requests.post(proxy_api_url('/v1/images/generations'),
         json=payload,
         headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},timeout=(15,300))
     if not r.ok:
