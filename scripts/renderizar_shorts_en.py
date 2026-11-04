@@ -229,6 +229,12 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
             previous = json.loads(report_file.read_text(encoding="utf-8"))
             if previous.get("video_sha256") != hashlib.sha256(output.read_bytes()).hexdigest():
                 raise ValueError("MP4 em cache sem assinatura QA correspondente. Use -Refazer.")
+        if require_character_motion:
+            if not report_file.is_file():
+                raise ValueError("MP4 EN em cache sem diagnostico de movimento: use -Refazer.")
+            checked = json.loads(report_file.read_text(encoding="utf-8"))
+            if not checked.get("character_motion_qa", {}).get("character_motion_verified"):
+                raise ValueError("MP4 EN em cache nao passou no modo estrito de personagens; use -Refazer.")
         print(f"[EN CACHE] Ja renderizado: {output} (use -Refazer para substituir)")
         return {"id": episode_id, "status": "cache", "mp4": str(output)}
     # Audio MUST be English and fresh before rendering English subtitles.
