@@ -42,6 +42,53 @@ PUBLIC_REL = Path("motion-remotion/public/generated/fofinhos-ep01-parte01")
 PLACEMENT_FILE = "canteiro-flores.json"
 VIDEO_NAME = "previa-canonica.mp4"
 FLOWER_VIEWS = ("jardim-03", "jardim-04")
+AMBIENT_VERSION = "fofinhos/ep01-ambiente-vivo/v1"
+# Ordem: nuvens, borboletas, pétalas, pólen, brilhos do ovo, poeira luminosa.
+# Nunca usar borboletas ou chuva de pétalas durante a revelação do ovo.
+AMBIENT_SCENES = (
+    (2, 2, 3, 8, 0, 0),  # 01: apresentação; jardim alegre
+    (2, 2, 2, 6, 0, 0),  # 02: Emanuelly brinca entre as flores
+    (1, 1, 1, 3, 0, 0),  # 03: primeira curiosidade; ambiente desacelera
+    (0, 0, 0, 0, 3, 0),  # 04: primeiro close do ovo azul
+    (0, 0, 0, 0, 1, 0),  # 05: decisão de investigar
+    (0, 0, 0, 0, 1, 0),  # 06: aproximação lenta
+    (0, 0, 0, 0, 2, 0),  # 07: ovo entre as flores (protagonista visual)
+    (0, 0, 0, 0, 1, 0),  # 08: ajoelhar e estender a mão
+    (0, 0, 0, 0, 5, 0),  # 09: ovo brilha mais
+    (0, 0, 1, 2, 0, 0),  # 10: sai do jardim segurando ovo
+    (0, 0, 0, 0, 0, 5),  # 11: luz morna no quarto
+    (0, 0, 0, 0, 0, 3),  # 12: promessa
+    (0, 0, 0, 0, 1, 2),  # 13: noite silenciosa
+    (0, 0, 0, 0, 4, 1),  # 14: ovo balança; toque de magia
+    (0, 0, 0, 0, 3, 0),  # 15: mistério, sem distração
+)
+
+
+def ambient_profiles(root: Path = ROOT) -> list[dict]:
+    """Ambiência 2D gratuita, discreta e vinculada às 15 cenas canônicas."""
+    script_scenes = scenes(root)
+    if len(script_scenes) != len(AMBIENT_SCENES):
+        raise ValueError("Tabela de ambiente não corresponde às cenas aprovadas")
+    rows = []
+    for scene, values in zip(script_scenes, AMBIENT_SCENES):
+        index = scene["index"]
+        clouds, butterflies, petals, pollen, egg_sparkles, motes = values
+        garden = scene["background"].startswith("jardim")
+        if (index in range(4, 10) and (clouds or butterflies or petals or pollen)):
+            raise ValueError("Ambiente está distraindo da descoberta do ovo")
+        if ((not garden or scene["night"]) and
+                (clouds or butterflies or petals or pollen)):
+            raise ValueError("Borboletas, nuvens e pétalas não pertencem ao quarto")
+        if (scene["egg_location"] == "ausente" and egg_sparkles):
+            raise ValueError("Brilhos do ovo antes da descoberta")
+        if max(values) > 8 or min(values) < 0:
+            raise ValueError("Densidade de partículas fora do limite infantil")
+        rows.append(dict(
+            index=index, clouds=clouds, butterflies=butterflies,
+            petals=petals, pollen=pollen, eggSparkles=egg_sparkles,
+            motes=motes,
+        ))
+    return rows
 
 
 def digest(data: bytes) -> str:
@@ -324,6 +371,11 @@ def plan(root: Path = ROOT) -> dict:
         "flowers": flower_status,
         "ready_for_preview": voice_ok and not needs and flower_status == "aprovado",
         "old_short_untouched": True,
+        "ambience": {"version": AMBIENT_VERSION,
+                     "effect_types": ["nuvens", "borboletas", "petalas",
+                                      "polen", "brilhos_ovo", "poeira_luminosa"],
+                     "new_images_required": 0,
+                     "human_audiovisual_review": True},
         "calls_gpt_image_2": 0, "uploads": 0,
     }
 
@@ -422,6 +474,8 @@ def props_build(root: Path = ROOT) -> tuple[dict, Path, str]:
         "durationFrames": total, "frames": [],
         "layeredScenes": layers, "captions": captions,
         "audio": audio_path, "music": music,
+        "ambientScenes": ambient_profiles(root),
+        "ambientEnabled": True,
         "madeForKids": True, "referenceSha": voice_signature(root),
     }
     dest = target / "props-canonicos.json"
@@ -429,6 +483,7 @@ def props_build(root: Path = ROOT) -> tuple[dict, Path, str]:
     signature = digest(json.dumps({
         "schema": SCHEMA, "images": copied, "positions": positions,
         "voice_signature": voice_signature(root), "duration_frames": total,
+        "ambient_version": AMBIENT_VERSION, "ambient_scenes": ambient_profiles(root),
     }, ensure_ascii=False, sort_keys=True).encode())
     return props, dest, signature
 
@@ -489,6 +544,10 @@ def render(root: Path = ROOT, *, refazer: bool = False,
         "seconds": duration, "scenes": 15,
         "narration": "approved_15_scenes",
         "flowerbed": "manually_approved_coordinates_only",
+        "ambient_version": AMBIENT_VERSION,
+        "ambient_effects": "borboletas/nuvens/petalas/polen/brilhos/poeira_svg",
+        "ambient_human_review": "pending",
+        "new_ambient_images": 0,
         "articulated_animation": False,
         "quality_review": "pending_human_watch_of_entire_mp4",
         "music_rights_review": "pending_before_publication",
