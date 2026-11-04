@@ -4,34 +4,48 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
-## PADRAO VISUAL SHORTS — 8 RELATORIOS VIDIQ (2026-11-03)
+## PADRAO VISUAL ATUAL: ZOOM CONTINUO SEM FLIQUES (2026-11-03)
 
-- Referencia: `docs/VIDIQ-OTAKU-MULTICENA-QA.md`. Nos 8 relatorios fornecidos
-  pelo criador, todos apontam aberturas estaticas; 6 citam problemas de
-  texto/legenda. Forecast nao e resultado real nem garantia de visualizacoes.
-- Em novos Shorts PT-BR, renderizadores **master e legado** usam camera de
-  gancho com cortes virtuais perceptiveis em **1,25s** e **2,45s**,
-  com movimento suave restante ate 5s. Para cenas >4,5s que permanecam
-  em tela depois do inicio, adicionar reenquadramentos discretos a cada
-  2,7s (sempre usando a mesma arte aprovada). A arte inteira pode
-  movimentar-se, mas nao deformar corpos, membros, maos ou objetos em contato.
-  Manter limite de zoom e enquadramento seguro e evitar luz piscando.
-- Na proxima geracao de imagens, o primeiro prompt deve mostrar uma acao,
-  objeto essencial ou interacao explicitamente citada no gancho (quando
-  canonicalmente coerente); nao iniciar sempre com retrato passivo.
-  Nao fabricar acontecimentos e nao gerar imagens extras sem cota autorizada.
-- Legendas em grupos de ate 3 palavras, fonte grande, fundo opaco e contorno
-  forte na faixa inferior. Destacar palavra atual usando timestamps reais
-  `WordBoundary`/ASR; nao inventar sincronismo nem atrasar artificialmente.
-  Os renderizadores master/legado preservam registros antigos verificados.
-- **Invalidez de cache:** se roteiro, voz ou fontes de render alterarem,
-  refazer MP4 local. Usar fingerprint do motor de imagem/camera/legendas
-  (scripts/fluxo_unico_short.py), nao confiar somente no SHA do MP3.
-- Aplicar melhorias somente em novas renderizacoes. Shorts ja publicados nao
-  sao apagados/atualizados/reenviados automaticamente. Exigir `-Publicar`
-  explicito para qualquer upload. QA tecnico antes de publicar:
-  `npm.cmd run typecheck`, `npm.cmd run test:qa`, `pytest`,
-  revisão de quadros 0s/1,3s/2,5s/5s e MP4 <=60,000s por ffprobe.
+- O criador rejeitou os **jump cuts virtuais** em 1,25s / 2,45s e as
+  trocas de posicao a cada 2,7s; causavam desconforto e atrapalhavam
+  a percepcao do movimento do personagem. **Nunca reintroduzir**.
+- Abertura: zoom in / zoom out suave de ate 4% com curva continua;
+  long holds: respiracao de camera de ate 2,2% sem saltos. Pan global
+  quase zero; camera centrada em cada cena. Nunca alterar o ponto focal
+  abruptamente em uma mesma imagem.
+- Personagens com RGBA semantico seguro: movimento rigido de corpo inteiro,
+  sem alongar rostos, maos, pernas ou tecidos. Preset equilibrado permite
+  deslocamento mais perceptivel, mas bloqueia personagens encostados em
+  objeto/manga/maos com risco de descolamento.
+- **Arte plana nao pode ter membros articulados de verdade** apenas com
+  transformacao global. Informar `camera_only_scenes` no QA; se o
+  movimento de corpo for indispensavel, produzir camadas/frames realmente
+  aprovados em vez de prometer gestos inexistentes.
+- Texto/legendas: blocos de ate 3 palavras, fundo escuro, tempos reais
+  da voz Edge TTS/ASR. Nao pronunciar o nome do canal no CTA.
+- Evitar reenquadramento excessivo, flicker, jitter, transicoes rapidas
+  e fontes cobrindo o rosto. Validar quadros e o video final no celular.
+- Alteracoes no motor de render invalidam MP4 local (renderer_sha256).
+  Nao reenviar videos antigos automaticamente.
+
+## GRADE DE 50 ANIMES — PRODUCAO / PUBLICACAO
+
+- Catalogos: `conteudos/otaku-multicena-grade-50-a.json` e
+  `conteudos/otaku-multicena-grade-50-b.json`: 50 Shorts originais,
+  ordenados dos lancamentos atuais aos nostalgicos, IDs 5001..5050.
+- Comando Windows: `grade-50-shorts.ps1` — Validar/Preparar/Produzir/Agendar.
+  `Validar` e `Preparar` sao offline e nao fazem upload ou chamadas IA.
+- `Produzir` exige cota de imagem autorizada explicitamente e conserva
+  caches. Padrao `MaxChamadasPorVideo=0`: nunca inferir custo/contas.
+- `Agendar` exige `ConfirmarPublicacao`, `InicioAgendamento` com fuso,
+  `IntervaloHoras>=1`, video/capa completos e privacidade `private`
+  com `publishAt` validado. Nao fazer 50 uploads publicos instantaneos.
+  A publicacao sera futura pelo YouTube quando o agendamento for confirmado.
+- Confirmar registros de video ID, bloquear duplicados e interromper apos
+  erro de upload sem reenvio automatico. Salvar estado somente em assets local.
+- **ChatGPT/GitHub nao tem acesso ao cache de imagens, OAuth nem PC local.**
+  Arquivos no repo significam roteiros prontos, NAO videos ja produzidos
+  nem 50 Shorts publicados. Ver `docs/OTAKU-GRADE-50.md`.
 
 ## REGRA EDITORIAL: CTA SEM MARCA NA NARRACAO
 
