@@ -26,6 +26,9 @@ from kids_narracao_acolhedora_v1 import (
 )
 from piloto_canais_3x2_v3 import verify_video
 from produzir_piloto_canais_v3 import _synthesize, audio_seconds
+from kids_musicas_fundo_v1 import (
+    MUSIC_POLICY, choose_track, music_signature, prepare_kids_music,
+)
 from kids_emanuelly_continuidade_v2 import (
     MODEL, POLICY, allowed_characters, role_for, scene_prompt,
     check_isolated_ref, prepare_isolated_references,
@@ -399,6 +402,7 @@ def build_props(part: dict, *, model: str = MODEL,
     dest = root / "motion-remotion" / "public" / "generated" / "kids-emanuelly" / part["id"]
     dest.mkdir(parents=True, exist_ok=True)
     shutil.copy2(voice, dest / "narracao.mp3")
+    music = prepare_kids_music(root, part["id"])
     frames = []
     for segment, beat in zip(part["segments"], beats):
         file, _ = frame_paths(part, segment, root=root)
@@ -420,6 +424,7 @@ def build_props(part: dict, *, model: str = MODEL,
         "audio": f"generated/kids-emanuelly/{part['id']}/narracao.mp3",
         "referenceSha": ref_digest,
         "madeForKids": True,
+        "music": music,
     }
     path = root / "motion-remotion" / f"props-emanuelly-{part['id']}.json"
     dump(path, props)
@@ -451,6 +456,8 @@ def render(part: dict, *, model: str = MODEL,
                 and qa.get("script_sha256") == sha(part["narration"].encode("utf-8"))
                 and qa.get("model") == model
                 and qa.get("continuity_policy") == POLICY
+                and qa.get("music_policy") == MUSIC_POLICY
+                and qa.get("music_sha256") == music_signature(root, part["id"])
                 and qa.get("image_sha256") == image_hashes
                 and qa.get("voice_sha256") == voice_hash
                 and len(image_hashes) == len(part["segments"])):
@@ -493,6 +500,10 @@ def render(part: dict, *, model: str = MODEL,
         "voice_sha256": sha((output_for(part, root) / "narracao.mp3").read_bytes()),
         "reference_sha256": ref_digest, "model": model,
         "continuity_policy": POLICY,
+        "music_policy": MUSIC_POLICY,
+        "music_sha256": music_signature(root, part["id"]),
+        "music_source": choose_track(part["id"])[1],
+        "music_rights_review": "pending_before_publication",
         "image_sha256": [
             sha(frame_paths(part, b, root=root)[0].read_bytes()) for b in part["segments"]
         ],
@@ -530,8 +541,12 @@ def inspect(part: dict, reference: Path = REFERENCE, model: str = MODEL,
             isolated[role] = True
         except (FileNotFoundError, ValueError, OSError):
             isolated[role] = False
+    music_track = choose_track(part["id"])[1]
     return {
         "episode": part["id"], "part": part["part"],
+        "music_track": music_track,
+        "music_present": (root / music_track).is_file(),
+        "music_rights_review": "pending_before_publication",
         "continuity_policy": POLICY, "isolated_references_ready": isolated,
         "reference_present": reference_present,
         "frames_required": len(part["segments"]),
