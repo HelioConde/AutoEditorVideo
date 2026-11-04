@@ -28,6 +28,17 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
+# Roteiro aprovado da Parte 1 nao pode usar o motor antigo de 9 cenas.
+if($Parte -eq '1' -and $Acao -in @('Planejar','Verificar','Renderizar','Abrir')){
+  $new=Join-Path $root 'fofinhos-ep01.ps1'
+  if(-not(Test-Path -LiteralPath $new -PathType Leaf)){
+    throw 'Motor canonico Fofinhos nao encontrado. Atualize o GitHub.'
+  }
+  $names=@{'Planejar'='Planejar';'Verificar'='Planejar';'Renderizar'='Renderizar';'Abrir'='Abrir'}
+  $name=$names[$Acao]
+  & $new -Acao $name -Refazer:$Refazer
+  return
+}
 $program=Join-Path $root 'scripts\kids_emanuelly_todos_videos_v2.py'
 if(-not(Test-Path -LiteralPath $program -PathType Leaf)){
   throw 'Compositor de todos os videos Fofinho nao encontrado. Execute git pull.'
