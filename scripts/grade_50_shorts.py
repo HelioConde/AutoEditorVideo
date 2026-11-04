@@ -20,6 +20,7 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from roteiro_para_storyboard import select_episode, save_plan
 from metadata_shorts import publisher_episode
 from shorts_duration import validate_video
+from otaku_growth_v3 import audit_batch
 
 CATALOGS=(
     ROOT/'conteudos'/'otaku-multicena-grade-50-a.json',
@@ -198,6 +199,22 @@ def run(args:argparse.Namespace)->int:
     print(f'[VALIDADO] {len(queue)} roteiros originais / {len(chosen)} selecionados. '
           'Upload somente na acao produzir-publicar com confirmacao explicita.',
           flush=True)
+    # Relatorio editorial sem imagens, upload ou modificacao de video.
+    if args.acao in ('validar', 'preparar') or args.auditar_editorial or args.exigir_gates_editoriais:
+        report = audit_batch(chosen)
+        summary = report['summary']
+        print('[EDITORIAL V3] ' + str(summary['episodes']) + ' roteiros; ' +
+              str(summary['blocking_issues']) + ' bloqueios objetivos; ' +
+              str(summary['advisories']) + ' avisos. ' +
+              'Revisao factual, visual e de direitos continua obrigatoria.',
+              flush=True)
+        for item in report['episodes']:
+            for issue in item['issues']:
+                if issue['severity'] == 'blocking':
+                    print('[EDITORIAL BLOQUEIO] ' + item['id'] + ': ' +
+                          issue['message'], flush=True)
+        if args.exigir_gates_editoriais and summary['blocking_issues']:
+            raise ValueError('Gate editorial V3 reprovou roteiros; corrigir antes de produzir.')
     if args.acao=='validar':
         return 0
     if args.acao=='preparar':
@@ -361,6 +378,10 @@ def parser()->argparse.ArgumentParser:
     ap.add_argument('--exigir-movimento-personagem',action='store_true',
                     help='QA estrito opcional: bloqueia se todas as cenas '
                          'forem apenas 2.5D/imagem plana com zoom')
+    ap.add_argument('--auditar-editorial',action='store_true',
+                    help='Auditoria V3 informativa antes da producao (offline).')
+    ap.add_argument('--exigir-gates-editoriais',action='store_true',
+                    help='Bloquear problemas objetivos, mantendo QA humano obrigatorio.')
     ap.add_argument('--continuar-apos-falha',action='store_true',
                     help='Se uma producao de imagens/render falhar, salvar '
                          'pendencia SEM upload e tentar o proximo episodio. '
