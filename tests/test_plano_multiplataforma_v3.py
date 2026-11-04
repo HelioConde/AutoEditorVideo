@@ -15,8 +15,7 @@ import plano_multiplataforma_v3 as plan
 
 
 def first_episode():
-    return next(ep for ep in plan.read_catalogs(list(plan.DEFAULT_CATALOGS))
-                if ep["id"] == "5001-black-clover")
+    return plan.load_episodes(include_recaps=True)["5001-black-clover"]
 
 
 def test_plan_uses_existing_episode_and_never_uploads(tmp_path):
