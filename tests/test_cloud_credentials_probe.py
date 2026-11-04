@@ -34,7 +34,7 @@ def test_wrong_channel_is_detected():
 def test_invalid_json_raises_sanitized_code_only():
     with pytest.raises(ValueError, match="INVALID_JSON") as e:
         p.parse_secret("YT", '{"invalid":"')
-    assert "invalid" not in str(e.value).lower()
+    assert '{"invalid":"' not in str(e.value)
 
 
 def test_missing_secrets_cannot_authenticate(monkeypatch, capsys):
