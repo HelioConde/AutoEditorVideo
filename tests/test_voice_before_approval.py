@@ -15,14 +15,14 @@ def test_voice_only_does_not_validate_or_render_unapproved_images(tmp_path,monke
     monkeypatch.setattr(render,"validate_scenes",bad_validate)
     monkeypatch.setattr(render,"OUT",tmp_path)
     calls=[]
-    def mocked_voice(ep,folder,*,create):
-        calls.append((ep["script"],folder,create))
+    def mocked_voice(ep,folder,*,create,engine='edge'):
+        calls.append((ep["script"],folder,create,engine))
         return folder/"voz-master.mp3",folder/"legendas.ass"
     monkeypatch.setattr(render,"ensure_voice",mocked_voice)
     # Mocked MP3 does not exist; isolate duration probe while retaining the 60s gate.
     monkeypatch.setattr(render,"audio_duration",lambda path: 42.0)
     assert render.main(["--id","ep-test","--somente-voz","--criar-voz"])==0
-    assert calls==[("A historia comeca",tmp_path/"ep-test",True)]
+    assert calls==[("A historia comeca",tmp_path/"ep-test",True,"edge")]
 
 
 def test_voice_only_cannot_also_render(tmp_path,monkeypatch):
