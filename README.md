@@ -61,6 +61,26 @@ por atualizar o GitHub.
 
 Detalhes: [Otaku Multicena 3.0](docs/OTAKU-MULTICENA-3-0.md).
 
+## Dois novos canais PT-BR — Games + Kids (piloto 3x2)
+
+Novo projeto independente com **3 Shorts Games** e **3 Shorts Kids**,
+todos em português brasileiro: roteiro, títulos, voz e legendas.
+Nomes provisórios: Checkpoint Pixel (games) e MiniMundo Curioso (kids).
+
+    .\piloto-canais-v3.ps1 -Acao validar
+    .\piloto-canais-v3.ps1 -Acao preparar
+    .\piloto-canais-v3.ps1 -Acao inspecionar
+
+Kids tem animações vetoriais originais em Remotion, voz pt-BR-FranciscaNeural
+e classificação Made for Kids planejada. Games precisa de **gameplay real**
+(Minecraft, Roblox e TILLFOLK) e narração pt-BR-AntonioNeural.
+
+Nomes ainda precisam de aprovação, canais YouTube ainda não foram criados e
+nenhum MP4 ou upload foi executado. O motor Otaku permanece inalterado.
+O piloto não possui opção de publicar nem usa tokens OAuth de outros canais.
+
+Guia: [Piloto Games e Kids — 3x2 PT-BR](docs/PILOTO-GAMES-KIDS-3X2-V3.md).
+
 ## Otaku Reframe EN V3 — Shorts brasileiros ja publicados
 
 O canal ingles Otaku Reframe ja existe. O projeto agora permite preparar
