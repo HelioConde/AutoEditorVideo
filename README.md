@@ -8,6 +8,24 @@
 > anterior permanece integralmente na branch
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
+## Kids — Narração Acolhedora com pausas reais (teste)
+
+A história da **estrelinha azul** foi reescrita em 13 falas PT-BR
+com perguntas, 11,8 segundos de pausas naturais e animação sincronizada.
+A criança tem 1,8 segundo para responder a cada pergunta de cor, sem
+o personagem antecipar a resposta.
+
+    .\piloto-canais-v3.ps1 -Acao inspecionar -Canal kids -Id kids-001-estrela-azul
+    .\piloto-canais-v3.ps1 -Acao voz -Canal kids -Id kids-001-estrela-azul -Refazer
+    .\piloto-canais-v3.ps1 -Acao renderizar -Canal kids -Id kids-001-estrela-azul -Refazer
+
+A narração é reconstruída com FFmpeg a partir de trechos Edge TTS.
+A meta é 45–55s, e a duração real nunca pode ultrapassar 60s.
+Esse teste não altera os outros Kids, Gamer ou os canais de anime,
+e **não envia nem publica vídeos**.
+
+[Guia do teste de Narração Acolhedora](docs/KIDS-NARRACAO-ACOLHEDORA-V1.md).
+
 ## Biblioteca de videos por canal + revisao do MP4 no YouTube
 
 Novo organizador **nao destrutivo** de `assets/gerados`: ao executar,
