@@ -3,6 +3,7 @@
 param(
     [ValidateSet('planejar','voz','capa','renderizar')][string]$Acao='planejar',
     [string]$Id='',
+    [string]$Manifesto='',
     [ValidateSet('gpt-image-1.5','gpt-image-2')][string]$Modelo='gpt-image-1.5',
     [ValidateSet('equilibrado','vivo','ultrassutil')][string]$Perfil='equilibrado',
     [switch]$Refazer
@@ -15,6 +16,7 @@ if(-not(Test-Path $py)){throw 'Python .venv ausente. Execute scripts\instalar-wi
 if(-not(Test-Path $program)){throw 'Atualize o repositorio: git pull --ff-only origin main'}
 $argsForPython=@($program,'--acao',$Acao,'--modelo',$Modelo,'--perfil',$Perfil)
 if($Id){$argsForPython+=@('--id',$Id)}
+if($Manifesto){$argsForPython+=@('--manifesto',(if([IO.Path]::IsPathRooted($Manifesto)){$Manifesto}else{Join-Path $root $Manifesto}))}
 if($Refazer){$argsForPython+='--refazer'}
 & $py @argsForPython
 if($LASTEXITCODE -ne 0){throw "Processo EN falhou (codigo $LASTEXITCODE). O material PT foi preservado."}
