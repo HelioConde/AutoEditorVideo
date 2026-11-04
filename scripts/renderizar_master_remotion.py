@@ -474,7 +474,15 @@ def main(argv:list[str]|None=None)->int:
                   'render_mode':e['render_mode'],
                   'foreground_source_consistency':e['fidelity']}
                   for e in validated]}
+    manifest["visual_review_stage"] = "post_upload_youtube_studio"
     (folder/'qa-master-multicenas.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    try:
+        from organizar_videos_por_canal import refresh_library_after_render
+        archive = refresh_library_after_render(ROOT)
+        if archive["status"] == "updated":
+            print(f'[BIBLIOTECA OTAKU] Sincronizados {archive["videos"]} MP4s.')
+    except (OSError, ValueError) as exc:
+        print(f'[BIBLIOTECA AVISO] MP4 original intacto; sincronizacao falhou: {exc}')
     print(f'[OK] Short renderizado (NAO publicado): {output}. '
           'Revisao visual do video completo somente depois de enviar PRIVADO ao YouTube Studio.')
     return 0
