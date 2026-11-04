@@ -149,6 +149,18 @@ def prompt(pose: str) -> str:
     )
 
 
+# Previously generated 'em-pe' poses remain valid under their original
+# identity and image hashes; updating framing instructions must not force
+# wasting a new paid request for an already successful image.
+MARGIN_PROMPT = (
+    "Keep the ENTIRE silhouette within the center 80 percent of the canvas, "
+    "at least 12 percent free transparent space on LEFT and RIGHT, and at "
+    "least 9 percent free transparent space above the hair and below the feet. "
+    "Do not place even hands, shoes, hair, bows or accessories on image edges. "
+    "NO zoomed-in character, NO clipped feet or fingers. "
+)
+
+
 def paths(pose: str, root: Path = ROOT) -> tuple[Path, Path]:
     if pose not in POSES:
         raise ValueError("Pose invalida: " + pose)
@@ -159,6 +171,12 @@ def paths(pose: str, root: Path = ROOT) -> tuple[Path, Path]:
 def expected(ref_sha: str, pose: str) -> str:
     return digest((SCHEMA + "\n" + MODEL + "\n" + ref_sha + "\n" +
                    prompt(pose)).encode("utf-8"))
+
+
+def expected_before_margin_fix(ref_sha: str, pose: str) -> str:
+    earlier = prompt(pose).replace(MARGIN_PROMPT, "")
+    return digest((SCHEMA + "\n" + MODEL + "\n" + ref_sha + "\n"
+                   + earlier).encode("utf-8"))
 
 
 def valid(pose: str, root: Path = ROOT) -> bool:
@@ -172,7 +190,9 @@ def valid(pose: str, root: Path = ROOT) -> bool:
             details.get("schema") == SCHEMA and details.get("model") == MODEL
             and details.get("pose") == pose
             and details.get("reference_sha256") == ref_sha
-            and details.get("signature") == expected(ref_sha, pose)
+            and details.get("signature") in (
+                expected(ref_sha, pose), expected_before_margin_fix(ref_sha, pose)
+            )
             and details.get("image_sha256") == digest(art.read_bytes())
             and details.get("qa", {}).get("transparent_fraction", 0) >= 0.08
         ):
@@ -191,17 +211,37 @@ def valid(pose: str, root: Path = ROOT) -> bool:
 def plan(poses: list[str], *, root: Path = ROOT) -> dict:
     ref = private_ref(root)
     ref_exists = ref.is_file()
-    rows = [{
-        "pose": slug, "descricao": POSES[slug][1],
-        "status": "em_cache" if valid(slug, root) else (
-            "desatualizada" if paths(slug, root)[0].exists() else "pendente"),
-    } for slug in poses]
+    ref_sha = image_check(ref) if ref_exists else None
+    rows = []
+    for slug in poses:
+        finished = valid(slug, root)
+        recoverable = (
+            not finished and ref_sha is not None and raw_valid(slug, ref_sha, root)
+        )
+        png, _meta = paths(slug, root)
+        raw, _raw_meta = raw_paths(slug, root)
+        if finished:
+            status = "em_cache"
+        elif recoverable:
+            status = "bruto_recuperavel_sem_ia"
+        elif png.exists() or raw.exists():
+            status = "desatualizada"
+        else:
+            status = "pendente"
+        rows.append({
+            "pose": slug, "descricao": POSES[slug][1],
+            "status": status, "chamadas_novas": int(
+                not finished and not recoverable
+            ),
+        })
     return {
         "schema": SCHEMA, "model": MODEL,
         "referencia_instalada": ref_exists,
         "referencia": str(ref),
         "poses": rows,
-        "chamadas_necessarias": sum(r["status"] != "em_cache" for r in rows),
+        "chamadas_necessarias": sum(r["chamadas_novas"] for r in rows),
+        "brutos_recuperaveis": sum(r["status"] == "bruto_recuperavel_sem_ia"
+                                  for r in rows),
         "revisao_identidade": "necessaria_antes_de_uso_na_animacao",
         "publicacoes": 0,
     }
