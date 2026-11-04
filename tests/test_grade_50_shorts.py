@@ -112,7 +112,8 @@ def test_produces_validates_then_uploads_one_public_video(monkeypatch,tmp_path):
     journal={}
     monkeypatch.setattr(grade,'load_journal',lambda:journal)
     monkeypatch.setattr(grade,'save_journal',lambda value:events.append(('journal',value[ep['id']]['status'])))
-    monkeypatch.setattr(grade,'ensure_ready',lambda *_a:events.append(('qa',ep['id'])) or video)
+    monkeypatch.setattr(grade,'ensure_ready',
+                        lambda *_a,**_k:events.append(('qa',ep['id'])) or video)
     def fake_invoke(cmd,*,label):
         events.append(('invoke','-Publicar' in cmd))
     monkeypatch.setattr(grade,'invoke',fake_invoke)
@@ -173,3 +174,65 @@ def test_existing_public_receipt_is_reconciled_without_reupload(monkeypatch,tmp_
     assert not uploads
     assert state[ep['id']]['video_id']=='abc123def45'
     assert state[ep['id']]['status']=='publicado-publico'
+
+
+def test_standard_2_5d_is_not_blocked_only_for_missing_character_masks(
+    monkeypatch,tmp_path
+):
+    """Regression: Black Clover was rendered, yet every scene was 2.5D.
+
+    It must publish with honest camera-only QA unless strict mode is enabled.
+    """
+    import json
+    from PIL import Image
+    ep=grade.load_queue()[0]
+    folder=tmp_path/ep['id']
+    folder.mkdir()
+    video=folder/(ep['id']+'-master-multicenas-personagens-v3-equilibrado.mp4')
+    video.write_bytes(b'pretend-valid-MP4')
+    cover=folder/(ep['id']+'-master-capa.jpg')
+    Image.effect_noise((720,1280),48).convert('RGB').save(cover,'JPEG',quality=90)
+    assert cover.stat().st_size>10000
+    qa={'id':ep['id'],'mp4':str(video),'animation_mode':'cinematica',
+        'visual_shots':9,'camera_only_scenes':9}
+    (folder/'qa-master-multicenas.json').write_text(
+        json.dumps(qa),encoding='utf-8')
+    monkeypatch.setattr(grade,'video_paths',lambda *_:(video,cover))
+    monkeypatch.setattr(grade,'validate_video',lambda *_a,**_k:50.)
+    assert grade.ensure_ready(ep,'equilibrado')==video
+    with pytest.raises(RuntimeError,match='QA estrito'):
+        grade.ensure_ready(ep,'equilibrado',require_character_motion=True)
+
+
+def test_flat_scene_is_not_excuse_to_ignore_other_safety_checks(
+    monkeypatch,tmp_path
+):
+    import json
+    from PIL import Image
+    ep=grade.load_queue()[0]
+    folder=tmp_path/ep['id']
+    folder.mkdir()
+    video=folder/(ep['id']+'-master-multicenas-personagens-v3-equilibrado.mp4')
+    video.write_bytes(b'fake-MP4')
+    cover=folder/(ep['id']+'-master-capa.jpg')
+    Image.effect_noise((720,1280),42).convert('RGB').save(cover,'JPEG',quality=90)
+    qa={'id':ep['id'],'mp4':str(video),'animation_mode':'cinematica',
+        'visual_shots':9,'camera_only_scenes':9}
+    qa_path=folder/'qa-master-multicenas.json'
+    qa_path.write_text(json.dumps(qa),encoding='utf-8')
+    monkeypatch.setattr(grade,'video_paths',lambda *_:(video,cover))
+    def invalid_duration(*_a,**_k):
+        raise ValueError('duracao ultrapassou 60s')
+    monkeypatch.setattr(grade,'validate_video',invalid_duration)
+    with pytest.raises(ValueError,match='60s'):
+        grade.ensure_ready(ep,'equilibrado')
+    monkeypatch.setattr(grade,'validate_video',lambda *_a,**_k:49.)
+    qa['id']='outro-episodio'
+    qa_path.write_text(json.dumps(qa),encoding='utf-8')
+    with pytest.raises(RuntimeError,match='QA nao pertence'):
+        grade.ensure_ready(ep,'equilibrado')
+    qa['id']=ep['id']
+    qa['camera_only_scenes']=10
+    qa_path.write_text(json.dumps(qa),encoding='utf-8')
+    with pytest.raises(RuntimeError,match='Contagem de cenas'):
+        grade.ensure_ready(ep,'equilibrado')
