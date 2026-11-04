@@ -1,4 +1,4 @@
-"""Protect the black chess king and require user approval of regenerated takes."""
+"""Protect the black chess king with technical QA and post-upload visual review."""
 from __future__ import annotations
 
 import io
@@ -78,7 +78,12 @@ def test_render_uses_only_master_not_damaged_king_layer(tmp_path,monkeypatch):
         assert fg.getchannel('A').getextrema()==(0,0)
 
 
-def test_revised_take_is_blocked_until_explicitly_approved(tmp_path,monkeypatch):
+def test_revised_take_renders_without_preapproval_but_explicit_rejection_blocks(tmp_path,monkeypatch):
+    """The current policy checks full videos after a PRIVATE YouTube upload.
+
+    Do not reintroduce per-scene human approval gates. A scene expressly
+    rejected as defective is still a strict technical blocker.
+    """
     folder,_,_=make_scene(tmp_path)
     scene={'id':'04','subject':'personagens','prompt':'x'*60,'shot_type':'l_reaction',
            'correcao_visual':{'requires_manual_approval':True}}
@@ -88,13 +93,18 @@ def test_revised_take_is_blocked_until_explicitly_approved(tmp_path,monkeypatch)
     monkeypatch.setattr(renderer,'scene_dir',lambda *args:folder)
     monkeypatch.setattr(renderer,'cover_options',lambda *args:{
         'scene':'04','title':'CHESS','zoom':1.07,'focus_x':.5,'focus_y':.38})
-    with pytest.raises(ValueError,match='APROVACAO'):
-        renderer.validate_scenes(ep,'gpt-image-1.5',output=tmp_path)
-    with pytest.raises(ValueError,match='nao foi aprovada'):
-        renderer.cover_from_master(ep,'gpt-image-1.5',tmp_path/'capa.jpg')
-    write_review(folder,status='aprovado',reason='Foto conferida')
     assert renderer.validate_scenes(ep,'gpt-image-1.5',output=tmp_path)
+    cover=renderer.cover_from_master(ep,'gpt-image-1.5',tmp_path/'capa.jpg')
+    assert cover['scene']=='04'
+    assert (tmp_path/'capa.jpg').is_file()
+    assert not (folder/'visual-review.json').exists()
+    assert scene['correcao_visual']['requires_manual_approval'] is True
 
+    write_review(folder,status='reprovado',reason='Defeito real identificado')
+    with pytest.raises(ValueError,match='Defeito real identificado'):
+        renderer.validate_scenes(ep,'gpt-image-1.5',output=tmp_path)
+    with pytest.raises(ValueError,match='reprovada'):
+        renderer.cover_from_master(ep,'gpt-image-1.5',tmp_path/'capa.jpg')
 
 def test_existing_approved_legacy_scenes_continue_working():
     assert master_static_for_chess_action({'shot_type':'light_moves_king'})
