@@ -5,6 +5,41 @@ imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
 
+## SERIE KIDS — EMANUELLY E SEUS AMIGOS DE PELUCIA (CANONE)
+
+- História-base integral e fatos confirmados dos personagens em
+  `docs/KIDS-EMANUELLY-SERIE-BIBLIA-V1.md`.
+  Nunca sobrescrever o conto-base ao adaptar para novos formatos.
+- Episodio 01 `O Ovo Azul e o Nascimento de Fofinho` tem quatro
+  Shorts narrativos planejados em
+  `conteudos/kids-emanuelly-ep01-shortserie-v1.json`.
+  Cada parte com abertura envolvente, descoberta real e final de curiosidade
+  leve que se resolve no começo da proxima parte.
+- Máximo absoluto de 60 segundos no MP4. Alvo de 45-55 segundos com TTS
+  acolhedor PT-BR e pausas reais. A duracao so e confirmada depois de
+  sintetizar e medir; nao truncar, nao acelerar demais, nem cortar
+  os intervalos de resposta das criancas.
+- Fofinho e um gato de pelucia azul, nasceu de ovo de dragao encontrado
+  por Emanuelly e controla agua. Arco-Iris e Rosa sao gatinhas gemeas,
+  irmas mais novas; nascem UM ANO apos Fofinho. Nao antecipar seu
+  nascimento no EP01 e nao inventar quantos ovos originam as gemeas.
+- Raposo e uma ONCA de pelucia apelidada por sua criacao entre
+  raposas/canideos; pega brinquedos porque deseja companhia, nao porque
+  seja mau. Porco-espinho de pelucia adora abracos. Emanuelly e
+  a protagonista afetuosa. Aparencia visual deve usar arte aprovada,
+  nao inventar caracteristicas fisicas do retrato.
+- Suspense infantil = descoberta e curiosidade, nunca perigo assustador,
+  punicao, urgencia ou manipulacao de engajamento. Evitar pedidos
+  de inscricoes/comentarios e manter Made for Kids.
+- Manter figurinos, paleta, poderes, personalidade, quarto, ovo e efeitos
+  consistentes entre partes. Cada parte deve entregar mini-recompensa
+  (ovo acolhido / nascimento / agua magica / amizade).
+- O manifesto e apenas PLANEJAMENTO EDITORIAL: sem mp4, TTS, uploads nem
+  integracao automatica ao motor Kids ainda. Nao afirmar que ja esta pronto
+  para renderizacao ate implementar e testar.
+- Testar `tests/test_kids_emanuelly_serie.py` quando alterar roteiro.
+  Manter `kids-001-estrela-azul` e demais projetos isolados.
+
 ## KIDS — NARRACAO ACOLHEDORA V1, TESTE ISOLADO
 
 - O usuário deseja histórias infantis com fala calorosa, perguntas simples

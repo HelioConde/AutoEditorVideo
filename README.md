@@ -9,6 +9,24 @@
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
 
+## Nova serie Kids: Emanuelly e seus Amigos de Pelucia
+
+A historia original **EP 01 — O Ovo Azul e o Nascimento de Fofinho**
+foi preservada integralmente na
+[Biblia da serie](docs/KIDS-EMANUELLY-SERIE-BIBLIA-V1.md),
+junto com as regras do elenco: Emanuelly, Fofinho, Fofinha Arco-Iris,
+Fofinha Rosa, Raposo (onca de pelucia) e Porco-espinho.
+
+O primeiro episodio foi dividido em **4 Shorts editoriais**, com um gancho
+suave nos primeiros segundos, uma pequena recompensa narrativa em cada
+parte e uma curiosidade que leva a parte seguinte. Meta de 45-55 segundos,
+maximo 60 segundos por MP4, sujeito a cronometragem real do Edge TTS.
+
+Manifesto: [EP01, quatro partes](conteudos/kids-emanuelly-ep01-shortserie-v1.json).
+**Ainda nao foram renderizados ou publicados**; estes scripts nao estao
+ligados automaticamente ao motor da estrelinha azul. A referencia visual
+aprovada do elenco precisa ser incorporada aos assets antes da producao.
+
 ## Kids — Narracao Acolhedora PT-BR (estrelinha azul)
 
 Piloto Kids com 13 falas, 13,1 segundos de pausas PCM reais e esperas

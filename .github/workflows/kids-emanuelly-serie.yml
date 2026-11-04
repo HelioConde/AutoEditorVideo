@@ -1,0 +1,33 @@
+name: Kids Emanuelly - Canon e sequencia Shorts
+
+on:
+  pull_request:
+    paths:
+      - "docs/KIDS-EMANUELLY-SERIE-BIBLIA-V1.md"
+      - "conteudos/kids-emanuelly-ep01-shortserie-v1.json"
+      - "tests/test_kids_emanuelly_serie.py"
+      - ".github/workflows/kids-emanuelly-serie.yml"
+  push:
+    branches: [main]
+    paths:
+      - "docs/KIDS-EMANUELLY-SERIE-BIBLIA-V1.md"
+      - "conteudos/kids-emanuelly-ep01-shortserie-v1.json"
+      - "tests/test_kids_emanuelly_serie.py"
+      - ".github/workflows/kids-emanuelly-serie.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verificar-roteiros:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pytest (no TTS, render or upload)
+        run: python -m pip install 'pytest>=8,<10'
+      - name: Validate original story, episode chronology and four under-60s drafts
+        run: python -m pytest -q tests/test_kids_emanuelly_serie.py
