@@ -37,6 +37,33 @@ Path(__file__).resolve().parents[1].joinpath("registro.json").write_text(
      -not ($argsPy -contains '--max-chamadas') -or -not ($argsPy -contains '1')){
     throw 'Gerar nao repassou pose e limite.'
   }
+  & $runner -Acao Catalogo -Grupo Todas | Out-Null
+  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'registro.json') -Raw | ConvertFrom-Json
+  if(-not ($argsPy -contains 'catalogo') -or -not ($argsPy -contains 'Todas')){
+    throw 'Catalogo e grupos futuros nao foram encaminhados'
+  }
+  & $runner -Acao Planejar -Grupo Carinho | Out-Null
+  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'registro.json') -Raw | ConvertFrom-Json
+  if(-not ($argsPy -contains 'Carinho') -or -not ($argsPy -contains '--grupo')){
+    throw 'Planejar Carinho deve funcionar sem usar IA'
+  }
+  & $runner -Acao Gerar -Pose fazendo-carinho -MaxChamadas 1 | Out-Null
+  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'registro.json') -Raw | ConvertFrom-Json
+  if(-not ($argsPy -contains 'fazendo-carinho') -or
+     -not ($argsPy -contains '--pose') -or
+     -not ($argsPy -contains '1')){
+    throw 'Pose fazendo-carinho nao chegou ao motor'
+  }
+  & $runner -Acao Gerar -Grupo Brincadeiras -Quantidade 2 -MaxChamadas 2 | Out-Null
+  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'registro.json') -Raw | ConvertFrom-Json
+  if(-not ($argsPy -contains 'Brincadeiras') -or
+     -not ($argsPy -contains '--quantidade') -or
+     -not ($argsPy -contains '2')){
+    throw 'Limite de lote e grupo precisam ser encaminhados'
+  }
+  $invalid=$false
+  try{& $runner -Acao Verificar -Quantidade 1 | Out-Null}catch{$invalid=$true}
+  if(-not $invalid){throw 'Quantidade nao pode gerar arte em Verificar'}
   $blocked=$false
   try{& $runner -Acao Planejar -Refazer | Out-Null}catch{$blocked=$true}
   if(-not $blocked){throw 'Planejar com Refazer devia falhar.'}
