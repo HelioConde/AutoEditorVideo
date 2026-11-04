@@ -112,8 +112,12 @@ def test_install_folder_partial_reuse_and_reject_unknown(tmp_path):
     assert assets.install_folder(source,root=tmp_path)["uploads"]==0
     other=image_file(source,"ovo-inventado")
     assert other.is_file()
-    with pytest.raises(FileNotFoundError,match="Nenhum PNG"):
+    with pytest.raises(FileNotFoundError,match="Pasta de imagens ausente"):
         assets.install_folder(other.parent/"missing",root=tmp_path)
+    unknown_only=tmp_path/"unknown"
+    image_file(unknown_only,"nao-registrado")
+    with pytest.raises(FileNotFoundError,match="Nenhum PNG com nome oficial"):
+        assets.install_folder(unknown_only,root=tmp_path)
     replacement=Image.new("RGB",(1024,1536),(90,80,100))
     replacement.save(src)
     with pytest.raises(ValueError,match="Refazer"):
