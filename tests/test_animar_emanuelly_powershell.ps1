@@ -49,7 +49,7 @@ Path(__file__).resolve().parents[1].joinpath("args.json").write_text(
   }
   & $runner -Acao Preparar | Out-Null
   $argsPy=Get-Content -LiteralPath (Join-Path $temp 'args.json') -Raw | ConvertFrom-Json
-  if(-not ($argsPy -contains 'props')){
+  if(-not ($argsPy -contains 'preparar')){
     throw 'Compositor nao recebeu acao Preparar'
   }
   & $runner -Acao GerarImagens -Parte 2 -Recurso ovo-rachado -MaxChamadas 1 | Out-Null
