@@ -26,6 +26,10 @@ from kids_narracao_acolhedora_v1 import (
 )
 from piloto_canais_3x2_v3 import verify_video
 from produzir_piloto_canais_v3 import _synthesize, audio_seconds
+from kids_emanuelly_continuidade_v2 import (
+    MODEL, POLICY, allowed_characters, role_for, scene_prompt,
+    check_isolated_ref, prepare_isolated_references,
+)
 
 MANIFEST = ROOT / "conteudos" / "kids-emanuelly-ep01-shortserie-v1.json"
 REFERENCE = ROOT / "assets" / "referencias-privadas" / "emanuelly-elenco.png"
@@ -190,36 +194,7 @@ def install_reference(source: Path, destination: Path = REFERENCE,
 
 
 def frame_prompt(part: dict, beat: dict, position: int) -> str:
-    # The reference image is the source of visual truth; never infer traits
-    # such as skin tone/hair/costume not visible in the supplied picture.
-    return (
-        "Create a NEW original 9:16 vertical cinematic 3D children's storybook "
-        "ILLUSTRATION, based closely on the attached PRIVATE CAST REFERENCE IMAGE. "
-        "Maintain the EXACT approved Emanuelly appearance shown in the reference: "
-        "facial proportions, hairstyle, skin appearance, clothes, body proportions, "
-        "and art style. Keep plush characters identical to the reference when shown, "
-        "especially Fofinho as a BLUE PLUSH KITTEN, not a real animal or a dragon. "
-        "The dragon EGG is magical and BLUE, with delicate waterdrop patterns; "
-        "the egg does not become a real dragon. "
-        "This series uses the SAME Emanuelly, SAME plush toys and SAME environments "
-        "across all episodes. Camera must frame the ACTION clearly with warm "
-        "gentle lighting, child-safe shapes, tactile plush fibers, expressive eyes, "
-        "cinematic composition, no uncanny expression. "
-        f"Episode 1, chapter {part['part']}/4, frame {position}/{len(part['segments'])}. "
-        f"Actual story beat: {beat['visual_cue']}. "
-        f"Spoken beat for context (do not draw text): {beat['spoken_text']}. "
-        "CRITICAL continuity: Chapter 1 is finding the blue egg BEFORE hatching; "
-        "chapter 2 shows Fofinho emerging from the egg; chapter 3 reveals his "
-        "gentle WATER magic; chapter 4 concludes with care and hugs. "
-        "The rainbow and pink twin sisters are NOT yet born; DO NOT depict them "
-        "as active characters in this story or spoil future introductions. "
-        "If the beat is before the birth, do not show Fofinho outside the egg. "
-        "If the beat is before the water power reveal, do not show magical "
-        "floating water drops. Preserve spatial layout and costumes. "
-        "NO text, subtitles, logo, watermark, collage, split panels, photorealism, "
-        "violent content, horror, harsh flashes, extra limbs, or unrelated characters. "
-        "Output one coherent illustrated cinematic shot, NOT the reference sheet."
-    )
+    return scene_prompt(part, beat)
 
 
 def image_cache(part: dict, beat: dict, model: str, ref_digest: str) -> str:
@@ -240,7 +215,20 @@ def valid_frame(part: dict, beat: dict, model: str, ref_digest: str,
         return False
     try:
         saved = json.loads(marker.read_text(encoding="utf-8"))
-        if (saved["signature"] != image_cache(part, beat, model, ref_digest)
+        role = role_for(part, beat)
+        try:
+            _isolated, isolated_sha = check_isolated_ref(
+                root / "assets" / "referencias-privadas" / "emanuelly-elenco.png", role
+            )
+        except (FileNotFoundError, ValueError, OSError):
+            return False
+        if (saved.get("schema") != "kids-emanuelly/image-qa/v2"
+                or saved.get("continuity_policy") != POLICY
+                or saved.get("allowed_characters") != list(allowed_characters(part, beat))
+                or saved.get("reference_role") != role
+                or saved.get("isolated_reference_sha256") != isolated_sha
+                or saved.get("model") != MODEL
+                or saved["signature"] != image_cache(part, beat, model, ref_digest)
                 or saved["reference_sha256"] != ref_digest
                 or saved["image_sha256"] != sha(frame.read_bytes())):
             return False
@@ -263,11 +251,11 @@ def image_plan(parts: list[dict], reference: Path, model: str, root: Path = ROOT
 
 
 def make_images(parts: list[dict], *, reference: Path = REFERENCE,
-                model: str = "gpt-image-1.5", budget: int = 0,
+                model: str = MODEL, budget: int = 0,
                 root: Path = ROOT, regenerate: bool = False,
                 editor=None, key_provider=None) -> dict:
-    if model not in ("gpt-image-1.5", "gpt-image-2"):
-        raise ValueError("Modelo invalido")
+    if model != MODEL:
+        raise ValueError("Referencias Kids exigem gpt-image-2; nunca gpt-image-1.5")
     if budget < 0:
         raise ValueError("Numero de chamadas nao pode ser negativo")
     missing, ref_digest = image_plan(parts, reference, model, root)
@@ -287,6 +275,9 @@ def make_images(parts: list[dict], *, reference: Path = REFERENCE,
     if requested == 0:
         return {"generated": 0, "cached": sum(len(p["segments"]) for p in parts),
                 "reference_sha256": ref_digest, "uploads": 0}
+    # Prevent any paid request while an isolated character reference is absent.
+    for part, beat in missing:
+        check_isolated_ref(reference, role_for(part, beat))
     if editor is None:
         from master_scenes import request_edit
         editor = request_edit
@@ -302,8 +293,11 @@ def make_images(parts: list[dict], *, reference: Path = REFERENCE,
             out, marker = frame_paths(part, beat, root=root)
             out.parent.mkdir(parents=True, exist_ok=True)
             try:
+                isolated, isolated_sha = check_isolated_ref(
+                    reference, role_for(part, beat)
+                )
                 raw = editor(
-                    reference, frame_prompt(part, beat, beat["index"]),
+                    isolated, frame_prompt(part, beat, beat["index"]),
                     model, key, transparent=False,
                 )
                 from master_scenes import normalize_image, validate_image
@@ -320,12 +314,16 @@ def make_images(parts: list[dict], *, reference: Path = REFERENCE,
                 temp.write_bytes(result)
                 temp.replace(out)
                 dump(marker, {
-                    "schema": "kids-emanuelly/image-qa/v1",
+                    "schema": "kids-emanuelly/image-qa/v2",
+                    "continuity_policy": POLICY,
                     "part": part["id"], "beat": beat["index"],
+                    "allowed_characters": list(allowed_characters(part, beat)),
+                    "reference_role": role_for(part, beat),
+                    "isolated_reference_sha256": isolated_sha,
                     "signature": image_cache(part, beat, model, ref_digest),
                     "reference_sha256": ref_digest,
                     "image_sha256": sha(result), "model": model,
-                    "source": "image_edit_with_uploaded_cast_reference",
+                    "source": "image_edit_with_isolated_character_reference",
                     "human_character_fidelity_review": "pending",
                     "upload": False,
                 })
@@ -380,7 +378,7 @@ def make_voice(part: dict, root: Path = ROOT, *, regenerate: bool = False,
             "voice": VOICE, "audio": str(audio), "published": False}
 
 
-def build_props(part: dict, *, model: str = "gpt-image-1.5",
+def build_props(part: dict, *, model: str = MODEL,
                 reference: Path = REFERENCE, root: Path = ROOT) -> tuple[dict, Path]:
     ref_digest = reference_hash(reference)
     missing, _ = image_plan([part], reference, model, root)
@@ -428,7 +426,7 @@ def build_props(part: dict, *, model: str = "gpt-image-1.5",
     return props, path
 
 
-def render(part: dict, *, model: str = "gpt-image-1.5",
+def render(part: dict, *, model: str = MODEL,
            reference: Path = REFERENCE, root: Path = ROOT,
            regenerate: bool = False) -> dict:
     directory = output_for(part, root)
@@ -452,6 +450,7 @@ def render(part: dict, *, model: str = "gpt-image-1.5",
                 and qa.get("reference_sha256") == ref_digest
                 and qa.get("script_sha256") == sha(part["narration"].encode("utf-8"))
                 and qa.get("model") == model
+                and qa.get("continuity_policy") == POLICY
                 and qa.get("image_sha256") == image_hashes
                 and qa.get("voice_sha256") == voice_hash
                 and len(image_hashes) == len(part["segments"])):
@@ -493,6 +492,7 @@ def render(part: dict, *, model: str = "gpt-image-1.5",
         "script_sha256": sha(part["narration"].encode("utf-8")),
         "voice_sha256": sha((output_for(part, root) / "narracao.mp3").read_bytes()),
         "reference_sha256": ref_digest, "model": model,
+        "continuity_policy": POLICY,
         "image_sha256": [
             sha(frame_paths(part, b, root=root)[0].read_bytes()) for b in part["segments"]
         ],
@@ -512,7 +512,7 @@ def render(part: dict, *, model: str = "gpt-image-1.5",
             "sha256": report["video_sha256"], "uploaded": False}
 
 
-def inspect(part: dict, reference: Path = REFERENCE, model: str = "gpt-image-1.5",
+def inspect(part: dict, reference: Path = REFERENCE, model: str = MODEL,
             root: Path = ROOT) -> dict:
     reference_present = reference.is_file()
     digest = reference_hash(reference) if reference_present else None
@@ -522,8 +522,17 @@ def inspect(part: dict, reference: Path = REFERENCE, model: str = "gpt-image-1.5
             cached += 1
     voice_present = (output_for(part, root) / "narracao.mp3").is_file()
     final = output_for(part, root) / "final.mp4"
+    roles = sorted({role_for(part, beat) for beat in part["segments"]})
+    isolated = {}
+    for role in roles:
+        try:
+            check_isolated_ref(reference, role)
+            isolated[role] = True
+        except (FileNotFoundError, ValueError, OSError):
+            isolated[role] = False
     return {
         "episode": part["id"], "part": part["part"],
+        "continuity_policy": POLICY, "isolated_references_ready": isolated,
         "reference_present": reference_present,
         "frames_required": len(part["segments"]),
         "frames_cached_and_verified": cached,
@@ -538,22 +547,28 @@ def inspect(part: dict, reference: Path = REFERENCE, model: str = "gpt-image-1.5
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Criar Shorts Emanuelly PT-BR com referencia real e pausas")
-    parser.add_argument("--acao", choices=("planejar", "instalar-referencia", "imagens",
+    parser.add_argument("--acao", choices=("planejar", "instalar-referencia",
+                                           "preparar-referencias", "imagens",
                                            "voz", "renderizar", "testar", "verificar"),
                         default="planejar")
     parser.add_argument("--parte", type=int, choices=(1, 2, 3, 4))
     parser.add_argument("--referencia", type=Path, default=REFERENCE)
-    parser.add_argument("--modelo", choices=("gpt-image-1.5", "gpt-image-2"),
-                        default="gpt-image-1.5")
+    parser.add_argument("--modelo", choices=(MODEL,), default=MODEL)
     parser.add_argument("--max-chamadas", type=int, default=0)
     parser.add_argument("--refazer", action="store_true")
     args = parser.parse_args(argv)
     if args.max_chamadas < 0:
         parser.error("--max-chamadas deve ser positivo")
-    if args.refazer and args.acao not in ("instalar-referencia", "imagens", "voz", "renderizar", "testar"):
+    if args.refazer and args.acao not in ("instalar-referencia", "preparar-referencias", "imagens", "voz", "renderizar", "testar"):
         parser.error("--refazer nao se aplica a acao escolhida")
     if args.acao == "instalar-referencia":
         result = install_reference(args.referencia, replace=args.refazer)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if args.acao == "preparar-referencias":
+        result = prepare_isolated_references(
+            REFERENCE, budget=args.max_chamadas, replace=args.refazer
+        )
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     parts = select(load_parts(), args.parte)
