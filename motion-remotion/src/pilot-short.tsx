@@ -68,7 +68,7 @@ const StarStory:React.FC<{scene:number;frame:number}>=({scene,frame})=>{
   {scene===0?<ChildStar x={540} y={820} color={colors[2]} size={210} wave={frame/17}/>:
   scene===1?
     colors.map((color,i)=><ChildStar key={i} x={260+i*280} y={840}
-      color={color} size={133} wave={frame/20+i}/>:
+      color={color} size={133} wave={frame/20+i}/>):
   scene===2?
     <><House x={600} y={970} color={colors[0]}/>
      <ChildStar x={270} y={820} color={colors[2]} wave={frame/20}/></>:
