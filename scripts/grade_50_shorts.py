@@ -196,6 +196,13 @@ def run(args:argparse.Namespace)->int:
                          '-ConfirmarCotaImagem; nao ha custo estimado garantido')
     if publish_now and not args.confirmar_publicacao:
         raise ValueError('Publicacao imediata exige -ConfirmarPublicacao')
+    if publish_now:
+        from publicar_arquivo_otaku import verify_oauth_config
+        verify_oauth_config()  # validate credentials before consuming image budget
+        if not (ROOT/'.secrets'/'youtube-token.json').is_file():
+            print('[OAUTH] Token do YouTube ainda nao salvo. '
+                  'O publicador podera exigir login na primeira publicacao.',
+                  flush=True)
     print(f'[ORCAMENTO MAXIMO] {len(chosen)*args.max_chamadas_por_video} '
           'chamadas IA permitidas na selecao (teto, nao custo garantido).',
           flush=True)
