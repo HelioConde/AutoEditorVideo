@@ -299,10 +299,20 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         "require_character_motion": require_character_motion,
         "visual_continuity": "ryuk-reveal-after-beat-9" if item.get("scenes") else "legacy",
     }
+    report["visual_review_stage"] = "post_upload_youtube_studio"
+    report["visual_review_status"] = "pending"
     (folder / "qa-en-US.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
-    print(f"[EN PRONTO] Revise voz, legendas e capa: {output}")
+    try:
+        from organizar_videos_por_canal import refresh_library_after_render
+        archive = refresh_library_after_render(ROOT)
+        if archive["status"] == "updated":
+            print("[BIBLIOTECA EN] Videos sincronizados por canal: " + str(archive["videos"]))
+    except (OSError, ValueError) as exc:
+        print("[BIBLIOTECA AVISO] MP4 preservado; organize manualmente: " + str(exc))
+    print(f"[EN PRONTO] MP4 tecnico criado: {output}. "
+          "Avaliacao artistica somente apos upload PRIVADO ao YouTube Studio.")
     return report
 
 
