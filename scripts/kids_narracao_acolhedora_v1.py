@@ -96,6 +96,82 @@ async def _fetch_segment(
     return mp3, words
 
 
+# Reserve enough room for MP3 encoder delay and the 0.45-second video tail.
+ADAPTIVE_MAX_SECONDS = 58.4
+
+
+def plan_child_friendly_pauses(
+    segments: list[dict], spoken_seconds: float,
+    *, maximum_seconds: float = ADAPTIVE_MAX_SECONDS,
+) -> tuple[list[float], dict]:
+    """Adjust ONLY secondary pauses after actual speech duration is known.
+
+    Preserve the full, explicit response window after every question.
+    Shorten rests between statements proportionally, never the voice,
+    spoken script or question/answer thinking time.
+    """
+    if not math.isfinite(spoken_seconds) or spoken_seconds <= 0:
+        raise ValueError("Duracao da narracao Kids invalida")
+    if not 0 < maximum_seconds <= 59.2:
+        raise ValueError("Limite adaptativo Kids invalido")
+    if not segments:
+        raise ValueError("Narração Kids sem falas")
+    requested = [float(item["pause_after_s"]) for item in segments]
+    if any(not math.isfinite(p) or p < 0 for p in requested):
+        raise ValueError("Pausa nao finita ou negativa")
+    minimums = []
+    for item, pause in zip(segments, requested):
+        cue = str(item["cue"])
+        if cue.endswith("-question"):
+            minimum = max(1.8, pause)
+        elif cue == "intro":
+            minimum = 0.4
+        elif cue == "colors":
+            minimum = 0.5
+        elif cue in ("celebrate", "goodbye"):
+            minimum = 0.45
+        else:
+            minimum = 0.35
+        minimums.append(min(pause, minimum) if not cue.endswith("-question") else minimum)
+    natural_duration = spoken_seconds + sum(requested)
+    minimum_duration = spoken_seconds + sum(minimums)
+    if minimum_duration > maximum_seconds + .001:
+        need = minimum_duration - maximum_seconds
+        raise ValueError(
+            f"Narracao Kids ultrapassa o limite mesmo mantendo somente as pausas "
+            f"minimas (fala {spoken_seconds:.1f}s, minimo {minimum_duration:.1f}s, "
+            f"limite {maximum_seconds:.1f}s). Precisamos reduzir cerca de "
+            f"{need:.1f}s do texto falado, sem acelerar a voz nem cortar "
+            "a resposta das criancas."
+        )
+    if natural_duration <= maximum_seconds:
+        chosen = requested[:]
+    else:
+        # Leave 0.06 s of rounding headroom for discrete PCM sample lengths.
+        available = max(sum(minimums), maximum_seconds - spoken_seconds - .06)
+        room = sum(p - floor for p, floor in zip(requested, minimums))
+        desired_room = max(0.0, available - sum(minimums))
+        ratio = min(1.0, max(0.0, desired_room / room)) if room > 0 else 0.0
+        chosen = [floor + (pause - floor) * ratio
+                  for pause, floor in zip(requested, minimums)]
+    details = {
+        "strategy": "question_pauses_protected",
+        "spoken_seconds": round(spoken_seconds, 3),
+        "original_pause_seconds": round(sum(requested), 3),
+        "applied_pause_seconds": round(sum(chosen), 3),
+        "saved_seconds": round(sum(requested) - sum(chosen), 3),
+        "natural_duration_seconds": round(natural_duration, 3),
+        "estimated_final_seconds": round(spoken_seconds + sum(chosen), 3),
+        "maximum_audio_seconds": maximum_seconds,
+        "all_questions_preserved": all(
+            pause >= max(1.8, requested[i]) - 1e-8
+            for i, (item, pause) in enumerate(zip(segments, chosen))
+            if str(item["cue"]).endswith("-question")
+        ),
+    }
+    return chosen, details
+
+
 async def assemble_paced_voice(
     episode: dict, voice: str, rate: str, output_dir: Path,
     *, synthesizer, probe=None, encode=None,
@@ -126,6 +202,9 @@ async def assemble_paced_voice(
                     or word["end"] > duration + .35):
                 raise ValueError("Tempos Edge TTS incoerentes no trecho " + str(i))
         chunks.append((item, pcm, boundaries, duration))
+    applied_pauses, pause_report = plan_child_friendly_pauses(
+        segments, sum(duration for _item, _pcm, _words, duration in chunks)
+    )
     audio = bytearray()
     words = []
     timeline = []
@@ -140,7 +219,7 @@ async def assemble_paced_voice(
                 "text": word["text"], "segment": index,
             })
         speech_end = start + duration
-        silence_samples = round(item["pause_after_s"] * RATE)
+        silence_samples = round(applied_pauses[index] * RATE)
         audio.extend(b"\x00\x00" * silence_samples)
         clock = speech_end + silence_samples / RATE
         timeline.append({
@@ -152,7 +231,8 @@ async def assemble_paced_voice(
             "start_s": round(start, 4),
             "speech_end_s": round(speech_end, 4),
             "end_s": round(clock, 4),
-            "pause_after_s": item["pause_after_s"],
+            "pause_after_s": round(silence_samples / RATE, 4),
+            "original_pause_after_s": item["pause_after_s"],
         })
     if clock >= 59.2:
         raise ValueError(
@@ -189,6 +269,7 @@ async def assemble_paced_voice(
             "duration_s": round(measured, 4),
             "target_seconds": pacing["target_seconds"],
             "pause_total_s": round(sum(x["pause_after_s"] for x in timeline), 3),
+            "pause_adaptation": pause_report,
             "review_required": True,
             "review_stage": "youtube_studio_private_video",
             "mp3_sha256": hashlib.sha256(mp3_partial.read_bytes()).hexdigest(),
