@@ -89,7 +89,7 @@ export const EmanuellyShort:React.FC<EmanuellyProps>=(props)=>{
      fontFamily:'Arial,sans-serif',fontWeight:900,color:'white',
      textShadow:'0 4px 9px rgba(0,0,0,.8)'
    }}>
-     <span style={{fontSize:35}}>EMANUELLY E SEUS AMIGOS</span>
+     <span style={{fontSize:35}}>{brand.toUpperCase()}</span>
      <span style={{background:'rgba(22,60,93,.72)',padding:'12px 20px',
                    borderRadius:24,fontSize:33}}>{chapter}</span>
    </div>
