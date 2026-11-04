@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 """Fila segura de 50 Shorts Otaku Multicena para Windows.
 
-Fluxo: validar (read-only) -> preparar (storyboards/metadados locais) ->
-produzir (voz/arte/cache/MP4) -> agendar (YouTube PRIVATE com publishAt).
-Nenhuma etapa de upload acontece sem --confirmar-publicacao.
+Fluxo: validar -> preparar -> produzir MP4 -> validar QA -> publicar publicamente
+o Short pronto, imediatamente e de forma individual, SEM agendamento.
+Nenhum upload acontece sem --confirmar-publicacao.
 """
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timedelta, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -114,18 +113,16 @@ def confirmed_existing_upload(video:Path)->dict|None:
 
 
 def local_command(ep:dict,args:argparse.Namespace, *, publish:bool=False,
-                  schedule:str='')->list[str]:
+                  )->list[str]:
     command=['powershell.exe','-NoProfile','-ExecutionPolicy','Bypass','-File',
              str(PS_SCRIPT),'-Id',ep['id'],'-VozMotor','edge',
              '-Modelo',args.modelo,'-Perfil',args.perfil,
              '-MaxChamadas',str(0 if publish else args.max_chamadas_por_video),
-             '-Privacidade','private']
+             '-Privacidade','public' if publish else 'private']
     if args.refazer and not publish:
         command.append('-Refazer')
     if publish:
         command.append('-Publicar')
-        if schedule:
-            command.extend(['-AgendarEm',schedule])
     return command
 
 
@@ -135,19 +132,6 @@ def invoke(command:list[str], *,label:str)->None:
     if result.returncode:
         raise RuntimeError(f'{label}: processo falhou (codigo {result.returncode}); '
                            'estado local preservado. Nao reenviar cegamente.')
-
-
-def scheduled_at(start:str, offset:int, hours:int)->str:
-    try:
-        timestamp=datetime.fromisoformat(start.replace('Z','+00:00'))
-    except ValueError as exc:
-        raise ValueError('InicioAgendamento deve ser data ISO8601 com fuso') from exc
-    if timestamp.tzinfo is None:
-        raise ValueError('InicioAgendamento exige -03:00 ou outro fuso explicito')
-    when=timestamp+timedelta(hours=offset*hours)
-    if when.astimezone(timezone.utc)<=datetime.now(timezone.utc)+timedelta(minutes=30):
-        raise ValueError('Primeira publicacao precisa estar mais de 30 min no futuro')
-    return when.isoformat(timespec='seconds')
 
 
 def ensure_ready(ep:dict,profile:str)->Path:
@@ -201,62 +185,89 @@ def run(args:argparse.Namespace)->int:
         return 0
     if sys.platform!='win32':
         raise RuntimeError('Gerar ou publicar requer Windows local com PowerShell e cache')
-    if args.acao=='produzir':
-        if args.max_chamadas_por_video>0 and not args.confirmar_cota_imagem:
-            raise ValueError('Confirme o teto de chamadas de imagem com '
-                             '-ConfirmarCotaImagem; nao ha custo estimado garantido')
-        print(f'[ORCAMENTO MAXIMO] {len(chosen)*args.max_chamadas_por_video} '
-              'chamadas IA permitidas na selecao (nao representa custo garantido).')
-        for ep in chosen:
-            if confirmed_existing_upload(video_paths(ep['id'],args.perfil)[0]):
-                print('[JA PUBLICADO] Nao recriar automaticamente: '+ep['id'],flush=True)
-                continue
-            invoke(local_command(ep,args),label='Produzir '+ep['id'])
-        return 0
-    if args.acao!='agendar':
+    if args.acao not in ('produzir','produzir-publicar'):
         raise ValueError('Acao desconhecida: '+args.acao)
-    if not args.confirmar_publicacao:
-        raise ValueError('Para publicar, indique explicitamente -ConfirmarPublicacao')
-    if not args.inicio_agendamento or args.intervalo_horas<1:
-        raise ValueError('Agendar exige InicioAgendamento com fuso e intervalo >=1 hora')
-    if args.max_chamadas_por_video:
-        raise ValueError('Publicacao usa apenas cache pronto; MaxChamadasPorVideo deve ser 0')
-    # Validate every file and every publication time before any remote write.
-    slots=[]
-    for ep in chosen:
-        time_iso=scheduled_at(args.inicio_agendamento,ep['queue_position']-1,
-                             args.intervalo_horas)
-        video=ensure_ready(ep,args.perfil)
-        slots.append((ep,time_iso,video))
+    publish_now=args.acao=='produzir-publicar'
+    # Never spend image credits or attempt any upload without both explicit
+    # authorizations. If a user's prior upload is uncertain, stop instead
+    # of treating it as "missing" and uploading again.
+    if args.max_chamadas_por_video>0 and not args.confirmar_cota_imagem:
+        raise ValueError('Confirme o teto de chamadas de imagem com '
+                         '-ConfirmarCotaImagem; nao ha custo estimado garantido')
+    if publish_now and not args.confirmar_publicacao:
+        raise ValueError('Publicacao imediata exige -ConfirmarPublicacao')
+    print(f'[ORCAMENTO MAXIMO] {len(chosen)*args.max_chamadas_por_video} '
+          'chamadas IA permitidas na selecao (teto, nao custo garantido).',
+          flush=True)
     journal=load_journal()
-    for ep,when,video in slots:
-        previous=confirmed_existing_upload(video)
-        if previous or journal.get(ep['id'],{}).get('video_id'):
-            print('[JA ENVIADO] Nao duplicar '+ep['id'],flush=True)
+    for ep in chosen:
+        ep_id=ep['id']
+        video=video_paths(ep_id,args.perfil)[0]
+        prior=journal.get(ep_id,{})
+        if prior.get('video_id'):
+            print('[JA PUBLICADO] '+ep_id+' id='+str(prior['video_id']),flush=True)
             continue
-        invoke(local_command(ep,args,publish=True,schedule=when),
-               label='Agendar '+ep['id']+' para '+when)
-        uploaded=confirmed_existing_upload(video)
-        if not uploaded:
-            raise RuntimeError('YouTube nao confirmou upload. Conferir Studio antes de retomar.')
-        if not uploaded.get('agendamento_confirmado'):
-            raise RuntimeError('YouTube nao confirmou agendamento: '+ep['id'])
-        from publicar_arquivo_otaku import parse_publish_at
-        if (not uploaded.get('agendado_para') or
-            parse_publish_at(uploaded['agendado_para'])!=parse_publish_at(when)):
-            raise RuntimeError('YouTube confirmou um horario diferente; '
-                               'conferir Studio antes de retomar: '+ep['id'])
-        journal[ep['id']]={'video_id':uploaded['video_id'],
-                           'agendado_para':when,'video_sha256':digest(video),
-                           'status':'agendado-confirmado'}
+        if prior.get('status') in ('upload_iniciado','upload_indeterminado'):
+            raise RuntimeError(
+                'Upload anterior sem confirmacao local: '+ep_id+
+                '. Confira o YouTube Studio antes de retomar; '
+                'nenhum reenvio automatico.'
+            )
+        previous=confirmed_existing_upload(video)
+        if previous:
+            print('[JA ENVIADO] '+ep_id+' https://youtu.be/'+
+                  previous['video_id']+'. Nao duplicar.',flush=True)
+            continue
+        invoke(local_command(ep,args),label='Produzir '+ep_id)
+        if not publish_now:
+            continue
+        # The generated video is validated before the irreversible upload.
+        ready_video=ensure_ready(ep,args.perfil)
+        if confirmed_existing_upload(ready_video):
+            print('[JA ENVIADO] '+ep_id+' encontrado apos render. Pular.',flush=True)
+            continue
+        journal[ep_id]={'status':'upload_iniciado',
+                        'video_sha256':digest(ready_video)}
         save_journal(journal)
-        print('[AGENDADO] '+ep['id']+' '+when+' id='+uploaded['video_id'],flush=True)
+        try:
+            # Second run reuses voice/images/MP4. MaxChamadas=0 ensures
+            # the publishing stage never pays for extra artwork.
+            invoke(local_command(ep,args,publish=True),
+                   label='Publicar imediatamente como PUBLICO '+ep_id)
+        except (RuntimeError,OSError,subprocess.SubprocessError):
+            journal[ep_id]['status']='upload_indeterminado'
+            save_journal(journal)
+            raise
+        uploaded=confirmed_existing_upload(ready_video)
+        if not uploaded:
+            journal[ep_id]['status']='upload_indeterminado'
+            save_journal(journal)
+            raise RuntimeError('Upload sem ID confirmado. Conferir Studio; nao reenvie '+ep_id)
+        if uploaded.get('privacidade_solicitada')!='public':
+            journal[ep_id]['status']='upload_indeterminado'
+            save_journal(journal)
+            raise RuntimeError('Privacidade PUBLICA nao confirmada: '+ep_id)
+        if uploaded.get('publicacao_publica_confirmada') is not True:
+            journal[ep_id]['status']='upload_indeterminado'
+            save_journal(journal)
+            raise RuntimeError('YouTube nao confirmou status PUBLIC. '
+                               'Verifique Studio sem reenviar '+ep_id)
+        journal[ep_id]={'video_id':uploaded['video_id'],
+                        'status':'publicado-publico',
+                        'thumbnail_status':uploaded.get('thumbnail_status','pending'),
+                        'video_sha256':digest(ready_video)}
+        save_journal(journal)
+        print('[PUBLICADO AGORA] '+ep_id+' https://youtu.be/'+uploaded['video_id'],
+              flush=True)
+        if uploaded.get('thumbnail_status')!='success':
+            print('[CAPA PENDENTE] Arquivo vertical salvo. '
+                  'Verifique YouTube Studio (Shorts > Miniatura) e NAO reenvie o MP4.',
+                  flush=True)
     return 0
-
 
 def parser()->argparse.ArgumentParser:
     ap=argparse.ArgumentParser(description='Grade Otaku Multicena: 50 Shorts')
-    ap.add_argument('--acao',choices=('validar','preparar','produzir','agendar'),
+    ap.add_argument('--acao',choices=('validar','preparar','produzir','produzir-publicar'),
                     default='validar')
     ap.add_argument('--inicio-na-lista',type=int,default=1)
     ap.add_argument('--quantidade',type=int,default=50)
@@ -266,8 +277,6 @@ def parser()->argparse.ArgumentParser:
                     default='equilibrado')
     ap.add_argument('--max-chamadas-por-video',type=int,default=0)
     ap.add_argument('--confirmar-cota-imagem',action='store_true')
-    ap.add_argument('--inicio-agendamento',default='')
-    ap.add_argument('--intervalo-horas',type=int,default=24)
     ap.add_argument('--confirmar-publicacao',action='store_true')
     ap.add_argument('--refazer',action='store_true')
     return ap
