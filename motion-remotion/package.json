@@ -12,7 +12,8 @@
     "test:character": "node --test tests/character-idle.test.cjs",
     "test:shorts": "node --test tests/shorts-pacing.test.cjs",
     "test:qa": "node --test tests/character-idle.test.cjs tests/shorts-pacing.test.cjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "render:fofinhos": "remotion render src/index.ts FofinhosEP01Canonico"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
