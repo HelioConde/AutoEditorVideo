@@ -86,6 +86,16 @@ Usar o manifesto completo ou um manifesto de um episodio gerado pelo passo 1.
     # Renderizar APENAS se os assets PT aprovados existirem
     .\gerar-shorts-en.ps1 -Acao renderizar -Manifesto $manifesto -Id 5001-black-clover
 
+    # Modo estrito: reprovar cenas com personagem cuja unica atividade e o zoom
+    .\gerar-shorts-en.ps1 -Acao renderizar -Manifesto $manifesto -Id 5001-black-clover -ExigirMovimentoPersonagem
+
+O QA EN passou a registrar quantas cenas possuem capacidade de movimento de
+camadas de personagem, quantas sao camera-only e seus IDs. O sinalizador
+-ExigirMovimentoPersonagem so aprova cenas de personagem com camada movel,
+mas nao substitui avaliacao de gestos/rigging; se os assets PT nao tiverem
+camadas adequadas, o render sera bloqueado com explicacao clara.
+A verificacao estrita tambem considera o QA de um MP4 em cache.
+
 O cache EN fica em assets/gerados/shorts-animados/<ID>/en-US/ com arquivo
 MP4, narracao, legendas, metadata-en.json e qa-en-US.json.
 
