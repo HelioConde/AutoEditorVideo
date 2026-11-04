@@ -19,6 +19,7 @@ import kids_fofinho_storyboards_v2 as bible
 import kids_emanuelly_series_assets_v2 as store
 import serie_kids_emanuelly_v1 as story
 import gerar_poses_emanuelly_gpt_image_2 as poses
+from fofinhos_ep01_canon import ensure_approved_script
 from kids_musicas_fundo_v1 import prepare_kids_music, music_signature
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -59,6 +60,7 @@ def _public_path(part:dict,name:str)->str:
 
 
 def build(part:int,*,root:Path=ROOT)->tuple[dict,Path,dict]:
+    ensure_approved_script(_episode(part), root)
     status=store.plan([part],root=root)
     if not status["ready"]:
         raise ValueError("Parte "+str(part)+" bloqueada. Faltam: "+

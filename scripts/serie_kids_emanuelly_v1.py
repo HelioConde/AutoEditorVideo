@@ -21,6 +21,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).parent))
+from fofinhos_ep01_canon import ensure_approved_script
 from kids_narracao_acolhedora_v1 import (
     assemble_paced_voice, commit_voice, scene_props, signature as pacing_signature,
 )
@@ -257,6 +258,8 @@ def make_images(parts: list[dict], *, reference: Path = REFERENCE,
                 model: str = MODEL, budget: int = 0,
                 root: Path = ROOT, regenerate: bool = False,
                 editor=None, key_provider=None) -> dict:
+    for part in parts:
+        ensure_approved_script(part, root)
     if model != MODEL:
         raise ValueError("Referencias Kids exigem gpt-image-2; nunca gpt-image-1.5")
     if budget < 0:
@@ -340,6 +343,7 @@ def make_images(parts: list[dict], *, reference: Path = REFERENCE,
 
 
 def read_voice(part: dict, root: Path = ROOT) -> tuple[Path, dict]:
+    ensure_approved_script(part, root)
     directory = output_for(part, root)
     audio = directory / "narracao.mp3"
     marker = directory / "marcacoes-voz.json"
@@ -359,6 +363,7 @@ def read_voice(part: dict, root: Path = ROOT) -> tuple[Path, dict]:
 
 def make_voice(part: dict, root: Path = ROOT, *, regenerate: bool = False,
                synthesizer=None, assembler=None) -> dict:
+    ensure_approved_script(part, root)
     folder = output_for(part, root)
     if not regenerate:
         try:
@@ -383,6 +388,7 @@ def make_voice(part: dict, root: Path = ROOT, *, regenerate: bool = False,
 
 def build_props(part: dict, *, model: str = MODEL,
                 reference: Path = REFERENCE, root: Path = ROOT) -> tuple[dict, Path]:
+    ensure_approved_script(part, root)
     ref_digest = reference_hash(reference)
     missing, _ = image_plan([part], reference, model, root)
     if missing:
@@ -434,6 +440,7 @@ def build_props(part: dict, *, model: str = MODEL,
 def render(part: dict, *, model: str = MODEL,
            reference: Path = REFERENCE, root: Path = ROOT,
            regenerate: bool = False) -> dict:
+    ensure_approved_script(part, root)
     directory = output_for(part, root)
     video = directory / "final.mp4"
     qa_file = directory / "qa-local.json"

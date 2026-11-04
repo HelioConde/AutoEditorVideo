@@ -2,6 +2,32 @@
 
 **Estado:** cânone editorial v1 · 04/11/2026 · idioma PT-BR · público: crianças e famílias
 
+## Nome oficial e narração revisada da Parte 1 (04/11/2026)
+
+**A série se chama Fofinhos.** O título anterior deste documento é histórico,
+não é a marca oficial para os próximos vídeos.
+
+A **narração aprovada pelo criador da Parte 1** está integralmente preservada
+em `conteudos/fofinhos-ep01-parte01-narracao-aprovada-v1.json`, com 15 cenas
+e três pausas explícitas (1,0 s; 0,8 s; 1,8 s). Esta versão substitui
+EDITORIALMENTE a versão resumida de nove cenas do manifesto antigo,
+que foi marcada como obsoleta e **não pode ser gerada/renderizada** como
+se fosse a narração atual.
+
+**Regra obrigatória de continuidade:** o ovo azul é visto e encontrado
+**entre flores coloridas do jardim, fora do caminho de pedras ou rua**.
+Os personagens só aparecem após sua introdução no roteiro, e a mesma
+geometria de jardim/quarto deve ser preservada entre ângulos. Conferir
+olhar, mãos, canteiro, objetos, cores, tempo do dia e transição entre falas.
+Aprovar cada imagem por inspeção visual; coordenadas e prompts por si sós
+não garantem coerência.
+
+O texto integral pode ultrapassar 59,2 segundos: **não encurtar falas, acelerar
+voz, cortar pausas ou reutilizar o áudio antigo** para forçar Shorts. A versão
+aprovada precisa de medição real de TTS e adaptação editorial consciente
+antes do próximo render. As Partes 2–4 seguem preservadas como roteiros
+anteriores, sem mudança automática de cronologia nem upload.
+
 ## Identidade
 
 Esta série tem **Emanuelly** como protagonista. No mundo dela, os bichinhos de pelúcia ganham vida; as histórias exploram carinho, amizade, pequenas descobertas e poderes mágicos de modo seguro e acolhedor.

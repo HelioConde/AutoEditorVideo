@@ -1,0 +1,190 @@
+{
+  "schema": "fofinhos/approved-narration-visual-v1",
+  "series": "Fofinhos",
+  "episode": 1,
+  "part": 1,
+  "title": "O Ovo Azul — Narração revisada e aprovada",
+  "approval": "user_provided_2026-11-04",
+  "narration_scope": "texto_integral_antes_de_adaptacao_para_shorts",
+  "release_policy": "NUNCA renderizar o rascunho antigo como se fosse esta narracao. A versao integral pode ultrapassar 60 segundos; medir TTS, preservar pausas e planejar eventual divisao editorial sem cortar falas.",
+  "previous_short_draft": "conteudos/kids-emanuelly-ep01-shortserie-v1.json",
+  "spoken_text_policy": "Manter as frases originais aprovadas em portugues; nao improvisar falas novas",
+  "pauses": [
+    {
+      "after_scene": 4,
+      "seconds": 1
+    },
+    {
+      "after_scene": 6,
+      "seconds": 0.8
+    },
+    {
+      "after_scene": 14,
+      "seconds": 1.8
+    }
+  ],
+  "render_policy": {
+    "only_one_blue_egg": true,
+    "egg_first_location": "entre_flores_fora_do_caminho",
+    "camera_positions": "4 angulos do mesmo jardim; 4 angulos do mesmo quarto",
+    "no_characters_embedded_in_scenery": true,
+    "flowerbed_visual_approval_required": true,
+    "before_birth_visible_characters": [
+      "Emanuelly"
+    ],
+    "fofinho_first_appearance": "Parte 2, cena 6",
+    "visual_review": "A imagem deve demonstrar cada acao, com olhar, gesto, posicao, cor e ambiente coerentes"
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "spoken_text": "Era uma vez uma menina linda, doce e muito carinhosa chamada Emanuelly.",
+      "background": "jardim-01",
+      "pose": "em-pe",
+      "egg_location": "ausente",
+      "night": false,
+      "visual_cue": "Apresentar Emanuelly no jardim; sem mostrar o ovo",
+      "forbidden": "Ovo ainda nao aparece"
+    },
+    {
+      "index": 2,
+      "spoken_text": "Emanuelly adorava brincar no jardim, pertinho das flores coloridas.",
+      "background": "jardim-02",
+      "pose": "brincando-jardim",
+      "egg_location": "ausente",
+      "night": false,
+      "visual_cue": "Emanuelly brinca perto de canteiros com flores coloridas reconheciveis",
+      "forbidden": "Nao substituir flores por rua, asfalto ou calcada"
+    },
+    {
+      "index": 3,
+      "spoken_text": "Um belo dia, enquanto brincava, encontrou algo muito diferente...",
+      "background": "jardim-03",
+      "pose": "observando",
+      "egg_location": "entre_flores",
+      "night": false,
+      "visual_cue": "A menina percebe um brilho no canteiro, na borda das flores",
+      "forbidden": "Nao colocar o brilho no caminho"
+    },
+    {
+      "index": 4,
+      "spoken_text": "Um ovo azul brilhante, com pequenas gotinhas desenhadas na casca!\n— O que será que era aquilo?",
+      "background": "jardim-03",
+      "pose": null,
+      "egg_location": "entre_flores",
+      "night": false,
+      "visual_cue": "Close no mesmo ovo azul, com gotinhas, entre flores coloridas; olhar com curiosidade",
+      "forbidden": "Ovo nao pode ficar sobre caminho ou rua"
+    },
+    {
+      "index": 5,
+      "spoken_text": "Emanuelly era muito curiosa, corajosa e destemida!\nEntão, decidiu descobrir.",
+      "background": "jardim-03",
+      "pose": "curiosa",
+      "egg_location": "entre_flores",
+      "night": false,
+      "visual_cue": "Emanuelly volta o olhar para o ovo, ao lado das flores",
+      "forbidden": "Olhar nunca pode apontar para lado oposto do ovo"
+    },
+    {
+      "index": 6,
+      "spoken_text": "Chegou pertinho...\nBem pertinho...",
+      "background": "jardim-04",
+      "pose": "caminhando",
+      "egg_location": "entre_flores",
+      "night": false,
+      "visual_cue": "Aproximacao gradual, o ovo permanece na area florida",
+      "forbidden": "Nao deslocar ovo para o caminho durante a aproximacao"
+    },
+    {
+      "index": 7,
+      "spoken_text": "E viu aquele lindo ovo azul brilhando entre as flores.",
+      "background": "jardim-04",
+      "pose": "observando",
+      "egg_location": "entre_flores",
+      "night": false,
+      "visual_cue": "Confirmar com clareza o ovo pousado ENTRE as flores; canteiro nitido",
+      "forbidden": "PROIBIDO ovo no caminho de pedras, rua, calcada ou area de circulacao"
+    },
+    {
+      "index": 8,
+      "spoken_text": "Ela se ajoelhou e estendeu a mão, bem devagarzinho.",
+      "background": "jardim-04",
+      "pose": "estendendo-mao",
+      "egg_location": "entre_flores",
+      "night": false,
+      "visual_cue": "Emanuelly ajoelhada, mao e olhar direcionados ao ovo no canteiro",
+      "forbidden": "Mao nao pode atravessar ovo ou apontar em outra direcao"
+    },
+    {
+      "index": 9,
+      "spoken_text": "Quando chegou perto, o ovo começou a brilhar ainda mais!\n— Nossa, que lindo! — disse Emanuelly, encantada.",
+      "background": "jardim-04",
+      "pose": "encantada",
+      "egg_location": "entre_flores",
+      "night": false,
+      "visual_cue": "Brilho do mesmo ovo aumenta suavemente; Emanuelly se encanta",
+      "forbidden": "Ainda no jardim; brilho nao deve apagar as gotinhas nem flores"
+    },
+    {
+      "index": 10,
+      "spoken_text": "Com muito cuidado, pegou o ovo e levou para casa.",
+      "background": "jardim-02",
+      "pose": "segurando-ovo",
+      "egg_location": "nas_maos",
+      "night": false,
+      "visual_cue": "Retirada cuidadosa do canteiro e deslocamento em direcao a casa; mesmo ovo",
+      "forbidden": "A mao deve sustentar o ovo; nao deixar ovo flutuando"
+    },
+    {
+      "index": 11,
+      "spoken_text": "Lá, preparou uma caminha bem macia, com uma mantinha e uma almofada fofinha.",
+      "background": "quarto-01",
+      "pose": "preparando-caminha",
+      "egg_location": "caminha_quarto",
+      "night": false,
+      "visual_cue": "Mesmo quarto; caminha com mantinha e almofada macias",
+      "forbidden": "Nao trocar moveis ou quarto entre angulos"
+    },
+    {
+      "index": 12,
+      "spoken_text": "— Vou cuidar de você! — prometeu, sorrindo.",
+      "background": "quarto-02",
+      "pose": "prometendo-cuidar",
+      "egg_location": "caminha_quarto",
+      "night": false,
+      "visual_cue": "Emanuelly sorri olhando para o ovo acomodado na caminha",
+      "forbidden": "Personagem olha para ovo, nao para fora da cena"
+    },
+    {
+      "index": 13,
+      "spoken_text": "Naquela noite, enquanto Emanuelly observava o ovo...",
+      "background": "quarto-03",
+      "pose": "observando",
+      "egg_location": "caminha_quarto",
+      "night": true,
+      "visual_cue": "Mesmo quarto com luz noturna suave; ovo inteiro e fechado",
+      "forbidden": "Quarto nao pode mudar e Fofinho nao pode aparecer"
+    },
+    {
+      "index": 14,
+      "spoken_text": "Toc... toc...\nO ovo começou a balançar!",
+      "background": "quarto-03",
+      "pose": "surpresa",
+      "egg_location": "caminha_quarto",
+      "night": true,
+      "visual_cue": "Ovo inteiro balanca sobre a almofada, com duas batidinhas; nenhuma rachadura",
+      "forbidden": "Nao fazer ovo rachar antes da Parte 2"
+    },
+    {
+      "index": 15,
+      "spoken_text": "Mas... quem será que estava lá dentro?\nContinua na Parte 2...",
+      "background": "quarto-04",
+      "pose": null,
+      "egg_location": "caminha_quarto",
+      "night": true,
+      "visual_cue": "Close no ovo ainda intacto e fechado; misterio carinhoso",
+      "forbidden": "Nao revelar gatinho, interior do ovo, gêmeas ou futuros personagens"
+    }
+  ]
+}
