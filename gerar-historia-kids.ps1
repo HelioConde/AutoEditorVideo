@@ -1,9 +1,10 @@
 # Serie Kids: Emanuelly e seus Amigos de Pelucia - EP 1 em quatro Shorts.
-# Referencia visual OBRIGATORIA no gerador de imagens (images/edits).
+# Referencia ISOLADA por fase: apenas Emanuelly antes de Fofinho nascer.
+# GPT Image 2 obrigatorio; nunca enviar a prancha inteira ao gerar quadros.
 # Sem criar canal, sem OAuth, sem publicacao, sem imagens substitutas.
 [CmdletBinding()]
 param(
-  [ValidateSet('Planejar','InstalarReferencia','Imagens','Voz','Renderizar','Gerar','Verificar','Abrir')]
+  [ValidateSet('Planejar','InstalarReferencia','PrepararReferencias','Imagens','Voz','Renderizar','Gerar','Verificar','Abrir')]
   [string]$Acao='Planejar',
 
   [ValidateSet('Todas','1','2','3','4')]
@@ -11,8 +12,8 @@ param(
 
   [string]$Referencia='',
 
-  [ValidateSet('gpt-image-1.5','gpt-image-2')]
-  [string]$Modelo='gpt-image-1.5',
+  [ValidateSet('gpt-image-2')]
+  [string]$Modelo='gpt-image-2',
 
   [ValidateRange(0,100)][int]$MaxChamadas=0,
 
@@ -58,6 +59,7 @@ if($Refazer -and $Acao -in @('Planejar','Verificar')){
 }
 $mapped=@{
   Planejar='planejar';InstalarReferencia='instalar-referencia';
+  PrepararReferencias='preparar-referencias';
   Imagens='imagens';Voz='voz';Renderizar='renderizar';
   Gerar='testar';Verificar='verificar'
 }
@@ -70,13 +72,13 @@ if($Acao -eq 'InstalarReferencia'){
 }
 if($Refazer){$argsPy+='--refazer'}
 
-if($Acao -in @('Imagens','Gerar')){
+if($Acao -in @('PrepararReferencias','Imagens','Gerar')){
   if(-not(Test-Path -LiteralPath $privateImage -PathType Leaf)){
     throw ('Referencia privada ausente em: '+$privateImage+
       '. Extraia o ZIP da foto na raiz do projeto ou use -Acao InstalarReferencia.')
   }
   if($MaxChamadas -le 0){
-    Write-Warning 'Nenhuma chamada de IA autorizada (-MaxChamadas 0). So funcionara com imagens em cache.'
+    Write-Warning 'Nenhuma chamada de IA autorizada (-MaxChamadas 0). So funcionara com referencias/imagens em cache.'
   }else{
     Write-Host "[IMAGENS] Limite explicito por execucao: $MaxChamadas novas chamadas; sem fallback." -ForegroundColor Yellow
   }
