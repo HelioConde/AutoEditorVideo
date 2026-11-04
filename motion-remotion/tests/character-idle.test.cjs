@@ -57,9 +57,9 @@ test('no stretching of face, torso or arms at ANY time',()=>{
     for(const pose of poses({preset})){
       assert.equal(pose.scaleX,1);
       assert.equal(pose.scaleY,1);
-      assert.ok(Math.abs(pose.translateX)<=1.700001);
-      assert.ok(Math.abs(pose.translateY)<=7.500001);
-      assert.ok(Math.abs(pose.rotateDeg)<=.250001);
+      assert.ok(Math.abs(pose.translateX)<=3.200001);
+      assert.ok(Math.abs(pose.translateY)<=11.800001);
+      assert.ok(Math.abs(pose.rotateDeg)<=.380001);
     }
   }
 });
@@ -124,5 +124,6 @@ test('settings change amplitude but do not change source art or character identi
   const peaks=presetNames.map(preset=>peak(poses({preset}),'translateY'));
   assert.ok(peaks[0]<peaks[1]);
   assert.ok(peaks[1]<peaks[2]);
+  assert.ok(peaks[1]>=peaks[0]*1.5, 'normal character idle must be visibly stronger');
   assert.ok(poses({preset:'ultrassutil'}).every(x=>x.scaleY===1));
 });
