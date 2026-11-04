@@ -4,6 +4,33 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
+## REGRA ATUAL — REVISAR NO YOUTUBE STUDIO, NAO APROVAR CENA A CENA
+
+- Preferencia explicita do criador em 04/11/2026: toda avaliacao
+  **artistica/narrativa do video completo** ocorre no YouTube Studio
+  depois de upload **privado**. Nao adicionar gates por ausencia de
+  `visual-review.json`, `multilayer/review.json`, `requires_manual_approval`,
+  `-AprovarCena`, `-AprovarMulticamadas` em rotas reais de render e capa.
+- Renders continuam exigindo QA automatico objetivo: arquivos presentes,
+  hashes de cache, composicao sem bloqueios, 9:16, audio, <=60s,
+  proveniencia e conta correta. Cache explicitamente REPROVADO continua
+  bloqueado ate ser corrigido; nao forjar `status=aprovado` ou alterar arquivos
+  de revisao. Alertas artisticos nao devem virar status falso de sucesso.
+- Upload para revisao EN exige confirmacao explicita, OAuth valido e
+  canal `UCBoNbQjaMYdpJqPLRZAFkvQ`, privacidade `private` por padrao.
+  Nao alterar videos publicos ou executar upload durante preparacao/render.
+  Direitos de imagens/musicas e seguranca de conteudo Kids continuam
+  requisitos, e upload privado nao libera automaticamente publicar.
+- `-ExigirMovimentoPersonagem` continua modo ESTRITO opcional; se bloquear
+  cenas camera-only, renderizar sem esse switch para inspecao privada em
+  video completo, sem chamar zoom de animacao de personagem.
+- Biblioteca nova: `assets/gerados/biblioteca-videos/{Kids,Gamer,Otaku Multicena,Otaku Reframe}`;
+  usar `organizar-videos.ps1 -Acao Prever` e depois `-Acao Organizar`.
+  NUNCA mover/remover originais de `assets/gerados` (os publicadores ainda
+  dependem dos caminhos antigos). Sem classificar fontes incertas como prontas.
+  Varios renderizadores atualizam a biblioteca APOS a primeira organizacao.
+  Consultar `docs/BIBLIOTECA-VIDEOS-CANAIS-POST-UPLOAD.md`.
+
 ## PADRAO VISUAL ATUAL: ZOOM CONTINUO SEM FLIQUES (2026-11-03)
 
 - O criador rejeitou os **jump cuts virtuais** em 1,25s / 2,45s e as

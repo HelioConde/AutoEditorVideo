@@ -4,7 +4,7 @@
 Uses the existing 1024x1536 master and extracts distinct semantic RGBA masks
 using the connected image-edit API. Each final layer copies actual master RGB,
 not the model's redrawn pixels. Source masks and paid bytes remain on disk.
-Never publishes anything. Always requires manual approval for multi-layer render.
+Never publishes anything. Rendering requires technical QA only; human review is post-upload on YouTube.
 """
 from __future__ import annotations
 
@@ -112,7 +112,7 @@ def validate_multilayer(ep:dict,scene:dict,model:str,folder:Path,
         print(f"[QA REVISAO] Cena {scene['id']}: "+
               ", ".join(review_warnings)+
               ". Sobreposicao de mascaras pode ser mao/oclusao legitima; "
-              "confira preview-composicao.png antes de aprovar.",
+              "inspecione a composicao no video completo apos upload privado.",
               flush=True)
     if approval:
         reviewfile=folder/"multilayer"/REVIEW
@@ -240,7 +240,7 @@ def process_multilayer(ep:dict,scene:dict,model:str,*,edit=None,
           f"QA diferenca media={qa['master_composite_mean_difference']}; "
           f"erros={qa['warnings']}; "
           f"para revisar={qa.get('review_warnings',[])}. "
-          "Pendente de aprovacao visual.",flush=True)
+          "QA tecnico concluido; revisao visual do video depois do upload no YouTube Studio.",flush=True)
     return document
 
 

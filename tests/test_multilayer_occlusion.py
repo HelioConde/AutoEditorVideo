@@ -84,20 +84,21 @@ def test_one_command_generates_each_mask_and_preserves_master_pixels(tmp_path,mo
     assert len(calls)==5  # no fresh paid calls
 
 
-def test_multilayer_requires_visual_approval_for_short_and_cover(tmp_path,monkeypatch):
+def test_multilayer_renders_without_per_scene_approval_if_technical_qa_passes(tmp_path,monkeypatch):
     ep,scene,base,edit,calls=scene_fixture(tmp_path,monkeypatch)
+    scene["correcao_visual"]={"requires_manual_approval":True}
     result=multi.process_multilayer(ep,scene,"gpt-image-1.5",edit=edit)
-    # Synthetic masks are ordered correctly but may have genuine QA warnings.
-    # A warning must prevent approval rather than be silently ignored.
-    if result["qa"]["warnings"]:
-        with pytest.raises(ValueError,match="alertas"):
-            multi.approve_multilayer(ep,scene,"gpt-image-1.5","Checked by eye")
+    # A falha tecnica real continua bloqueando o render, mesmo sem click manual.
+    from qa_multilayer_geometry import classify_qa_alerts
+    blockers,_ = classify_qa_alerts(result["qa"])
+    if blockers:
+        with pytest.raises(ValueError,match="ERROS"):
+            renderer.validate_scenes(ep,"gpt-image-1.5")
         return
-    with pytest.raises(ValueError,match="aguardando revisao"):
-        renderer.validate_scenes(ep,"gpt-image-1.5")
-    multi.approve_multilayer(ep,scene,"gpt-image-1.5","Checked all characters and chessboard")
+    assert not (base/"multilayer"/"review.json").exists()
     checked=renderer.validate_scenes(ep,"gpt-image-1.5")
     assert checked[0]["render_mode"]=="multilayer"
+    assert not (base/"visual-review.json").exists()
     monkeypatch.setattr(renderer,"select_episode",lambda *_:{"cover":"test"})
     voice=tmp_path/"voz.mp3"
     voice.write_bytes(b"test")

@@ -40,23 +40,15 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
     for scene in ep['scenes']:
         folder=scene_dir(ep,scene,model,output)
         if (folder/'scene-layers.json').is_file():
-            # Once opted into semantic layers, never silently fall back to an
-            # unapproved two-layer render on a failing QA/review.
+            # Preserve semantic layers and their technical validation. Visual
+            # evaluation happens on the full, privately uploaded YouTube video.
             base_review=read_review(folder)
             if base_review and base_review['status']=='reprovado':
                 raise ValueError(f"Cena {scene['id']}: master reprovada; "
                                  'multicamadas nao consertam anatomia ruim.')
-            if scene.get('correcao_visual', {}).get('requires_manual_approval') and (
-                    not base_review or base_review['status'] != 'aprovado'):
-                raise ValueError(
-                    f"Cena {scene['id']}: multicamadas novas exigem aprovacao "
-                    "manual explicita antes de renderizar."
-                )
-            # Auto mode retains deterministic layer/hash/blocker QA but does
-            # not require manual per-image clicks. Explicit rejections still
-            # block above, for both modes.
-            auto_qa=bool(scene.get('correcao_visual', {}).get('automatic_technical_qa'))
-            validated=validate_multilayer(ep,scene,model,folder,approval=not auto_qa)
+            # Never require a pre-render approval click. Hashes, geometry,
+            # composition blockers and explicit prior rejections still apply.
+            validated=validate_multilayer(ep,scene,model,folder,approval=False)
             report={'status':'aguardando_revisao_visual',
                     'alpha':{'margin_warning':False},
                     'composition':{'alignment_warning':False},
@@ -78,11 +70,6 @@ def validate_scenes(ep:dict,model:str,output:Path=OUT)->list[dict]:
             raise ValueError(f"Cena {scene['id']} REPROVADA manualmente: "
                              f"{manual['reason']}. Corrija/regenere a imagem e "
                              'revise a nova versão antes de renderizar.')
-        if scene.get('correcao_visual',{}).get('requires_manual_approval') and (
-                not manual or manual['status']!='aprovado'):
-            raise ValueError(f"Cena {scene['id']}: nova versao requer APROVACAO "
-                             'visual explicita antes de entrar no Short. '
-                             'Use -AprovarCena so apos conferir master e comparacao.')
         qa=folder/'qa.json'
         if not qa.is_file():
             raise ValueError(f'Enquadramento {scene["id"]}: falta QA da composição')
@@ -318,20 +305,19 @@ def cover_from_master(ep:dict,model:str,destination:Path,*,title_override:str|No
         raise ValueError(f'Cena de capa {chosen} ausente no storyboard atual')
     folder=scene_dir(ep,scene,model)
     if (folder/'scene-layers.json').is_file():
-        auto_qa=bool(scene.get('correcao_visual', {}).get('automatic_technical_qa'))
         manual=read_review(folder)
         if manual and manual['status']=='reprovado':
             raise ValueError(f"Capa bloqueada: cena {chosen} reprovada.")
-        multi=validate_multilayer(ep,scene,model,folder,approval=not auto_qa)
+        multi=validate_multilayer(ep,scene,model,folder,approval=False)
         source=compose_semantic_layers(multi['background'],multi['layers'])
         label=title_override or options.get('title') or select_episode(ep['id']).get('cover') or ep.get('title') or 'ARQUIVO OTAKU'
         report=render_cover(source,str(label),destination,
                             zoom=options.get('zoom',1.07),
                             focus_x=options.get('focus_x',.5),
                             focus_y=options.get('focus_y',.38))
-        report.update(scene=chosen,source='multilayer-approved',
+        report.update(scene=chosen,source='multilayer-technical-qa',
                       model=model,output=str(destination))
-        print(f'[CAPA] multicamadas aprovadas | cena {chosen} | {destination}',flush=True)
+        print(f'[CAPA QA] multicamadas validadas tecnicamente | cena {chosen} | {destination}',flush=True)
         return report
     foreground=folder/'foreground.png'
     background=folder/'background.png'
@@ -340,9 +326,6 @@ def cover_from_master(ep:dict,model:str,destination:Path,*,title_override:str|No
     if manual and manual['status']=='reprovado':
         raise ValueError(f"Capa bloqueada: cena {chosen} reprovada: "
                          f"{manual['reason']}. Escolha cena aprovada no JSON.")
-    if scene.get('correcao_visual',{}).get('requires_manual_approval') and (
-            not manual or manual['status']!='aprovado'):
-        raise ValueError(f"Capa bloqueada: nova cena {chosen} ainda nao foi aprovada.")
     if background.is_file() and foreground.is_file():
         validate_image(background.read_bytes(),alpha=False)
         validate_image(foreground.read_bytes(),alpha=True)
@@ -416,7 +399,7 @@ def main(argv:list[str]|None=None)->int:
         voice,subtitles=ensure_voice(select_episode(args.id),folder,create=args.criar_voz,engine=args.voz_motor)
         validate_planned_audio(audio_duration(voice),stage=f'Voz PT {args.id}')
         print(f'[VOZ PRONTA] Audio: {voice} | legendas: {subtitles}. '
-              'Nenhum render executado; aguardando aprovacao visual das imagens.')
+              'Nenhum render executado; revisao visual do video no YouTube Studio.')
         return 0
     if args.somente_capa:
         if args.renderizar or args.criar_voz:
@@ -491,8 +474,17 @@ def main(argv:list[str]|None=None)->int:
                   'render_mode':e['render_mode'],
                   'foreground_source_consistency':e['fidelity']}
                   for e in validated]}
+    manifest["visual_review_stage"] = "post_upload_youtube_studio"
     (folder/'qa-master-multicenas.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    print(f'[OK] Short pronto para revisão (NÃO publicado): {output}')
+    try:
+        from organizar_videos_por_canal import refresh_library_after_render
+        archive = refresh_library_after_render(ROOT)
+        if archive["status"] == "updated":
+            print(f'[BIBLIOTECA OTAKU] Sincronizados {archive["videos"]} MP4s.')
+    except (OSError, ValueError) as exc:
+        print(f'[BIBLIOTECA AVISO] MP4 original intacto; sincronizacao falhou: {exc}')
+    print(f'[OK] Short renderizado (NAO publicado): {output}. '
+          'Revisao visual do video completo somente depois de enviar PRIVADO ao YouTube Studio.')
     return 0
 
 

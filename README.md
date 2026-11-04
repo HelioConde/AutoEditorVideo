@@ -8,6 +8,29 @@
 > anterior permanece integralmente na branch
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
+## Biblioteca de videos por canal + revisao do MP4 no YouTube
+
+Novo organizador **nao destrutivo** de `assets/gerados`: ao executar,
+cria `biblioteca-videos/Kids`, `Gamer`, `Otaku Multicena` e `Otaku Reframe`,
+com videos separados por episodio e catalogo SHA-256. Os caminhos originais
+permanecem intactos para todos os scripts e plataformas.
+
+    .\organizar-videos.ps1 -Acao Prever
+    .\organizar-videos.ps1 -Acao Organizar
+    .\organizar-videos.ps1 -Acao Abrir -Canal "Otaku Reframe"
+
+Depois da primeira organizacao, os renderizadores PT-BR, EN e piloto
+Gamer/Kids atualizam a biblioteca automaticamente. O modo padrao copia
+arquivos; `-Metodo Link` economiza espaco, mas usa os mesmos bytes do
+original e nao substitui um backup.
+
+**Aprovacao manual de imagens/cenas nao e mais um requisito para renderizar.**
+O criador avalia o MP4 completo **depois de enviar PRIVADO ao YouTube Studio**.
+Continuam as verificacoes tecnicas de camadas, QA, duracao, audio e identidade
+de canal. Nenhum envio automatico e criado por essa mudanca.
+
+Guia: [Biblioteca e revisao posterior](docs/BIBLIOTECA-VIDEOS-CANAIS-POST-UPLOAD.md).
+
 ## Otaku Reframe (EN): producao e envio automaticos
 
 O AutoEditorVideo Windows e o UNICO motor de edicao aprovado: artes originais
