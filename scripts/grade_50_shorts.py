@@ -155,6 +155,28 @@ def ensure_ready(ep:dict,profile:str)->Path:
     if not cover.is_file():
         raise FileNotFoundError('Capa do Short ausente: '+str(cover))
     validate_video(video,stage='Fila grade 50 '+ep['id'])
+    # Mandatory technical QA for new uploads: the user specifically rejected
+    # still characters and abrupt virtual cuts. A video with zero independently
+    # animatable characters cannot be described as character animation.
+    qa_file=video.parent/'qa-master-multicenas.json'
+    if not qa_file.is_file():
+        raise RuntimeError('QA visual nao encontrado; renderize com o motor atualizado: '+ep['id'])
+    qa=json.loads(qa_file.read_text(encoding='utf-8-sig'))
+    total=qa.get('visual_shots',0)
+    camera_only=qa.get('camera_only_scenes')
+    if qa.get('animation_mode')!='cinematica' or not isinstance(camera_only,int):
+        raise RuntimeError('QA de movimento antigo; refaça a renderização: '+ep['id'])
+    if not isinstance(total,int) or total<1 or camera_only<0 or camera_only>total:
+        raise RuntimeError('Contagem de cenas inválida no QA: '+ep['id'])
+    if camera_only==total:
+        raise RuntimeError(
+            'Bloqueado para upload: nenhuma cena tem personagem em camada '
+            'independente segura. Apenas zoom de imagem; revise as camadas: '+ep['id']
+        )
+    if camera_only:
+        print(f'[AVISO MOVIMENTO] {ep["id"]}: {camera_only}/{total} '
+              'cenas com zoom de arte plana; restantes com personagem em camada.',
+              flush=True)
     return video
 
 
@@ -219,6 +241,11 @@ def run(args:argparse.Namespace)->int:
             raise RuntimeError('YouTube nao confirmou upload. Conferir Studio antes de retomar.')
         if not uploaded.get('agendamento_confirmado'):
             raise RuntimeError('YouTube nao confirmou agendamento: '+ep['id'])
+        from publicar_arquivo_otaku import parse_publish_at
+        if (not uploaded.get('agendado_para') or
+            parse_publish_at(uploaded['agendado_para'])!=parse_publish_at(when)):
+            raise RuntimeError('YouTube confirmou um horario diferente; '
+                               'conferir Studio antes de retomar: '+ep['id'])
         journal[ep['id']]={'video_id':uploaded['video_id'],
                            'agendado_para':when,'video_sha256':digest(video),
                            'status':'agendado-confirmado'}
