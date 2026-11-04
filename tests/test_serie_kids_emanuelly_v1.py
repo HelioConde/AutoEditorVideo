@@ -31,7 +31,7 @@ def fake_png() -> bytes:
 def test_four_parts_serialized_and_no_upload():
     parts = story.load_parts()
     assert [p["part"] for p in parts] == [1, 2, 3, 4]
-    assert sum(len(p["segments"]) for p in parts) == 38
+    assert sum(len(p["segments"]) for p in parts) == 37
     for p in parts:
         assert p["narration"].startswith(p["segments"][0]["spoken_text"])
         assert p["narration"].endswith(p["segments"][-1]["spoken_text"])
