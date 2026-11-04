@@ -88,6 +88,14 @@ def test_missing_source_in_lote_fails_before_any_file_write(tmp_path):
     assert not any(layers.official(slot,tmp_path).exists() for slot in layers.SLOTS)
 
 
+def test_bad_opaque_egg_rejects_entire_batch_without_partial_install(tmp_path):
+    src=nine_files(tmp_path)
+    background(src,"ovo-azul",(20,40,100))
+    with pytest.raises(ValueError,match="Ovo sem alfa real"):
+        layers.install_directory(src,root=tmp_path)
+    assert all(not layers.official(slot,tmp_path).exists() for slot in layers.SLOTS)
+
+
 def test_preflight_missing_pose_or_voice_blocks_without_placeholder(tmp_path,monkeypatch):
     src=nine_files(tmp_path)
     layers.install_directory(src,root=tmp_path)
