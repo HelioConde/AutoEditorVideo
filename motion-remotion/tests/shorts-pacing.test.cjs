@@ -21,54 +21,50 @@ const captions=load('caption-pacing.ts').exports.groupLegacyCaptionWords;
 const master=fs.readFileSync(path.join(__dirname,'../src/master-short.tsx'),'utf8');
 const legacy=fs.readFileSync(path.join(__dirname,'../src/short.tsx'),'utf8');
 
-test('first five seconds have obvious camera cuts without fabricated body movement',()=>{
+test('opening camera is continuous, centered and visibly zooms in/out',()=>{
   const fps=30;
-  const initial=opening(0,fps,'cinematica');
-  assert.deepEqual(initial,{zoom:0,panX:0,panY:0,beat:0});
-  const early=opening(30,fps,'cinematica');
-  assert.ok(early.zoom>.02);
-  const beforeFirst=opening(37,fps,'cinematica');
-  const firstCut=opening(38,fps,'cinematica');
-  assert.ok(firstCut.zoom-beforeFirst.zoom>.02);
-  assert.equal(firstCut.beat,1);
-  const beforeSecond=opening(73,fps,'cinematica');
-  const secondCut=opening(74,fps,'cinematica');
-  assert.ok(beforeSecond.zoom-secondCut.zoom>.03);
-  assert.equal(secondCut.beat,2);
+  assert.deepEqual(opening(0,fps,'cinematica'),
+    {zoom:0,panX:0,panY:0,beat:0});
+  assert.ok(opening(30,fps,'cinematica').zoom>.01);
+  assert.ok(opening(75,fps,'cinematica').zoom>.035);
+  assert.ok(opening(120,fps,'cinematica').zoom>.01);
   assert.equal(opening(150,fps,'cinematica').zoom,0);
-  assert.equal(opening(150,fps,'cinematica').beat,-1);
-  for(let f=0;f<151;f++){
-    const shot=opening(f,fps,'cinematica');
-    assert.ok(Number.isFinite(shot.zoom) && shot.zoom>=0 && shot.zoom<=.09);
-    assert.ok(Math.abs(shot.panX)<=24.01);
-    assert.ok(Math.abs(shot.panY)<=16.01);
+  let previous=opening(0,fps,'cinematica');
+  for(let f=1;f<=151;f++){
+    const now=opening(f,fps,'cinematica');
+    assert.ok(Math.abs(now.zoom-previous.zoom)<.001);
+    assert.equal(now.panX,0);
+    assert.equal(now.panY,0);
+    previous=now;
   }
 });
 
-test('long static holds are recut after 5 seconds without new assets',()=>{
+test('long holds breathe without a single abrupt camera reposition',()=>{
   const fps=30;
-  const last=450;
-  assert.equal(hold(120,0,last,fps,'cinematica').beat,-1);
-  const atFive=hold(150,0,last,fps,'cinematica');
-  assert.equal(atFive.beat,0);
-  assert.ok(atFive.zoom>.02);
-  const next=hold(232,0,last,fps,'cinematica');
-  assert.equal(next.beat,1);
-  assert.ok(Math.abs(next.panX-atFive.panX)>20);
-  assert.ok(hold(330,0,last,fps,'cinematica').beat>=2);
-  assert.equal(hold(150,0,100,fps,'cinematica').zoom,0);
-  assert.equal(hold(150,0,last,fps,'desligada').zoom,0);
-  assert.equal(hold(150,0,last,fps,'esqueleto2d').zoom,0);
-  assert.equal(hold(180,180,last,fps,'cinematica').zoom,0);
-  assert.ok(hold(192,180,last,fps,'cinematica').zoom>.02);
-  assert.equal(hold(last,0,last,fps,'cinematica').zoom,0);
+  const duration=450;
+  assert.equal(hold(120,0,duration,fps,'cinematica').zoom,0);
+  assert.equal(hold(150,0,duration,fps,'cinematica').zoom,0);
+  assert.ok(hold(205,0,duration,fps,'cinematica').zoom>.008);
+  assert.equal(hold(duration,0,duration,fps,'cinematica').zoom,0);
+  for(const sceneStart of [0,180]){
+    let previous=hold(sceneStart,sceneStart,duration,fps,'cinematica');
+    for(let f=sceneStart+1;f<=duration;f++){
+      const now=hold(f,sceneStart,duration,fps,'cinematica');
+      assert.ok(Math.abs(now.zoom-previous.zoom)<.003,
+        'Unexpected jump at frame '+f+' for start '+sceneStart);
+      assert.equal(now.panX,0);
+      assert.equal(now.panY,0);
+      previous=now;
+    }
+  }
 });
 
-test('disabled or skeletal modes never add virtual cuts',()=>{
+test('camera zoom helper is disabled with motion off or skeletal art',()=>{
   for(const mode of ['desligada','esqueleto2d']){
     assert.deepEqual(opening(45,30,mode),{zoom:0,panX:0,panY:0,beat:-1});
+    assert.deepEqual(hold(201,0,450,30,mode),{zoom:0,panX:0,panY:0,beat:-1});
   }
-  assert.equal(opening(Number.NaN,30,'cinematica').zoom,0);
+  assert.equal(opening(NaN,30,'cinematica').zoom,0);
   assert.equal(opening(45,0,'cinematica').zoom,0);
 });
 
@@ -104,7 +100,7 @@ test('both renderers consume opening cuts and keep captions off the face',()=>{
   assert.ok(master.includes('longHoldCutAtFrame(frame,scene.startFrame,scene.endFrame,fps,mode)'));
   assert.ok(legacy.includes('longHoldCutAtFrame(frame,0,props.durationFrames,fps'));
   assert.ok(legacy.includes("openingCutAtFrame(frame,fps,'cinematica')"));
-  assert.ok(master.includes("safeZoom=Math.min(1.14"));
+  assert.ok(master.includes("safeZoom=Math.min(1.115"));
   assert.ok(legacy.includes("background:'rgba(2,5,15,.86)'"));
   assert.ok(master.includes("background:'rgba(2,5,15,.85)'"));
   assert.ok(master.includes('top:1258') && legacy.includes('top:1280'));
