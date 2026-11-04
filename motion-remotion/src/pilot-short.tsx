@@ -9,7 +9,7 @@ import {AbsoluteFill, Audio, OffthreadVideo, Sequence, interpolate,
  */
 export type PilotScene = {
   id:string; startFrame:number; endFrame:number; headline:string;
-  visual:string; video?:string;
+  visual:string; video?:string; beat?:string;
 };
 export type PilotCaption = {startFrame:number;endFrame:number;text:string};
 export type PilotProps = {
@@ -54,36 +54,63 @@ const House:React.FC<{x:number;y:number;color:string;showLabel?:boolean}>=
    {showLabel&&<circle cx={x+65} cy={y+42} r={11} fill="#fef9dc"/>}
  </g>;
 
-const StarStory:React.FC<{scene:number;frame:number}>=({scene,frame})=>{
- const colors=['#f97373','#ffdb63','#4eaffb'];
- const p=Math.min(1,Math.max(0,(frame%90)/90));
- const x=scene>=3?800:scene===2?230:540;
- const selected=scene===4?Math.min(1,frame/45):0;
- return <svg viewBox="0 0 1080 1920" width="100%" height="100%">
-  <defs><linearGradient id="skyS" x1="0" y1="0" x2="1" y2="1">
-    <stop stopColor="#174d93"/><stop offset="1" stopColor="#26245c"/></linearGradient></defs>
-  <rect width={W} height={H} fill="url(#skyS)"/>
-  {Array.from({length:20},(_,i)=><circle key={i} cx={(i*197+91)%W}
-    cy={(i*239+210)%1700} r={3+(i%3)*2} fill="#eff8ff" opacity={.4+(i%5)*.1}/>)}
-  {scene===0?<ChildStar x={540} y={820} color={colors[2]} size={210} wave={frame/17}/>:
-  scene===1?
-    colors.map((color,i)=><ChildStar key={i} x={260+i*280} y={840}
-      color={color} size={133} wave={frame/20+i}/>):
-  scene===2?
-    <><House x={600} y={970} color={colors[0]}/>
-     <ChildStar x={270} y={820} color={colors[2]} wave={frame/20}/></>:
-  scene===3?
-    <><House x={255} y={970} color={colors[1]}/>
-     <House x={805} y={970} color={colors[2]}/>
-     <ChildStar x={470+p*95} y={760} color={colors[2]} wave={frame/20}/></>:
-    <><House x={540} y={970} color={colors[2]}/>
-     <ChildStar x={540} y={790+selected*190} color={colors[2]}
-        size={140} wave={frame/22}/></>}
-  <text x={540} y={1410} textAnchor="middle" fill="#d8efff"
-    fontFamily="Arial" fontSize={52} fontWeight={700}>
-     {['Onde está a azul?','Vermelha, amarela e azul','A vermelha não é!','Encontramos a azul!','Azul com azul!'][scene]}
-  </text>
- </svg>;
+const StarStory:React.FC<{beat:string;frame:number}>=({beat,frame})=>{
+  // Cada fala ocupa sua janela inteira (fala + silencio de observacao).
+  // A crianca ve a pergunta e pode pensar antes de qualquer resposta visual.
+  const blue='#4eaffb', red='#f97373', yellow='#ffdb63';
+  const drift=Math.sin(frame/24)*10;
+  const approach=Math.min(1,Math.max(0,frame/70));
+  const isRed=beat==='red-question'||beat==='red-no';
+  const isYellow=beat==='yellow-question'||beat==='yellow-no';
+  const isBlue=['blue-appear','blue-question','blue-yes','enter','match','thanks'].includes(beat);
+  const success=['blue-yes','enter','match','thanks'].includes(beat);
+  const entering=['enter','match','thanks'].includes(beat);
+  const homeX=entering?540:750;
+  const starX=beat==='intro'?540:
+    beat==='colors'?820:
+    beat==='search'?410:
+    isRed||isYellow?280+drift:
+    beat==='blue-appear'?250+drift:
+    beat==='blue-question'?300+drift:
+    beat==='blue-yes'?480+approach*80:
+    entering?540:280;
+  const starY=beat==='intro'?860:beat==='colors'?870:
+    entering?820+Math.min(1,frame/60)*180:
+    820;
+  const showOnlyBlue=beat==='intro';
+  const showThree=beat==='colors';
+  return <svg viewBox="0 0 1080 1920" width="100%" height="100%">
+    <defs><linearGradient id="skyS" x1="0" y1="0" x2="1" y2="1">
+      <stop stopColor="#174d93"/><stop offset="1" stopColor="#26245c"/></linearGradient></defs>
+    <rect width={W} height={H} fill="url(#skyS)"/>
+    {Array.from({length:20},(_,i)=><circle key={i} cx={(i*197+91)%W}
+      cy={(i*239+210)%1700} r={3+(i%3)*2} fill="#eff8ff" opacity={.4+(i%5)*.1}/>)}
+    {showOnlyBlue&&<ChildStar x={540} y={840} color={blue} size={205} wave={frame/19}/>}
+    {showThree&&<>
+      <ChildStar x={260} y={880} color={red} size={135} wave={frame/24}/>
+      <ChildStar x={540} y={870} color={yellow} size={135} wave={frame/25+1}/>
+      <ChildStar x={820} y={880} color={blue} size={135} wave={frame/22+2}/>
+    </>}
+    {!showOnlyBlue&&!showThree&&<>
+      {beat==='search'&&<>
+        <House x={790} y={1020} color={red}/>
+        <House x={900} y={1330} color={yellow}/>
+      </>}
+      {isRed&&<House x={720} y={980} color={red}/>}
+      {isYellow&&<House x={720} y={980} color={yellow}/>}
+      {isBlue&&<House x={homeX} y={990} color={blue}/>}
+      {success&&<circle cx={homeX} cy={930} r={172}
+        fill="#addaff" opacity={.1+.025*Math.sin(frame/18)}/>}
+      <ChildStar x={starX} y={starY} color={blue}
+        size={entering?125:145} wave={frame/23}/>
+    </>}
+    {isRed&&<text x={710} y={1350} textAnchor="middle" fill="#fff"
+      fontFamily="Arial" fontSize={60} fontWeight={700}>VERMELHA</text>}
+    {isYellow&&<text x={710} y={1350} textAnchor="middle" fill="#fff"
+      fontFamily="Arial" fontSize={60} fontWeight={700}>AMARELA</text>}
+    {isBlue&&<text x={homeX} y={1350} textAnchor="middle" fill="#fff"
+      fontFamily="Arial" fontSize={60} fontWeight={700}>AZUL</text>}
+  </svg>;
 };
 const Bird:React.FC<{x:number;y:number;wing:number;hue:string}>=({x,y,wing,hue})=>
  <g transform={"translate("+x+","+(y+Math.sin(wing)*6)+")"}>
@@ -155,9 +182,9 @@ const ShapeStory:React.FC<{scene:number;frame:number}>=({scene,frame})=>{
    </text>
  </svg>;
 };
-const KidsScene:React.FC<{id:string;index:number}>=({id,index})=>{
+const KidsScene:React.FC<{id:string;index:number;beat?:string}>=({id,index,beat})=>{
  const frame=useCurrentFrame();
- if(id==='kids-001-estrela-azul') return <StarStory scene={index} frame={frame}/>;
+ if(id==='kids-001-estrela-azul') return <StarStory beat={beat||['intro','colors','red-question','yellow-question','enter'][index]||'thanks'} frame={frame}/>;
  if(id==='kids-002-cinco-passarinhos')return <BirdStory scene={index} frame={frame}/>;
  return <ShapeStory scene={index} frame={frame}/>;
 };
@@ -187,7 +214,7 @@ export const PilotShort:React.FC<PilotProps>=(props)=>{
          [1,1,1,1],clamp);
      return <Sequence key={scene.id} from={scene.startFrame} durationInFrames={duration} layout="none">
        <AbsoluteFill style={{opacity}}>
-       {kids?<KidsScene id={episodeId} index={index}/>:
+       {kids?<KidsScene id={episodeId} index={index} beat={scene.beat}/>:
         scene.video?
           <OffthreadVideo src={staticFile(scene.video)} volume={0} style={{
              width:'100%',height:'100%',objectFit:'contain',
