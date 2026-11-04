@@ -1,4 +1,4 @@
-"""Protect the black chess king and require user approval of regenerated takes."""
+"""Protect the black chess king and defer artistic approvals to the complete video."""
 from __future__ import annotations
 
 import io
@@ -78,7 +78,9 @@ def test_render_uses_only_master_not_damaged_king_layer(tmp_path,monkeypatch):
         assert fg.getchannel('A').getextrema()==(0,0)
 
 
-def test_revised_take_is_blocked_until_explicitly_approved(tmp_path,monkeypatch):
+def test_revised_take_can_render_before_youtube_review_but_rejection_still_blocks(tmp_path,monkeypatch):
+    # A revisao narrativa/artística ocorre no MP4 completo, apos upload privado.
+    # Uma flag de revisao manual nao pode bloquear a renderizacao tecnica.
     folder,_,_=make_scene(tmp_path)
     scene={'id':'04','subject':'personagens','prompt':'x'*60,'shot_type':'l_reaction',
            'correcao_visual':{'requires_manual_approval':True}}
@@ -86,14 +88,18 @@ def test_revised_take_is_blocked_until_explicitly_approved(tmp_path,monkeypatch)
                          directory=folder,offline=True)
     ep={'id':'chess-test','scenes':[scene]}
     monkeypatch.setattr(renderer,'scene_dir',lambda *args:folder)
+    checked=renderer.validate_scenes(ep,'gpt-image-1.5',output=tmp_path)
+    assert checked
+    assert not (folder/'visual-review.json').exists()
+
+    # A recusa expressa continua impedindo render e capa, sem falsa aprovacao.
+    write_review(folder,status='reprovado',reason='Composicao do rei incorreta')
+    with pytest.raises(ValueError,match='Composicao do rei incorreta'):
+        renderer.validate_scenes(ep,'gpt-image-1.5',output=tmp_path)
     monkeypatch.setattr(renderer,'cover_options',lambda *args:{
         'scene':'04','title':'CHESS','zoom':1.07,'focus_x':.5,'focus_y':.38})
-    with pytest.raises(ValueError,match='APROVACAO'):
-        renderer.validate_scenes(ep,'gpt-image-1.5',output=tmp_path)
-    with pytest.raises(ValueError,match='nao foi aprovada'):
+    with pytest.raises(ValueError,match='Capa bloqueada'):
         renderer.cover_from_master(ep,'gpt-image-1.5',tmp_path/'capa.jpg')
-    write_review(folder,status='aprovado',reason='Foto conferida')
-    assert renderer.validate_scenes(ep,'gpt-image-1.5',output=tmp_path)
 
 
 def test_existing_approved_legacy_scenes_continue_working():
