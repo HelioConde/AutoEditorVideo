@@ -4,6 +4,28 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
+## KIDS — NARRACAO ACOLHEDORA V1 (TESTE ESTRELINHA AZUL)
+
+- Somente `kids-001-estrela-azul` usa por enquanto `narration_style=kids-acolhedora-v1`.
+  Manter a proposta inclusiva, simples, acolhedora e nao apressada, com
+  "Obrigada por me ajudar..." no final; outros Kids aguardam avaliacao.
+- 13 blocos de fala em `narration_timeline` do manifesto;
+  pausas reais de 0,6–0,9s entre falas e **1,8s apos cada pergunta**
+  sobre a casinha vermelha, amarela e azul. Total de 11,8s.
+- Gerar TTS independente por fala (Francisca pt-BR -15%), decodificar PCM
+  mono/48kHz com FFmpeg, inserir silêncios por amostra e reencodar um MP3.
+  Recalcular WordBoundary, legendas, cenas, personagens e abertura;
+  nunca narrar marcadores de pausa nem adiantar a resposta visual.
+- Objetivo editorial 45–55s, medida real obrigatoria, teto tecnicamente
+  validado de 60s. Se longo, nao remover pausas e nao acelerar a voz
+  silenciosamente; revisar roteiro. Nao substituir MP3/cache antigo sem
+  `-Refazer`. Fingerprint inclui texto E duracao das pausas.
+- Animar estrela olhando para as casas durante o silencio, corpo/expressao
+  suave, câmera fixa, sem flashes ou pedidos de comentarios/inscricoes.
+- A revisao narrativa continua no MP4 completo depois de upload privado
+  com autorizacao expressa; o piloto nao possui OAuth nem upload.
+  Ver `docs/KIDS-NARRACAO-ACOLHEDORA-V1.md`.
+
 ## REGRA ATUAL — REVISAR NO YOUTUBE STUDIO, NAO APROVAR CENA A CENA
 
 - Preferencia explicita do criador em 04/11/2026: toda avaliacao
