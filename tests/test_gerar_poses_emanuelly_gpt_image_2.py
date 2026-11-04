@@ -48,7 +48,6 @@ def test_eight_distinct_one_pose_per_image_and_no_unwanted_character():
         assert "SAME CHILD CHARACTER" in text
         assert "TRANSPARENT ALPHA" in text
         assert "NO future characters" in text
-        assert "no additional" not in text.lower() or True
         assert "1024x1536" in text
         assert "No floor" in text
 
@@ -150,5 +149,4 @@ def test_story_pipeline_remains_separate_and_no_upload():
     assert "youtube.upload" not in program
     assert "videos().insert" not in program
     assert "gpt-image-1.5" not in program
-    assert "image edits" not in program.lower() or True
     assert "render:emanuelly" not in program
