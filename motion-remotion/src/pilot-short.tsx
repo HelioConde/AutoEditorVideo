@@ -12,9 +12,11 @@ export type PilotScene = {
   visual:string; video?:string;
 };
 export type PilotCaption = {startFrame:number;endFrame:number;text:string};
+export type KidsBeat = {startFrame:number;endFrame:number;sceneIndex:number;cue:string;headline:string;pauseFrames:number};
 export type PilotProps = {
   episodeId:string;channel:'games'|'kids';durationFrames:number;
   scenes:PilotScene[];audio:string;captions:PilotCaption[];brand:string;
+  kidsBeats?:KidsBeat[];
 };
 const clamp = {extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
 const W=1080,H=1920;
@@ -54,10 +56,13 @@ const House:React.FC<{x:number;y:number;color:string;showLabel?:boolean}>=
    {showLabel&&<circle cx={x+65} cy={y+42} r={11} fill="#fef9dc"/>}
  </g>;
 
-const StarStory:React.FC<{scene:number;frame:number}>=({scene,frame})=>{
+const StarStory:React.FC<{scene:number;frame:number;cue?:string}>=({scene,frame,cue=''})=>{
  const colors=['#f97373','#ffdb63','#4eaffb'];
+ const showBlueHome=cue.startsWith('blue-') || cue==='home' || cue==='celebrate';
+ const redQuestion=cue==='red-question';
+ const yellowQuestion=cue==='yellow-question';
+ const blueQuestion=cue==='blue-question';
  const p=Math.min(1,Math.max(0,(frame%90)/90));
- const x=scene>=3?800:scene===2?230:540;
  const selected=scene===4?Math.min(1,frame/45):0;
  return <svg viewBox="0 0 1080 1920" width="100%" height="100%">
   <defs><linearGradient id="skyS" x1="0" y1="0" x2="1" y2="1">
@@ -74,14 +79,19 @@ const StarStory:React.FC<{scene:number;frame:number}>=({scene,frame})=>{
      <ChildStar x={270} y={820} color={colors[2]} wave={frame/20}/></>:
   scene===3?
     <><House x={255} y={970} color={colors[1]}/>
-     <House x={805} y={970} color={colors[2]}/>
-     <ChildStar x={470+p*95} y={760} color={colors[2]} wave={frame/20}/></>:
+     {showBlueHome&&<House x={805} y={970} color={colors[2]}/>}
+     <ChildStar x={showBlueHome?470+p*95:470} y={760} color={colors[2]} wave={frame/20}/></>:
     <><House x={540} y={970} color={colors[2]}/>
      <ChildStar x={540} y={790+selected*190} color={colors[2]}
         size={140} wave={frame/22}/></>}
   <text x={540} y={1410} textAnchor="middle" fill="#d8efff"
     fontFamily="Arial" fontSize={52} fontWeight={700}>
-     {['Onde está a azul?','Vermelha, amarela e azul','A vermelha não é!','Encontramos a azul!','Azul com azul!'][scene]}
+     {scene===2
+        ? (redQuestion?'Será que é aqui?':cue==='red-answer'?'Não é essa!':'Vamos procurar!')
+        : scene===3
+        ? (showBlueHome?(blueQuestion?'Será que é aqui?':'Olha a casinha azul!'):
+           yellowQuestion?'Será que é aqui?':'Vamos procurar!')
+        : ['Onde está a azul?','Vermelha, amarela e azul','','','Azul com azul!'][scene]}
   </text>
  </svg>;
 };
@@ -155,9 +165,9 @@ const ShapeStory:React.FC<{scene:number;frame:number}>=({scene,frame})=>{
    </text>
  </svg>;
 };
-const KidsScene:React.FC<{id:string;index:number}>=({id,index})=>{
+const KidsScene:React.FC<{id:string;index:number;cue?:string}>=({id,index,cue})=>{
  const frame=useCurrentFrame();
- if(id==='kids-001-estrela-azul') return <StarStory scene={index} frame={frame}/>;
+ if(id==='kids-001-estrela-azul') return <StarStory scene={index} frame={frame} cue={cue}/>;
  if(id==='kids-002-cinco-passarinhos')return <BirdStory scene={index} frame={frame}/>;
  return <ShapeStory scene={index} frame={frame}/>;
 };
@@ -174,7 +184,7 @@ const Captions:React.FC<{items:PilotCaption[];kids:boolean}>=({items,kids})=>{
  }}>{selected.text}</div>;
 };
 export const PilotShort:React.FC<PilotProps>=(props)=>{
- const {durationFrames,channel,episodeId,scenes,audio,captions,brand}=props;
+ const {durationFrames,channel,episodeId,scenes,audio,captions,brand,kidsBeats=[]}=props;
  const frame=useCurrentFrame();
  const {fps}=useVideoConfig();
  const kids=channel==='kids';
@@ -183,18 +193,19 @@ export const PilotShort:React.FC<PilotProps>=(props)=>{
    {scenes.map((scene,index)=>{
      if(frame<scene.startFrame||frame>=scene.endFrame)return null;
      const duration=scene.endFrame-scene.startFrame;
+     const activeBeat=kidsBeats.find(b=>frame>=b.startFrame&&frame<b.endFrame&&b.sceneIndex===index);
      const opacity=interpolate(frame,[scene.startFrame,scene.startFrame+5,scene.endFrame-5,scene.endFrame],
          [1,1,1,1],clamp);
      return <Sequence key={scene.id} from={scene.startFrame} durationInFrames={duration} layout="none">
        <AbsoluteFill style={{opacity}}>
-       {kids?<KidsScene id={episodeId} index={index}/>:
+       {kids?<KidsScene id={episodeId} index={index} cue={activeBeat?.cue}/>:
         scene.video?
           <OffthreadVideo src={staticFile(scene.video)} volume={0} style={{
              width:'100%',height:'100%',objectFit:'contain',
              backgroundColor:'#070c16'
           }}/>:
           <AbsoluteFill style={{background:'#111'}}/>}
-       <Headline text={scene.headline} kids={kids}/>
+       <Headline text={kids?activeBeat?.headline??scene.headline:scene.headline} kids={kids}/>
        </AbsoluteFill>
      </Sequence>;
    })}
