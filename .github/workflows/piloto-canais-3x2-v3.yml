@@ -1,0 +1,70 @@
+name: Pilot 3x2 - Games Kids PT-BR
+
+on:
+  pull_request:
+    paths:
+      - "conteudos/piloto-games-kids-3x2-v3.json"
+      - "scripts/piloto_canais_3x2_v3.py"
+      - "scripts/produzir_piloto_canais_v3.py"
+      - "tests/test_piloto_canais_3x2_v3.py"
+      - "motion-remotion/src/pilot-short.tsx"
+      - "motion-remotion/src/root.tsx"
+      - "motion-remotion/package.json"
+      - "piloto-canais-v3.ps1"
+      - ".github/workflows/piloto-canais-3x2-v3.yml"
+  push:
+    branches: [main]
+    paths:
+      - "conteudos/piloto-games-kids-3x2-v3.json"
+      - "scripts/piloto_canais_3x2_v3.py"
+      - "scripts/produzir_piloto_canais_v3.py"
+      - "tests/test_piloto_canais_3x2_v3.py"
+      - "motion-remotion/src/pilot-short.tsx"
+      - "motion-remotion/src/root.tsx"
+      - "motion-remotion/package.json"
+      - "piloto-canais-v3.ps1"
+      - ".github/workflows/piloto-canais-3x2-v3.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  editorial-and-render-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install pytest
+      - name: Verify PT-BR kids/game split with no login or uploads
+        run: python -m pytest -q tests/test_piloto_canais_3x2_v3.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Remotion dependencies without touching OAuth
+        working-directory: motion-remotion
+        run: npm install --no-audit --no-fund
+      - name: Check strict TypeScript composition
+        working-directory: motion-remotion
+        run: npm run typecheck
+  windows-launcher:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse Windows launcher only, never run a render
+        shell: powershell
+        run: |
+          $tokens=$null
+          $errors=$null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Join-Path (Get-Location) 'piloto-canais-v3.ps1'),
+            [ref]$tokens, [ref]$errors
+          ) | Out-Null
+          if($errors.Count -gt 0){
+            $errors | ForEach-Object { Write-Error $_.ToString() }
+            throw 'Pilot PowerShell script failed syntax validation'
+          }
+          Write-Host '[OK] launcher PT-BR'
