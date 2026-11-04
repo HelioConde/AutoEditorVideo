@@ -8,6 +8,26 @@
 > anterior permanece integralmente na branch
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
+
+## Kids — Narracao Acolhedora PT-BR (estrelinha azul)
+
+Piloto Kids com 13 falas, 13,1 segundos de pausas PCM reais e esperas
+de 1,8 segundo após as perguntas, mirando 45–55 segundos. O MP4 tem
+legendas por frase e animacoes sincronizadas com cada descoberta; o
+sistema nao revela a casinha azul antes da narracao.
+
+    .\kids-narracao-acolhedora.ps1 -Acao Planejar
+    .\kids-narracao-acolhedora.ps1 -Acao Testar
+    .\kids-narracao-acolhedora.ps1 -Acao Abrir
+
+O teste gera narração real Edge TTS e MP4 local quando executado no
+Windows; pode exigir FFmpeg, Node/Remotion, internet e Python .venv.
+O programa NAO publica, nao cria canal nem acessa OAuth. Voz e MP4
+anteriores recebem backup antes da substituição.
+Somente o episódio kids-001-estrela-azul foi alterado neste experimento.
+
+Guia: [Narração Acolhedora Kids](docs/KIDS-NARRACAO-ACOLHEDORA-V1.md).
+
 ## Biblioteca de videos por canal + revisao do MP4 no YouTube
 
 Novo organizador **nao destrutivo** de `assets/gerados`: ao executar,
