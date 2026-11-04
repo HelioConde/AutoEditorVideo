@@ -236,3 +236,95 @@ def test_flat_scene_is_not_excuse_to_ignore_other_safety_checks(
     qa_path.write_text(json.dumps(qa),encoding='utf-8')
     with pytest.raises(RuntimeError,match='Contagem de cenas'):
         grade.ensure_ready(ep,'equilibrado')
+
+
+def test_continue_after_failed_generation_publishes_only_next_valid_video(
+    monkeypatch,tmp_path
+):
+    """One failed episode may be skipped, but NEVER uploaded half-finished."""
+    args=grade.parser().parse_args([
+        '--acao','produzir-publicar','--inicio-na-lista','5',
+        '--quantidade','2','--confirmar-publicacao','--continuar-apos-falha'
+    ])
+    monkeypatch.setattr(grade.sys,'platform','win32')
+    import publicar_arquivo_otaku as publisher
+    monkeypatch.setattr(publisher,'verify_oauth_config',lambda:None)
+    chosen=grade.load_queue()[4:6]
+    video=tmp_path/'complete.mp4'
+    video.write_bytes(b'test second episode')
+    monkeypatch.setattr(grade,'video_paths',
+                        lambda ep_id,_:(tmp_path/(ep_id+'.mp4'),tmp_path/'cover.jpg'))
+    journal={}
+    monkeypatch.setattr(grade,'load_journal',lambda:journal)
+    monkeypatch.setattr(grade,'save_journal',lambda _:None)
+    events=[]
+    def runner(cmd,*,label):
+        ep_id=cmd[cmd.index('-Id')+1]
+        stage='upload' if '-Publicar' in cmd else 'render'
+        events.append((ep_id,stage))
+        if ep_id==chosen[0]['id']:
+            raise RuntimeError('image editing rejected')
+    monkeypatch.setattr(grade,'invoke',runner)
+    monkeypatch.setattr(grade,'ensure_ready',lambda *_a,**_k:video)
+    sent={'count':0}
+    def receipt(_video):
+        sent['count']+=1
+        return {'video_id':'new12345678','privacidade_solicitada':'public',
+                'publicacao_publica_confirmada':True,
+                'thumbnail_status':'pending_processing'} if sent['count']>=4 else None
+    monkeypatch.setattr(grade,'confirmed_existing_upload',receipt)
+    assert grade.run(args)==2  # incomplete batch is disclosed
+    assert journal[chosen[0]['id']]['status']=='falha_producao'
+    assert journal[chosen[1]['id']]['status']=='publicado-publico'
+    assert events==[(chosen[0]['id'],'render'),
+                    (chosen[1]['id'],'render'),
+                    (chosen[1]['id'],'upload')]
+
+
+def test_stop_after_three_consecutive_production_failures(monkeypatch):
+    args=grade.parser().parse_args([
+        '--acao','produzir-publicar','--inicio-na-lista','5',
+        '--quantidade','5','--confirmar-publicacao','--continuar-apos-falha'
+    ])
+    monkeypatch.setattr(grade.sys,'platform','win32')
+    import publicar_arquivo_otaku as publisher
+    monkeypatch.setattr(publisher,'verify_oauth_config',lambda:None)
+    monkeypatch.setattr(grade,'load_journal',lambda:{})
+    monkeypatch.setattr(grade,'save_journal',lambda *_a:None)
+    monkeypatch.setattr(grade,'confirmed_existing_upload',lambda *_a:None)
+    events=[]
+    def fail(cmd,*,label):
+        events.append(cmd[cmd.index('-Id')+1])
+        assert '-Publicar' not in cmd
+        raise RuntimeError('proxy offline')
+    monkeypatch.setattr(grade,'invoke',fail)
+    with pytest.raises(RuntimeError,match='Tres falhas consecutivas'):
+        grade.run(args)
+    assert len(events)==3
+
+
+def test_continue_flag_never_skips_uncertain_upload(monkeypatch,tmp_path):
+    args=grade.parser().parse_args([
+        '--acao','produzir-publicar','--inicio-na-lista','1',
+        '--quantidade','2','--confirmar-publicacao','--continuar-apos-falha'
+    ])
+    monkeypatch.setattr(grade.sys,'platform','win32')
+    import publicar_arquivo_otaku as publisher
+    monkeypatch.setattr(publisher,'verify_oauth_config',lambda:None)
+    ep=grade.load_queue()[0]
+    video=tmp_path/'video.mp4'
+    video.write_bytes(b'pretend valid')
+    monkeypatch.setattr(grade,'video_paths',lambda *_:(video,tmp_path/'cover.jpg'))
+    monkeypatch.setattr(grade,'load_journal',lambda:{})
+    monkeypatch.setattr(grade,'save_journal',lambda *_a:None)
+    monkeypatch.setattr(grade,'confirmed_existing_upload',lambda _v:None)
+    monkeypatch.setattr(grade,'ensure_ready',lambda *_a,**_kw:video)
+    events=[]
+    def upload_fails(cmd,*,label):
+        events.append(cmd[cmd.index('-Id')+1])
+        if '-Publicar' in cmd:
+            raise RuntimeError('remote upload uncertain')
+    monkeypatch.setattr(grade,'invoke',upload_fails)
+    with pytest.raises(RuntimeError,match='remote upload uncertain'):
+        grade.run(args)
+    assert events==[ep['id'],ep['id']]
