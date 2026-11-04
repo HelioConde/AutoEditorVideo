@@ -72,7 +72,7 @@ def test_games_capture_files_must_be_real_and_no_fake_results(tmp_path):
 
 def test_child_engagement_is_strictly_blocked():
     data = pilot.load_manifest()
-    ep = data["channels"][1]["episodes"][0]
+    ep = data["channels"][1]["episodes"][1]
     ep["narration_beats"][-1] += " Comente a resposta!"
     ep["scenes"][-1]["narration"] = ep["narration_beats"][-1]
     ep["script"] = " ".join(ep["narration_beats"])
@@ -125,24 +125,24 @@ def test_voice_selection_is_brazilian_for_both_channels():
 
 def test_voice_and_word_boundaries_with_mock_tts_only(tmp_path, monkeypatch):
     data = pilot.load_manifest()
-    kids, ep = data["channels"][1], data["channels"][1]["episodes"][0]
+    games, ep = data["channels"][0], data["channels"][0]["episodes"][0]
     monkeypatch.setattr(producer, "OUT", tmp_path)
     async def fake_tts(script, voice, rate):
-        assert voice == "pt-BR-FranciscaNeural"
-        assert rate == "-15%"
+        assert voice == "pt-BR-AntonioNeural"
+        assert rate == "+2%"
         return b"MP3" * 1500, [
             {"start": i * .6, "end": i * .6 + .5, "text": "teste"}
             for i in range(20)
         ]
     monkeypatch.setattr(producer, "_synthesize", fake_tts)
-    state = producer.create_voice(kids, ep)
+    state = producer.create_voice(games, ep)
     assert state["status"] == "voz_gerada_requer_revisao"
-    path, marker = producer.read_voice(kids, ep)
+    path, marker = producer.read_voice(games, ep)
     assert path.stat().st_size > 1000
     assert marker["script_sha256"] == hashlib.sha256(ep["script"].encode()).hexdigest()
     with pytest.raises(ValueError, match="Roteiro mudou"):
-        producer.read_voice(kids, {**ep, "script": ep["script"] + " Uma linha nova."})
-    assert producer.create_voice(kids, ep)["status"] == "cache_ptbr_aprovado_tecnicamente"
+        producer.read_voice(games, {**ep, "script": ep["script"] + " Uma linha nova."})
+    assert producer.create_voice(games, ep)["status"] == "cache_ptbr_aprovado_tecnicamente"
 
 
 def test_scene_frames_align_with_real_word_times():
