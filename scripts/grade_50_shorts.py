@@ -234,6 +234,8 @@ def run(args:argparse.Namespace)->int:
           'chamadas IA permitidas na selecao (teto, nao custo garantido).',
           flush=True)
     journal=load_journal()
+    skipped=[]
+    consecutive_production_failures=0
     for ep in chosen:
         ep_id=ep['id']
         video=video_paths(ep_id,args.perfil)[0]
@@ -264,7 +266,30 @@ def run(args:argparse.Namespace)->int:
                 '. Confira o YouTube Studio antes de retomar; '
                 'nenhum reenvio automatico.'
             )
-        invoke(local_command(ep,args),label='Produzir '+ep_id)
+        try:
+            invoke(local_command(ep,args),label='Produzir '+ep_id)
+        except (RuntimeError,OSError,subprocess.SubprocessError) as exc:
+            if not args.continuar_apos_falha:
+                raise
+            # A failed production is safe to skip; an uncertain YouTube upload
+            # is NEVER safe to skip. No incomplete MP4 was submitted.
+            skipped.append(ep_id)
+            consecutive_production_failures+=1
+            journal[ep_id]={'status':'falha_producao',
+                            'causa':'geracao_ou_render_incompleto'}
+            save_journal(journal)
+            print(f'[PULADO, SEM UPLOAD] {ep_id}: {type(exc).__name__}. '
+                  'Cache salvo; somente este episodio fica pendente.',
+                  flush=True)
+            if consecutive_production_failures>=3:
+                raise RuntimeError(
+                    'Tres falhas consecutivas de producao. '
+                    'Possivel problema geral com o Codex Proxy ou dependencias; '
+                    'nao continuar desperdicando recursos. '
+                    'Pendentes: '+', '.join(skipped)
+                ) from exc
+            continue
+        consecutive_production_failures=0
         if not publish_now:
             continue
         # The generated video is validated before the irreversible upload.
@@ -311,6 +336,12 @@ def run(args:argparse.Namespace)->int:
             print('[CAPA PENDENTE] Arquivo vertical salvo. '
                   'Verifique YouTube Studio (Shorts > Miniatura) e NAO reenvie o MP4.',
                   flush=True)
+    if skipped:
+        print('[LOTE PARCIAL] Episodios nao publicados por falha de '
+              'producao: '+', '.join(skipped)+
+              '. Nao perderam o cache. Retome-os apos corrigir o proxy.',
+              flush=True)
+        return 2
     return 0
 
 def parser()->argparse.ArgumentParser:
@@ -330,6 +361,11 @@ def parser()->argparse.ArgumentParser:
     ap.add_argument('--exigir-movimento-personagem',action='store_true',
                     help='QA estrito opcional: bloqueia se todas as cenas '
                          'forem apenas 2.5D/imagem plana com zoom')
+    ap.add_argument('--continuar-apos-falha',action='store_true',
+                    help='Se uma producao de imagens/render falhar, salvar '
+                         'pendencia SEM upload e tentar o proximo episodio. '
+                         'Parar apos 3 falhas consecutivas. Nunca ignorar '
+                         'falhas de upload ou de QA do video ja renderizado.')
     return ap
 
 
