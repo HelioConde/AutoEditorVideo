@@ -1,5 +1,6 @@
 import React from 'react';
 import {KidsBackgroundMusic, KidsMusic} from './kids-background-music';
+import {EmanuellyLayerStage,EmanuellyLayeredScene} from './emanuelly-layer-stage';
 import {AbsoluteFill, Audio, Img, interpolate, staticFile,
   useCurrentFrame} from 'remotion';
 
@@ -18,6 +19,7 @@ export type EmanuellyProps = {
   durationFrames:number; frames:EmanuellyFrame[];
   captions:EmanuellyCaption[]; audio:string; referenceSha:string;
   music?:KidsMusic;
+  layeredScenes?:EmanuellyLayeredScene[];
   madeForKids:true;
 };
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
@@ -51,6 +53,8 @@ export const EmanuellyShort:React.FC<EmanuellyProps>=(props)=>{
  const frame=useCurrentFrame();
  const {frames,captions,durationFrames,brand,chapter,audio,episodeId}=props;
  const active=frames.find(b=>frame>=b.startFrame&&frame<b.endFrame);
+ const layered=props.layeredScenes||[];
+ const layeredScene=layered.find(b=>frame>=b.startFrame&&frame<b.endFrame);
  const idx=active?frames.indexOf(active):-1;
  const prev=idx>0?frames[idx-1]:null;
  const beatFrame=active?frame-active.startFrame:0;
@@ -61,22 +65,24 @@ export const EmanuellyShort:React.FC<EmanuellyProps>=(props)=>{
  const water=(episodeId.includes('-p03-')||episodeId.includes('-p04-'))
    && Boolean(active&&/gotinha|gota|água|bolha|chuvisco|plim|mágica/i.test(active.cue));
  const caption=captions.find(c=>frame>=c.startFrame&&frame<c.endFrame);
- if(!frames.length)return <AbsoluteFill style={{backgroundColor:'#0d2a4a'}}/>;
+ if(!frames.length&&!layered.length)return <AbsoluteFill style={{backgroundColor:'#0d2a4a'}}/>;
  const imageStyle:React.CSSProperties={
    position:'absolute',width:'100%',height:'100%',objectFit:'cover',
    transform:'translate('+moveX+'px,'+moveY+'px) scale('+zoom+')',
  };
  return <AbsoluteFill style={{backgroundColor:'#153c5b',overflow:'hidden'}}>
-   {active&&<>
-     {prev&&beatFrame<9&&<Img src={staticFile(prev.image)} style={imageStyle}/>}
-     <Img src={staticFile(active.image)}
-       style={{...imageStyle,opacity:prev?transition:1}}/>
-   </>}
+   {layeredScene?
+     <EmanuellyLayerStage scene={layeredScene} frame={frame}/>
+     :active&&<>
+       {prev&&beatFrame<9&&<Img src={staticFile(prev.image)} style={imageStyle}/>}
+       <Img src={staticFile(active.image)}
+         style={{...imageStyle,opacity:prev?transition:1}}/>
+     </>}
    <AbsoluteFill style={{
      background:'linear-gradient(to bottom,rgba(12,28,56,.48) 0%,transparent 19%,transparent 70%,rgba(12,28,56,.43) 100%)',
      pointerEvents:'none'
    }}/>
-   <GlowParticles frame={frame} water={water}/>
+   {!layered.length&&<GlowParticles frame={frame} water={water}/>}
    <div style={{
      position:'absolute',left:54,right:54,top:89,
      display:'flex',justifyContent:'space-between',alignItems:'center',

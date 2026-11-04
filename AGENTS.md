@@ -93,6 +93,35 @@ miniaturas e upload OAuth para YouTube.
   ou outros canais. Nenhum upload ou publicação automática.
 - Testar regressão em `tests/test_gerar_poses_emanuelly_gpt_image_2.py`.
 
+## KIDS — REUTILIZAR CENARIOS E OBJETOS NA ANIMACAO
+
+- A partir da Parte 1 de Emanuelly, USAR preferencialmente cenários
+  e objetos oficiais fixos com camadas independentes em Remotion.
+  Nunca redesenhar o jardim, o quarto ou o ovo para cada frase.
+- Um único ovo-azul.png com gotinhas em todas as cenas; a cena 01
+  mostra apenas ovo e jardim, sem Emanuelly. Manu aparece no
+  jardim nas seguintes, e vai ao quarto a partir da cena 06.
+  Nenhum Fofinho/irmãs/Raposo/Porco-espinho antes da apresentação.
+- Quatro vistas jardins e quatro quartos oficiais. Todas
+  instaladas localmente com animar-emanuelly.ps1 -Acao InstalarLote.
+  A pasta assets/gerados/kids-emanuelly/cenarios-oficiais/ fica
+  fora do Git; os SHA e históricos preservam cada referência.
+- Mover personagem e ovo com transformações 2D independentes
+  do cenário, usando poses PNG transparentes já aprovadas.
+  Isso é animação por camadas, não rigging ou lip-sync completo.
+  Priorizar ação visível em vez de zoom de câmera genérico.
+- Preservar MP4 original final.mp4. Prévia em final-camadas.mp4,
+  QA separado. A voz e a música existentes devem ser reutilizadas
+  sem alterar volumes ou pedir novo TTS desnecessariamente.
+- Compositor só para EP01 Parte 1 nesta versão; não
+  aplicar automaticamente cenas desse episódio às outras partes.
+- Sem geração de IA de imagem, sem upload, somente revisão local
+  do vídeo completo depois de renderizar. Não alegar aprovação
+  visual automática apenas pelo SHA dos recursos.
+- Guia docs/KIDS-EMANUELLY-CENARIOS-CAMADAS-V1.md.
+  Testes tests/test_kids_emanuelly_cenarios_camadas_v1.py
+  e tests/test_animar_emanuelly_powershell.ps1.
+
 ## KIDS — CATALOGO DE POSES V2 ATUAIS E FUTURAS
 
 - Usar scripts/kids_emanuelly_catalogo_poses_v2.py como fonte de

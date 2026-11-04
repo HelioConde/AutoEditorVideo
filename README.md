@@ -52,6 +52,27 @@ Estas etapas dependem do proxy de imagens e preservam quadros antigos
 em histórico. O usuário deve conferir o novo MP4; a IA não oferece
 garantia de detecção automática de todos os erros de elenco.
 
+## Série Kids — animação por camadas com cenários fixos
+
+Agora é possível produzir uma **prévia local da Parte 1** sem novas
+imagens geradas por IA: 4 vistas oficiais do jardim + 4 do quarto,
+o mesmo ovo azul PNG transparente e as poses já geradas de Manu
+são compostos em camadas no Remotion.
+
+    .\animar-emanuelly.ps1 -Acao Planejar
+    .\animar-emanuelly.ps1 -Acao InstalarLote -Pasta "C:\Imagens\Referencias"
+    .\animar-emanuelly.ps1 -Acao Preparar
+    .\animar-emanuelly.ps1 -Acao Renderizar
+    .\animar-emanuelly.ps1 -Acao Abrir
+
+A primeira cena contém apenas ovo e jardim, sem Emanuelly.
+O cenário permanece fixo enquanto Manu caminha, muda de pose
+e o ovo balança independentemente. Preserva voz e música
+aprovadas e produz final-camadas.mp4 sem sobrescrever final.mp4.
+Não é ainda rigging articulado. Nenhum upload.
+
+Guia: docs/KIDS-EMANUELLY-CENARIOS-CAMADAS-V1.md
+
 ## Catálogo v2 de animações Kids — 54 poses da Emanuelly
 
 Além das oito poses existentes, foram planejadas 46 poses novas
