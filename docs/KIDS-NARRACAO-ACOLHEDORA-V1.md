@@ -6,7 +6,8 @@ Trocar o ritmo excessivamente acelerado (cerca de 25 segundos) por uma história
 
 Neste piloto, somente kids-001-estrela-azul muda:
 - Voz pt-BR-FranciscaNeural (-15%), com 13 frases individuais;
-- 13,1 segundos de pausas explícitas PCM, não apenas reticências;
+- 13,1 segundos de pausas solicitadas antes da geração, não apenas reticências;
+- Pausas secundárias ajustadas automaticamente se a duração real das falas ultrapassar o limite; as perguntas preservam os 1,8 segundo de resposta;
 - Esperas de 1,8 segundo após cada pergunta sobre casinhas;
 - Final afetuoso: "Obrigada por ajudar a estrelinha azul a encontrar sua casinha!";
 - Duração-alvo de 45–55 segundos, com bloqueio acima de 59,2 segundos;
