@@ -116,6 +116,64 @@ usam créditos de imagem nem enviam vídeos.
   estiver rodando no PC. Os arquivos no GitHub não iniciam tarefas
   automaticamente.
 
+## Bleach (#5) e erros de edicao `images/edits`
+
+Se o processo parar em `5005-bleach-thousand-year-blood-war` com
+`Cena IA 01, 06, 07`, nao apagar `master-raw.png`, `foreground-raw.png`,
+`background-raw.png`, a voz, o storyboard nem o MP4 de outros episodios.
+
+A mensagem `Sem gerar nova cena de forma independente` vem de uma chamada
+ao endpoint local de **edicao**, e nao do YouTube. Uma resposta HTTP
+`400/415/422` pode sinalizar payload ou modelo de edicao incompativel;
+`401/403` autorizacao/permissao; `404` endpoint ausente;
+`429` cota/cooldown; `5xx` servidor. A causa real deve ser lida no
+HTTP anterior do log; nunca supor que todas as falhas sao iguais.
+
+A versao atual grava um `scene-failure.json` **local** dentro da pasta
+`master-scenes/<cena>-<hash>/`, indicando `stage`, `http_status`,
+`category`, `retryable` e `remedy`, sem gravar resposta bruta do proxy
+nem credenciais. Erros nao recuperaveis nao provocam 2 ou 3 chamadas
+iguais em sequencia. Nao converte falha de edicao em cena falsa ou
+video incompleto.
+
+```powershell
+cd "$HOME\Documents\arquivo-otaku-github"
+git pull --ff-only origin main
+.\testar-codex-proxy.ps1 -Acao status
+
+# Offline: mostra cache das 9 cenas, sem chamadas de imagem
+.\.venv\Scripts\python.exe .\scripts\master_scenes.py `
+  --id 5005-bleach-thousand-year-blood-war `
+  --todas-cenas --modelo gpt-image-2 `
+  --diagnosticar-cache --max-chamadas 0
+```
+
+Depois de confirmar cota, modelo e endpoint, tente apenas o #5;
+o cache existente sera retomado, sem refazer os episodios 1–4:
+
+```powershell
+.\grade-50-shorts.ps1 -Acao ProduzirPublicar -InicioNaLista 5 -Quantidade 1 `
+  -Modelo gpt-image-2 -Perfil equilibrado `
+  -MaxChamadasPorVideo 30 -ConfirmarCotaImagem -ConfirmarPublicacao
+```
+
+Se desejar **seguir com os outros** enquanto o #5 continua pendente,
+existe `-ContinuarAposFalha`. A opcao pula **somente videos que falharam
+na geracao de imagens/MP4**, nunca publica os incompletos e **nunca**
+continua apos falha ambigua de upload. Para apos tres falhas seguidas
+(possivel proxy indisponivel para toda a grade), registra os IDs pendentes
+e termina com codigo 2 quando ha algum episodio faltando.
+
+```powershell
+.\grade-50-shorts.ps1 -Acao ProduzirPublicar -InicioNaLista 5 -Quantidade 46 `
+  -Modelo gpt-image-2 -Perfil equilibrado `
+  -MaxChamadasPorVideo 30 -ConfirmarCotaImagem `
+  -ConfirmarPublicacao -ContinuarAposFalha
+```
+
+Esse exemplo permite ate **1.380 chamadas**. Escolha uma quantidade menor
+para diagnosticar antes de gastar todo o teto.
+
 ## Estratégia recomendada
 
 A lista contém animes recentes, populares e nostálgicos. Embora o modo automático já permita 50 uploads públicos sequenciais,
