@@ -61,6 +61,26 @@ por atualizar o GitHub.
 
 Detalhes: [Otaku Multicena 3.0](docs/OTAKU-MULTICENA-3-0.md).
 
+## Otaku Reframe EN V3 — Shorts brasileiros ja publicados
+
+O canal ingles Otaku Reframe ja existe. O projeto agora permite preparar
+versoes inglesas dos Shorts publicados no canal BR, com correspondencia
+conservadora: 13 episodios mapeados, 1 ja em ingles e 4 sem fonte local confirmada.
+
+Comandos Windows, sem upload nem gasto com IA:
+
+    .\preparar-publicados-en.ps1 -Acao Resumo
+    .\preparar-publicados-en.ps1 -Acao Verificar
+    .\preparar-publicados-en.ps1 -Acao Preparar
+
+O manifesto resultante fica em assets/gerados/otaku-br-publicados-en-v3.json.
+Os scripts gerar-shorts-en.ps1 e publicar-shorts-en.ps1 aceitam -Manifesto
+para nao afetar o lote historico de cinco videos EN. O upload exige a
+identidade OAuth do Otaku Reframe, MP4 EN assinado, roteiro original ingles
+e aprovacao especifica de envio. Privacidade padrao: private.
+
+Leia: [Otaku Reframe BR->EN V3](docs/OTAKU-REFRAME-PUBLICADOS-BR-EN-V3.md).
+
 ## Otaku Multicena 3.0 — expansao TikTok e Kwai
 
 A nova fase prioriza transferencia **responsavel** dos aprendizados de YouTube e Instagram
