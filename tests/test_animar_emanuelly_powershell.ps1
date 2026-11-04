@@ -10,6 +10,14 @@ if($errors.Count -gt 0){throw 'Erro de sintaxe no compositor Kids'}
 $temp=Join-Path ([IO.Path]::GetTempPath()) ('emanuelly-layers-'+[Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path (Join-Path $temp 'scripts') -Force | Out-Null
 try{
+  # Novo motor separado: os testes usam stub e nao sintetizam voz real.
+  Copy-Item -LiteralPath (Join-Path (Split-Path -Parent $PSScriptRoot) 'fofinhos-ep01.ps1') -Destination (Join-Path $temp 'fofinhos-ep01.ps1')
+  @'
+import sys,json
+from pathlib import Path
+Path(__file__).resolve().parents[1].joinpath("args-fofinhos.json").write_text(
+  json.dumps(sys.argv[1:]),encoding="utf8")
+'@ | Set-Content -LiteralPath (Join-Path $temp 'scripts\fofinhos_ep01_render.py') -Encoding UTF8
   Copy-Item -LiteralPath $source -Destination (Join-Path $temp 'animar-emanuelly.ps1')
   @'
 import sys,json
@@ -29,9 +37,14 @@ Path(__file__).resolve().parents[1].joinpath("args.json").write_text(
     throw 'Planejar Parte 3 nao foi encaminhado'
   }
   & $runner -Acao Planejar | Out-Null
-  $argsPy=Get-Content -LiteralPath (Join-Path $temp 'args.json') -Raw | ConvertFrom-Json
-  if(-not ($argsPy -contains 'planejar')){
-    throw 'Planejamento nao encaminhado'
+  $argsNew=Get-Content -LiteralPath (Join-Path $temp 'args-fofinhos.json') -Raw | ConvertFrom-Json
+  if(-not ($argsNew -contains 'planejar')){
+    throw 'Planejar Parte 1 deve usar o novo motor Fofinhos'
+  }
+  & $runner -Acao Renderizar -Parte 1 -Refazer | Out-Null
+  $argsNew=Get-Content -LiteralPath (Join-Path $temp 'args-fofinhos.json') -Raw | ConvertFrom-Json
+  if(-not ($argsNew -contains 'renderizar') -or -not ($argsNew -contains '--refazer')){
+    throw 'Renderizar Parte 1 deve usar o storyboard Fofinhos aprovado'
   }
   $src=Join-Path $temp 'fake-original.png'
   'fake image, mock launcher only' | Set-Content -LiteralPath $src
