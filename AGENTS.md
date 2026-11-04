@@ -5,6 +5,39 @@ imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
 
+## GERAÇÃO DA SÉRIE KIDS COM FOTO DE REFERÊNCIA
+
+- Comando: gerar-historia-kids.ps1 (Planejar, InstalarReferencia,
+  Imagens, Voz, Renderizar, Gerar, Verificar, Abrir).
+- Script scripts/serie_kids_emanuelly_v1.py; 4 partes e 37
+  quadros visuais no total, orçamento de chamadas de IA EXPLÍCITO.
+- A foto privada NÃO PODE SER VERSIONADA NO GITHUB. Somente
+  assets/referencias-privadas/emanuelly-elenco.png local, protegida
+  no .gitignore. Nunca subir imagens do elenco infantil ou a foto
+  original como anexos públicos a issues.
+- Ao gerar quadro, utilizar OBRIGATORIAMENTE o Codex Proxy
+  /v1/images/edits com a referência PNG em cada chamada.
+  Se não suportado, bloquear e informar; NUNCA usar text-to-image
+  sem referência como fallback, nem reciclar imagens de outro personagem.
+- Usar SHA256 de foto, prompt, modelo e beat para cache de quadros;
+  rejeitar materiais stale e preservar históricos quando -Refazer.
+- Voz pt-BR-FranciscaNeural com pausas PCM e WordBoundary real
+  (Kids Narração Acolhedora); manter <=60s MP4, <=59,2s áudio,
+  perguntas com ~1,8s e narracao de 45-55s quando possível.
+  Se não couber, ajustar roteiro sem acelerar ou truncar falas.
+- Composição Remotion EmanuellySerieV1: 9/10/9/9 cenas ilustradas
+  de referência e efeitos vetoriais independentes. NÃO alegar
+  movimento articulado de personagens; avaliar a coerência dos quadros
+  no vídeo completo depois de renderizar.
+- Salvar em assets/gerados/kids-emanuelly/<id>/final.mp4, QA local,
+  atualizar biblioteca Kids quando inicializada, não tocar Games,
+  Otaku Multicena, Otaku Reframe ou a estrelinha azul.
+- Sem OAuth, nenhum upload e nenhuma publicação automática.
+  Canais infantis exigem Made for Kids e revisão de direitos.
+- Documentação: docs/GERAR-SERIE-KIDS-EMANUELLY.md;
+  testes: tests/test_serie_kids_emanuelly_v1.py e
+  tests/test_gerar_historia_kids_powershell.ps1.
+
 ## SERIE KIDS — EMANUELLY E SEUS AMIGOS DE PELUCIA (CANONE)
 
 - História-base integral e fatos confirmados dos personagens em

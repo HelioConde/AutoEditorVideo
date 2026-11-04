@@ -8,6 +8,7 @@
     "compositions": "remotion compositions src/index.ts",
     "render:master": "remotion render src/index.ts ArquivoOtakuMaster",
     "render:pilot": "remotion render src/index.ts PilotoCanaisV3",
+    "render:emanuelly": "remotion render src/index.ts EmanuellySerieV1",
     "test:character": "node --test tests/character-idle.test.cjs",
     "test:shorts": "node --test tests/shorts-pacing.test.cjs",
     "test:qa": "node --test tests/character-idle.test.cjs tests/shorts-pacing.test.cjs",
