@@ -54,3 +54,6 @@ tests/_out_tmp/
 *.log
 
 *token*.json
+
+# Arquivo Otaku: credenciais e arquivos de publicacao
+assets/gerados/publicacao-youtube/

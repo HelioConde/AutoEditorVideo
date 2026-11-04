@@ -5,21 +5,8 @@
     "003-death-note-xadrez/06-594007f1c10bb8": {
       "x": 0,
       "y": -211,
-      "note": "Alinhamento do foreground para corresponder a referencia manual no Photoshop; fundo limpo direto"
+      "note": "Alinhamento antigo da versão aprovada no Photoshop; mantido apenas como histórico de cache exato."
     }
   },
-  "scene_defaults": {
-    "003-death-note-xadrez/gpt-image-1.5/01": {
-      "scale": 1.03,
-      "x": -4,
-      "y": -15,
-      "note": "Ajustado pela imagem 3 enviada: ampliação visual leve e reposicionamento vertical; validar visualmente no Windows."
-    },
-    "003-death-note-xadrez/gpt-image-1.5/05": {
-      "scale": 1.1,
-      "x": -25,
-      "y": -88,
-      "note": "Ajustado pela imagem 6 enviada: aumentar personagens cerca de 10% e subir cerca de 88 px; validar visualmente no Windows."
-    }
-  }
+  "scene_defaults": {}
 }
