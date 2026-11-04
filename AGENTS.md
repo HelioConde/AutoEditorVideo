@@ -93,6 +93,42 @@ miniaturas e upload OAuth para YouTube.
   ou outros canais. Nenhum upload ou publicação automática.
 - Testar regressão em `tests/test_gerar_poses_emanuelly_gpt_image_2.py`.
 
+
+## KIDS FOFINHO — ASSETS OFICIAIS DOS QUATRO SHORTS
+
+- Fonte editorial: conteudos/kids-emanuelly-ep01-shortserie-v1.json.
+- Fonte única de imagens e storyboard (4 partes):
+  scripts/kids_fofinho_storyboards_v2.py. Cada quadro tem
+  cenário, pose Manu, estado do ovo, pose Fofinho e gotas.
+- Biblioteca persistente: scripts/kids_emanuelly_series_assets_v2.py.
+  Imagens oficiais são registradas uma única vez com SHA-256.
+  Não redesenhar jardim, quarto, ovo ou rosto do Fofinho a cada beat.
+- PowerShell animar-emanuelly.ps1 suporta Parte 1,2,3,4,Todas;
+  Catalogo lista cada recurso, Planejar mostra os pendentes,
+  GerarImagens pode gerar faltantes com limite explícito de IA.
+- Ordem do ovo: Parte 1 sempre fechado; Parte 2 quadros
+  1/2 fechado, 3/4 rachado, 5 aberto, quadros 6+ Fofinho
+  fora do ovo. Partes 3/4: não mostrar ovo original.
+  Fofinho só aparece em Parte 2 beat 6, nunca antes.
+- Gotas d'água são um único asset transparente repetido,
+  com animação independente. Mesmo Fofinho azul, miando,
+  patinhas e aconchegado referenciados ao sprite oficial.
+- Imagens de Fofinha Arco-Íris, Fofinha Rosa, Raposo e
+  Porco-espinho NÃO são requeridas nem renderizadas no EP01.
+  As irmãs gêmeas só nascem UM ANO depois de Fofinho.
+  Na Parte 4 beat 9 mostrar apenas brilhos abstratos.
+- GerarImagens exige gpt-image-2 e edição com fonte oficial,
+  sem fallback. Salvar resposta paga antes de QA e não
+  gastar créditos regenerando assets válidos. Regeneração
+  explícita -Refazer mantém versão anterior em histórico.
+- Não alterar TTS/música aprovada nem substituir final.mp4.
+  Renderiza final-camadas.mp4 em cada pasta de Parte.
+- Nenhum upload, sem controle de canais; revisar o vídeo
+  inteiro e só depois avaliar publicação em privado.
+- Guia: docs/KIDS-FOFINHO-TODOS-VIDEOS-REFERENCIAS-V2.md.
+- Testar tests/test_kids_fofinho_todos_videos_v2.py,
+  testes Windows PowerShell e TypeScript Remotion.
+
 ## KIDS — REUTILIZAR CENARIOS E OBJETOS NA ANIMACAO
 
 - A partir da Parte 1 de Emanuelly, USAR preferencialmente cenários
