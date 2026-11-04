@@ -31,12 +31,14 @@ export const profileForShot=(shotType:string|undefined,_sceneId:string):ShotProf
 // All pan values are in pixels inside the 940x1410 portrait content.
 // Deliberately no camera shake / random jitter / object deformation.
 const profiles:Record<ShotProfile,{zoom:number;x:number;y:number;fill:number;focus:number}> = {
-  establish:{zoom:1.035,x:-5,y:-8,fill:0.038,focus:0.0},
-  duel:     {zoom:1.052,x:10,y:-6,fill:0.040,focus:0.0},
-  king:     {zoom:1.078,x:-11,y:-15,fill:0.060,focus:0.32},
-  reaction: {zoom:1.052,x:8,y:-9,fill:0.042,focus:0.0},
-  reply:    {zoom:1.065,x:9,y:-13,fill:0.060,focus:0.30},
-  final:    {zoom:1.043,x:0,y:-12,fill:0.051,focus:0.46},
+  // Stable framing: subtle progressive push/pull; never a sudden camera jump.
+  // The image and every RGBA character/prop layer use the same camera matrix.
+  establish:{zoom:1.038,x:-1.2,y:-1.4,fill:0.025,focus:0.0},
+  duel:     {zoom:1.042,x:1.0,y:-1.4,fill:0.027,focus:0.0},
+  king:     {zoom:1.048,x:-1.2,y:-1.0,fill:0.033,focus:0.25},
+  reaction: {zoom:1.046,x:1.0,y:-1.0,fill:0.028,focus:0.0},
+  reply:    {zoom:1.045,x:1.0,y:-1.6,fill:0.029,focus:0.22},
+  final:    {zoom:1.034,x:0,y:-1.2,fill:0.025,focus:0.35},
 };
 
 export const motionAtFrame=(
@@ -71,44 +73,29 @@ export const motionAtFrame=(
 
 
 /**
- * Three unmistakable virtual cuts from the SAME approved art in the opening.
+ * Continuous zoom-in/out for the opening. Former versions made virtual jump
+ * cuts at 1.25s / 2.45s, which caused visibly disorienting flicker.
  *
- * The old 0–6s Ken Burns drift was frequently perceived as a static still.
- * We use two jump cuts at 1.25s and 2.45s, then recover a calm composition
- * before 5s. Only the common camera moves: actors, hands and furniture stay
- * together. No AI calls, invented gestures or audio changes.
- *
- * Off and Rigby2D modes keep their original motion behaviour.
+ * A smooth sine envelope starts moving at frame zero, peaks around 2.5s,
+ * and returns to zero by frame 5 WITHOUT a transform discontinuity.
+ * Pan deliberately remains zero so the viewer can see character animation.
+ * The legacy function name is retained for existing renderers, but it no
+ * longer performs any cut.
  */
 export const openingCutAtFrame=(frame:number,fps:number,
                                mode:AnimationMode):{zoom:number;panX:number;panY:number;beat:number}=>{
   const flat={zoom:0,panX:0,panY:0,beat:-1};
   if(mode!=='cinematica'||!Number.isFinite(frame)||!Number.isFinite(fps)||
      frame<0||fps<=0||frame>=5*fps)return flat;
-  const t=frame/fps;
-  if(t===0)return {zoom:0,panX:0,panY:0,beat:0};
-  // Direct camera cuts, not dissolves. Zoom is capped by the Shot renderer.
-  if(t<1.25){
-    const k=ease(t/1.25);
-    return {zoom:.055*k,panX:8*k,panY:-9*k,beat:0};
-  }
-  if(t<2.45){
-    const k=ease((t-1.25)/1.2);
-    return {zoom:.082+.008*k,panX:20+4*k,panY:-14-2*k,beat:1};
-  }
-  if(t<3.55){
-    const k=ease((t-2.45)/1.10);
-    return {zoom:.041+.011*k,panX:-14-5*k,panY:-6-3*k,beat:2};
-  }
-  const k=ease((t-3.55)/1.45);
-  return {zoom:.034*(1-k),panX:7*(1-k),panY:-5*(1-k),beat:3};
+  const phase=Math.PI*clamp(frame/fps/5,0,1);
+  return {zoom:Math.sin(phase)*.040,panX:0,panY:0,beat:0};
 };
 
 /**
- * A few archived Shorts kept one approved still for 6–15 seconds. Continuing
- * tiny smooth zoom after the first five seconds is not enough. When a scene
- * lasts longer than 4.5s, alternate a gentle crop/pan every 2.7s without
- * replacing its source image, altering narrative timing or separating masks.
+ * A long still must remain alive WITHOUT fake cuts. Use a smooth breathing
+ * zoom in/out of at most 2.2%, no pan, and fade motion near scene edges.
+ * A multilayer scene can show the (separately composed) character idle motion
+ * underneath this camera; a flattened PNG only supports whole-image zoom.
  */
 export const longHoldCutAtFrame=(
     frame:number,startFrame:number,endFrame:number,fps:number,
@@ -120,18 +107,14 @@ export const longHoldCutAtFrame=(
   const start=Math.max(startFrame,5*fps);
   if(frame<start)return flat;
   const elapsed=(frame-start)/fps;
-  const beat=Math.floor(elapsed/2.7);
-  const local=(elapsed-beat*2.7)/2.7;
-  const t=ease(local);
-  const even=beat%2===0;
-  // A newly entered scene must start on its original approved pixels.
-  // The first long hold (scene starting at 0s) still cuts at 5s.
-  const enter=startFrame>=5*fps?ease(elapsed/.3):1;
+  const remaining=(endFrame-frame)/fps;
+  const fadeIn=ease(elapsed/.45);
+  const fadeOut=ease(remaining/.45);
+  const cycle=Math.sin(Math.PI*elapsed/4.6);
   return {
-    zoom:((even?.032:.055)+.012*t)*enter,
-    panX:(even?-12-5*t:13+6*t)*enter,
-    panY:(even?-5-4*t:-11+3*t)*enter,
-    beat,
+    zoom:.022*cycle*cycle*fadeIn*fadeOut,
+    panX:0,panY:0,
+    beat:0,
   };
 };
 
