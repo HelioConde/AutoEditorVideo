@@ -395,13 +395,13 @@
           "cover": "CADÊ A ESTRELA AZUL?",
           "series": "MiniMundo Curioso",
           "hook": "Onde está a estrelinha azul?",
-          "script": "Onde está a estrelinha azul? Três estrelinhas brincam no céu: uma vermelha, uma amarela e uma azul. A estrelinha azul procura uma casinha da mesma cor. Vermelha? Não é essa! Amarela? Ainda não! Olha só: apareceu uma casinha azul. A estrelinha entra na casa azul e brilha feliz. Azul com azul! Que encontro bonito!",
+          "script": "Onde está a estrelinha azul? Três estrelinhas brincam lá no céu. Uma vermelha, uma amarela e uma azul! A estrelinha azul procura uma casinha da mesma cor que ela. Será que é essa casinha vermelha? Hum... não é essa! E essa casinha amarela? Ainda não! Olha só! Apareceu uma casinha azul! Será que é essa? Siiim! É essa mesmo! Você encontrou! A estrelinha azul entra na sua casinha e brilha feliz! Azul com azul! Que encontro bonito! Obrigada por ajudar a estrelinha azul a encontrar sua casinha!",
           "narration_beats": [
             "Onde está a estrelinha azul?",
-            "Três estrelinhas brincam no céu: uma vermelha, uma amarela e uma azul.",
-            "A estrelinha azul procura uma casinha da mesma cor. Vermelha? Não é essa!",
-            "Amarela? Ainda não! Olha só: apareceu uma casinha azul.",
-            "A estrelinha entra na casa azul e brilha feliz. Azul com azul! Que encontro bonito!"
+            "Três estrelinhas brincam lá no céu. Uma vermelha, uma amarela e uma azul!",
+            "A estrelinha azul procura uma casinha da mesma cor que ela. Será que é essa casinha vermelha? Hum... não é essa!",
+            "E essa casinha amarela? Ainda não! Olha só! Apareceu uma casinha azul! Será que é essa? Siiim! É essa mesmo! Você encontrou!",
+            "A estrelinha azul entra na sua casinha e brilha feliz! Azul com azul! Que encontro bonito! Obrigada por ajudar a estrelinha azul a encontrar sua casinha!"
           ],
           "hook_options": {
             "curiosity": "Onde está a estrelinha azul?",
@@ -410,7 +410,7 @@
             "mystery": "Onde será que a casinha azul está escondida?",
             "consequence": "Ao encontrar sua cor, a estrelinha descansa feliz."
           },
-          "description_youtube": "⭐ Uma história original e tranquila sobre identificar cores. As estrelinhas descobrem suas casinhas com alegria e respeito ao ritmo das crianças.\n\nAnimação educativa original em português.\n\n#Cores #AprenderBrincando #EducacaoInfantil #MiniMundoCurioso #Shorts",
+          "description_youtube": "⭐ Você consegue ajudar a estrelinha azul a encontrar a casinha da mesma cor? Uma historinha acolhedora para crianças, com pausas para observar e descobrir as cores.\n\nAnimação educativa original em português brasileiro. Conteúdo direcionado a crianças.\n\n#Cores #AprenderBrincando #EducacaoInfantil #MiniMundoCurioso #Shorts",
           "tags": [
             "cores para crianças",
             "aprender cores",
@@ -420,7 +420,7 @@
             "vídeo infantil",
             "MiniMundo Curioso"
           ],
-          "planned_duration_seconds": 28,
+          "planned_duration_seconds": 55,
           "footage_origin": "original_vector_animation",
           "intended_learning": "identificar azul e associar cores",
           "scenes": [
@@ -431,7 +431,7 @@
               "narration": "Onde está a estrelinha azul?",
               "visual": "Céu azul-escuro suave com três estrelas de olhos amigáveis e cores distintas",
               "physical_action": "estrela azul pisca devagar e dá um aceno",
-              "on_screen_text": "QUAL É A AZUL?",
+              "on_screen_text": "CADÊ A AZUL?",
               "character_motion": "piscar lento sem flashes",
               "camera_motion": "câmera fixa",
               "continuity": "design consistente das estrelas",
@@ -443,8 +443,8 @@
             {
               "id": "02",
               "start_s": 3,
-              "end_s": 8,
-              "narration": "Três estrelinhas brincam no céu: uma vermelha, uma amarela e uma azul.",
+              "end_s": 12,
+              "narration": "Três estrelinhas brincam lá no céu. Uma vermelha, uma amarela e uma azul!",
               "visual": "Estrelas deslizam com espaço claro entre cores",
               "physical_action": "estrela vermelha, amarela e azul flutuam suavemente",
               "on_screen_text": "VERMELHO • AMARELO • AZUL",
@@ -458,12 +458,12 @@
             },
             {
               "id": "03",
-              "start_s": 8,
-              "end_s": 14,
-              "narration": "A estrelinha azul procura uma casinha da mesma cor. Vermelha? Não é essa!",
+              "start_s": 12,
+              "end_s": 27,
+              "narration": "A estrelinha azul procura uma casinha da mesma cor que ela. Será que é essa casinha vermelha? Hum... não é essa!",
               "visual": "Casinha vermelha e estrela azul, sem confusão",
               "physical_action": "estrela azul para e observa casinha vermelha",
-              "on_screen_text": "VERMELHA?",
+              "on_screen_text": "É A VERMELHA?",
               "character_motion": "corpo inteiro translada suavemente",
               "camera_motion": "fixa",
               "continuity": "não fingir que vermelha é azul",
@@ -474,15 +474,15 @@
             },
             {
               "id": "04",
-              "start_s": 14,
-              "end_s": 21,
-              "narration": "Amarela? Ainda não! Olha só: apareceu uma casinha azul.",
-              "visual": "Casinha amarela e depois azul surgem separadas",
+              "start_s": 27,
+              "end_s": 42,
+              "narration": "E essa casinha amarela? Ainda não! Olha só! Apareceu uma casinha azul! Será que é essa? Siiim! É essa mesmo! Você encontrou!",
+              "visual": "Casinha amarela aparece primeiro; a casinha azul só é revelada no momento correto da narração",
               "physical_action": "estrela azul olha e vai até casinha azul",
-              "on_screen_text": "ACHEI A AZUL!",
+              "on_screen_text": "É A AMARELA?",
               "character_motion": "giro de olhos e deslizamento independente",
               "camera_motion": "fixa",
-              "continuity": "associação correta azul com azul",
+              "continuity": "nunca revelar a casinha azul antes da fala Olha só!",
               "transition": "clean_narrative_cut",
               "sound": "subtle_original_or_licensed",
               "asset_source": "original_procedural_vector",
@@ -490,12 +490,12 @@
             },
             {
               "id": "05",
-              "start_s": 21,
-              "end_s": 28,
-              "narration": "A estrelinha entra na casa azul e brilha feliz. Azul com azul! Que encontro bonito!",
+              "start_s": 42,
+              "end_s": 55,
+              "narration": "A estrelinha azul entra na sua casinha e brilha feliz! Azul com azul! Que encontro bonito! Obrigada por ajudar a estrelinha azul a encontrar sua casinha!",
               "visual": "Estrela azul entra na casinha azul e repousa",
               "physical_action": "estrela sorri e repousa",
-              "on_screen_text": "AZUL COM AZUL",
+              "on_screen_text": "AZUL COM AZUL!",
               "character_motion": "expressão suave e brilho sem estrobo",
               "camera_motion": "fixa",
               "continuity": "encerramento calmo",
@@ -504,7 +504,108 @@
               "asset_source": "original_procedural_vector",
               "required_asset": null
             }
-          ]
+          ],
+          "kids_pacing": {
+            "schema": "mini-mundo/narracao-acolhedora/v1",
+            "target_seconds": {
+              "min": 45,
+              "max": 55
+            },
+            "pause_policy": "observation_and_response",
+            "segments": [
+              {
+                "scene": "01",
+                "text": "Onde está a estrelinha azul?",
+                "pause_after_s": 0.7,
+                "cue": "intro",
+                "headline": "CADÊ A AZUL?"
+              },
+              {
+                "scene": "02",
+                "text": "Três estrelinhas brincam lá no céu. Uma vermelha, uma amarela e uma azul!",
+                "pause_after_s": 1,
+                "cue": "colors",
+                "headline": "TRÊS ESTRELINHAS"
+              },
+              {
+                "scene": "03",
+                "text": "A estrelinha azul procura uma casinha da mesma cor que ela.",
+                "pause_after_s": 0.8,
+                "cue": "red-search",
+                "headline": "UMA CASINHA AZUL?"
+              },
+              {
+                "scene": "03",
+                "text": "Será que é essa casinha vermelha?",
+                "pause_after_s": 1.8,
+                "cue": "red-question",
+                "headline": "É A VERMELHA?"
+              },
+              {
+                "scene": "03",
+                "text": "Hum... não é essa!",
+                "pause_after_s": 0.6,
+                "cue": "red-answer",
+                "headline": "NÃO É ESSA!"
+              },
+              {
+                "scene": "04",
+                "text": "E essa casinha amarela?",
+                "pause_after_s": 1.8,
+                "cue": "yellow-question",
+                "headline": "É A AMARELA?"
+              },
+              {
+                "scene": "04",
+                "text": "Ainda não!",
+                "pause_after_s": 0.8,
+                "cue": "yellow-answer",
+                "headline": "AINDA NÃO!"
+              },
+              {
+                "scene": "04",
+                "text": "Olha só! Apareceu uma casinha azul!",
+                "pause_after_s": 0.7,
+                "cue": "blue-reveal",
+                "headline": "OLHA A AZUL!"
+              },
+              {
+                "scene": "04",
+                "text": "Será que é essa?",
+                "pause_after_s": 1.8,
+                "cue": "blue-question",
+                "headline": "SERÁ QUE É ESSA?"
+              },
+              {
+                "scene": "04",
+                "text": "Siiim! É essa mesmo! Você encontrou!",
+                "pause_after_s": 0.7,
+                "cue": "blue-answer",
+                "headline": "VOCÊ ENCONTROU!"
+              },
+              {
+                "scene": "05",
+                "text": "A estrelinha azul entra na sua casinha e brilha feliz!",
+                "pause_after_s": 0.8,
+                "cue": "home",
+                "headline": "ELA ENCONTROU!"
+              },
+              {
+                "scene": "05",
+                "text": "Azul com azul! Que encontro bonito!",
+                "pause_after_s": 0.8,
+                "cue": "celebrate",
+                "headline": "AZUL COM AZUL!"
+              },
+              {
+                "scene": "05",
+                "text": "Obrigada por ajudar a estrelinha azul a encontrar sua casinha!",
+                "pause_after_s": 0.8,
+                "cue": "goodbye",
+                "headline": "OBRIGADA!"
+              }
+            ]
+          }
         },
         {
           "id": "kids-002-cinco-passarinhos",

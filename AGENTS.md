@@ -4,6 +4,28 @@ Projeto local de produção de Shorts em PT-BR: radar editorial, roteiro revisad
 imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
+
+## KIDS — NARRACAO ACOLHEDORA V1, TESTE ISOLADO
+
+- O usuário deseja histórias infantis com fala calorosa, perguntas simples
+  e pausas reais para a criança entender e responder. NAO apenas reduzir
+  a velocidade global nem narrar literalmente "pausa".
+- Somente kids-001-estrela-azul recebeu kids_pacing (13 frases,
+  13,1s de pausas totais, 1,8s após perguntas). Meta 45–55s e
+  limite técnico de áudio 59,2s, vídeo final <=60s.
+- Gerar TTS em blocos com Edge pt-BR-FranciscaNeural, PCM 48kHz e
+  silêncio real; preservar WordBoundary, hash do roteiro/pausas, áudio
+  anterior e MP4 anterior. Falhas de voz não podem criar silêncio falso.
+- Storyboard de 5 cenas tem 13 marcadores de ação; vermelho e amarelo
+  são apresentados antes de azul. NÃO revelar a casa azul antecipadamente.
+- Em pauses as legendas desaparecem; estrelas continuam movimento suave,
+  sem flashes, cortes agressivos ou chamadas a comentar/inscrever.
+- Command local: kids-narracao-acolhedora.ps1 -Acao Testar.
+  NUNCA chamar upload; a avaliação visual ocorre no vídeo completo,
+  e o canal infantil ainda precisa ser criado e marcado Made for Kids.
+- Não alterar o ritmo dos Games, Otaku Multicena ou Otaku Reframe.
+- Ver docs/KIDS-NARRACAO-ACOLHEDORA-V1.md e testes dedicados.
+
 ## REGRA ATUAL — REVISAR NO YOUTUBE STUDIO, NAO APROVAR CENA A CENA
 
 - Preferencia explicita do criador em 04/11/2026: toda avaliacao

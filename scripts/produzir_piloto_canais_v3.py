@@ -17,6 +17,9 @@ import subprocess
 import sys
 
 from piloto_canais_3x2_v3 import load_manifest, selected, verify_video, ROOT
+from kids_narracao_acolhedora_v1 import (
+    assemble_paced_voice, commit_voice, scene_props, signature as pacing_signature,
+)
 
 OUT = ROOT / "assets" / "gerados" / "piloto-canais-v3"
 MOTION = ROOT / "motion-remotion"
@@ -46,6 +49,15 @@ def read_voice(channel: dict, episode: dict) -> tuple[Path, dict]:
         raise ValueError("Roteiro mudou: cache da narração antiga bloqueado")
     if data.get("voice") != voice or data.get("rate") != rate:
         raise ValueError("Idioma, voz ou velocidade não correspondem ao canal")
+    pacing = episode.get("kids_pacing")
+    if pacing is not None:
+        if (data.get("pacing_sha256") != pacing_signature(pacing)
+                or data.get("pacing_schema") != pacing.get("schema")):
+            raise ValueError("Ritmo e pausas Kids mudaram: renove a voz com -Refazer")
+        if data.get("mp3_sha256") != hashlib.sha256(audio.read_bytes()).hexdigest():
+            raise ValueError("Narracao Kids alterada sem atualizar os tempos/QA")
+    elif data.get("pacing_sha256"):
+        raise ValueError("Cache Kids pertence a roteiro ritmado diferente")
     words = data.get("words", [])
     if not isinstance(words, list) or not words:
         raise ValueError("Voz sem tempos reais das palavras")
@@ -61,7 +73,8 @@ def read_voice(channel: dict, episode: dict) -> tuple[Path, dict]:
     return audio, data
 
 
-async def _synthesize(script: str, voice: str, rate: str) -> tuple[bytes, list[dict]]:
+async def _synthesize(script: str, voice: str, rate: str, *,
+                      minimum_words: int = 10) -> tuple[bytes, list[dict]]:
     import edge_tts
     actor = edge_tts.Communicate(script, voice, rate=rate, boundary="WordBoundary")
     audio = bytearray()
@@ -75,7 +88,7 @@ async def _synthesize(script: str, voice: str, rate: str) -> tuple[bytes, list[d
             if duration > 0:
                 words.append({"start": round(start, 4), "end": round(start + duration, 4),
                               "text": packet.get("text", "")})
-    if len(audio) < 1000 or len(words) < 10:
+    if len(audio) < 1000 or len(words) < minimum_words:
         raise RuntimeError("Edge TTS não retornou narração e alinhamento válidos")
     return bytes(audio), words
 
@@ -91,6 +104,23 @@ def create_voice(channel: dict, episode: dict, *, replace: bool = False) -> dict
     if (folder / "narracao.mp3").exists() and not replace:
         raise ValueError("Cache de voz anterior diverge; especifique --refazer para renovar")
     folder.mkdir(parents=True, exist_ok=True)
+    if channel["id"] == "kids" and episode.get("kids_pacing"):
+        async def short_speech(text: str, selected_voice: str, selected_rate: str):
+            return await _synthesize(text, selected_voice, selected_rate, minimum_words=1)
+        completed = asyncio.run(assemble_paced_voice(
+            episode, voice, rate, folder, synthesizer=short_speech,
+        ))
+        commit_voice(folder, completed)
+        audio, data = read_voice(channel, episode)
+        return {
+            "status": "voz_kids_acolhedora_com_pausas", "voice": voice,
+            "audio": str(audio), "words": len(data["words"]),
+            "segments": len(data["segments"]),
+            "pause_total_s": data["pause_total_s"],
+            "duration_s": completed["seconds"],
+            "target_reached": completed["target_reached"],
+            "review_required": True, "published": False,
+        }
     blob, words = asyncio.run(_synthesize(episode["script"], voice, rate))
     # Write new audio atomically without destroying approved data on failure.
     tmp = folder / "narracao.partial.mp3"
@@ -196,8 +226,12 @@ def prepare_props(channel: dict, episode: dict, *, root: Path = ROOT) -> tuple[d
     if seconds > 59.2:
         raise ValueError("Narração ultrapassa limite interno de 60s; revisar roteiro sem acelerar")
     total_frames = math.ceil((seconds + 0.45) * FPS)
-    scenes = _scenes_with_audio_timings(episode, marker["words"], total_frames)
-    captions = _caption_groups(marker["words"], total_frames)
+    if channel["id"] == "kids" and episode.get("kids_pacing"):
+        scenes, captions, kids_beats = scene_props(episode, marker, total_frames)
+    else:
+        scenes = _scenes_with_audio_timings(episode, marker["words"], total_frames)
+        captions = _caption_groups(marker["words"], total_frames)
+        kids_beats = []
     target = root / "motion-remotion" / "public" / "generated" / "piloto-canais-v3" / channel["id"] / episode["id"]
     target.mkdir(parents=True, exist_ok=True)
     sound = target / "narracao.mp3"
@@ -217,6 +251,7 @@ def prepare_props(channel: dict, episode: dict, *, root: Path = ROOT) -> tuple[d
         "durationFrames": total_frames,
         "scenes": scenes,
         "captions": captions,
+        "kidsBeats": kids_beats,
         "audio": f"generated/piloto-canais-v3/{channel['id']}/{episode['id']}/narracao.mp3",
     }
     props_file = root / "motion-remotion" / f"props-{episode['id']}-v3.json"
@@ -237,6 +272,9 @@ def render(channel: dict, episode: dict, *, replace: bool = False,
         digest = hashlib.sha256(final.read_bytes()).hexdigest()
         if (qa.get("video_sha256") == digest and
                 qa.get("script_sha256") == hash_script(episode["script"]) and
+                qa.get("pacing_sha256") == (
+                    pacing_signature(episode["kids_pacing"]) if episode.get("kids_pacing") else None
+                ) and
                 qa.get("channel") == channel["id"]):
             return {"status": "render_existente_sem_publicacao", "file": str(final)}
         raise ValueError("MP4 existente diverge do roteiro ou assinatura; usar --refazer")
@@ -258,16 +296,31 @@ def render(channel: dict, episode: dict, *, replace: bool = False,
     if status.get("technical_status") != "passed":
         raise ValueError("Render PT-BR nao passou no FFprobe: " + json.dumps(status))
     sha = hashlib.sha256(temp_output.read_bytes()).hexdigest()
+    # Preserve an earlier video version rather than silently overwriting it.
+    if final.is_file():
+        history = folder / "historico-renders"
+        history.mkdir(parents=True, exist_ok=True)
+        old_sha = hashlib.sha256(final.read_bytes()).hexdigest()[:12]
+        old_video = history / ("final-" + old_sha + ".mp4")
+        if not old_video.is_file():
+            shutil.copy2(final, old_video)
+        if qa_file.is_file():
+            old_qa = history / ("qa-" + old_sha + ".json")
+            if not old_qa.is_file():
+                shutil.copy2(qa_file, old_qa)
     temp_output.replace(final)
     qa = {
         "schema": "piloto-canais/render-qa/v3",
         "channel": channel["id"], "locale": "pt-BR",
         "episode_id": episode["id"], "video_sha256": sha,
         "script_sha256": hash_script(episode["script"]),
+        "pacing_sha256": (pacing_signature(episode["kids_pacing"])
+                          if episode.get("kids_pacing") else None),
         "motion": ("original_animated_vectors" if channel["id"] == "kids"
                    else "original_gameplay_capture_required"),
         "render_engine": "AutoEditorVideo/local/remotion",
         "technical": status,
+        "pause_total_s": sum(b["pause_after_s"] for b in episode.get("kids_pacing", {}).get("segments", [])),
         "human_visual_audio_rights_review": "pending",
         "youtube_channel_id_verified": False,
         "upload_approved": False,
