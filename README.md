@@ -9,6 +9,28 @@
 > [`backup/autoeditor-studio-2026-11-01`](../../tree/backup/autoeditor-studio-2026-11-01).
 
 
+## Duas musicas de fundo no canal Kids
+
+As faixas adicionadas pelo criador na raiz do repositorio,
+`Wondertrail _Main Theme_.mp3` e `Wondertrail _Main Theme_2.mp3`,
+estao integradas aos **Shorts Kids** (Emanuelly e os pilotos).
+
+O gerador alterna musica 1 nas Partes 1/3 e musica 2 nas Partes 2/4;
+a estrelinha usa a musica 1, os passarinhos a 2 e as formas a 1.
+O Remotion faz loop, volume de fundo **7,5%**, fade-in e fade-out
+de 1,5s, mantendo a narracao acolhedora em destaque.
+O canal Gamer e os dois canais Otaku nao recebem essas faixas.
+
+A faixa original nao e modificada; apenas copias locais
+sao preparadas em `motion-remotion/public/generated/kids-musicas/`.
+O cache do MP4 Kids e invalidado quando a musica muda, preservando
+versoes anteriores nos historicos. Nenhum upload automatico.
+
+**IMPORTANTE: licenca/direitos das duas faixas ainda nao verificados.**
+A integracao e apenas para render e revisao local. Antes de publicar,
+comprovar direito de uso no YouTube (incluindo monetizacao, se aplicavel).
+Veja `docs/GERAR-SERIE-KIDS-EMANUELLY.md`.
+
 ## Correção de cronologia da série Emanuelly — referência isolada
 
 A versão de continuidade v2 corrige o problema dos quadros **03 e 08**
