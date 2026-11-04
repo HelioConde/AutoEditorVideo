@@ -55,9 +55,9 @@ def test_catalog_covers_current_story_and_future_events_without_duplicates():
         assert len(group) == len(set(group)), label
         assert set(group) <= set(generator.POSES)
     assert catalog.choose("Carinho", "fazendo-carinho") == ["fazendo-carinho"]
-    with pytest.raises(ValueError, match="desconhecido"):
+    with pytest.raises(ValueError, match="desconhecid"):
         catalog.choose("Carinho", "../foto")
-    with pytest.raises(ValueError, match="desconhecido"):
+    with pytest.raises(ValueError, match="desconhecid"):
         catalog.choose("desconhecido")
 
 
