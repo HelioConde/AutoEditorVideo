@@ -1,6 +1,7 @@
 import React from 'react';
 import {KidsBackgroundMusic, KidsMusic} from './kids-background-music';
 import {EmanuellyLayerStage,EmanuellyLayeredScene} from './emanuelly-layer-stage';
+import {FofinhosAmbientEffects,FofinhosAmbientScenePlan} from './fofinhos-ambient-effects';
 import {AbsoluteFill, Audio, Img, interpolate, staticFile,
   useCurrentFrame} from 'remotion';
 
@@ -20,6 +21,8 @@ export type EmanuellyProps = {
   captions:EmanuellyCaption[]; audio:string; referenceSha:string;
   music?:KidsMusic;
   layeredScenes?:EmanuellyLayeredScene[];
+  ambientScenes?:FofinhosAmbientScenePlan[];
+  ambientEnabled?:boolean;
   madeForKids:true;
 };
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
@@ -55,6 +58,8 @@ export const EmanuellyShort:React.FC<EmanuellyProps>=(props)=>{
  const active=frames.find(b=>frame>=b.startFrame&&frame<b.endFrame);
  const layered=props.layeredScenes||[];
  const layeredScene=layered.find(b=>frame>=b.startFrame&&frame<b.endFrame);
+ const ambient=episodeId==='fofinhos-ep01-parte01-canonico' && props.ambientEnabled!==false
+   ?props.ambientScenes?.find(p=>p.index===layeredScene?.index):undefined;
  const idx=active?frames.indexOf(active):-1;
  const prev=idx>0?frames[idx-1]:null;
  const beatFrame=active?frame-active.startFrame:0;
@@ -78,6 +83,8 @@ export const EmanuellyShort:React.FC<EmanuellyProps>=(props)=>{
        <Img src={staticFile(active.image)}
          style={{...imageStyle,opacity:prev?transition:1}}/>
      </>}
+   {layeredScene&&ambient&&
+     <FofinhosAmbientEffects scene={layeredScene} frame={frame} plan={ambient}/>}
    <AbsoluteFill style={{
      background:'linear-gradient(to bottom,rgba(12,28,56,.48) 0%,transparent 19%,transparent 70%,rgba(12,28,56,.43) 100%)',
      pointerEvents:'none'
