@@ -185,7 +185,8 @@ export const PilotShort:React.FC<PilotProps>=(props)=>{
      const duration=scene.endFrame-scene.startFrame;
      const opacity=interpolate(frame,[scene.startFrame,scene.startFrame+5,scene.endFrame-5,scene.endFrame],
          [1,1,1,1],clamp);
-     return <AbsoluteFill key={scene.id} style={{opacity}}>
+     return <Sequence key={scene.id} from={scene.startFrame} durationInFrames={duration} layout="none">
+       <AbsoluteFill style={{opacity}}>
        {kids?<KidsScene id={episodeId} index={index}/>:
         scene.video?
           <OffthreadVideo src={staticFile(scene.video)} volume={0} style={{
@@ -194,7 +195,8 @@ export const PilotShort:React.FC<PilotProps>=(props)=>{
           }}/>:
           <AbsoluteFill style={{background:'#111'}}/>}
        <Headline text={scene.headline} kids={kids}/>
-     </AbsoluteFill>;
+       </AbsoluteFill>
+     </Sequence>;
    })}
    <div style={{
      position:'absolute',bottom:94,right:70,color:kids?'#315f7b':'#f8fafc',
