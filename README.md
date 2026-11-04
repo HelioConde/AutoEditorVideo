@@ -45,7 +45,10 @@ no registro local. Consulte o [guia do Short EN](docs/OTAKU-REFRAME-DID-YOU-KNOW
 50 roteiros e metadados estão cadastrados para novos e nostálgicos
 animes. O motor Remotion usa **zoom suave**, sem flicker dos antigos
 jump cuts; personagens só se movimentam de forma independente quando
-há camadas RGBA seguras.
+há camadas RGBA seguras. Cenas padrão 2.5D sem RGBA individual passam
+no QA e podem ser publicadas com zoom suave, com aviso explícito de
+"somente câmera". Para exigir animação real de personagem e bloquear
+essas cenas, use a opção `-ExigirMovimentoPersonagem`.
 
 **Novo fluxo pedido:** gera um vídeo, valida QA, publica **público
 imediatamente**, tenta enviar a thumbnail vertical depois que o YouTube
