@@ -68,6 +68,36 @@ miniaturas e upload OAuth para YouTube.
   -MaxChamadas 9 -Refazer` depois de preparar as referências.
   NÃO alterar a história original e não publicar por esta ação.
 
+## EMANUELLY — ASSETS PARA ANIMACAO POR CAMADAS
+
+- A personagem NÃO pode ser redesenhada com rosto, cabelo, roupa
+  ou detalhes inventados. Cada pose deve ser gerada com a MESMA imagem
+  de referência visual que o criador forneceu. Esta fonte fica
+  localmente em assets/referencias-privadas/emanuelly-personagem-oficial.png,
+  NUNCA em GitHub público.
+- Comando gerar-poses-emanuelly.ps1 e
+  scripts/gerar_poses_emanuelly_gpt_image_2.py.
+  A ação Gerar usa exclusivamente gpt-image-2 com images/edits,
+  referência em CADA pedido e background=transparent.
+- Gerar 8 poses individuais: em-pe, caminhando, observando,
+  ajoelhada, estendendo-mao, segurando-ovo (sem objeto),
+  preparando-caminha (sem objetos), surpresa.
+  Evitar repetição de poses e folha de personagens no mesmo quadro.
+- Os PNGs devem ter alfa REAL, corpo inteiro, espaço nas bordas,
+  sem cenário, ovo, jardim, quarto, pelúcias ou futuros personagens.
+  O ovo, os cenários e os efeitos serão camadas reutilizáveis separadas.
+- Orçamento de chamadas sempre explícito; -MaxChamadas 0 só consulta
+  cache. Falhas e referências alteradas não sobrescrevem arquivos sem
+  -Refazer, que guarda histórico. SHA do conteúdo e do prompt
+  invalida caches anteriores.
+- A semelhança de Emanuelly continua aguardando revisão HUMANA.
+  Hash válido e alfa transparente não provam identidade facial.
+- Esta biblioteca cria assets, NÃO renderiza animação articulada,
+  NÃO muda narração/música e NÃO envia Shorts para YouTube.
+- Documentação: docs/POSES-EMANUELLY-GPT-IMAGE-2.md.
+  Testes: tests/test_gerar_poses_emanuelly_gpt_image_2.py
+  e tests/test_gerar_poses_emanuelly_powershell.ps1.
+
 ## GERAÇÃO DA SÉRIE KIDS COM FOTO DE REFERÊNCIA
 
 - Comando: gerar-historia-kids.ps1 (Planejar, InstalarReferencia,

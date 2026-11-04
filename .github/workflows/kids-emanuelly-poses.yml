@@ -1,0 +1,46 @@
+name: Kids - Poses Oficiais Emanuelly GPT Image 2
+
+on:
+  pull_request:
+    paths:
+      - "scripts/gerar_poses_emanuelly_gpt_image_2.py"
+      - "gerar-poses-emanuelly.ps1"
+      - "tests/test_gerar_poses_emanuelly_gpt_image_2.py"
+      - "tests/test_gerar_poses_emanuelly_powershell.ps1"
+      - ".github/workflows/kids-emanuelly-poses.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/gerar_poses_emanuelly_gpt_image_2.py"
+      - "gerar-poses-emanuelly.ps1"
+      - "tests/test_gerar_poses_emanuelly_gpt_image_2.py"
+      - "tests/test_gerar_poses_emanuelly_powershell.ps1"
+      - ".github/workflows/kids-emanuelly-poses.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  reference-and-alpha:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install isolated test dependencies
+        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
+      - name: Eight different poses with real transparency, cache and no external network
+        run: python -m pytest -q tests/test_gerar_poses_emanuelly_gpt_image_2.py
+  windows-powershell:
+    runs-on: windows-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify PowerShell launcher without image calls or uploads
+        shell: powershell
+        run: .\tests\test_gerar_poses_emanuelly_powershell.ps1
