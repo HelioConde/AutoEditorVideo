@@ -221,6 +221,25 @@ def organize(*, root: Path = ROOT, output: Path | None = None, method: str = "co
     }
 
 
+
+def refresh_library_after_render(root: Path = ROOT) -> dict:
+    """Sync only after the user has initialized the library via Organizar.
+
+    This is post-render best-effort indexing, not a rendering QA, publishing
+    action or reason to regenerate video. The original file remains untouched.
+    """
+    root = Path(root).resolve()
+    target = root / "assets" / "gerados" / "biblioteca-videos"
+    if not target.is_dir():
+        return {"status": "not_initialized", "copied": 0}
+    result = organize(root=root, preview=False)
+    return {
+        "status": "updated",
+        "videos": len(result["files"]),
+        "copied": sum(row["status"] == "copiado" for row in result["files"]),
+        "unknown": len(result["unclassified"]),
+    }
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Organizar MP4 por Kids, Gamer, Otaku Multicena e Reframe")
     p.add_argument("--acao", choices=("prever", "organizar"), default="prever")
