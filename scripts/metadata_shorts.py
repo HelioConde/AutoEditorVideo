@@ -11,6 +11,8 @@ MANIFEST = ROOT / "conteudos" / "testes-animados-5.json"
 RECAPS_MANIFEST = ROOT / "conteudos" / "death-note-recaps-60s.json"
 FORMATS_MANIFEST = ROOT / "conteudos" / "death-note-formatos-60s.json"
 JUJUTSU_MANIFEST = ROOT / "conteudos" / "jujutsu-kaisen-recaps-60s.json"
+GRADE_50_MANIFESTS = (ROOT / "conteudos" / "otaku-multicena-grade-50-a.json",
+                      ROOT / "conteudos" / "otaku-multicena-grade-50-b.json")
 
 
 def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dict[str, dict]:
@@ -21,7 +23,7 @@ def load_episodes(path: Path = MANIFEST, *, include_recaps: bool = False) -> dic
     """
     sources = [path]
     if include_recaps and path == MANIFEST:
-        sources.extend(extra for extra in (RECAPS_MANIFEST, FORMATS_MANIFEST, JUJUTSU_MANIFEST)
+        sources.extend(extra for extra in (RECAPS_MANIFEST, FORMATS_MANIFEST, JUJUTSU_MANIFEST, *GRADE_50_MANIFESTS)
                        if extra.is_file())
     items = []
     for source in sources:
