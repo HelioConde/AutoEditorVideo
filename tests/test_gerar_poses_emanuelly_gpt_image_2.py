@@ -12,6 +12,7 @@ from PIL import Image, ImageDraw
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import gerar_poses_emanuelly_gpt_image_2 as poses
+import kids_emanuelly_catalogo_poses_v2 as catalog
 
 
 def input_file(tmp_path, rgb=(71, 42, 106)):
@@ -40,9 +41,10 @@ def ready(tmp_path):
 
 
 def test_eight_distinct_one_pose_per_image_and_no_unwanted_character():
-    assert len(poses.POSES) == 8
+    assert len(catalog.ESSENCIAIS) == 8
+    assert len(poses.POSES) == 54
     assert poses.MODEL == "gpt-image-2"
-    prompts = [poses.prompt(p) for p in poses.POSES]
+    prompts = [poses.prompt(p) for p in catalog.ESSENCIAIS]
     assert len(set(prompts)) == 8
     for text in prompts:
         assert "SAME CHILD CHARACTER" in text
@@ -88,7 +90,7 @@ def test_all_eight_call_gpt_image_2_with_the_exact_same_source_and_alpha(tmp_pat
     def edit(source, prompt, model, key, *, transparent):
         calls.append((source, prompt, model, transparent, key))
         return cutout()
-    result = poses.generate(list(poses.POSES), root=tmp_path, budget=8,
+    result = poses.generate(list(catalog.ESSENCIAIS), root=tmp_path, budget=8,
                             editor=edit, key_provider=lambda: "test")
     assert result["geradas"] == 8 and result["publicadas"] == 0
     assert len(calls) == 8
@@ -96,7 +98,7 @@ def test_all_eight_call_gpt_image_2_with_the_exact_same_source_and_alpha(tmp_pat
     assert {x[2] for x in calls} == {"gpt-image-2"}
     assert all(x[3] is True for x in calls)
     assert len({x[1] for x in calls}) == 8
-    for slug in poses.POSES:
+    for slug in catalog.ESSENCIAIS:
         assert poses.valid(slug, tmp_path)
         img, meta = poses.paths(slug, tmp_path)
         saved = json.loads(meta.read_text())
@@ -106,8 +108,8 @@ def test_all_eight_call_gpt_image_2_with_the_exact_same_source_and_alpha(tmp_pat
         with Image.open(img) as im:
             assert im.mode == "RGBA" and im.size == (1024, 1536)
             assert im.getchannel("A").getextrema() == (0, 255)
-    assert poses.plan(list(poses.POSES), root=tmp_path)["chamadas_necessarias"] == 0
-    again = poses.generate(list(poses.POSES), root=tmp_path, budget=0,
+    assert poses.plan(list(catalog.ESSENCIAIS), root=tmp_path)["chamadas_necessarias"] == 0
+    again = poses.generate(list(catalog.ESSENCIAIS), root=tmp_path, budget=0,
                            editor=lambda *args, **kwargs: pytest.fail("cached"),
                            key_provider=lambda: pytest.fail("must not read secrets"))
     assert again["geradas"] == 0
@@ -235,11 +237,11 @@ def test_succeeded_em_pe_under_previous_prompt_still_valid_and_budget_7(tmp_path
     )
     meta_path.write_text(json.dumps(saved), encoding="utf8")
     assert poses.valid("em-pe", tmp_path)
-    summary = poses.plan(list(poses.POSES), root=tmp_path)
+    summary = poses.plan(list(catalog.ESSENCIAIS), root=tmp_path)
     assert summary["chamadas_necessarias"] == 7
     calls = []
     result = poses.generate(
-        list(poses.POSES), root=tmp_path, budget=7,
+        list(catalog.ESSENCIAIS), root=tmp_path, budget=7,
         editor=lambda *_a, **_kw: (calls.append(1), cutout())[1],
         key_provider=lambda: "test"
     )
