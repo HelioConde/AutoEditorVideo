@@ -99,8 +99,8 @@ def validate(data: dict) -> None:
                 segments = pacing.get("segments")
                 if not isinstance(segments, list) or not 5 <= len(segments) <= 30:
                     raise ValueError("Narração acolhedora precisa de frases separadas")
-                all_ids = [segment.get("scene") for segment in segments]
-                if all_ids != sorted(all_ids) or set(all_ids) != {
+                scene_ids = [segment.get("scene") for segment in segments]
+                if scene_ids != sorted(scene_ids) or set(scene_ids) != {
                     "01", "02", "03", "04", "05"
                 }:
                     raise ValueError("Segmentos acolhedores fora de ordem ou sem cenas")
