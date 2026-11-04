@@ -14,7 +14,8 @@ import subprocess
 import sys
 import unicodedata
 
-from otaku_growth_v3 import DEFAULT_CATALOGS, audit_episode, read_catalogs, WINDOWS_HOURS
+from otaku_growth_v3 import audit_episode, WINDOWS_HOURS
+from metadata_shorts import load_episodes
 
 ROOT = Path(__file__).resolve().parents[1]
 PROFILES = ("ultrassutil", "equilibrado", "vivo")
@@ -200,11 +201,13 @@ def main(argv: list[str] | None = None) -> int:
                     help="Marcar TikTok bloqueado por remocao de audio ja informada")
     ap.add_argument("--saida", type=Path, help="Salvar proposta JSON local")
     args = ap.parse_args(argv)
-    episodes = read_catalogs(list(DEFAULT_CATALOGS))
+    episodes = list(load_episodes(include_recaps=True).values())
     selected = {ep["id"]: ep for ep in episodes if ep.get("id") in args.id}
     missing = set(args.id) - set(selected)
     if missing:
         ap.error("IDs nao encontrados: " + ", ".join(sorted(missing)))
+    if args.tiktok_som_removido and len(set(args.id)) != 1:
+        ap.error("--tiktok-som-removido exige um unico ID; cada video tem diagnostico proprio")
     results = [
         make_plan(selected[ep_id], profile=args.perfil, verify_mp4=args.verificar_mp4,
                   tiktok_audio_removed=args.tiktok_som_removido)
