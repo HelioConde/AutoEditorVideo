@@ -163,6 +163,7 @@ def test_still_image_pipeline_untouched():
     assert "EmanuellyLayerStage" in text
     assert "active&&" in text
     ps=(ROOT/"animar-emanuelly.ps1").read_text("utf8")
-    assert "Nenhuma IA" in ps
+    assert "Modo Catalogo e Planejar nao geram imagens" in ps
+    assert "GerarImagens" in ps
     assert "Start-Process" in ps
     assert "upload" in ps.lower()
