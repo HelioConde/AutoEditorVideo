@@ -173,7 +173,7 @@ def inspect_episode(channel: dict, ep: dict, root: Path = ROOT) -> dict:
             path = root / scene["required_asset"]
             clips.append({"scene": scene["id"], "found": path.is_file(), "path": str(path)})
     mp4 = base / "final.mp4"
-    voice = base / "narracao.wav"
+    voice = base / "narracao.mp3"  # Mesmo formato produzido por produzir_piloto_canais_v3.py
     review = base / "revisao-manual.json"
     return {
         "episode": ep["id"],
