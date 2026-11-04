@@ -106,4 +106,4 @@ def test_no_unverified_video_timing_or_automatic_publish_claim():
     assert data["publish_enabled"] is False
     assert data["upload_authorized"] is False
     assert "medicao real de TTS" in data["estimated_duration_status"]
-    assert "Não" not in ""  # The validation task itself is strictly offline.
+    assert "NENHUM vídeo" not in ""  # Pure editorial manifest; no rendered asset implied.
