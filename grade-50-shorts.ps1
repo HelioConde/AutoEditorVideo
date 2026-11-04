@@ -15,6 +15,7 @@ param(
     [switch]$ConfirmarCotaImagem,
     [switch]$ConfirmarPublicacao,
     [switch]$ExigirMovimentoPersonagem,
+    [switch]$ContinuarAposFalha,
     [switch]$Refazer
 )
 $ErrorActionPreference='Stop'
@@ -47,6 +48,7 @@ $argsList=@(
 if($ConfirmarCotaImagem){$argsList+='--confirmar-cota-imagem'}
 if($ConfirmarPublicacao){$argsList+='--confirmar-publicacao'}
 if($ExigirMovimentoPersonagem){$argsList+='--exigir-movimento-personagem'}
+if($ContinuarAposFalha){$argsList+='--continuar-apos-falha'}
 if($Refazer){$argsList+='--refazer'}
 & $py @argsList
 if($LASTEXITCODE -ne 0){
