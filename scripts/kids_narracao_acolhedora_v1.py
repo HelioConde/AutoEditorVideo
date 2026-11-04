@@ -97,7 +97,7 @@ async def _fetch_segment(
 
 
 # Reserve enough room for MP3 encoder delay and the 0.45-second video tail.
-ADAPTIVE_MAX_SECONDS = 58.4
+ADAPTIVE_MAX_SECONDS = 58.6
 
 
 def plan_child_friendly_pauses(
