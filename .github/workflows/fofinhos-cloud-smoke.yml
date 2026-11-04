@@ -1,0 +1,65 @@
+name: Fofinhos - cloud render and visual QA (synthetic)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/fofinhos-cloud-smoke.yml'
+      - 'motion-remotion/src/cloud-smoke-entry.tsx'
+      - 'scripts/cloud_smoke_qa.py'
+      - 'tests/test_cloud_smoke_qa.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fofinhos-cloud-smoke.yml'
+      - 'motion-remotion/src/cloud-smoke-entry.tsx'
+      - 'scripts/cloud_smoke_qa.py'
+      - 'tests/test_cloud_smoke_qa.py'
+  workflow_dispatch:
+
+# No external provider, no credentials, no real Kids art, no YouTube upload.
+permissions:
+  contents: read
+
+jobs:
+  render-synthetic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install FFmpeg and Pillow
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install 'Pillow>=10,<13' 'pytest>=8,<10'
+      - name: Run cloud probe and visual QA offline unit tests
+        run: python -m pytest -q tests/test_cloud_credentials_probe.py tests/test_cloud_smoke_qa.py
+      - name: Install Remotion from lockfile
+        working-directory: motion-remotion
+        run: npm ci --no-audit --no-fund
+      - name: TypeScript validation
+        working-directory: motion-remotion
+        run: npm run typecheck
+      - name: Render synthetic animated clip without assets or AI
+        working-directory: motion-remotion
+        run: npx remotion render src/cloud-smoke-entry.tsx FofinhosCloudSmoke ../cloud-smoke-out/fofinhos-cloud-smoke.mp4 --codec h264 --concurrency 2 --log error
+      - name: Validate codec, dimensions, duration and visible motion
+        run: python scripts/cloud_smoke_qa.py cloud-smoke-out/fofinhos-cloud-smoke.mp4
+      - name: Upload only publicly safe synthetic demo and QA
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fofinhos-cloud-smoke-synthetic
+          path: |
+            cloud-smoke-out/fofinhos-cloud-smoke.mp4
+            cloud-smoke-out/cloud-smoke-qa.json
+            cloud-smoke-out/cloud-smoke-frame-start.png
+            cloud-smoke-out/cloud-smoke-frame-end.png
+          retention-days: 3
