@@ -160,3 +160,64 @@ def test_scripts_keep_legacy_paths_untouched_and_no_image_api():
     assert "GuiaFlores" in launcher and "Renderizar" in launcher
     old = (ROOT / "gerar-historia-kids.ps1").read_text(encoding="utf-8")
     assert "fofinhos-ep01.ps1" in old
+
+
+def test_ambient_profiles_match_approved_fifteen_scene_story():
+    """Animated life must reinforce the plot rather than distract from the egg."""
+    actual = production.ambient_profiles()
+    story = approved.read_canon()["scenes"]
+    assert len(actual) == len(story) == 15
+    assert [x["index"] for x in actual] == list(range(1, 16))
+    # Clouds, butterflies and flower petals only belong to the introduction.
+    assert actual[0]["clouds"] == 2
+    assert actual[0]["butterflies"] == 2
+    assert actual[1]["butterflies"] == 2
+    assert actual[2]["butterflies"] == 1
+    for row in actual[3:9]:
+        assert row["clouds"] == 0
+        assert row["butterflies"] == 0
+        assert row["petals"] == 0
+        assert row["pollen"] == 0
+    # Bedroom: warm dust by day, small motes at night, no garden fauna.
+    for row in actual[10:]:
+        assert all(row[key] == 0 for key in
+                   ("clouds", "butterflies", "petals", "pollen"))
+    assert actual[10]["motes"] > 0
+    assert actual[11]["motes"] > 0
+    assert actual[13]["eggSparkles"] > 0
+    assert actual[14]["butterflies"] == 0
+    for scene, row in zip(story, actual):
+        if scene["egg_location"] == "ausente":
+            assert row["eggSparkles"] == 0
+        assert max(row[k] for k in
+                   ("clouds", "butterflies", "petals", "pollen",
+                    "eggSparkles", "motes")) <= 8
+
+
+def test_ambient_only_affects_canonical_preview_and_uses_no_extra_ai():
+    renderer = (ROOT / "motion-remotion/src/emanuelly-short.tsx").read_text(
+        encoding="utf-8")
+    overlay = (ROOT / "motion-remotion/src/fofinhos-ambient-effects.tsx").read_text(
+        encoding="utf-8")
+    script = (ROOT / "scripts/fofinhos_ep01_render.py").read_text(
+        encoding="utf-8")
+    assert "episodeId==='fofinhos-ep01-parte01-canonico'" in renderer
+    assert "props.ambientScenes" in renderer
+    assert "<FofinhosAmbientEffects" in renderer
+    assert "ambientScenes" in script and "ambientEnabled" in script
+    assert "ambient_version" in script
+    assert "ambient_scenes" in script
+    assert "ambient_human_review" in script
+    assert "request_edit" not in overlay
+    assert "Math.random" not in overlay.replace("Sem Math.random()", "")
+    assert "fetch(" not in overlay
+    assert "Clouds" in overlay and "Butterflies" in overlay
+    assert "MAX_SECONDS = 600" in script
+    scene = approved.read_canon()["scenes"][8]
+    positions = {"angles": {
+        "jardim-03": {"x": 0.7, "y": 0.7},
+        "jardim-04": {"x": 0.8, "y": 0.7},
+    }}
+    plan = production.layout(scene, positions)
+    assert plan["magic"] is False
+    assert plan["eggLocation"] == "entre_flores"
