@@ -15,6 +15,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+from kids_narracao_acolhedora import STYLE as KIDS_ACOLHEDORA, validate_timeline
 MANIFEST = ROOT / "conteudos" / "piloto-games-kids-3x2-v3.json"
 OUTPUT = ROOT / "assets" / "gerados" / "piloto-canais-v3" / "preparacao"
 VALID_TYPES = ("curiosity", "contradiction", "decision", "mystery", "consequence")
@@ -92,7 +93,14 @@ def validate(data: dict) -> None:
             scenes = ep.get("scenes")
             if not isinstance(scenes, list) or len(scenes) != 5:
                 raise ValueError("Storyboard deve ter cinco cenas: " + ep_id)
-            expected_duration = 28 if children else 38
+            expected_duration = (
+                52 if children and ep.get("narration_style") == KIDS_ACOLHEDORA
+                else 28 if children else 38
+            )
+            if ep.get("narration_style"):
+                if not children or ep.get("narration_style") != KIDS_ACOLHEDORA:
+                    raise ValueError("Estilo de narracao nao permitido para este canal")
+                validate_timeline(ep)
             if ep.get("planned_duration_seconds") != expected_duration:
                 raise ValueError("Duracao planejada invalida: " + ep_id)
             if children:
