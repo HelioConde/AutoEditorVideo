@@ -119,7 +119,7 @@ def validate(data: dict) -> None:
                 if children:
                     if scene["asset_source"] != "original_procedural_vector" or scene["required_asset"] is not None:
                         raise ValueError("Kids requer composicao original, nao gameplay: " + ep_id)
-                    if scene["camera_motion"] != "fixa":
+                    if scene["camera_motion"].casefold().strip() not in ("fixa", "câmera fixa", "camera fixa"):
                         raise ValueError("Camera Kids deve ser estavel e confortavel: " + ep_id)
                 else:
                     if scene["asset_source"] != "captured_real_gameplay":
