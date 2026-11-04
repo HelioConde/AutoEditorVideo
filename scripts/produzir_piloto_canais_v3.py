@@ -117,6 +117,7 @@ def create_voice(channel: dict, episode: dict, *, replace: bool = False) -> dict
             "audio": str(audio), "words": len(data["words"]),
             "segments": len(data["segments"]),
             "pause_total_s": data["pause_total_s"],
+            "pause_adaptation": data.get("pause_adaptation"),
             "duration_s": completed["seconds"],
             "target_reached": completed["target_reached"],
             "review_required": True, "published": False,

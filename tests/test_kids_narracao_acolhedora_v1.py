@@ -223,3 +223,78 @@ def test_no_youtube_upload_and_no_other_channel_voice_changes():
     assert "youtube.upload" not in source
     assert producer.BR_VOICES["games"] == ("pt-BR-AntonioNeural", "+2%")
     assert producer.BR_VOICES["kids"] == ("pt-BR-FranciscaNeural", "-15%")
+
+
+def test_62_2_second_report_is_fixed_without_cutting_questions():
+    """Regressão: relato real = 49.1s de fala + 13.1s de pausas."""
+    _, episode = load_star()
+    beats = episode["kids_pacing"]["segments"]
+    speech = 49.1
+    pauses, report = pacing.plan_child_friendly_pauses(beats, speech)
+    assert report["natural_duration_seconds"] == pytest.approx(62.2, abs=.01)
+    assert speech + sum(pauses) <= pacing.ADAPTIVE_MAX_SECONDS + .01
+    assert report["all_questions_preserved"] is True
+    assert 3.5 <= report["saved_seconds"] <= 4.0
+    assert 8.9 <= report["applied_pause_seconds"] < 10.0
+    for original, effective in zip(beats, pauses):
+        if original["cue"].endswith("-question"):
+            assert effective == pytest.approx(1.8)
+        else:
+            assert 0.35 <= effective <= original["pause_after_s"]
+
+
+def test_real_62_second_chunks_compose_and_keep_captions_in_speech(tmp_path, monkeypatch):
+    """Exercises actual PCM silence, word offsets, and synced visual beats."""
+    _, episode = load_star()
+
+    async def cache_only(text, voice, rate, *, segment_dir, index, synthesizer):
+        return segment_dir / f"{index:02d}.mp3", [
+            {"start": .25, "end": .5, "text": "olha"},
+            {"start": .6, "end": .9, "text": "aqui"},
+        ]
+
+    monkeypatch.setattr(pacing, "_fetch_segment", cache_only)
+    def fake_decode(path):
+        # 12 x 3.8s + 1 x 3.5s = 49.1 seconds of real speech.
+        sec = 3.5 if path.stem == "13" else 3.8
+        return b"\0\0" * round(pacing.RATE * sec)
+    monkeypatch.setattr(pacing, "_decode_pcm", fake_decode)
+
+    capture = {}
+    def fake_encode(pcm, wav_path, mp3_path):
+        capture["seconds"] = len(pcm) / (pacing.RATE * 2)
+        mp3_path.write_bytes(b"MP3 (fake)" * 200)
+
+    async def should_not_call(*args):
+        raise AssertionError("Do not re-synthesize cached speech")
+
+    result = asyncio.run(pacing.assemble_paced_voice(
+        episode, "pt-BR-FranciscaNeural", "-15%", tmp_path,
+        synthesizer=should_not_call, encode=fake_encode,
+        probe=lambda _path: capture["seconds"],
+    ))
+    marker = result["marker"]
+    assert 58 <= result["seconds"] <= 58.6
+    assert marker["pause_adaptation"]["natural_duration_seconds"] == pytest.approx(62.2)
+    assert marker["pause_total_s"] < 10
+    assert marker["pause_adaptation"]["all_questions_preserved"]
+    for item in marker["segments"]:
+        if item["cue"].endswith("-question"):
+            assert item["pause_after_s"] == 1.8
+        assert item["end_s"] - item["speech_end_s"] == pytest.approx(
+            item["pause_after_s"], abs=.001
+        )
+    scenes, captions, beats = pacing.scene_props(
+        episode, marker, round((result["seconds"] + .45) * pacing.FPS)
+    )
+    assert len(scenes) == 5 and len(beats) == 13
+    assert all(a["endFrame"] == b["startFrame"] for a, b in zip(scenes, scenes[1:]))
+    assert beats[7]["cue"] == "blue-reveal"
+    assert captions[-1]["endFrame"] < scenes[-1]["endFrame"]
+
+
+def test_adaptive_pause_planning_fails_if_speech_itself_too_long():
+    _, episode = load_star()
+    beats = episode["kids_pacing"]["segments"]
+    with pytest.raises(ValueError, match="reduzir cerca de"):
+        pacing.plan_child_friendly_pauses(beats, 53.0)

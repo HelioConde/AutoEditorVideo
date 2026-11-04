@@ -6,7 +6,8 @@ Trocar o ritmo excessivamente acelerado (cerca de 25 segundos) por uma história
 
 Neste piloto, somente kids-001-estrela-azul muda:
 - Voz pt-BR-FranciscaNeural (-15%), com 13 frases individuais;
-- 13,1 segundos de pausas explícitas PCM, não apenas reticências;
+- 13,1 segundos de pausas solicitadas antes da geração, não apenas reticências;
+- Pausas secundárias ajustadas automaticamente se a duração real das falas ultrapassar o limite; as perguntas preservam os 1,8 segundo de resposta;
 - Esperas de 1,8 segundo após cada pergunta sobre casinhas;
 - Final afetuoso: "Obrigada por ajudar a estrelinha azul a encontrar sua casinha!";
 - Duração-alvo de 45–55 segundos, com bloqueio acima de 59,2 segundos;
@@ -21,10 +22,11 @@ O manifesto conteudos/piloto-games-kids-3x2-v3.json tem o campo kids_pacing: tex
 O módulo scripts/kids_narracao_acolhedora_v1.py:
 1. Gera cada frase no Edge TTS e cacheia por hash de texto/voz/taxa.
 2. Usa FFmpeg para decodificar os trechos de MP3 em PCM mono 48kHz.
-3. Adiciona silêncio real e exporta narração.mp3, verificada com FFprobe.
-4. Preserva marcações de tempo de cada palavra, 13 estados visuais, legendas sem texto durante pausas e divisão de cinco cenas.
-5. Guarda versões anteriores de narração e vídeo em historico-voz e historico-renders.
-6. Interrompe se a voz não for gerada ou se ultrapassar 59,2s; nunca inventa áudio ou acelera a fala automaticamente.
+3. Mede o tempo real da fala e calcula as pausas efetivas. Se a soma original ficar longa demais (ex.: **62,2 s = 49,1 s de fala + 13,1 s de pausas**), reduz somente pausas secundárias e mantém **1,8 s** nas perguntas. Para esse exemplo, a estimativa é cerca de **58,5 s**. Não acelera a voz nem elimina perguntas. Se nem as pausas mínimas couberem, bloqueia e informa quantos segundos de roteiro precisam ser cortados.
+4. Adiciona silêncio PCM real e exporta narração.mp3, verificada com FFprobe.
+5. Preserva marcações de tempo de cada palavra, 13 estados visuais, legendas sem texto durante pausas e divisão de cinco cenas. Registra `pause_adaptation` com pausas originais, efetivas e tempo economizado.
+6. Guarda versões anteriores de narração e vídeo em historico-voz e historico-renders.
+7. Interrompe se a voz não for gerada ou se ultrapassar 59,2s; nunca inventa áudio ou acelera a fala automaticamente.
 
 A animação Remotion mantém movimentos leves durante as pausas e mostra as casinhas no momento certo. Não há animações piscantes, sustos, CTA de comentários/inscrições, nem upload embutido.
 
