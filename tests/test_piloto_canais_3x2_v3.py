@@ -72,7 +72,10 @@ def test_games_capture_files_must_be_real_and_no_fake_results(tmp_path):
 
 def test_child_engagement_is_strictly_blocked():
     data = pilot.load_manifest()
-    data["channels"][1]["episodes"][0]["script"] += " Comente a resposta!"
+    ep = data["channels"][1]["episodes"][0]
+    ep["narration_beats"][-1] += " Comente a resposta!"
+    ep["scenes"][-1]["narration"] = ep["narration_beats"][-1]
+    ep["script"] = " ".join(ep["narration_beats"])
     with pytest.raises(ValueError, match="Kids nao deve pedir"):
         pilot.validate(data)
 
