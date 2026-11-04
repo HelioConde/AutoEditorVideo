@@ -628,15 +628,17 @@ def upload(args):
                     previous.pop("thumbnail_error",None)
                     save_state(previous,historical_state)
                     print("[CAPA OK] Miniatura vertical 9:16 anexada ao Short.")
-                except HttpError as exc:
-                    code=getattr(exc.resp,"status","?")
-                    previous["thumbnail_status"]=f"error_http_{code}"
+                except (HttpError,OSError,RuntimeError,ValueError) as exc:
+                    code=getattr(getattr(exc,"resp",None),"status",None)
+                    previous["thumbnail_status"]=(
+                        f"error_http_{code}" if code else "error_thumbnail"
+                    )
                     previous["thumbnail_file"]=str(thumb.resolve())
                     previous["thumbnail_error"]=str(exc)[:350]
                     save_state(previous,historical_state)
-                    print(f"[CAPA PENDENTE] YouTube recusou miniatura (HTTP {code}). "
-                          "Verifique elegibilidade do canal ou anexe pelo Studio. "
-                          "Video ja enviado; NAO reenvie o MP4.")
+                    print(f"[CAPA PENDENTE] Thumbnail falhou ({type(exc).__name__}"
+                          f"{' HTTP '+str(code) if code else ''}). "
+                          "Capa salva para Studio; MP4 JA ENVIADO, NAO reenvie.")
             else:
                 previous["thumbnail_status"]="pending_processing" if status=="pending" else "pending_manual"
                 previous["thumbnail_file"]=str(thumb.resolve())
