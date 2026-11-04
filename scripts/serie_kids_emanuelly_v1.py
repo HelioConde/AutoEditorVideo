@@ -439,10 +439,22 @@ def render(part: dict, *, model: str = "gpt-image-1.5",
         if not qa_file.is_file():
             raise ValueError("MP4 existente sem QA: usar -Refazer")
         qa = json.loads(qa_file.read_text(encoding="utf-8"))
+        # A new image or voice invalidates a cached MP4 even if the script
+        # and source photo are unchanged. Never silently reuse stale footage.
+        image_hashes = [
+            sha(frame_paths(part, b, root=root)[0].read_bytes())
+            for b in part["segments"]
+            if frame_paths(part, b, root=root)[0].is_file()
+        ]
+        current_voice = output_for(part, root) / "narracao.mp3"
+        voice_hash = sha(current_voice.read_bytes()) if current_voice.is_file() else None
         if (qa.get("video_sha256") == sha(video.read_bytes())
                 and qa.get("reference_sha256") == ref_digest
                 and qa.get("script_sha256") == sha(part["narration"].encode("utf-8"))
-                and qa.get("model") == model):
+                and qa.get("model") == model
+                and qa.get("image_sha256") == image_hashes
+                and qa.get("voice_sha256") == voice_hash
+                and len(image_hashes) == len(part["segments"])):
             return {"status": "render_em_cache", "mp4": str(video), "uploaded": False}
         raise ValueError("MP4 pertence a outro roteiro ou referencia: usar -Refazer")
     props, path = build_props(part, model=model, reference=reference, root=root)
@@ -479,6 +491,7 @@ def render(part: dict, *, model: str = "gpt-image-1.5",
         "episode_id": part["id"], "channel": "Kids", "language": "pt-BR",
         "video_sha256": sha(video.read_bytes()),
         "script_sha256": sha(part["narration"].encode("utf-8")),
+        "voice_sha256": sha((output_for(part, root) / "narracao.mp3").read_bytes()),
         "reference_sha256": ref_digest, "model": model,
         "image_sha256": [
             sha(frame_paths(part, b, root=root)[0].read_bytes()) for b in part["segments"]
@@ -575,7 +588,7 @@ def main(argv: list[str] | None = None) -> int:
             if args.acao in ("renderizar", "testar"):
                 rows.append({"part": part["part"], "render": render(
                     part, model=args.modelo,
-                    regenerate=args.refazer if args.acao == "renderizar" else False,
+                    regenerate=args.refazer,
                 )})
         result = {"status": "local_only", "parts": rows, "uploaded": False}
     print(json.dumps(result, ensure_ascii=False, indent=2))
