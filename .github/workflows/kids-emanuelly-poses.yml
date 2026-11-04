@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "scripts/gerar_poses_emanuelly_gpt_image_2.py"
+      - "scripts/kids_poses_enquadramento_v1.py"
       - "gerar-poses-emanuelly.ps1"
       - "tests/test_gerar_poses_emanuelly_gpt_image_2.py"
       - "tests/test_gerar_poses_emanuelly_powershell.ps1"
@@ -12,6 +13,7 @@ on:
     branches: [main]
     paths:
       - "scripts/gerar_poses_emanuelly_gpt_image_2.py"
+      - "scripts/kids_poses_enquadramento_v1.py"
       - "gerar-poses-emanuelly.ps1"
       - "tests/test_gerar_poses_emanuelly_gpt_image_2.py"
       - "tests/test_gerar_poses_emanuelly_powershell.ps1"

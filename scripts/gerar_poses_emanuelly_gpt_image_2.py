@@ -15,6 +15,8 @@ from pathlib import Path
 import shutil
 import sys
 
+from kids_poses_enquadramento_v1 import fit_transparent_pose
+
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = "gpt-image-2"
 SCHEMA = "kids/emanuelly/identity-poses/v1"
@@ -137,9 +139,26 @@ def prompt(pose: str) -> str:
         "girl, contact sheet, panels, labels, lettering or logos. "
         "NO future characters: Fofinho, Fofinha Rainbow, Fofinha Pink, Raposo "
         "or Hedgehog. Keep the exact same character scale as other pose files. "
+        "Keep the ENTIRE silhouette within the center 80 percent of the canvas, "
+        "at least 12 percent free transparent space on LEFT and RIGHT, and at "
+        "least 9 percent free transparent space above the hair and below the feet. "
+        "Do not place even hands, shoes, hair, bows or accessories on image edges. "
+        "NO zoomed-in character, NO clipped feet or fingers. "
         "A distinct believable body action, five fingers per hand, natural "
         "arms and anatomy, no cropped limbs, no excess fingers."
     )
+
+
+# Previously generated 'em-pe' poses remain valid under their original
+# identity and image hashes; updating framing instructions must not force
+# wasting a new paid request for an already successful image.
+MARGIN_PROMPT = (
+    "Keep the ENTIRE silhouette within the center 80 percent of the canvas, "
+    "at least 12 percent free transparent space on LEFT and RIGHT, and at "
+    "least 9 percent free transparent space above the hair and below the feet. "
+    "Do not place even hands, shoes, hair, bows or accessories on image edges. "
+    "NO zoomed-in character, NO clipped feet or fingers. "
+)
 
 
 def paths(pose: str, root: Path = ROOT) -> tuple[Path, Path]:
@@ -154,6 +173,12 @@ def expected(ref_sha: str, pose: str) -> str:
                    prompt(pose)).encode("utf-8"))
 
 
+def expected_before_margin_fix(ref_sha: str, pose: str) -> str:
+    earlier = prompt(pose).replace(MARGIN_PROMPT, "")
+    return digest((SCHEMA + "\n" + MODEL + "\n" + ref_sha + "\n"
+                   + earlier).encode("utf-8"))
+
+
 def valid(pose: str, root: Path = ROOT) -> bool:
     art, manifest = paths(pose, root)
     if not art.is_file() or not manifest.is_file() or art.is_symlink():
@@ -165,7 +190,9 @@ def valid(pose: str, root: Path = ROOT) -> bool:
             details.get("schema") == SCHEMA and details.get("model") == MODEL
             and details.get("pose") == pose
             and details.get("reference_sha256") == ref_sha
-            and details.get("signature") == expected(ref_sha, pose)
+            and details.get("signature") in (
+                expected(ref_sha, pose), expected_before_margin_fix(ref_sha, pose)
+            )
             and details.get("image_sha256") == digest(art.read_bytes())
             and details.get("qa", {}).get("transparent_fraction", 0) >= 0.08
         ):
@@ -184,17 +211,37 @@ def valid(pose: str, root: Path = ROOT) -> bool:
 def plan(poses: list[str], *, root: Path = ROOT) -> dict:
     ref = private_ref(root)
     ref_exists = ref.is_file()
-    rows = [{
-        "pose": slug, "descricao": POSES[slug][1],
-        "status": "em_cache" if valid(slug, root) else (
-            "desatualizada" if paths(slug, root)[0].exists() else "pendente"),
-    } for slug in poses]
+    ref_sha = image_check(ref) if ref_exists else None
+    rows = []
+    for slug in poses:
+        finished = valid(slug, root)
+        recoverable = (
+            not finished and ref_sha is not None and raw_valid(slug, ref_sha, root)
+        )
+        png, _meta = paths(slug, root)
+        raw, _raw_meta = raw_paths(slug, root)
+        if finished:
+            status = "em_cache"
+        elif recoverable:
+            status = "bruto_recuperavel_sem_ia"
+        elif png.exists() or raw.exists():
+            status = "desatualizada"
+        else:
+            status = "pendente"
+        rows.append({
+            "pose": slug, "descricao": POSES[slug][1],
+            "status": status, "chamadas_novas": int(
+                not finished and not recoverable
+            ),
+        })
     return {
         "schema": SCHEMA, "model": MODEL,
         "referencia_instalada": ref_exists,
         "referencia": str(ref),
         "poses": rows,
-        "chamadas_necessarias": sum(r["status"] != "em_cache" for r in rows),
+        "chamadas_necessarias": sum(r["chamadas_novas"] for r in rows),
+        "brutos_recuperaveis": sum(r["status"] == "bruto_recuperavel_sem_ia"
+                                  for r in rows),
         "revisao_identidade": "necessaria_antes_de_uso_na_animacao",
         "publicacoes": 0,
     }
@@ -206,6 +253,55 @@ def save_json(path: Path, payload: dict) -> None:
     tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
                    encoding="utf-8")
     tmp.replace(path)
+
+
+def raw_paths(pose: str, root: Path = ROOT) -> tuple[Path, Path]:
+    if pose not in POSES:
+        raise ValueError("Pose bruta desconhecida")
+    base = pose_dir(root) / "brutos" / f"emanuelly-{pose}"
+    return base.with_suffix(".png"), base.with_suffix(".json")
+
+
+def raw_valid(pose: str, ref_sha: str, root: Path = ROOT) -> bool:
+    art, marker = raw_paths(pose, root)
+    if not art.is_file() or not marker.is_file() or art.is_symlink():
+        return False
+    try:
+        meta = json.loads(marker.read_text(encoding="utf-8"))
+        return (meta.get("schema") == SCHEMA
+                and meta.get("model") == MODEL
+                and meta.get("pose") == pose
+                and meta.get("reference_sha256") == ref_sha
+                and meta.get("signature") == expected(ref_sha, pose)
+                and meta.get("raw_sha256") == digest(art.read_bytes()))
+    except (OSError, KeyError, ValueError, TypeError):
+        return False
+
+
+def cache_raw(pose: str, blob: bytes, ref_sha: str,
+              root: Path = ROOT) -> None:
+    """Write the PAID API response before validation, even if it fails QA."""
+    path, metadata = raw_paths(pose, root)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.is_file():
+        previous = path.read_bytes()
+        backup = path.parent / "historico" / (
+            f"emanuelly-{pose}-{digest(previous)[:12]}.png"
+        )
+        backup.parent.mkdir(exist_ok=True)
+        if not backup.exists():
+            shutil.copy2(path, backup)
+    tmp = path.with_suffix(".partial.png")
+    tmp.write_bytes(blob)
+    tmp.replace(path)
+    save_json(metadata, {
+        "schema": SCHEMA, "model": MODEL, "pose": pose,
+        "reference_sha256": ref_sha,
+        "signature": expected(ref_sha, pose),
+        "raw_sha256": digest(blob),
+        "status": "paid_response_saved_before_qa",
+        "upload": False,
+    })
 
 
 def generate(poses: list[str], *, root: Path = ROOT,
@@ -220,38 +316,64 @@ def generate(poses: list[str], *, root: Path = ROOT,
     # to regenerate: never overwrite earlier pictures invisibly.
     if not replace:
         stale = [p for p in pending if paths(p, root)[0].exists()]
+        stale += [p for p in pending if raw_paths(p, root)[0].exists()
+                  and not raw_valid(p, ref_sha, root) and p not in stale]
         if stale:
             raise ValueError(
                 "Poses com referencia alterada ou QA invalido: " + ", ".join(stale) +
                 ". Use -Refazer para guardar as versoes anteriores."
             )
-    if len(pending) > budget:
+    # A paid image which failed margins is RECOVERABLE at zero new calls.
+    # The API budget must count requests, not poses pending local QA.
+    to_call = [p for p in pending if replace or not raw_valid(p, ref_sha, root)]
+    if len(to_call) > budget:
         raise ValueError(
-            f"Orcamento insuficiente: {len(pending)} imagens necessarias, "
-            f"-MaxChamadas {budget}. NENHUMA chamada de IA realizada."
+            f"Orcamento insuficiente: {len(to_call)} novas chamadas necessarias "
+            f"(inclui {len(pending) - len(to_call)} respostas recuperaveis "
+            f"do cache bruto); -MaxChamadas {budget}. "
+            "NENHUMA chamada de IA realizada."
         )
     if not pending:
         return {"status": "cache", "geradas": 0, "reutilizadas": len(poses),
                 "modelo": MODEL, "publicadas": 0}
-    if editor is None:
-        from master_scenes import request_edit
-        editor = request_edit
-    if key_provider is None:
-        from gerar_video_codex import proxy_key
-        key_provider = proxy_key
+    if to_call:
+        if editor is None:
+            from master_scenes import request_edit
+            editor = request_edit
+        if key_provider is None:
+            from gerar_video_codex import proxy_key
+            key_provider = proxy_key
+        key = key_provider()
     from master_scenes import normalize_image, validate_image
-    key = key_provider()
     finished = []
+    reframed = []
+    rescued = []
     for slug in pending:
-        # Use the SAME supplied reference for every pose.
-        print(f"[GPT IMAGE 2] Gerando pose isolada: {slug}", flush=True)
-        raw = editor(original, prompt(slug), MODEL, key, transparent=True)
+        if raw_valid(slug, ref_sha, root) and not replace:
+            raw = raw_paths(slug, root)[0].read_bytes()
+            rescued.append(slug)
+            print(f"[CACHE BRUTO] Recuperando a pose {slug} sem nova chamada", flush=True)
+        else:
+            # Use the SAME supplied private reference for every pose.
+            print(f"[GPT IMAGE 2] Gerando pose isolada: {slug}", flush=True)
+            raw = editor(original, prompt(slug), MODEL, key, transparent=True)
+            # CRITICAL: save exact paid bytes BEFORE any possible QA failure.
+            cache_raw(slug, raw, ref_sha, root)
         png = normalize_image(raw, alpha=True, stage="kids/emanuelly/" + slug)
+        pre_qa = validate_image(png, alpha=True)
+        png, frame_qa = fit_transparent_pose(png)
         qa = validate_image(png, alpha=True)
         if qa.get("margin_warning"):
             raise ValueError(
-                "Personagem encostou na borda e pode ficar cortada: " + slug
+                "Falha de margens mesmo apos reenquadrar localmente: " + slug
+                + ". Resposta bruta salva em brutos/ para recuperacao."
             )
+        if frame_qa["reframed"]:
+            reframed.append(slug)
+            print(f"[REENQUADRAMENTO LOCAL] {slug}: margens corrigidas, zero IA extra", flush=True)
+        if frame_qa["source_may_already_be_cropped"]:
+            print(f"[AVISO DE REVISAO] {slug}: imagem original encosta na borda; "
+                  "confira se nenhum membro ja estava cortado.", flush=True)
         target, metadata = paths(slug, root)
         target.parent.mkdir(parents=True, exist_ok=True)
         if target.exists():
@@ -272,6 +394,8 @@ def generate(poses: list[str], *, root: Path = ROOT,
             "pose": slug, "reference_sha256": ref_sha,
             "signature": expected(ref_sha, slug),
             "image_sha256": digest(png), "qa": qa,
+            "source_qa": pre_qa, "reframe": frame_qa,
+            "raw_sha256": digest(raw),
             "reference_sent_to": "configured_local_codex_proxy_image_edits",
             "identity_approved_by_human": False,
             "status": "pending_visual_review",
@@ -280,6 +404,9 @@ def generate(poses: list[str], *, root: Path = ROOT,
         finished.append(slug)
     return {"status": "gerado_para_revisao", "geradas": len(finished),
             "poses": finished, "modelo": MODEL, "publicadas": 0,
+            "novas_chamadas": len(to_call),
+            "recuperadas_cache_bruto": rescued,
+            "reenquadradas_sem_ia": reframed,
             "saida": str(pose_dir(root))}
 
 

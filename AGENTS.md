@@ -68,6 +68,31 @@ miniaturas e upload OAuth para YouTube.
   -MaxChamadas 9 -Refazer` depois de preparar as referências.
   NÃO alterar a história original e não publicar por esta ação.
 
+## CORREÇÃO KIDS — ENQUADRAMENTO DE POSES E RESPOSTA PAGA
+
+- O criador reportou em 04/11/2026 o erro
+  `Personagem encostou na borda e pode ficar cortada: caminhando`
+  durante `gerar-poses-emanuelly.ps1 -Acao Gerar -Pose Todas -MaxChamadas 7`.
+- A pose paga NÃO pode ser perdida por um teste de margem. Salvar
+  imediatamente o PNG original em `poses/brutos/` com hash,
+  modelo e identidade de referência ANTES de QA.
+- Reenquadrar APENAS pixels existentes, com Pillow e transparência
+  real em `scripts/kids_poses_enquadramento_v1.py`: ajustar o alpha
+  bbox para margem segura e preservar proporção. Zero nova IA.
+- Não afirmar que isso recupera partes do corpo ausentes. Se o PNG
+  original toca a borda, marcar `source_may_already_be_cropped`
+  e exigir revisão visual. Nunca fabricar dedos ou mãos.
+- A execução seguinte deve reconhecer PNG bruto válido e fazer
+  QA novamente com `-MaxChamadas 0`, sem reenvio ao proxy.
+  `Planejar` indica custo real: respostas brutas recuperáveis
+  não contam como novas chamadas.
+- `em-pe` já aceita no cache anterior DEVE continuar válida mesmo
+  após reforço do prompt de enquadramento, para que o lote restante
+  continue com até 7 chamadas e não se perca a pose aprovada.
+- Não alterar a referência privada, áudio, música, renderizador
+  ou outros canais. Nenhum upload ou publicação automática.
+- Testar regressão em `tests/test_gerar_poses_emanuelly_gpt_image_2.py`.
+
 ## EMANUELLY — ASSETS PARA ANIMACAO POR CAMADAS
 
 - A personagem NÃO pode ser redesenhada com rosto, cabelo, roupa
