@@ -66,7 +66,7 @@ export const FofinhosAmbientEffects:React.FC<{
       const inner=i===0?'#ffe9f7':'#fff6d5';
       return <g key={'butterfly-'+i}
         transform={'translate('+x+' '+y+') rotate('+tilt+')'}
-        opacity={isQuiet?.0:.85}>
+        opacity={isQuiet ? 0 : .85}>
         <g transform={'scale('+wing+' 1)'}>
           <path d="M-2 -1 C-17 -44 -47 -43 -41 -13 C-36 2 -20 11 -2 4 Z"
             fill={hue} stroke="#fff9e7" strokeWidth={2}/>
@@ -106,7 +106,7 @@ export const FofinhosAmbientEffects:React.FC<{
       const y=480+(i*197)%870-Math.sin(local/86+i)*20;
       return <circle key={'mote-'+i} cx={x} cy={y}
         r={3.2+(i%2)*2} fill={scene.night?'#dce9ff':'#ffebc3'}
-        opacity={scene.night?.10:.19}/>;
+        opacity={scene.night ? .10 : .19}/>;
     })}
     {/* Egg-localized sparkling, not magic spread across the whole screen. */}
     {Array.from({length:sparkleCount},(_,i)=>{
