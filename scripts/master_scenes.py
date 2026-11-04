@@ -22,6 +22,7 @@ from roteiro_para_storyboard import select_episode, save_plan
 from diversidade_visual import similar_masters, storyboard_warnings
 from qa_foreground_fidelity import foreground_fidelity
 from chess_composition_safety import master_static_for_chess_action, hero_prop_prompt
+from proxy_endpoint import proxy_api_url
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'assets'/'gerados'/'shorts-animados'
@@ -187,7 +188,7 @@ def request_edit(master:Path,prompt:str,model:str,key:str,*,transparent:bool,
     if post is None:
         import requests
         post=requests.post
-    r=post(EDIT_URL,json=payload,headers={'Authorization':'Bearer '+key,
+    r=post(proxy_api_url('/v1/images/edits'),json=payload,headers={'Authorization':'Bearer '+key,
           'Content-Type':'application/json'},timeout=(15,360))
     if not r.ok:
         raise RuntimeError(f'Proxy recusou images/edits (HTTP {r.status_code}): {str(r.text)[:180]}. '
