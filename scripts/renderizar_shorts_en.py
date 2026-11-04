@@ -26,6 +26,41 @@ from otaku_reframe_direction import ensure_english_plan
 from english_caption_design import grouped_captions
 from qa_automatico_reframe_en import prepare_qa_storyboard
 from otaku_reframe_production import validate_english_production
+from metadata_shorts import load_episodes
+
+# Identidades verificadas por consulta dos canais conectados em 2026-11-04.
+BR_CHANNEL_V3 = "UCXGYTuBYn-0Ziqin5ajKhOw"
+EN_CHANNEL_V3 = "UCBoNbQjaMYdpJqPLRZAFkvQ"
+BR_SNAPSHOT_V3 = ROOT / "conteudos" / "otaku-br-publicados-snapshot-20261104.json"
+
+
+def validate_reused_br_manifest(data: dict, items: list[dict]) -> None:
+    """Rejeita mapeamento incorreto de videos e fontes PT (sem chamada remota)."""
+    if not any(e.get("source_br_video_id") for e in items):
+        return
+    if data.get("target_channel_id") != EN_CHANNEL_V3 or data.get("source_br_channel_id") != BR_CHANNEL_V3:
+        raise ValueError("Destino Otaku Reframe ou origem Otaku Multicena invalido")
+    snapshot = json.loads(BR_SNAPSHOT_V3.read_text(encoding="utf-8-sig"))
+    ready = {r["episode_id"]: r["video_id"] for r in snapshot["videos"]
+             if r.get("status") == "ready"}
+    originals = load_episodes(include_recaps=True)
+    seen = set()
+    for ep in items:
+        original = originals.get(ep["id"])
+        vid = ep.get("source_br_video_id", "")
+        if not original or ready.get(ep["id"]) != vid or ep["id"] in seen:
+            raise ValueError("Fonte BR nao confirmada ou duplicada: " + ep["id"])
+        seen.add(ep["id"])
+        digest = hashlib.sha256(original["script"].encode("utf-8")).hexdigest()
+        if ep.get("source_pt_script_sha256") != digest or ep.get("source_pt_episode_id") != ep["id"]:
+            raise ValueError("Fonte PT foi alterada; revalidar adaptacao EN: " + ep["id"])
+        if ep.get("channel") != "Otaku Reframe" or ep.get("source_visual_check") != "requires_full_english_video_review":
+            raise ValueError("Identidade EN ou revisao obrigatoria ausente: " + ep["id"])
+        if not isinstance(ep.get("hook_options"), list) or len(ep["hook_options"]) != 5:
+            raise ValueError("Roteiro EN sem cinco propostas de gancho: " + ep["id"])
+        if not ep["script"].startswith(ep.get("selected_hook", "")):
+            raise ValueError("A abertura EN diverge do gancho escolhido: " + ep["id"])
+
 
 LANG = ROOT / "conteudos" / "testes-animados-5-en.json"
 OUT = ROOT / "assets" / "gerados" / "shorts-animados"
@@ -42,6 +77,7 @@ def load_english(path: Path = LANG) -> list[dict]:
         raise ValueError("Manifesto ingles sem episodios ou com IDs duplicados")
     if path == LANG and len(items) != 5:
         raise ValueError("O lote original em ingles deve conservar exatamente cinco episodios")
+    validate_reused_br_manifest(data, items)
     for item in items:
         item.setdefault("channel", data.get("channel", "Otaku Reframe"))
         if item.get("scenes"):
@@ -156,6 +192,16 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
     if output.is_file() and not overwrite:
         validate_video(output,stage=f'Cache EN {episode_id}')
         report_file = folder / "qa-en-US.json"
+        if item.get("source_br_video_id"):
+            if not report_file.is_file():
+                raise ValueError("MP4 EN reaproveitado sem QA assinado; use -Refazer.")
+            previous = json.loads(report_file.read_text(encoding="utf-8"))
+            if (previous.get("video_sha256") != hashlib.sha256(output.read_bytes()).hexdigest()
+                    or previous.get("render_origin") != "AutoEditorVideo/local/remotion"
+                    or previous.get("language") != "en-US"
+                    or previous.get("source_br_video_id") != item["source_br_video_id"]
+                    or previous.get("source_pt_script_sha256") != item["source_pt_script_sha256"]):
+                raise ValueError("MP4 EN em cache nao corresponde a fonte BR/QA; use -Refazer.")
         if item.get("scenes"):
             if not report_file.is_file():
                 raise ValueError("MP4 em cache sem QA EN; use -Refazer.")
@@ -214,6 +260,9 @@ def process(item: dict, action: str, *, profile: str, model: str, overwrite: boo
         "production_pipeline": production,
         "render_origin": "AutoEditorVideo/local/remotion",
         "editorial_profile": props["editorialProfile"],
+        "source_br_video_id": item.get("source_br_video_id"),
+        "source_pt_script_sha256": item.get("source_pt_script_sha256"),
+        "english_visual_review_required": bool(item.get("source_br_video_id")),
         "visual_continuity": "ryuk-reveal-after-beat-9" if item.get("scenes") else "legacy",
     }
     (folder / "qa-en-US.json").write_text(
