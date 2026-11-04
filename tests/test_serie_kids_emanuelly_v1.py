@@ -21,6 +21,8 @@ def reference(tmp_path, *, color=(120, 70, 210)) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     Image.new("RGB", (1024, 1536), color).save(path)
     install_fake_isolated_references(path)
+    for name in ("Wondertrail _Main Theme_.mp3", "Wondertrail _Main Theme_2.mp3"):
+        (tmp_path / name).write_bytes(b"ID3" + b"\x00" * 120_000)
     return path
 
 
