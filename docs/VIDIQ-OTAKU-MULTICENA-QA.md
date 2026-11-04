@@ -22,13 +22,13 @@ o algoritmo penaliza formalmente imagens estáticas, nem que as previsões se cu
 
 ## Correções de engenharia entregues
 
-1. **Remotion master e legado:** abertura em três enquadramentos virtuais com
-   jump cuts em **1,25s e 2,45s**, a partir das imagens já aprovadas.
-   Em cenas longas (como a imagem de 15s do Short de Light/Ryuk), entram
-   reenquadramentos adicionais a cada **2,7s depois dos 5s iniciais**.
-   Movimento é de câmera global, não manipulação física independente de faces,
-   mãos, móveis, tabuleiro ou corpo; zoom total do master limitado a 1,14.
-   Não consome cota de imagem e não altera áudio.
+1. **Remotion master e legado (corrigido após feedback do criador):**
+   os jump cuts virtuais em 1,25s, 2,45s e a cada 2,7s causaram
+   desconforto e foram **removidos**. O novo movimento é um zoom in/out
+   contínuo, centralizado e de pequena amplitude. Os personagens com
+   máscaras RGBA seguras têm movimento de corpo mais perceptível, sem
+   esticar rosto/membros. Arte plana só faz zoom; não fingir movimento real.
+   O QA registra quantas cenas permitem movimento de personagem.
 2. **Legendas:** Remotion master usa grupos de 2–3 palavras com timestamps
    de voz reais; o legado também agrupa marcações existentes em até três
    palavras, destacando a palavra falada. Fundo escuro e fonte grande na
@@ -68,8 +68,8 @@ não pode atualizar um Short existente no YouTube substituindo seu arquivo.
 
 ### QA antes do próximo vídeo
 
-- Conferir visualmente quadros em 0,0s / 1,3s / 2,5s / 5,0s na prévia
-  vertical; verificar se a câmera realmente muda e não corta cabelo/mãos.
+- Conferir quadros em 0,0s / 1,3s / 2,5s / 5,0s na prévia
+  vertical: zoom deve mudar suavemente, sem saltos, e não cortar cabelo/mãos.
 - Conferir legendas de 2–3 palavras em fundo contrastado, na zona inferior.
   Validar o primeiro segundo e uma frase longa contra a voz real.
 - Confirmar ação principal/objeto relevante no primeiro quadro **quando
