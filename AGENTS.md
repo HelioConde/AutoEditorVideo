@@ -5,6 +5,46 @@ imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
 
+## REGRA CRÍTICA — PERSONAGENS NASCEM ANTES DE APARECER (KIDS)
+
+- Em 04/11/2026, o criador confirmou erro grave na Parte 1,
+  especialmente quadro 08: Fofinho e Fofinha Arco-Íris foram
+  mostrados ao lado de Emanuelly **antes de nascerem**.
+  É proibido repetir isto em qualquer nova geração.
+- **EP01 Parte 1, TODOS os nove quadros: Emanuelly (Manu) é
+  a única personagem visível; ovo de dragão AZUL permanece fechado.
+  Nenhum bichinho de pelúcia pode aparecer, nem ao fundo, como reflexo,
+  silhueta, brinquedo decorativo ou figurante.**
+- EP01 Parte 2 quadros 01–05: só Emanuelly e ovo ainda fechado/
+  abrindo; Fofinho ainda não saiu. A partir do quadro 06, aparecem
+  Emanuelly e Fofinho **azul**. Partes 3–4: apenas os dois.
+- Fofinhas Arco-Íris e Rosa são gêmeas nascidas UM ANO depois;
+  Raposo e Porco-espinho serão apresentados no futuro e NUNCA
+  podem aparecer em EP01. Não antecipar fisicamente novos personagens.
+- A prancha original do elenco é APENAS uma fonte para criar dois
+  arquivos de referência **isolados e privados**: emanuelly-solo.png
+  (1 pessoa) e emanuelly-fofinho.png (somente 2 personagens).
+  Nunca enviar prancha do elenco inteiro como referência de quadros.
+  Não assumir que texto negativo basta para conter vazamento.
+- Preparar estas imagens via
+  `gerar-historia-kids.ps1 -Acao PrepararReferencias -MaxChamadas 2`.
+  São 2 chamadas GPT Image 2 e ficam fora do Git.
+  O isolamento visual é um auxílio, não uma garantia de visão:
+  avaliar o MP4 completo antes de publicar.
+- O gerador Kids com referência DEVE usar exclusivamente
+  **gpt-image-2**; `gpt-image-1.5` é rejeitado. Nunca fazer fallback
+  de modelo quando tiver imagem de referência.
+- Cada quadro usa apenas a referência permitida pela cronologia,
+  com política versionada `emanuelly/character-continuity/v2`,
+  SHA-256 do elenco e da imagem isolada, e QA de entrada/saída.
+  Cache com a política antiga é INVÁLIDO e não pode entrar no render.
+- Corrigir precisamente o quadro 03 (só Emanuelly e efeitos mágicos
+  abstratos, sem pelúcias) e 08 (só Emanuelly e o mesmo ovo azul
+  no mesmo quarto noturno). Preservar os arquivos anteriores em
+  histórico; regenerar Parte 1 com `-Acao Imagens -Parte 1
+  -MaxChamadas 9 -Refazer` depois de preparar as referências.
+  NÃO alterar a história original e não publicar por esta ação.
+
 ## GERAÇÃO DA SÉRIE KIDS COM FOTO DE REFERÊNCIA
 
 - Comando: gerar-historia-kids.ps1 (Planejar, InstalarReferencia,
