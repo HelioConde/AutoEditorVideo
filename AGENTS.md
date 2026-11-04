@@ -5,6 +5,29 @@ imagens anime via Codex Proxy local, edição com MoneyPrinterTurbo/FFmpeg,
 miniaturas e upload OAuth para YouTube.
 
 
+## MUSICA DE FUNDO DOS KIDS — DUAS FAIXAS DE ENTRADA
+
+- Musicas originais adicionadas na raiz do repositorio em 04/11/2026:
+  `Wondertrail _Main Theme_.mp3`, `Wondertrail _Main Theme_2.mp3`.
+  Nao renomear, modificar ou mover estes fontes.
+- Usar apenas nos renders Kids, nunca Gamer/Otaku.
+  Alternar na serie Emanuelly (Partes 1/3 = faixa 1; Partes 2/4 =
+  faixa 2). Pilot Kids usa padrao estavel.
+- O volume padrao do Remotion e 7,5% (teto absoluto de 12%),
+  com fade-in/out 1,5s; narracao TTS em primeiro plano e pausas
+  de compreensao preservadas. Ouvir o resultado real antes de publicar.
+- Modulo de preparo: `scripts/kids_musicas_fundo_v1.py`.
+  Somente copia local para a pasta gerada do Remotion; hash SHA-256
+  garante integridade. O cache de render Kids deve exigir a assinatura
+  da faixa atual. Alterou trilha => gerar nova versao de MP4.
+- Nao alegar que estas musicas sao liberadas para publicacao:
+  **direitos/licenca nao verificados**. Manter
+  `music_rights_review=pending_before_publication`
+  ate o titular comprovar autorizacao de uso, especialmente no YouTube.
+  Nada de upload automatico; evitar reclamações de copyright.
+- Manter a musica baixa e sem abafamento de voz. Testar
+  `tests/test_kids_musicas_fundo_v1.py` e compilacao Remotion.
+
 ## REGRA CRÍTICA — PERSONAGENS NASCEM ANTES DE APARECER (KIDS)
 
 - Em 04/11/2026, o criador confirmou erro grave na Parte 1,
