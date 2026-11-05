@@ -1,0 +1,121 @@
+name: Gamer + Alchemy - private upload native V3 master style
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/games-alchemy-native-v3-upload-20261105.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: games-alchemy-v3-native-private-upload-20261105
+  cancel-in-progress: false
+
+jobs:
+  verify-native-v3-render:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(games-alchemy): upload six native Remotion Shorts privately with program covers'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check original native Remotion render and programmatic cover provenance without YouTube secrets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python -m pip install 'Pillow>=10,<13'
+          python scripts/games_alchemy_native_v3_upload_gate.py
+          python -m py_compile scripts/games_alchemy_native_v3_upload.py
+
+  gamer-v3-private:
+    needs: verify-native-v3-render
+    if: needs.verify-native-v3-render.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube API clients without credentials
+        run: python -m pip install -r requirements-publicacao.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: gamer-alchemy-six-native-v3
+          run-id: 42058545056
+          github-token: ${{ github.token }}
+          path: cloud-games-alchemy-recut-v3/
+      - name: Publish only 3 native Gamer revisions to PRIVATE YouTube; 75s wait for official thumbnail
+        env:
+          NATIVE_V3_UPLOAD_APPROVED: 'true'
+          SOURCE_NATIVE_RENDER_RUN_ID: '42058545056'
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_CHANNEL_TOKEN_JSON: ${{ secrets.YOUTUBE_GAMES_TOKEN_JSON }}
+        run: python scripts/games_alchemy_native_v3_upload.py --channel games
+      - name: Retain video IDs and thumbnail acknowledgements even if a later step fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gamer-native-v3-private-receipts
+          path: cloud-games-alchemy-recut-v3/games-native-v3-youtube-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
+
+  alchemy-v3-private:
+    needs: verify-native-v3-render
+    if: needs.verify-native-v3-render.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube API clients without credentials
+        run: python -m pip install -r requirements-publicacao.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: gamer-alchemy-six-native-v3
+          run-id: 42058545056
+          github-token: ${{ github.token }}
+          path: cloud-games-alchemy-recut-v3/
+      - name: Publish only 3 native Alchemy revisions to PRIVATE YouTube; 75s wait for official thumbnail
+        env:
+          NATIVE_V3_UPLOAD_APPROVED: 'true'
+          SOURCE_NATIVE_RENDER_RUN_ID: '42058545056'
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_CHANNEL_TOKEN_JSON: ${{ secrets.YOUTUBE_ALCHEMY_TOKEN_JSON }}
+        run: python scripts/games_alchemy_native_v3_upload.py --channel alchemy
+      - name: Retain video IDs and thumbnail acknowledgements even if a later step fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: alchemy-native-v3-private-receipts
+          path: cloud-games-alchemy-recut-v3/alchemy-native-v3-youtube-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
