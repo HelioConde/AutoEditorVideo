@@ -119,7 +119,7 @@ def test_only_main_protected_environment_is_accepted(channel):
         env,p=gh_policy(channel,branch="*")
         guard.policy_is_main_only(channel,env,p)
     with pytest.raises(guard.UnsafeYouTubeEnvironment,match="WRONG_CHANNEL"):
-        env,p=gh_policy(channel,name=get_channel("br")["youtube_environment"])
+        env,p=gh_policy(channel,name="youtube-not-protected")
         guard.policy_is_main_only(channel,env,p)
 
 def test_missing_environment_and_multiple_branches_do_not_unlock_oauth():
@@ -151,3 +151,26 @@ def test_no_video_write_or_image_access_code_in_read_only_workflow():
         assert "environment: "+get_channel(slug)["youtube_environment"] in workflow
         assert "secrets."+get_channel(slug)["oauth_token_secret_name"] in workflow
     assert "github.run_attempt == 1" in workflow
+    assert workflow.count("environment: youtube-private-upload")==3
+    for legacy in ("youtube-games-private-upload","youtube-kids-private-upload",
+                   "youtube-alchemy-private-upload"):
+        assert legacy not in workflow
+
+
+def test_powershell_only_writes_selected_token_and_preserves_otaku():
+    ps=(ROOT/"conectar-novos-canais.ps1").read_text(encoding="utf-8")
+    assert "& gh secret set $tokenSecretName -e $environment" in ps
+    assert "gh secret set YOUTUBE_CLIENT_JSON" not in ps
+    assert "youtube-private-upload" in ps
+    assert "YOUTUBE_CLIENT_JSON' }).Count" in ps
+    for token in ("YOUTUBE_BR_TOKEN_JSON","YOUTUBE_EN_TOKEN_JSON"):
+        assert "gh secret set "+token not in ps
+    assert "ConfirmarArmazenamentoGitHub" in ps
+
+
+def test_legacy_otaku_workflow_keeps_same_shared_env_and_secret_names():
+    old=(ROOT/".github"/"workflows"/"otaku-cloud-private-5011.yml").read_text(encoding="utf-8")
+    assert old.count("environment: youtube-private-upload")==2
+    for token in ("YOUTUBE_BR_TOKEN_JSON","YOUTUBE_EN_TOKEN_JSON","YOUTUBE_CLIENT_JSON"):
+        assert "secrets."+token in old
+
