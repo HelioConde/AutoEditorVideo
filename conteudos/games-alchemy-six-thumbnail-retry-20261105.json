@@ -1,0 +1,36 @@
+{
+  "schema": "autoeditorvideo/thumbnail-only-retry-once/v1",
+  "date": "2026-11-05",
+  "approved_by_creator": true,
+  "creator_request": "Depois de enviar o vídeo esperar um pouco e enviar a thumb; tentar novamente para confirmar.",
+  "scope": "thumbnails_only_no_video_upload",
+  "initial_visibility": "private",
+  "delay_after_upload_seconds": 75,
+  "render_run": 42044136670,
+  "artifact_id": 13425056457,
+  "original_upload_run": 42048524469,
+  "gamer_recovery_run": 42049521888,
+  "expected_shorts": 6,
+  "channels": [
+    "games",
+    "alchemy"
+  ],
+  "video_ids": {
+    "games": [
+      "GJyfGo8Mhtw",
+      "61bCmdk2dV8",
+      "RaHo_rrHk8M"
+    ],
+    "alchemy": [
+      "bdjD6zCEDkw",
+      "GIeHe2gDuiQ",
+      "XTc7hjnp4cY"
+    ]
+  },
+  "rules": [
+    "No videos.insert, no new images, no public visibility changes",
+    "Try one known video per channel first; only proceed if API acknowledges",
+    "Results must distinguish API acceptance from display in YouTube Studio",
+    "Verify channel OAuth ID, source cover SHA and existing private video ID before each write"
+  ]
+}
