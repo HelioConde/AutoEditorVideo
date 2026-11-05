@@ -34,6 +34,9 @@ if ($null -eq $channel -or $channel.youtube_channel_id -cne $expected[$Canal]) {
   throw 'O ID do canal nao corresponde ao registro verificado.'
 }
 $environment = [string]$channel.youtube_environment
+if ($environment -cne 'youtube-private-upload') {
+  throw 'O canal nao esta apontando para o Environment compartilhado aprovado.'
+}
 $tokenSecretName = [string]$channel.oauth_token_secret_name
 $tokenPath = Join-Path $root (".secrets\youtube-$Canal-cloud-token.json")
 $clientPath = Join-Path $root '.secrets\youtube-oauth-client.json'
@@ -85,11 +88,37 @@ try {
 } catch {
   throw 'Politica de protecao do GitHub nao confirmada. NENHUM token enviado.'
 }
-Get-Content -LiteralPath $clientPath -Raw -Encoding UTF8 |
-  & gh secret set YOUTUBE_CLIENT_JSON -e $environment -R $repo
-if ($LASTEXITCODE -ne 0) { throw 'Falha ao registrar o OAuth client. Verifique o Environment.' }
+# Preserve the OAuth CLIENT and BR/EN token Secrets already in this Environment.
+# Only the individually selected new-channel token is allowed to be written.
+try {
+  $savedSecretsRaw = & gh secret list -e $environment -R $repo --json name
+  if ($LASTEXITCODE -ne 0) { throw 'Nao foi possivel listar os nomes dos Secrets.' }
+  $savedSecrets = @($savedSecretsRaw | ConvertFrom-Json)
+  if (-not (@($savedSecrets | Where-Object { $_.name -ceq 'YOUTUBE_CLIENT_JSON' }).Count -eq 1)) {
+    throw 'O Secret YOUTUBE_CLIENT_JSON existente nao foi confirmado. Preservar Otaku.'
+  }
+} catch {
+  throw 'Nao foi possivel confirmar o OAuth CLIENT existente. NENHUM Secret alterado.'
+}
+
+# Ensure this locally authorized token uses the local client JSON, without
+# printing secrets; Google Actions will also reject any mismatched cloud client.
+try {
+  $clientObject = Get-Content -LiteralPath $clientPath -Raw -Encoding UTF8 | ConvertFrom-Json
+  $tokenObject = Get-Content -LiteralPath $tokenPath -Raw -Encoding UTF8 | ConvertFrom-Json
+  $localClientId = if ($null -ne $clientObject.installed) {
+    [string]$clientObject.installed.client_id
+  } else { [string]$clientObject.web.client_id }
+  if ([string]::IsNullOrWhiteSpace($localClientId) -or
+      $tokenObject.client_id -cne $localClientId) {
+    throw 'Identidade do OAuth client local incorreta.'
+  }
+} catch {
+  throw 'Token OAuth local nao corresponde ao client local. NENHUM Secret alterado.'
+}
+
 Get-Content -LiteralPath $tokenPath -Raw -Encoding UTF8 |
   & gh secret set $tokenSecretName -e $environment -R $repo
-if ($LASTEXITCODE -ne 0) { throw 'Falha ao registrar token deste canal.' }
-Write-Host "[OK] ${Canal}: Secrets registrados no Environment protegido $environment."
-Write-Host '[SEGURANCA] Nenhuma publicacao, nenhum video ou token exibido na tela.'
+if ($LASTEXITCODE -ne 0) { throw 'Falha ao registrar somente o token do canal selecionado.' }
+Write-Host "[OK] ${Canal}: Token individual registrado no Environment compartilhado $environment."
+Write-Host '[SEGURANCA] CLIENT e tokens BR/EN preservados. Nenhum upload nem token exibido.'
