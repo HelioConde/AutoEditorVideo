@@ -1,5 +1,27 @@
 # Arquivo Otaku — orientações para agentes
 
+## REGRA PERMANENTE — TAGS DE SEO NÃO SÃO IDENTIFICADORES TÉCNICOS (05/11/2026)
+
+- As tags visíveis no YouTube Studio e vidIQ devem conter **somente palavras-chave
+  editoriais relevantes** ao tema do vídeo. É PROIBIDO enviar em `snippet.tags`
+  qualquer código `autoeditorvideo-*`, `autoeditorvideo_*`, nome de reserva,
+  hash, identificador de episódio, slug técnico ou marcador de idempotência.
+- A função obrigatória de saída é `scripts/youtube_public_tags.py:public_tags`.
+  Aplicá-la imediatamente antes de chamar `videos.insert` ou `videos.update`,
+  mesmo quando o arquivo de metadados vier aprovado ou de uma automação antiga.
+  Exemplos de tags boas: `Minecraft`, `Minecraft nostalgia`, `creeper`,
+  `IA generativa`; nunca permitir um código do programa com nota 0 no vidIQ.
+- **Controle de duplicação** deve usar reservas e recibos privados do GitHub,
+  IDs retornados pela API e verificação do canal. O rastreio não pode depender
+  de publicar identificadores internos na descrição, título ou tags.
+  Se um upload for ambíguo, parar e reconciliar pelo manifesto/ID antes de
+  qualquer reenvio; nunca reenviar cegamente.
+- Ao corrigir tags de vídeo existente, consultar os metadados atuais e
+  substituir apenas a lista de tags, preservando título, descrição,
+  categoria, idioma e visibilidade (sem enviar `status` no update);
+  não excluir o vídeo nem alterar sua miniatura.
+
+
 ## REGRA PERMANENTE — FIM DE SHORTS E MINIATURAS GAMER + IA (05/11/2026)
 
 ### Identidade visual validável — modelo de referência do criador
