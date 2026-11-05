@@ -453,10 +453,24 @@ miniaturas e upload OAuth para YouTube.
 - Para novos originais EN, `production.qa=automatic-technical`,
   `post_upload_review=true`, `external_rendering=false` e
   `auto_publish=false` (sem publicacao PUBLICA automatica por padrao).
-- Nunca enviar tokens, `.secrets`, cache IA, imagens e videos finais ao GitHub.
-  Este repositorio armazena apenas codigo, manifests, roteiros, testes e docs.
-- O upload YouTube e somente no computador local Windows com OAuth da conta.
-  ChatGPT/GitHub Actions nao possuem acesso ao cache local do PC.
+- **REGRA ATUALIZADA 05/11/2026 — CLOUD-FIRST:** o objetivo principal para
+  Otaku Multicena BR e, futuramente, EN/Kids e gerar o roteiro, imagens, voz,
+  animacoes, MP4 e QA integralmente no **GitHub Actions**, usando o motor
+  AutoEditorVideo original (Codex Proxy Go nativo, Edge TTS, Remotion/FFmpeg).
+  Nunca substituir por renderizacao externa/vidIQ, previews vetoriais ou
+  pedir render local no Windows como passo obrigatorio. O cache do Windows
+  nao aparece automaticamente no runner; planejar armazenamento seguro.
+- Nunca enviar tokens, `.secrets`, cache bruto de IA, fotos privadas de
+  criancas ou logs de credenciais ao repositorio nem a Actions artifacts.
+  **Excecao explicita somente para pilotos BR nao pessoais autorizados:**
+  um artifact temporario (retencao 1 dia) pode conter apenas MP4 final,
+  capa, metadados e QA, com aviso de que leitores do repositorio publico
+  podem acessa-lo. Rever armazenamento privado antes de rotina em escala.
+- O upload para YouTube depende de OAuth do canal correto e privacidade
+  adequada; neste momento, o job cloud BR gera apenas video para revisao,
+  sem upload. Nao exigir Windows para *geracao*. Antes de mover o upload
+  para Actions, implementar OAuth segregado, verificacao do canal,
+  controle de duplicatas e escopos/credenciais apropriados.
 - A previa vetorial externa do Short `201-death-note-rosto-nome` foi rejeitada;
   nao reutilizar suas artes/voz/trilha no MP4 gerado pelo AutoEditorVideo.
 
