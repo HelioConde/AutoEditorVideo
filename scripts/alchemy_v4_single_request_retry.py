@@ -5,6 +5,7 @@ from pathlib import Path
 from datetime import datetime,timezone
 from googleapiclient.http import MediaFileUpload
 from games_alchemy_ai_upload import get_youtube,set_thumbnail
+from youtube_public_tags import public_tags
 from production_reservations import assert_reserved
 from youtube_channel_registry import get_channel,KNOWN_IDS
 
@@ -99,7 +100,7 @@ def main():
   if seen:id=seen[0];reused=True
   else:
    body={"snippet":{"title":meta["title"],"description":meta["description"],
-         "tags":list(dict.fromkeys(meta["tags"]+[TAG,"autoeditorvideo-episode-"+eid])),
+         "tags":public_tags(meta["tags"]),
          "categoryId":"28","defaultLanguage":"pt-BR"},
          "status":{"privacyStatus":"private","containsSyntheticMedia":True,"selfDeclaredMadeForKids":False}}
    try:
