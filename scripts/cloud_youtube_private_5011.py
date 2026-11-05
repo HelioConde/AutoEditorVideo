@@ -57,7 +57,7 @@ def preflight(env:dict[str,str],channel:str)->None:
 
 def validate_review(channel:str,dir:Path=REVIEW)->tuple[Path,dict,str]:
     summary=json.loads((dir/'review-summary.json').read_text(encoding='utf-8'))
-    if summary.get('schema')!='autoeditorvideo/dual-cloud-review/v1' or summary.get('episode')!=ID:
+    if summary.get('schema') not in ('autoeditorvideo/dual-cloud-review/v1','autoeditorvideo/dual-cloud-review/v2') or summary.get('episode')!=ID:
         raise UploadBlocked('BAD_SOURCE_ARTIFACT')
     if summary.get('publication')!='not_performed' or len(summary.get('videos',[]))!=2:
         raise UploadBlocked('NOT_A_TWO_CHANNEL_REVIEW_ARTIFACT')
