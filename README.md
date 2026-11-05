@@ -288,11 +288,15 @@ Nenhum canal ou MP4 foi criado so por adicionar os scripts.
 
 Veja [PowerShell por canal](docs/POWERSHELL-CANAIS-GAMER-INGLES.md).
 
-## Dois novos canais PT-BR — Games + Kids (piloto 3x2)
+## Cinco canais YouTube cadastrados (2 Otaku + Gamer + Kids + Alchemy Lab)
+
+Os canais reais estão em [Registro de canais YouTube](docs/CANAIS-5-YOUTUBE-GITHUB.md). IDs novos: Gamer UCg77gYc1_wkHuL07XPtKcow (nome atual Hélio Conde; Conde Games proposto); Kids UCxEzVW2Uy44OUVurTQSg_Eg (Emanuelly Kids e série Fofinhos); Alchemy Lab UCCTYFE5Cmz2aYZ37cJQ-wcg (nome atual Alchemy Flames). O cadastro não concede OAuth nem autoriza uploads. Valide sem publicar: python scripts/youtube_channel_registry.py --action list.
+
+## Games + Kids (piloto antigo 3x2; sem publicação)
 
 Novo projeto independente com **3 Shorts Games** e **3 Shorts Kids**,
 todos em português brasileiro: roteiro, títulos, voz e legendas.
-Nomes provisórios: Checkpoint Pixel (games) e MiniMundo Curioso (kids).
+Esses nomes (Checkpoint Pixel e MiniMundo Curioso) pertencem apenas ao piloto antigo, não aos canais reais cadastrados. Veja a seção de cinco canais abaixo.
 
     .\piloto-canais-v3.ps1 -Acao validar
     .\piloto-canais-v3.ps1 -Acao preparar
@@ -302,8 +306,7 @@ Kids tem animações vetoriais originais em Remotion, voz pt-BR-FranciscaNeural
 e classificação Made for Kids planejada. Games precisa de **gameplay real**
 (Minecraft, Roblox e TILLFOLK) e narração pt-BR-AntonioNeural.
 
-Nomes ainda precisam de aprovação, canais YouTube ainda não foram criados e
-nenhum MP4 ou upload foi executado. O motor Otaku permanece inalterado.
+Os canais Games e Kids já existem no YouTube, mas este **piloto legado** continua com IDs nulos e publicação bloqueada até revisão editorial. Nenhum upload decorre deste cadastro. O motor Otaku permanece inalterado.
 O piloto não possui opção de publicar nem usa tokens OAuth de outros canais.
 
 Guia: [Piloto Games e Kids — 3x2 PT-BR](docs/PILOTO-GAMES-KIDS-3X2-V3.md).
