@@ -1,7 +1,7 @@
 {
   "schema": "autoeditorvideo/production-reservations/v1",
   "updated_at": "2026-11-05",
-  "policy": "Reserve in GitHub BEFORE creating any video generation script, PowerShell command, workflow, or image request. Public/private uploads, active production and review artifacts are NOT available for automatic reselection.",
+  "policy": "Before creating any video generation script, PowerShell or cloud workflow, reserve the exact (channel, episode_id) pair here and merge to main first. All five channels use unique channel IDs; registration never authorizes image or YouTube requests.",
   "channels": {
     "br": {
       "name": "Otaku Multicena",
@@ -10,6 +10,24 @@
     "en": {
       "name": "Otaku Reframe",
       "youtube_channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ"
+    },
+    "games": {
+      "name": "Conde Games",
+      "youtube_channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "production_state": "registered_no_episodes_reserved",
+      "upload_authorized": false
+    },
+    "kids": {
+      "name": "Emanuelly Kids",
+      "youtube_channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "production_state": "registered_no_episodes_reserved",
+      "upload_authorized": false
+    },
+    "alchemy": {
+      "name": "Alchemy Lab",
+      "youtube_channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "production_state": "registered_no_episodes_reserved",
+      "upload_authorized": false
     }
   },
   "entries": [
@@ -110,5 +128,5 @@
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
-  "warning": "A matching folder does not prove publication; verify YouTube and reservation registry. Never overwrite or automatically retry reserved/active/published episodes."
+  "warning": "A matching folder does not prove publication; verify YouTube and reservation registry. Never overwrite or automatically retry reserved/active/published episodes. New Games, Kids and Alchemy channels are registered but have no authorized YouTube upload paths or reserved episodes."
 }
