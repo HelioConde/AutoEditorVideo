@@ -1,0 +1,333 @@
+{
+  "schema": "autoeditorvideo/games-alchemy-six-recut-v2/v1",
+  "date": "2026-11-05",
+  "owner": "games_alchemy_six_shorts_v2_20261105",
+  "status": "awaiting_render_and_private_upload",
+  "source_run": 42044136670,
+  "source_artifact_name": "games-alchemy-six-ai-render",
+  "source_artifact_id": 13425056457,
+  "source_render_sha": "a414b9aea8d778f27c765cfb3d45e94612d0ee05",
+  "source_publication_receipts": "conteudos/games-alchemy-six-private-upload-result-20261105.json",
+  "revisions": [
+    "Remove spoken workflow/AI disclosure; retain accurate description labeling.",
+    "End each script with topical engagement CTA and invitation to subscribe.",
+    "Reconstruct fresh frames from already-generated AI original video; remove burnt-in captions by source crop, no new AI generation charge.",
+    "Use accessible new subtitle font/line breaks within safe area, no edge clipping.",
+    "Thumbnails match user sample: striking full-bleed AI fantasy art + bold white uppercase serif at top; no logo, bottom banner, long headline.",
+    "Upload new private videos only after verified destination ID; do not delete old private original videos; cannot replace an existing MP4 in YouTube."
+  ],
+  "projects": [
+    {
+      "source_episode_id": "game-001-gta4-gta5",
+      "revised_episode_id": "game-001-gta4-gta5-v2",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "GTA IV vs GTA V: por que a física ainda surpreende?",
+      "description": "Dois títulos marcantes, com propostas diferentes para física, veículos e reações dos personagens. Vamos explorar essas diferenças por meio de cenas conceituais.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTAIV #GTAV #Shorts",
+      "tags": [
+        "GTA IV",
+        "GTA V",
+        "GTA 4",
+        "GTA 5",
+        "física GTA",
+        "comparação GTA",
+        "Hélio Conde",
+        "games Brasil",
+        "você sabia?"
+      ],
+      "hashtags": [
+        "#GTAIV",
+        "#GTAV",
+        "#Shorts"
+      ],
+      "narration": "GTA IV e GTA V marcaram gerações, mas têm propostas bem diferentes. No quarto jogo, o peso dos veículos e as reações da cidade chamavam muita atenção. Já GTA V apostou em uma direção mais ágil e um mundo aberto cheio de possibilidades. É por isso que comparar os dois até hoje rende discussão: realismo e diversão nem sempre são a mesma coisa. E para você, qual é o melhor? Comenta GTA IV ou GTA V e se inscreve no canal, porque vem muita curiosidade gamer por aí!",
+      "duration_target_range_seconds": [
+        25,
+        60
+      ],
+      "thumbnail": {
+        "style": "cinematic_anime_illustration_white_uppercase_bold_serif_black_stroke_top_center",
+        "lines": [
+          "GTA IV OU",
+          "GTA V?"
+        ],
+        "scene_index": 2,
+        "render_size": [
+          720,
+          1280
+        ],
+        "safe_top_title_fraction": 0.25,
+        "reference": "image(20261105-151450).png",
+        "text_overlay": "PIL white serif not AI text",
+        "no_brand_logos": true,
+        "no_baked_subtitles": true
+      },
+      "source_mp4": "cloud-games-alchemy-ai-six/game-001-gta4-gta5/final.mp4",
+      "origin_video_id": "61bCmdk2dV8",
+      "visuals": "reused_original_AI_art_frames_no_new_images",
+      "disclosure": "in_description_only_not_narrated",
+      "cta_required": true,
+      "state": "reserved_preproduction"
+    },
+    {
+      "source_episode_id": "game-002-primeira-noite-minecraft",
+      "revised_episode_id": "game-002-primeira-noite-minecraft-v2",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Minecraft: você lembra da primeira noite assustadora?",
+      "description": "Madeira, abrigo improvisado e barulhos no escuro: a primeira noite no Minecraft faz parte da memória de muitos jogadores.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #NostalgiaGamer #Shorts",
+      "tags": [
+        "Minecraft",
+        "Minecraft sobrevivência",
+        "primeira noite Minecraft",
+        "creeper",
+        "Minecraft nostalgia",
+        "Minecraft Brasil",
+        "Hélio Conde",
+        "games Brasil",
+        "você lembra?"
+      ],
+      "hashtags": [
+        "#Minecraft",
+        "#NostalgiaGamer",
+        "#Shorts"
+      ],
+      "narration": "Você lembra da primeira noite no Minecraft? Tudo começava com aquela pressa para pegar madeira, encontrar um lugar e improvisar um abrigo. Mas o sol sumia, os monstros apareciam e qualquer parede de terra parecia uma fortaleza. O melhor era acordar no dia seguinte e descobrir que você tinha sobrevivido a mais uma noite naquele mundo enorme. E você, construía uma casinha ou cavava um buraco no chão? Conta nos comentários e se inscreve para acompanhar mais lembranças dos jogos que marcaram nossa história!",
+      "duration_target_range_seconds": [
+        25,
+        60
+      ],
+      "thumbnail": {
+        "style": "cinematic_anime_illustration_white_uppercase_bold_serif_black_stroke_top_center",
+        "lines": [
+          "PRIMEIRA",
+          "NOITE"
+        ],
+        "scene_index": 4,
+        "render_size": [
+          720,
+          1280
+        ],
+        "safe_top_title_fraction": 0.25,
+        "reference": "image(20261105-151450).png",
+        "text_overlay": "PIL white serif not AI text",
+        "no_brand_logos": true,
+        "no_baked_subtitles": true
+      },
+      "source_mp4": "cloud-games-alchemy-ai-six/game-002-primeira-noite-minecraft/final.mp4",
+      "origin_video_id": "GJyfGo8Mhtw",
+      "visuals": "reused_original_AI_art_frames_no_new_images",
+      "disclosure": "in_description_only_not_narrated",
+      "cta_required": true,
+      "state": "reserved_preproduction"
+    },
+    {
+      "source_episode_id": "game-003-minecraft-sem-amarelo",
+      "revised_episode_id": "game-003-minecraft-sem-amarelo-v2",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Minecraft sem tocar no amarelo: como seria esse desafio?",
+      "description": "Imagine um mundo de Minecraft em que qualquer bloco amarelo é proibido. Que caminhos e decisões seriam mais difíceis nessa hipótese?\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #DesafioMinecraft #Shorts",
+      "tags": [
+        "Minecraft desafio",
+        "Minecraft sem tocar amarelo",
+        "Minecraft challenge",
+        "Minecraft Brasil",
+        "sobrevivência Minecraft",
+        "desafio de cores",
+        "Hélio Conde",
+        "games Brasil",
+        "jogos em alta"
+      ],
+      "hashtags": [
+        "#Minecraft",
+        "#DesafioMinecraft",
+        "#Shorts"
+      ],
+      "narration": "Imagina explorar um mundo parecido com Minecraft com uma regra absurda: você não pode encostar em nada amarelo! Uma flor vira obstáculo, uma faixa de areia bloqueia o caminho e um campo inteiro pode obrigar você a dar a volta. Até construir uma ponte exigiria pensar bem nos materiais. Parece um desafio simples, mas cada detalhe muda a estratégia. Agora quero saber: se pudesse proibir uma cor do mapa inteiro, qual você escolheria? Responde aqui e se inscreve no canal para acompanhar as próximas ideias gamer!",
+      "duration_target_range_seconds": [
+        25,
+        60
+      ],
+      "thumbnail": {
+        "style": "cinematic_anime_illustration_white_uppercase_bold_serif_black_stroke_top_center",
+        "lines": [
+          "SEM TOCAR",
+          "NO AMARELO"
+        ],
+        "scene_index": 4,
+        "render_size": [
+          720,
+          1280
+        ],
+        "safe_top_title_fraction": 0.25,
+        "reference": "image(20261105-151450).png",
+        "text_overlay": "PIL white serif not AI text",
+        "no_brand_logos": true,
+        "no_baked_subtitles": true
+      },
+      "source_mp4": "cloud-games-alchemy-ai-six/game-003-minecraft-sem-amarelo/final.mp4",
+      "origin_video_id": "RaHo_rrHk8M",
+      "visuals": "reused_original_AI_art_frames_no_new_images",
+      "disclosure": "in_description_only_not_narrated",
+      "cta_required": true,
+      "state": "reserved_preproduction"
+    },
+    {
+      "source_episode_id": "alchemy-001-chatgpt-gifs",
+      "revised_episode_id": "alchemy-001-chatgpt-gifs-v2",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "GIFs com inteligência artificial: como funcionam?",
+      "description": "Animações curtas podem começar com imagens e movimentos em loop.\n\nQual outra curiosidade de IA merece um vídeo?\n\n🎨 Ilustrações geradas por IA; não são gravações de interface nem resultados de testes.\n\n#GIFcomIA #ChatGPT #Shorts",
+      "tags": [
+        "GIF IA",
+        "gerar GIF com IA",
+        "imagens animadas",
+        "ChatGPT imagens",
+        "animação com IA",
+        "imagem para GIF",
+        "Alchemy Flames",
+        "inteligência artificial",
+        "curiosidades de IA"
+      ],
+      "hashtags": [
+        "#GIFcomIA",
+        "#ChatGPT",
+        "#Shorts"
+      ],
+      "narration": "Você já pensou em dar movimento a um desenho sem animar tudo quadro por quadro? Um GIF funciona como uma sequência curta de imagens repetidas, criando a sensação de movimento contínuo. Com ferramentas de inteligência artificial, podemos planejar ações simples, como um robô acenando ou uma estrela piscando. O segredo está em manter o personagem parecido em todos os quadros e fazer o final combinar com o começo. Quer aprender mais possibilidades da inteligência artificial? Então se inscreve no canal e acompanha o próximo vídeo!",
+      "duration_target_range_seconds": [
+        25,
+        60
+      ],
+      "thumbnail": {
+        "style": "cinematic_anime_illustration_white_uppercase_bold_serif_black_stroke_top_center",
+        "lines": [
+          "GIFS COM",
+          "IA?"
+        ],
+        "scene_index": 2,
+        "render_size": [
+          720,
+          1280
+        ],
+        "safe_top_title_fraction": 0.25,
+        "reference": "image(20261105-151450).png",
+        "text_overlay": "PIL white serif not AI text",
+        "no_brand_logos": true,
+        "no_baked_subtitles": true
+      },
+      "source_mp4": "cloud-games-alchemy-ai-six/alchemy-001-chatgpt-gifs/final.mp4",
+      "origin_video_id": "bdjD6zCEDkw",
+      "visuals": "reused_original_AI_art_frames_no_new_images",
+      "disclosure": "in_description_only_not_narrated",
+      "cta_required": true,
+      "state": "reserved_preproduction"
+    },
+    {
+      "source_episode_id": "alchemy-002-images-26-consistencia",
+      "revised_episode_id": "alchemy-002-images-26-consistencia-v2",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Images 2.6: o desafio de manter personagens iguais",
+      "description": "Referências visuais, roupa e proporções ajudam a reduzir inconsistências.\n\nQue ferramenta você gostaria de entender melhor?\n\n🎨 Ilustrações geradas por IA; não são gravações de interface nem resultados de testes.\n\n#ImagensComIA #AnimacaoIA #Shorts",
+      "tags": [
+        "Images 2.6",
+        "consistência de personagem",
+        "animação IA",
+        "personagem IA",
+        "imagem para vídeo",
+        "edição de imagem IA",
+        "Alchemy Flames",
+        "inteligência artificial",
+        "análise de ferramentas IA"
+      ],
+      "hashtags": [
+        "#ImagensComIA",
+        "#AnimacaoIA",
+        "#Shorts"
+      ],
+      "narration": "Por que um personagem criado com inteligência artificial às vezes muda de rosto, roupa ou tamanho entre duas imagens? Porque cada geração precisa reconstruir os detalhes visuais, e nem sempre eles ficam idênticos. Referências claras, cores fixas, acessórios marcantes e poses bem descritas ajudam a reduzir essas diferenças. Antes de usar uma sequência, vale olhar especialmente os olhos, as mãos e as roupas. Qual dessas mudanças mais chama sua atenção? Conta aqui e se inscreve para acompanhar mais dicas sobre imagens com IA!",
+      "duration_target_range_seconds": [
+        25,
+        60
+      ],
+      "thumbnail": {
+        "style": "cinematic_anime_illustration_white_uppercase_bold_serif_black_stroke_top_center",
+        "lines": [
+          "MESMO",
+          "PERSONAGEM?"
+        ],
+        "scene_index": 2,
+        "render_size": [
+          720,
+          1280
+        ],
+        "safe_top_title_fraction": 0.25,
+        "reference": "image(20261105-151450).png",
+        "text_overlay": "PIL white serif not AI text",
+        "no_brand_logos": true,
+        "no_baked_subtitles": true
+      },
+      "source_mp4": "cloud-games-alchemy-ai-six/alchemy-002-images-26-consistencia/final.mp4",
+      "origin_video_id": "GIeHe2gDuiQ",
+      "visuals": "reused_original_AI_art_frames_no_new_images",
+      "disclosure": "in_description_only_not_narrated",
+      "cta_required": true,
+      "state": "reserved_preproduction"
+    },
+    {
+      "source_episode_id": "alchemy-003-gif-animado-tutorial",
+      "revised_episode_id": "alchemy-003-gif-animado-tutorial-v2",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "GIF animado com IA: o processo explicado por etapas",
+      "description": "Do conceito ao loop final, há etapas de criação e revisão.\n\nQue outra etapa você quer aprender?\n\n🎨 Ilustrações geradas por IA; não são gravações de interface nem resultados de testes.\n\n#GIFAnimado #TutorialIA #Shorts",
+      "tags": [
+        "criar GIF IA",
+        "tutorial GIF",
+        "imagem animada",
+        "animação de imagem",
+        "ferramentas IA",
+        "GIF animado",
+        "Alchemy Flames",
+        "inteligência artificial",
+        "tutorial IA"
+      ],
+      "hashtags": [
+        "#GIFAnimado",
+        "#TutorialIA",
+        "#Shorts"
+      ],
+      "narration": "Quer planejar um GIF animado com ajuda da inteligência artificial? Comece escolhendo um personagem e um movimento curto, como um aceno. Depois, descreva o que deve se mover e o que precisa ficar parado. Pense também no loop: o último quadro deve combinar com o primeiro para a animação não dar um salto. Na revisão, confira rosto, mãos, roupas e a opção de exportação disponível na ferramenta. E qual personagem você animaria primeiro? Deixa sua ideia nos comentários e se inscreve para acompanhar os próximos tutoriais!",
+      "duration_target_range_seconds": [
+        25,
+        60
+      ],
+      "thumbnail": {
+        "style": "cinematic_anime_illustration_white_uppercase_bold_serif_black_stroke_top_center",
+        "lines": [
+          "COMO CRIAR",
+          "UM GIF?"
+        ],
+        "scene_index": 3,
+        "render_size": [
+          720,
+          1280
+        ],
+        "safe_top_title_fraction": 0.25,
+        "reference": "image(20261105-151450).png",
+        "text_overlay": "PIL white serif not AI text",
+        "no_brand_logos": true,
+        "no_baked_subtitles": true
+      },
+      "source_mp4": "cloud-games-alchemy-ai-six/alchemy-003-gif-animado-tutorial/final.mp4",
+      "origin_video_id": "XTc7hjnp4cY",
+      "visuals": "reused_original_AI_art_frames_no_new_images",
+      "disclosure": "in_description_only_not_narrated",
+      "cta_required": true,
+      "state": "reserved_preproduction"
+    }
+  ]
+}
