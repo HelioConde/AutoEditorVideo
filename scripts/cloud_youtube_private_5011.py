@@ -18,7 +18,8 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
-from youtube_short_thumbnail import attach_thumbnail, ThumbnailBlocked
+from youtube_short_thumbnail import attach_thumbnail, ThumbnailBlocked, verified_generated_cover
+from youtube_upload_profiles import build_insert_body, upload_notify_subscribers, UploadProfileError
 
 ROOT=Path(__file__).resolve().parents[1]
 REVIEW=ROOT/'cloud-br-en-review-5011'
@@ -60,6 +61,9 @@ def validate_review(channel:str,dir:Path=REVIEW)->tuple[Path,dict,str]:
         raise UploadBlocked('BAD_SOURCE_ARTIFACT')
     if summary.get('publication')!='not_performed' or len(summary.get('videos',[]))!=2:
         raise UploadBlocked('NOT_A_TWO_CHANNEL_REVIEW_ARTIFACT')
+    # Fail BEFORE videos.insert if the exact original generated thumbnail is
+    # missing. Never choose a random frame or use YouTube-generated alternatives.
+    verified_generated_cover(dir,summary,channel,ID)
     item=next((x for x in summary['videos'] if x.get('channel')==channel),None)
     if not item:
         raise UploadBlocked('MISSING_CHANNEL_IN_ARTIFACT')
@@ -160,12 +164,16 @@ def publish_one(env:dict[str,str],channel:str,output_dir:Path=REVIEW)->dict:
         # A prior upload, private or otherwise, MUST NOT be repeated.
         print(f'[YOUTUBE {channel.upper()}] ALREADY_EXISTS_NO_SECOND_UPLOAD')
         return {'channel':channel,'id':ID,'status':'existing','video_id':prior}
-    body={'snippet':{'title':title,'description':description+'\n\n'+marker,
-                     'tags':tags,'categoryId':'1','defaultLanguage':'pt' if channel=='br' else 'en'},
-          'status':{'privacyStatus':'private','selfDeclaredMadeForKids':False}}
+    prepared=dict(meta)
+    prepared['description' if channel=='br' else 'descricao']=description+'\n\n'+marker
+    body=build_insert_body(channel,prepared,privacy='private')
+    if body['status']['privacyStatus']!='private':
+        raise UploadBlocked('PRIVATE_ONLY_CLOUD_UPLOAD')
     print(f'[YOUTUBE {channel.upper()}] CHANNEL_VERIFIED_SENDING_PRIVATE')
     media=MediaFileUpload(str(path),mimetype='video/mp4',chunksize=4*1024*1024,resumable=True)
-    command=youtube.videos().insert(part='snippet,status',body=body,media_body=media)
+    command=youtube.videos().insert(part='snippet,status',body=body,
+                                    notifySubscribers=upload_notify_subscribers(channel),
+                                    media_body=media)
     response=None
     try:
         while response is None:
@@ -193,7 +201,9 @@ def main(argv=None)->int:
         file.write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
         try:
             youtube,_=authorized_youtube(os.environ,args.channel)
-            cover=REVIEW/f'{args.channel}-{ID}-cover.jpg'
+            summary=json.loads((REVIEW/'review-summary.json').read_text(encoding='utf-8'))
+            cover,digest=verified_generated_cover(REVIEW,summary,args.channel,ID)
+            record['generated_cover_sha256']=digest
             result=attach_thumbnail(youtube,record['video_id'],cover)
         except (UploadBlocked,ThumbnailBlocked) as exc:
             record['thumbnail_status']='pending'
@@ -205,7 +215,7 @@ def main(argv=None)->int:
         file.write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
         print('[YOUTUBE] PRIVATE_MP4_AND_COVER_API_ACKNOWLEDGED')
         return 0
-    except (UploadBlocked,ThumbnailBlocked) as exc:
+    except (UploadBlocked,ThumbnailBlocked,UploadProfileError) as exc:
         print('[YOUTUBE] '+str(exc),file=sys.stderr)
         return 1
 
