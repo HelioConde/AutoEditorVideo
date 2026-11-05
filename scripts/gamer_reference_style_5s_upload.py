@@ -19,6 +19,7 @@ import time
 from googleapiclient.http import MediaFileUpload
 from games_alchemy_ai_upload import get_youtube,confirm_private,set_thumbnail
 from gamer_reference_style_5s import DEST, EP, OWNER, TAG, SOURCE_RUN, _sha
+from youtube_public_tags import public_tags
 from youtube_channel_registry import KNOWN_IDS,get_channel
 from production_reservations import assert_reserved
 
@@ -130,7 +131,7 @@ def upload_once(youtube,meta:dict,video:Path)->str:
     body={
         "snippet":{
             "title":meta["title"],"description":meta["description"],
-            "tags":meta["tags"],"categoryId":"20","defaultLanguage":"pt-BR",
+            "tags":public_tags(meta["tags"]),"categoryId":"20","defaultLanguage":"pt-BR",
         },
         "status":{"privacyStatus":"private",
                   "selfDeclaredMadeForKids":False,
