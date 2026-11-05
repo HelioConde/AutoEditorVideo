@@ -158,14 +158,20 @@ def publish_one(env:dict[str,str],channel:str,output_dir:Path=REVIEW)->dict:
     title=meta.get('title') if channel=='br' else meta['titulo']
     description=meta.get('description') if channel=='br' else meta['descricao']
     tags=meta.get('tags') or []
-    marker=f'AUTOEDITORVIDEO-5011-{channel}-{digest[:16]}'
-    prior=exists_in_playlist(youtube,playlist,marker,title)
+    # Legacy uploads may contain this tracking marker in their description.
+    # Read it ONLY to detect historical duplicates; never write it publicly.
+    internal_upload_key=f'AUTOEDITORVIDEO-5011-{channel}-{digest[:16]}'
+    prior=exists_in_playlist(youtube,playlist,internal_upload_key,title)
     if prior:
         # A prior upload, private or otherwise, MUST NOT be repeated.
         print(f'[YOUTUBE {channel.upper()}] ALREADY_EXISTS_NO_SECOND_UPLOAD')
-        return {'channel':channel,'id':ID,'status':'existing','video_id':prior}
+        return {'channel':channel,'id':ID,'status':'existing','video_id':prior,
+                'internal_upload_key':internal_upload_key}
     prepared=dict(meta)
-    prepared['description' if channel=='br' else 'descricao']=description+'\n\n'+marker
+    # Upload idempotency belongs in the internal receipt, NOT the published
+    # title/description/hashtags/tags. The upload profile also strips any
+    # legacy IDs accidentally present inside an authored manifest.
+    prepared['description' if channel=='br' else 'descricao']=description
     body=build_insert_body(channel,prepared,privacy='private')
     if body['status']['privacyStatus']!='private':
         raise UploadBlocked('PRIVATE_ONLY_CLOUD_UPLOAD')
@@ -182,7 +188,8 @@ def publish_one(env:dict[str,str],channel:str,output_dir:Path=REVIEW)->dict:
         if len(video_id)!=11 or (response.get('status') or {}).get('privacyStatus')!='private':
             raise UploadBlocked('UPLOAD_NOT_CONFIRMED_PRIVATE_DO_NOT_RETRY')
         print(f'[YOUTUBE {channel.upper()}] PRIVATE_UPLOAD_CONFIRMED_VIDEO_ID_{video_id}')
-        return {'channel':channel,'id':ID,'status':'private','video_id':video_id}
+        return {'channel':channel,'id':ID,'status':'private','video_id':video_id,
+                'internal_upload_key':internal_upload_key}
     except UploadBlocked:
         raise
     except Exception:
