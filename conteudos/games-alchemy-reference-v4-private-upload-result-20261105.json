@@ -1,0 +1,133 @@
+{
+  "schema": "autoeditorvideo/six-reference-v4-private-youtube-confirmations/v1",
+  "date": "2026-11-05",
+  "status": "six_new_reference_v4_shorts_confirmed_private_on_correct_channels",
+  "github_workflow_run": 42074829801,
+  "github_workflow_url": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42074829801",
+  "render_artifact": {
+    "id": 13439442112,
+    "name": "gamer-alchemy-reference-v4-six",
+    "size_bytes": 78474605
+  },
+  "receipt_artifacts": {
+    "games": 13439382764,
+    "alchemy": 13438728207
+  },
+  "source_original_ai_visual_render_run": 42044136670,
+  "approved_reference_test": {
+    "episode": "game-901-estilo-referencia-5s",
+    "github_run": 42071497586,
+    "youtube_id": "464eWmgPBnA"
+  },
+  "program_provenance": {
+    "renderer": "AutoEditorVideo/ArquivoOtakuMaster",
+    "captions": "scripts/legendas_precisas.py + native Remotion word highlights",
+    "visual_profile": "gamer-alchemy-reference",
+    "cover_generator": "scripts/capa_cinematografica.py",
+    "cover_template": "gamer-alchemy-reference"
+  },
+  "new_image_model_calls": 0,
+  "new_mp4_uploads": 6,
+  "privacy": "private",
+  "made_public": false,
+  "all_earlier_private_videos_preserved": true,
+  "thumbnail_api_accepted": 6,
+  "thumbnail_studio_ui_verified": false,
+  "thumbnail_delay_after_upload_seconds": 75,
+  "counts": {
+    "games": 3,
+    "alchemy": 3,
+    "total": 6
+  },
+  "channel_ids": {
+    "games": "UCg77gYc1_wkHuL07XPtKcow",
+    "alchemy": "UCCTYFE5Cmz2aYZ37cJQ-wcg"
+  },
+  "videos": [
+    {
+      "channel": "games",
+      "episode": "game-001-gta4-gta5-v4",
+      "title": "GTA IV vs GTA V: por que a física ainda surpreende?",
+      "youtube_video_id": "CY9v9742DqY",
+      "url": "https://www.youtube.com/watch?v=CY9v9742DqY",
+      "privacy": "private",
+      "channel_identity_verified": true,
+      "private_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_ui_verified": false,
+      "duration_seconds": 32.21
+    },
+    {
+      "channel": "games",
+      "episode": "game-002-primeira-noite-minecraft-v4",
+      "title": "Minecraft: você lembra da primeira noite assustadora?",
+      "youtube_video_id": "vG5tqbqirRo",
+      "url": "https://www.youtube.com/watch?v=vG5tqbqirRo",
+      "privacy": "private",
+      "channel_identity_verified": true,
+      "private_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_ui_verified": false,
+      "duration_seconds": 30.78
+    },
+    {
+      "channel": "games",
+      "episode": "game-003-minecraft-sem-amarelo-v4",
+      "title": "Minecraft sem tocar no amarelo: como seria esse desafio?",
+      "youtube_video_id": "0PzFrTqWUQk",
+      "url": "https://www.youtube.com/watch?v=0PzFrTqWUQk",
+      "privacy": "private",
+      "channel_identity_verified": true,
+      "private_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_ui_verified": false,
+      "duration_seconds": 31.85
+    },
+    {
+      "channel": "alchemy",
+      "episode": "alchemy-001-chatgpt-gifs-v4",
+      "title": "GIFs com inteligência artificial: como funcionam?",
+      "youtube_video_id": "xeABjVrX09U",
+      "url": "https://www.youtube.com/watch?v=xeABjVrX09U",
+      "privacy": "private",
+      "channel_identity_verified": true,
+      "private_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_ui_verified": false,
+      "duration_seconds": 32.04
+    },
+    {
+      "channel": "alchemy",
+      "episode": "alchemy-002-images-26-consistencia-v4",
+      "title": "Images 2.6: o desafio de manter personagens iguais",
+      "youtube_video_id": "Vg1QNyPbN7s",
+      "url": "https://www.youtube.com/watch?v=Vg1QNyPbN7s",
+      "privacy": "private",
+      "channel_identity_verified": true,
+      "private_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_ui_verified": false,
+      "duration_seconds": 34.37
+    },
+    {
+      "channel": "alchemy",
+      "episode": "alchemy-003-gif-animado-tutorial-v4",
+      "title": "GIF animado com IA: o processo explicado por etapas",
+      "youtube_video_id": "ujhj3LgdqVc",
+      "url": "https://www.youtube.com/watch?v=ujhj3LgdqVc",
+      "privacy": "private",
+      "channel_identity_verified": true,
+      "private_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_ui_verified": false,
+      "duration_seconds": 33
+    }
+  ],
+  "quality_notes": [
+    "All six programmatic covers observed in 1080x1920 contact sheet; 6 original-program caption renders sampled at early/late positions, with short white text and active yellow word.",
+    "Video script endings include topic-related calls to comment/subscribe. Explanation that visuals are AI-generated remains in descriptions.",
+    "Original AI visual assets reused; exact semantic match of every frame to narration was not manually certified. Some mid-clip visual mismatch may remain in original artwork.",
+    "YouTube thumbnail API acknowledged all six after 75 seconds; appearance in Shorts UI is not proved.",
+    "The user authorized re-uploads. They were submitted PRIVATE; no public release occurred."
+  ]
+}
