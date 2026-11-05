@@ -1,0 +1,60 @@
+{
+  "schema": "autoeditorvideo/gamer-three-v4-single-request-reupload-confirmation/v1",
+  "date": "2026-11-05",
+  "status": "three_private_gamer_reuploads_fully_processed",
+  "workflow_run": 42090188952,
+  "source_render_run": 42074829801,
+  "receipt_artifact_id": 13444583537,
+  "channel": "games",
+  "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+  "counts": {
+    "requested": 3,
+    "uploaded": 3,
+    "private": 3,
+    "processed": 3,
+    "thumbnail_api_accepted": 3
+  },
+  "upload_method": "single_request_non_resumable",
+  "no_alchemy_changes": true,
+  "no_new_images": true,
+  "earlier_videos_preserved": true,
+  "made_public": false,
+  "videos": [
+    {
+      "episode": "game-001-gta4-gta5-v4-reenvio1",
+      "new_youtube_id": "GPJa03DRf5Y",
+      "old_youtube_id": "CY9v9742DqY",
+      "duration": "PT33S",
+      "url": "https://www.youtube.com/watch?v=GPJa03DRf5Y",
+      "visibility": "private",
+      "upload_status": "processed",
+      "processing_status": "succeeded",
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_ui_verified": false
+    },
+    {
+      "episode": "game-002-primeira-noite-minecraft-v4-reenvio1",
+      "new_youtube_id": "BCqrEmJa77E",
+      "old_youtube_id": "vG5tqbqirRo",
+      "duration": "PT31S",
+      "url": "https://www.youtube.com/watch?v=BCqrEmJa77E",
+      "visibility": "private",
+      "upload_status": "processed",
+      "processing_status": "succeeded",
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_ui_verified": false
+    },
+    {
+      "episode": "game-003-minecraft-sem-amarelo-v4-reenvio1",
+      "new_youtube_id": "j7_cAomsPvM",
+      "old_youtube_id": "0PzFrTqWUQk",
+      "duration": "PT32S",
+      "url": "https://www.youtube.com/watch?v=j7_cAomsPvM",
+      "visibility": "private",
+      "upload_status": "processed",
+      "processing_status": "succeeded",
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_ui_verified": false
+    }
+  ]
+}
