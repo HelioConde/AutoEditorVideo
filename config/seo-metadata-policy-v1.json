@@ -1,6 +1,6 @@
 {
   "schema": "autoeditorvideo/seo-metadata-policy/v1",
-  "revision": "2026-11-05",
+  "revision": "2026-11-05-ai-visuals",
   "state": "editorial_guidance_only_not_wired_to_publisher",
   "applies_to": "future_metadata_drafts_only",
   "does_not_authorize": "publishing, uploads, mass-edits or changes to current YouTube videos",
@@ -60,7 +60,9 @@
       "Avoid claims like 'testei' unless the experiment was actually executed and shown.",
       "Treat vidIQ scores as diagnostic hints, not YouTube ranking guarantees.",
       "For children-directed videos never include requests for comments, likes or subscriptions directed at children.",
-      "No upload, automatic metadata update, or publication is implied by this policy."
+      "No upload, automatic metadata update, or publication is implied by this policy.",
+      "For Gamer, NEVER request, capture, fetch or portray recorded gameplay; use AI illustrations and append honest disclaimer.",
+      "For IA, replace 'Testei por Você!' with 'IA Sob a Lupa' when no real experiment exists; no fake UI/screenshots or test claims."
     ],
     "performance_review": [
       "views_and_engaged_views_by_video_age",
@@ -99,9 +101,11 @@
       "id": "UCg77gYc1_wkHuL07XPtKcow",
       "current_brand": "Hélio Conde",
       "proposed_brand": "Conde Games not applied",
-      "description_focus": "game title + real gameplay or verified curiosity + platform/version",
+      "description_focus": "game title + verified curiosity/nostalgia/news, with clearly marked AI-generated illustrations and NO actual gameplay",
       "brand_hashtag": null,
-      "requires_real_gameplay_if_claimed": true
+      "requires_real_gameplay_if_claimed": false,
+      "visual_policy": "ai_generated_images_only_no_gameplay_capture",
+      "mandatory_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
     },
     "kids": {
       "id": "UCxEzVW2Uy44OUVurTQSg_Eg",
@@ -117,10 +121,12 @@
       "id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
       "current_brand_last_observed": "Alchemy Flames",
       "planned_brand": "Alchemy Lab; YouTube rename unverified",
-      "description_focus": "tool/model version + authentic tested result or reproducible tutorial + limitation if relevant",
+      "description_focus": "factual tool/model explanation and conceptual tutorial illustrated with AI-generated art; no tests or UI claims without real evidence",
       "brand_hashtag": "#AlchemyLab",
       "requires_verified_demo_if_tested_claim": true,
-      "require_official_tool_version_check": true
+      "require_official_tool_version_check": true,
+      "visual_policy": "ai_generated_images_only_no_fake_ui_or_experiment",
+      "mandatory_disclosure": "🎨 Ilustrações geradas por IA. Resultados de testes só são afirmados quando verificados."
     }
   },
   "short_example": {
