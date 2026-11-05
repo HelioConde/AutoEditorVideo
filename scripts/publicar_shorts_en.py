@@ -16,6 +16,7 @@ import subprocess
 import sys
 
 from renderizar_shorts_en import load_english, english_metadata, OUT, ROOT, EN_CHANNEL_V3
+from youtube_upload_profiles import sanitize_youtube_description
 from shorts_duration import validate_seconds
 
 CLIENT = ROOT / ".secrets" / "youtube-oauth-client.json"
@@ -200,7 +201,8 @@ def upload(youtube, row: dict, privacy: str, saved: dict) -> dict:
         part="snippet,status",
         body={
             "snippet": {
-                "title": meta["titulo"], "description": meta["descricao"],
+                "title": meta["titulo"],
+                "description": sanitize_youtube_description(meta["descricao"]),
                 "tags": meta["tags"], "categoryId": meta["categoria"],
                 "defaultLanguage": meta["idioma"],
             },
