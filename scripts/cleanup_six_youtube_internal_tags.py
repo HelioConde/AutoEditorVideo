@@ -12,7 +12,6 @@ import os
 from pathlib import Path
 import sys
 
-from games_alchemy_ai_upload import get_youtube
 from youtube_channel_registry import get_channel,KNOWN_IDS
 from youtube_public_tags import public_tags,internal_tags
 
@@ -84,6 +83,7 @@ def preserved_snippet(s:dict,tags:list[str])->dict:
 
 def cleanup(channel:str)->None:
     ids=preflight(channel)
+    from games_alchemy_ai_upload import get_youtube
     api=get_youtube(channel,dict(os.environ))
     mine=api.channels().list(part="id",mine=True).execute().get("items",[])
     if [x.get("id") for x in mine]!=[KNOWN_IDS[channel]]:
