@@ -2,6 +2,23 @@
 
 ## REGRA PERMANENTE — FIM DE SHORTS E MINIATURAS GAMER + IA (05/11/2026)
 
+- **O AutoEditorVideo é o único gerador das capas.** Não criar miniaturas
+  paralelas por PIL ad hoc, screenshots aleatórias, ferramentas externas ou
+  montagens enviadas ao vídeo. Reutilizar `scripts/capa_cinematografica.py`
+  (`render_cover`) a partir das artes originais geradas pelo pipeline.
+  Usar layout da referência com título branco serifado no topo.
+- **As legendas seguem obrigatoriamente o padrão do programa existente:**
+  `scripts/narracao_shorts.py` para voz/WordBoundary,
+  `scripts/legendas_precisas.py` para grupos de 2–3 palavras e
+  `motion-remotion/src/master-short.tsx` (`ArquivoOtakuMaster`) para
+  renderizar com palavra pronunciada em amarelo (`#ffd166`), texto
+  branco grosso, fundo escuro e margens originais. Não substituir
+  pelo ASS simples do piloto Gamer/Alchemy V1/V2.
+- Para estes 6 Shorts, a revisão que usa esses componentes canônicos
+  é `scripts/games_alchemy_native_v3.py`. V1/V2 são rascunhos privados,
+  não a versão final aprovada. Antes de qualquer upload público,
+  inspecionar o MP4 completo, as capas e as palavras destacadas.
+
 - A **narração** deve terminar com um CTA relevante ao tema, por exemplo uma
   pergunta concreta e um convite para se inscrever/acompanhar o próximo Short.
   Proibido terminar narrando metadados de produção: "este vídeo foi criado por
