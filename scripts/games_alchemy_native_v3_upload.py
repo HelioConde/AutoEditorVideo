@@ -177,8 +177,16 @@ def upload(channel:str)->None:
             try:
                 id=insert_private(youtube,job)
             except Exception:
-                raise NativeV3UploadBlocked("AMBIGUOUS_UPLOAD_STOP_NO_RETRY_"+job["id"]) from None
-            # Preserve receipt immediately to avoid duplicates after thumbnails errors.
+                # Google can return a resumable-upload redirect without Location
+                # AFTER accepting the video (RedirectMissingLocation).
+                # Never call videos.insert twice: query the private uploads
+                # playlist by the V3 idempotency tag and exact title instead.
+                time.sleep(20)
+                recovered=recent_private_v3(youtube,channel,job["meta"]["title"])
+                if len(recovered)!=1:
+                    raise NativeV3UploadBlocked("AMBIGUOUS_UPLOAD_STOP_NO_RETRY_"+job["id"]) from None
+                id=recovered[0]
+            # Persist the accepted ID before waiting for the separate cover.
             record={"id":job["id"],"channel":channel,
                     "video_id":id,"visibility":"private",
                     "from_prior_v3":False,
@@ -191,14 +199,16 @@ def upload(channel:str)->None:
             raise NativeV3UploadBlocked("PRIVATE_CHANNEL_UNVERIFIED_"+job["id"])
         record["confirmed_private"]=True
         receipts_path.write_text(json.dumps(receipts,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        # Also apply the program-generated cover when an already-accepted
+        # video was recovered after an ambiguous upload. Never reinsert MP4.
         if not matches:
             time.sleep(75)
-            record["thumbnail_api_acknowledged"]=set_thumbnail(youtube,id,job["cover"])
-            record["thumbnail_wait_seconds"]=75
-            record["thumbnail_studio_visibility"]="not_verified"
-            receipts_path.write_text(json.dumps(receipts,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-            if not record["thumbnail_api_acknowledged"]:
-                raise NativeV3UploadBlocked("COVER_API_UNACKNOWLEDGED_NO_REUPLOAD_"+job["id"])
+        record["thumbnail_api_acknowledged"]=set_thumbnail(youtube,id,job["cover"])
+        record["thumbnail_wait_seconds"]=75 if not matches else 0
+        record["thumbnail_studio_visibility"]="not_verified"
+        receipts_path.write_text(json.dumps(receipts,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        if not record["thumbnail_api_acknowledged"]:
+            raise NativeV3UploadBlocked("COVER_API_UNACKNOWLEDGED_NO_REUPLOAD_"+job["id"])
         print("NATIVE_V3_PRIVATE_"+job["id"]+"_"+id,flush=True)
     if len(receipts)!=3 or any(not x["confirmed_private"] for x in receipts):
         raise NativeV3UploadBlocked("THREE_PRIVATE_UPLOADS_NOT_CONFIRMED")
