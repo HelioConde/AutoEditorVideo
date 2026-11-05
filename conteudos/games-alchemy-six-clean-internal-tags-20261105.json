@@ -1,0 +1,34 @@
+{
+  "schema": "autoeditorvideo/six-private-shorts-internal-tags-cleanup/v1",
+  "date": "2026-11-05",
+  "approved_by_creator": true,
+  "request": "Errado: tags internas autoeditorvideo-* aparecem no YouTube Studio/vidIQ. Limpar sem afetar tags reais de SEO.",
+  "scope": "existing_uploads_only_no_new_video",
+  "channels": {
+    "games": [
+      "GPJa03DRf5Y",
+      "BCqrEmJa77E",
+      "j7_cAomsPvM"
+    ],
+    "alchemy": [
+      "WNlK9OYe1jc",
+      "bk433QOIdK0",
+      "iKlsUANJ8og"
+    ]
+  },
+  "preserve_titles_descriptions_privacy_thumbnails": true,
+  "only_remove_tag_prefixes": [
+    "autoeditorvideo-",
+    "autoeditorvideo_",
+    "autoeditorvideo:"
+  ],
+  "keep_valid_keywords": true,
+  "new_uploads": 0,
+  "no_video_deletions": true,
+  "expected_YouTube_API_method": "videos.update(part=snippet) using exact title description categoryId defaultLanguage and cleaned tag list",
+  "preserve_original_video_privacy": "private",
+  "expected_receipt_artifacts": [
+    "seo-tags-cleaned-games",
+    "seo-tags-cleaned-alchemy"
+  ]
+}
