@@ -1,5 +1,28 @@
 # Arquivo Otaku — orientações para agentes
 
+## REGRA PERMANENTE — FIM DE SHORTS E MINIATURAS GAMER + IA (05/11/2026)
+
+- A **narração** deve terminar com um CTA relevante ao tema, por exemplo uma
+  pergunta concreta e um convite para se inscrever/acompanhar o próximo Short.
+  Proibido terminar narrando metadados de produção: "este vídeo foi criado por
+  IA", "não é gameplay", "não é captura de tela", "não testamos o modelo", etc.
+- **Não ocultar/falsificar** a natureza dos visuais: avisar na **descrição**
+  que as imagens são ilustrações geradas por IA, classificar conteúdo sintético
+  conforme regras da plataforma e nunca afirmar gameplay ou teste realizado.
+- Estilo obrigatório de thumbnails nos canais Gamer e IA: referência
+  `image(20261105-151450).png`; formato **9:16**, arte ilustrativa
+  cinematográfica de corpo inteiro, título resumido em **BRANCO, CAIXA ALTA,
+  FONTE SERIFADA** no **TOPO**, contorno preto e contraste adequado. Sem
+  faixas de texto na parte inferior, logos que tapem a arte, títulos longos,
+  recortes de personagens ou grafismos publicitários espalhafatosos.
+- Em refações, gerar MP4 novo sem legendas anteriores queimadas e revisar
+  as legendas novas com margem horizontal, evitando cortar palavras.
+- Para versões já enviadas ao YouTube, nunca afirmar substituição in-place:
+  fazer novo upload privado após reserva/versionamento, conferência de ID e QA,
+  preservar o vídeo privado anterior até autorização explícita para exclusão.
+- Referência de seis roteiros corrigidos e títulos de capas:
+  `conteudos/lote-6-games-alchemy-recut-v2.json`.
+
 ## REGRA OFICIAL — GAMER E IA USAM SOMENTE IMAGENS GERADAS POR IA (05/11/2026)
 
 - **Gamer (Hélio Conde): é proibido capturar, solicitar, baixar ou exigir gameplay real.**
