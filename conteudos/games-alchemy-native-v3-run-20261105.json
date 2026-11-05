@@ -1,0 +1,33 @@
+{
+  "schema": "autoeditorvideo/six-native-visual-style-correction/v1",
+  "date": "2026-11-05",
+  "approval_from_creator": true,
+  "requested_change": "Capas geradas pelo programa AutoEditorVideo e legendas no padrão já criado no AutoEditorVideo.",
+  "status": "requested_render_only_private_upload_requires_qa",
+  "source_original_artifact_run": 42044136670,
+  "original_ai_images_reused": true,
+  "additional_paid_image_calls": 0,
+  "revised_script_source": "conteudos/lote-6-games-alchemy-recut-v2.json",
+  "reservation_owner": "games_alchemy_six_shorts_v3_20261105",
+  "caption_system": {
+    "engine": "motion-remotion/src/master-short.tsx",
+    "timing": "scripts/legendas_precisas.py",
+    "voice": "scripts/narracao_shorts.py",
+    "pattern": "2-3 words per caption with spoken word highlighted yellow, white heavy text and dark transparent panel"
+  },
+  "thumbnail_system": {
+    "engine": "scripts/capa_cinematografica.py",
+    "source": "reused original AI illustrated scenes",
+    "format": "1080x1920 JPEG",
+    "style": "cinematic large white serif title on top with contrast and no brand-blocking overlay"
+  },
+  "channels": {
+    "games": 3,
+    "alchemy": 3
+  },
+  "notes": [
+    "Keep V1/V2 videos private and unchanged while revising.",
+    "No publishing before structural and visual QA of native subtitles and generated covers.",
+    "Publish private V3 only with distinct OAuth and anti-duplication after successful QA."
+  ]
+}
