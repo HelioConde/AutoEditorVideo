@@ -292,8 +292,10 @@ Veja [PowerShell por canal](docs/POWERSHELL-CANAIS-GAMER-INGLES.md).
 
 **Próxima etapa OAuth cloud-first preparada (ainda não ativada):**
 [Conectar com segurança os canais Gamer, Emanuelly Kids/Fofinhos e Alchemy Lab](docs/CONECTAR-3-CANAIS-OAUTH-GITHUB.md).
-Um PowerShell separado verifica cada conta Google e importa tokens somente
-com consentimento para Environments GitHub protegidos. O workflow
+Um PowerShell separado verifica cada conta Google e importa somente o
+token do canal escolhido, com consentimento, para o único Environment
+youtube-private-upload já protegido na branch main; preserva o OAuth Client
+e os tokens BR/EN existentes. O workflow
 [youtube-new-channels-oauth.yml](.github/workflows/youtube-new-channels-oauth.yml)
 valida a identidade por leitura, sem gerar/publicar vídeos e sem modificar
 as credenciais Otaku.
