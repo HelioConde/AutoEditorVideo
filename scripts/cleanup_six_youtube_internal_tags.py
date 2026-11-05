@@ -61,8 +61,8 @@ def read(api,video_id:str,channel:str)->dict:
         raise TagCleanupBlocked("VIDEO_NOT_VISIBLE_TO_OWNER_"+video_id)
     v=items[0]
     if (v.get("id")!=video_id or v.get("snippet",{}).get("channelId")!=KNOWN_IDS[channel] or
-        v.get("status",{}).get("privacyStatus")!="private"):
-        raise TagCleanupBlocked("WRONG_IDENTITY_OR_PRIVACY_"+video_id)
+        v.get("status",{}).get("privacyStatus") not in ("private","unlisted","public")):
+        raise TagCleanupBlocked("WRONG_IDENTITY_OR_UNKNOWN_PRIVACY_"+video_id)
     s=v["snippet"]
     if not s.get("title") or not s.get("categoryId"):
         raise TagCleanupBlocked("REQUIRED_SNIPPET_FIELDS_MISSING_"+video_id)
@@ -120,7 +120,7 @@ def cleanup(channel:str)->None:
             now.get("description","")!=s.get("description","") or
             now.get("categoryId")!=s.get("categoryId") or
             now.get("defaultLanguage")!=s.get("defaultLanguage") or
-            after.get("status",{}).get("privacyStatus")!="private"):
+            after.get("status",{}).get("privacyStatus")!=before.get("status",{}).get("privacyStatus")):
             raise TagCleanupBlocked("VIDEO_SNIPPET_PRESERVATION_FAILED_"+id)
         entry["verified"]=True
         receipt_path.write_text(json.dumps(results,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
