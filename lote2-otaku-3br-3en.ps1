@@ -15,6 +15,7 @@ param(
     [int]$MaxChamadasBleach=0,
     [ValidateRange(0,60)]
     [int]$MaxChamadasJujutsu=0,
+    [switch]$SomenteJujutsu,
     [switch]$ExigirMovimentoPersonagem
 )
 
@@ -33,6 +34,11 @@ $br=@(
     [pscustomobject]@{Numero=10;Id='5010-aoashi';Chamadas=$MaxChamadasNovos}
 )
 $manifesto='assets\gerados\otaku-en-lote2-3-shorts.json'
+if($SomenteJujutsu){
+    $br=@()
+    $enIds=@('401-jujutsu-kaisen-ep01')
+    $manifesto='assets\gerados\otaku-en-lote2-jujutsu.json'
+}
 
 foreach($name in @('grade-50-shorts.ps1','criar-publicar-short.ps1',
                    'preparar-publicados-en.ps1','gerar-shorts-en.ps1',
@@ -125,8 +131,12 @@ function Get-EstadoEN {
 
 Push-Location $root
 try {
-    Write-Host '[BR] Bleach (#5), Overgeared (#9), Aoashi (#10)' -ForegroundColor Cyan
-    Write-Host '[EN] Steel Ball Run, Death Note 40s, Jujutsu Kaisen' -ForegroundColor Cyan
+    if($SomenteJujutsu){
+        Write-Host '[FOCO] Somente Jujutsu Kaisen EN; outros cinco Shorts intocados.' -ForegroundColor Cyan
+    } else {
+        Write-Host '[BR] Bleach (#5), Overgeared (#9), Aoashi (#10)' -ForegroundColor Cyan
+        Write-Host '[EN] Steel Ball Run, Death Note 40s, Jujutsu Kaisen' -ForegroundColor Cyan
+    }
     if(-not $Publicar){
         Write-Host '[PREVIA] Nenhum video sera enviado ou gerado.' -ForegroundColor Yellow
         foreach($ep in $br){
