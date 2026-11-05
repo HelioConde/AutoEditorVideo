@@ -1,0 +1,188 @@
+name: Otaku BR+EN 5011 - publish YouTube PRIVATE after OAuth authorization
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/otaku-cloud-private-5011.yml'
+      - 'scripts/cloud_youtube_private_5011.py'
+      - 'scripts/youtube_env_policy_guard.py'
+      - 'tests/test_cloud_youtube_private_5011.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/otaku-cloud-private-5011.yml'
+      - 'scripts/cloud_youtube_private_5011.py'
+      - 'scripts/youtube_env_policy_guard.py'
+      - 'tests/test_cloud_youtube_private_5011.py'
+  workflow_dispatch:
+    inputs:
+      render_run_id:
+        description: 'Successful protected 5011 BR+EN cloud render run ID'
+        type: string
+        required: true
+        default: '42013193406'
+      channel:
+        description: 'Private-upload destination'
+        type: choice
+        required: true
+        default: both
+        options:
+          - both
+          - br
+          - en
+      confirm_private_upload:
+        description: 'I authorize PRIVATE YouTube upload to the verified channels, never public/scheduled'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-5011-private-youtube-upload
+  cancel-in-progress: false
+
+jobs:
+  offline-security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install YouTube client for offline stubs
+        run: python -m pip install -r requirements-publicacao.txt 'pytest>=8,<10'
+      - name: Verify channel separation, privacy, artifacts and protected environment
+        run: python -m pytest -q tests/test_cloud_youtube_private_5011.py
+
+  verify-youtube-environment:
+    needs: offline-security
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      inputs.confirm_private_upload == true &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate separate YouTube publishing Environment is main-only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/youtube_env_policy_guard.py
+      - name: Check completed artifact originates from this exact GitHub production run
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.render_run_id }}
+        run: |
+          set -euo pipefail
+          test "$SOURCE_RUN_ID" = "42013193406"
+          repo="$GITHUB_REPOSITORY"
+          base="repos/$repo/actions/runs/$SOURCE_RUN_ID"
+          event="$(gh api "$base" --jq '.event')"
+          conclusion="$(gh api "$base" --jq '.conclusion')"
+          head_sha="$(gh api "$base" --jq '.head_sha')"
+          workflow="$(gh api "$base" --jq '.name')"
+          test "$event" = "push"
+          test "$conclusion" = "success"
+          test "$head_sha" = "e0e4686d6a7f2f7324761dd8dbe3e8e00724e2f0"
+          test "$workflow" = "Otaku Multicena + Otaku Reframe - 5011 BR and EN cloud render"
+          echo '[YOUTUBE PREFLIGHT] EXACT_SUCCESSFUL_TWO_VIDEO_RUN_VERIFIED'
+
+  private-upload-br:
+    needs: [offline-security, verify-youtube-environment]
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      inputs.confirm_private_upload == true &&
+      (inputs.channel == 'br' || inputs.channel == 'both') &&
+      github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube uploader libraries
+        run: python -m pip install -r requirements-publicacao.txt
+      - name: Retrieve both completed MP4s from the pinned GitHub render
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-5011-gachiakuta-BR-EN-autoeditorvideo
+          path: cloud-br-en-review-5011/
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.render_run_id }}
+      - name: Private upload to Otaku Multicena BR only after OAuth verification
+        env:
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_BR_TOKEN_JSON: ${{ secrets.YOUTUBE_BR_TOKEN_JSON }}
+          EXPECTED_CHANNEL_ID: UCXGYTuBYn-0Ziqin5ajKhOw
+          PRIVATE_UPLOAD_CONFIRMED: 'true'
+        run: python scripts/cloud_youtube_private_5011.py --channel br
+      - name: Preserve only video ID and status for private review
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-5011-br-private-upload-status
+          path: cloud-br-en-review-5011/private-upload-result-br.json
+          retention-days: 14
+
+  private-upload-en:
+    needs: [offline-security, verify-youtube-environment]
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      inputs.confirm_private_upload == true &&
+      (inputs.channel == 'en' || inputs.channel == 'both') &&
+      github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube uploader libraries
+        run: python -m pip install -r requirements-publicacao.txt
+      - name: Retrieve both completed MP4s from the pinned GitHub render
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-5011-gachiakuta-BR-EN-autoeditorvideo
+          path: cloud-br-en-review-5011/
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.render_run_id }}
+      - name: Private upload to Otaku Reframe EN only after OAuth verification
+        env:
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_EN_TOKEN_JSON: ${{ secrets.YOUTUBE_EN_TOKEN_JSON }}
+          EXPECTED_CHANNEL_ID: UCBoNbQjaMYdpJqPLRZAFkvQ
+          PRIVATE_UPLOAD_CONFIRMED: 'true'
+        run: python scripts/cloud_youtube_private_5011.py --channel en
+      - name: Preserve only video ID and status for private review
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-5011-en-private-upload-status
+          path: cloud-br-en-review-5011/private-upload-result-en.json
+          retention-days: 14
