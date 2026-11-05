@@ -1,0 +1,79 @@
+name: Gamer + Alchemy - redo 6 CTA Shorts + cinematic covers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/games-alchemy-six-recut-v2-run-20261105.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: games-alchemy-six-recut-v2-one-shot-20261105
+  cancel-in-progress: false
+
+jobs:
+  validate-v2-editorial:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(recut): render six corrected CTA Shorts and reference-style thumbs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install lightweight offline QA dependencies
+        run: python -m pip install 'pytest>=8,<10'
+      - name: Validate reservations, six CTA scripts and thumbnail constraints
+        run: |
+          python -m pytest -q tests/test_games_alchemy_six_recut_v2.py
+          python scripts/games_alchemy_six_recut_v2.py --action validate
+          python -m py_compile scripts/games_alchemy_six_recut_v2.py
+
+  recut-existing-ai-footage:
+    needs: validate-v2-editorial
+    if: needs.validate-v2-editorial.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install ffmpeg, subtitles, TTS and image processing - NO image-model secrets
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Reuse original SIX MP4s without calling image generation
+        uses: actions/download-artifact@v4
+        with:
+          name: games-alchemy-six-ai-render
+          run-id: 42044136670
+          github-token: ${{ github.token }}
+          path: source-games-alchemy-six/
+      - name: Render 6 new MP4s with clean captions, topic CTAs and vintage-serif covers
+        env:
+          RECUT_V2_APPROVED: 'true'
+          SOURCE_RUN_ID: '42044136670'
+        run: python scripts/games_alchemy_six_recut_v2.py --action render
+      - name: Publish only media artifacts for internal review, no YouTube upload
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: games-alchemy-six-recut-v2-preview
+          path: cloud-games-alchemy-recut-v2/
+          if-no-files-found: error
+          retention-days: 5
