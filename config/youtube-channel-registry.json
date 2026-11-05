@@ -50,7 +50,7 @@
       "brand_status": "proposed_not_renamed_on_youtube",
       "youtube_channel_id": "UCg77gYc1_wkHuL07XPtKcow",
       "language": "pt-BR",
-      "content": "gaming_original_gameplay_and_game_development",
+      "content": "gaming_news_nostalgia_curiosities_ai_generated_illustrations_no_gameplay",
       "audience": "general",
       "made_for_kids_default": false,
       "visibility_default": "private",
@@ -60,8 +60,11 @@
       "video_profile": "games",
       "script_entrypoint": "canal-gamer.ps1",
       "editorial_rules": [
-        "Only genuine or licensed gameplay; do not simulate achievements",
-        "Do not route Fofinhos/Kids or anime uploads here"
+        "NO recorded or downloaded gameplay. Use only original AI-generated images/scenes as visual illustration.",
+        "Never portray AI imagery as authentic gameplay, tests, screenshots or official footage; describe them as illustrations.",
+        "Replace playthrough/test challenges with hypotheses, curiosity, explanation and current game news after fact-checking.",
+        "Use three formats: Você Sabia?, Você Lembra?, Jogos em Alta.",
+        "Do not route Fofinhos/Kids, anime or Alchemy uploads here."
       ],
       "brand_note": "Conde Games was proposed for this existing channel; do not rename YouTube account automatically.",
       "youtube_category_id": "20",
@@ -78,7 +81,7 @@
         "privacy": "private",
         "auto_publication": false
       },
-      "gameplay_policy": "show authentic owned/permitted gameplay; never fake captures"
+      "gameplay_policy": "never_record_gameplay; ai_generated_illustrations_only; explicit_no_gameplay_disclosure"
     },
     "kids": {
       "name": "Emanuelly Kids",
@@ -133,10 +136,11 @@
       "oauth_token_secret_name": "YOUTUBE_ALCHEMY_TOKEN_JSON",
       "video_profile": "alchemy",
       "editorial_rules": [
-        "Genuine demonstrations and reproducible results; do not claim tests were run if not",
-        "No mass-produced low-value repetitive Shorts",
-        "Declare realistic synthetic media per content and YouTube policy",
-        "Keep any secrets and credentials out of video, repo, artifacts and logs"
+        "Use original AI-generated illustrations and scenes; they are not screenshots or proof of tests.",
+        "Do not say Testei/Comparei/Conseguiu when no test was executed; only claim verified features, names and dates.",
+        "Use three formats: Você Sabia?, IA Sob a Lupa, IA na Prática (illustrated conceptual tutorial).",
+        "Do not mass-produce low-value repetitive Shorts; each narrative must have original educational value.",
+        "Declare realistic synthetic media when YouTube requires it; keep secrets, credentials and private images out of videos/repo/logs."
       ],
       "brand_note": "Change of channel brand on YouTube is a separate authorized action; registration only.",
       "youtube_category_id": "28",
