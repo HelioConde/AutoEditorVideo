@@ -1,0 +1,53 @@
+{
+  "schema": "autoeditorvideo/games-alchemy-approved-reference-v4-one-shot/v1",
+  "date": "2026-11-05",
+  "creator_approval": "está tudo certo, refazer os videos e fazer o upload",
+  "authorized_by_creator": true,
+  "approved_reference_test": {
+    "episode_id": "game-901-estilo-referencia-5s",
+    "workflow_run_id": 42071497586,
+    "youtube_private_id": "464eWmgPBnA"
+  },
+  "channels": {
+    "games": {
+      "youtube_channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "count": 3,
+      "oauth": "YOUTUBE_GAMES_TOKEN_JSON"
+    },
+    "alchemy": {
+      "youtube_channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "count": 3,
+      "oauth": "YOUTUBE_ALCHEMY_TOKEN_JSON"
+    }
+  },
+  "ids": [
+    "game-001-gta4-gta5-v4",
+    "game-002-primeira-noite-minecraft-v4",
+    "game-003-minecraft-sem-amarelo-v4",
+    "alchemy-001-chatgpt-gifs-v4",
+    "alchemy-002-images-26-consistencia-v4",
+    "alchemy-003-gif-animado-tutorial-v4"
+  ],
+  "owner": "games_alchemy_six_reference_v4_20261105",
+  "visibility": "private",
+  "public_release": false,
+  "preserve_prior_v1_v2_v3_and_5s_test": true,
+  "source_ai_render_run": 42044136670,
+  "new_image_generation_calls": 0,
+  "full_video_narration": "reused from six CTA-corrected scripts in conteudos/lote-6-games-alchemy-recut-v2.json",
+  "scene_safety": "Avoid mismatched old ending frames in GTA and first Alchemy GIF using explicit cinematic scene time selections.",
+  "thumbnail": {
+    "engine": "scripts/capa_cinematografica.py",
+    "template": "gamer-alchemy-reference",
+    "size": "1080x1920",
+    "delay_after_new_upload_seconds": 75
+  },
+  "captions": {
+    "engine": "motion-remotion/src/master-short.tsx",
+    "profile": "gamer-alchemy-reference",
+    "word_alignment": "scripts/legendas_precisas.py",
+    "active_color": "#ffd166"
+  },
+  "idempotency": "Use unique V4 tag per upload; verify exact channel ID and existing private videos; never blindly repeat ambiguous videos.insert.",
+  "workflow": ".github/workflows/games-alchemy-reference-v4.yml"
+}
