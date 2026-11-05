@@ -31,6 +31,7 @@ on:
 # verified main-only Environment before the protected job is scheduled.
 permissions:
   contents: read
+  actions: read  # GET /environments/... requires Actions read permission
 
 jobs:
   offline-tests:
