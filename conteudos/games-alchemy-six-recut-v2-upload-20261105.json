@@ -1,0 +1,27 @@
+{
+  "schema": "autoeditorvideo/six-recut-v2-private-upload-one-shot/v1",
+  "date": "2026-11-05",
+  "approved_by_creator": true,
+  "revision": "v2",
+  "creator_request": "Corrigir os seis Shorts dos canais Gamer e IA, retirar narração sobre processo de IA, encerrar com CTA para inscrição e refazer thumbnails conforme a referência visual fornecida.",
+  "source_recut_run": 42055957229,
+  "source_artifact_id": 13429072215,
+  "source_artifact_name": "games-alchemy-six-recut-v2-preview",
+  "visibility": "private",
+  "keep_old_private_videos": true,
+  "thumbnail_upload_delay_s": 75,
+  "channel_counts": {
+    "games": 3,
+    "alchemy": 3
+  },
+  "visual_qa_reviewed": true,
+  "quality_review": "Six V2 MP4 files validated as 720x1280 H264+AAC, six white-uppercase-serif top-title covers reviewed in contact sheet; subtitles observed centered and not clipped in sample frames. CTA narration text verified in editorial manifest; synth media described in descriptions.",
+  "user_style_reference": "image(20261105-151450).png",
+  "upload_safety": [
+    "Each channel has different OAuth token, exact Channel ID check.",
+    "Only v2 reserved IDs, unique tag protects from repeated upload.",
+    "No public publishing or deletion of v1 videos.",
+    "On timeout stop and reconcile via the private channel playlist before any retry.",
+    "Wait 75 seconds AFTER receiving video ID then thumbnails.set; note API acknowledgment is not Studio UI proof."
+  ]
+}
