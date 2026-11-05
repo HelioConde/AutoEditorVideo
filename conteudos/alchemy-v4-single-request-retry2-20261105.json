@@ -1,0 +1,25 @@
+{
+  "schema": "autoeditorvideo/alchemy-three-v4-single-request-retry-followup/v1",
+  "date": "2026-11-05",
+  "approved_by_creator": true,
+  "source_request": "Agora envie os videos do canal IA, método em requisição única testado no Gamer.",
+  "channel": "alchemy",
+  "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+  "expected_count": 3,
+  "source_run": 42074829801,
+  "source_artifact_id": 13439442112,
+  "previous_run": 42093990295,
+  "previous_result": "failed in initial state(api,old) before ANY videos.insert; old V4 is pending in Studio",
+  "new_check": "Validate channels.list mine, verify exact OAuth channel, recent private V4 retry tag and all V4 media checksums, not stale previous processing state.",
+  "method": "single_request_non_resumable",
+  "visibility": "private",
+  "no_new_images": true,
+  "no_other_channel_changes": true,
+  "old_videos_unchanged": true,
+  "old_ids": [
+    "xeABjVrX09U",
+    "Vg1QNyPbN7s",
+    "ujhj3LgdqVc"
+  ],
+  "destination": ".github/workflows/alchemy-v4-three-single-request-retry2.yml"
+}
