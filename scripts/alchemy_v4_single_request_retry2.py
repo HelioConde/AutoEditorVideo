@@ -60,13 +60,13 @@ def check():
  return checked
 
 def existing(api,episode,title):
-  # Existing processed IDs are stored in a repository manifest, not SEO tags.
-  receipt_file=ROOT/"conteudos/alchemy-v4-three-single-request-result-20261105.json"
-  recorded=set()
-  if receipt_file.is_file():
-   data=json.loads(receipt_file.read_text(encoding="utf-8"))
-   recorded={v["new_youtube_video_id"] for v in data.get("videos",[])
-             if v.get("source_episode")==episode}
+ # Existing processed IDs are stored in a repository manifest, not SEO tags.
+ receipt_file=ROOT/"conteudos/alchemy-v4-three-single-request-result-20261105.json"
+ recorded=set()
+ if receipt_file.is_file():
+  data=json.loads(receipt_file.read_text(encoding="utf-8"))
+  recorded={v["new_youtube_video_id"] for v in data.get("videos",[])
+            if v.get("source_episode")==episode}
  owner=api.channels().list(part="contentDetails",mine=True).execute().get("items",[])
  if len(owner)!=1 or owner[0].get("id")!=CHANNEL:raise UploadBlocked("OAUTH_CHANNEL_MISMATCH")
  playlist=owner[0]["contentDetails"]["relatedPlaylists"]["uploads"]
