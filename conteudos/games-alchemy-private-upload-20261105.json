@@ -1,0 +1,28 @@
+{
+  "schema": "autoeditorvideo/one-time-private-upload-approval/v1",
+  "approved_by_creator": true,
+  "creator_request": "Corrigir até ser enviado para o YouTube (Gamer e canal IA, 3 Shorts cada)",
+  "date": "2026-11-05",
+  "original_run_id": 42044136670,
+  "original_run_sha": "a414b9aea8d778f27c765cfb3d45e94612d0ee05",
+  "artifact_id": 13425056457,
+  "artifact_name": "games-alchemy-six-ai-render",
+  "visuals": "AI-only, zero gameplay",
+  "youtube_visibility": "private",
+  "targets": [
+    {
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "count": 3,
+      "secret": "YOUTUBE_GAMES_TOKEN_JSON"
+    },
+    {
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "count": 3,
+      "secret": "YOUTUBE_ALCHEMY_TOKEN_JSON"
+    }
+  ],
+  "execution": "Single first-attempt push on main; verify original image job and exact YouTube channel identity; forbid automatic replay.",
+  "release_note": "Private uploads first for visual and audio review; no public launch authorized by this marker."
+}
