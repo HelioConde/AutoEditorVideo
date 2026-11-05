@@ -135,6 +135,8 @@ def get_youtube(channel: str, env: dict):
     from google.auth.transport.requests import Request
     from google.oauth2.credentials import Credentials
     from googleapiclient.discovery import build
+    from google_auth_httplib2 import AuthorizedHttp
+    import httplib2
     try:
         client = json.loads(env["YOUTUBE_CLIENT_JSON"])
         token = json.loads(env["YOUTUBE_CHANNEL_TOKEN_JSON"])
@@ -144,7 +146,10 @@ def get_youtube(channel: str, env: dict):
                            "https://www.googleapis.com/auth/youtube.readonly"])
         if not credential.valid:
             credential.refresh(Request())
-        api = build("youtube", "v3", credentials=credential, cache_discovery=False)
+        # Private upload can take longer than googleapiclient's default socket
+        # timeout; set a bounded 180-second HTTP timeout without extra retries.
+        api_http = AuthorizedHttp(credential, http=httplib2.Http(timeout=180))
+        api = build("youtube", "v3", http=api_http, cache_discovery=False)
         verify_channel_identity(api, channel)
         return api
     except Exception:
