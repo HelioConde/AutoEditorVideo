@@ -26,7 +26,10 @@
       "privacy": "private",
       "confirmed_private": true,
       "thumbnail_acknowledged": true,
-      "verified_by": "initial_upload_verified_again"
+      "verified_by": "initial_upload_verified_again",
+      "thumbnail_retry_api_acknowledged": true,
+      "thumbnail_retry_wait_seconds": 75,
+      "thumbnail_studio_display_verified": false
     },
     {
       "channel": "games",
@@ -37,7 +40,10 @@
       "privacy": "private",
       "confirmed_private": true,
       "thumbnail_acknowledged": null,
-      "verified_by": "found_existing_after_timeout"
+      "verified_by": "found_existing_after_timeout",
+      "thumbnail_retry_api_acknowledged": true,
+      "thumbnail_retry_wait_seconds": 75,
+      "thumbnail_studio_display_verified": false
     },
     {
       "channel": "games",
@@ -48,7 +54,10 @@
       "privacy": "private",
       "confirmed_private": true,
       "thumbnail_acknowledged": true,
-      "verified_by": "recovered_new_upload"
+      "verified_by": "recovered_new_upload",
+      "thumbnail_retry_api_acknowledged": true,
+      "thumbnail_retry_wait_seconds": 75,
+      "thumbnail_studio_display_verified": false
     },
     {
       "channel": "alchemy",
@@ -59,7 +68,10 @@
       "privacy": "private",
       "confirmed_private": true,
       "thumbnail_acknowledged": true,
-      "verified_by": "initial_upload"
+      "verified_by": "initial_upload",
+      "thumbnail_retry_api_acknowledged": true,
+      "thumbnail_retry_wait_seconds": 75,
+      "thumbnail_studio_display_verified": false
     },
     {
       "channel": "alchemy",
@@ -70,7 +82,10 @@
       "privacy": "private",
       "confirmed_private": true,
       "thumbnail_acknowledged": true,
-      "verified_by": "initial_upload"
+      "verified_by": "initial_upload",
+      "thumbnail_retry_api_acknowledged": true,
+      "thumbnail_retry_wait_seconds": 75,
+      "thumbnail_studio_display_verified": false
     },
     {
       "channel": "alchemy",
@@ -81,7 +96,10 @@
       "privacy": "private",
       "confirmed_private": true,
       "thumbnail_acknowledged": true,
-      "verified_by": "initial_upload"
+      "verified_by": "initial_upload",
+      "thumbnail_retry_api_acknowledged": true,
+      "thumbnail_retry_wait_seconds": 75,
+      "thumbnail_studio_display_verified": false
     }
   ],
   "counts": {
@@ -93,7 +111,23 @@
     "Private-only until final visual and audio review; initial image samples showed a few visual consistency issues and some subtitles exceeding the video safe width.",
     "game-002's YouTube upload succeeded despite a client-side TimeoutError; it was discovered via the owning channel's uploads list and not sent twice.",
     "game-002's thumbnail acknowledgement was unavailable after the timeout, so inspect its cover in YouTube Studio.",
-    "No extra paid image-generation calls were made during upload recovery."
+    "No extra paid image-generation calls were made during upload recovery.",
+    "2026-11-05: re-sent the six 720x1280 JPEG thumbs after a 75-second delay. thumbnails.set API acknowledged all 6; videos remained private. Thumbnail URLs exposed by videos.list did not change; this alone does not prove either success or failure of Studio/Shorts display. Manual Studio visibility check needed."
   ],
-  "future_workflow_rule": "Before any new upload for these episode IDs, check this result manifest and actual private video IDs. Do not create duplicates."
+  "future_workflow_rule": "Before any new upload for these episode IDs, check this result manifest and actual private video IDs. Do not create duplicates.",
+  "thumbnail_retry": {
+    "workflow_run": 42051300131,
+    "status": "success",
+    "date": "2026-11-05",
+    "method": "Wait 75 seconds, send existing thumb.jpg through YouTube thumbnails.set, then verify video remains private with same Channel ID.",
+    "api_acknowledged": 6,
+    "failures": 0,
+    "studio_visual_confirmation": "not_verified",
+    "api_result_vs_ui": "API acknowledgement does not establish the custom thumbnail is displayed on Shorts, especially across YouTube surfaces; independent Studio check remains necessary.",
+    "gamer_receipt_artifact": 13426792149,
+    "alchemy_receipt_artifact": 13427891390,
+    "retried_all_six": true,
+    "original_mp4s_uploaded_again": false,
+    "new_images_generated": false
+  }
 }
