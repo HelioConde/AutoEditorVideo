@@ -1,121 +1,122 @@
-# Conectar Gamer, Kids e Alchemy Lab no GitHub — OAuth protegido
+# Conectar Gamer, Kids e Alchemy Lab ao Environment único do GitHub
 
-Etapa 05/11/2026. **Cloud-first.** O Windows faz somente o consentimento
-inicial no Google; o GitHub Actions verifica a identidade e, em outra etapa
-futura, renderiza e publica. **Nenhum vídeo é gerado ou enviado aqui.**
+Atualização 05/11/2026 — decisão do criador: CENTRALIZAR os cinco canais
+no Environment existente youtube-private-upload. Nenhum token real é
+transferido automaticamente por este PR e nenhum vídeo é publicado.
 
-| Canal | ID real | Environment GitHub |
-|---|---|---|
-| Gamer (nome atual Hélio Conde) | UCg77gYc1_wkHuL07XPtKcow | youtube-games-private-upload |
-| Emanuelly Kids (série Fofinhos) | UCxEzVW2Uy44OUVurTQSg_Eg | youtube-kids-private-upload |
-| Alchemy Lab (nome atual Alchemy Flames) | UCCTYFE5Cmz2aYZ37cJQ-wcg | youtube-alchemy-private-upload |
+## Configuração final
 
-## Etapa 1 — criar ambientes protegidos
+Um único Environment: https://github.com/HelioConde/AutoEditorVideo/settings/environments
+Selecione youtube-private-upload. Ele já existia com a proteção para main
+e três Secrets utilizados pelos dois canais Otaku.
 
-Abra https://github.com/HelioConde/AutoEditorVideo/settings/environments
-e crie exatamente os três Environments acima. Em cada um: Deployment
-branches and tags > Selected branches and tags > autorizar somente a branch
-main (tipo branch; não usar coringa). Opcionalmente, adicionar revisão
-obrigatória no Kids. Não liberar bypass desnecessário.
+Secrets esperados:
 
-O workflow confere as regras de cada Environment em job SEM Secrets.
-Se algo estiver permissivo, ele bloqueia antes de carregar tokens.
+| Secret no Environment único | Canal |
+|---|---|
+| YOUTUBE_CLIENT_JSON | OAuth Client Google existente, NÃO sobrescrever |
+| YOUTUBE_BR_TOKEN_JSON | Otaku Multicena, preservar |
+| YOUTUBE_EN_TOKEN_JSON | Otaku Reframe, preservar |
+| YOUTUBE_GAMES_TOKEN_JSON | Gamer (Hélio Conde / Conde Games) |
+| YOUTUBE_KIDS_TOKEN_JSON | Emanuelly Kids — série Fofinhos |
+| YOUTUBE_ALCHEMY_TOKEN_JSON | Alchemy Flames / Alchemy Lab |
 
-## Etapa 2 — autorizar uma conta de cada vez no PC
+Todos os tokens de canal são independentes. Compartilhar o Environment
+simplifica a administração, mas reduz o isolamento dos Secrets entre jobs
+que utilizem esse Environment. Somente workflows estritamente controlados
+na branch main devem acessá-lo. Cada ação que use um token deve receber
+SOMENTE o Secret específico no passo e sempre verificar o Channel ID
+com channels.list(mine=true) antes de qualquer escrita na conta.
+Nenhum dos novos canais possui uploader automaticamente habilitado.
 
-No PowerShell:
+## 1 — Confirmar proteção da branch main
 
-    cd C:\Users\helio\Documents\arquivo-otaku-github
-    git pull --ff-only origin main
-    .\.venv\Scripts\python.exe -m pip install -r requirements-publicacao.txt
+No Environment youtube-private-upload, configure Deployment branches and
+tags > Selected branches and tags > somente a branch main.
+Não crie outros Environments. O script local e a action bloqueiam o uso
+dos Secrets quando não conseguem verificar que main é a única branch.
 
-O OAuth client desktop já utilizado pelo AutoEditorVideo precisa existir
-na pasta local .secrets\youtube-oauth-client.json. Nenhum segredo deve ser
-enviado no chat ou adicionado ao Git.
+## 2 — Garantir que os tokens locais já existem (sem renová-los)
 
-    .\conectar-novos-canais.ps1 -Canal games -Acao Inspecionar
+No PC, pasta C:\Users\helio\Documents\arquivo-otaku-github:
+
+    Test-Path .secrets\youtube-games-cloud-token.json
+    Test-Path .secrets\youtube-kids-cloud-token.json
+    Test-Path .secrets\youtube-alchemy-cloud-token.json
+
+Quando for necessário obter ou renovar o token de UM canal, execute,
+no projeto com Python e os scripts atualizados:
+
     .\conectar-novos-canais.ps1 -Canal games -Acao Conectar
     .\conectar-novos-canais.ps1 -Canal kids -Acao Conectar
     .\conectar-novos-canais.ps1 -Canal alchemy -Acao Conectar
 
-Cada conexão abre o navegador e exige consentimento no Google. Se você
-selecionar uma conta que não administra o Channel ID registrado,
-o script BLOQUEIA e NÃO salva o token. É necessário conceder os escopos
-youtube.upload + youtube.readonly e receber refresh token offline.
+O login é local e usa o navegador Google. É preciso selecionar
+exatamente o canal registrado e conceder youtube.upload e
+youtube.readonly, com refresh token. Sem Channel ID confirmado,
+nenhum token é salvo. Se token já existir, não renovar sem necessidade.
 
-Tokens privados resultantes ficam em .secrets (ignorado no Git):
-- youtube-games-cloud-token.json
-- youtube-kids-cloud-token.json
-- youtube-alchemy-cloud-token.json
+## 3 — Enviar APENAS os três novos tokens ao GitHub
 
-Um token existente só é substituído com -SubstituirToken explicitamente.
-
-## Etapa 3 — transferir tokens para os Environments com consentimento
-
-Estas ações transferem tokens de longa duração para o GitHub Environment.
-Execute SOMENTE se concordar com esse armazenamento. O PowerShell
-verifica a política exclusiva de main antes de transferir algo.
+O usuário optou por armazenar os três novos tokens no mesmo Environment.
+Os comandos abaixo exigem confirmação explícita e validam a regra main-only
+antes de escrever cada Secret. Eles NÃO sobrescrevem YOUTUBE_CLIENT_JSON,
+YOUTUBE_BR_TOKEN_JSON ou YOUTUBE_EN_TOKEN_JSON.
 
     .\conectar-novos-canais.ps1 -Canal games -Acao EnviarSecret -ConfirmarArmazenamentoGitHub
     .\conectar-novos-canais.ps1 -Canal kids -Acao EnviarSecret -ConfirmarArmazenamentoGitHub
     .\conectar-novos-canais.ps1 -Canal alchemy -Acao EnviarSecret -ConfirmarArmazenamentoGitHub
 
-Cada Environment terá YOUTUBE_CLIENT_JSON mais um token diferente:
-- games: YOUTUBE_GAMES_TOKEN_JSON
-- kids: YOUTUBE_KIDS_TOKEN_JSON
-- alchemy: YOUTUBE_ALCHEMY_TOKEN_JSON
+O PowerShell confirma que YOUTUBE_CLIENT_JSON JÁ existe no Environment.
+Se ele estiver ausente ou incompatível com a conta autorizada, NÃO
+substitua o Secret sem antes conferir o impacto nos dois canais Otaku.
 
-Confirme apenas os nomes, sem expor valores:
+Verifique a existência dos seis nomes sem revelar os valores:
 
-    gh secret list -e youtube-games-private-upload -R HelioConde/AutoEditorVideo
-    gh secret list -e youtube-kids-private-upload -R HelioConde/AutoEditorVideo
-    gh secret list -e youtube-alchemy-private-upload -R HelioConde/AutoEditorVideo
+    gh secret list -e youtube-private-upload -R HelioConde/AutoEditorVideo
 
-Os dois canais Otaku e seus Secrets ficam intactos.
+Os três Secrets antigos devem continuar existindo e com os mesmos
+valores. Os três novos devem aparecer com suas chaves individuais.
+Nunca poste tokens ou arquivos OAuth na conversa ou no Git.
 
-## Etapa 4 — confirmar OAuth dentro do GitHub Actions SEM upload
+## 4 — Conferir identidade pelo GitHub Actions SEM publicar vídeos
 
-Abra Actions > New Channels - Verify YouTube OAuth (Games Kids Alchemy)
-READ ONLY > Run workflow, branch main. Execute três vezes: games,
-kids, alchemy. Alternativamente:
+Workflow:
+https://github.com/HelioConde/AutoEditorVideo/actions/workflows/youtube-new-channels-oauth.yml
 
     gh workflow run youtube-new-channels-oauth.yml -R HelioConde/AutoEditorVideo --ref main -f channel=games
     gh workflow run youtube-new-channels-oauth.yml -R HelioConde/AutoEditorVideo --ref main -f channel=kids
     gh workflow run youtube-new-channels-oauth.yml -R HelioConde/AutoEditorVideo --ref main -f channel=alchemy
 
-O workflow valida o Environment antes dos Secrets, renova o token se
-necessário e consulta apenas channels.list(mine=true), comparando o ID
-EXATO com o registro. Não executa videos.insert, thumbnails.set,
-produção de MP4, imagens IA, agendamentos nem alterações no canal.
+Cada execução valida a proteção do mesmo Environment em um job sem
+Secrets. Depois escolhe apenas o token do canal especificado,
+renova-o se necessário e compara o Channel ID real com o registro.
+A API utilizada é somente channels.list(mine=true). Nenhum vídeo
+é gerado, atualizado, enviado, agendado ou publicado neste fluxo.
+A verificação de acesso não implica autorização de publicação.
 
-Saída esperada: VERIFIED_[CANAL] e ZERO_VIDEOS_UPLOADED.
+## 5 — Atualizar os scripts no Windows com branch Fofinhos modificada
 
-## Etapa seguinte — cloud production por canal (não liberada ainda)
+Se a pasta local continua em audit/fofinhos-otaku-ciclo-1 e possui
+arquivos Fofinhos modificados, não execute git switch main, reset --hard,
+clean -fd ou git pull --ff-only origin main na branch divergente.
+Depois da integração deste PR:
 
-Gamer: exigir gameplay gravado/permitido e reservar o episódio no
-GitHub antes do script. Render original Remotion, QA e capa gerada,
-depois upload privado e sem IDs internos nas descrições.
+    git fetch origin main
+    git restore --source=origin/main --worktree -- conectar-novos-canais.ps1 scripts/youtube_channel_registry.py scripts/youtube_new_channels_env_guard.py scripts/youtube_new_channels_oauth.py config/youtube-channel-registry.json
 
-Kids Fofinhos: imagens pessoais de referência ficam privadas,
-nunca em repo/artifact público; direitos das músicas ainda precisam
-ser confirmados; marcação Made for Kids obrigatória para conteúdo
-dirigido a crianças. Nenhum CTA de comentários/inscrições infantil.
+O restore atualiza somente os scripts escolhidos e não altera os
+trabalhos locais do Fofinhos. Revise git status antes de fazer commit.
 
-Alchemy Lab: roteiros e demonstrações IA reais e verificáveis,
-originalidade e declaração apropriada de conteúdo sintético.
-O canal ainda aparece como Alchemy Flames até renomeação no YouTube.
+## Segurança editorial que continua obrigatória
 
-O cadastro ou OAuth não concede autorização automática para publicar.
-Antes de cada produção: reservar (canal, episódio), verificar material
-fonte/direitos, QA, miniatura original com SHA e privacidade privada.
-
-## Arquivos
-
-- scripts/youtube_new_channels_oauth.py — conectividade e teste read-only
-- scripts/youtube_new_channels_env_guard.py — regra main-only
-- conectar-novos-canais.ps1 — consentimento local e Secrets protegidos
-- .github/workflows/youtube-new-channels-oauth.yml — execução por canal
-- tests/test_youtube_new_channels_oauth.py — testes offline
-
-Nenhum Environment, token ou OAuth foi criado automaticamente por esta
-mudança. Você controla cada autorização e cada possível futuro upload.
+- Gamer: gameplay real e permitido; reservar o episódio no GitHub.
+- Kids Fofinhos: conteúdo Made for Kids, referências privadas e
+  comprovação de direitos de música; nenhum pedido de comentários
+  direcionado a crianças.
+- Alchemy Lab: tutoriais com demonstrações reais, originalidade e
+  declaração adequada de conteúdo sintético realista.
+- Todos: publicar inicialmente como privado com confirmação, capa
+  ORIGINAL gerada pelo AutoEditorVideo e hash; nada de marcadores internos
+  AUTOEDITORVIDEO nas descrições; nenhuma regeneração ou reupload para
+  corrigir somente miniatura ou metadados.
