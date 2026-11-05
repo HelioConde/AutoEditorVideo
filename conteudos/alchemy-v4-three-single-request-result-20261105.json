@@ -1,0 +1,75 @@
+{
+  "schema": "autoeditorvideo/alchemy-three-v4-single-request-private-confirmations/v1",
+  "date": "2026-11-05",
+  "status": "three_alchemy_v4_nonresumable_private_uploads_processing_succeeded",
+  "channel": "alchemy",
+  "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+  "source_video_generation_run": 42074829801,
+  "source_media_artifact_id": 13439442112,
+  "first_preflight_run": 42093990295,
+  "first_run_result": "blocked before videos.insert: old V4 draft could not be confirmed private through API",
+  "successful_run": 42094362597,
+  "successful_workflow_url": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42094362597",
+  "receipt_artifact_id": 13446587380,
+  "method": "single_request_non_resumable",
+  "counts": {
+    "requested": 3,
+    "new_private_uploads": 3,
+    "processing_succeeded": 3,
+    "thumbnails_api_acknowledged": 3
+  },
+  "reused_existing_V4_mp4s": true,
+  "new_image_generation_calls": 0,
+  "older_alchemy_uploads_preserved": true,
+  "other_channels_unchanged": true,
+  "public_release_performed": false,
+  "thumbnail_display_in_youtube_studio_verified": false,
+  "videos": [
+    {
+      "episode": "alchemy-001-chatgpt-gifs-v4-reenvio1",
+      "source_episode": "alchemy-001-chatgpt-gifs-v4",
+      "title": "GIFs com inteligência artificial: como funcionam?",
+      "old_pending_video_id": "xeABjVrX09U",
+      "new_youtube_video_id": "WNlK9OYe1jc",
+      "url": "https://www.youtube.com/watch?v=WNlK9OYe1jc",
+      "studio_url": "https://studio.youtube.com/video/WNlK9OYe1jc/edit",
+      "privacy": "private",
+      "processing_status": "succeeded",
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_display_verified": false
+    },
+    {
+      "episode": "alchemy-002-images-26-consistencia-v4-reenvio1",
+      "source_episode": "alchemy-002-images-26-consistencia-v4",
+      "title": "Images 2.6: o desafio de manter personagens iguais",
+      "old_pending_video_id": "Vg1QNyPbN7s",
+      "new_youtube_video_id": "bk433QOIdK0",
+      "url": "https://www.youtube.com/watch?v=bk433QOIdK0",
+      "studio_url": "https://studio.youtube.com/video/bk433QOIdK0/edit",
+      "privacy": "private",
+      "processing_status": "succeeded",
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_display_verified": false
+    },
+    {
+      "episode": "alchemy-003-gif-animado-tutorial-v4-reenvio1",
+      "source_episode": "alchemy-003-gif-animado-tutorial-v4",
+      "title": "GIF animado com IA: o processo explicado por etapas",
+      "old_pending_video_id": "ujhj3LgdqVc",
+      "new_youtube_video_id": "iKlsUANJ8og",
+      "url": "https://www.youtube.com/watch?v=iKlsUANJ8og",
+      "studio_url": "https://studio.youtube.com/video/iKlsUANJ8og/edit",
+      "privacy": "private",
+      "processing_status": "succeeded",
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_display_verified": false
+    }
+  ],
+  "notes": [
+    "Three distinct new YouTube private IDs logged; all three returned processingStatus succeeded during run 42094362597. The complete workflow succeeded.",
+    "Each program-generated V4 thumbnail acknowledged by YouTube thumbnails.set after 75 seconds.",
+    "An initial run was blocked before creating uploads because an original pending draft was unavailable to videos.list; retried with exact OAuth account identity and idempotency-tag checks.",
+    "No changes to Gamer, Kids or Otaku channels; no old video deletions and no public release.",
+    "Studio Shorts tab presentation and thumbnail visibility should still be checked in the actual YouTube UI."
+  ]
+}
