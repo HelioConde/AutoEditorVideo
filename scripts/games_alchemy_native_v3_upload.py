@@ -16,6 +16,7 @@ import sys
 import time
 from googleapiclient.http import MediaFileUpload
 from games_alchemy_ai_upload import get_youtube,confirm_private,set_thumbnail
+from youtube_public_tags import public_tags
 from production_reservations import assert_reserved
 from youtube_channel_registry import KNOWN_IDS,get_channel
 
@@ -137,7 +138,7 @@ def insert_private(youtube,job:dict)->str:
     meta=job["meta"]
     body={
       "snippet":{"title":meta["title"],"description":meta["description"],
-                 "tags":list(dict.fromkeys(meta["tags"]+[TAG])),
+                 "tags":public_tags(meta["tags"]),
                  "categoryId":meta["categoryId"],"defaultLanguage":"pt-BR"},
       "status":{"privacyStatus":"private",
                 "selfDeclaredMadeForKids":False,
