@@ -46,17 +46,7 @@ jobs:
 
   validate-environment:
     needs: offline-safety
-    if: false # 5008 already published and tested; historical pipeline archived
-      # github.ref == 'refs/heads/main' &&
-      github.run_attempt == 1 &&
-      (
-        (github.event_name == 'push' &&
-         startsWith(github.event.head_commit.message, 'feat(cloud-br): run 5008 full video from AutoEditorVideo'))
-        ||
-        (github.event_name == 'workflow_dispatch' &&
-         inputs.episode_id == '5008-firefly-wedding' &&
-         inputs.max_calls != '0')
-      )
+    if: false # archived 5008; no further paid images or repeated videos
     runs-on: ubuntu-latest
     timeout-minutes: 3
     permissions:
@@ -73,17 +63,7 @@ jobs:
 
   generate-actual-autoeditorvideo-mp4:
     needs: [offline-safety, validate-environment]
-    if: false # 5008 already published and tested; historical pipeline archived
-      # github.ref == 'refs/heads/main' &&
-      github.run_attempt == 1 &&
-      (
-        (github.event_name == 'push' &&
-         startsWith(github.event.head_commit.message, 'feat(cloud-br): run 5008 full video from AutoEditorVideo'))
-        ||
-        (github.event_name == 'workflow_dispatch' &&
-         inputs.episode_id == '5008-firefly-wedding' &&
-         inputs.max_calls != '0')
-      )
+    if: false # archived 5008; no further paid images or repeated videos
     runs-on: ubuntu-latest
     timeout-minutes: 180
     environment: image-generation
