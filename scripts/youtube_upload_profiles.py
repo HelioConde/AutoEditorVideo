@@ -55,6 +55,29 @@ def _text(meta:Mapping,key_candidates:tuple[str,...])->str:
     return ""
 
 
+# Legacy tracking codes must never appear in a title, caption or
+# YouTube description. Previously the cloud uploader appended one of these
+# as a separate paragraph; keep it only in private/internal upload records.
+_INTERNAL_UPLOAD_LINE=re.compile(
+    r"^[ \t]*AUTOEDITORVIDEO-[0-9]{4}-(?:br|en)-[a-fA-F0-9]{16}[ \t]*$",
+    re.MULTILINE,
+)
+
+
+def sanitize_youtube_description(description:str)->str:
+    """Strip *only* known old internal tracking lines without changing prose."""
+    if not isinstance(description,str):
+        raise UploadProfileError("YOUTUBE_DESCRIPTION_NOT_TEXT")
+    text=description.replace("\r\n","\n")
+    text=_INTERNAL_UPLOAD_LINE.sub("",text)
+    text=re.sub(r"\n{3,}","\n\n",text).strip()
+    # Unknown or malformed internal IDs require manual review; they are
+    # not user-facing content and should never escape into the API request.
+    if re.search(r"AUTOEDITORVIDEO-[0-9]",text,re.IGNORECASE):
+        raise UploadProfileError("UNRECOGNIZED_INTERNAL_ID_IN_DESCRIPTION")
+    return text
+
+
 def _paragraph_dedup(description:str)->str:
     # Avoid the exact repeated paragraphs visible in some Studio paste drafts.
     paragraphs=re.split(r"\n\s*\n", description.replace("\r\n","\n").strip())
@@ -96,7 +119,9 @@ def _description(meta:Mapping,channel:str,profile:dict)->str:
     base=_text(meta,("description","descricao","description_youtube","descricao_youtube"))
     if not base:
         raise UploadProfileError("MISSING_AUTHOR_WRITTEN_DESCRIPTION")
-    description=_paragraph_dedup(base)
+    description=_paragraph_dedup(sanitize_youtube_description(base))
+    if not description:
+        raise UploadProfileError("DESCRIPTION_HAS_ONLY_INTERNAL_ID")
     configuration=profile["description"]
     lower=description.casefold()
     if not any(s in lower for s in (("inscreva","inscrever","acompanhe") if channel=="br" else ("subscribe","follow for more"))):
