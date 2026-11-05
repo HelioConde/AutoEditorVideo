@@ -91,5 +91,5 @@ if ($LASTEXITCODE -ne 0) { throw 'Falha ao registrar o OAuth client. Verifique o
 Get-Content -LiteralPath $tokenPath -Raw -Encoding UTF8 |
   & gh secret set $tokenSecretName -e $environment -R $repo
 if ($LASTEXITCODE -ne 0) { throw 'Falha ao registrar token deste canal.' }
-Write-Host "[OK] $Canal: Secrets registrados no Environment protegido $environment."
+Write-Host "[OK] ${Canal}: Secrets registrados no Environment protegido $environment."
 Write-Host '[SEGURANCA] Nenhuma publicacao, nenhum video ou token exibido na tela.'
