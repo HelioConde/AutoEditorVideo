@@ -37,7 +37,7 @@ $manifesto='assets\gerados\otaku-en-lote2-3-shorts.json'
 foreach($name in @('grade-50-shorts.ps1','criar-publicar-short.ps1',
                    'preparar-publicados-en.ps1','gerar-shorts-en.ps1',
                    'publicar-shorts-en.ps1','gerar-shorts-master.ps1',
-                   'scripts\validar_short_lote2.py')){
+                   'scripts\validar_short_lote2.py','scripts\retomar_cache_por_cena.py')){
     if(-not(Test-Path (Join-Path $root $name) -PathType Leaf)){
         throw "Arquivo ausente: $name. Atualize o projeto com git pull."
     }
@@ -242,10 +242,20 @@ try {
                         DiagnosticarCache=$true;MaxChamadas=0
                     }
                     if($MaxChamadasJujutsu -gt 0){
-                        Write-Host "[JUJUTSU] Completando somente os arquivos faltantes, teto $MaxChamadasJujutsu chamadas de imagem." -ForegroundColor Yellow
-                        Invoke-Etapa 'gerar-shorts-master.ps1' @{
-                            Id=$id;Modelo=$Modelo;TodasCenas=$true
-                            MaxChamadas=$MaxChamadasJujutsu
+                        # O gerador geral exige budget para TODAS as cenas. Retomar por cena
+                        # evita bloquear tudo quando o teto autorizado e menor que o total.
+                        $py=Join-Path $root '.venv\Scripts\python.exe'
+                        if(-not(Test-Path -LiteralPath $py -PathType Leaf)){
+                            throw 'Python .venv ausente: nao foi possivel retomar o cache EN.'
+                        }
+                        Write-Host "[JUJUTSU] Retomada por cena; teto TOTAL de $MaxChamadasJujutsu chamadas. Sem upload BR." -ForegroundColor Yellow
+                        & $py (Join-Path $root 'scripts\retomar_cache_por_cena.py') '--id' $id '--modelo' $Modelo '--max-chamadas' ([string]$MaxChamadasJujutsu)
+                        $retornoCache=$LASTEXITCODE
+                        if($retornoCache -eq 2){
+                            throw 'Jujutsu tem imagens ainda pendentes. Retomada parcial concluida dentro do teto. Use o mesmo comando para continuar; nenhum MP4 parcial sera enviado.'
+                        }
+                        if($retornoCache -ne 0){
+                            throw "Falha ao preparar cache Jujutsu ($retornoCache). Imagens existentes preservadas."
                         }
                     } else {
                         Write-Warning '[JUJUTSU] Nenhuma chamada nova autorizada. Se faltar master.png, use -MaxChamadasJujutsu apos conferir diagnostico.'
