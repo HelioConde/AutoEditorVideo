@@ -44,5 +44,6 @@ def test_no_publication_upload_or_deletion():
     assert ".thumbnails().set(" not in source
     assert ".videos().update(" in source
     assert 'part="snippet"' in source
-    assert 'privacyStatus")!="private"' in source
+    assert 'get("privacyStatus") not in ("private","unlisted","public")' in source
+    assert 'after.get("status",{}).get("privacyStatus")!=before.get("status",{}).get("privacyStatus")' in source
     ast.parse(source)
