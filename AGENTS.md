@@ -413,6 +413,18 @@ miniaturas e upload OAuth para YouTube.
   Usar `-ExigirMovimentoPersonagem` se o usuario quiser um modo
   estrito e aceitar o bloqueio; caso contrario publico com zoom suave.
   Nao chamar zoom de animacao facial ou gesto corporal.
+- **REGRA INVIOLAVEL — MINIATURAS GERADAS (05/11/2026):** para todo
+  upload BR e EN, usar SEMPRE o JPG original que foi gerado pelo
+  AutoEditorVideo, personalizado para aquele episodio e idioma, nunca frame
+  capturado, screenshot, thumbnail sugerida pelo YouTube, capa de outro
+  idioma ou imagem refeita durante upload. O pacote do render DEVE trazer
+  `cover_sha256`, `cover`, `render_origin` e `channel`; o uploader
+  valida todos ANTES de `videos.insert`. A excecao de assinatura vale
+  somente para o artifact antigo do 5011 Gachiakuta que precede a regra.
+  Se a miniatura falhar apos o upload, manter video privado e registrar
+  pendencia, sem recriar video ou substituir a capa. Configuracoes de upload
+  do BR/EN sao mantidas em `config/youtube-upload-profiles.json` e
+  documentadas em `docs/PERFIS-YOUTUBE-BR-EN-MINIATURAS-ORIGINAIS.md`.
 - **REGRA OBRIGATORIA CLOUD BR/EN (05/11/2026):** a capa JPG 9:16 do
   AutoEditorVideo NAO pode apenas existir no artifact. Apos confirmar o upload,
   o workflow deve consultar `videos.list(part=processingDetails,status)`,

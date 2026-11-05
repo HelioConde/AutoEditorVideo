@@ -1,0 +1,139 @@
+{
+  "schema": "autoeditorvideo/youtube-upload-profiles/v1",
+  "revision": "2026-11-05",
+  "policy": "Applies only to future uploads, never silently modifies existing videos. Story-specific text and tags are supplied by the episode manifest.",
+  "br": {
+    "channel_name": "Otaku Multicena",
+    "youtube_channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+    "language": "pt-BR",
+    "title_and_description_language": "pt-BR",
+    "category_id": "1",
+    "privacy_default": "private",
+    "license": "youtube",
+    "embeddable": true,
+    "public_stats_viewable": true,
+    "self_declared_made_for_kids": false,
+    "notify_subscribers": true,
+    "commentary_moderation_studio": "none",
+    "comments_studio": "enabled",
+    "remix_studio": "review audio-and-video permission in Studio",
+    "altered_content_ai": "review_each_video",
+    "description": {
+      "call_to_action": "Inscreva-se no Otaku Multicena para mais histórias e análises de anime. Conte sua opinião nos comentários!",
+      "original_content_notice": "Conteúdo independente com comentário, narração, edição e ilustrações geradas por IA. Os animes e personagens pertencem aos respectivos titulares.",
+      "extra_hashtags": [
+        "#OtakuMulticena",
+        "#Shorts"
+      ],
+      "spoiler_notice": "⚠️ Contém spoilers."
+    },
+    "tags": {
+      "priority": [
+        "Anime Brasil",
+        "Anime Shorts",
+        "Otaku Multicena",
+        "Anime"
+      ],
+      "unrelated_blacklist": [
+        "free movies",
+        "free movie",
+        "anime in hindi",
+        "full movie english",
+        "full movies",
+        "youtube movies",
+        "movies english",
+        "full free movies"
+      ],
+      "max_characters": 500
+    },
+    "thumbnail": {
+      "source": "autoeditorvideo_original_generated_cover",
+      "layout": "vertical_9_16",
+      "mime": "image/jpeg",
+      "must_match_review_artifact_sha256": true,
+      "block_video_upload_if_missing_or_invalid": true,
+      "block_public_release_until_youtube_thumbnail_acknowledged": true,
+      "fallback_to_auto_generated_youtube_thumbnail": false,
+      "fallback_to_video_frame": false,
+      "fallback_to_other_channel_cover": false,
+      "regenerate_cover_at_publish_time": false,
+      "youtube_api_method": "thumbnails.set",
+      "required_processing_status": "succeeded"
+    }
+  },
+  "en": {
+    "channel_name": "Otaku Reframe",
+    "youtube_channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+    "language": "en-US",
+    "title_and_description_language": "en",
+    "category_id": "1",
+    "privacy_default": "private",
+    "license": "youtube",
+    "embeddable": true,
+    "public_stats_viewable": true,
+    "self_declared_made_for_kids": false,
+    "notify_subscribers": true,
+    "commentary_moderation_studio": "basic",
+    "comments_studio": "enabled",
+    "remix_studio": "review audio-and-video permission in Studio",
+    "altered_content_ai": "review_each_video",
+    "description": {
+      "call_to_action": "Subscribe to Otaku Reframe for more anime stories and character analysis. Who would you side with?",
+      "original_content_notice": "Independent anime commentary featuring original narration, editing and AI-generated illustrations. Series and characters belong to their respective rights holders.",
+      "extra_hashtags": [
+        "#OtakuReframe",
+        "#Shorts"
+      ],
+      "spoiler_notice": "⚠️ Contains spoilers."
+    },
+    "tags": {
+      "priority": [
+        "Anime Shorts",
+        "Otaku Reframe",
+        "Anime Explained",
+        "Anime Analysis"
+      ],
+      "unrelated_blacklist": [
+        "free movies",
+        "free movie",
+        "anime in hindi",
+        "full movie english",
+        "full movies",
+        "youtube movies",
+        "movies english",
+        "full free movies"
+      ],
+      "max_characters": 500
+    },
+    "thumbnail": {
+      "source": "autoeditorvideo_original_generated_cover",
+      "layout": "vertical_9_16",
+      "mime": "image/jpeg",
+      "must_match_review_artifact_sha256": true,
+      "block_video_upload_if_missing_or_invalid": true,
+      "block_public_release_until_youtube_thumbnail_acknowledged": true,
+      "fallback_to_auto_generated_youtube_thumbnail": false,
+      "fallback_to_video_frame": false,
+      "fallback_to_other_channel_cover": false,
+      "regenerate_cover_at_publish_time": false,
+      "youtube_api_method": "thumbnails.set",
+      "required_processing_status": "succeeded"
+    }
+  },
+  "studio_only": {
+    "age_restriction": "Not automatically set via videos.insert; review if story contains content requiring age restriction.",
+    "comments": "Moderation and who can comment are channel/Studio controls; user example BR none, EN basic.",
+    "chapters": "Automatic chapters setting not controlled by this API upload.",
+    "auto_places": "Automatic location detection not controlled by this API upload.",
+    "auto_concepts": "Automatic concept definitions not controlled by this API upload.",
+    "remixes": "Audio/video remix allowance not controlled by this API upload.",
+    "captions_certification": "No certification when not required; check in Studio.",
+    "video_audio_language": "Verify recorded language in Studio; snippet.defaultLanguage is metadata language, not a guarantee of video language.",
+    "subtitles": "Burned-in subtitles produced by Remotion; optional native caption track requires captions.insert authorization.",
+    "paid_promotion": "Only mark paid promotion when actual sponsorship exists. Requires separate Studio review.",
+    "ai_disclosure": "If materially altered or realistic synthetic content is present, explicitly set containsSyntheticMedia=true in episode metadata. For non-realistic animations, review YouTube policy and do not automatically infer.",
+    "youtube_short_thumbnail": "Upload the original channel-specific vertical JPG with thumbnails.set after successful processing; API acceptance does not guarantee where Shorts surfaces display it.",
+    "notifications": "notifySubscribers=true on upload, actual subscriber notifications depend on visibility and YouTube behavior.",
+    "like_count_display": "Not guaranteed by status.publicStatsViewable; verify in Studio."
+  }
+}

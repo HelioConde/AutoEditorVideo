@@ -5,6 +5,10 @@ import json
 from pathlib import Path
 import sys
 import pytest
+# General offline suites do not install Google API dependencies; dedicated
+# YouTube CI installs them and runs these tests without skipping.
+pytest.importorskip('googleapiclient')
+pytest.importorskip('google.oauth2')
 from PIL import Image
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -55,12 +59,15 @@ def test_separate_english_token_and_exact_channel():
 def test_review_rejects_wrong_sha_before_publication(tmp_path):
     fake=tmp_path/f'br-{publish.ID}-autoeditorvideo.mp4'
     fake.write_bytes(b'fake MP4 bytes' * 20000)
+    cover=tmp_path/f'br-{publish.ID}-cover.jpg'
+    Image.new('RGB',(540,960)).save(cover,format='JPEG')
     (tmp_path/'review-summary.json').write_text(json.dumps({
       'schema':'autoeditorvideo/dual-cloud-review/v1',
       'episode':publish.ID,'publication':'not_performed',
+      'render_origin':'original AutoEditorVideo Remotion in GitHub Actions',
       'videos':[
         {'channel':'br','expected_youtube_channel_id':publish.EXPECTED['br'][0],
-         'mp4':fake.name,'sha256':'0'*64},
+         'mp4':fake.name,'cover':cover.name,'sha256':'0'*64},
         {'channel':'en'}]}))
     with pytest.raises(publish.UploadBlocked,match='MP4_HASH_MISMATCH'):
         publish.validate_review('br',tmp_path)
@@ -84,7 +91,10 @@ def test_main_only_environment_and_private_upload_policy():
 
 def test_publisher_source_is_private_and_no_schedule():
     source=(ROOT/'scripts'/'cloud_youtube_private_5011.py').read_text()
-    assert "'privacyStatus':'private'" in source
+    assert "build_insert_body(channel,prepared,privacy='private')" in source
+    profile=(ROOT/'scripts'/'youtube_upload_profiles.py').read_text(encoding='utf-8')
+    assert '"privacyStatus":privacy' in profile
+    assert 'verified_generated_cover' in source
     assert "publishAt" not in source
     assert "image_generation" not in source
     assert "PROXY_ACCOUNTS_JSON" not in source

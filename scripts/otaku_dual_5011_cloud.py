@@ -85,7 +85,7 @@ def package_both()->dict:
         ('br',br_video,br_cover,br_qa),
         ('en',en_video,en_cover,en_qa)
     ]
-    summary={'schema':'autoeditorvideo/dual-cloud-review/v1',
+    summary={'schema':'autoeditorvideo/dual-cloud-review/v2',
              'episode':ID,'youtube_uploads':[],
              'upload_request':'private to separate BR/EN channels after independently verified YouTube OAuth',
              'render_origin':'original AutoEditorVideo Remotion in GitHub Actions',
@@ -114,6 +114,8 @@ def package_both()->dict:
             'language':'pt-BR' if channel=='br' else 'en-US',
             'mp4':f'{channel}-{ID}-autoeditorvideo.mp4',
             'cover':f'{channel}-{ID}-cover.jpg',
+            'cover_sha256':hashlib.sha256(cover.read_bytes()).hexdigest(),
+            'cover_provenance':'original AutoEditorVideo rendered cover - never a video frame fallback',
             'duration_s':round(duration,2),'sha256':digest,
             'qa_status':qa['status']
         })
