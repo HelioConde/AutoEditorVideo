@@ -1,0 +1,25 @@
+{
+  "schema": "autoeditorvideo/native-v3-private-upload-trigger/v1",
+  "date": "2026-11-05",
+  "approved_by_creator": true,
+  "creator_request": "Publicar novo com as alterações — 3 Shorts Gamer e 3 IA com as legendas Remotion e as capas do programa AutoEditorVideo.",
+  "source_run": 42058545056,
+  "source_artifact": "gamer-alchemy-six-native-v3",
+  "source_artifact_id": 13432425860,
+  "visibility": "private",
+  "keep_older_private_uploads": true,
+  "channel_counts": {
+    "games": 3,
+    "alchemy": 3
+  },
+  "official_cover_and_caption_only": true,
+  "thumbnail_delay_s": 75,
+  "no_new_image_generation": true,
+  "no_repeat_after_ambiguous_upload": true,
+  "channels": {
+    "games": "UCg77gYc1_wkHuL07XPtKcow",
+    "alchemy": "UCCTYFE5Cmz2aYZ37cJQ-wcg"
+  },
+  "review": "V3 audio and covers technically validated. Some illustration/subject mismatches found in visual review; publish private for inspection.",
+  "workflow": ".github/workflows/games-alchemy-native-v3-private.yml"
+}
