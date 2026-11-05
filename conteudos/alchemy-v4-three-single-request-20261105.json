@@ -1,0 +1,30 @@
+{
+  "schema": "autoeditorvideo/alchemy-three-v4-single-request-one-time/v1",
+  "date": "2026-11-05",
+  "approved_by_creator": true,
+  "creator_request": "Agora envie os vídeos do canal de IA; o método em requisição única resolveu o processamento do canal Gamer.",
+  "channel": "alchemy",
+  "youtube_channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+  "old_ids": [
+    "xeABjVrX09U",
+    "Vg1QNyPbN7s",
+    "ujhj3LgdqVc"
+  ],
+  "episodes": [
+    "alchemy-001-chatgpt-gifs-v4",
+    "alchemy-002-images-26-consistencia-v4",
+    "alchemy-003-gif-animado-tutorial-v4"
+  ],
+  "reservation_owner": "alchemy_v4_three_processing_reupload_20261105",
+  "source_run": 42074829801,
+  "source_artifact_id": 13439442112,
+  "method": "single_request_non_resumable",
+  "expected_count": 3,
+  "visibility": "private",
+  "other_channels_unchanged": true,
+  "old_videos_preserved": true,
+  "no_new_images": true,
+  "upload_processing_must_be_verified": true,
+  "thumbnail_wait_seconds": 75,
+  "notes": "Reuse exact V4 audio and MP4 and cover. Do not edit or delete older uploads, do not publish publicly, compare processingStatus instead of assuming uploaded means processed. Preserve receipts to reconcile uncertain YouTube responses."
+}
