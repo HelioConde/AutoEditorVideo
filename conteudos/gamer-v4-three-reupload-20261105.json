@@ -1,0 +1,33 @@
+{
+  "schema": "autoeditorvideo/one-time-gamer-three-nonresumable-reupload/v1",
+  "date": "2026-11-05",
+  "approved_by_creator": true,
+  "user_request": "Envie novamente somente os 3 vídeos (Gamer), porque continuam presos no processamento.",
+  "channel": "games",
+  "youtube_channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+  "no_alchemy_changes": true,
+  "source_run": 42074829801,
+  "source_artifact_id": 13439442112,
+  "source_artifact_name": "gamer-alchemy-reference-v4-six",
+  "expected_count": 3,
+  "source_video_ids": [
+    "CY9v9742DqY",
+    "vG5tqbqirRo",
+    "0PzFrTqWUQk"
+  ],
+  "original_episodes": [
+    "game-001-gta4-gta5-v4",
+    "game-002-primeira-noite-minecraft-v4",
+    "game-003-minecraft-sem-amarelo-v4"
+  ],
+  "new_reservation_owner": "gamer_v4_three_processing_reupload_20261105",
+  "reuse_exact_original_v4_mps": true,
+  "visibility": "private",
+  "new_video_insert_upload_transport": "single_request_non_resumable_not_chunked",
+  "thumbnail_delay_seconds": 75,
+  "never_delete_old_videos": true,
+  "duplicate_prevention": "Unique once-only Gamer retry tag, compare channel/title/episode before any insert; on ambiguous response reconcile, never retry video upload blindly.",
+  "processing_confirmation": "After upload save uploadStatus and processingDetails.processingStatus; only YouTube succeeded is fully processed, uploaded/processing is still pending.",
+  "no_new_ai_image_generation": true,
+  "workflow": ".github/workflows/gamer-only-v4-three-nonresumable-reupload.yml"
+}
