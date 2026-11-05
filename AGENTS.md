@@ -471,6 +471,27 @@ miniaturas e upload OAuth para YouTube.
 - Edge TTS segue o motor padrao. Nenhum upload automatico decorrente de revisao
   textual; exigir o sinalizador de publicacao explicito.
 
+## REGRA PERMANENTE — IDS INTERNOS FORA DA DESCRICAO YOUTUBE (05/11/2026)
+
+- **Nunca publicar** strings de controle como
+  `AUTOEDITORVIDEO-5011-en-fdc3d3a734833529`, hashes, IDs de pipeline,
+  nomes de cache ou recibos no titulo, descricao, hashtags, tags, legendas ou
+  texto exibido aos espectadores, em **nenhum** canal BR/EN.
+- Antigos identificadores `AUTOEDITORVIDEO-<episodio>-<br|en>-<hash>`
+  podem ser **lidos** somente para localizar uploads anteriores e evitar
+  duplicatas; sao proibidos como texto de novos uploads. Persistir chave de
+  idempotencia no recibo interno/registro de producao e YouTube video_id.
+- Aplicar `sanitize_youtube_description` no caminho cloud
+  `scripts/cloud_youtube_private_5011.py` e nos publicadores locais
+  `scripts/publicar_arquivo_otaku.py` / `scripts/publicar_shorts_en.py`.
+  Uma chave malformada deve **bloquear** em vez de vazar na descricao.
+- Para um video ja enviado, limpar SOMENTE o identificador antigo
+  com revisao do texto completo. Preservar titulo, tags, publico,
+  privacidade, horario/agendamento, capa e outros metadados.
+  **Nunca reenviar MP4 nem repetir geracao** para corrigir descricao.
+- Novas historias precisam de reserva no GitHub antes de scripts/PowerShell
+  conforme `conteudos/otaku-production-reservations.json`.
+
 ## MOTOR DE VOZ OPCIONAL: VOICESTUDIO
 
 - Edge TTS e a opcao **padrao** e nunca deve ser removida nem substituida silenciosamente.
