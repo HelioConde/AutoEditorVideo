@@ -486,6 +486,39 @@
       "youtube_processing_status": "succeeded",
       "upload_workflow_run": 42090188952,
       "thumbnail_api_acknowledged": true
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-001-chatgpt-gifs-v4-reenvio1",
+      "status": "reserved",
+      "reservation_owner": "alchemy_v4_three_processing_reupload_20261105",
+      "publication_target": "private_first",
+      "review_status": "pending_single_request_reupload_and_processing_verification",
+      "original_private_youtube_video_id": "xeABjVrX09U",
+      "source": "creator_explicit_request_reupload_three_Alchemy_Lab_20261105",
+      "note": "Repeat EXACT existing three V4 Alchemy MP4s via Google non-resumable single request because Gamer test processed succeeded. Retain old V3/V4; never use Gamer OAuth, do not generate images or mutate Gamer/Kids/Otaku; verify processing status after upload; require unique retry tag."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-002-images-26-consistencia-v4-reenvio1",
+      "status": "reserved",
+      "reservation_owner": "alchemy_v4_three_processing_reupload_20261105",
+      "publication_target": "private_first",
+      "review_status": "pending_single_request_reupload_and_processing_verification",
+      "original_private_youtube_video_id": "Vg1QNyPbN7s",
+      "source": "creator_explicit_request_reupload_three_Alchemy_Lab_20261105",
+      "note": "Repeat EXACT existing three V4 Alchemy MP4s via Google non-resumable single request because Gamer test processed succeeded. Retain old V3/V4; never use Gamer OAuth, do not generate images or mutate Gamer/Kids/Otaku; verify processing status after upload; require unique retry tag."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-003-gif-animado-tutorial-v4-reenvio1",
+      "status": "reserved",
+      "reservation_owner": "alchemy_v4_three_processing_reupload_20261105",
+      "publication_target": "private_first",
+      "review_status": "pending_single_request_reupload_and_processing_verification",
+      "original_private_youtube_video_id": "ujhj3LgdqVc",
+      "source": "creator_explicit_request_reupload_three_Alchemy_Lab_20261105",
+      "note": "Repeat EXACT existing three V4 Alchemy MP4s via Google non-resumable single request because Gamer test processed succeeded. Retain old V3/V4; never use Gamer OAuth, do not generate images or mutate Gamer/Kids/Otaku; verify processing status after upload; require unique retry tag."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
