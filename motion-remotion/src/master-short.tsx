@@ -20,7 +20,8 @@ export type Caption={startFrame:number;endFrame:number;text:string;
 export type MasterProps={
   id:string;durationFrames:number;audio:string;scenes:Scene[];
   captions:Caption[];hook:string;animationMode?:AnimationMode;
-  characterPreset?:CharacterPreset;editorialProfile?:string
+  characterPreset?:CharacterPreset;editorialProfile?:string;
+  visualProfile?:'original'|'gamer-alchemy-reference'
 };
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
 
@@ -113,7 +114,7 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
 
 export const MasterShort:React.FC<MasterProps>=({
   scenes,audio,captions,hook,animationMode='cinematica',
-  characterPreset='equilibrado'
+  characterPreset='equilibrado',visualProfile='original'
 })=>{
   const frame=useCurrentFrame();
   const {fps}=useVideoConfig();
@@ -131,14 +132,25 @@ export const MasterShort:React.FC<MasterProps>=({
     {previous&&fade<1?<Shot scene={previous} opacity={1} mode={animationMode} preset={characterPreset}/>:null}
     <Shot scene={current} opacity={fade} mode={animationMode} preset={characterPreset}/>
     <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(0,0,0,.15),transparent 20%,rgba(0,0,0,.13) 55%,rgba(0,0,0,.65) 100%)'}}/>
-    {hook&&frame<fps*2.2?<div style={{position:'absolute',top:102,left:75,right:75,
-      fontSize:76,lineHeight:1.08,color:'#fff',textAlign:'center',fontWeight:900,
-      letterSpacing:'0.016em',
-      WebkitTextStroke:'1.2px rgba(4,7,18,.95)',
-      textShadow:'0 5px 18px rgba(0,0,0,.95), 0 0 15px rgba(252,78,78,.45), 0 0 3px #fff',
-      filter:'drop-shadow(0 7px 8px rgba(0,0,0,.8))',
-      transform:'scale('+interpolate(frame,[0,8,fps*2],[.92,1.025,1],clamp)+')',
-      opacity:interpolate(frame,[0,3,fps*1.8,fps*2.2],[.85,1,1,0],clamp)}}>{hook}</div>:null}
+    {visualProfile==='gamer-alchemy-reference' && hook
+      ? <div style={{
+        position:'absolute',top:73,left:66,right:66,
+        fontSize:77,lineHeight:1.01,color:'#fff',textAlign:'center',
+        fontFamily:'Arial,DejaVu Sans,sans-serif',fontWeight:900,
+        letterSpacing:'0.018em',whiteSpace:'pre-line',
+        WebkitTextStroke:'1px rgba(0,0,0,.85)',
+        textShadow:'0 5px 10px #000,0 1px 3px #000'
+      }}>{hook}</div>
+      : hook && frame<fps*2.2
+        ? <div style={{position:'absolute',top:102,left:75,right:75,
+          fontSize:76,lineHeight:1.08,color:'#fff',textAlign:'center',fontWeight:900,
+          letterSpacing:'0.016em',
+          WebkitTextStroke:'1.2px rgba(4,7,18,.95)',
+          textShadow:'0 5px 18px rgba(0,0,0,.95), 0 0 15px rgba(252,78,78,.45), 0 0 3px #fff',
+          filter:'drop-shadow(0 7px 8px rgba(0,0,0,.8))',
+          transform:'scale('+interpolate(frame,[0,8,fps*2],[.92,1.025,1],clamp)+')',
+          opacity:interpolate(frame,[0,3,fps*1.8,fps*2.2],[.85,1,1,0],clamp)}}>{hook}</div>
+        :null}
     {current.headline && frame-current.startFrame<fps*1.65 &&
       ['rehook','answer','rule_confirm','cta'].includes(current.beatRole||'')
       ? <div style={{position:'absolute',top:200,left:98,right:98,
@@ -152,14 +164,24 @@ export const MasterShort:React.FC<MasterProps>=({
         opacity:interpolate(frame-current.startFrame,[0,5,fps*1.38,fps*1.65],[0,1,1,0],clamp),
         transform:'translateY('+interpolate(frame-current.startFrame,[0,8],[22,0],clamp)+'px)',
       }}>{current.headline}</div>:null}
-    {caption?<div style={{position:'absolute',top:1258,left:78,right:78,
-      padding:'18px 25px',borderRadius:22,
-      background:'rgba(2,5,15,.85)',
-      border:'2px solid rgba(255,255,255,.18)',
-      boxShadow:'0 12px 32px rgba(0,0,0,.68)',
-      fontSize:79,lineHeight:1.12,fontWeight:900,textAlign:'center',color:'#fff',
-      WebkitTextStroke:'2px rgba(1,3,9,.96)',
-      textShadow:'0 5px 13px #000,0 0 15px rgba(240,240,255,.2)'}}>
+    {caption?<div style={visualProfile==='gamer-alchemy-reference'
+      ? {position:'absolute',top:1272,left:94,right:94,
+        padding:'19px 28px',borderRadius:17,
+        background:'rgba(6,10,19,.9)',
+        border:'2px solid rgba(225,235,255,.15)',
+        boxShadow:'0 10px 28px rgba(0,0,0,.65)',
+        fontSize:67,lineHeight:1.16,fontWeight:900,textAlign:'center',color:'#fff',
+        fontFamily:'Arial,DejaVu Sans,sans-serif',
+        WebkitTextStroke:'1px rgba(1,3,9,.85)',
+        textShadow:'0 3px 8px #000'}
+      : {position:'absolute',top:1258,left:78,right:78,
+        padding:'18px 25px',borderRadius:22,
+        background:'rgba(2,5,15,.85)',
+        border:'2px solid rgba(255,255,255,.18)',
+        boxShadow:'0 12px 32px rgba(0,0,0,.68)',
+        fontSize:79,lineHeight:1.12,fontWeight:900,textAlign:'center',color:'#fff',
+        WebkitTextStroke:'2px rgba(1,3,9,.96)',
+        textShadow:'0 5px 13px #000,0 0 15px rgba(240,240,255,.2)'}}>
       {caption.words?.length
         ? caption.words.map((word,index)=>{
           const active=frame>=word.startFrame && frame<word.endFrame;
@@ -167,7 +189,7 @@ export const MasterShort:React.FC<MasterProps>=({
             {index>0?' ':null}
             <span style={{
               color:active?'#ffd166':'#fff',
-              textShadow:active?'0 0 16px rgba(255,195,75,.6),0 4px 8px #000':undefined,
+              textShadow:active?'0 0 9px rgba(255,197,76,.45),0 3px 6px #000':undefined,
             }}>{word.text}</span>
           </React.Fragment>;
         }):caption.text}
