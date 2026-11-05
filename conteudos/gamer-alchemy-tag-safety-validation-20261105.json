@@ -1,0 +1,40 @@
+{
+  "schema": "autoeditorvideo/gamer-alchemy-public-tags-safety/v1",
+  "date": "2026-11-05",
+  "reason": "User screenshot showed internal AutoEditorVideo tracking tokens in vidIQ YouTube tag fields.",
+  "verified_api": {
+    "run_id": 42098082976,
+    "games": {
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "videos": [
+        "GPJa03DRf5Y",
+        "BCqrEmJa77E",
+        "j7_cAomsPvM"
+      ],
+      "internal_tracking_tag_count": [
+        0,
+        0,
+        0
+      ]
+    },
+    "alchemy": {
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "videos": [
+        "WNlK9OYe1jc",
+        "bk433QOIdK0",
+        "iKlsUANJ8og"
+      ],
+      "internal_tracking_tag_count": [
+        0,
+        0,
+        0
+      ]
+    },
+    "note": "Read-only owner API inspection found zero internal tags on these six current uploads. Initial attempt to mutate halted before any video update due to already public first Short in each channel. No tags or visibility were changed."
+  },
+  "code_change": "All 8 Gamer/Alchemy uploader entrypoints now pass outgoing keyword lists through youtube_public_tags.public_tags; receipt-based fallback added to latest V4 uploaders.",
+  "privacy": "Preserve existing public/private/unlisted visibility unchanged",
+  "future_policy": "Use GitHub reservations/receipts for internal IDs, not public snippet.tags",
+  "cleanup_performed_on_live_videos": false,
+  "revision_scope": "code_qa_and_read_only_verification_only"
+}
