@@ -43,7 +43,7 @@ def test_subtitle_wrapping_protects_horizontal_safe_area(tmp_path):
     lines=[x for x in text.splitlines() if x.startswith("Dialogue:")]
     assert lines
     for row in lines:
-        caption=row.split(",,",1)[1]
+        caption=row.rsplit(",,",1)[-1]
         for line in caption.split(r"\N"):
             assert len(line)<=24
     assert "MarginL" in text and "260" in text
