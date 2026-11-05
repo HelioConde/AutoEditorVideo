@@ -18,6 +18,7 @@ from googleapiclient.http import MediaFileUpload
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
+from youtube_public_tags import public_tags
 from production_reservations import assert_reserved
 from youtube_channel_registry import KNOWN_IDS
 from games_alchemy_ai_upload import get_youtube,confirm_private,set_thumbnail
@@ -128,7 +129,7 @@ def upload_one(youtube,job:dict)->str:
     meta=job["meta"]
     body={"snippet":{"title":meta["title"],
                       "description":meta["description"],
-                      "tags":list(dict.fromkeys(meta["tags"]+[TAG])),
+                      "tags":public_tags(meta["tags"]),
                       "categoryId":meta["categoryId"],
                       "defaultLanguage":"pt-BR"},
           "status":{"privacyStatus":"private",
