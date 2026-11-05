@@ -1,0 +1,91 @@
+name: Gamer + Alchemy - native Remotion subtitles and original AutoEditorVideo covers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/games-alchemy-native-v3-run-20261105.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: games-alchemy-six-native-v3-20261105
+  cancel-in-progress: false
+
+jobs:
+  validate-original-program:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(games-alchemy): render six Shorts with official AutoEditorVideo covers and captions'
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install tests and thumbnail engine
+        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13'
+      - name: Ensure all scripts, reservations, caption word groups and cover source match repository's original pipeline
+        run: |
+          python -m pytest -q tests/test_games_alchemy_native_v3.py tests/test_games_alchemy_six_recut_v2.py
+          python scripts/games_alchemy_native_v3.py --action validate
+          python -m py_compile scripts/games_alchemy_native_v3.py
+
+  render-with-native-remotion:
+    needs: validate-original-program
+    if: needs.validate-original-program.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 140
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - name: Install ffmpeg and fonts used by the official program
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+      - name: Install TTS and Pillow without image-generation or YouTube Secrets
+        run: python -m pip install 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Install pinned AutoEditorVideo Remotion packages
+        working-directory: motion-remotion
+        run: npm ci --no-audit --no-fund
+      - name: Verify Remotion TypeScript code
+        working-directory: motion-remotion
+        run: npm run typecheck
+      - name: Reuse original 6 videos solely as existing AI visual sources
+        uses: actions/download-artifact@v4
+        with:
+          name: games-alchemy-six-ai-render
+          run-id: 42044136670
+          github-token: ${{ github.token }}
+          path: source-games-alchemy-six/
+      - name: Render 6 with official Remotion highlighted captions + original cinematic-cover program
+        env:
+          NATIVE_REDO_APPROVED: 'true'
+          SOURCE_RUN_ID: '42044136670'
+        run: python scripts/games_alchemy_native_v3.py --action render
+      - name: Keep completed videos, cover images, metadata and QA for visual review
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gamer-alchemy-six-native-v3
+          path: cloud-games-alchemy-recut-v3/
+          retention-days: 5
+          if-no-files-found: error
