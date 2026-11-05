@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Read-only GitHub API gate for three independent YouTube environments.
+"""Read-only GitHub API gate for the single protected YouTube Environment.
 
 Runs in a normal unprotected job before ANY OAuth Secret becomes available.
 A workflow-created Environment with permissive defaults is NOT acceptable.
@@ -9,7 +9,7 @@ import json
 import os
 from urllib import request, error
 
-from youtube_channel_registry import NEW_CHANNELS, get_channel
+from youtube_channel_registry import NEW_CHANNELS, get_channel, SHARED_YOUTUBE_ENVIRONMENT
 
 REPO="HelioConde/AutoEditorVideo"
 
@@ -19,7 +19,9 @@ class UnsafeYouTubeEnvironment(ValueError):
 def policy_is_main_only(channel:str, environment:dict, policies:dict)->None:
     if channel not in NEW_CHANNELS:
         raise UnsafeYouTubeEnvironment("CHANNEL_NOT_ALLOWED")
-    expected=get_channel(channel)["youtube_environment"]
+    expected=SHARED_YOUTUBE_ENVIRONMENT
+    if get_channel(channel)["youtube_environment"]!=expected:
+        raise UnsafeYouTubeEnvironment("CHANNEL_NOT_MAPPED_TO_SHARED_ENVIRONMENT")
     if not isinstance(environment,dict) or environment.get("name")!=expected:
         raise UnsafeYouTubeEnvironment("ENVIRONMENT_NOT_FOUND_OR_WRONG_CHANNEL")
     branch=environment.get("deployment_branch_policy") or {}
@@ -38,7 +40,7 @@ def fetch_protected_policy(channel:str, token:str, *, opener=None)->tuple[dict,d
         raise UnsafeYouTubeEnvironment("CHANNEL_NOT_ALLOWED")
     if not token:
         raise UnsafeYouTubeEnvironment("GITHUB_READ_TOKEN_MISSING")
-    name=get_channel(channel)["youtube_environment"]
+    name=SHARED_YOUTUBE_ENVIRONMENT
     base=f"https://api.github.com/repos/{REPO}/environments/{name}"
     headers={
         "Accept":"application/vnd.github+json",
@@ -78,7 +80,7 @@ def main()->int:
     except Exception:
         print("[YOUTUBE ENV] UNCLASSIFIED_CHECK_FAILED")
         return 1
-    print("[YOUTUBE ENV] MAIN_ONLY_PROTECTION_VERIFIED_"+channel.upper())
+    print("[YOUTUBE ENV] SHARED_MAIN_ONLY_PROTECTION_VERIFIED_"+channel.upper())
     print("[SAFETY] NO_YOUTUBE_SECRETS_ACCESSED_IN_GATE")
     return 0
 

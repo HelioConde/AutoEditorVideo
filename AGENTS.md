@@ -2,11 +2,14 @@
 
 ## INTEGRACAO OAUTH DOS TRES NOVOS CANAIS — GITHUB CLOUD-FIRST
 
-- Uma identidade registrada NÃO autoriza upload. Os três novos canais
-  Gamer/Kids/Alchemy exigem consentimento Google e refresh token próprios;
-  segredos são isolados respectivamente em
-  youtube-games-private-upload, youtube-kids-private-upload,
-  youtube-alchemy-private-upload, todos restritos EXCLUSIVAMENTE a main.
+- Uma identidade registrada NÃO autoriza upload. Gamer/Kids/Alchemy
+  exigem consentimento Google e refresh token próprios. Os CINCO canais
+  compartilham APENAS o Environment GitHub youtube-private-upload,
+  restrito EXCLUSIVAMENTE à branch main. São 5 Secrets OAuth diferentes
+  (BR, EN, GAMES, KIDS, ALCHEMY) e 1 YOUTUBE_CLIENT_JSON existente.
+  Isso reduz o isolamento entre jobs: nunca expor todos os Secrets a um
+  processo, registrar credenciais, aceitar canal sem checagem de ID ou
+  habilitar uploads automaticamente.
 - A verificação de cada Environment acontece sem Secrets no workflow
   .github/workflows/youtube-new-channels-oauth.yml. A autenticação cloud
   é SOMENTE channels.list(mine=true), sem videos.insert ou upload.
@@ -15,7 +18,7 @@
   com comparação EXATA do YouTube Channel ID. É proibido enviar tokens
   à conversa, commits, logs públicos ou artifacts.
 - Só transferir OAuth ao GitHub após consentimento explícito do titular
-  para guardar refresh tokens em Environments protegidos.
+  para guardar refresh tokens no Environment existente e protegido.
 - Após OAuth validado, construir fluxos cloud de geração, QA, miniatura
   original e publicação privada por canal; não habilitar upload ao
   cadastrar/verificar OAuth. Gamer requer footage real; Kids requer
@@ -30,7 +33,7 @@
 - Gamer: UCg77gYc1_wkHuL07XPtKcow; YouTube exibe **Hélio Conde**, **Conde Games** e proposta ainda nao aplicada na conta. Exigir gameplay real e/ou autorizado.
 - Kids: UCxEzVW2Uy44OUVurTQSg_Eg; YouTube exibe **Emanuelly Kids**, a serie oficial e **Fofinhos**. Toda publicacao para criancas deve ter classificacao Made for Kids, sem CTA para comentarios/inscricoes de criancas. Nunca publicar fotos privadas nem musicas sem direitos.
 - Alchemy Lab: UCCTYFE5Cmz2aYZ37cJQ-wcg; YouTube exibe **Alchemy Flames**; a identidade planejada e **Alchemy Lab** (IA pratica e automacoes). Nunca afirmar que o nome foi alterado na conta; nunca falsificar testes ou criar conteudo repetitivo de baixo valor.
-- Os tres novos canais estao **somente registrados**, com OAuth e publicacao cloud DESATIVADOS; criar Environment e token proprios somente apos autorizacao especifica e verificacao do ID via channels.list(mine=true). Nunca usar segredos YouTube Otaku/CodeX Proxy como substitutos.
+- Os tres novos canais estao **somente registrados**, com publicacao cloud DESATIVADA; os tokens individuais sao adicionados com consentimento ao Environment existente youtube-private-upload, preservando YOUTUBE_CLIENT_JSON e os tokens BR/EN. Nao criar Environments adicionais. Cada verificacao consulta channels.list(mine=true) e bloqueia qualquer ID incorreto. Nunca usar segredos Otaku/CodeX Proxy como substitutos.
 - Manter roteiros/miniaturas originais, categoria e idioma por canal, default privado, verificacao de direitos, QA e controle de duplicatas. Os pilotos antigos Checkpoint Pixel/MiniMundo Curioso permanecem isolados com upload_enabled=false e IDs nulos; sao drafts, NAO sao identidade do Emanuelly Kids.
 - Reservar cada (canal, episodio) antes de gerar scripts, comandos PowerShell ou MP4s usando conteudos/otaku-production-reservations.json, agora compatível com cinco canais; nenhum upload e geracao sao autorizados apenas pelo registro.
 - Guia: docs/CANAIS-5-YOUTUBE-GITHUB.md.

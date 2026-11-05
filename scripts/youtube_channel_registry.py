@@ -2,6 +2,7 @@
 """Authoritative, fail-closed YouTube channel identity registry.
 
 REGISTERED != AUTHORIZED. No network, OAuth, generation, or upload.
+All five channels share a protected GitHub Environment but never an OAuth token.
 New Gamer/Kids/Alchemy channels cannot be published using the Otaku tokens.
 """
 from __future__ import annotations
@@ -21,6 +22,7 @@ KNOWN_IDS = {
     "alchemy": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
 }
 NEW_CHANNELS = ("games", "kids", "alchemy")
+SHARED_YOUTUBE_ENVIRONMENT = "youtube-private-upload"
 BLOCKED_STATE = {
     "blocked_until_separate_oauth_and_verified_uploader",
     "blocked_until_separate_oauth_and_kids_compliance_review",
@@ -36,7 +38,9 @@ def load_registry(path: Path = REGISTRY) -> dict:
     items = raw.get("channels")
     if not isinstance(items, dict) or set(items) != set(KNOWN_IDS):
         raise ChannelRegistryError("YOUTUBE_CHANNEL_REGISTRY_MISSING_OR_EXTRA_CHANNEL")
-    ids, secrets, envs = set(), set(), set()
+    if raw.get("policy", {}).get("shared_youtube_environment") != SHARED_YOUTUBE_ENVIRONMENT:
+        raise ChannelRegistryError("SHARED_ENVIRONMENT_POLICY_MISSING")
+    ids, secrets = set(), set()
     for slug, expected in KNOWN_IDS.items():
         record = items[slug]
         if not isinstance(record, dict):
@@ -63,13 +67,11 @@ def load_registry(path: Path = REGISTRY) -> dict:
             raise ChannelRegistryError("CHANNEL_OAUTH_SECRET_NAME_SHARED")
         secrets.add(secret)
         environment = record.get("youtube_environment")
-        if not isinstance(environment, str) or not environment:
-            raise ChannelRegistryError("CHANNEL_ENVIRONMENT_MISSING")
+        if environment != SHARED_YOUTUBE_ENVIRONMENT:
+            raise ChannelRegistryError("SHARED_YOUTUBE_ENVIRONMENT_REQUIRED")
         if slug in NEW_CHANNELS:
             if record.get("cloud_upload_state") not in BLOCKED_STATE:
                 raise ChannelRegistryError("NEW_CHANNEL_MUST_NOT_AUTO_PUBLISH_" + slug.upper())
-            if environment in envs or environment == "youtube-private-upload":
-                raise ChannelRegistryError("NEW_CHANNEL_MUST_HAVE_SEPARATE_OAUTH_ENVIRONMENT")
             if record.get("brand_status") == "active" and (
                 record.get("name") != record.get("observed_youtube_title")
             ):
@@ -77,7 +79,6 @@ def load_registry(path: Path = REGISTRY) -> dict:
         else:
             if record.get("cloud_upload_state") != "existing_explicit_workflow":
                 raise ChannelRegistryError("OTAKU_CLOUD_CONFIG_CHANGED_UNEXPECTEDLY")
-        envs.add(environment)
     if items["kids"].get("series") != "Fofinhos" or items["kids"].get("audience") != "children":
         raise ChannelRegistryError("FOFINHOS_CHILD_SAFETY_MISSING")
     if raw.get("policy", {}).get("no_automatic_publication_from_registration") is not True:

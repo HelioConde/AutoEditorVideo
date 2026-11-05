@@ -19,7 +19,7 @@ on:
   workflow_dispatch:
     inputs:
       channel:
-        description: 'Verify OAuth of ONE independently protected channel. NEVER upload.'
+        description: 'Read-only verification of one selected channel in the shared main-only Environment. NEVER upload.'
         type: choice
         required: true
         default: games
@@ -91,7 +91,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Confirm selected GitHub Environment allows ONLY main branch
+      - name: Confirm the existing shared YouTube Environment allows ONLY main branch
         env:
           GH_TOKEN: ${{ github.token }}
           CHANNEL_SLUG: ${{ inputs.channel }}
@@ -106,7 +106,7 @@ jobs:
       github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 8
-    environment: youtube-games-private-upload
+    environment: youtube-private-upload
     permissions:
       contents: read
     steps:
@@ -135,7 +135,7 @@ jobs:
       github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 8
-    environment: youtube-kids-private-upload
+    environment: youtube-private-upload
     permissions:
       contents: read
     steps:
@@ -164,7 +164,7 @@ jobs:
       github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 8
-    environment: youtube-alchemy-private-upload
+    environment: youtube-private-upload
     permissions:
       contents: read
     steps:
