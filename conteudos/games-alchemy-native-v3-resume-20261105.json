@@ -1,0 +1,26 @@
+{
+  "schema": "autoeditorvideo/native-v3-selective-recovery/v1",
+  "date": "2026-11-05",
+  "creator_authorized": true,
+  "creator_request": "Publicar novos seis Shorts com alterações, sem duplicar os vídeos existentes.",
+  "source_render_run": 42058545056,
+  "first_upload_run": 42063131990,
+  "read_only_audit_run": 42063706481,
+  "expected_existing_v3": {
+    "games": 1,
+    "alchemy": 1
+  },
+  "desired_private_v3": {
+    "games": 3,
+    "alchemy": 3
+  },
+  "visibility": "private",
+  "preserve_old_versions": true,
+  "no_new_image_generation": true,
+  "thumbnail_delay_seconds": 75,
+  "safety": [
+    "Check exact YouTube channel ID, privacy, V3 idempotency tag before each insert.",
+    "Never retry a write blindly after a timed-out response. Reconcile private upload list.",
+    "Record accepted thumbnail API separately from actual display in Studio."
+  ]
+}
