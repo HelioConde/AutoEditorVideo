@@ -147,7 +147,7 @@ try {
             $concluidos.Add("EN $id")
         }catch{
             $pendentes.Add("EN $id")
-            Write-Warning "[EN PENDENTE] $id: $_"
+            Write-Warning "[EN PENDENTE] ${id}: $_"
             Write-Warning 'Se houve inicio de upload, confira o Studio antes de repetir.'
         }
     }
