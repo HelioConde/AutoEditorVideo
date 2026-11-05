@@ -1,0 +1,49 @@
+name: YouTube channel registry - Gamer Kids Alchemy safety
+
+on:
+  pull_request:
+    paths:
+      - 'config/youtube-channel-registry.json'
+      - 'scripts/youtube_channel_registry.py'
+      - 'tests/test_youtube_channel_registry.py'
+      - '.github/workflows/youtube-channel-registry.yml'
+      - 'docs/CANAIS-5-YOUTUBE-GITHUB.md'
+  push:
+    branches: [main]
+    paths:
+      - 'config/youtube-channel-registry.json'
+      - 'scripts/youtube_channel_registry.py'
+      - 'tests/test_youtube_channel_registry.py'
+      - '.github/workflows/youtube-channel-registry.yml'
+      - 'docs/CANAIS-5-YOUTUBE-GITHUB.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-channel-registry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install pytest only; no OAuth, images or upload libraries
+        run: python -m pip install 'pytest>=8,<10'
+      - name: Verify five channel IDs, separation and Kids audience controls
+        run: python -m pytest -q tests/test_youtube_channel_registry.py
+      - name: Print registered channels without accessing YouTube or Secrets
+        run: python scripts/youtube_channel_registry.py --action list
+      - name: Confirm new Kids channel is NOT authorized for cloud upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          if python scripts/youtube_channel_registry.py --action check-upload --channel kids; then
+            echo 'ERROR: channel registration accidentally enabled Kids upload'
+            exit 1
+          fi
+          echo '[PASS] registration never authorizes YouTube publishing'
