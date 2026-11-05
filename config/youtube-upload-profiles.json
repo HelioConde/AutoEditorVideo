@@ -45,6 +45,20 @@
         "full free movies"
       ],
       "max_characters": 500
+    },
+    "thumbnail": {
+      "source": "autoeditorvideo_original_generated_cover",
+      "layout": "vertical_9_16",
+      "mime": "image/jpeg",
+      "must_match_review_artifact_sha256": true,
+      "block_video_upload_if_missing_or_invalid": true,
+      "block_public_release_until_youtube_thumbnail_acknowledged": true,
+      "fallback_to_auto_generated_youtube_thumbnail": false,
+      "fallback_to_video_frame": false,
+      "fallback_to_other_channel_cover": false,
+      "regenerate_cover_at_publish_time": false,
+      "youtube_api_method": "thumbnails.set",
+      "required_processing_status": "succeeded"
     }
   },
   "en": {
@@ -90,6 +104,20 @@
         "full free movies"
       ],
       "max_characters": 500
+    },
+    "thumbnail": {
+      "source": "autoeditorvideo_original_generated_cover",
+      "layout": "vertical_9_16",
+      "mime": "image/jpeg",
+      "must_match_review_artifact_sha256": true,
+      "block_video_upload_if_missing_or_invalid": true,
+      "block_public_release_until_youtube_thumbnail_acknowledged": true,
+      "fallback_to_auto_generated_youtube_thumbnail": false,
+      "fallback_to_video_frame": false,
+      "fallback_to_other_channel_cover": false,
+      "regenerate_cover_at_publish_time": false,
+      "youtube_api_method": "thumbnails.set",
+      "required_processing_status": "succeeded"
     }
   },
   "studio_only": {
