@@ -1,6 +1,6 @@
 {
   "schema": "autoeditorvideo/game-channel-editorial-queue/v1",
-  "revision": "2026-11-05",
+  "revision": "2026-11-05-ai-illustrated",
   "channel": {
     "key": "games",
     "youtube_channel_id": "UCg77gYc1_wkHuL07XPtKcow",
@@ -9,13 +9,13 @@
     "language": "pt-BR",
     "category_id": "20"
   },
-  "editorial_status": "ideas_and_seo_drafts_only_not_published",
-  "research_note": "Topics from 2026-11-05 ideation using earlier vidIQ trend signals, not a certified latest ranking for all 50; facts/updates require fresh verification.",
+  "editorial_status": "50_ai_illustrated_editorial_concepts_seo_drafts_no_gameplay_no_upload",
+  "research_note": "Non-gameplay AI-illustrated editorial list; factual and version checks must precede publication; no recorded gameplay or simulated achievements.",
   "seo_policy": "config/seo-metadata-policy-v1.json",
   "rotate": [
     "voce-sabia",
     "voce-lembra",
-    "jogos-do-momento"
+    "jogos-em-alta"
   ],
   "total_videos": 50,
   "first_test_batch": [
@@ -31,11 +31,14 @@
   ],
   "controls": [
     "No video produced or uploaded by this list",
-    "All gameplay claimed must have real authorized captures",
     "Time-sensitive game facts and platform names must be rechecked",
     "Reserve game-XXX in production reservations before future scripts/media/workflows",
     "No use of Otaku, Kids or Alchemy channel credentials",
-    "Upload remains disabled until separate OAuth channel-ID verification and authorization"
+    "Upload remains disabled until separate OAuth channel-ID verification and authorization",
+    "Only original AI-generated illustrations and derived animation; NEVER record or request gameplay.",
+    "Disclose illustration as AI-generated in description and do not represent visuals as a game capture.",
+    "Do not claim playthroughs, winnings, tests or gameplay results not performed.",
+    "No upload without verified exact channel OAuth, rendered media and QA."
   ],
   "episodes": [
     {
@@ -43,7 +46,7 @@
       "queue_position": 1,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Por que GTA IV ainda surpreende mais que GTA V em alguns detalhes? 🤯",
+      "title_proposed": "GTA IV vs GTA V: por que a física ainda surpreende?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -52,9 +55,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Por que GTA IV ainda surpreende mais que GTA V em alguns detalhes? 🤯",
+        "title_draft": "GTA IV vs GTA V: por que a física ainda surpreende?",
         "primary_keyword": "GTA IV vs GTA V",
-        "description_draft": "GTA IV vs GTA V: A comparação entre física, interação com NPCs e comportamento dos veículos rende detalhes que merecem ser vistos lado a lado.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#GTAIV #GTAV #Shorts",
+        "description_draft": "Dois títulos marcantes, com propostas diferentes para física, veículos e reações dos personagens. Vamos explorar essas diferenças por meio de cenas conceituais.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTAIV #GTAV #Shorts",
         "hashtags": [
           "#GTAIV",
           "#GTAV",
@@ -71,16 +74,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-002",
       "queue_position": 2,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Você lembra da primeira noite no Minecraft? 😨",
+      "title_proposed": "Minecraft: você lembra da primeira noite assustadora?",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -89,9 +97,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Você lembra da primeira noite no Minecraft? 😨",
+        "title_draft": "Minecraft: você lembra da primeira noite assustadora?",
         "primary_keyword": "primeira noite no Minecraft",
-        "description_draft": "primeira noite no Minecraft: Abrigo improvisado, barulhos de monstros e medo de sair de casa: por que a primeira noite marcou tanta gente?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#Minecraft #NostalgiaGamer #Shorts",
+        "description_draft": "Madeira, abrigo improvisado e barulhos no escuro: a primeira noite no Minecraft faz parte da memória de muitos jogadores.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #NostalgiaGamer #Shorts",
         "hashtags": [
           "#Minecraft",
           "#NostalgiaGamer",
@@ -108,16 +116,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-003",
       "queue_position": 3,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Minecraft, mas NÃO POSSO TOCAR no amarelo!",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Minecraft sem tocar no amarelo: como seria esse desafio?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -126,9 +139,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Minecraft, mas NÃO POSSO TOCAR no amarelo!",
+        "title_draft": "Minecraft sem tocar no amarelo: como seria esse desafio?",
         "primary_keyword": "Minecraft desafio sem tocar amarelo",
-        "description_draft": "Minecraft desafio sem tocar amarelo: O desafio muda a forma de explorar o mapa: qualquer bloco amarelo passa a ser um obstáculo. A vitória só vale com gameplay real.\n\nVocê jogaria esse desafio?\n\n#Minecraft #DesafioMinecraft #Shorts",
+        "description_draft": "Imagine um mundo de Minecraft em que qualquer bloco amarelo é proibido. Que caminhos e decisões seriam mais difíceis nessa hipótese?\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #DesafioMinecraft #Shorts",
         "hashtags": [
           "#Minecraft",
           "#DesafioMinecraft",
@@ -143,18 +156,23 @@
           "desafio de cores",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-004",
       "queue_position": 4,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Roblox e jogos indie: por que os desenvolvedores estão discutindo?",
+      "title_proposed": "Roblox e jogos indie: inspiração ou cópia?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -163,9 +181,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Roblox e jogos indie: por que os desenvolvedores estão discutindo?",
+        "title_draft": "Roblox e jogos indie: inspiração ou cópia?",
         "primary_keyword": "Roblox e desenvolvedores indie",
-        "description_draft": "Roblox e desenvolvedores indie: Jogos parecidos geraram debates sobre autoria, inspiração e cópia. Vamos distinguir as reclamações das informações confirmadas.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#Roblox #JogosIndie #Shorts",
+        "description_draft": "Jogos que lembram uns aos outros levantam dúvidas sobre originalidade e inspiração. Entenda o que diferencia referências de cópias.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Roblox #JogosIndie #Shorts",
         "hashtags": [
           "#Roblox",
           "#JogosIndie",
@@ -182,16 +200,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-005",
       "queue_position": 5,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Os jogos do Roblox que todo mundo jogava e foram esquecidos",
+      "title_proposed": "Os jogos antigos do Roblox que você quase esqueceu",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -200,9 +223,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Os jogos do Roblox que todo mundo jogava e foram esquecidos",
+        "title_draft": "Os jogos antigos do Roblox que você quase esqueceu",
         "primary_keyword": "jogos antigos do Roblox",
-        "description_draft": "jogos antigos do Roblox: Reviva experiências que já dominaram servidores e veja quais ainda merecem uma visita, sem confundir memória com números atuais.\n\nQue lembrança dessa época você ainda guarda?\n\n#Roblox #NostalgiaGamer #Shorts",
+        "description_draft": "Algumas experiências do Roblox fizeram parte da infância de muitos jogadores. Vamos recordar seus cenários e ideias marcantes.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Roblox #NostalgiaGamer #Shorts",
         "hashtags": [
           "#Roblox",
           "#NostalgiaGamer",
@@ -219,16 +242,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-006",
       "queue_position": 6,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "99 Noites na Floresta: será que consigo sobreviver sozinho?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "99 Noites na Floresta: por que o Roblox fala tanto desse jogo?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -237,9 +265,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "99 Noites na Floresta: será que consigo sobreviver sozinho?",
+        "title_draft": "99 Noites na Floresta: por que o Roblox fala tanto desse jogo?",
         "primary_keyword": "99 Noites na Floresta Roblox",
-        "description_draft": "99 Noites na Floresta Roblox: Sobrevivência, exploração e decisões arriscadas: vamos acompanhar uma tentativa solo real e descobrir até onde dá para chegar.\n\nQual teste desse jogo devemos fazer depois?\n\n#99NoitesNaFloresta #Roblox #Shorts",
+        "description_draft": "O conceito de sobrevivência, o ambiente de floresta e os perigos noturnos ajudam a explicar o interesse por 99 Noites na Floresta.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#99NoitesNaFloresta #Roblox #Shorts",
         "hashtags": [
           "#99NoitesNaFloresta",
           "#Roblox",
@@ -251,21 +279,25 @@
           "Roblox sobrevivência",
           "Roblox terror",
           "99 noites solo",
-          "Roblox gameplay",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-007",
       "queue_position": 7,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Por que o Creeper é tão diferente dos outros monstros do Minecraft?",
+      "title_proposed": "Creeper: como surgiu o monstro icônico do Minecraft?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -274,9 +306,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Por que o Creeper é tão diferente dos outros monstros do Minecraft?",
+        "title_draft": "Creeper: como surgiu o monstro icônico do Minecraft?",
         "primary_keyword": "origem do Creeper no Minecraft",
-        "description_draft": "origem do Creeper no Minecraft: O Creeper virou símbolo de Minecraft graças ao seu comportamento explosivo e visual reconhecível. Entenda sua origem com fontes verificadas.\n\nQual explicação sobre games você gostaria de ver?\n\n#Minecraft #Creeper #Shorts",
+        "description_draft": "Um inimigo silencioso e explosivo virou símbolo do Minecraft. Relembre a história e o papel do Creeper nas aventuras.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #Creeper #Shorts",
         "hashtags": [
           "#Minecraft",
           "#Creeper",
@@ -293,16 +325,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-008",
       "queue_position": 8,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Grand Chase: você lembra qual foi sua primeira classe? ⚔️",
+      "title_proposed": "Grand Chase: qual foi sua primeira classe? ⚔️",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -311,9 +348,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Grand Chase: você lembra qual foi sua primeira classe? ⚔️",
+        "title_draft": "Grand Chase: qual foi sua primeira classe? ⚔️",
         "primary_keyword": "classes de Grand Chase",
-        "description_draft": "classes de Grand Chase: Personagens, evolução de classes e as primeiras missões despertam lembranças distintas em cada jogador de Grand Chase.\n\nVocê jogaria esse clássico novamente?\n\n#GrandChase #NostalgiaGamer #Shorts",
+        "description_draft": "Missões, classes e personagens faziam cada progresso em Grand Chase parecer uma conquista. Qual classe marcou sua jornada?\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GrandChase #NostalgiaGamer #Shorts",
         "hashtags": [
           "#GrandChase",
           "#NostalgiaGamer",
@@ -330,16 +367,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-009",
       "queue_position": 9,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Fortnite: os desafios da atualização atual valem a pena?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Fortnite: o que está chamando atenção na temporada?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -348,9 +390,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Fortnite: os desafios da atualização atual valem a pena?",
+        "title_draft": "Fortnite: o que está chamando atenção na temporada?",
         "primary_keyword": "desafios da temporada Fortnite",
-        "description_draft": "desafios da temporada Fortnite: Escolhas de recompensa, eventos e tempo investido: avaliamos os desafios da versão vigente, após confirmar a atualização oficial.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#Fortnite #FortniteBrasil #Shorts",
+        "description_draft": "Eventos, mudanças e itens do Fortnite serão comentados com base em informações oficiais da temporada vigente.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Fortnite #FortniteBrasil #Shorts",
         "hashtags": [
           "#Fortnite",
           "#FortniteBrasil",
@@ -365,18 +407,23 @@
           "missões Fortnite",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Confirm official title/platform/version/date at publication"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-010",
       "queue_position": 10,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Esses jogos recompensam você por NÃO matar os inimigos!",
+      "title_proposed": "Jogos em que não atacar é a melhor escolha",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -385,9 +432,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Esses jogos recompensam você por NÃO matar os inimigos!",
+        "title_draft": "Jogos em que não atacar é a melhor escolha",
         "primary_keyword": "jogos com escolhas pacíficas",
-        "description_draft": "jogos com escolhas pacíficas: Nem todo jogo premia a violência. Conheça sistemas de misericórdia e escolhas não letais em exemplos confirmados.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#CuriosidadesGamer #Jogos #Shorts",
+        "description_draft": "Alguns jogos oferecem caminhos pacíficos e escolhas diferentes de combate. Saiba por que esses sistemas mudam a experiência.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#CuriosidadesGamer #Jogos #Shorts",
         "hashtags": [
           "#CuriosidadesGamer",
           "#Jogos",
@@ -404,16 +451,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-011",
       "queue_position": 11,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "GTA San Andreas: quem nunca usou esses códigos?",
+      "title_proposed": "GTA San Andreas: os códigos que ninguém esquece",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -422,9 +474,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "GTA San Andreas: quem nunca usou esses códigos?",
+        "title_draft": "GTA San Andreas: os códigos que ninguém esquece",
         "primary_keyword": "códigos GTA San Andreas",
-        "description_draft": "códigos GTA San Andreas: Armas, veículos e situações absurdas viraram memórias inesquecíveis. Quais truques do GTA San Andreas você conhecia?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#GTASanAndreas #NostalgiaGamer #Shorts",
+        "description_draft": "Os códigos secretos de GTA San Andreas renderam situações absurdas e se tornaram parte da nostalgia do PlayStation 2.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTASanAndreas #NostalgiaGamer #Shorts",
         "hashtags": [
           "#GTASanAndreas",
           "#NostalgiaGamer",
@@ -441,16 +493,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-012",
       "queue_position": 12,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "GTA VI: 3 novidades oficiais que você precisa conhecer",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "GTA VI: 3 novidades oficiais que merecem atenção",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -459,9 +516,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "GTA VI: 3 novidades oficiais que você precisa conhecer",
+        "title_draft": "GTA VI: 3 novidades oficiais que merecem atenção",
         "primary_keyword": "novidades oficiais GTA VI",
-        "description_draft": "novidades oficiais GTA VI: Reunir três informações confirmadas pela Rockstar, com data e fonte, ajuda a separar o que já foi anunciado das especulações.\n\nVocê jogaria esse desafio?\n\n#GTAVI #RockstarGames #Shorts",
+        "description_draft": "Uma seleção de informações confirmadas sobre GTA VI, diferenciando anúncios reais de expectativas e rumores.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTAVI #RockstarGames #Shorts",
         "hashtags": [
           "#GTAVI",
           "#RockstarGames",
@@ -476,18 +533,23 @@
           "GTA 6 Brasil",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Confirm official title/platform/version/date at publication"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-013",
       "queue_position": 13,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Jogos incríveis que foram criados por uma única pessoa",
+      "title_proposed": "Jogos incríveis feitos por uma única pessoa",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -496,9 +558,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Jogos incríveis que foram criados por uma única pessoa",
+        "title_draft": "Jogos incríveis feitos por uma única pessoa",
         "primary_keyword": "jogos feitos por uma pessoa",
-        "description_draft": "jogos feitos por uma pessoa: Desenvolvimento solo envolve programação, arte e muito tempo de produção. Veja exemplos com autoria devidamente verificada.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#JogosIndie #GameDev #Shorts",
+        "description_draft": "Descubra como criadores independentes conseguem transformar ideias pequenas em jogos completos e marcantes.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#JogosIndie #GameDev #Shorts",
         "hashtags": [
           "#JogosIndie",
           "#GameDev",
@@ -515,16 +577,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-014",
       "queue_position": 14,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Ragnarok Online: a época em que subir de nível era uma aventura",
+      "title_proposed": "Ragnarok Online: a saudade de upar com os amigos",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -533,9 +600,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Ragnarok Online: a época em que subir de nível era uma aventura",
+        "title_draft": "Ragnarok Online: a saudade de upar com os amigos",
         "primary_keyword": "Ragnarok Online nostalgia",
-        "description_draft": "Ragnarok Online nostalgia: Mobs, mapas e grupos improvisados faziam cada nível parecer uma conquista. Relembre a rotina de Ragnarok Online.\n\nQue lembrança dessa época você ainda guarda?\n\n#RagnarokOnline #MMORPG #Shorts",
+        "description_draft": "Mapas, classes e grupos improvisados fizeram a experiência social de Ragnarok Online ficar na memória.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#RagnarokOnline #MMORPG #Shorts",
         "hashtags": [
           "#RagnarokOnline",
           "#MMORPG",
@@ -552,16 +619,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-015",
       "queue_position": 15,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Roblox: testei o jogo de quebrar ovos que virou febre",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "O jogo de quebrar ovos no Roblox: por que viralizou?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -570,9 +642,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Roblox: testei o jogo de quebrar ovos que virou febre",
+        "title_draft": "O jogo de quebrar ovos no Roblox: por que viralizou?",
         "primary_keyword": "jogo de quebrar ovos Roblox",
-        "description_draft": "jogo de quebrar ovos Roblox: O desafio gira em torno de ovos, recompensas e progressão. O vídeo depende de uma partida real para mostrar como funciona.\n\nQual teste desse jogo devemos fazer depois?\n\n#Roblox #RobloxBrasil #Shorts",
+        "description_draft": "Uma ideia simples com recompensas e escolhas rápidas pode atrair milhares de pessoas. Vamos explicar a proposta do jogo.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Roblox #RobloxBrasil #Shorts",
         "hashtags": [
           "#Roblox",
           "#RobloxBrasil",
@@ -583,22 +655,26 @@
           "quebrar ovos Roblox",
           "steal an egg",
           "Roblox jogo de ovos",
-          "Roblox gameplay",
           "Roblox Brasil",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-016",
       "queue_position": 16,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Por que os desenvolvedores escondem easter eggs nos jogos?",
+      "title_proposed": "Easter eggs: por que os jogos escondem tantos segredos?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -607,9 +683,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Por que os desenvolvedores escondem easter eggs nos jogos?",
+        "title_draft": "Easter eggs: por que os jogos escondem tantos segredos?",
         "primary_keyword": "easter eggs nos jogos",
-        "description_draft": "easter eggs nos jogos: Segredos escondidos incentivam exploração e homenagens. Entenda como os desenvolvedores usam detalhes extras para recompensar jogadores.\n\nQual explicação sobre games você gostaria de ver?\n\n#EasterEggs #CuriosidadesGamer #Shorts",
+        "description_draft": "Referências secretas e pequenos detalhes recompensam a curiosidade. Conheça o papel dos easter eggs nos jogos.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#EasterEggs #CuriosidadesGamer #Shorts",
         "hashtags": [
           "#EasterEggs",
           "#CuriosidadesGamer",
@@ -626,16 +702,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-017",
       "queue_position": 17,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Combat Arms e CrossFire: saudades dos FPS de antigamente?",
+      "title_proposed": "Combat Arms e CrossFire: saudade dos FPS clássicos?",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -644,9 +725,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Combat Arms e CrossFire: saudades dos FPS de antigamente?",
+        "title_draft": "Combat Arms e CrossFire: saudade dos FPS clássicos?",
         "primary_keyword": "Combat Arms e CrossFire",
-        "description_draft": "Combat Arms e CrossFire: Partidas em lan houses, armas favoritas e mapas clássicos: dois FPS que fazem parte da nostalgia de jogadores brasileiros.\n\nVocê jogaria esse clássico novamente?\n\n#CombatArms #CrossFire #Shorts",
+        "description_draft": "Dois nomes que marcaram a época das lan houses e dos FPS online. Relembre mapas, estilos de jogo e amizades.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#CombatArms #CrossFire #Shorts",
         "hashtags": [
           "#CombatArms",
           "#CrossFire",
@@ -663,16 +744,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-018",
       "queue_position": 18,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Testei mods que deixam a água do Minecraft REALISTA!",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Minecraft com água realista: o que os mods mudam?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -681,9 +767,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Testei mods que deixam a água do Minecraft REALISTA!",
+        "title_draft": "Minecraft com água realista: o que os mods mudam?",
         "primary_keyword": "mods de água realista Minecraft",
-        "description_draft": "mods de água realista Minecraft: Compare a aparência e o desempenho de mods ou shaders de água em uma instalação real do Minecraft, com versões identificadas.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#Minecraft #MinecraftMods #Shorts",
+        "description_draft": "Mods gráficos e shaders podem mudar a aparência da água no Minecraft. Entenda a proposta visual e seus limites.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #MinecraftMods #Shorts",
         "hashtags": [
           "#Minecraft",
           "#MinecraftMods",
@@ -698,18 +784,23 @@
           "Minecraft desempenho",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-019",
       "queue_position": 19,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Remake ou remaster? A diferença que muita gente confunde",
+      "title_proposed": "Remake ou remaster: qual é a verdadeira diferença?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -718,9 +809,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Remake ou remaster? A diferença que muita gente confunde",
+        "title_draft": "Remake ou remaster: qual é a verdadeira diferença?",
         "primary_keyword": "remake vs remaster",
-        "description_draft": "remake vs remaster: Um remake pode reconstruir partes de um jogo; um remaster normalmente aprimora a apresentação. Veja exemplos que deixam a distinção clara.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#Remake #Remaster #Shorts",
+        "description_draft": "Os termos remake e remaster descrevem mudanças diferentes na produção de jogos. Entenda com exemplos conhecidos.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Remake #Remaster #Shorts",
         "hashtags": [
           "#Remake",
           "#Remaster",
@@ -737,16 +828,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-020",
       "queue_position": 20,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Zelda Ocarina of Time: por que esse clássico marcou uma geração?",
+      "title_proposed": "Ocarina of Time: por que Zelda marcou uma geração?",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -755,9 +851,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Zelda Ocarina of Time: por que esse clássico marcou uma geração?",
+        "title_draft": "Ocarina of Time: por que Zelda marcou uma geração?",
         "primary_keyword": "Zelda Ocarina of Time nostalgia",
-        "description_draft": "Zelda Ocarina of Time nostalgia: Música, masmorras e exploração ajudam a explicar por que Ocarina of Time continua lembrado por tantos fãs.\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#Zelda #OcarinaOfTime #Shorts",
+        "description_draft": "Música, exploração e masmorras fizeram de Zelda Ocarina of Time um clássico lembrado até hoje.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Zelda #OcarinaOfTime #Shorts",
         "hashtags": [
           "#Zelda",
           "#OcarinaOfTime",
@@ -774,16 +870,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-021",
       "queue_position": 21,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Ocarina of Time no Switch 2: o que mudou no remake?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Zelda no Switch 2: o que realmente foi confirmado?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -792,9 +893,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Ocarina of Time no Switch 2: o que mudou no remake?",
+        "title_draft": "Zelda no Switch 2: o que realmente foi confirmado?",
         "primary_keyword": "Ocarina of Time Switch 2",
-        "description_draft": "Ocarina of Time Switch 2: Compare apenas versões e anúncios oficialmente confirmados. Se o remake não estiver disponível, a pauta deve ser suspensa ou corrigida.\n\nVocê jogaria esse desafio?\n\n#Zelda #NintendoSwitch2 #Shorts",
+        "description_draft": "Vamos separar informações oficiais de expectativas sobre Ocarina of Time no Switch 2, sem afirmar remakes não confirmados.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Zelda #NintendoSwitch2 #Shorts",
         "hashtags": [
           "#Zelda",
           "#NintendoSwitch2",
@@ -809,18 +910,23 @@
           "Zelda notícias",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Confirm official title/platform/version/date at publication"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-022",
       "queue_position": 22,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Por que alguns jogos oferecem recompensas diárias?",
+      "title_proposed": "Por que jogos oferecem recompensa por entrar todo dia?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -829,9 +935,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Por que alguns jogos oferecem recompensas diárias?",
+        "title_draft": "Por que jogos oferecem recompensa por entrar todo dia?",
         "primary_keyword": "recompensas diárias nos jogos",
-        "description_draft": "recompensas diárias nos jogos: Bônus de login e tarefas recorrentes incentivam hábitos. Entenda esses sistemas sem confundir fidelização com obrigação de jogar.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#GameDesign #CuriosidadesGamer #Shorts",
+        "description_draft": "Bônus diários, missões e recompensas criam hábitos. Conheça a lógica de design por trás desses sistemas.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GameDesign #CuriosidadesGamer #Shorts",
         "hashtags": [
           "#GameDesign",
           "#CuriosidadesGamer",
@@ -848,16 +954,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-023",
       "queue_position": 23,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "A época do PS2: esses jogos merecem uma segunda chance",
+      "title_proposed": "PlayStation 2: jogos que merecem uma segunda chance",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -866,9 +977,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "A época do PS2: esses jogos merecem uma segunda chance",
+        "title_draft": "PlayStation 2: jogos que merecem uma segunda chance",
         "primary_keyword": "jogos clássicos do PS2",
-        "description_draft": "jogos clássicos do PS2: Reviva experiências marcantes do PlayStation 2 e descubra quais títulos ainda podem surpreender em uma nova partida.\n\nQue lembrança dessa época você ainda guarda?\n\n#PS2 #NostalgiaGamer #Shorts",
+        "description_draft": "Uma viagem nostálgica por títulos do PS2 que fizeram parte da história de muitos jogadores.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#PS2 #NostalgiaGamer #Shorts",
         "hashtags": [
           "#PS2",
           "#NostalgiaGamer",
@@ -885,16 +996,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-024",
       "queue_position": 24,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "GTA V: testei 3 mitos envolvendo NPCs",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "GTA V: 3 mitos famosos sobre os NPCs",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -903,9 +1019,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "GTA V: testei 3 mitos envolvendo NPCs",
+        "title_draft": "GTA V: 3 mitos famosos sobre os NPCs",
         "primary_keyword": "mitos de NPCs no GTA V",
-        "description_draft": "mitos de NPCs no GTA V: Três hipóteses sobre os NPCs de GTA V devem ser gravadas em gameplay real, mostrando inclusive as tentativas que falharem.\n\nQual teste desse jogo devemos fazer depois?\n\n#GTAV #MitosGTA #Shorts",
+        "description_draft": "NPCs de GTA V inspiraram teorias e histórias curiosas. Conheça três ideias populares e o que podemos verificar sobre elas.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTAV #MitosGTA #Shorts",
         "hashtags": [
           "#GTAV",
           "#MitosGTA",
@@ -917,21 +1033,25 @@
           "GTA NPCs",
           "mitos GTA V",
           "GTA 5 experiências",
-          "GTA 5 gameplay",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-025",
       "queue_position": 25,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Como um desenvolvedor sozinho consegue criar um jogo inteiro?",
+      "title_proposed": "Como uma pessoa consegue criar um jogo inteiro?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -940,9 +1060,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Como um desenvolvedor sozinho consegue criar um jogo inteiro?",
+        "title_draft": "Como uma pessoa consegue criar um jogo inteiro?",
         "primary_keyword": "desenvolvimento de jogo solo",
-        "description_draft": "desenvolvimento de jogo solo: Escopo reduzido, ferramentas prontas e testes ajudam pequenos criadores a concluir projetos. Veja exemplos com produção documentada.\n\nQual explicação sobre games você gostaria de ver?\n\n#GameDev #JogosIndie #Shorts",
+        "description_draft": "Escopo enxuto, ferramentas e persistência ajudam desenvolvedores solo a concluir projetos sem equipes grandes.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GameDev #JogosIndie #Shorts",
         "hashtags": [
           "#GameDev",
           "#JogosIndie",
@@ -959,16 +1079,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-026",
       "queue_position": 26,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Os jogos esquecidos do Xbox 360 que ainda merecem atenção",
+      "title_proposed": "Xbox 360: clássicos esquecidos que merecem voltar",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -977,9 +1102,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Os jogos esquecidos do Xbox 360 que ainda merecem atenção",
+        "title_draft": "Xbox 360: clássicos esquecidos que merecem voltar",
         "primary_keyword": "jogos pouco conhecidos Xbox 360",
-        "description_draft": "jogos pouco conhecidos Xbox 360: O catálogo do Xbox 360 guarda títulos menos comentados. Relembre opções que valem ser revisitadas com informação correta de plataforma.\n\nVocê jogaria esse clássico novamente?\n\n#Xbox360 #NostalgiaGamer #Shorts",
+        "description_draft": "Jogos menos comentados do Xbox 360 ainda rendem boas lembranças. Conheça algumas experiências dessa geração.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Xbox360 #NostalgiaGamer #Shorts",
         "hashtags": [
           "#Xbox360",
           "#NostalgiaGamer",
@@ -996,16 +1121,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-027",
       "queue_position": 27,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Jogos grátis desta semana na Steam e Epic: quais compensam?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Jogos grátis da Steam e Epic: o que vale conferir?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -1014,9 +1144,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Jogos grátis desta semana na Steam e Epic: quais compensam?",
+        "title_draft": "Jogos grátis da Steam e Epic: o que vale conferir?",
         "primary_keyword": "jogos grátis Steam e Epic",
-        "description_draft": "jogos grátis Steam e Epic: A oferta depende da semana de publicação. Mostre somente jogos confirmados gratuitamente nas lojas, com prazo de resgate atualizado.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#JogosGratis #Steam #Shorts",
+        "description_draft": "Como descobrir jogos gratuitos na Steam e Epic e avaliar opções, sempre conferindo a disponibilidade atual das lojas.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#JogosGratis #Steam #Shorts",
         "hashtags": [
           "#JogosGratis",
           "#Steam",
@@ -1031,18 +1161,23 @@
           "promoções jogos",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Confirm official title/platform/version/date at publication"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-028",
       "queue_position": 28,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Por que alguns jogos são tão difíceis e outros tão fáceis?",
+      "title_proposed": "Por que alguns jogos são tão difíceis?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -1051,9 +1186,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Por que alguns jogos são tão difíceis e outros tão fáceis?",
+        "title_draft": "Por que alguns jogos são tão difíceis?",
         "primary_keyword": "dificuldade nos videogames",
-        "description_draft": "dificuldade nos videogames: IA dos inimigos, recursos disponíveis e curvas de aprendizado mudam o desafio. A dificuldade também depende do perfil de quem joga.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#GameDesign #CuriosidadesGamer #Shorts",
+        "description_draft": "Regras, recursos disponíveis e curva de aprendizado transformam a dificuldade. Entenda como os designers criam desafios.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GameDesign #CuriosidadesGamer #Shorts",
         "hashtags": [
           "#GameDesign",
           "#CuriosidadesGamer",
@@ -1070,9 +1205,14 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-029",
@@ -1090,7 +1230,7 @@
       "seo": {
         "title_draft": "Roblox antigo: quando tudo parecia mais simples",
         "primary_keyword": "Roblox antigo nostalgia",
-        "description_draft": "Roblox antigo nostalgia: Avatares, interfaces e experiências do Roblox evoluíram ao longo do tempo. Quais elementos da época antiga você sente falta?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#Roblox #NostalgiaGamer #Shorts",
+        "description_draft": "Avatares, interfaces e experiências antigas do Roblox despertam saudade. Relembre o que mudou.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Roblox #NostalgiaGamer #Shorts",
         "hashtags": [
           "#Roblox",
           "#NostalgiaGamer",
@@ -1107,16 +1247,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-030",
       "queue_position": 30,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Fortnite: dá para se divertir sem gastar V-Bucks?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Fortnite sem V-Bucks: dá para aproveitar o jogo?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -1125,9 +1270,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Fortnite: dá para se divertir sem gastar V-Bucks?",
+        "title_draft": "Fortnite sem V-Bucks: dá para aproveitar o jogo?",
         "primary_keyword": "Fortnite sem V-Bucks",
-        "description_draft": "Fortnite sem V-Bucks: Experiências gratuitas, cosméticos opcionais e modos de jogo permitem avaliar quanto a diversão depende de gastar dinheiro.\n\nVocê jogaria esse desafio?\n\n#Fortnite #VBucks #Shorts",
+        "description_draft": "Fortnite oferece experiências gratuitas e opções cosméticas. Saiba como separar diversão de gastos opcionais.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Fortnite #VBucks #Shorts",
         "hashtags": [
           "#Fortnite",
           "#VBucks",
@@ -1142,18 +1287,23 @@
           "jogos gratuitos",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-031",
       "queue_position": 31,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "3 erros que jogadores iniciantes cometem nos FPS",
+      "title_proposed": "3 erros comuns de quem está começando nos FPS",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -1162,9 +1312,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "3 erros que jogadores iniciantes cometem nos FPS",
+        "title_draft": "3 erros comuns de quem está começando nos FPS",
         "primary_keyword": "erros comuns de FPS",
-        "description_draft": "erros comuns de FPS: Posicionamento ruim, pressa e pouca atenção ao mapa podem atrapalhar partidas. Confira dicas que dependem da situação e do jogo.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#FPS #DicasGamer #Shorts",
+        "description_draft": "Posicionamento, pressa e leitura do mapa são escolhas decisivas em jogos de tiro. Conheça três cuidados gerais.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#FPS #DicasGamer #Shorts",
         "hashtags": [
           "#FPS",
           "#DicasGamer",
@@ -1181,16 +1331,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-032",
       "queue_position": 32,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Os mods antigos do Minecraft que pareciam magia",
+      "title_proposed": "Mods antigos do Minecraft que pareciam magia",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -1199,9 +1354,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Os mods antigos do Minecraft que pareciam magia",
+        "title_draft": "Mods antigos do Minecraft que pareciam magia",
         "primary_keyword": "mods clássicos do Minecraft",
-        "description_draft": "mods clássicos do Minecraft: Certos mods de Minecraft mudavam criaturas, ferramentas e dimensões inteiras. Relembre a época das instalações manuais.\n\nQue lembrança dessa época você ainda guarda?\n\n#Minecraft #NostalgiaGamer #Shorts",
+        "description_draft": "Criaturas, ferramentas e dimensões criadas pela comunidade mudaram a experiência de Minecraft ao longo dos anos.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #NostalgiaGamer #Shorts",
         "hashtags": [
           "#Minecraft",
           "#NostalgiaGamer",
@@ -1218,16 +1373,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-033",
       "queue_position": 33,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Testei 3 jogos de terror do Roblox: qual assusta mais?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "3 jogos de terror do Roblox para conhecer",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -1236,9 +1396,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Testei 3 jogos de terror do Roblox: qual assusta mais?",
+        "title_draft": "3 jogos de terror do Roblox para conhecer",
         "primary_keyword": "terror no Roblox",
-        "description_draft": "terror no Roblox: Sustos, ambientação e mecânicas de três jogos de terror do Roblox serão comparados com capturas reais, não cenas geradas.\n\nQual teste desse jogo devemos fazer depois?\n\n#Roblox #JogosDeTerror #Shorts",
+        "description_draft": "Atmosfera, sustos e mistérios aparecem em diferentes experiências de terror do Roblox. Conheça três propostas distintas.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Roblox #JogosDeTerror #Shorts",
         "hashtags": [
           "#Roblox",
           "#JogosDeTerror",
@@ -1249,22 +1409,26 @@
           "jogos de terror Roblox",
           "Roblox assustador",
           "terror Roblox Brasil",
-          "Roblox gameplay",
           "jogos Roblox",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-034",
       "queue_position": 34,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "3 detalhes escondidos no mundo de GTA IV",
+      "title_proposed": "GTA IV: 3 detalhes curiosos de Liberty City",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -1273,9 +1437,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "3 detalhes escondidos no mundo de GTA IV",
+        "title_draft": "GTA IV: 3 detalhes curiosos de Liberty City",
         "primary_keyword": "segredos GTA IV",
-        "description_draft": "segredos GTA IV: Lugares, interações e referências de Liberty City podem guardar detalhes interessantes. Cada segredo deve ser confirmado no jogo.\n\nQual explicação sobre games você gostaria de ver?\n\n#GTAIV #SegredosGTA #Shorts",
+        "description_draft": "Liberty City guarda pequenas referências e interações interessantes. Conheça detalhes do universo de GTA IV.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTAIV #SegredosGTA #Shorts",
         "hashtags": [
           "#GTAIV",
           "#SegredosGTA",
@@ -1292,16 +1456,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-035",
       "queue_position": 35,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Você lembra de passar horas construindo no Bloxburg?",
+      "title_proposed": "Bloxburg: você lembra das suas primeiras casas?",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -1310,9 +1479,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Você lembra de passar horas construindo no Bloxburg?",
+        "title_draft": "Bloxburg: você lembra das suas primeiras casas?",
         "primary_keyword": "Bloxburg Roblox nostalgia",
-        "description_draft": "Bloxburg Roblox nostalgia: Casas, empregos e projetos demorados faziam do Bloxburg um lugar para criar histórias. Qual construção você mais gostava de fazer?\n\nVocê jogaria esse clássico novamente?\n\n#Bloxburg #Roblox #Shorts",
+        "description_draft": "Construir, decorar e trabalhar no Bloxburg se tornou parte das lembranças de muitos fãs de Roblox.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Bloxburg #Roblox #Shorts",
         "hashtags": [
           "#Bloxburg",
           "#Roblox",
@@ -1329,16 +1498,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-036",
       "queue_position": 36,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "GTA VI: o que é oficial e o que ainda é boato?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "GTA VI: o que é oficial e o que ainda é rumor?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -1347,9 +1521,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "GTA VI: o que é oficial e o que ainda é boato?",
+        "title_draft": "GTA VI: o que é oficial e o que ainda é rumor?",
         "primary_keyword": "rumores e fatos GTA VI",
-        "description_draft": "rumores e fatos GTA VI: Separe trailers e comunicados da Rockstar de vazamentos e teorias. Informações oficiais e datas devem ser conferidas no dia de publicação.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#GTAVI #GTA6 #Shorts",
+        "description_draft": "Uma análise para distinguir materiais publicados pela Rockstar de previsões e boatos sobre GTA VI.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTAVI #GTA6 #Shorts",
         "hashtags": [
           "#GTAVI",
           "#GTA6",
@@ -1364,18 +1538,23 @@
           "notícias GTA VI",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Confirm official title/platform/version/date at publication"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-037",
       "queue_position": 37,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Por que os roguelites fazem a gente querer tentar de novo?",
+      "title_proposed": "Por que roguelites fazem você querer tentar de novo?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -1384,9 +1563,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Por que os roguelites fazem a gente querer tentar de novo?",
+        "title_draft": "Por que roguelites fazem você querer tentar de novo?",
         "primary_keyword": "mecânicas de roguelite",
-        "description_draft": "mecânicas de roguelite: Progressão entre tentativas, escolhas aleatórias e recompensas graduais explicam o ciclo de repetição em muitos roguelites.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#Roguelite #GameDesign #Shorts",
+        "description_draft": "Progressão, escolhas e aleatoriedade deixam cada tentativa um pouco diferente em muitos roguelites.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Roguelite #GameDesign #Shorts",
         "hashtags": [
           "#Roguelite",
           "#GameDesign",
@@ -1403,16 +1582,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-038",
       "queue_position": 38,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Os MMORPGs que rodavam até em computadores fracos",
+      "title_proposed": "MMORPGs antigos que rodavam em computadores fracos",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -1421,9 +1605,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Os MMORPGs que rodavam até em computadores fracos",
+        "title_draft": "MMORPGs antigos que rodavam em computadores fracos",
         "primary_keyword": "MMORPGs para PC fraco",
-        "description_draft": "MMORPGs para PC fraco: Jogos online de outra época cabiam em configurações modestas. Relembre mundos, classes e amizades formadas nos servidores.\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#MMORPG #NostalgiaGamer #Shorts",
+        "description_draft": "Relembre mundos online e jogos leves que formaram comunidades em computadores modestos.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#MMORPG #NostalgiaGamer #Shorts",
         "hashtags": [
           "#MMORPG",
           "#NostalgiaGamer",
@@ -1440,16 +1624,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-039",
       "queue_position": 39,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Godzilla Remastered: o clássico voltou, mas ainda diverte?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Jogos de monstros gigantes: por que Godzilla fascina?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -1458,9 +1647,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Godzilla Remastered: o clássico voltou, mas ainda diverte?",
+        "title_draft": "Jogos de monstros gigantes: por que Godzilla fascina?",
         "primary_keyword": "Godzilla Remastered",
-        "description_draft": "Godzilla Remastered: Antes de produzir, confirme o nome exato, a existência e a plataforma da suposta edição remasterizada. Depois avalie gameplay real.\n\nVocê jogaria esse desafio?\n\n#Godzilla #Jogos #Shorts",
+        "description_draft": "Monstros colossais rendem confrontos e cenários cinematográficos em jogos. Conheça o apelo dos títulos inspirados em Godzilla.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Godzilla #Jogos #Shorts",
         "hashtags": [
           "#Godzilla",
           "#Jogos",
@@ -1472,21 +1661,25 @@
           "jogos Godzilla",
           "Godzilla games",
           "jogos de monstros",
-          "Godzilla gameplay",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Confirm official title/platform/version/date at publication"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-040",
       "queue_position": 40,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Como os mods conseguem transformar completamente um jogo?",
+      "title_proposed": "Mods: como um jogo pode virar outro completamente?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -1495,9 +1688,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Como os mods conseguem transformar completamente um jogo?",
+        "title_draft": "Mods: como um jogo pode virar outro completamente?",
         "primary_keyword": "mods e modificações de jogos",
-        "description_draft": "mods e modificações de jogos: De texturas a mecânicas completas, mods ampliam possibilidades e dependem de ferramentas, compatibilidade e regras de cada jogo.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#Mods #CuriosidadesGamer #Shorts",
+        "description_draft": "De gráficos a mecânicas inteiras, modificações feitas pela comunidade expandem as possibilidades dos jogos.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Mods #CuriosidadesGamer #Shorts",
         "hashtags": [
           "#Mods",
           "#CuriosidadesGamer",
@@ -1514,16 +1707,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-041",
       "queue_position": 41,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "League of Legends antigo: você sobreviveria naquele meta?",
+      "title_proposed": "League of Legends antigo: saudade daquele meta?",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -1532,9 +1730,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "League of Legends antigo: você sobreviveria naquele meta?",
+        "title_draft": "League of Legends antigo: saudade daquele meta?",
         "primary_keyword": "meta antigo de League of Legends",
-        "description_draft": "meta antigo de League of Legends: Itens, campeões e estilos de partida mudaram. Relembre decisões comuns no meta antigo de LoL sem tratar uma opinião como estatística.\n\nQue lembrança dessa época você ainda guarda?\n\n#LeagueOfLegends #NostalgiaGamer #Shorts",
+        "description_draft": "Itens, campeões e estratégias mudaram com o tempo. Relembre momentos do LoL que marcaram uma geração.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#LeagueOfLegends #NostalgiaGamer #Shorts",
         "hashtags": [
           "#LeagueOfLegends",
           "#NostalgiaGamer",
@@ -1551,16 +1749,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-042",
       "queue_position": 42,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "CS2: testei três armas que quase ninguém valoriza",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "CS2: 3 armas subestimadas que merecem atenção",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -1569,9 +1772,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "CS2: testei três armas que quase ninguém valoriza",
+        "title_draft": "CS2: 3 armas subestimadas que merecem atenção",
         "primary_keyword": "armas subestimadas no CS2",
-        "description_draft": "armas subestimadas no CS2: Escolha três armas menos populares e registre situações reais de uso no Counter-Strike 2, sem afirmar vantagem antes dos resultados.\n\nQual teste desse jogo devemos fazer depois?\n\n#CS2 #CounterStrike2 #Shorts",
+        "description_draft": "Nem sempre os equipamentos mais conhecidos são os únicos interessantes. Entenda o papel de três armas do CS2.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#CS2 #CounterStrike2 #Shorts",
         "hashtags": [
           "#CS2",
           "#CounterStrike2",
@@ -1583,21 +1786,25 @@
           "armas CS2",
           "CS2 Brasil",
           "CS2 dicas",
-          "Counter Strike gameplay",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-043",
       "queue_position": 43,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Por que alguns jogos de terror indie assustam mais que jogos caros?",
+      "title_proposed": "Por que jogos de terror indie assustam tanto?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -1606,9 +1813,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Por que alguns jogos de terror indie assustam mais que jogos caros?",
+        "title_draft": "Por que jogos de terror indie assustam tanto?",
         "primary_keyword": "terror indie vs AAA",
-        "description_draft": "terror indie vs AAA: Som, imprevisibilidade e atmosfera podem ser tão importantes quanto gráficos. Compare exemplos reais, sem transformar gosto em fato.\n\nQual explicação sobre games você gostaria de ver?\n\n#TerrorIndie #JogosDeTerror #Shorts",
+        "description_draft": "Atmosfera, áudio e incerteza podem criar medo mesmo sem grandes orçamentos. Conheça o design dos jogos indie de terror.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#TerrorIndie #JogosDeTerror #Shorts",
         "hashtags": [
           "#TerrorIndie",
           "#JogosDeTerror",
@@ -1625,16 +1832,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-044",
       "queue_position": 44,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "PSP: os jogos portáteis que marcaram nossa infância",
+      "title_proposed": "PSP: os jogos portáteis que marcaram uma geração",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -1643,9 +1855,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "PSP: os jogos portáteis que marcaram nossa infância",
+        "title_draft": "PSP: os jogos portáteis que marcaram uma geração",
         "primary_keyword": "jogos clássicos de PSP",
-        "description_draft": "jogos clássicos de PSP: O PlayStation Portable levou aventuras e multiplayer ao bolso. Relembre o catálogo e a experiência de jogar longe da TV.\n\nVocê jogaria esse clássico novamente?\n\n#PSP #NostalgiaGamer #Shorts",
+        "description_draft": "A era do PSP trouxe grandes aventuras para um console de bolso. Relembre jogos que fizeram história.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#PSP #NostalgiaGamer #Shorts",
         "hashtags": [
           "#PSP",
           "#NostalgiaGamer",
@@ -1662,16 +1874,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-045",
       "queue_position": 45,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Void/Breaker: esse FPS roguelite merece uma chance?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Void/Breaker: o que torna esse FPS roguelite diferente?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -1680,9 +1897,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Void/Breaker: esse FPS roguelite merece uma chance?",
+        "title_draft": "Void/Breaker: o que torna esse FPS roguelite diferente?",
         "primary_keyword": "Void/Breaker FPS roguelite",
-        "description_draft": "Void/Breaker FPS roguelite: Teste combate, progressão e desempenho na versão correta de Void/Breaker antes de tirar uma conclusão sobre o jogo.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#VoidBreaker #Roguelite #Shorts",
+        "description_draft": "A combinação de tiros e progressão roguelite dá identidade a experiências como Void/Breaker. Conheça a proposta geral.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#VoidBreaker #Roguelite #Shorts",
         "hashtags": [
           "#VoidBreaker",
           "#Roguelite",
@@ -1694,21 +1911,25 @@
           "FPS roguelite",
           "jogo indie FPS",
           "roguelite FPS",
-          "Void Breaker gameplay",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Confirm official title/platform/version/date at publication"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-046",
       "queue_position": 46,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Como Zelda transformou música em parte da jogabilidade?",
+      "title_proposed": "Como Zelda transformou música em jogabilidade?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -1717,9 +1938,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Como Zelda transformou música em parte da jogabilidade?",
+        "title_draft": "Como Zelda transformou música em jogabilidade?",
         "primary_keyword": "música em Zelda Ocarina of Time",
-        "description_draft": "música em Zelda Ocarina of Time: Melodias tocadas com a ocarina conduzem acontecimentos e puzzles em Zelda. O som faz parte da interação do jogador.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#Zelda #OcarinaOfTime #Shorts",
+        "description_draft": "Melodias e instrumentos aparecem como parte das ações e enigmas da série Zelda, especialmente em Ocarina of Time.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Zelda #OcarinaOfTime #Shorts",
         "hashtags": [
           "#Zelda",
           "#OcarinaOfTime",
@@ -1736,16 +1957,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-047",
       "queue_position": 47,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "Grand Chase: os duelos PvP que acabavam com amizades 😂",
+      "title_proposed": "Grand Chase: a nostalgia dos duelos PvP 😂",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -1754,9 +1980,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Grand Chase: os duelos PvP que acabavam com amizades 😂",
+        "title_draft": "Grand Chase: a nostalgia dos duelos PvP 😂",
         "primary_keyword": "PvP de Grand Chase",
-        "description_draft": "PvP de Grand Chase: Combos, arenas e rivais transformavam disputas de Grand Chase em histórias engraçadas. Qual duelo você nunca esqueceu?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#GrandChase #NostalgiaGamer #Shorts",
+        "description_draft": "Combos e rivalidades nos modos PvP de Grand Chase fizeram parte da experiência de muitos jogadores.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GrandChase #NostalgiaGamer #Shorts",
         "hashtags": [
           "#GrandChase",
           "#NostalgiaGamer",
@@ -1773,16 +1999,21 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-048",
       "queue_position": 48,
-      "format_id": "jogos-do-momento",
-      "format_name": "Jogos do Momento",
-      "title_proposed": "Enigma do Medo: vale conhecer com a alta de Ordem Paranormal?",
+      "format_id": "jogos-em-alta",
+      "format_name": "Jogos em Alta",
+      "title_proposed": "Enigma do Medo: por que Ordem Paranormal desperta interesse?",
       "target_duration_seconds": {
         "min": 40,
         "max": 90
@@ -1791,9 +2022,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Enigma do Medo: vale conhecer com a alta de Ordem Paranormal?",
+        "title_draft": "Enigma do Medo: por que Ordem Paranormal desperta interesse?",
         "primary_keyword": "Enigma do Medo e Ordem Paranormal",
-        "description_draft": "Enigma do Medo e Ordem Paranormal: Explore a ligação temática entre Enigma do Medo e o universo de Ordem Paranormal; verifique dados do jogo e da franquia antes do vídeo.\n\nVocê jogaria esse desafio?\n\n#EnigmaDoMedo #OrdemParanormal #Shorts",
+        "description_draft": "O universo de Ordem Paranormal reúne mistério e terror. Conheça a proposta de Enigma do Medo e sua relação com a franquia.\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#EnigmaDoMedo #OrdemParanormal #Shorts",
         "hashtags": [
           "#EnigmaDoMedo",
           "#OrdemParanormal",
@@ -1804,22 +2035,26 @@
           "Ordem Paranormal",
           "Cellbit jogos",
           "jogo brasileiro",
-          "Enigma do Medo gameplay",
           "RPG de terror",
           "Hélio Conde",
           "games Brasil",
-          "jogos do momento"
+          "jogos em alta"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": "Needs real, licensed or original gameplay before publishing"
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-049",
       "queue_position": 49,
       "format_id": "voce-sabia",
       "format_name": "Você Sabia?",
-      "title_proposed": "Como os jogos criam sons de monstros que parecem reais?",
+      "title_proposed": "Como criam os sons assustadores dos monstros?",
       "target_duration_seconds": {
         "min": 25,
         "max": 45
@@ -1828,9 +2063,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "Como os jogos criam sons de monstros que parecem reais?",
+        "title_draft": "Como criam os sons assustadores dos monstros?",
         "primary_keyword": "design de som de monstros",
-        "description_draft": "design de som de monstros: Camadas de animais, objetos e efeitos digitais ajudam a criar criaturas memoráveis. Use exemplos com making-of documentado.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#SoundDesign #CuriosidadesGamer #Shorts",
+        "description_draft": "Camadas de sons, processamento e criatividade transformam ruídos simples em criaturas memoráveis nos videogames.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#SoundDesign #CuriosidadesGamer #Shorts",
         "hashtags": [
           "#SoundDesign",
           "#CuriosidadesGamer",
@@ -1847,16 +2082,21 @@
           "games Brasil",
           "você sabia?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     },
     {
       "id": "game-050",
       "queue_position": 50,
       "format_id": "voce-lembra",
       "format_name": "Você Lembra?",
-      "title_proposed": "GTA V: você lembra da primeira vez que entrou em Los Santos?",
+      "title_proposed": "GTA V: você lembra da primeira vez em Los Santos?",
       "target_duration_seconds": {
         "min": 35,
         "max": 60
@@ -1865,9 +2105,9 @@
       "production_reservation": "not_reserved",
       "publish_authorized": false,
       "seo": {
-        "title_draft": "GTA V: você lembra da primeira vez que entrou em Los Santos?",
+        "title_draft": "GTA V: você lembra da primeira vez em Los Santos?",
         "primary_keyword": "primeira vez em Los Santos GTA V",
-        "description_draft": "primeira vez em Los Santos GTA V: Explorar Los Santos pela primeira vez trouxe descobertas e histórias. Compartilhe aquela lembrança inesquecível de GTA V.\n\nQue lembrança dessa época você ainda guarda?\n\n#GTAV #NostalgiaGamer #Shorts",
+        "description_draft": "Explorar Los Santos pela primeira vez rende nostalgia, histórias e descobertas. Relembre o impacto do mundo de GTA V.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTAV #NostalgiaGamer #Shorts",
         "hashtags": [
           "#GTAV",
           "#NostalgiaGamer",
@@ -1884,9 +2124,14 @@
           "games Brasil",
           "você lembra?"
         ],
-        "metadata_status": "draft_pending_factual_and_video_review",
-        "extra_review": null
-      }
+        "metadata_status": "draft_illustrated_ai_pending_factual_and_visual_review",
+        "extra_review": "Check the facts and current versions; visuals are original AI illustrations, never footage or official game screenshots.",
+        "ai_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+      },
+      "visual_policy": "ai_generated_original_illustrations_only_no_gameplay",
+      "production_mode": "narrated_editorial_illustrated_by_ai",
+      "gameplay_recording_required": false,
+      "claims_require_factual_review": true
     }
   ]
 }
