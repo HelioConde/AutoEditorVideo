@@ -27,19 +27,27 @@ A aprovação de um nome de marca NÃO significa que o nome do canal foi alterad
 - Scripts youtube_channel_registry.py e production_reservations.py passam a
   validar os cinco destinos e exigem reserva de vídeo no GitHub antes de gerar.
 
-## Separação do YouTube OAuth
+## OAuth individual dos cinco canais no mesmo Environment
 
-| Canal novo | GitHub Environment planejado | Secret planejado | Estado |
+**youtube-private-upload** é o Environment único existente. Ele deve
+permanecer restrito à branch main. A centralização dos nomes de Secrets
+reduz o isolamento entre jobs, não permite compartilhar tokens de conta.
+
+| Canal | Environment único | Secret exclusivo | Situação |
 |---|---|---|---|
-| games | youtube-games-private-upload | YOUTUBE_GAMES_TOKEN_JSON | upload bloqueado |
-| kids | youtube-kids-private-upload | YOUTUBE_KIDS_TOKEN_JSON | upload bloqueado |
-| alchemy | youtube-alchemy-private-upload | YOUTUBE_ALCHEMY_TOKEN_JSON | upload bloqueado |
+| br | youtube-private-upload | YOUTUBE_BR_TOKEN_JSON | preservar |
+| en | youtube-private-upload | YOUTUBE_EN_TOKEN_JSON | preservar |
+| games | youtube-private-upload | YOUTUBE_GAMES_TOKEN_JSON | adicionar com consentimento |
+| kids | youtube-private-upload | YOUTUBE_KIDS_TOKEN_JSON | adicionar com consentimento |
+| alchemy | youtube-private-upload | YOUTUBE_ALCHEMY_TOKEN_JSON | adicionar com consentimento |
 
-Esses Secrets são NOMES de futuras configurações. Nenhum token foi inserido,
-nenhum OAuth foi conectado e nenhuma alteração foi feita nas contas.
-Nunca reutilizar tokens do Otaku BR/EN ou do Codex Proxy para enviar vídeos.
-O uploader futuro deve verificar channels.list(mine=true) contra o ID
-registrado, proteger a privacidade e impedir duplicações.
+O sexto Secret, YOUTUBE_CLIENT_JSON, é o cliente OAuth já existente e
+**não deve ser substituído** por este procedimento. Nenhum token é
+transferido pela simples alteração do código ou pelo merge do PR.
+Cada verificação exige channels.list(mine=true) e o ID exato.
+Os uploaders dos canais novos continuam BLOQUEADOS; OAuth autorizado
+não é autorização para publicação. Guia:
+docs/CONECTAR-3-CANAIS-OAUTH-GITHUB.md.
 
 ## Políticas obrigatórias
 
