@@ -435,6 +435,39 @@
       "upload_workflow_run": 42074829801,
       "thumbnail_api_acknowledged": true,
       "youtube_visibility": "private"
+    },
+    {
+      "channel": "games",
+      "id": "game-001-gta4-gta5-v4-reenvio1",
+      "status": "reserved",
+      "reservation_owner": "gamer_v4_three_processing_reupload_20261105",
+      "publication_target": "private_first",
+      "review_status": "pending_nonresumable_private_upload_and_processing_verification",
+      "original_private_youtube_video_id": "CY9v9742DqY",
+      "source": "creator_explicit_request_resend_three_gamer_only_20261105",
+      "note": "Upload same 3 verified V4 original MP4s only, using a different YouTube transport (single-request non-resumable upload) because prior 12 videos stuck processing; no new render, no Alchemy channel, no public status, no delete. Unique retry tag for idempotence and separate receipt."
+    },
+    {
+      "channel": "games",
+      "id": "game-002-primeira-noite-minecraft-v4-reenvio1",
+      "status": "reserved",
+      "reservation_owner": "gamer_v4_three_processing_reupload_20261105",
+      "publication_target": "private_first",
+      "review_status": "pending_nonresumable_private_upload_and_processing_verification",
+      "original_private_youtube_video_id": "vG5tqbqirRo",
+      "source": "creator_explicit_request_resend_three_gamer_only_20261105",
+      "note": "Upload same 3 verified V4 original MP4s only, using a different YouTube transport (single-request non-resumable upload) because prior 12 videos stuck processing; no new render, no Alchemy channel, no public status, no delete. Unique retry tag for idempotence and separate receipt."
+    },
+    {
+      "channel": "games",
+      "id": "game-003-minecraft-sem-amarelo-v4-reenvio1",
+      "status": "reserved",
+      "reservation_owner": "gamer_v4_three_processing_reupload_20261105",
+      "publication_target": "private_first",
+      "review_status": "pending_nonresumable_private_upload_and_processing_verification",
+      "original_private_youtube_video_id": "0PzFrTqWUQk",
+      "source": "creator_explicit_request_resend_three_gamer_only_20261105",
+      "note": "Upload same 3 verified V4 original MP4s only, using a different YouTube transport (single-request non-resumable upload) because prior 12 videos stuck processing; no new render, no Alchemy channel, no public status, no delete. Unique retry tag for idempotence and separate receipt."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
