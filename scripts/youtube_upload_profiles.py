@@ -35,6 +35,15 @@ def load_profiles(path:Path=PROFILE_FILE)->dict:
             raise UploadProfileError("UPLOAD_PROFILE_UNAPPROVED_CATEGORY_OR_PRIVACY")
         if p.get("youtube_channel_id")!=("UCXGYTuBYn-0Ziqin5ajKhOw" if channel=="br" else "UCBoNbQjaMYdpJqPLRZAFkvQ"):
             raise UploadProfileError("UPLOAD_PROFILE_CHANNEL_ID_MISMATCH")
+        cover=p.get("thumbnail") or {}
+        if (cover.get("source")!="autoeditorvideo_original_generated_cover"
+                or cover.get("must_match_review_artifact_sha256") is not True
+                or cover.get("block_video_upload_if_missing_or_invalid") is not True
+                or cover.get("fallback_to_auto_generated_youtube_thumbnail") is not False
+                or cover.get("fallback_to_video_frame") is not False
+                or cover.get("fallback_to_other_channel_cover") is not False
+                or cover.get("regenerate_cover_at_publish_time") is not False):
+            raise UploadProfileError("GENERATED_THUMBNAIL_PROFILE_VIOLATION")
     return data
 
 
