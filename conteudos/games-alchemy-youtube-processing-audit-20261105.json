@@ -1,0 +1,36 @@
+{
+  "schema": "autoeditorvideo/youtube-upload-processing-readonly-audit/v1",
+  "date": "2026-11-05",
+  "purpose": "Diagnose why 31-34 second 1080p H.264 Shorts show 'O processamento vai começar em breve' and 'Retomar o envio' long after API reported private video IDs.",
+  "no_mutations": true,
+  "targets": {
+    "games": {
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "versions": [
+        "v3",
+        "v4"
+      ],
+      "count": 6
+    },
+    "alchemy": {
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "versions": [
+        "v3",
+        "v4"
+      ],
+      "count": 6
+    }
+  },
+  "read_only_youtube_api": [
+    "channels.list(mine)",
+    "videos.list(part=id,status,processingDetails,contentDetails,fileDetails)"
+  ],
+  "prohibited": [
+    "videos.insert",
+    "videos.update",
+    "videos.delete",
+    "thumbnails.set",
+    "new_image_generations"
+  ],
+  "expected_result": "See upload_status, processing_status, file_details availability and duration for each of the 12 private draft video IDs"
+}
