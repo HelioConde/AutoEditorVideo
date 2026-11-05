@@ -44,16 +44,31 @@ def test_registered_does_not_allow_upload(slug):
     with pytest.raises(registry.ChannelRegistryError,match="UPLOAD_NOT_AUTHORIZED"):
         registry.assert_upload_authorized(slug)
 
-def test_separate_environment_and_tokens_for_new_channels():
-    data=registry.load_registry()["channels"]
+def test_single_shared_environment_and_five_distinct_token_secrets():
+    config=registry.load_registry()
+    data=config["channels"]
+    assert config["policy"]["shared_youtube_environment"]=="youtube-private-upload"
+    assert set(row["youtube_environment"] for row in data.values())=={"youtube-private-upload"}
+    names={slug:row["oauth_token_secret_name"] for slug,row in data.items()}
+    assert names=={
+        "br":"YOUTUBE_BR_TOKEN_JSON",
+        "en":"YOUTUBE_EN_TOKEN_JSON",
+        "games":"YOUTUBE_GAMES_TOKEN_JSON",
+        "kids":"YOUTUBE_KIDS_TOKEN_JSON",
+        "alchemy":"YOUTUBE_ALCHEMY_TOKEN_JSON",
+    }
+    assert len(set(names.values()))==5
     for slug in registry.NEW_CHANNELS:
-        env=data[slug]["youtube_environment"]
-        assert env!="youtube-private-upload"
-        assert env not in [data[x]["youtube_environment"] for x in registry.NEW_CHANNELS if x!=slug]
-        token=data[slug]["oauth_token_secret_name"]
-        assert token not in (data["br"]["oauth_token_secret_name"],data["en"]["oauth_token_secret_name"])
         assert data[slug]["cloud_upload_state"].startswith("blocked_until")
         assert data[slug]["visibility_default"]=="private"
+
+def test_reject_channel_mapped_outside_existing_shared_environment(tmp_path):
+    config=registry.load_registry()
+    config["channels"]["games"]["youtube_environment"]="youtube-games-private-upload"
+    file=tmp_path/"wrong-env.json"
+    file.write_text(json.dumps(config),encoding="utf-8")
+    with pytest.raises(registry.ChannelRegistryError,match="SHARED_YOUTUBE_ENVIRONMENT_REQUIRED"):
+        registry.load_registry(file)
 
 def test_otaku_existing_channels_unmodified_and_operational():
     data=registry.load_registry()["channels"]
