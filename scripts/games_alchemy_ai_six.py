@@ -226,7 +226,7 @@ def render_video(images: list[Path], audio: Path, subtitles: Path, out: Path, du
           "-c", "copy", str(joined)])
     # ASS subtitles use timing from the TTS WordBoundary events, not guesses.
     _run(["ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error", "-y",
-          "-i", str(joined), "-i", str(audio), "-vf", f"ass={subtitles.name}",
+          "-i", str(joined), "-i", str(audio), "-vf", f"ass={subtitles.as_posix()}",
           "-c:v", "libx264", "-preset", "veryfast", "-crf", "21",
           "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart",
           str(out)])
