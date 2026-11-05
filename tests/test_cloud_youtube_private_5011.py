@@ -87,7 +87,10 @@ def test_main_only_environment_and_private_upload_policy():
 
 def test_publisher_source_is_private_and_no_schedule():
     source=(ROOT/'scripts'/'cloud_youtube_private_5011.py').read_text()
-    assert "'privacyStatus':'private'" in source
+    assert "build_insert_body(channel,prepared,privacy='private')" in source
+    profile=(ROOT/'scripts'/'youtube_upload_profiles.py').read_text(encoding='utf-8')
+    assert '"privacyStatus":privacy' in profile
+    assert 'verified_generated_cover' in source
     assert "publishAt" not in source
     assert "image_generation" not in source
     assert "PROXY_ACCOUNTS_JSON" not in source
