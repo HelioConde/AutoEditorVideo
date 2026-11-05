@@ -51,7 +51,11 @@ def connection_status(root: Path = ROOT, *, opener=None) -> dict:
     except (OSError, error.URLError, TimeoutError) as exc:
         return result
     result['server'] = True
-    key = read_local_key(credentials_file(root))
+    # GitHub Actions supplies this only inside a protected job; never log it.
+    # Local Windows continues to use its existing .env when the variable is absent.
+    key = os.environ.get('PROXY_API_KEY', '').strip() or read_local_key(credentials_file(root))
+    if key and (len(key) < 15 or key.lower().startswith('change-me')):
+        key = None
     if not key:
         result.update(state='sem_chave',
                       message='Proxy ligado, mas .env/PROXY_API_KEY local nao foi encontrado.')
