@@ -5,6 +5,10 @@ import json
 from pathlib import Path
 import sys
 import pytest
+# General offline suites do not install Google API dependencies; dedicated
+# YouTube CI installs them and runs these tests without skipping.
+pytest.importorskip('googleapiclient')
+pytest.importorskip('google.oauth2')
 from PIL import Image
 
 ROOT=Path(__file__).resolve().parents[1]
