@@ -14,7 +14,7 @@
     "games": {
       "name": "Conde Games",
       "youtube_channel_id": "UCg77gYc1_wkHuL07XPtKcow",
-      "production_state": "registered_no_episodes_reserved",
+      "production_state": "3_reserved_pending_real_gameplay_and_verified_oauth",
       "upload_authorized": false
     },
     "kids": {
@@ -26,7 +26,7 @@
     "alchemy": {
       "name": "Alchemy Lab",
       "youtube_channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
-      "production_state": "registered_no_episodes_reserved",
+      "production_state": "3_reserved_pending_demonstrations_and_verified_oauth",
       "upload_authorized": false
     }
   },
@@ -125,8 +125,74 @@
       "source": "user_instruction_2026-11-05",
       "publication_target": "private",
       "note": "Distinct English narration/captions; check separate English channel before upload."
+    },
+    {
+      "channel": "games",
+      "id": "game-001-gta4-gta5",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_20261105",
+      "source": "user_request_six_videos_2026-11-05",
+      "publication_target": "private_first",
+      "review_status": "blocked_missing_real_media_and_verified_channel_oauth",
+      "catalog_id": "game-001",
+      "note": "GTA IV vs GTA V comparisons require genuine captured or licensed gameplay; no footage supplied."
+    },
+    {
+      "channel": "games",
+      "id": "game-002-primeira-noite-minecraft",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_20261105",
+      "source": "user_request_six_videos_2026-11-05",
+      "publication_target": "private_first",
+      "review_status": "blocked_missing_real_media_and_verified_channel_oauth",
+      "catalog_id": "game-002",
+      "note": "Minecraft nostalgia; real gameplay footage or a factual original visual review is required."
+    },
+    {
+      "channel": "games",
+      "id": "game-003-minecraft-sem-amarelo",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_20261105",
+      "source": "user_request_six_videos_2026-11-05",
+      "publication_target": "private_first",
+      "review_status": "blocked_missing_real_media_and_verified_channel_oauth",
+      "catalog_id": "game-003",
+      "note": "Minecraft no yellow challenge; capture real successful/failed attempts. Do not simulate challenge gameplay."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-001-chatgpt-gifs",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_20261105",
+      "source": "user_request_six_videos_2026-11-05",
+      "publication_target": "private_first",
+      "review_status": "blocked_missing_real_media_and_verified_channel_oauth",
+      "catalog_id": "alchemy-001",
+      "note": "Verify official GIF capability first; title must reflect supported product/version. Do not claim feature without evidence."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-002-images-26-consistencia",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_20261105",
+      "source": "user_request_six_videos_2026-11-05",
+      "publication_target": "private_first",
+      "review_status": "blocked_missing_real_media_and_verified_channel_oauth",
+      "catalog_id": "alchemy-002",
+      "note": "Real image generation comparison required; model/version access and source outputs not yet verified."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-003-gif-animado-tutorial",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_20261105",
+      "source": "user_request_six_videos_2026-11-05",
+      "publication_target": "private_first",
+      "review_status": "blocked_missing_real_media_and_verified_channel_oauth",
+      "catalog_id": "alchemy-003",
+      "note": "A reproducible tutorial with genuine capture and output GIF demonstration required."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
-  "warning": "A matching folder does not prove publication; verify YouTube and reservation registry. Never overwrite or automatically retry reserved/active/published episodes. New Games, Kids and Alchemy channels are registered but have no authorized YouTube upload paths or reserved episodes."
+  "warning": "New Games and Alchemy episodes are reserved for this explicitly requested six-video pilot. Reservations do not authorize video creation, OAuth calls, or uploads by themselves. Source footage/demonstrations and per-channel OAuth verification are required. Existing Otaku reservations and Kids entries are unchanged."
 }
