@@ -61,7 +61,22 @@
         "Only genuine or licensed gameplay; do not simulate achievements",
         "Do not route Fofinhos/Kids or anime uploads here"
       ],
-      "brand_note": "Conde Games was proposed for this existing channel; do not rename YouTube account automatically."
+      "brand_note": "Conde Games was proposed for this existing channel; do not rename YouTube account automatically.",
+      "youtube_category_id": "20",
+      "age_restricted_default": false,
+      "thumbnail_policy": {
+        "source": "AutoEditorVideo channel-specific generated and approved cover",
+        "require_original_artifact": true,
+        "never_reuse_other_channel_cover": true,
+        "no_automatic_video_frame_fallback": true
+      },
+      "upload_safety": {
+        "oauth_identity_check_required": true,
+        "per_video_editorial_review": true,
+        "privacy": "private",
+        "auto_publication": false
+      },
+      "gameplay_policy": "show authentic owned/permitted gameplay; never fake captures"
     },
     "kids": {
       "name": "Emanuelly Kids",
@@ -83,7 +98,23 @@
         "No engagement manipulation, child personal information or comments CTAs",
         "Require rights clearance for music and use of private reference images"
       ],
-      "brand_note": "Fofinhos is the series title. The channel currently displays Emanuelly Kids."
+      "brand_note": "Fofinhos is the series title. The channel currently displays Emanuelly Kids.",
+      "youtube_category_id": "1",
+      "age_restricted_default": false,
+      "thumbnail_policy": {
+        "source": "AutoEditorVideo channel-specific generated and approved cover",
+        "require_original_artifact": true,
+        "never_reuse_other_channel_cover": true,
+        "no_automatic_video_frame_fallback": true
+      },
+      "upload_safety": {
+        "oauth_identity_check_required": true,
+        "per_video_editorial_review": true,
+        "privacy": "private",
+        "auto_publication": false
+      },
+      "comments_policy": "disabled_by_YouTube_for_made_for_kids",
+      "cta_policy": "no_calls_for_comments_or_notifications_to_children"
     },
     "alchemy": {
       "name": "Alchemy Lab",
@@ -105,7 +136,22 @@
         "Declare realistic synthetic media per content and YouTube policy",
         "Keep any secrets and credentials out of video, repo, artifacts and logs"
       ],
-      "brand_note": "Change of channel brand on YouTube is a separate authorized action; registration only."
+      "brand_note": "Change of channel brand on YouTube is a separate authorized action; registration only.",
+      "youtube_category_id": "28",
+      "age_restricted_default": false,
+      "thumbnail_policy": {
+        "source": "AutoEditorVideo channel-specific generated and approved cover",
+        "require_original_artifact": true,
+        "never_reuse_other_channel_cover": true,
+        "no_automatic_video_frame_fallback": true
+      },
+      "upload_safety": {
+        "oauth_identity_check_required": true,
+        "per_video_editorial_review": true,
+        "privacy": "private",
+        "auto_publication": false
+      },
+      "ai_disclosure_policy": "check realistic synthetic media and accurately declare when required"
     }
   }
 }
