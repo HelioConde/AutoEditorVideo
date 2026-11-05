@@ -188,14 +188,70 @@ def draw_title(canvas: Image.Image, text: str) -> Image.Image:
                                  Image.alpha_composite(panel,flare))
 
 
+
+def draw_reference_shorts_title(canvas: Image.Image, text: str) -> Image.Image:
+    """Approved Gamer/IA top typography: luminous serif + two fine red rules.
+
+    An opt-in preset of the OFFICIAL cover generator; never puts subtitles,
+    channel branding, a bottom banner or fake game UI on the thumbnail.
+    """
+    if not (1 <= len(text.strip()) <= 42):
+        raise ValueError('Titulo de referencia precisa ser curto')
+    panel = Image.new('RGBA', SIZE, (0, 0, 0, 0))
+    painter = ImageDraw.Draw(panel)
+    lines = text_lines(text.strip().upper(), painter, 106, width=970)
+    if len(lines) > 3:
+        raise ValueError('Titulo excedeu a area de seguranca da referencia')
+    # Preserve the artwork: a short gradient adds contrast but does not
+    # hide the people/characters underneath a solid banner.
+    for y in range(55, 465):
+        fraction = (y - 55) / 410
+        painter.line((0, y, SIZE[0], y), fill=(4, 6, 14, round(143 * (1 - fraction) ** 1.5)))
+    heights = []
+    for row in lines:
+        font = load_font(106)
+        box = painter.textbbox((0, 0), row, font=font, stroke_width=3)
+        heights.append(box[3] - box[1])
+    total = sum(heights) + 5 * (len(lines) - 1)
+    if total > 330:
+        raise ValueError('Titulo grande demais para a area superior')
+    y = 112
+    for row, height in zip(lines, heights):
+        font = load_font(106)
+        box = painter.textbbox((0, 0), row, font=font, stroke_width=3)
+        width = box[2] - box[0]
+        x = round((SIZE[0] - width) / 2 - box[0])
+        baseline = y - box[1]
+        painter.text((x + 3, baseline + 5), row, font=font,
+                     fill=(0, 0, 0, 200), stroke_width=5,
+                     stroke_fill=(0, 0, 0, 170))
+        painter.text((x, baseline), row, font=font,
+                     fill=(255, 255, 255, 255), stroke_width=2,
+                     stroke_fill=(13, 12, 19, 245))
+        y += height + 5
+    rule = Image.new('RGBA', SIZE, (0, 0, 0, 0))
+    d = ImageDraw.Draw(rule)
+    for position in (91, min(432, y + 22)):
+        d.line((64, position, 1016, position), fill=(222, 57, 52, 178), width=3)
+    glow = rule.filter(ImageFilter.GaussianBlur(8))
+    return Image.alpha_composite(Image.alpha_composite(canvas, panel),
+                                 Image.alpha_composite(glow, rule))
+
+
 def render_cover(source: Image.Image, title: str, destination: Path,
-                 *,zoom: float=1.07, focus_x: float=.5, focus_y: float=.4) -> dict:
+                 *,zoom: float=1.07, focus_x: float=.5, focus_y: float=.4,
+                   template: str='default') -> dict:
     """Render deterministic high-impact cover from cached pixels only."""
     if not 1.0<=zoom<=1.4 or not 0<=focus_x<=1 or not 0<=focus_y<=1:
         raise ValueError('Zoom/foco da capa invalido')
+    if template not in ('default', 'gamer-alchemy-reference'):
+        raise ValueError('Preset de capa desconhecido')
     image=zoom_cover(source,zoom,focus_x,focus_y)
-    result=draw_title(add_cinematic_grade(image),title).convert('RGB')
+    graded=add_cinematic_grade(image)
+    result=(draw_reference_shorts_title(graded,title) if template=='gamer-alchemy-reference'
+            else draw_title(graded,title)).convert('RGB')
     destination.parent.mkdir(parents=True,exist_ok=True)
     result.save(destination,'JPEG',quality=94,subsampling=0,optimize=True)
     return {'size':list(SIZE),'style':STYLE,'title':title.upper(),
-            'zoom':zoom,'focus_x':focus_x,'focus_y':focus_y}
+            'zoom':zoom,'focus_x':focus_x,'focus_y':focus_y,
+            'template':template}
