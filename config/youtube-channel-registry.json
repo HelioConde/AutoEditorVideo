@@ -1,0 +1,111 @@
+{
+  "schema": "autoeditorvideo/youtube-channel-registry/v1",
+  "updated_at": "2026-11-05",
+  "purpose": "Authoritative channel identity and audience routing. A registered channel is NOT an authorized YouTube uploader.",
+  "policy": {
+    "default_visibility": "private",
+    "upload_requires_explicit_authorization": true,
+    "token_isolation": "one OAuth refresh-token per exact YouTube channel; never share between channels",
+    "reserve_script_before_generation": true,
+    "never_reuse_video_or_thumbnail_from_other_channel": true,
+    "never_publish_internal_upload_markers": true,
+    "no_automatic_publication_from_registration": true
+  },
+  "channels": {
+    "br": {
+      "name": "Otaku Multicena",
+      "observed_youtube_title": "Otaku Multicena",
+      "brand_status": "active",
+      "youtube_channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "language": "pt-BR",
+      "content": "anime_original_commentary",
+      "audience": "general",
+      "made_for_kids_default": false,
+      "visibility_default": "private",
+      "cloud_upload_state": "existing_explicit_workflow",
+      "youtube_environment": "youtube-private-upload",
+      "oauth_token_secret_name": "YOUTUBE_BR_TOKEN_JSON",
+      "video_profile": "br"
+    },
+    "en": {
+      "name": "Otaku Reframe",
+      "observed_youtube_title": "Otaku Reframe",
+      "brand_status": "active",
+      "youtube_channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "language": "en-US",
+      "content": "english_anime_commentary",
+      "audience": "general",
+      "made_for_kids_default": false,
+      "visibility_default": "private",
+      "cloud_upload_state": "existing_explicit_workflow",
+      "youtube_environment": "youtube-private-upload",
+      "oauth_token_secret_name": "YOUTUBE_EN_TOKEN_JSON",
+      "video_profile": "en"
+    },
+    "games": {
+      "name": "Conde Games",
+      "observed_youtube_title": "Hélio Conde",
+      "brand_status": "proposed_not_renamed_on_youtube",
+      "youtube_channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "language": "pt-BR",
+      "content": "gaming_original_gameplay_and_game_development",
+      "audience": "general",
+      "made_for_kids_default": false,
+      "visibility_default": "private",
+      "cloud_upload_state": "blocked_until_separate_oauth_and_verified_uploader",
+      "youtube_environment": "youtube-games-private-upload",
+      "oauth_token_secret_name": "YOUTUBE_GAMES_TOKEN_JSON",
+      "video_profile": "games",
+      "script_entrypoint": "canal-gamer.ps1",
+      "editorial_rules": [
+        "Only genuine or licensed gameplay; do not simulate achievements",
+        "Do not route Fofinhos/Kids or anime uploads here"
+      ],
+      "brand_note": "Conde Games was proposed for this existing channel; do not rename YouTube account automatically."
+    },
+    "kids": {
+      "name": "Emanuelly Kids",
+      "observed_youtube_title": "Emanuelly Kids",
+      "brand_status": "current_youtube_title",
+      "youtube_channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "language": "pt-BR",
+      "content": "fofinhos_original_childrens_animation",
+      "audience": "children",
+      "made_for_kids_default": true,
+      "visibility_default": "private",
+      "cloud_upload_state": "blocked_until_separate_oauth_and_kids_compliance_review",
+      "youtube_environment": "youtube-kids-private-upload",
+      "oauth_token_secret_name": "YOUTUBE_KIDS_TOKEN_JSON",
+      "video_profile": "kids",
+      "series": "Fofinhos",
+      "editorial_rules": [
+        "Declare content directed to children as made for kids",
+        "No engagement manipulation, child personal information or comments CTAs",
+        "Require rights clearance for music and use of private reference images"
+      ],
+      "brand_note": "Fofinhos is the series title. The channel currently displays Emanuelly Kids."
+    },
+    "alchemy": {
+      "name": "Alchemy Lab",
+      "observed_youtube_title": "Alchemy Flames",
+      "brand_status": "planned_rename_not_applied",
+      "youtube_channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "language": "pt-BR",
+      "content": "ai_education_practical_experiments_and_automation",
+      "audience": "general",
+      "made_for_kids_default": false,
+      "visibility_default": "private",
+      "cloud_upload_state": "blocked_until_separate_oauth_and_verified_uploader",
+      "youtube_environment": "youtube-alchemy-private-upload",
+      "oauth_token_secret_name": "YOUTUBE_ALCHEMY_TOKEN_JSON",
+      "video_profile": "alchemy",
+      "editorial_rules": [
+        "Genuine demonstrations and reproducible results; do not claim tests were run if not",
+        "No mass-produced low-value repetitive Shorts",
+        "Declare realistic synthetic media per content and YouTube policy",
+        "Keep any secrets and credentials out of video, repo, artifacts and logs"
+      ],
+      "brand_note": "Change of channel brand on YouTube is a separate authorized action; registration only."
+    }
+  }
+}
