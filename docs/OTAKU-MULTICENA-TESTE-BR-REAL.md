@@ -32,10 +32,10 @@ Cada cena precisa, normalmente, de **master + foreground + background**, três r
 Com o proxy local funcionando e depois de revisar o orçamento:
 
 ```powershell
-.\testar-short-br-real.ps1 -Acao Produzir -Id 5008-firefly-wedding -Modelo gpt-image-2 -MaxChamadas 30 -ConfirmarCotaImagem
+.\testar-short-br-real.ps1 -Acao Produzir -Id 5008-firefly-wedding -Modelo gpt-image-2 -MaxChamadas 21 -ConfirmarCotaImagem
 ```
 
-`30` é apenas **exemplo de teto**, não previsão de custo nem garantia de suficiência. Escolha o teto de acordo com o resultado de `Planejar` e seu limite. O fluxo usa `Tentativas 1`, não recebe `-Publicar` e não marca o vídeo como público, privado ou agendado no YouTube: **não há upload algum**.
+No planejamento offline do GitHub, **7 enquadramentos × 3 camadas = 21 chamadas pendentes**. Por isso `21` é o teto deste exemplo, não previsão de custo nem garantia de sucesso. No seu Windows, a quantidade pode mudar conforme o cache fixado; utilize o total indicado por `Planejar` e o limite que deseja autorizar. O fluxo usa `Tentativas 1`, não recebe `-Publicar` e não marca o vídeo como público, privado ou agendado no YouTube: **não há upload algum**.
 
 O projeto salva os resultados em `assets\gerados\shorts-animados\5008-firefly-wedding\`. Na conclusão, o motor produzirá um MP4 com nome `5008-firefly-wedding-master-multicenas-personagens-v3-equilibrado.mp4`, a capa e o QA. Se alguma etapa falhar, não substitua por vídeo externo; examine erros e retome preservando o cache.
 
