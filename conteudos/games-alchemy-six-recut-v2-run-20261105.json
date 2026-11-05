@@ -13,5 +13,8 @@
   "ai_images_new_calls": 0,
   "old_private_uploads_unchanged": true,
   "publication_visibility_after_review": "private",
-  "thumbnail_visual_style": "image user-provided white upper-case bold serif at top, full-bleed original illustration, no bottom banner"
+  "thumbnail_visual_style": "image user-provided white upper-case bold serif at top, full-bleed original illustration, no bottom banner",
+  "validation_retry": 2,
+  "previous_qa_run": 42055419611,
+  "previous_qa_issue": "Short synthetic test was too short for a 2-line subtitle count assertion; tests fixed. No render/image calls/YouTube upload made."
 }
