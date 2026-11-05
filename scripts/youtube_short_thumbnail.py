@@ -66,7 +66,7 @@ def verified_generated_cover(review_dir:Path, summary:dict, channel:str,
     if pinned is None:
         # Compatibility limited to the historic original 5011 v1 package.
         # Other episodes must never bypass this integrity check.
-        if episode_id!="5011-gachiakuta":
+        if episode_id!="5011-gachiakuta" or summary.get("schema")!="autoeditorvideo/dual-cloud-review/v1":
             raise ThumbnailBlocked("COVER_DIGEST_NOT_RECORDED")
     elif not isinstance(pinned,str) or digest!=pinned:
         raise ThumbnailBlocked("ORIGINAL_GENERATED_COVER_SHA256_MISMATCH")
