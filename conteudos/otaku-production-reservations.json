@@ -257,6 +257,72 @@
       "review_status": "pending_recut_qa_and_separate_oauth",
       "original_video_id": "alchemy-003-gif-animado-tutorial",
       "note": "Reuse original 6 MP4s as source; do NOT repeat AI image API charges. Strip burned-in captions and narration containing pipeline disclosures; add CTA spoken and white serif top thumbnail. Keep truthful disclosure in description; do not delete/modify old private videos."
+    },
+    {
+      "channel": "games",
+      "id": "game-001-gta4-gta5-v3",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v3_20261105",
+      "source": "creator_request_reuse_standard_autoeditorvideo_cover_and_caption_engines",
+      "publication_target": "private_first",
+      "review_status": "pending_native_renderer_QA",
+      "catalog_id": "game-001-gta4-gta5-v3",
+      "note": "Use existing original AI-generated visual source; render caption highlight through native Remotion ArquivoOtakuMaster using Edge word boundaries; generate program-owned thumbnail with capa_cinematografica.py; preserve existing private V1/V2 videos; no reuse of mismatched subtitle or cover."
+    },
+    {
+      "channel": "games",
+      "id": "game-002-primeira-noite-minecraft-v3",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v3_20261105",
+      "source": "creator_request_reuse_standard_autoeditorvideo_cover_and_caption_engines",
+      "publication_target": "private_first",
+      "review_status": "pending_native_renderer_QA",
+      "catalog_id": "game-002-primeira-noite-minecraft-v3",
+      "note": "Use existing original AI-generated visual source; render caption highlight through native Remotion ArquivoOtakuMaster using Edge word boundaries; generate program-owned thumbnail with capa_cinematografica.py; preserve existing private V1/V2 videos; no reuse of mismatched subtitle or cover."
+    },
+    {
+      "channel": "games",
+      "id": "game-003-minecraft-sem-amarelo-v3",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v3_20261105",
+      "source": "creator_request_reuse_standard_autoeditorvideo_cover_and_caption_engines",
+      "publication_target": "private_first",
+      "review_status": "pending_native_renderer_QA",
+      "catalog_id": "game-003-minecraft-sem-amarelo-v3",
+      "note": "Use existing original AI-generated visual source; render caption highlight through native Remotion ArquivoOtakuMaster using Edge word boundaries; generate program-owned thumbnail with capa_cinematografica.py; preserve existing private V1/V2 videos; no reuse of mismatched subtitle or cover."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-001-chatgpt-gifs-v3",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v3_20261105",
+      "source": "creator_request_reuse_standard_autoeditorvideo_cover_and_caption_engines",
+      "publication_target": "private_first",
+      "review_status": "pending_native_renderer_QA",
+      "catalog_id": "alchemy-001-chatgpt-gifs-v3",
+      "note": "Use existing original AI-generated visual source; render caption highlight through native Remotion ArquivoOtakuMaster using Edge word boundaries; generate program-owned thumbnail with capa_cinematografica.py; preserve existing private V1/V2 videos; no reuse of mismatched subtitle or cover."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-002-images-26-consistencia-v3",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v3_20261105",
+      "source": "creator_request_reuse_standard_autoeditorvideo_cover_and_caption_engines",
+      "publication_target": "private_first",
+      "review_status": "pending_native_renderer_QA",
+      "catalog_id": "alchemy-002-images-26-consistencia-v3",
+      "note": "Use existing original AI-generated visual source; render caption highlight through native Remotion ArquivoOtakuMaster using Edge word boundaries; generate program-owned thumbnail with capa_cinematografica.py; preserve existing private V1/V2 videos; no reuse of mismatched subtitle or cover."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-003-gif-animado-tutorial-v3",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v3_20261105",
+      "source": "creator_request_reuse_standard_autoeditorvideo_cover_and_caption_engines",
+      "publication_target": "private_first",
+      "review_status": "pending_native_renderer_QA",
+      "catalog_id": "alchemy-003-gif-animado-tutorial-v3",
+      "note": "Use existing original AI-generated visual source; render caption highlight through native Remotion ArquivoOtakuMaster using Edge word boundaries; generate program-owned thumbnail with capa_cinematografica.py; preserve existing private V1/V2 videos; no reuse of mismatched subtitle or cover."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
