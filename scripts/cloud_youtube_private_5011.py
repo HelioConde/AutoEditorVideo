@@ -15,6 +15,8 @@ from pathlib import Path
 import sys
 
 from google.auth.transport.requests import Request
+from google.auth.exceptions import RefreshError, GoogleAuthError
+from googleapiclient.errors import HttpError
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
@@ -85,7 +87,34 @@ def validate_review(channel:str,dir:Path=REVIEW)->tuple[Path,dict,str]:
     return path,metadata,digest
 
 
+def _safe_refresh_reason(exc:RefreshError)->str:
+    # Only choose among known public OAuth error CODES; never print exception
+    # body, URLs, refresh tokens, client ids or Google response JSON.
+    value=str(exc).lower()
+    for code in ('invalid_grant','invalid_scope','invalid_client','unauthorized_client'):
+        if code in value:
+            return 'OAUTH_REFRESH_'+code.upper()
+    return 'OAUTH_REFRESH_REJECTED'
+
+
+def _stored_scopes(token:dict)->set[str]|None:
+    """Read only scopes explicitly present in the OAuth token, if provided."""
+    value=token.get('scopes')
+    if value is None:
+        return None
+    if isinstance(value,list) and all(isinstance(x,str) for x in value):
+        return set(value)
+    if isinstance(value,str):
+        return set(value.split())
+    raise UploadBlocked('INVALID_STORED_YOUTUBE_SCOPES')
+
+
 def authorized_youtube(env:dict[str,str],channel:str):
+    """Only verify OAuth, refresh if necessary and read channel identity.
+
+    Used by both the real private uploader and read-only BR diagnostic.
+    All logged failures are stable, non-sensitive error codes.
+    """
     _,token_var=EXPECTED[channel]
     try:
         client=json.loads(env[CLIENT_SECRET])
@@ -97,29 +126,60 @@ def authorized_youtube(env:dict[str,str],channel:str):
             raise UploadBlocked('BAD_OAUTH_CLIENT')
         if not installed.get('client_id') or not installed.get('client_secret'):
             raise UploadBlocked('MISSING_OAUTH_CLIENT_FIELDS')
-        # Token JSON from Google auth's Credentials.to_json() contains its own
-        # client_id/client_secret and refresh_token; cross-check client identity.
         if token.get('client_id')!=installed.get('client_id'):
             raise UploadBlocked('CLIENT_AND_TOKEN_MISMATCH')
-        credentials=Credentials.from_authorized_user_info(token,scopes=SCOPES)
+        print('[YOUTUBE AUTH] OAUTH_JSON_FIELDS_AND_CLIENT_MATCH_OK',flush=True)
+        original_scopes=_stored_scopes(token)
+        if original_scopes is not None:
+            for scope,label in ((SCOPES[0],'UPLOAD'),(SCOPES[1],'READONLY')):
+                if scope not in original_scopes:
+                    raise UploadBlocked('YOUTUBE_'+label+'_SCOPE_MISSING_IN_STORED_TOKEN')
+        print('[YOUTUBE AUTH] STORED_SCOPE_PREFLIGHT_OK_OR_UNDECLARED',flush=True)
+        try:
+            credentials=Credentials.from_authorized_user_info(token,scopes=SCOPES)
+        except (ValueError,TypeError):
+            raise UploadBlocked('INVALID_YOUTUBE_CREDENTIALS_FIELDS') from None
         if not credentials.refresh_token:
             raise UploadBlocked('MISSING_YOUTUBE_REFRESH_TOKEN')
         if not credentials.valid:
-            credentials.refresh(Request())
-        youtube=build('youtube','v3',credentials=credentials,cache_discovery=False)
-        response=youtube.channels().list(part='id,contentDetails',mine=True).execute()
+            try:
+                credentials.refresh(Request())
+            except RefreshError as exc:
+                raise UploadBlocked(_safe_refresh_reason(exc)) from None
+            except GoogleAuthError:
+                raise UploadBlocked('YOUTUBE_REFRESH_GOOGLE_AUTH_ERROR') from None
+            except Exception:
+                raise UploadBlocked('YOUTUBE_REFRESH_TRANSPORT_ERROR') from None
+        granted_scopes=getattr(credentials,'granted_scopes',None)
+        if granted_scopes is not None:
+            for scope,label in ((SCOPES[0],'UPLOAD'),(SCOPES[1],'READONLY')):
+                if scope not in granted_scopes:
+                    raise UploadBlocked('YOUTUBE_'+label+'_SCOPE_NOT_GRANTED')
+        print('[YOUTUBE AUTH] TOKEN_CURRENT_OR_REFRESHED_OK',flush=True)
+        try:
+            youtube=build('youtube','v3',credentials=credentials,cache_discovery=False)
+            response=youtube.channels().list(part='id,contentDetails',mine=True).execute()
+        except HttpError as exc:
+            status=getattr(getattr(exc,'resp',None),'status',None)
+            if status in (400,401,403,404,429):
+                raise UploadBlocked('YOUTUBE_CHANNELS_READONLY_HTTP_'+str(status)) from None
+            raise UploadBlocked('YOUTUBE_CHANNELS_READONLY_HTTP_OTHER') from None
+        except Exception:
+            raise UploadBlocked('YOUTUBE_CHANNELS_READONLY_API_ERROR') from None
         channels=response.get('items') or []
         if len(channels)!=1 or channels[0].get('id')!=EXPECTED[channel][0]:
             raise UploadBlocked('OAUTH_BELONGS_TO_ANOTHER_YOUTUBE_CHANNEL')
         playlist=channels[0].get('contentDetails',{}).get('relatedPlaylists',{}).get('uploads')
         if not isinstance(playlist,str) or not playlist:
             raise UploadBlocked('CHANNEL_UPLOAD_PLAYLIST_UNVERIFIED')
+        print('[YOUTUBE AUTH] CHANNEL_ID_VERIFIED_READ_ONLY',flush=True)
         return youtube,playlist
     except UploadBlocked:
         raise
+    except (KeyError,json.JSONDecodeError):
+        raise UploadBlocked('INVALID_YOUTUBE_OAUTH_SECRET_JSON') from None
     except Exception:
-        # Never print Google OAuth client/token or YouTube private error bodies.
-        raise UploadBlocked('YOUTUBE_AUTHENTICATION_FAILED') from None
+        raise UploadBlocked('YOUTUBE_AUTHENTICATION_FAILED_UNCLASSIFIED') from None
 
 
 def exists_in_playlist(youtube,playlist:str,marker:str,title:str)->str|None:
