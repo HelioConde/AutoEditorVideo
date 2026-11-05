@@ -290,6 +290,15 @@ Veja [PowerShell por canal](docs/POWERSHELL-CANAIS-GAMER-INGLES.md).
 
 ## Cinco canais YouTube cadastrados (2 Otaku + Gamer + Kids + Alchemy Lab)
 
+**Próxima etapa OAuth cloud-first preparada (ainda não ativada):**
+[Conectar com segurança os canais Gamer, Emanuelly Kids/Fofinhos e Alchemy Lab](docs/CONECTAR-3-CANAIS-OAUTH-GITHUB.md).
+Um PowerShell separado verifica cada conta Google e importa tokens somente
+com consentimento para Environments GitHub protegidos. O workflow
+[youtube-new-channels-oauth.yml](.github/workflows/youtube-new-channels-oauth.yml)
+valida a identidade por leitura, sem gerar/publicar vídeos e sem modificar
+as credenciais Otaku.
+
+
 Os canais reais estão em [Registro de canais YouTube](docs/CANAIS-5-YOUTUBE-GITHUB.md). IDs novos: Gamer UCg77gYc1_wkHuL07XPtKcow (nome atual Hélio Conde; Conde Games proposto); Kids UCxEzVW2Uy44OUVurTQSg_Eg (Emanuelly Kids e série Fofinhos); Alchemy Lab UCCTYFE5Cmz2aYZ37cJQ-wcg (nome atual Alchemy Flames). O cadastro não concede OAuth nem autoriza uploads. Valide sem publicar: python scripts/youtube_channel_registry.py --action list.
 
 ## Games + Kids (piloto antigo 3x2; sem publicação)

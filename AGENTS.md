@@ -1,5 +1,28 @@
 # Arquivo Otaku — orientações para agentes
 
+## INTEGRACAO OAUTH DOS TRES NOVOS CANAIS — GITHUB CLOUD-FIRST
+
+- Uma identidade registrada NÃO autoriza upload. Os três novos canais
+  Gamer/Kids/Alchemy exigem consentimento Google e refresh token próprios;
+  segredos são isolados respectivamente em
+  youtube-games-private-upload, youtube-kids-private-upload,
+  youtube-alchemy-private-upload, todos restritos EXCLUSIVAMENTE a main.
+- A verificação de cada Environment acontece sem Secrets no workflow
+  .github/workflows/youtube-new-channels-oauth.yml. A autenticação cloud
+  é SOMENTE channels.list(mine=true), sem videos.insert ou upload.
+- A primeira autorização OAuth ocorre no navegador do proprietário via
+  conectar-novos-canais.ps1 / scripts/youtube_new_channels_oauth.py,
+  com comparação EXATA do YouTube Channel ID. É proibido enviar tokens
+  à conversa, commits, logs públicos ou artifacts.
+- Só transferir OAuth ao GitHub após consentimento explícito do titular
+  para guardar refresh tokens em Environments protegidos.
+- Após OAuth validado, construir fluxos cloud de geração, QA, miniatura
+  original e publicação privada por canal; não habilitar upload ao
+  cadastrar/verificar OAuth. Gamer requer footage real; Kids requer
+  privacidade de referências e direitos das músicas; Alchemy requer
+  demonstrações técnicas verificáveis.
+- Guia operacional: docs/CONECTAR-3-CANAIS-OAUTH-GITHUB.md.
+
 ## REGRA — CINCO CANAIS YOUTUBE SEPARADOS (05/11/2026)
 
 - Registro oficial: config/youtube-channel-registry.json; validar com scripts/youtube_channel_registry.py. Sao **cinco canais**, sem reutilizar ID, OAuth, thumbnail, voz ou metadados de outro.
