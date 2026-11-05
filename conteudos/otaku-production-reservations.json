@@ -1,0 +1,114 @@
+{
+  "schema": "autoeditorvideo/production-reservations/v1",
+  "updated_at": "2026-11-05",
+  "policy": "Reserve in GitHub BEFORE creating any video generation script, PowerShell command, workflow, or image request. Public/private uploads, active production and review artifacts are NOT available for automatic reselection.",
+  "channels": {
+    "br": {
+      "name": "Otaku Multicena",
+      "youtube_channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw"
+    },
+    "en": {
+      "name": "Otaku Reframe",
+      "youtube_channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ"
+    }
+  },
+  "entries": [
+    {
+      "channel": "br",
+      "id": "5001-black-clover",
+      "status": "published",
+      "youtube_id": "B8KCPSDL7kg",
+      "source": "verified_youtube_uploads_2026-11-05",
+      "note": "Do not generate another same-story Short automatically."
+    },
+    {
+      "channel": "br",
+      "id": "5002-apothecary-diaries",
+      "status": "published",
+      "youtube_id": "wbxMcCPWXIM",
+      "source": "verified_youtube_uploads_2026-11-05",
+      "note": "Do not generate another same-story Short automatically."
+    },
+    {
+      "channel": "br",
+      "id": "5003-cyberpunk-edgerunners",
+      "status": "published",
+      "youtube_id": "Zu87-dVMmkg",
+      "source": "verified_youtube_uploads_2026-11-05",
+      "note": "Do not generate another same-story Short automatically."
+    },
+    {
+      "channel": "br",
+      "id": "5004-jojo-steel-ball-run",
+      "status": "published",
+      "youtube_id": "78ICmUFT--Q",
+      "source": "verified_youtube_uploads_2026-11-05",
+      "note": "Do not generate another same-story Short automatically."
+    },
+    {
+      "channel": "br",
+      "id": "5006-blue-box",
+      "status": "published",
+      "youtube_id": "MEX24eZCNp4",
+      "source": "verified_youtube_uploads_2026-11-05",
+      "note": "Do not generate another same-story Short automatically."
+    },
+    {
+      "channel": "br",
+      "id": "5007-tokyo-revengers",
+      "status": "published",
+      "youtube_id": "JIz_woaE_58",
+      "source": "verified_youtube_uploads_2026-11-05",
+      "note": "Do not generate another same-story Short automatically."
+    },
+    {
+      "channel": "br",
+      "id": "5008-firefly-wedding",
+      "status": "published",
+      "youtube_id": "9NutbHQ3X9k",
+      "source": "verified_youtube_uploads_2026-11-05",
+      "note": "Do not generate another same-story Short automatically."
+    },
+    {
+      "channel": "br",
+      "id": "5005-bleach-thousand-year-blood-war",
+      "status": "existing_assets_unverified",
+      "source": "user_local_dir_2026-11-05",
+      "note": "Local folder exists, publication not verified; not eligible for automatic reuse."
+    },
+    {
+      "channel": "br",
+      "id": "5009-overgeared",
+      "status": "in_production",
+      "source": "user_confirmation_2026-11-05",
+      "note": "User already generating; never auto-select or spend images for this episode."
+    },
+    {
+      "channel": "br",
+      "id": "5010-aoashi",
+      "status": "in_production",
+      "source": "user_confirmation_2026-11-05",
+      "note": "User already generating; never auto-select or spend images for this episode."
+    },
+    {
+      "channel": "br",
+      "id": "5011-gachiakuta",
+      "status": "reserved",
+      "reservation_owner": "github_cloud_br_en_5011",
+      "source": "user_instruction_2026-11-05",
+      "publication_target": "private",
+      "note": "Next authorized BR topic; reserve before scripts and image requests."
+    },
+    {
+      "channel": "en",
+      "id": "5011-gachiakuta",
+      "status": "reserved",
+      "reservation_owner": "github_cloud_br_en_5011",
+      "source": "user_instruction_2026-11-05",
+      "publication_target": "private",
+      "note": "Distinct English narration/captions; check separate English channel before upload."
+    }
+  ],
+  "available_next_br_after_reserved": "5012-solo-leveling",
+  "warning": "A matching folder does not prove publication; verify YouTube and reservation registry. Never overwrite or automatically retry reserved/active/published episodes."
+}
