@@ -1,0 +1,1892 @@
+{
+  "schema": "autoeditorvideo/game-channel-editorial-queue/v1",
+  "revision": "2026-11-05",
+  "channel": {
+    "key": "games",
+    "youtube_channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+    "current_brand": "Hélio Conde",
+    "proposed_brand": "Conde Games (not applied)",
+    "language": "pt-BR",
+    "category_id": "20"
+  },
+  "editorial_status": "ideas_and_seo_drafts_only_not_published",
+  "research_note": "Topics from 2026-11-05 ideation using earlier vidIQ trend signals, not a certified latest ranking for all 50; facts/updates require fresh verification.",
+  "seo_policy": "config/seo-metadata-policy-v1.json",
+  "rotate": [
+    "voce-sabia",
+    "voce-lembra",
+    "jogos-do-momento"
+  ],
+  "total_videos": 50,
+  "first_test_batch": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "controls": [
+    "No video produced or uploaded by this list",
+    "All gameplay claimed must have real authorized captures",
+    "Time-sensitive game facts and platform names must be rechecked",
+    "Reserve game-XXX in production reservations before future scripts/media/workflows",
+    "No use of Otaku, Kids or Alchemy channel credentials",
+    "Upload remains disabled until separate OAuth channel-ID verification and authorization"
+  ],
+  "episodes": [
+    {
+      "id": "game-001",
+      "queue_position": 1,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que GTA IV ainda surpreende mais que GTA V em alguns detalhes? 🤯",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que GTA IV ainda surpreende mais que GTA V em alguns detalhes? 🤯",
+        "primary_keyword": "GTA IV vs GTA V",
+        "description_draft": "GTA IV vs GTA V: A comparação entre física, interação com NPCs e comportamento dos veículos rende detalhes que merecem ser vistos lado a lado.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#GTAIV #GTAV #Shorts",
+        "hashtags": [
+          "#GTAIV",
+          "#GTAV",
+          "#Shorts"
+        ],
+        "tags": [
+          "GTA IV",
+          "GTA V",
+          "GTA 4",
+          "GTA 5",
+          "física GTA",
+          "comparação GTA",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-002",
+      "queue_position": 2,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Você lembra da primeira noite no Minecraft? 😨",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Você lembra da primeira noite no Minecraft? 😨",
+        "primary_keyword": "primeira noite no Minecraft",
+        "description_draft": "primeira noite no Minecraft: Abrigo improvisado, barulhos de monstros e medo de sair de casa: por que a primeira noite marcou tanta gente?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#Minecraft #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#Minecraft",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "Minecraft",
+          "Minecraft sobrevivência",
+          "primeira noite Minecraft",
+          "creeper",
+          "Minecraft nostalgia",
+          "Minecraft Brasil",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-003",
+      "queue_position": 3,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Minecraft, mas NÃO POSSO TOCAR no amarelo!",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Minecraft, mas NÃO POSSO TOCAR no amarelo!",
+        "primary_keyword": "Minecraft desafio sem tocar amarelo",
+        "description_draft": "Minecraft desafio sem tocar amarelo: O desafio muda a forma de explorar o mapa: qualquer bloco amarelo passa a ser um obstáculo. A vitória só vale com gameplay real.\n\nVocê jogaria esse desafio?\n\n#Minecraft #DesafioMinecraft #Shorts",
+        "hashtags": [
+          "#Minecraft",
+          "#DesafioMinecraft",
+          "#Shorts"
+        ],
+        "tags": [
+          "Minecraft desafio",
+          "Minecraft sem tocar amarelo",
+          "Minecraft challenge",
+          "Minecraft Brasil",
+          "sobrevivência Minecraft",
+          "desafio de cores",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-004",
+      "queue_position": 4,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Roblox e jogos indie: por que os desenvolvedores estão discutindo?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Roblox e jogos indie: por que os desenvolvedores estão discutindo?",
+        "primary_keyword": "Roblox e desenvolvedores indie",
+        "description_draft": "Roblox e desenvolvedores indie: Jogos parecidos geraram debates sobre autoria, inspiração e cópia. Vamos distinguir as reclamações das informações confirmadas.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#Roblox #JogosIndie #Shorts",
+        "hashtags": [
+          "#Roblox",
+          "#JogosIndie",
+          "#Shorts"
+        ],
+        "tags": [
+          "Roblox",
+          "Roblox Brasil",
+          "jogos indie",
+          "desenvolvedores indie",
+          "Roblox polêmica",
+          "direitos dos jogos",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-005",
+      "queue_position": 5,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Os jogos do Roblox que todo mundo jogava e foram esquecidos",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Os jogos do Roblox que todo mundo jogava e foram esquecidos",
+        "primary_keyword": "jogos antigos do Roblox",
+        "description_draft": "jogos antigos do Roblox: Reviva experiências que já dominaram servidores e veja quais ainda merecem uma visita, sem confundir memória com números atuais.\n\nQue lembrança dessa época você ainda guarda?\n\n#Roblox #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#Roblox",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "Roblox antigo",
+          "jogos esquecidos Roblox",
+          "Roblox nostalgia",
+          "Roblox Brasil",
+          "jogos clássicos Roblox",
+          "Roblox antigos",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-006",
+      "queue_position": 6,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "99 Noites na Floresta: será que consigo sobreviver sozinho?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "99 Noites na Floresta: será que consigo sobreviver sozinho?",
+        "primary_keyword": "99 Noites na Floresta Roblox",
+        "description_draft": "99 Noites na Floresta Roblox: Sobrevivência, exploração e decisões arriscadas: vamos acompanhar uma tentativa solo real e descobrir até onde dá para chegar.\n\nQual teste desse jogo devemos fazer depois?\n\n#99NoitesNaFloresta #Roblox #Shorts",
+        "hashtags": [
+          "#99NoitesNaFloresta",
+          "#Roblox",
+          "#Shorts"
+        ],
+        "tags": [
+          "99 noites na floresta",
+          "99 Nights in the Forest",
+          "Roblox sobrevivência",
+          "Roblox terror",
+          "99 noites solo",
+          "Roblox gameplay",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-007",
+      "queue_position": 7,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que o Creeper é tão diferente dos outros monstros do Minecraft?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que o Creeper é tão diferente dos outros monstros do Minecraft?",
+        "primary_keyword": "origem do Creeper no Minecraft",
+        "description_draft": "origem do Creeper no Minecraft: O Creeper virou símbolo de Minecraft graças ao seu comportamento explosivo e visual reconhecível. Entenda sua origem com fontes verificadas.\n\nQual explicação sobre games você gostaria de ver?\n\n#Minecraft #Creeper #Shorts",
+        "hashtags": [
+          "#Minecraft",
+          "#Creeper",
+          "#Shorts"
+        ],
+        "tags": [
+          "Creeper",
+          "Minecraft Creeper",
+          "origem do Creeper",
+          "Minecraft história",
+          "monstros Minecraft",
+          "curiosidades Minecraft",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-008",
+      "queue_position": 8,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Grand Chase: você lembra qual foi sua primeira classe? ⚔️",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Grand Chase: você lembra qual foi sua primeira classe? ⚔️",
+        "primary_keyword": "classes de Grand Chase",
+        "description_draft": "classes de Grand Chase: Personagens, evolução de classes e as primeiras missões despertam lembranças distintas em cada jogador de Grand Chase.\n\nVocê jogaria esse clássico novamente?\n\n#GrandChase #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#GrandChase",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "Grand Chase",
+          "Grand Chase Classic",
+          "classes Grand Chase",
+          "personagens Grand Chase",
+          "Grand Chase Brasil",
+          "Grand Chase nostalgia",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-009",
+      "queue_position": 9,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Fortnite: os desafios da atualização atual valem a pena?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Fortnite: os desafios da atualização atual valem a pena?",
+        "primary_keyword": "desafios da temporada Fortnite",
+        "description_draft": "desafios da temporada Fortnite: Escolhas de recompensa, eventos e tempo investido: avaliamos os desafios da versão vigente, após confirmar a atualização oficial.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#Fortnite #FortniteBrasil #Shorts",
+        "hashtags": [
+          "#Fortnite",
+          "#FortniteBrasil",
+          "#Shorts"
+        ],
+        "tags": [
+          "Fortnite",
+          "Fortnite Brasil",
+          "desafios Fortnite",
+          "temporada Fortnite",
+          "Fortnite atualização",
+          "missões Fortnite",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Confirm official title/platform/version/date at publication"
+      }
+    },
+    {
+      "id": "game-010",
+      "queue_position": 10,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Esses jogos recompensam você por NÃO matar os inimigos!",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Esses jogos recompensam você por NÃO matar os inimigos!",
+        "primary_keyword": "jogos com escolhas pacíficas",
+        "description_draft": "jogos com escolhas pacíficas: Nem todo jogo premia a violência. Conheça sistemas de misericórdia e escolhas não letais em exemplos confirmados.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#CuriosidadesGamer #Jogos #Shorts",
+        "hashtags": [
+          "#CuriosidadesGamer",
+          "#Jogos",
+          "#Shorts"
+        ],
+        "tags": [
+          "jogos pacifistas",
+          "escolhas nos jogos",
+          "jogos sem matar",
+          "jogos com moralidade",
+          "jogos alternativos",
+          "curiosidades gamer",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-011",
+      "queue_position": 11,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "GTA San Andreas: quem nunca usou esses códigos?",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "GTA San Andreas: quem nunca usou esses códigos?",
+        "primary_keyword": "códigos GTA San Andreas",
+        "description_draft": "códigos GTA San Andreas: Armas, veículos e situações absurdas viraram memórias inesquecíveis. Quais truques do GTA San Andreas você conhecia?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#GTASanAndreas #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#GTASanAndreas",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "GTA San Andreas",
+          "códigos GTA San Andreas",
+          "cheats GTA SA",
+          "GTA nostalgia",
+          "GTA San Andreas Brasil",
+          "jogos PS2",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-012",
+      "queue_position": 12,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "GTA VI: 3 novidades oficiais que você precisa conhecer",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "GTA VI: 3 novidades oficiais que você precisa conhecer",
+        "primary_keyword": "novidades oficiais GTA VI",
+        "description_draft": "novidades oficiais GTA VI: Reunir três informações confirmadas pela Rockstar, com data e fonte, ajuda a separar o que já foi anunciado das especulações.\n\nVocê jogaria esse desafio?\n\n#GTAVI #RockstarGames #Shorts",
+        "hashtags": [
+          "#GTAVI",
+          "#RockstarGames",
+          "#Shorts"
+        ],
+        "tags": [
+          "GTA VI",
+          "GTA 6",
+          "GTA VI notícias",
+          "Rockstar Games",
+          "GTA 6 informações oficiais",
+          "GTA 6 Brasil",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Confirm official title/platform/version/date at publication"
+      }
+    },
+    {
+      "id": "game-013",
+      "queue_position": 13,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Jogos incríveis que foram criados por uma única pessoa",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Jogos incríveis que foram criados por uma única pessoa",
+        "primary_keyword": "jogos feitos por uma pessoa",
+        "description_draft": "jogos feitos por uma pessoa: Desenvolvimento solo envolve programação, arte e muito tempo de produção. Veja exemplos com autoria devidamente verificada.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#JogosIndie #GameDev #Shorts",
+        "hashtags": [
+          "#JogosIndie",
+          "#GameDev",
+          "#Shorts"
+        ],
+        "tags": [
+          "jogos indie",
+          "solo developer",
+          "desenvolvedor solo",
+          "jogos feitos por uma pessoa",
+          "game dev",
+          "desenvolvimento de jogos",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-014",
+      "queue_position": 14,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Ragnarok Online: a época em que subir de nível era uma aventura",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Ragnarok Online: a época em que subir de nível era uma aventura",
+        "primary_keyword": "Ragnarok Online nostalgia",
+        "description_draft": "Ragnarok Online nostalgia: Mobs, mapas e grupos improvisados faziam cada nível parecer uma conquista. Relembre a rotina de Ragnarok Online.\n\nQue lembrança dessa época você ainda guarda?\n\n#RagnarokOnline #MMORPG #Shorts",
+        "hashtags": [
+          "#RagnarokOnline",
+          "#MMORPG",
+          "#Shorts"
+        ],
+        "tags": [
+          "Ragnarok Online",
+          "Ragnarok Brasil",
+          "MMORPG antigo",
+          "upar Ragnarok",
+          "Ragnarok nostalgia",
+          "jogos online antigos",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-015",
+      "queue_position": 15,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Roblox: testei o jogo de quebrar ovos que virou febre",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Roblox: testei o jogo de quebrar ovos que virou febre",
+        "primary_keyword": "jogo de quebrar ovos Roblox",
+        "description_draft": "jogo de quebrar ovos Roblox: O desafio gira em torno de ovos, recompensas e progressão. O vídeo depende de uma partida real para mostrar como funciona.\n\nQual teste desse jogo devemos fazer depois?\n\n#Roblox #RobloxBrasil #Shorts",
+        "hashtags": [
+          "#Roblox",
+          "#RobloxBrasil",
+          "#Shorts"
+        ],
+        "tags": [
+          "Roblox",
+          "quebrar ovos Roblox",
+          "steal an egg",
+          "Roblox jogo de ovos",
+          "Roblox gameplay",
+          "Roblox Brasil",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-016",
+      "queue_position": 16,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que os desenvolvedores escondem easter eggs nos jogos?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que os desenvolvedores escondem easter eggs nos jogos?",
+        "primary_keyword": "easter eggs nos jogos",
+        "description_draft": "easter eggs nos jogos: Segredos escondidos incentivam exploração e homenagens. Entenda como os desenvolvedores usam detalhes extras para recompensar jogadores.\n\nQual explicação sobre games você gostaria de ver?\n\n#EasterEggs #CuriosidadesGamer #Shorts",
+        "hashtags": [
+          "#EasterEggs",
+          "#CuriosidadesGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "easter eggs",
+          "segredos de jogos",
+          "curiosidades dos games",
+          "desenvolvedores de jogos",
+          "referências escondidas",
+          "easter egg games",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-017",
+      "queue_position": 17,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Combat Arms e CrossFire: saudades dos FPS de antigamente?",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Combat Arms e CrossFire: saudades dos FPS de antigamente?",
+        "primary_keyword": "Combat Arms e CrossFire",
+        "description_draft": "Combat Arms e CrossFire: Partidas em lan houses, armas favoritas e mapas clássicos: dois FPS que fazem parte da nostalgia de jogadores brasileiros.\n\nVocê jogaria esse clássico novamente?\n\n#CombatArms #CrossFire #Shorts",
+        "hashtags": [
+          "#CombatArms",
+          "#CrossFire",
+          "#Shorts"
+        ],
+        "tags": [
+          "Combat Arms",
+          "CrossFire",
+          "FPS antigo",
+          "jogos de lan house",
+          "CrossFire Brasil",
+          "Combat Arms Brasil",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-018",
+      "queue_position": 18,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Testei mods que deixam a água do Minecraft REALISTA!",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Testei mods que deixam a água do Minecraft REALISTA!",
+        "primary_keyword": "mods de água realista Minecraft",
+        "description_draft": "mods de água realista Minecraft: Compare a aparência e o desempenho de mods ou shaders de água em uma instalação real do Minecraft, com versões identificadas.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#Minecraft #MinecraftMods #Shorts",
+        "hashtags": [
+          "#Minecraft",
+          "#MinecraftMods",
+          "#Shorts"
+        ],
+        "tags": [
+          "Minecraft mods",
+          "Minecraft água realista",
+          "shaders Minecraft",
+          "Minecraft gráficos",
+          "Minecraft mod água",
+          "Minecraft desempenho",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-019",
+      "queue_position": 19,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Remake ou remaster? A diferença que muita gente confunde",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Remake ou remaster? A diferença que muita gente confunde",
+        "primary_keyword": "remake vs remaster",
+        "description_draft": "remake vs remaster: Um remake pode reconstruir partes de um jogo; um remaster normalmente aprimora a apresentação. Veja exemplos que deixam a distinção clara.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#Remake #Remaster #Shorts",
+        "hashtags": [
+          "#Remake",
+          "#Remaster",
+          "#Shorts"
+        ],
+        "tags": [
+          "remake",
+          "remaster",
+          "remake vs remaster",
+          "jogos remasterizados",
+          "jogos refeitos",
+          "curiosidades dos jogos",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-020",
+      "queue_position": 20,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Zelda Ocarina of Time: por que esse clássico marcou uma geração?",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Zelda Ocarina of Time: por que esse clássico marcou uma geração?",
+        "primary_keyword": "Zelda Ocarina of Time nostalgia",
+        "description_draft": "Zelda Ocarina of Time nostalgia: Música, masmorras e exploração ajudam a explicar por que Ocarina of Time continua lembrado por tantos fãs.\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#Zelda #OcarinaOfTime #Shorts",
+        "hashtags": [
+          "#Zelda",
+          "#OcarinaOfTime",
+          "#Shorts"
+        ],
+        "tags": [
+          "Zelda Ocarina of Time",
+          "The Legend of Zelda",
+          "Zelda clássico",
+          "Nintendo 64",
+          "Zelda nostalgia",
+          "Ocarina of Time",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-021",
+      "queue_position": 21,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Ocarina of Time no Switch 2: o que mudou no remake?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Ocarina of Time no Switch 2: o que mudou no remake?",
+        "primary_keyword": "Ocarina of Time Switch 2",
+        "description_draft": "Ocarina of Time Switch 2: Compare apenas versões e anúncios oficialmente confirmados. Se o remake não estiver disponível, a pauta deve ser suspensa ou corrigida.\n\nVocê jogaria esse desafio?\n\n#Zelda #NintendoSwitch2 #Shorts",
+        "hashtags": [
+          "#Zelda",
+          "#NintendoSwitch2",
+          "#Shorts"
+        ],
+        "tags": [
+          "Ocarina of Time",
+          "Nintendo Switch 2",
+          "Zelda remake",
+          "Zelda Nintendo",
+          "Ocarina of Time comparação",
+          "Zelda notícias",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Confirm official title/platform/version/date at publication"
+      }
+    },
+    {
+      "id": "game-022",
+      "queue_position": 22,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que alguns jogos oferecem recompensas diárias?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que alguns jogos oferecem recompensas diárias?",
+        "primary_keyword": "recompensas diárias nos jogos",
+        "description_draft": "recompensas diárias nos jogos: Bônus de login e tarefas recorrentes incentivam hábitos. Entenda esses sistemas sem confundir fidelização com obrigação de jogar.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#GameDesign #CuriosidadesGamer #Shorts",
+        "hashtags": [
+          "#GameDesign",
+          "#CuriosidadesGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "recompensa diária",
+          "daily rewards",
+          "missões diárias",
+          "login diário",
+          "economia de jogos",
+          "game design",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-023",
+      "queue_position": 23,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "A época do PS2: esses jogos merecem uma segunda chance",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "A época do PS2: esses jogos merecem uma segunda chance",
+        "primary_keyword": "jogos clássicos do PS2",
+        "description_draft": "jogos clássicos do PS2: Reviva experiências marcantes do PlayStation 2 e descubra quais títulos ainda podem surpreender em uma nova partida.\n\nQue lembrança dessa época você ainda guarda?\n\n#PS2 #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#PS2",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "PlayStation 2",
+          "jogos PS2",
+          "PS2 nostalgia",
+          "clássicos PS2",
+          "Playstation antigo",
+          "jogos retro",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-024",
+      "queue_position": 24,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "GTA V: testei 3 mitos envolvendo NPCs",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "GTA V: testei 3 mitos envolvendo NPCs",
+        "primary_keyword": "mitos de NPCs no GTA V",
+        "description_draft": "mitos de NPCs no GTA V: Três hipóteses sobre os NPCs de GTA V devem ser gravadas em gameplay real, mostrando inclusive as tentativas que falharem.\n\nQual teste desse jogo devemos fazer depois?\n\n#GTAV #MitosGTA #Shorts",
+        "hashtags": [
+          "#GTAV",
+          "#MitosGTA",
+          "#Shorts"
+        ],
+        "tags": [
+          "GTA V",
+          "GTA 5",
+          "GTA NPCs",
+          "mitos GTA V",
+          "GTA 5 experiências",
+          "GTA 5 gameplay",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-025",
+      "queue_position": 25,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Como um desenvolvedor sozinho consegue criar um jogo inteiro?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como um desenvolvedor sozinho consegue criar um jogo inteiro?",
+        "primary_keyword": "desenvolvimento de jogo solo",
+        "description_draft": "desenvolvimento de jogo solo: Escopo reduzido, ferramentas prontas e testes ajudam pequenos criadores a concluir projetos. Veja exemplos com produção documentada.\n\nQual explicação sobre games você gostaria de ver?\n\n#GameDev #JogosIndie #Shorts",
+        "hashtags": [
+          "#GameDev",
+          "#JogosIndie",
+          "#Shorts"
+        ],
+        "tags": [
+          "gamedev solo",
+          "desenvolvedor indie",
+          "criar jogos sozinho",
+          "game development",
+          "desenvolvimento indie",
+          "jogos independentes",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-026",
+      "queue_position": 26,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Os jogos esquecidos do Xbox 360 que ainda merecem atenção",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Os jogos esquecidos do Xbox 360 que ainda merecem atenção",
+        "primary_keyword": "jogos pouco conhecidos Xbox 360",
+        "description_draft": "jogos pouco conhecidos Xbox 360: O catálogo do Xbox 360 guarda títulos menos comentados. Relembre opções que valem ser revisitadas com informação correta de plataforma.\n\nVocê jogaria esse clássico novamente?\n\n#Xbox360 #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#Xbox360",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "Xbox 360",
+          "jogos Xbox 360",
+          "Xbox 360 nostalgia",
+          "hidden gems Xbox 360",
+          "jogos esquecidos",
+          "Xbox clássicos",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-027",
+      "queue_position": 27,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Jogos grátis desta semana na Steam e Epic: quais compensam?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Jogos grátis desta semana na Steam e Epic: quais compensam?",
+        "primary_keyword": "jogos grátis Steam e Epic",
+        "description_draft": "jogos grátis Steam e Epic: A oferta depende da semana de publicação. Mostre somente jogos confirmados gratuitamente nas lojas, com prazo de resgate atualizado.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#JogosGratis #Steam #Shorts",
+        "hashtags": [
+          "#JogosGratis",
+          "#Steam",
+          "#Shorts"
+        ],
+        "tags": [
+          "Steam jogos grátis",
+          "Epic Games grátis",
+          "jogos grátis PC",
+          "Steam Brasil",
+          "Epic Games Store",
+          "promoções jogos",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Confirm official title/platform/version/date at publication"
+      }
+    },
+    {
+      "id": "game-028",
+      "queue_position": 28,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que alguns jogos são tão difíceis e outros tão fáceis?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que alguns jogos são tão difíceis e outros tão fáceis?",
+        "primary_keyword": "dificuldade nos videogames",
+        "description_draft": "dificuldade nos videogames: IA dos inimigos, recursos disponíveis e curvas de aprendizado mudam o desafio. A dificuldade também depende do perfil de quem joga.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#GameDesign #CuriosidadesGamer #Shorts",
+        "hashtags": [
+          "#GameDesign",
+          "#CuriosidadesGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "dificuldade dos jogos",
+          "game design",
+          "jogos difíceis",
+          "jogos fáceis",
+          "balanceamento jogos",
+          "curva de aprendizagem",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-029",
+      "queue_position": 29,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Roblox antigo: quando tudo parecia mais simples",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Roblox antigo: quando tudo parecia mais simples",
+        "primary_keyword": "Roblox antigo nostalgia",
+        "description_draft": "Roblox antigo nostalgia: Avatares, interfaces e experiências do Roblox evoluíram ao longo do tempo. Quais elementos da época antiga você sente falta?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#Roblox #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#Roblox",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "Roblox antigo",
+          "Roblox nostalgia",
+          "história Roblox",
+          "Roblox Brasil",
+          "Roblox clássico",
+          "Roblox evolução",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-030",
+      "queue_position": 30,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Fortnite: dá para se divertir sem gastar V-Bucks?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Fortnite: dá para se divertir sem gastar V-Bucks?",
+        "primary_keyword": "Fortnite sem V-Bucks",
+        "description_draft": "Fortnite sem V-Bucks: Experiências gratuitas, cosméticos opcionais e modos de jogo permitem avaliar quanto a diversão depende de gastar dinheiro.\n\nVocê jogaria esse desafio?\n\n#Fortnite #VBucks #Shorts",
+        "hashtags": [
+          "#Fortnite",
+          "#VBucks",
+          "#Shorts"
+        ],
+        "tags": [
+          "Fortnite grátis",
+          "V-Bucks",
+          "Fortnite sem gastar",
+          "Fortnite Brasil",
+          "Fortnite free to play",
+          "jogos gratuitos",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-031",
+      "queue_position": 31,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "3 erros que jogadores iniciantes cometem nos FPS",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "3 erros que jogadores iniciantes cometem nos FPS",
+        "primary_keyword": "erros comuns de FPS",
+        "description_draft": "erros comuns de FPS: Posicionamento ruim, pressa e pouca atenção ao mapa podem atrapalhar partidas. Confira dicas que dependem da situação e do jogo.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#FPS #DicasGamer #Shorts",
+        "hashtags": [
+          "#FPS",
+          "#DicasGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "dicas FPS",
+          "erros de iniciante FPS",
+          "melhorar mira",
+          "jogos de tiro",
+          "FPS competitivo",
+          "posicionamento FPS",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-032",
+      "queue_position": 32,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Os mods antigos do Minecraft que pareciam magia",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Os mods antigos do Minecraft que pareciam magia",
+        "primary_keyword": "mods clássicos do Minecraft",
+        "description_draft": "mods clássicos do Minecraft: Certos mods de Minecraft mudavam criaturas, ferramentas e dimensões inteiras. Relembre a época das instalações manuais.\n\nQue lembrança dessa época você ainda guarda?\n\n#Minecraft #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#Minecraft",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "Minecraft mods antigos",
+          "Minecraft clássico",
+          "mods Minecraft nostalgia",
+          "Minecraft Brasil",
+          "modpacks antigos",
+          "Minecraft nostalgia",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-033",
+      "queue_position": 33,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Testei 3 jogos de terror do Roblox: qual assusta mais?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Testei 3 jogos de terror do Roblox: qual assusta mais?",
+        "primary_keyword": "terror no Roblox",
+        "description_draft": "terror no Roblox: Sustos, ambientação e mecânicas de três jogos de terror do Roblox serão comparados com capturas reais, não cenas geradas.\n\nQual teste desse jogo devemos fazer depois?\n\n#Roblox #JogosDeTerror #Shorts",
+        "hashtags": [
+          "#Roblox",
+          "#JogosDeTerror",
+          "#Shorts"
+        ],
+        "tags": [
+          "Roblox terror",
+          "jogos de terror Roblox",
+          "Roblox assustador",
+          "terror Roblox Brasil",
+          "Roblox gameplay",
+          "jogos Roblox",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-034",
+      "queue_position": 34,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "3 detalhes escondidos no mundo de GTA IV",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "3 detalhes escondidos no mundo de GTA IV",
+        "primary_keyword": "segredos GTA IV",
+        "description_draft": "segredos GTA IV: Lugares, interações e referências de Liberty City podem guardar detalhes interessantes. Cada segredo deve ser confirmado no jogo.\n\nQual explicação sobre games você gostaria de ver?\n\n#GTAIV #SegredosGTA #Shorts",
+        "hashtags": [
+          "#GTAIV",
+          "#SegredosGTA",
+          "#Shorts"
+        ],
+        "tags": [
+          "GTA IV",
+          "GTA 4",
+          "segredos GTA IV",
+          "Liberty City",
+          "GTA 4 curiosidades",
+          "GTA IV Brasil",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-035",
+      "queue_position": 35,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Você lembra de passar horas construindo no Bloxburg?",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Você lembra de passar horas construindo no Bloxburg?",
+        "primary_keyword": "Bloxburg Roblox nostalgia",
+        "description_draft": "Bloxburg Roblox nostalgia: Casas, empregos e projetos demorados faziam do Bloxburg um lugar para criar histórias. Qual construção você mais gostava de fazer?\n\nVocê jogaria esse clássico novamente?\n\n#Bloxburg #Roblox #Shorts",
+        "hashtags": [
+          "#Bloxburg",
+          "#Roblox",
+          "#Shorts"
+        ],
+        "tags": [
+          "Bloxburg",
+          "Welcome to Bloxburg",
+          "Roblox Bloxburg",
+          "Bloxburg Brasil",
+          "construção Roblox",
+          "Roblox nostalgia",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-036",
+      "queue_position": 36,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "GTA VI: o que é oficial e o que ainda é boato?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "GTA VI: o que é oficial e o que ainda é boato?",
+        "primary_keyword": "rumores e fatos GTA VI",
+        "description_draft": "rumores e fatos GTA VI: Separe trailers e comunicados da Rockstar de vazamentos e teorias. Informações oficiais e datas devem ser conferidas no dia de publicação.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#GTAVI #GTA6 #Shorts",
+        "hashtags": [
+          "#GTAVI",
+          "#GTA6",
+          "#Shorts"
+        ],
+        "tags": [
+          "GTA VI",
+          "GTA 6",
+          "GTA VI rumores",
+          "GTA 6 oficial",
+          "Rockstar Games",
+          "notícias GTA VI",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Confirm official title/platform/version/date at publication"
+      }
+    },
+    {
+      "id": "game-037",
+      "queue_position": 37,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que os roguelites fazem a gente querer tentar de novo?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que os roguelites fazem a gente querer tentar de novo?",
+        "primary_keyword": "mecânicas de roguelite",
+        "description_draft": "mecânicas de roguelite: Progressão entre tentativas, escolhas aleatórias e recompensas graduais explicam o ciclo de repetição em muitos roguelites.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#Roguelite #GameDesign #Shorts",
+        "hashtags": [
+          "#Roguelite",
+          "#GameDesign",
+          "#Shorts"
+        ],
+        "tags": [
+          "roguelite",
+          "roguelike",
+          "game design",
+          "progressão roguelite",
+          "jogos indie",
+          "jogos de estratégia",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-038",
+      "queue_position": 38,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Os MMORPGs que rodavam até em computadores fracos",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Os MMORPGs que rodavam até em computadores fracos",
+        "primary_keyword": "MMORPGs para PC fraco",
+        "description_draft": "MMORPGs para PC fraco: Jogos online de outra época cabiam em configurações modestas. Relembre mundos, classes e amizades formadas nos servidores.\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#MMORPG #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#MMORPG",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "MMORPG PC fraco",
+          "MMORPG antigo",
+          "jogos online leves",
+          "MMORPG nostalgia",
+          "PC fraco",
+          "RPG online",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-039",
+      "queue_position": 39,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Godzilla Remastered: o clássico voltou, mas ainda diverte?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Godzilla Remastered: o clássico voltou, mas ainda diverte?",
+        "primary_keyword": "Godzilla Remastered",
+        "description_draft": "Godzilla Remastered: Antes de produzir, confirme o nome exato, a existência e a plataforma da suposta edição remasterizada. Depois avalie gameplay real.\n\nVocê jogaria esse desafio?\n\n#Godzilla #Jogos #Shorts",
+        "hashtags": [
+          "#Godzilla",
+          "#Jogos",
+          "#Shorts"
+        ],
+        "tags": [
+          "Godzilla jogo",
+          "Godzilla Remastered",
+          "jogos Godzilla",
+          "Godzilla games",
+          "jogos de monstros",
+          "Godzilla gameplay",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Confirm official title/platform/version/date at publication"
+      }
+    },
+    {
+      "id": "game-040",
+      "queue_position": 40,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Como os mods conseguem transformar completamente um jogo?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como os mods conseguem transformar completamente um jogo?",
+        "primary_keyword": "mods e modificações de jogos",
+        "description_draft": "mods e modificações de jogos: De texturas a mecânicas completas, mods ampliam possibilidades e dependem de ferramentas, compatibilidade e regras de cada jogo.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#Mods #CuriosidadesGamer #Shorts",
+        "hashtags": [
+          "#Mods",
+          "#CuriosidadesGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "mods de jogos",
+          "game mods",
+          "modding",
+          "modificações de jogos",
+          "mods PC",
+          "comunidade gamer",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-041",
+      "queue_position": 41,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "League of Legends antigo: você sobreviveria naquele meta?",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "League of Legends antigo: você sobreviveria naquele meta?",
+        "primary_keyword": "meta antigo de League of Legends",
+        "description_draft": "meta antigo de League of Legends: Itens, campeões e estilos de partida mudaram. Relembre decisões comuns no meta antigo de LoL sem tratar uma opinião como estatística.\n\nQue lembrança dessa época você ainda guarda?\n\n#LeagueOfLegends #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#LeagueOfLegends",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "League of Legends",
+          "LoL antigo",
+          "meta League of Legends",
+          "League of Legends nostalgia",
+          "LoL Brasil",
+          "jogos MOBA",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-042",
+      "queue_position": 42,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "CS2: testei três armas que quase ninguém valoriza",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "CS2: testei três armas que quase ninguém valoriza",
+        "primary_keyword": "armas subestimadas no CS2",
+        "description_draft": "armas subestimadas no CS2: Escolha três armas menos populares e registre situações reais de uso no Counter-Strike 2, sem afirmar vantagem antes dos resultados.\n\nQual teste desse jogo devemos fazer depois?\n\n#CS2 #CounterStrike2 #Shorts",
+        "hashtags": [
+          "#CS2",
+          "#CounterStrike2",
+          "#Shorts"
+        ],
+        "tags": [
+          "CS2",
+          "Counter Strike 2",
+          "armas CS2",
+          "CS2 Brasil",
+          "CS2 dicas",
+          "Counter Strike gameplay",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-043",
+      "queue_position": 43,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que alguns jogos de terror indie assustam mais que jogos caros?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que alguns jogos de terror indie assustam mais que jogos caros?",
+        "primary_keyword": "terror indie vs AAA",
+        "description_draft": "terror indie vs AAA: Som, imprevisibilidade e atmosfera podem ser tão importantes quanto gráficos. Compare exemplos reais, sem transformar gosto em fato.\n\nQual explicação sobre games você gostaria de ver?\n\n#TerrorIndie #JogosDeTerror #Shorts",
+        "hashtags": [
+          "#TerrorIndie",
+          "#JogosDeTerror",
+          "#Shorts"
+        ],
+        "tags": [
+          "terror indie",
+          "jogos de terror",
+          "terror psicológico",
+          "jogos independentes",
+          "horror indie",
+          "game design terror",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-044",
+      "queue_position": 44,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "PSP: os jogos portáteis que marcaram nossa infância",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "PSP: os jogos portáteis que marcaram nossa infância",
+        "primary_keyword": "jogos clássicos de PSP",
+        "description_draft": "jogos clássicos de PSP: O PlayStation Portable levou aventuras e multiplayer ao bolso. Relembre o catálogo e a experiência de jogar longe da TV.\n\nVocê jogaria esse clássico novamente?\n\n#PSP #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#PSP",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "PSP",
+          "PlayStation Portable",
+          "jogos PSP",
+          "PSP nostalgia",
+          "jogos portáteis",
+          "PlayStation clássico",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-045",
+      "queue_position": 45,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Void/Breaker: esse FPS roguelite merece uma chance?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Void/Breaker: esse FPS roguelite merece uma chance?",
+        "primary_keyword": "Void/Breaker FPS roguelite",
+        "description_draft": "Void/Breaker FPS roguelite: Teste combate, progressão e desempenho na versão correta de Void/Breaker antes de tirar uma conclusão sobre o jogo.\n\nQual detalhe do resultado você quer ver em gameplay?\n\n#VoidBreaker #Roguelite #Shorts",
+        "hashtags": [
+          "#VoidBreaker",
+          "#Roguelite",
+          "#Shorts"
+        ],
+        "tags": [
+          "Void Breaker",
+          "Void/Breaker",
+          "FPS roguelite",
+          "jogo indie FPS",
+          "roguelite FPS",
+          "Void Breaker gameplay",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Confirm official title/platform/version/date at publication"
+      }
+    },
+    {
+      "id": "game-046",
+      "queue_position": 46,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Como Zelda transformou música em parte da jogabilidade?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como Zelda transformou música em parte da jogabilidade?",
+        "primary_keyword": "música em Zelda Ocarina of Time",
+        "description_draft": "música em Zelda Ocarina of Time: Melodias tocadas com a ocarina conduzem acontecimentos e puzzles em Zelda. O som faz parte da interação do jogador.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#Zelda #OcarinaOfTime #Shorts",
+        "hashtags": [
+          "#Zelda",
+          "#OcarinaOfTime",
+          "#Shorts"
+        ],
+        "tags": [
+          "Zelda",
+          "Ocarina of Time",
+          "músicas Zelda",
+          "ocarina Zelda",
+          "Zelda curiosidades",
+          "Nintendo 64",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-047",
+      "queue_position": 47,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "Grand Chase: os duelos PvP que acabavam com amizades 😂",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Grand Chase: os duelos PvP que acabavam com amizades 😂",
+        "primary_keyword": "PvP de Grand Chase",
+        "description_draft": "PvP de Grand Chase: Combos, arenas e rivais transformavam disputas de Grand Chase em histórias engraçadas. Qual duelo você nunca esqueceu?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#GrandChase #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#GrandChase",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "Grand Chase",
+          "Grand Chase PvP",
+          "Grand Chase Classic",
+          "Grand Chase Brasil",
+          "arena Grand Chase",
+          "Grand Chase nostalgia",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-048",
+      "queue_position": 48,
+      "format_id": "jogos-do-momento",
+      "format_name": "Jogos do Momento",
+      "title_proposed": "Enigma do Medo: vale conhecer com a alta de Ordem Paranormal?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Enigma do Medo: vale conhecer com a alta de Ordem Paranormal?",
+        "primary_keyword": "Enigma do Medo e Ordem Paranormal",
+        "description_draft": "Enigma do Medo e Ordem Paranormal: Explore a ligação temática entre Enigma do Medo e o universo de Ordem Paranormal; verifique dados do jogo e da franquia antes do vídeo.\n\nVocê jogaria esse desafio?\n\n#EnigmaDoMedo #OrdemParanormal #Shorts",
+        "hashtags": [
+          "#EnigmaDoMedo",
+          "#OrdemParanormal",
+          "#Shorts"
+        ],
+        "tags": [
+          "Enigma do Medo",
+          "Ordem Paranormal",
+          "Cellbit jogos",
+          "jogo brasileiro",
+          "Enigma do Medo gameplay",
+          "RPG de terror",
+          "Hélio Conde",
+          "games Brasil",
+          "jogos do momento"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": "Needs real, licensed or original gameplay before publishing"
+      }
+    },
+    {
+      "id": "game-049",
+      "queue_position": 49,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Como os jogos criam sons de monstros que parecem reais?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como os jogos criam sons de monstros que parecem reais?",
+        "primary_keyword": "design de som de monstros",
+        "description_draft": "design de som de monstros: Camadas de animais, objetos e efeitos digitais ajudam a criar criaturas memoráveis. Use exemplos com making-of documentado.\n\nQue curiosidade você acrescentaria a essa lista?\n\n#SoundDesign #CuriosidadesGamer #Shorts",
+        "hashtags": [
+          "#SoundDesign",
+          "#CuriosidadesGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "sound design games",
+          "som de monstros",
+          "efeitos sonoros jogos",
+          "áudio nos games",
+          "criação de sons",
+          "game audio",
+          "Hélio Conde",
+          "games Brasil",
+          "você sabia?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    },
+    {
+      "id": "game-050",
+      "queue_position": 50,
+      "format_id": "voce-lembra",
+      "format_name": "Você Lembra?",
+      "title_proposed": "GTA V: você lembra da primeira vez que entrou em Los Santos?",
+      "target_duration_seconds": {
+        "min": 35,
+        "max": 60
+      },
+      "content_status": "idea_only",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "GTA V: você lembra da primeira vez que entrou em Los Santos?",
+        "primary_keyword": "primeira vez em Los Santos GTA V",
+        "description_draft": "primeira vez em Los Santos GTA V: Explorar Los Santos pela primeira vez trouxe descobertas e histórias. Compartilhe aquela lembrança inesquecível de GTA V.\n\nQue lembrança dessa época você ainda guarda?\n\n#GTAV #NostalgiaGamer #Shorts",
+        "hashtags": [
+          "#GTAV",
+          "#NostalgiaGamer",
+          "#Shorts"
+        ],
+        "tags": [
+          "GTA V",
+          "GTA 5",
+          "Los Santos",
+          "GTA nostalgia",
+          "GTA V Brasil",
+          "histórias GTA V",
+          "Hélio Conde",
+          "games Brasil",
+          "você lembra?"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "extra_review": null
+      }
+    }
+  ]
+}
