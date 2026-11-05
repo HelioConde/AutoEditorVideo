@@ -1,5 +1,18 @@
 # Arquivo Otaku — orientações para agentes
 
+## REGRA — CINCO CANAIS YOUTUBE SEPARADOS (05/11/2026)
+
+- Registro oficial: config/youtube-channel-registry.json; validar com scripts/youtube_channel_registry.py. Sao **cinco canais**, sem reutilizar ID, OAuth, thumbnail, voz ou metadados de outro.
+- Otaku Multicena BR: UCXGYTuBYn-0Ziqin5ajKhOw; Otaku Reframe EN: UCBoNbQjaMYdpJqPLRZAFkvQ (uploaders existentes preservados).
+- Gamer: UCg77gYc1_wkHuL07XPtKcow; YouTube exibe **Hélio Conde**, **Conde Games** e proposta ainda nao aplicada na conta. Exigir gameplay real e/ou autorizado.
+- Kids: UCxEzVW2Uy44OUVurTQSg_Eg; YouTube exibe **Emanuelly Kids**, a serie oficial e **Fofinhos**. Toda publicacao para criancas deve ter classificacao Made for Kids, sem CTA para comentarios/inscricoes de criancas. Nunca publicar fotos privadas nem musicas sem direitos.
+- Alchemy Lab: UCCTYFE5Cmz2aYZ37cJQ-wcg; YouTube exibe **Alchemy Flames**; a identidade planejada e **Alchemy Lab** (IA pratica e automacoes). Nunca afirmar que o nome foi alterado na conta; nunca falsificar testes ou criar conteudo repetitivo de baixo valor.
+- Os tres novos canais estao **somente registrados**, com OAuth e publicacao cloud DESATIVADOS; criar Environment e token proprios somente apos autorizacao especifica e verificacao do ID via channels.list(mine=true). Nunca usar segredos YouTube Otaku/CodeX Proxy como substitutos.
+- Manter roteiros/miniaturas originais, categoria e idioma por canal, default privado, verificacao de direitos, QA e controle de duplicatas. Os pilotos antigos Checkpoint Pixel/MiniMundo Curioso permanecem isolados com upload_enabled=false e IDs nulos; sao drafts, NAO sao identidade do Emanuelly Kids.
+- Reservar cada (canal, episodio) antes de gerar scripts, comandos PowerShell ou MP4s usando conteudos/otaku-production-reservations.json, agora compatível com cinco canais; nenhum upload e geracao sao autorizados apenas pelo registro.
+- Guia: docs/CANAIS-5-YOUTUBE-GITHUB.md.
+
+
 ## REGRA PERMANENTE — RESERVAR NO GITHUB ANTES DE QUALQUER VIDEO/COMANDO
 
 **Regra definida pelo criador em 05/11/2026:** toda vez que solicitar ao

@@ -8,7 +8,7 @@ Ambos os canais serao **portugues brasileiro integral**: roteiro, voz, legendas,
 
 **Kids: MiniMundo Curioso** (nome provisório). Publico-alvo: criancas entre 4 e 7 anos, com seus responsaveis. Tres Shorts originais: estrela azul encontra sua casa (cores), cinco passarinhos (contagem), casinha de formas geometricas. Animacao 2D vetorial original, movimentos lentos e independentes, sem flashes ou sustos. Voz PT-BR FranciscaNeural (-15%), sujeita a revisao. Sem pedidos para comentar, curtir, inscrever-se ou comprar. Classificar como Made for Kids no YouTube.
 
-Nomes e IDs de canais ainda NAO foram confirmados ou criados. Nenhuma conta nova, OAuth, MP4 ou upload foi realizado pelo GitHub.
+Atualizacao 05/11/2026: os canais reais foram identificados e cadastrados separadamente: Games UCg77gYc1_wkHuL07XPtKcow (nome atual Hélio Conde, marca Conde Games proposta), Kids UCxEzVW2Uy44OUVurTQSg_Eg (Emanuelly Kids / serie Fofinhos). **Este piloto usa nomes antigos provisorios e continua com ID nulo/sem upload**. Nao encaminhar os pilotos MiniMundo Curioso para a serie Fofinhos sem revisar marca/conteudo/direitos. O cadastro nao cria OAuth, MP4 nem publica nada. Veja docs/CANAIS-5-YOUTUBE-GITHUB.md.
 
 ## Fontes oficiais
 

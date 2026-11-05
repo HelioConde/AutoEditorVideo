@@ -9,7 +9,7 @@ Shorts, logins ou diretorios de saida:
 - canal-ingles.ps1 -> Otaku Reframe, anime em ingles americano (en-US).
 
 O canal Kids continua com o motor piloto-canais-v3.ps1 -Canal kids.
-Os canais Games e Kids ainda nao estao criados/vinculados no YouTube.
+Os canais Games e Kids **ja existem no YouTube e foram cadastrados no GitHub** em config/youtube-channel-registry.json. Games: UCg77gYc1_wkHuL07XPtKcow (YouTube exibe Hélio Conde; Conde Games e proposta). Kids: UCxEzVW2Uy44OUVurTQSg_Eg (Emanuelly Kids / serie Fofinhos). Isso **NAO** habilita OAuth nem upload. Veja docs/CANAIS-5-YOUTUBE-GITHUB.md.
 O Otaku Reframe **ja existe**, com Channel ID
 UCBoNbQjaMYdpJqPLRZAFkvQ.
 
@@ -126,7 +126,7 @@ Nao disparar novo envio se a API der retorno incerto: conferir o Studio.
 - Windows com PowerShell, Python .venv e dependencias do repositorio.
 - Para renderizacao: Node/Remotion, ffmpeg/ffprobe, narracao Edge TTS,
   artes aprovadas (EN) ou gameplay real (Games).
-- Os roteiros e metadados sao drafts; nenhum canal Gamer foi criado nem
+- Os roteiros e metadados continuam drafts; canal Gamer registrado mas nenhuma autorizacao de publicar foi concedida nem
   sao fornecidas credenciais em arquivos de codigo.
 - Nenhum comando de producao envia video sem acao especifica de envio.
 - Testes isolados em tests/test_channel_launchers.ps1 verificam
