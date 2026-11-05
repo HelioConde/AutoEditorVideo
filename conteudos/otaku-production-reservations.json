@@ -323,6 +323,16 @@
       "review_status": "pending_native_renderer_QA",
       "catalog_id": "alchemy-003-gif-animado-tutorial-v3",
       "note": "Use existing original AI-generated visual source; render caption highlight through native Remotion ArquivoOtakuMaster using Edge word boundaries; generate program-owned thumbnail with capa_cinematografica.py; preserve existing private V1/V2 videos; no reuse of mismatched subtitle or cover."
+    },
+    {
+      "channel": "games",
+      "id": "game-901-estilo-referencia-5s",
+      "status": "reserved",
+      "reservation_owner": "gamer_reference_style_5s_20261105",
+      "source": "creator_visual_reference_two_images_20261105",
+      "publication_target": "private_first",
+      "review_status": "one_5_second_visual_test_only",
+      "note": "One 5-second original visual test with native AutoEditorVideo cover + precise Remotion highlighted captions. Reuse existing Minecraft AI art, no new image-model calls. Upload PRIVATE only with Gamer channel OAuth; preserve all existing private videos. Not a public-ready episode."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
