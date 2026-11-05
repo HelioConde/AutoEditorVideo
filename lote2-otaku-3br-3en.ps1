@@ -48,6 +48,17 @@ function Invoke-Etapa {
 
 function Get-EstadoBR {
     param([string]$Id)
+    # Historico da grade: se houve envio publico anterior ou envio ambiguo,
+    # nao tentar reenviar so porque o checksum do MP4 local mudou.
+    $journalPath=Join-Path $script:root 'assets\gerados\publicacao-youtube\grade-50-estado.json'
+    if(Test-Path -LiteralPath $journalPath -PathType Leaf){
+        $journal=Get-Content -LiteralPath $journalPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $item=$journal.PSObject.Properties[$Id]
+        if($null -ne $item){
+            if($item.Value.video_id){return 'outro'}
+            if($item.Value.status -in @('upload_iniciado','upload_indeterminado')){return 'incerto'}
+        }
+    }
     $video=Join-Path $script:root ("assets\gerados\shorts-animados\{0}\{0}-master-multicenas-personagens-v3-{1}.mp4" -f $Id,$script:Perfil)
     if(-not(Test-Path -LiteralPath $video -PathType Leaf)){return 'pendente'}
     $hash=(Get-FileHash -LiteralPath $video -Algorithm SHA256).Hash.ToLowerInvariant()
