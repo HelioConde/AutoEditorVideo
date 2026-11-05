@@ -1,10 +1,10 @@
-name: Gamer + Alchemy - upload rendered six AI Shorts from original run
+name: Gamer + Alchemy - private upload from completed AI render
 
 on:
-  workflow_run:
-    workflows:
-      - 'Gamer + Alchemy - six AI-illustrated Shorts one-shot'
-    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/games-alchemy-private-upload-20261105.json'
 
 permissions:
   contents: read
@@ -16,10 +16,10 @@ concurrency:
 jobs:
   verify-original-render-and-main-protection:
     if: >-
-      github.event.workflow_run.id == 42044136670 &&
-      github.event.workflow_run.head_sha == 'a414b9aea8d778f27c765cfb3d45e94612d0ee05' &&
-      github.event.workflow_run.head_branch == 'main' &&
-      github.event.workflow_run.run_attempt == 1
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(games-alchemy): submit finished six AI Shorts for private upload'
     runs-on: ubuntu-latest
     timeout-minutes: 6
     permissions:
@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
-      - name: Verify original image/MP4 job succeeded and Youtube Environment is main-only, no Secrets
+      - name: Verify original 6 MP4s and approved one-shot upload on main, without Secrets
         env:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/games_alchemy_ai_recovery_gate.py
