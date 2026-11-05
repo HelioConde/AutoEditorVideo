@@ -21,6 +21,7 @@ from datetime import datetime, timezone
 
 from googleapiclient.http import MediaFileUpload
 from games_alchemy_ai_upload import get_youtube, set_thumbnail
+from youtube_public_tags import public_tags
 from youtube_channel_registry import KNOWN_IDS, get_channel
 from production_reservations import assert_reserved
 
@@ -172,7 +173,7 @@ def insert_nonresumable(youtube,job:dict)->str:
     meta=job["meta"]
     data={
       "snippet":{"title":meta["title"],"description":meta["description"],
-                 "tags":list(dict.fromkeys(meta["tags"]+[TAG,"autoeditorvideo-id-"+job["id"]])),
+                 "tags":public_tags(meta["tags"]),
                  "categoryId":"20","defaultLanguage":"pt-BR"},
       "status":{"privacyStatus":"private","selfDeclaredMadeForKids":False,
                 "containsSyntheticMedia":True}
