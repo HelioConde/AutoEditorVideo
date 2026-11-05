@@ -529,7 +529,8 @@ def upload(args):
     validate_video(args.video,stage="Upload YouTube PT")
     meta=json.loads(METADATA.read_text(encoding="utf-8-sig"))
     title=meta.get("titulo","").strip()
-    desc=meta.get("descricao","").strip()
+    from youtube_upload_profiles import sanitize_youtube_description
+    desc=sanitize_youtube_description(meta.get("descricao","").strip())
     if not (1<=len(title)<=100):raise RuntimeError("Titulo obrigatorio: preencha titulo em metadata.json (ate 100 caracteres)")
     if len(desc)>5000:raise RuntimeError("Descricao excede 5000 caracteres")
     scheduled_for = parse_publish_at(args.agendar_em) if args.agendar_em else None
