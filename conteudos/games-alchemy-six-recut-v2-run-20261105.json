@@ -1,0 +1,17 @@
+{
+  "schema": "autoeditorvideo/recut-six-cta-shorts-trigger/v1",
+  "date": "2026-11-05",
+  "creator_request": "Corrigir narrações dos 6 Shorts removendo encerramento sobre produção com IA; finalizar com CTA para inscrição e refazer capas no estilo enviado.",
+  "approved_by_creator": true,
+  "source_render_run": 42044136670,
+  "original_artifact": "games-alchemy-six-ai-render",
+  "source_artifact_id": 13425056457,
+  "revision_manifest": "conteudos/lote-6-games-alchemy-recut-v2.json",
+  "new_reservation_owner": "games_alchemy_six_shorts_v2_20261105",
+  "target": "generate previews and review; then private upload new version only, without touching old videos",
+  "video_count": 6,
+  "ai_images_new_calls": 0,
+  "old_private_uploads_unchanged": true,
+  "publication_visibility_after_review": "private",
+  "thumbnail_visual_style": "image user-provided white upper-case bold serif at top, full-bleed original illustration, no bottom banner"
+}
