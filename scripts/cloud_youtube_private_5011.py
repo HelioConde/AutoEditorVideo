@@ -18,6 +18,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
+from youtube_short_thumbnail import attach_thumbnail, ThumbnailBlocked
 
 ROOT=Path(__file__).resolve().parents[1]
 REVIEW=ROOT/'cloud-br-en-review-5011'
@@ -187,9 +188,24 @@ def main(argv=None)->int:
     try:
         record=publish_one(os.environ,args.channel)
         file=REVIEW/f'private-upload-result-{args.channel}.json'
+        # Persist the UPLOAD RECEIPT before any thumbnail API request.
+        # Thumbnail errors MUST NEVER be treated as reasons to resend MP4.
         file.write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
+        try:
+            youtube,_=authorized_youtube(os.environ,args.channel)
+            cover=REVIEW/f'{args.channel}-{ID}-cover.jpg'
+            result=attach_thumbnail(youtube,record['video_id'],cover)
+        except (UploadBlocked,ThumbnailBlocked) as exc:
+            record['thumbnail_status']='pending'
+            record['thumbnail_error_code']=str(exc)
+            file.write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
+            print('[YOUTUBE] MP4_ALREADY_UPLOADED_DO_NOT_REUPLOAD',file=sys.stderr)
+            raise
+        record['thumbnail_status']=result['status']
+        file.write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
+        print('[YOUTUBE] PRIVATE_MP4_AND_COVER_API_ACKNOWLEDGED')
         return 0
-    except UploadBlocked as exc:
+    except (UploadBlocked,ThumbnailBlocked) as exc:
         print('[YOUTUBE] '+str(exc),file=sys.stderr)
         return 1
 

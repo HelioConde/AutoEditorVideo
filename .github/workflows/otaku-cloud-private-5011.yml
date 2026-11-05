@@ -135,13 +135,14 @@ jobs:
           EXPECTED_CHANNEL_ID: UCXGYTuBYn-0Ziqin5ajKhOw
           PRIVATE_UPLOAD_CONFIRMED: 'true'
         run: python scripts/cloud_youtube_private_5011.py --channel br
-      - name: Preserve only video ID and status for private review
-        if: success()
+      - name: Preserve upload receipt and thumbnail status even if thumbnail fails
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: otaku-5011-br-private-upload-status
           path: cloud-br-en-review-5011/private-upload-result-br.json
           retention-days: 14
+          if-no-files-found: ignore
 
   private-upload-en:
     needs: [offline-security, verify-youtube-environment]
@@ -179,10 +180,11 @@ jobs:
           EXPECTED_CHANNEL_ID: UCBoNbQjaMYdpJqPLRZAFkvQ
           PRIVATE_UPLOAD_CONFIRMED: 'true'
         run: python scripts/cloud_youtube_private_5011.py --channel en
-      - name: Preserve only video ID and status for private review
-        if: success()
+      - name: Preserve upload receipt and thumbnail status even if thumbnail fails
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: otaku-5011-en-private-upload-status
           path: cloud-br-en-review-5011/private-upload-result-en.json
           retention-days: 14
+          if-no-files-found: ignore
