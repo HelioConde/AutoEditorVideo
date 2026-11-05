@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from production_reservations import assert_reserved
 from youtube_channel_registry import get_channel, KNOWN_IDS
 from youtube_new_channels_oauth import validate_token_fields, verify_channel_identity
+from youtube_public_tags import public_tags
 
 OUTPUT = ROOT / "cloud-games-alchemy-ai-six"
 OWNER = "games_alchemy_six_shorts_20261105"
@@ -163,7 +164,7 @@ def publish_private(youtube, item: dict) -> str:
     # No public status change is attempted without a separate explicit approval.
     insert_body = {
         "snippet": {"title": meta["title"], "description": meta["description"],
-                    "tags": meta["tags"], "categoryId": meta["categoryId"],
+                    "tags": public_tags(meta["tags"]), "categoryId": meta["categoryId"],
                     "defaultLanguage": "pt-BR"},
         "status": {"privacyStatus": "private",
                    "selfDeclaredMadeForKids": False,
