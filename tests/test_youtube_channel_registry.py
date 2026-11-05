@@ -111,3 +111,28 @@ def test_pilot_remains_nonpublishing_until_brand_and_content_review():
         assert item["youtube_channel_id"] is None
     # Channel IDs are registered centrally but intentionally are not copied
     # into provisional pilot episode upload tickets.
+
+
+def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scripts():
+    import production_reservations as queue
+    data=queue.load()
+    assert set(data["channels"])==set(registry.KNOWN_IDS)
+    for slug in registry.NEW_CHANNELS:
+        assert data["channels"][slug]["youtube_channel_id"]==registry.KNOWN_IDS[slug]
+        assert data["channels"][slug]["upload_authorized"] is False
+        assert not any(item["channel"]==slug for item in data["entries"])
+    with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
+        queue.assert_reserved("games","game-001-minecraft-um-coracao","any_worker")
+    with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
+        queue.assert_reserved("kids","kids-001-estrela-azul","any_worker")
+    with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
+        queue.assert_reserved("alchemy","alchemy-001-introducao-ia","any_worker")
+    # Existing Otaku entries remain intact, only their channel is allowed.
+    assert queue.get_entry("br","5008-firefly-wedding",data)["status"]=="published"
+    assert queue.get_entry("en","5008-firefly-wedding",data) is None
+
+def test_new_channels_cannot_infer_next_episode_or_trigger_batch():
+    import production_reservations as queue
+    for slug in registry.NEW_CHANNELS:
+        with pytest.raises(ValueError,match="EXPLICIT_EDITORIAL_SELECTION"):
+            queue.next_available(slug)
