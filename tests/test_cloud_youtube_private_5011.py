@@ -55,12 +55,15 @@ def test_separate_english_token_and_exact_channel():
 def test_review_rejects_wrong_sha_before_publication(tmp_path):
     fake=tmp_path/f'br-{publish.ID}-autoeditorvideo.mp4'
     fake.write_bytes(b'fake MP4 bytes' * 20000)
+    cover=tmp_path/f'br-{publish.ID}-cover.jpg'
+    Image.new('RGB',(540,960)).save(cover,format='JPEG')
     (tmp_path/'review-summary.json').write_text(json.dumps({
       'schema':'autoeditorvideo/dual-cloud-review/v1',
       'episode':publish.ID,'publication':'not_performed',
+      'render_origin':'original AutoEditorVideo Remotion in GitHub Actions',
       'videos':[
         {'channel':'br','expected_youtube_channel_id':publish.EXPECTED['br'][0],
-         'mp4':fake.name,'sha256':'0'*64},
+         'mp4':fake.name,'cover':cover.name,'sha256':'0'*64},
         {'channel':'en'}]}))
     with pytest.raises(publish.UploadBlocked,match='MP4_HASH_MISMATCH'):
         publish.validate_review('br',tmp_path)
