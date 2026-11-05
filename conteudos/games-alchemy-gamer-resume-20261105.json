@@ -1,0 +1,20 @@
+{
+  "schema": "autoeditorvideo/gamer-missing-videos-reconciliation/v1",
+  "approved_by_creator": true,
+  "creator_request": "Corrigir até que todos os seis vídeos sejam enviados ao YouTube",
+  "date": "2026-11-05",
+  "original_render_run_id": 42044136670,
+  "original_render_sha": "a414b9aea8d778f27c765cfb3d45e94612d0ee05",
+  "previous_upload_run_id": 42048524469,
+  "already_confirmed_video_id": "61bCmdk2dV8",
+  "channel": "games",
+  "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+  "missing": [
+    "game-002-primeira-noite-minecraft",
+    "game-003-minecraft-sem-amarelo"
+  ],
+  "upload_visibility": "private",
+  "duplicate_policy": "Verify first uploaded video by ID; inspect private videos and uploads playlist for the exact titles of missing videos twice before inserting. Never retry an ambiguous insert.",
+  "media_policy": "Use old MP4 artifact, no AI image generation or gameplay recording",
+  "secrets": "Use only YOUTUBE_GAMES_TOKEN_JSON + YOUTUBE_CLIENT_JSON in protected environment"
+}
