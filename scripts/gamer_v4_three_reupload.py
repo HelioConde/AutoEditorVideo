@@ -143,6 +143,13 @@ def owner_videos(youtube)->list[dict]:
     return all_rows
 
 def find_reupload(youtube,title:str,episode:str)->list[str]:
+    # Technical IDs live in the GitHub private-upload receipt, NOT in tags.
+    receipt_file=ROOT/"conteudos/gamer-v4-three-reupload-result-20261105.json"
+    recorded=set()
+    if receipt_file.is_file():
+        data=json.loads(receipt_file.read_text(encoding="utf-8"))
+        recorded={v["new_youtube_id"] for v in data.get("videos",[])
+                  if v.get("episode")==episode+"-reenvio1"}
     rows=owner_videos(youtube)
     matches=[]
     for row in rows:
@@ -150,8 +157,8 @@ def find_reupload(youtube,title:str,episode:str)->list[str]:
         tags=sn.get("tags",[])
         if (sn.get("channelId")==CHANNEL
             and sn.get("title")==title
-            and TAG in tags
-            and "autoeditorvideo-id-"+episode in tags
+            and ((TAG in tags and "autoeditorvideo-id-"+episode in tags)
+                 or row["id"] in recorded)
             and row.get("status",{}).get("privacyStatus")=="private"):
             matches.append(row["id"])
     if len(matches)>1:
