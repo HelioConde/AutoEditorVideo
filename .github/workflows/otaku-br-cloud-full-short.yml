@@ -1,4 +1,4 @@
-name: Otaku Multicena BR - real AutoEditorVideo cloud video
+name: Otaku Multicena BR - historical 5008 pilot (archived, no duplicate generation)
 
 on:
   pull_request:
@@ -18,29 +18,6 @@ on:
       - 'scripts/estado_codex_proxy.py'
       - 'scripts/gerar_video_codex.py'
       - 'scripts/master_scenes.py'
-  workflow_dispatch:
-    inputs:
-      episode_id:
-        description: 'BR Short (only 5008-firefly-wedding authorized for this pilot)'
-        required: true
-        default: '5008-firefly-wedding'
-        type: choice
-        options:
-          - '5008-firefly-wedding'
-      max_calls:
-        description: 'Explicit maximum of real image requests; 0 = no image generation'
-        required: true
-        default: '0'
-        type: choice
-        options:
-          - '0'
-          - '3'
-          - '6'
-          - '9'
-          - '12'
-          - '15'
-          - '18'
-          - '21'
 
 # The provider is a third-party, community-built, undocumented proxy.
 # Never expose OAuth secrets in PR jobs or artifact uploads.
@@ -69,8 +46,8 @@ jobs:
 
   validate-environment:
     needs: offline-safety
-    if: >-
-      github.ref == 'refs/heads/main' &&
+    if: false # 5008 already published and tested; historical pipeline archived
+      # github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
       (
         (github.event_name == 'push' &&
@@ -96,8 +73,8 @@ jobs:
 
   generate-actual-autoeditorvideo-mp4:
     needs: [offline-safety, validate-environment]
-    if: >-
-      github.ref == 'refs/heads/main' &&
+    if: false # 5008 already published and tested; historical pipeline archived
+      # github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
       (
         (github.event_name == 'push' &&
