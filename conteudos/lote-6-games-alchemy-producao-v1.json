@@ -3,20 +3,20 @@
   "created": "2026-11-05",
   "production_owner": "games_alchemy_six_shorts_20261105",
   "registry": "conteudos/otaku-production-reservations.json",
-  "state": "reservations_created_preflight_blocked_no_renders_no_upload",
+  "state": "six_episodes_reserved_30_ai_scenes_planned_not_rendered_not_uploaded",
   "sandbox_root": "assets/gerados/games-alchemy-pilot-6",
   "source_lists": [
     "conteudos/helio-conde-games-grade-50-seo-v1.json",
     "conteudos/alchemy-lab-grade-50-v1.json"
   ],
   "strict_rules": [
-    "Reserved episodes must match owner exactly and statuses reserved",
-    "Titles, description and examples are drafts, not confirmations of actual gameplay/tests",
-    "Obtain real game footage or real recorded technical demonstrations; never manufacture success, results or interface",
-    "No uploads while specific channel OAuth is missing or channel ID unverified",
-    "Select only per-channel credentials under the protected environment; do not reuse Otaku",
-    "YouTube publishing is PRIVATE first, then public only after QA, confirmation and explicit authorization",
-    "No automatic retry after ambiguous uploads. Inspect YouTube video ID before attempting again."
+    "Each episode is reserved in main for this exact owner; enforce before generating.",
+    "Use only original AI-generated images and smooth editorial motion in all six videos.",
+    "No gameplay recording, no gameplay footage and no false depiction of screenshots, tests or success.",
+    "Descriptions disclose AI illustration to viewers.",
+    "Validate six separate videos, narration, visual frame safety, captions and rights.",
+    "Every OAuth token must match the exact expected channel ID before upload, with initial visibility private.",
+    "Do not repeat uploads after any ambiguous error; preserve artifacts and log video IDs without secrets."
   ],
   "batch": [
     {
@@ -27,10 +27,10 @@
       "requested_publish": true,
       "desired_visibility_after_qa": "public",
       "first_upload_visibility": "private",
-      "video_status": "blocked_awaiting_real_assets_and_channel_oauth",
+      "video_status": "reserved_pending_render_and_verified_channel_upload",
       "format": "Você Sabia?",
-      "title_draft": "Por que GTA IV ainda surpreende mais que GTA V em alguns detalhes? 🤯",
-      "description_draft": "GTA IV vs GTA V: A comparação entre física, interação com NPCs e comportamento dos veículos rende detalhes que merecem ser vistos lado a lado.\n\nQual outro detalhe desses jogos merece um vídeo?\n\n#GTAIV #GTAV #Shorts",
+      "title_draft": "GTA IV vs GTA V: por que a física ainda surpreende?",
+      "description_draft": "Dois títulos marcantes, com propostas diferentes para física, veículos e reações dos personagens. Vamos explorar essas diferenças por meio de cenas conceituais.\n\nQue outra curiosidade gamer você gostaria de descobrir?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#GTAIV #GTAV #Shorts",
       "hashtags": [
         "#GTAIV",
         "#GTAV",
@@ -47,54 +47,64 @@
         "games Brasil",
         "você sabia?"
       ],
-      "narration_script_status": "draft_pending_fact_and_visual_review",
-      "duration_target_seconds": 38,
-      "narration_script_draft": "GTA IV chegou antes de GTA V, mas muita gente ainda prefere certas reações dos personagens e veículos. Para comparar direito, precisamos repetir situações parecidas nos dois jogos: uma colisão, uma curva e uma reação de pedestre. Só aí dá para observar o que mudou, sem confundir física com preferência pessoal. Qual versão parece mais convincente para você?",
-      "intro_hook": "GTA IV é mais antigo… mas será que algumas reações da física ainda surpreendem mais que em GTA V?",
-      "premise": "Comparação documental entre GTA IV e GTA V, sem prometer superioridade objetiva.",
+      "narration_script_status": "complete_editorial_draft_pending_fact_and_audio_qa",
+      "duration_target_seconds": 44,
+      "narration_script_draft": "GTA IV e GTA V marcaram épocas diferentes da Rockstar. O quarto jogo ficou conhecido pelo peso dos veículos e pelas reações dos personagens. Já GTA V trouxe outro ritmo de direção e um mundo maior para explorar. Isso não significa que um seja melhor em tudo. São escolhas de design diferentes, e cada jogador valoriza uma coisa. As cenas que você está vendo são ilustrações criadas por inteligência artificial, não gameplay. E você: qual GTA deixou as melhores lembranças?",
+      "intro_hook": "GTA IV chegou antes de GTA V. Mas por que sua física ainda rende tanta discussão?",
+      "premise": "GTA IV vs GTA V: por que a física ainda surpreende?",
       "scenes": [
         {
           "index": 1,
-          "estimated_time": "00-03",
-          "narrative_visual": "Abertura com capturas reais sincronizadas de GTA IV e GTA V",
-          "required_asset_kind": "footage_real_gta4_and_gta5",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-01.mp4"
+          "beat": "A dúvida",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Two contrasting fictional contemporary metropolitan cities, one overcast and gritty, the other sunlit and colorful, cinematic editorial digital painting, original, no logos, no HUD, no screenshots. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-01.png"
         },
         {
           "index": 2,
-          "estimated_time": "03-12",
-          "narrative_visual": "Comparar colisão equivalente nos dois jogos",
-          "required_asset_kind": "matched_footage_collision",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-02.mp4"
+          "beat": "Carros",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Two stylized fictional sports cars taking a dramatic turn in a generic city, show body weight and momentum, original editorial illustration, no brand logos. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-02.png"
         },
         {
           "index": 3,
-          "estimated_time": "12-24",
-          "narrative_visual": "Comparar controle de veículo e reação de NPC",
-          "required_asset_kind": "matched_footage_car_npc",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-03.mp4"
+          "beat": "Reações",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Generic city pedestrian silhouettes near a crosswalk and one vehicle braking, tasteful dynamic concept art, no actual game screenshots. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-03.png"
         },
         {
           "index": 4,
-          "estimated_time": "24-36",
-          "narrative_visual": "Resumo honesto da observação sem afirmar superioridade absoluta",
-          "required_asset_kind": "matched_footage_summary",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-04.mp4"
+          "beat": "Escolhas",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Side by side abstract conceptual sketch contrasting gritty realism and colorful open-world freedom, no text or gameplay. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-04.png"
+        },
+        {
+          "index": 5,
+          "beat": "Nostalgia",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Two fictional roadways fading into a golden sunset, video game nostalgia concept illustration, no text. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/source/scene-05.png"
         }
       ],
       "evidence_requirements": [
-        "Own or licensed footage from both GTA IV and GTA V recorded under comparable conditions",
-        "Record platform/game version and content-use permission",
-        "Do not fabricate NPC reactions or label AI images as gameplay"
+        "Visuals must be original AI illustrations, not gameplay or screenshots.",
+        "Fact-check narration against actual released information.",
+        "Do not claim to have played, tested or used specific tools.",
+        "Check narration and onscreen caption accuracy and rights before upload.",
+        "Verify exact YouTube Channel ID using separate token for this channel."
       ],
       "rendered_mp4_expected": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/final.mp4",
       "thumbnail_expected": "assets/gerados/games-alchemy-pilot-6/game-001-gta4-gta5/thumb.jpg",
       "qa": {
-        "footage_verified": false,
+        "footage_verified": "not_applicable_ai_only",
         "visual_review": false,
         "audio_review": false,
         "rights_checked": false,
@@ -103,7 +113,11 @@
         "video_rendered": false,
         "youtube_uploaded": false
       },
-      "notes": "A real production must replace draft placeholders and obtain all required media, pass QA, verify OAuth channel ID, and publish via authorized channel uploader only."
+      "notes": "Illustrated AI-only Short; do not claim real gameplay or product testing. Upload only after render and OAuth per-channel checks. Initial visibility private.",
+      "ai_illustrations_only": true,
+      "footage_required": false,
+      "synthetic_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.",
+      "scene_count": 5
     },
     {
       "channel": "games",
@@ -113,10 +127,10 @@
       "requested_publish": true,
       "desired_visibility_after_qa": "public",
       "first_upload_visibility": "private",
-      "video_status": "blocked_awaiting_real_assets_and_channel_oauth",
+      "video_status": "reserved_pending_render_and_verified_channel_upload",
       "format": "Você Lembra?",
-      "title_draft": "Você lembra da primeira noite no Minecraft? 😨",
-      "description_draft": "primeira noite no Minecraft: Abrigo improvisado, barulhos de monstros e medo de sair de casa: por que a primeira noite marcou tanta gente?\n\nQual foi sua experiência mais marcante com esse jogo?\n\n#Minecraft #NostalgiaGamer #Shorts",
+      "title_draft": "Minecraft: você lembra da primeira noite assustadora?",
+      "description_draft": "Madeira, abrigo improvisado e barulhos no escuro: a primeira noite no Minecraft faz parte da memória de muitos jogadores.\n\nQual lembrança desse jogo marcou você?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #NostalgiaGamer #Shorts",
       "hashtags": [
         "#Minecraft",
         "#NostalgiaGamer",
@@ -133,54 +147,64 @@
         "games Brasil",
         "você lembra?"
       ],
-      "narration_script_status": "draft_pending_fact_and_visual_review",
-      "duration_target_seconds": 44,
-      "narration_script_draft": "A primeira noite no Minecraft parecia durar uma eternidade. Você juntava madeira, improvisava uma cabana de terra e escutava os monstros do lado de fora. É aquela mistura de medo e descoberta que marcou muita gente. E tem um detalhe: se você se preparar antes do anoitecer, a experiência já muda completamente. Você se escondia num buraco ou construía sua primeira casa?",
-      "intro_hook": "Você lembra daquele primeiro anoitecer no Minecraft… quando ainda nem tinha uma casa?",
-      "premise": "Lembrança da primeira noite em Minecraft com dicas reais do modo Sobrevivência.",
+      "narration_script_status": "complete_editorial_draft_pending_fact_and_audio_qa",
+      "duration_target_seconds": 49,
+      "narration_script_draft": "No começo, tudo parecia simples: pegar madeira, olhar o horizonte e pensar na primeira casa. Mas o sol descia, os sons estranhos começavam e a melhor ideia era construir qualquer abrigo possível. Uma parede de terra já parecia um castelo. É por isso que tanta gente guarda carinho pela primeira noite no Minecraft: era medo e descoberta ao mesmo tempo. As imagens deste Short são ilustrações feitas por IA, não cenas gravadas do jogo. Você se escondia num buraco ou tentava construir uma casa de verdade?",
+      "intro_hook": "Você lembra quando a primeira noite no Minecraft parecia um filme de terror?",
+      "premise": "Minecraft: você lembra da primeira noite assustadora?",
       "scenes": [
         {
           "index": 1,
-          "estimated_time": "00-04",
-          "narrative_visual": "Gameplay próprio começa ao entardecer",
-          "required_asset_kind": "minecraft_real_recording_sunset",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-01.mp4"
+          "beat": "Entardecer",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Nostalgic blocky voxel-inspired forest at sunset with wooden trees and a small original square character silhouette, beautiful warm concept art, clearly illustrated not a game capture. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-01.png"
         },
         {
           "index": 2,
-          "estimated_time": "04-14",
-          "narrative_visual": "Coletar recursos e improvisar abrigo",
-          "required_asset_kind": "minecraft_real_recording_shelter",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-02.mp4"
+          "beat": "Madeira",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Close view of cubical log pieces and a handmade tool near a camp, fictional voxel fantasy illustration, no UI. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-02.png"
         },
         {
           "index": 3,
-          "estimated_time": "14-28",
-          "narrative_visual": "Monstros surgem à noite fora do abrigo",
-          "required_asset_kind": "minecraft_real_recording_night",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-03.mp4"
+          "beat": "Anoiteceu",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Starry night over a small hand-built shelter made of earthy blocks, shadowy fantasy creatures behind trees, playful original illustration. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-03.png"
         },
         {
           "index": 4,
-          "estimated_time": "28-42",
-          "narrative_visual": "Amanhecer e lembrança nostálgica",
-          "required_asset_kind": "minecraft_real_recording_sunrise",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-04.mp4"
+          "beat": "Dentro da casa",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Cozy tiny block cabin inside with warm torch light, anxious small explorer silhouette, painterly voxel art. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-04.png"
+        },
+        {
+          "index": 5,
+          "beat": "Amanhecer",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Sunrise over blocky countryside and small shelter, emotional nostalgia digital painting. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/source/scene-05.png"
         }
       ],
       "evidence_requirements": [
-        "Own or authorized Minecraft gameplay, not copied footage",
-        "Avoid inventing a personal gameplay history for narrator",
-        "Support for gameplay tips: minecraft.net/pt-br/article/how-survive-your-first-night-minecraft"
+        "Visuals must be original AI illustrations, not gameplay or screenshots.",
+        "Fact-check narration against actual released information.",
+        "Do not claim to have played, tested or used specific tools.",
+        "Check narration and onscreen caption accuracy and rights before upload.",
+        "Verify exact YouTube Channel ID using separate token for this channel."
       ],
       "rendered_mp4_expected": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/final.mp4",
       "thumbnail_expected": "assets/gerados/games-alchemy-pilot-6/game-002-primeira-noite-minecraft/thumb.jpg",
       "qa": {
-        "footage_verified": false,
+        "footage_verified": "not_applicable_ai_only",
         "visual_review": false,
         "audio_review": false,
         "rights_checked": false,
@@ -189,7 +213,11 @@
         "video_rendered": false,
         "youtube_uploaded": false
       },
-      "notes": "A real production must replace draft placeholders and obtain all required media, pass QA, verify OAuth channel ID, and publish via authorized channel uploader only."
+      "notes": "Illustrated AI-only Short; do not claim real gameplay or product testing. Upload only after render and OAuth per-channel checks. Initial visibility private.",
+      "ai_illustrations_only": true,
+      "footage_required": false,
+      "synthetic_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.",
+      "scene_count": 5
     },
     {
       "channel": "games",
@@ -199,10 +227,10 @@
       "requested_publish": true,
       "desired_visibility_after_qa": "public",
       "first_upload_visibility": "private",
-      "video_status": "blocked_awaiting_real_assets_and_channel_oauth",
-      "format": "Jogos do Momento",
-      "title_draft": "Minecraft, mas NÃO POSSO TOCAR no amarelo!",
-      "description_draft": "Minecraft desafio sem tocar amarelo: O desafio muda a forma de explorar o mapa: qualquer bloco amarelo passa a ser um obstáculo. A vitória só vale com gameplay real.\n\nVocê jogaria esse desafio?\n\n#Minecraft #DesafioMinecraft #Shorts",
+      "video_status": "reserved_pending_render_and_verified_channel_upload",
+      "format": "Jogos em Alta",
+      "title_draft": "Minecraft sem tocar no amarelo: como seria esse desafio?",
+      "description_draft": "Imagine um mundo de Minecraft em que qualquer bloco amarelo é proibido. Que caminhos e decisões seriam mais difíceis nessa hipótese?\n\nQual outro jogo em alta você gostaria de conhecer?\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #DesafioMinecraft #Shorts",
       "hashtags": [
         "#Minecraft",
         "#DesafioMinecraft",
@@ -217,56 +245,66 @@
         "desafio de cores",
         "Hélio Conde",
         "games Brasil",
-        "jogos do momento"
+        "jogos em alta"
       ],
-      "narration_script_status": "incomplete_requires_recorded_result",
+      "narration_script_status": "complete_editorial_draft_pending_fact_and_audio_qa",
       "duration_target_seconds": 45,
-      "narration_script_draft": "Hoje a regra é simples: nenhum bloco amarelo pode ser tocado. Parece fácil, até começar a explorar e perceber que a cor está em lugares inesperados. Cada passo precisa ser pensado. O desafio só vale se a partida for real, sem esconder os erros. [INSERIR AQUI O DESFECHO VERDADEIRO DA GRAVAÇÃO]. Você tentaria essa regra?",
-      "intro_hook": "E se uma única cor fosse proibida no Minecraft?",
-      "premise": "Um desafio real de Minecraft: não tocar no amarelo; o resultado depende do gameplay.",
+      "narration_script_draft": "Imagine uma aventura em que você não pode encostar em nenhum bloco amarelo. Uma flor no caminho já vira um problema. A areia pode bloquear um atalho e até um simples detalhe do cenário muda sua rota. Esse desafio é apenas uma ideia hipotética, ilustrada com imagens geradas por inteligência artificial. Não é uma partida gravada nem uma vitória real. O interessante é pensar na estratégia: como atravessar o mapa sem usar caminhos óbvios? Que outra cor você proibiria nessa brincadeira?",
+      "intro_hook": "E se a cor amarela fosse proibida em um mundo como Minecraft?",
+      "premise": "Minecraft sem tocar no amarelo: como seria esse desafio?",
       "scenes": [
         {
           "index": 1,
-          "estimated_time": "00-04",
-          "narrative_visual": "Abrir com a regra na tela e a gravação real",
-          "required_asset_kind": "minecraft_real_challenge_rule",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-01.mp4"
+          "beat": "Regra",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Vibrant original voxel fantasy world with a giant yellow flower outlined as a conceptual warning, illustrated magical game concept art, no screenshot no HUD. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-01.png"
         },
         {
           "index": 2,
-          "estimated_time": "04-16",
-          "narrative_visual": "Registrar primeira dificuldade encontrada",
-          "required_asset_kind": "minecraft_real_challenge_first_obstacle",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-02.mp4"
+          "beat": "Flor",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Traveler facing field of stylized yellow cubic flowers and choosing a path around them, painted original voxel concept. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-02.png"
         },
         {
           "index": 3,
-          "estimated_time": "16-30",
-          "narrative_visual": "Mostrar tentativas e erro/acerto verdadeiros",
-          "required_asset_kind": "minecraft_real_challenge_attempt",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-03.mp4"
+          "beat": "Areia",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Warm sandy yellow block desert splitting lush green forest and a blue river, top-down illustrative path planning, no actual game capture. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-03.png"
         },
         {
           "index": 4,
-          "estimated_time": "30-44",
-          "narrative_visual": "Exibir o resultado verdadeiro, com falha ou sucesso",
-          "required_asset_kind": "minecraft_real_challenge_result",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-04.mp4"
+          "beat": "Estratégia",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Small voxel explorer building a winding bridge to avoid bright yellow terrain, artistic fictional scene. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-04.png"
+        },
+        {
+          "index": 5,
+          "beat": "Pergunta",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Two possible routes in stylized blocky world, golden obstacles and green path, imaginative editorial illustration. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/source/scene-05.png"
         }
       ],
       "evidence_requirements": [
-        "Record an actual game run respecting clear color criteria",
-        "Record and retain failed attempts when relevant",
-        "Do not claim completed challenge without a verified end"
+        "Visuals must be original AI illustrations, not gameplay or screenshots.",
+        "Fact-check narration against actual released information.",
+        "Do not claim to have played, tested or used specific tools.",
+        "Check narration and onscreen caption accuracy and rights before upload.",
+        "Verify exact YouTube Channel ID using separate token for this channel."
       ],
       "rendered_mp4_expected": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/final.mp4",
       "thumbnail_expected": "assets/gerados/games-alchemy-pilot-6/game-003-minecraft-sem-amarelo/thumb.jpg",
       "qa": {
-        "footage_verified": false,
+        "footage_verified": "not_applicable_ai_only",
         "visual_review": false,
         "audio_review": false,
         "rights_checked": false,
@@ -275,7 +313,11 @@
         "video_rendered": false,
         "youtube_uploaded": false
       },
-      "notes": "A real production must replace draft placeholders and obtain all required media, pass QA, verify OAuth channel ID, and publish via authorized channel uploader only."
+      "notes": "Illustrated AI-only Short; do not claim real gameplay or product testing. Upload only after render and OAuth per-channel checks. Initial visibility private.",
+      "ai_illustrations_only": true,
+      "footage_required": false,
+      "synthetic_visual_disclosure": "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.",
+      "scene_count": 5
     },
     {
       "channel": "alchemy",
@@ -285,10 +327,10 @@
       "requested_publish": true,
       "desired_visibility_after_qa": "public",
       "first_upload_visibility": "private",
-      "video_status": "blocked_awaiting_real_assets_and_channel_oauth",
+      "video_status": "reserved_pending_render_and_verified_channel_upload",
       "format": "Você Sabia?",
-      "title_draft": "ChatGPT cria GIFs com IA? Entenda as possibilidades",
-      "description_draft": "GIFs com inteligência artificial: Veja quais tipos de animação podem nascer de imagens e quais limitações precisam ser consideradas antes de atribuir a função a um produto específico.\n\nQual detalhe sobre IA mais surpreendeu você?\n\n#GIFcomIA #ChatGPT #Shorts",
+      "title_draft": "GIFs com inteligência artificial: como funcionam?",
+      "description_draft": "Animações curtas podem começar com imagens e movimentos em loop.\n\nQual outra curiosidade de IA merece um vídeo?\n\n🎨 Ilustrações geradas por IA; não são gravações de interface nem resultados de testes.\n\n#GIFcomIA #ChatGPT #Shorts",
       "hashtags": [
         "#GIFcomIA",
         "#ChatGPT",
@@ -305,54 +347,64 @@
         "inteligência artificial",
         "curiosidades de IA"
       ],
-      "narration_script_status": "draft_pending_fact_and_visual_review",
-      "duration_target_seconds": 39,
-      "narration_script_draft": "A OpenAI anunciou o Images 2.6 com criação de GIFs animados. A ideia é simples: descrever um movimento, como um mascote acenando, e produzir uma pequena animação em loop. O anúncio também fala em mais controle de edição e consistência de detalhes. Aqui vamos mostrar o recurso e explicar o que muda — sem fingir que um exemplo promocional foi um teste nosso. Qual personagem você gostaria de animar?",
-      "intro_hook": "O ChatGPT agora pode transformar ideias em GIFs animados!",
-      "premise": "Explicação factual da novidade de GIFs do Images 2.6 anunciada em 4 de novembro de 2026.",
+      "narration_script_status": "complete_editorial_draft_pending_fact_and_audio_qa",
+      "duration_target_seconds": 48,
+      "narration_script_draft": "Um GIF é uma sequência curta de imagens que pode repetir um movimento em loop. Hoje, ferramentas de inteligência artificial ajudam a imaginar e produzir essas pequenas animações. Você pode começar com um personagem, escolher uma ação e pensar em como o movimento termina para voltar ao início. Mas o resultado ainda precisa de revisão: braços, mãos e objetos podem mudar entre quadros. As cenas deste vídeo são ilustrações criadas por IA, não uma gravação da interface de qualquer ferramenta. Qual animação você criaria primeiro?",
+      "intro_hook": "Você sabia que algumas ferramentas de IA conseguem criar imagens animadas?",
+      "premise": "GIFs com inteligência artificial: como funcionam?",
       "scenes": [
         {
           "index": 1,
-          "estimated_time": "00-04",
-          "narrative_visual": "Arte original com a palavra GIF e um mascote original",
-          "required_asset_kind": "original_graphic",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-01.mp4"
+          "beat": "Conceito",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Whimsical original teal robot mascot waving in a clean futuristic studio, editorial illustration of artificial intelligence creativity, no logos no UI. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-01.png"
         },
         {
           "index": 2,
-          "estimated_time": "04-14",
-          "narrative_visual": "Mostrar o anúncio oficial e data da novidade",
-          "required_asset_kind": "official_source_screenshot_or_original_citation_graphic",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-02.mp4"
+          "beat": "Frames",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Four sequential illustrated poses of the same friendly abstract robot mascot waving, storyboard grid with no text, original concept art. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-02.png"
         },
         {
           "index": 3,
-          "estimated_time": "14-28",
-          "narrative_visual": "Demonstrar GIF realmente gerado ou deixar apenas explicação visual",
-          "required_asset_kind": "real_gif_demo_or_original_explanatory_visual",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-03.mp4"
+          "beat": "Loop",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Visual metaphor of circular motion with glowing curved arrows and an original simple robot silhouette, elegant teal violet sci-fi illustration. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-03.png"
         },
         {
           "index": 4,
-          "estimated_time": "28-38",
-          "narrative_visual": "Limitações e encerramento",
-          "required_asset_kind": "original_explanatory_graphic",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-04.mp4"
+          "beat": "Revisão",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Original character with precise hands and matching clothes shown in clean concept-art turnarounds, illustration only. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-04.png"
+        },
+        {
+          "index": 5,
+          "beat": "Criatividade",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Happy original mascot waving against colorful digital gradient particles, editorial art, no interface. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/source/scene-05.png"
         }
       ],
       "evidence_requirements": [
-        "Official announcement https://openai.com/index/introducing-images-2-6/",
-        "Demonstration must be original and attributable; if no real GIF, only feature explanation",
-        "Do not claim any tests or personal usage not performed"
+        "Visuals must be original AI illustrations, not gameplay or screenshots.",
+        "Fact-check narration against actual released information.",
+        "Do not claim to have played, tested or used specific tools.",
+        "Check narration and onscreen caption accuracy and rights before upload.",
+        "Verify exact YouTube Channel ID using separate token for this channel."
       ],
       "rendered_mp4_expected": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/final.mp4",
       "thumbnail_expected": "assets/gerados/games-alchemy-pilot-6/alchemy-001-chatgpt-gifs/thumb.jpg",
       "qa": {
-        "footage_verified": false,
+        "footage_verified": "not_applicable_ai_only",
         "visual_review": false,
         "audio_review": false,
         "rights_checked": false,
@@ -361,7 +413,11 @@
         "video_rendered": false,
         "youtube_uploaded": false
       },
-      "notes": "A real production must replace draft placeholders and obtain all required media, pass QA, verify OAuth channel ID, and publish via authorized channel uploader only."
+      "notes": "Illustrated AI-only Short; do not claim real gameplay or product testing. Upload only after render and OAuth per-channel checks. Initial visibility private.",
+      "ai_illustrations_only": true,
+      "footage_required": false,
+      "synthetic_visual_disclosure": "🎨 Ilustrações geradas por IA; não são capturas de interfaces nem resultados de testes.",
+      "scene_count": 5
     },
     {
       "channel": "alchemy",
@@ -371,10 +427,10 @@
       "requested_publish": true,
       "desired_visibility_after_qa": "public",
       "first_upload_visibility": "private",
-      "video_status": "blocked_awaiting_real_assets_and_channel_oauth",
-      "format": "Testei por Você!",
-      "title_draft": "Images 2.6: dá para animar o mesmo personagem?",
-      "description_draft": "Images 2.6 personagem consistente: O mesmo personagem pode perder detalhes entre quadros. A comparação precisa mostrar as tentativas, os erros e o resultado sem cortes enganosos.\n\nQual critério deve pesar mais nessa comparação?\n\n#ImagensComIA #AnimacaoIA #Shorts",
+      "video_status": "reserved_pending_render_and_verified_channel_upload",
+      "format": "IA Sob a Lupa",
+      "title_draft": "Images 2.6: o desafio de manter personagens iguais",
+      "description_draft": "Referências visuais, roupa e proporções ajudam a reduzir inconsistências.\n\nQue ferramenta você gostaria de entender melhor?\n\n🎨 Ilustrações geradas por IA; não são gravações de interface nem resultados de testes.\n\n#ImagensComIA #AnimacaoIA #Shorts",
       "hashtags": [
         "#ImagensComIA",
         "#AnimacaoIA",
@@ -389,56 +445,66 @@
         "edição de imagem IA",
         "Alchemy Flames",
         "inteligência artificial",
-        "comparativo de IA"
+        "análise de ferramentas IA"
       ],
-      "narration_script_status": "incomplete_requires_recorded_result",
+      "narration_script_status": "complete_editorial_draft_pending_fact_and_audio_qa",
       "duration_target_seconds": 48,
-      "narration_script_draft": "Desta vez, o desafio é manter o mesmo personagem ao longo de uma animação. Vamos usar uma referência única, pedir movimentos diferentes e comparar rosto, roupas e mãos. [MOSTRAR TESTE REAL, COM NÚMERO DE TENTATIVAS E EVENTUAIS FALHAS]. [INSERIR CONCLUSÃO SOMENTE DEPOIS DA GERAÇÃO].",
-      "intro_hook": "Será que a nova IA consegue animar um personagem sem mudar o rosto dele?",
-      "premise": "Teste da consistência de um mesmo personagem em várias poses/quadros com Images 2.6.",
+      "narration_script_draft": "Manter um personagem consistente em várias imagens é um desafio da geração por IA. Mesmo quando a descrição é igual, pequenos detalhes podem variar: formato do rosto, roupas, acessórios e até o número de dedos. Por isso, uma boa referência visual ajuda a orientar novas poses. Também é importante comparar os resultados e descartar versões incoerentes. Neste vídeo, estamos explicando esse problema com ilustrações feitas por IA; não estamos apresentando um teste executado de uma versão específica do modelo. Qual detalhe você percebe primeiro quando um personagem muda?",
+      "intro_hook": "Por que uma IA muda o rosto do personagem quando você pede outra pose?",
+      "premise": "Images 2.6: o desafio de manter personagens iguais",
       "scenes": [
         {
           "index": 1,
-          "estimated_time": "00-04",
-          "narrative_visual": "Mostrar referência do personagem original com permissão",
-          "required_asset_kind": "original_character_reference",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-01.mp4"
+          "beat": "Pergunta",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Original cute sci-fi robot mascot with distinctive violet scarf and teal eye lights, portrait, clean fantasy concept art. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-01.png"
         },
         {
           "index": 2,
-          "estimated_time": "04-17",
-          "narrative_visual": "Captura real dos prompts e geração com Images 2.6",
-          "required_asset_kind": "actual_tool_screen_capture",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-02.mp4"
+          "beat": "Referência",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Illustrated character reference sheet of the exact same robot mascot, front side back, violet scarf and teal eye lights, no text. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-02.png"
         },
         {
           "index": 3,
-          "estimated_time": "17-32",
-          "narrative_visual": "Exibir saídas reais, incluindo inconsistências",
-          "required_asset_kind": "real_model_outputs",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-03.mp4"
+          "beat": "Variações",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Conceptual artistic illustration showing subtle changes in the same robot silhouette across portrait panels, non-photoreal, no text. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-03.png"
         },
         {
           "index": 4,
-          "estimated_time": "32-48",
-          "narrative_visual": "Comparar com critérios fixos e resultado honesto",
-          "required_asset_kind": "actual_result_scorecard",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-04.mp4"
+          "beat": "Critérios",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Close detailed concept art of original robot mascot matching same scarf, proportions, eyes and body accessories, no comparison claim. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-04.png"
+        },
+        {
+          "index": 5,
+          "beat": "Conclusão",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Consistent original robot hero surrounded by illustrative reference cards, warm digital studio. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/source/scene-05.png"
         }
       ],
       "evidence_requirements": [
-        "Generate with exact named model; capture dates/version and all trial outputs",
-        "Source character is original or licensed; never send private photos without consent",
-        "No results invented; wait for real generations and visual QA"
+        "Visuals must be original AI illustrations, not gameplay or screenshots.",
+        "Fact-check narration against actual released information.",
+        "Do not claim to have played, tested or used specific tools.",
+        "Check narration and onscreen caption accuracy and rights before upload.",
+        "Verify exact YouTube Channel ID using separate token for this channel."
       ],
       "rendered_mp4_expected": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/final.mp4",
       "thumbnail_expected": "assets/gerados/games-alchemy-pilot-6/alchemy-002-images-26-consistencia/thumb.jpg",
       "qa": {
-        "footage_verified": false,
+        "footage_verified": "not_applicable_ai_only",
         "visual_review": false,
         "audio_review": false,
         "rights_checked": false,
@@ -447,7 +513,11 @@
         "video_rendered": false,
         "youtube_uploaded": false
       },
-      "notes": "A real production must replace draft placeholders and obtain all required media, pass QA, verify OAuth channel ID, and publish via authorized channel uploader only."
+      "notes": "Illustrated AI-only Short; do not claim real gameplay or product testing. Upload only after render and OAuth per-channel checks. Initial visibility private.",
+      "ai_illustrations_only": true,
+      "footage_required": false,
+      "synthetic_visual_disclosure": "🎨 Ilustrações geradas por IA; não são capturas de interfaces nem resultados de testes.",
+      "scene_count": 5
     },
     {
       "channel": "alchemy",
@@ -457,10 +527,10 @@
       "requested_publish": true,
       "desired_visibility_after_qa": "public",
       "first_upload_visibility": "private",
-      "video_status": "blocked_awaiting_real_assets_and_channel_oauth",
+      "video_status": "reserved_pending_render_and_verified_channel_upload",
       "format": "IA na Prática",
-      "title_draft": "Como criar GIF animado com IA: tutorial simples",
-      "description_draft": "como criar GIF animado com IA: Da imagem inicial à animação exportada, o tutorial deve mostrar a ferramenta utilizada, o formato do arquivo e as etapas reproduzíveis.\n\nQual etapa desse processo você quer aprender melhor?\n\n#GIFAnimado #TutorialIA #Shorts",
+      "title_draft": "GIF animado com IA: o processo explicado por etapas",
+      "description_draft": "Do conceito ao loop final, há etapas de criação e revisão.\n\nQue outra etapa você quer aprender?\n\n🎨 Ilustrações geradas por IA; não são gravações de interface nem resultados de testes.\n\n#GIFAnimado #TutorialIA #Shorts",
       "hashtags": [
         "#GIFAnimado",
         "#TutorialIA",
@@ -477,54 +547,64 @@
         "inteligência artificial",
         "tutorial IA"
       ],
-      "narration_script_status": "incomplete_requires_recorded_result",
+      "narration_script_status": "complete_editorial_draft_pending_fact_and_audio_qa",
       "duration_target_seconds": 52,
-      "narration_script_draft": "Primeiro, escolha uma ilustração original. Depois, descreva um movimento curto e contínuo, como uma personagem acenando. Na ferramenta, peça uma animação em loop e revise o enquadramento para não cortar mãos ou rosto. Se o resultado tiver erros, corrija o prompt e gere uma nova versão. [MOSTRAR O GIF CRIADO REALMENTE E O FLUXO DE EXPORTAÇÃO VALIDADO].",
-      "intro_hook": "Quer transformar uma imagem em um GIF animado sem editar quadro por quadro?",
-      "premise": "Tutorial prático e reproduzível para criar GIF com IA com ferramenta realmente disponível.",
+      "narration_script_draft": "O primeiro passo é escolher uma imagem original e decidir um movimento simples, como acenar. Depois, descreva a ação com clareza: quem se move, o que fica parado e como deve ser o loop. Na revisão, observe se as mãos e o rosto continuam iguais e se o movimento termina próximo do começo. Por fim, confira o formato de exportação disponível na ferramenta que você escolher. Este é um guia visual ilustrado por IA, não uma demonstração de tela nem a promessa de que todo gerador exporta GIF. Qual movimento você gostaria de animar?",
+      "intro_hook": "Quer entender como planejar um GIF animado com ajuda da IA?",
+      "premise": "GIF animado com IA: o processo explicado por etapas",
       "scenes": [
         {
           "index": 1,
-          "estimated_time": "00-05",
-          "narrative_visual": "Mostrar ilustração autoral de referência",
-          "required_asset_kind": "original_image",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-01.mp4"
+          "beat": "Ideia",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. One original friendly cartoon fox mascot in blue hoodie on plain soft gradient background, full body, high quality illustration. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-01.png"
         },
         {
           "index": 2,
-          "estimated_time": "05-18",
-          "narrative_visual": "Gravar prompt real na interface e ferramenta utilizada",
-          "required_asset_kind": "actual_tool_capture",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-02.mp4"
+          "beat": "Ação",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Same original fox mascot waving one paw in a concept-art motion pose, no interface or screenshot. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-02.png"
         },
         {
           "index": 3,
-          "estimated_time": "18-32",
-          "narrative_visual": "Mostrar processamento e arquivo de GIF real",
-          "required_asset_kind": "real_generated_gif",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-03.mp4"
+          "beat": "Pontos fixos",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Same fox mascot in blue hoodie with background elements clearly stationary and gesture arc shown visually without text, editorial illustration. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-03.png"
         },
         {
           "index": 4,
-          "estimated_time": "32-50",
-          "narrative_visual": "Verificar ciclo, consistência e exportar o GIF",
-          "required_asset_kind": "real_gif_export",
-          "asset_status": "not_provided",
-          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-04.mp4"
+          "beat": "Revisão",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Visual illustrative storyboard of fox mascot wave movement in four simple stages without UI, clear proportions. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-04.png"
+        },
+        {
+          "index": 5,
+          "beat": "Resultado imaginado",
+          "type": "ai_generated_illustration",
+          "prompt_en": "Generate a vertical 9:16 premium cinematic ORIGINAL editorial artwork for a Brazilian YouTube Short. Single friendly fox mascot waving as looping visual motif with curved arrows, clean original studio illustration. Rich composition, tasteful 2D digital illustration, excellent anatomy if visible, no embedded words, no watermarks, no fake in-game HUD, no photoreal screenshot, no real people, no branded assets, no UI captures. Keep subject inside safe margins; empty lower 20 percent for text.",
+          "asset_status": "not_yet_generated",
+          "asset_path": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/source/scene-05.png"
         }
       ],
       "evidence_requirements": [
-        "Demonstrate the actual supported interface or API; do not invent menu buttons",
-        "Record the real GIF result and steps used",
-        "Permission for reference artwork and exact version check"
+        "Visuals must be original AI illustrations, not gameplay or screenshots.",
+        "Fact-check narration against actual released information.",
+        "Do not claim to have played, tested or used specific tools.",
+        "Check narration and onscreen caption accuracy and rights before upload.",
+        "Verify exact YouTube Channel ID using separate token for this channel."
       ],
       "rendered_mp4_expected": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/final.mp4",
       "thumbnail_expected": "assets/gerados/games-alchemy-pilot-6/alchemy-003-gif-animado-tutorial/thumb.jpg",
       "qa": {
-        "footage_verified": false,
+        "footage_verified": "not_applicable_ai_only",
         "visual_review": false,
         "audio_review": false,
         "rights_checked": false,
@@ -533,7 +613,12 @@
         "video_rendered": false,
         "youtube_uploaded": false
       },
-      "notes": "A real production must replace draft placeholders and obtain all required media, pass QA, verify OAuth channel ID, and publish via authorized channel uploader only."
+      "notes": "Illustrated AI-only Short; do not claim real gameplay or product testing. Upload only after render and OAuth per-channel checks. Initial visibility private.",
+      "ai_illustrations_only": true,
+      "footage_required": false,
+      "synthetic_visual_disclosure": "🎨 Ilustrações geradas por IA; não são capturas de interfaces nem resultados de testes.",
+      "scene_count": 5
     }
-  ]
+  ],
+  "visual_policy": "only_ai_generated_original_illustrations_and_smooth_animation_no_real_gameplay_or_fake_product_UI"
 }
