@@ -2,6 +2,27 @@
 
 ## REGRA PERMANENTE — FIM DE SHORTS E MINIATURAS GAMER + IA (05/11/2026)
 
+### Identidade visual validável — modelo de referência do criador
+- Thumbnail Gamer/IA: usar `scripts/capa_cinematografica.py` com
+  `template='gamer-alchemy-reference'`, arte IA original, título branco
+  serifado curto no topo, contraste e duas linhas vermelhas discretas;
+  nunca usar outra rotina de montagem ou faixa inferior.
+- Vídeo Gamer/IA: `motion-remotion/src/master-short.tsx` com
+  `visualProfile='gamer-alchemy-reference'`, título legível fixo no
+  topo da amostra; caixa escura compacta dentro da cena para 2–3 palavras,
+  com a palavra falada em amarelo `#ffd166`. Tempos devem vir de
+  `scripts/legendas_precisas.py` a partir de WordBoundary reais.
+- O padrão anterior `visualProfile='original'` continua sendo o padrão
+  para os outros canais. Não reutilizar o estilo do teste em Kids ou Otaku.
+- Teste de homologação: `game-901-estilo-referencia-5s`, código
+  `scripts/gamer_reference_style_5s.py` e workflow
+  `.github/workflows/gamer-reference-style-5s.yml`. Usar somente
+  frames IA já gerados; o teste não justifica geração paga de imagens.
+- Verificação obrigatória: vídeo exatamente 5s em 1080×1920, capa
+  1080×1920, palavras sincronizadas no Remotion, destino YouTube Gamer
+  exato e upload inicial PRIVADO; não alterar os seis V3 existentes.
+
+
 - **O AutoEditorVideo é o único gerador das capas.** Não criar miniaturas
   paralelas por PIL ad hoc, screenshots aleatórias, ferramentas externas ou
   montagens enviadas ao vídeo. Reutilizar `scripts/capa_cinematografica.py`
