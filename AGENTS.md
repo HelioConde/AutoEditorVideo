@@ -1,5 +1,38 @@
 # Arquivo Otaku — orientações para agentes
 
+## REGRA OFICIAL — GAMER E IA USAM SOMENTE IMAGENS GERADAS POR IA (05/11/2026)
+
+- **Gamer (Hélio Conde): é proibido capturar, solicitar, baixar ou exigir gameplay real.**
+  Ilustrar notícias, nostalgia, curiosidades e conceitos de jogos com artes
+  e cenas originais geradas por IA; não apresentar essas artes como captura real
+  de jogo, conquistas, resultados testados ou produto oficial.
+- O terceiro quadro Gamer chama-se **Jogos em Alta**, substituindo
+  "Jogos do Momento" nos próximos catálogos; não há "testei", "joguei",
+  "consegui", "venci" ou desafios fingidos.
+- Em descrições Gamer, acrescentar transparência:
+  "🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+- **Canal IA:** usar imagens/cenas geradas por IA para explicar novidades,
+  recursos e tutoriais conceituais. Nunca simular screenshots de produtos,
+  resultados de testes ou tutoriais executados. Comparativos sem experimento
+  devem ser análises das funcionalidades confirmadas, não um "Testei por Você!".
+- Quadro equivalente para estudos sem testes: **IA Sob a Lupa**.
+  Para alegar um experimento, registrar prova do resultado real e revisão
+  factual antes de publicar; não inventar comparações.
+- O motor pode animar ilustrações por camadas com efeitos de câmera suaves,
+  evitando deformar personagens, saltos bruscos e falso movimento real.
+- Prioridade de fontes: 50 pautas Gamer em
+  `conteudos/helio-conde-games-grade-50-seo-v1.json`; 50 pautas IA em
+  `conteudos/alchemy-lab-grade-50-v1.json`. Lote piloto reservado em
+  `conteudos/lote-6-games-alchemy-producao-v1.json`.
+- Respeitar registro de reservas, OAuth exclusivo por canal, verificação exata
+  de Channel ID, privacidade inicial `private`, QA audiovisual e material
+  produzido. A existência de secrets no GitHub NÃO comprova o upload nem
+  substitui a verificação no momento da publicação.
+- Esta regra editorial do criador prevalece sobre instruções antigas de
+  "capturar gameplay real" relativas aos canais Gamer/IA; **não altera
+  o canal Kids nem os dois canais Otaku**.
+
+
 ## INTEGRACAO OAUTH DOS TRES NOVOS CANAIS — GITHUB CLOUD-FIRST
 
 - Uma identidade registrada NÃO autoriza upload. Gamer/Kids/Alchemy
@@ -21,7 +54,7 @@
   para guardar refresh tokens no Environment existente e protegido.
 - Após OAuth validado, construir fluxos cloud de geração, QA, miniatura
   original e publicação privada por canal; não habilitar upload ao
-  cadastrar/verificar OAuth. Gamer requer footage real; Kids requer
+  cadastrar/verificar OAuth. Gamer exige visuais IA ilustrativos, nunca gameplay real; Kids requer
   privacidade de referências e direitos das músicas; Alchemy requer
   demonstrações técnicas verificáveis.
 - Guia operacional: docs/CONECTAR-3-CANAIS-OAUTH-GITHUB.md.
@@ -30,7 +63,7 @@
 
 - Registro oficial: config/youtube-channel-registry.json; validar com scripts/youtube_channel_registry.py. Sao **cinco canais**, sem reutilizar ID, OAuth, thumbnail, voz ou metadados de outro.
 - Otaku Multicena BR: UCXGYTuBYn-0Ziqin5ajKhOw; Otaku Reframe EN: UCBoNbQjaMYdpJqPLRZAFkvQ (uploaders existentes preservados).
-- Gamer: UCg77gYc1_wkHuL07XPtKcow; YouTube exibe **Hélio Conde**, **Conde Games** e proposta ainda nao aplicada na conta. Exigir gameplay real e/ou autorizado.
+- Gamer: UCg77gYc1_wkHuL07XPtKcow; YouTube exibe **Hélio Conde**, **Conde Games** e proposta ainda nao aplicada na conta. Exigir ilustrações originais geradas por IA, sem simular gameplay.
 - Kids: UCxEzVW2Uy44OUVurTQSg_Eg; YouTube exibe **Emanuelly Kids**, a serie oficial e **Fofinhos**. Toda publicacao para criancas deve ter classificacao Made for Kids, sem CTA para comentarios/inscricoes de criancas. Nunca publicar fotos privadas nem musicas sem direitos.
 - Alchemy Lab: UCCTYFE5Cmz2aYZ37cJQ-wcg; YouTube exibe **Alchemy Flames**; a identidade planejada e **Alchemy Lab** (IA pratica e automacoes). Nunca afirmar que o nome foi alterado na conta; nunca falsificar testes ou criar conteudo repetitivo de baixo valor.
 - Os tres novos canais estao **somente registrados**, com publicacao cloud DESATIVADA; os tokens individuais sao adicionados com consentimento ao Environment existente youtube-private-upload, preservando YOUTUBE_CLIENT_JSON e os tokens BR/EN. Nao criar Environments adicionais. Cada verificacao consulta channels.list(mine=true) e bloqueia qualquer ID incorreto. Nunca usar segredos Otaku/CodeX Proxy como substitutos.
