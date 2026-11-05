@@ -26,8 +26,8 @@ if (-not (Test-Path -LiteralPath $main -PathType Leaf)) {
 if (-not (Test-Path -LiteralPath $plan -PathType Leaf)) {
   throw 'Motor master_scenes.py ausente. Atualize o projeto.'
 }
-if (-not (Test-Path -LiteralPath $py -PathType Leaf)) {
-  throw 'Python do projeto ausente. Configure a .venv primeiro; nao use voz/arte de outro programa.'
+if ($Acao -eq 'Planejar' -and -not (Test-Path -LiteralPath $py -PathType Leaf)) {
+  throw 'Python do projeto ausente. Configure a .venv para o planejamento offline.'
 }
 
 $folder = Join-Path $root ('assets\gerados\shorts-animados\' + $Id)
