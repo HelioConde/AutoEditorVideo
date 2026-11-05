@@ -1,0 +1,104 @@
+{
+  "schema": "autoeditorvideo/native-v3-six-youtube-private-confirmations/v1",
+  "date": "2026-11-05",
+  "source_render_run": 42058545056,
+  "first_upload_attempt": 42063131990,
+  "duplicate_audit_run": 42063706481,
+  "selective_recovery_run": 42064334854,
+  "status": "six_new_native_v3_uploads_confirmed_private_correct_channel",
+  "upload_privacy": "private",
+  "public_release": "not_performed",
+  "source_artifact": "gamer-alchemy-six-native-v3",
+  "source_artifact_id": 13432425860,
+  "render_engine": "AutoEditorVideo/ArquivoOtakuMaster",
+  "thumbnail_engine": "AutoEditorVideo/scripts/capa_cinematografica.py",
+  "channel_ids": {
+    "games": "UCg77gYc1_wkHuL07XPtKcow",
+    "alchemy": "UCCTYFE5Cmz2aYZ37cJQ-wcg"
+  },
+  "counts": {
+    "games": 3,
+    "alchemy": 3,
+    "total": 6
+  },
+  "videos": [
+    {
+      "channel": "games",
+      "episode": "game-001-gta4-gta5-v3",
+      "title": "GTA IV vs GTA V: por que a física ainda surpreende?",
+      "youtube_video_id": "4n3hrBv3anw",
+      "youtube_url": "https://www.youtube.com/watch?v=4n3hrBv3anw",
+      "privacy": "private",
+      "private_and_channel_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_visibility": "not_verified",
+      "source": "recovered_by_scoped_channel_readonly_lookup_with_new_cover"
+    },
+    {
+      "channel": "games",
+      "episode": "game-002-primeira-noite-minecraft-v3",
+      "title": "Minecraft: você lembra da primeira noite assustadora?",
+      "youtube_video_id": "hDKdl0cxtKM",
+      "youtube_url": "https://www.youtube.com/watch?v=hDKdl0cxtKM",
+      "privacy": "private",
+      "private_and_channel_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_visibility": "not_verified",
+      "source": "recovered_by_scoped_channel_readonly_lookup_with_new_cover"
+    },
+    {
+      "channel": "games",
+      "episode": "game-003-minecraft-sem-amarelo-v3",
+      "title": "Minecraft sem tocar no amarelo: como seria esse desafio?",
+      "youtube_video_id": "cNrnzmzo50Y",
+      "youtube_url": "https://www.youtube.com/watch?v=cNrnzmzo50Y",
+      "privacy": "private",
+      "private_and_channel_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_visibility": "not_verified",
+      "source": "recovered_by_scoped_channel_readonly_lookup_with_new_cover"
+    },
+    {
+      "channel": "alchemy",
+      "episode": "alchemy-001-chatgpt-gifs-v3",
+      "title": "GIFs com inteligência artificial: como funcionam?",
+      "youtube_video_id": "egIProzaeAs",
+      "youtube_url": "https://www.youtube.com/watch?v=egIProzaeAs",
+      "privacy": "private",
+      "private_and_channel_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_visibility": "not_verified",
+      "source": "recovered_by_scoped_channel_readonly_lookup_with_new_cover"
+    },
+    {
+      "channel": "alchemy",
+      "episode": "alchemy-002-images-26-consistencia-v3",
+      "title": "Images 2.6: o desafio de manter personagens iguais",
+      "youtube_video_id": "RUm9CkeAMdw",
+      "youtube_url": "https://www.youtube.com/watch?v=RUm9CkeAMdw",
+      "privacy": "private",
+      "private_and_channel_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_visibility": "not_verified",
+      "source": "recovered_by_scoped_channel_readonly_lookup_with_new_cover"
+    },
+    {
+      "channel": "alchemy",
+      "episode": "alchemy-003-gif-animado-tutorial-v3",
+      "title": "GIF animado com IA: o processo explicado por etapas",
+      "youtube_video_id": "wIqABXUU8LA",
+      "youtube_url": "https://www.youtube.com/watch?v=wIqABXUU8LA",
+      "privacy": "private",
+      "private_and_channel_verified": true,
+      "thumbnail_api_acknowledged": true,
+      "thumbnail_studio_visibility": "not_verified",
+      "source": "recovered_by_scoped_channel_readonly_lookup_with_new_cover"
+    }
+  ],
+  "issues": [
+    "API sometimes raises RedirectMissingLocation AFTER a successful videos.insert; original first uploads produced no receipt. Read-only V3-tagged channel lookup found the accepted uploads, then only missing episodes were inserted.",
+    "Private destination and exact OAuth channel ID were confirmed for all six videos; program-generated thumbnails were accepted by API, but their actual rendering on Shorts UI is not confirmed.",
+    "Prior visual review found scene-to-narration mismatches in some V3 imagery. V3 uploaded privately for review; not switched to public.",
+    "Existing V1 and V2 private videos remain untouched; no new image-generation costs during V3 upload."
+  ]
+}
