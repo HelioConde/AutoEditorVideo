@@ -1,6 +1,6 @@
 # Lote 2 Otaku Multicena (BR) + Otaku Reframe (EN): 3 Shorts por canal.
 # Sem -Publicar: valida a fila, sem IA, render ou upload.
-# Com -Publicar: publica PUBLICAMENTE assim que cada video for aprovado no QA.
+# Com -Publicar: produz, verifica QA e ENVIA COMO PRIVADO; agende depois no YouTube Studio.
 # Bleach: somente cache local, sem novas chamadas de IA.
 [CmdletBinding()]
 param(
@@ -30,8 +30,9 @@ $br=@(
 )
 $manifesto='assets\gerados\otaku-en-lote2-3-shorts.json'
 
-foreach($name in @('grade-50-shorts.ps1','preparar-publicados-en.ps1',
-                   'gerar-shorts-en.ps1','publicar-shorts-en.ps1')){
+foreach($name in @('grade-50-shorts.ps1','criar-publicar-short.ps1',
+                   'preparar-publicados-en.ps1','gerar-shorts-en.ps1',
+                   'publicar-shorts-en.ps1')){
     if(-not(Test-Path (Join-Path $root $name) -PathType Leaf)){
         throw "Arquivo ausente: $name. Atualize o projeto com git pull."
     }
@@ -41,6 +42,41 @@ function Invoke-Etapa {
     param([string]$Nome,[hashtable]$Parametros)
     & (Join-Path $script:root $Nome) @Parametros
     if(-not $?){throw "Falhou a etapa: $Nome"}
+}
+
+function Get-EstadoBR {
+    param([string]$Id)
+    $video=Join-Path $script:root ("assets\gerados\shorts-animados\{0}\{0}-master-multicenas-personagens-v3-{1}.mp4" -f $Id,$script:Perfil)
+    if(-not(Test-Path -LiteralPath $video -PathType Leaf)){return 'pendente'}
+    $hash=(Get-FileHash -LiteralPath $video -Algorithm SHA256).Hash.ToLowerInvariant()
+    $receipt=Join-Path $script:root ("assets\gerados\publicacao-youtube\estado-upload-{0}.json" -f $hash.Substring(0,12))
+    if(-not(Test-Path -LiteralPath $receipt -PathType Leaf)){return 'pendente'}
+    $status=Get-Content -LiteralPath $receipt -Raw -Encoding UTF8 | ConvertFrom-Json
+    if(-not $status.video_id){return 'incerto'}
+    if($status.privacidade_solicitada -eq 'private'){return 'privado'}
+    return 'outro'
+}
+
+function Assert-Grade50QA {
+    param([string]$Id)
+    $python=Join-Path $script:root '.venv\Scripts\python.exe'
+    if(-not(Test-Path -LiteralPath $python -PathType Leaf)){
+        throw 'Ambiente Python .venv ausente; QA BR nao pode ser verificado.'
+    }
+    $codigo=@'
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path("scripts").resolve()))
+from grade_50_shorts import load_queue, ensure_ready
+items = [ep for ep in load_queue() if ep["id"] == sys.argv[1]]
+if len(items) != 1:
+    raise RuntimeError("Episodio BR nao encontrado na grade")
+ensure_ready(items[0], sys.argv[2], require_character_motion=(sys.argv[3] == "1"))
+'@
+    $strict='0'
+    if($script:ExigirMovimentoPersonagem){$strict='1'}
+    & $python -c $codigo $Id $script:Perfil $strict
+    if($LASTEXITCODE -ne 0){throw "QA BR reprovado: $Id. Nenhum upload."}
 }
 
 function Get-EstadoEN {
@@ -74,11 +110,12 @@ try {
         Invoke-Etapa 'preparar-publicados-en.ps1' @{
             Acao='Verificar';Id=$enIds
         }
-        Write-Host '[OK] Para iniciar producao e upload PUBLICO, acrescente -Publicar.' -ForegroundColor Green
+        Write-Host '[OK] Para produzir e enviar COMO PRIVADO, acrescente -Publicar.' -ForegroundColor Green
         return
     }
 
-    Write-Host '[UPLOAD] Publico, imediato e sem agendamento.' -ForegroundColor Yellow
+    Write-Host '[UPLOAD PRIVADO] Nenhum Short sera tornado publico automaticamente.' -ForegroundColor Yellow
+    Write-Host '[AGENDAMENTO] Depois, defina os horarios no YouTube Studio, sem reenviar.' -ForegroundColor Yellow
     Write-Host '[BLEACH] 0 chamadas de imagem; usa somente cache.' -ForegroundColor Yellow
     Write-Host "[TETO IA] Outros 2 BR: ate $($MaxChamadasNovos*2) chamadas adicionais." -ForegroundColor Yellow
     $concluidos=New-Object System.Collections.Generic.List[string]
@@ -87,19 +124,39 @@ try {
     foreach($ep in $br){
         try {
             Write-Host "[BR] $($ep.Id) | ate $($ep.Chamadas) chamadas" -ForegroundColor Cyan
+            $estado=Get-EstadoBR -Id $ep.Id
+            if($estado -eq 'privado'){
+                Write-Host "[BR JA PRIVADO] $($ep.Id) - nao reenviar." -ForegroundColor Green
+                $concluidos.Add("BR $($ep.Id) (ja privado)")
+                continue
+            }
+            if($estado -ne 'pendente'){
+                throw "Upload anterior encontrado ($estado). Confira o YouTube Studio antes de tentar novamente."
+            }
+            # A grade 50 tem publicacao exclusivamente PUBLICA; use apenas o modo Produzir.
             $p=@{
-                Acao='ProduzirPublicar'
+                Acao='Produzir'
                 InicioNaLista=[int]$ep.Numero
                 Quantidade=1
                 Modelo=$Modelo
                 Perfil=$Perfil
                 MaxChamadasPorVideo=[int]$ep.Chamadas
-                ConfirmarPublicacao=$true
             }
             if($ep.Chamadas -gt 0){$p.ConfirmarCotaImagem=$true}
-            if($ExigirMovimentoPersonagem){$p.ExigirMovimentoPersonagem=$true}
             Invoke-Etapa 'grade-50-shorts.ps1' $p
-            $concluidos.Add("BR $($ep.Id)")
+
+            # Mesmo QA visual, de duracao, capa e cenas do fluxo da grade antes do upload.
+            Assert-Grade50QA -Id $ep.Id
+            # Reusa cache e publica como private; NAO usa ProduzirPublicar, que envia publico.
+            Invoke-Etapa 'criar-publicar-short.ps1' @{
+                Id=$ep.Id;Modelo=$Modelo;Perfil=$Perfil;VozMotor='edge'
+                MaxChamadas=0;Privacidade='private';Publicar=$true
+            }
+            $estadoDepois=Get-EstadoBR -Id $ep.Id
+            if($estadoDepois -ne 'privado'){
+                throw "Envio privado sem recibo confirmado para $($ep.Id). Verifique Studio; nao reenvie."
+            }
+            $concluidos.Add("BR $($ep.Id) (privado)")
         }catch{
             $pendentes.Add("BR $($ep.Id)")
             Write-Warning "[BR PENDENTE] $($ep.Id): $_"
@@ -142,9 +199,9 @@ try {
             }
             Invoke-Etapa 'publicar-shorts-en.ps1' @{
                 Acao='enviar';Manifesto=$manifesto;Id=$id;Perfil=$Perfil
-                Privacidade='public';ConfirmarEnvio=$true
+                Privacidade='private';ConfirmarEnvio=$true
             }
-            $concluidos.Add("EN $id")
+            $concluidos.Add("EN $id (privado)")
         }catch{
             $pendentes.Add("EN $id")
             Write-Warning "[EN PENDENTE] ${id}: $_"
@@ -155,7 +212,7 @@ try {
     Write-Host "[RESUMO] Concluidos: $($concluidos.Count); pendentes: $($pendentes.Count)." -ForegroundColor Cyan
     foreach($x in $concluidos){Write-Host "OK: $x" -ForegroundColor Green}
     foreach($x in $pendentes){Write-Warning "PENDENTE: $x"}
-    Write-Host 'Confira as publicacoes no YouTube Studio dos dois canais.' -ForegroundColor Yellow
+    Write-Host 'Confira os videos PRIVADOS no YouTube Studio e agende por la.' -ForegroundColor Yellow
     if($pendentes.Count -gt 0){
         throw 'Lote parcialmente concluido. Consulte os avisos; nao faca reupload cego.'
     }
