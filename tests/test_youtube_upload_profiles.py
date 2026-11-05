@@ -153,3 +153,70 @@ def test_cloud_uploader_has_no_random_screenshot_or_thumbnail_fallback():
     assert "attach_thumbnail" in uploader
     assert "screenshot(" not in uploader
     assert "youtube.thumbnails().set" not in uploader
+
+
+def test_strip_old_internal_id_from_description_without_removing_editorial_content():
+    """Regression: a former cloud upload marker must never reach YouTube."""
+    marker="AUTOEDITORVIDEO-5011-en-fdc3d3a734833529"
+    result=build_insert_body("en",{
+        "titulo":"Gachiakuta: Rudo's Power #Shorts",
+        "descricao":"Rudo learns to fight back.\n\n#Gachiakuta #Shorts\n\n"+marker,
+        "tags":["Gachiakuta"],
+        "channel_id":cloud.EXPECTED["en"][0],
+    })
+    description=result["snippet"]["description"]
+    assert marker not in description
+    assert "AUTOEDITORVIDEO-" not in description
+    assert "Rudo learns to fight back." in description
+    assert "#Gachiakuta #Shorts" in description
+
+
+@pytest.mark.parametrize("channel",["br","en"])
+def test_cloud_upload_never_appends_internal_marker_but_still_records_it(monkeypatch,channel):
+    """Test the actual videos.insert payload with a synthetic YouTube client."""
+    marker=f"AUTOEDITORVIDEO-5011-{channel}-{'a'*16}"
+    class FakeYoutube:
+        def __init__(self):
+            self.insert_body=None
+            self.notify=None
+        def videos(self):
+            return self
+        def insert(self,*,part,body,notifySubscribers,media_body):
+            assert part=="snippet,status"
+            self.insert_body=body
+            self.notify=notifySubscribers
+            return self
+        def next_chunk(self):
+            return None, {"id":"123456789ab","status":{"privacyStatus":"private"}}
+    fake=FakeYoutube()
+    meta={
+        "channel_id":cloud.EXPECTED[channel][0],
+        "tags":["Gachiakuta"],
+        "title":"Gachiakuta BR #Shorts",
+        "description":"Rudo enfrenta monstros no abismo.",
+        "titulo":"Gachiakuta EN #Shorts",
+        "descricao":"Rudo fights monsters in the Pit.",
+    }
+    monkeypatch.setattr(cloud,"preflight",lambda env,ch:None)
+    monkeypatch.setattr(cloud,"validate_review",lambda ch,dir:(Path("original-5011.mp4"),meta,'a'*64))
+    monkeypatch.setattr(cloud,"authorized_youtube",lambda env,ch:(fake,"uploads"))
+    legacy=[]
+    monkeypatch.setattr(cloud,"exists_in_playlist",
+                        lambda youtube,playlist,key,title:(legacy.append((key,title)) or None))
+    monkeypatch.setattr(cloud,"MediaFileUpload",lambda *args,**kwargs:object())
+    record=cloud.publish_one({},channel)
+    assert fake.insert_body is not None
+    description=fake.insert_body["snippet"]["description"]
+    assert "AUTOEDITORVIDEO-" not in description
+    assert "Rudo " in description
+    assert record["internal_upload_key"]==marker
+    assert legacy[0][0]==marker
+    assert record["video_id"]=="123456789ab"
+
+
+def test_unknown_internal_id_causes_fail_closed_instead_of_leaking():
+    with pytest.raises(UploadProfileError,match="UNRECOGNIZED_INTERNAL_ID"):
+        build_insert_body("en",{
+            "title":"Title","description":"Anime commentary.\n\nAUTOEDITORVIDEO-5011-en-badcode!",
+            "tags":["Gachiakuta"],
+        })
