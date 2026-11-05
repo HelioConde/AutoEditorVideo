@@ -1,0 +1,156 @@
+name: Otaku Multicena + Otaku Reframe - 5011 BR and EN cloud render
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/otaku-cloud-dual-5011.yml'
+      - 'conteudos/otaku-production-reservations.json'
+      - 'conteudos/otaku-reframe-5011-gachiakuta-en.json'
+      - 'scripts/production_reservations.py'
+      - 'scripts/otaku_dual_5011_cloud.py'
+      - 'tests/test_otaku_dual_5011_cloud.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/otaku-cloud-dual-5011.yml'
+      - 'conteudos/otaku-production-reservations.json'
+      - 'conteudos/otaku-reframe-5011-gachiakuta-en.json'
+      - 'scripts/production_reservations.py'
+      - 'scripts/otaku_dual_5011_cloud.py'
+      - 'tests/test_otaku_dual_5011_cloud.py'
+
+# Explicit one-shot execution: ONLY one special merge-commit can generate
+# real images. No workflow_dispatch, no schedule, no rerun; no YouTube upload.
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-gachiakuta-5011-br-en-single-production
+  cancel-in-progress: false
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install runtime QA dependencies, never credentials
+        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
+      - name: Verify reservations, editorial identity, protected jobs and two-channel outputs
+        run: python -m pytest -q tests/test_otaku_dual_5011_cloud.py
+      - name: Print next unreserved BR episode
+        run: python scripts/production_reservations.py --acao proximo --canal br
+
+  validate-protection:
+    needs: offline-tests
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      startsWith(github.event.head_commit.message, 'feat(cloud-dual): run reserved 5011 Gachiakuta BR and EN')
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate GitHub Environment allows only main before secrets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  render-both-real-shorts:
+    needs: [offline-tests, validate-protection]
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      startsWith(github.event.head_commit.message, 'feat(cloud-dual): run reserved 5011 Gachiakuta BR and EN')
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout ORIGINAL pinned Go Codex Proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install original AutoEditorVideo dependencies before loading Secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-master.txt
+      - name: Install original Remotion from package lockfile
+        working-directory: motion-remotion
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck actual Remotion engine
+        working-directory: motion-remotion
+        run: npm run typecheck
+      - name: Build native Go proxy without Docker
+        working-directory: pinned-native-go-proxy
+        shell: bash
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/otaku-native-proxy" ./cmd/api
+      - name: Generate 5011 in BR and EN with the original renderer
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
+          MAX_IMAGE_CALLS: '21'
+        run: |
+          set -euo pipefail
+          umask 077
+          state_dir="$RUNNER_TEMP/otaku-dual-private-auth"
+          test ! -e "$state_dir"
+          mkdir -m 700 "$state_dir"
+          proxy_pid=''
+          cleanup() {
+            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$state_dir"
+            rm -f -- "$RUNNER_TEMP/otaku-dual-private-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$state_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/otaku-native-proxy" > "$RUNNER_TEMP/otaku-dual-private-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/otaku_dual_5011_cloud.py --max-image-calls 21
+          echo '[DUAL CLOUD] FULL_ORIGINAL_BR_EN_RENDER_COMPLETED_ZERO_YOUTUBE_UPLOADS'
+      - name: Upload only both final video review packages, short retention
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-5011-gachiakuta-BR-EN-autoeditorvideo
+          path: cloud-br-en-review-5011/
+          retention-days: 1
+          if-no-files-found: error
