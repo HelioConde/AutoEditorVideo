@@ -5,11 +5,13 @@
   "policy": {
     "default_visibility": "private",
     "upload_requires_explicit_authorization": true,
-    "token_isolation": "one OAuth refresh-token per exact YouTube channel; never share between channels",
+    "token_isolation": "distinct OAuth token Secret per YouTube channel inside one protected main-only Environment",
     "reserve_script_before_generation": true,
     "never_reuse_video_or_thumbnail_from_other_channel": true,
     "never_publish_internal_upload_markers": true,
-    "no_automatic_publication_from_registration": true
+    "no_automatic_publication_from_registration": true,
+    "shared_youtube_environment": "youtube-private-upload",
+    "environment_isolation": "shared_credential_boundary_all_five_tokens_visible_to_authorized_workflows; enforce per-channel OAuth identity"
   },
   "channels": {
     "br": {
@@ -53,7 +55,7 @@
       "made_for_kids_default": false,
       "visibility_default": "private",
       "cloud_upload_state": "blocked_until_separate_oauth_and_verified_uploader",
-      "youtube_environment": "youtube-games-private-upload",
+      "youtube_environment": "youtube-private-upload",
       "oauth_token_secret_name": "YOUTUBE_GAMES_TOKEN_JSON",
       "video_profile": "games",
       "script_entrypoint": "canal-gamer.ps1",
@@ -89,7 +91,7 @@
       "made_for_kids_default": true,
       "visibility_default": "private",
       "cloud_upload_state": "blocked_until_separate_oauth_and_kids_compliance_review",
-      "youtube_environment": "youtube-kids-private-upload",
+      "youtube_environment": "youtube-private-upload",
       "oauth_token_secret_name": "YOUTUBE_KIDS_TOKEN_JSON",
       "video_profile": "kids",
       "series": "Fofinhos",
@@ -127,7 +129,7 @@
       "made_for_kids_default": false,
       "visibility_default": "private",
       "cloud_upload_state": "blocked_until_separate_oauth_and_verified_uploader",
-      "youtube_environment": "youtube-alchemy-private-upload",
+      "youtube_environment": "youtube-private-upload",
       "oauth_token_secret_name": "YOUTUBE_ALCHEMY_TOKEN_JSON",
       "video_profile": "alchemy",
       "editorial_rules": [
