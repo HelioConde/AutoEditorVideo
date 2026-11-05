@@ -82,9 +82,10 @@ def request_image(prompt:str, model:str, key:str, size:str='1024x1536', *, backg
         json=payload,
         headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},timeout=(15,300))
     if not r.ok:
+        # Do not leak provider errors/headers into public cloud logs.
         if background=='transparent':
-            raise RuntimeError(f'O Codex Proxy recusou background=transparent (HTTP {r.status_code}). Sem fallback verde: {r.text[:220]}')
-        raise RuntimeError(f'Imagem recusada (HTTP {r.status_code}): {r.text[:220]}')
+            raise RuntimeError(f'O Codex Proxy recusou background=transparent (HTTP {r.status_code}). Sem fallback verde.')
+        raise RuntimeError(f'Imagem recusada (HTTP {r.status_code}).')
     items=r.json().get('data',[])
     if not items:raise RuntimeError('Resposta nao possui imagens')
     obj=items[0]

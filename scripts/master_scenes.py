@@ -190,7 +190,9 @@ def request_edit(master:Path,prompt:str,model:str,key:str,*,transparent:bool,
     r=post(EDIT_URL,json=payload,headers={'Authorization':'Bearer '+key,
           'Content-Type':'application/json'},timeout=(15,360))
     if not r.ok:
-        raise RuntimeError(f'Proxy recusou images/edits (HTTP {r.status_code}): {str(r.text)[:180]}. '
+        # The unofficial proxy may include private account/session data in error JSON.
+        # Never emit provider response text into public GitHub Actions logs.
+        raise RuntimeError(f'Proxy recusou images/edits (HTTP {r.status_code}). '
                            'Sem gerar nova cena de forma independente.')
     data=r.json().get('data') or []
     if not data:raise RuntimeError('O proxy não retornou imagem editada')
