@@ -67,6 +67,9 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && inputs.validate_private_session == true && github.ref == 'refs/heads/main'
     needs: offline-tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read  # GET /environments/... requires Actions read permission
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
