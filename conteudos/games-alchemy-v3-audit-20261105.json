@@ -1,0 +1,13 @@
+{
+  "schema": "autoeditorvideo/v3-upload-reconciliation/v1",
+  "approved_by_creator": true,
+  "date": "2026-11-05",
+  "original_failed_upload_run": 42063131990,
+  "expected_source_render_run": 42058545056,
+  "channels": [
+    "games",
+    "alchemy"
+  ],
+  "action": "read_only_list_owner_private_uploads",
+  "reason": "Original V3 uploads failed with ambiguous error before any receipt; do not create duplicates"
+}
