@@ -11,6 +11,8 @@ param(
     [string]$Perfil='equilibrado',
     [ValidateRange(0,180)]
     [int]$MaxChamadasNovos=30,
+    [ValidateRange(0,24)]
+    [int]$MaxChamadasBleach=0,
     [switch]$ExigirMovimentoPersonagem
 )
 
@@ -24,7 +26,7 @@ $enIds=@(
     '401-jujutsu-kaisen-ep01'
 )
 $br=@(
-    [pscustomobject]@{Numero=5;Id='5005-bleach-thousand-year-blood-war';Chamadas=0},
+    [pscustomobject]@{Numero=5;Id='5005-bleach-thousand-year-blood-war';Chamadas=$MaxChamadasBleach},
     [pscustomobject]@{Numero=9;Id='5009-overgeared';Chamadas=$MaxChamadasNovos},
     [pscustomobject]@{Numero=10;Id='5010-aoashi';Chamadas=$MaxChamadasNovos}
 )
@@ -32,7 +34,7 @@ $manifesto='assets\gerados\otaku-en-lote2-3-shorts.json'
 
 foreach($name in @('grade-50-shorts.ps1','criar-publicar-short.ps1',
                    'preparar-publicados-en.ps1','gerar-shorts-en.ps1',
-                   'publicar-shorts-en.ps1')){
+                   'publicar-shorts-en.ps1','scripts\validar_short_lote2.py')){
     if(-not(Test-Path (Join-Path $root $name) -PathType Leaf)){
         throw "Arquivo ausente: $name. Atualize o projeto com git pull."
     }
@@ -60,23 +62,34 @@ function Get-EstadoBR {
 function Assert-Grade50QA {
     param([string]$Id)
     $python=Join-Path $script:root '.venv\Scripts\python.exe'
+    $validator=Join-Path $script:root 'scripts\validar_short_lote2.py'
     if(-not(Test-Path -LiteralPath $python -PathType Leaf)){
         throw 'Ambiente Python .venv ausente; QA BR nao pode ser verificado.'
     }
-    $codigo=@'
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path("scripts").resolve()))
-from grade_50_shorts import load_queue, ensure_ready
-items = [ep for ep in load_queue() if ep["id"] == sys.argv[1]]
-if len(items) != 1:
-    raise RuntimeError("Episodio BR nao encontrado na grade")
-ensure_ready(items[0], sys.argv[2], require_character_motion=(sys.argv[3] == "1"))
-'@
-    $strict='0'
-    if($script:ExigirMovimentoPersonagem){$strict='1'}
-    & $python -c $codigo $Id $script:Perfil $strict
+    $argsPython=@($validator,'--id',$Id,'--perfil',$script:Perfil)
+    if($script:ExigirMovimentoPersonagem){
+        $argsPython+='--exigir-movimento-personagem'
+    }
+    & $python @argsPython
     if($LASTEXITCODE -ne 0){throw "QA BR reprovado: $Id. Nenhum upload."}
+}
+
+function Ensure-ENChannelId {
+    # ID publico ja confirmado na auditoria do proprio projeto (4/11/2026).
+    # Nunca escreve token OAuth nem substitui outro Channel ID ja configurado.
+    $expected='UCBoNbQjaMYdpJqPLRZAFkvQ'
+    $secrets=Join-Path $script:root '.secrets'
+    $channelPath=Join-Path $secrets 'youtube-en-channel-id.txt'
+    if(-not(Test-Path -LiteralPath $channelPath -PathType Leaf)){
+        New-Item -ItemType Directory -Path $secrets -Force | Out-Null
+        Set-Content -LiteralPath $channelPath -Value $expected -Encoding ASCII
+        Write-Host "[EN CONFIG] Channel ID oficial gravado apenas no computador: $expected" -ForegroundColor Cyan
+    }
+    $actual=(Get-Content -LiteralPath $channelPath -Raw -Encoding UTF8).Trim()
+    if($actual -ne $expected){
+        throw "ID do canal EN divergente ($actual). Nao vou sobrescrever. Verifique seu Studio."
+    }
+    Write-Host '[EN] OAuth verificara que a conta autenticada corresponde ao Otaku Reframe.' -ForegroundColor Cyan
 }
 
 function Get-EstadoEN {
@@ -116,7 +129,11 @@ try {
 
     Write-Host '[UPLOAD PRIVADO] Nenhum Short sera tornado publico automaticamente.' -ForegroundColor Yellow
     Write-Host '[AGENDAMENTO] Depois, defina os horarios no YouTube Studio, sem reenviar.' -ForegroundColor Yellow
-    Write-Host '[BLEACH] 0 chamadas de imagem; usa somente cache.' -ForegroundColor Yellow
+    if($MaxChamadasBleach -eq 0){
+        Write-Host '[BLEACH] 0 novas chamadas de imagem; 6 estavam faltando no ultimo diagnostico.' -ForegroundColor Yellow
+    } else {
+        Write-Host "[BLEACH] Reparo autorizado: ate $MaxChamadasBleach novas chamadas (somente se faltar cache)." -ForegroundColor Yellow
+    }
     Write-Host "[TETO IA] Outros 2 BR: ate $($MaxChamadasNovos*2) chamadas adicionais." -ForegroundColor Yellow
     $concluidos=New-Object System.Collections.Generic.List[string]
     $pendentes=New-Object System.Collections.Generic.List[string]
@@ -133,21 +150,27 @@ try {
             if($estado -ne 'pendente'){
                 throw "Upload anterior encontrado ($estado). Confira o YouTube Studio antes de tentar novamente."
             }
-            # A grade 50 tem publicacao exclusivamente PUBLICA; use apenas o modo Produzir.
-            $p=@{
-                Acao='Produzir'
-                InicioNaLista=[int]$ep.Numero
-                Quantidade=1
-                Modelo=$Modelo
-                Perfil=$Perfil
-                MaxChamadasPorVideo=[int]$ep.Chamadas
+            # Reaproveita MP4 ja renderizado; valida o arquivo e QA sem gerar nada.
+            $videoBR=Join-Path $root ("assets\gerados\shorts-animados\{0}\{0}-master-multicenas-personagens-v3-{1}.mp4" -f $ep.Id,$Perfil)
+            if(Test-Path -LiteralPath $videoBR -PathType Leaf){
+                Write-Host "[BR CACHE MP4] $($ep.Id): usando render existente." -ForegroundColor Green
+                Assert-Grade50QA -Id $ep.Id
+            } else {
+                # A grade 50 publica apenas em modo PUBLICO: usar Produzir sem upload.
+                $p=@{
+                    Acao='Produzir'
+                    InicioNaLista=[int]$ep.Numero
+                    Quantidade=1
+                    Modelo=$Modelo
+                    Perfil=$Perfil
+                    MaxChamadasPorVideo=[int]$ep.Chamadas
+                }
+                if($ep.Chamadas -gt 0){$p.ConfirmarCotaImagem=$true}
+                Invoke-Etapa 'grade-50-shorts.ps1' $p
+                Assert-Grade50QA -Id $ep.Id
             }
-            if($ep.Chamadas -gt 0){$p.ConfirmarCotaImagem=$true}
-            Invoke-Etapa 'grade-50-shorts.ps1' $p
-
-            # Mesmo QA visual, de duracao, capa e cenas do fluxo da grade antes do upload.
-            Assert-Grade50QA -Id $ep.Id
-            # Reusa cache e publica como private; NAO usa ProduzirPublicar, que envia publico.
+            # O publicador especifico recebe private e max chamadas 0.
+            # Se caches mudaram, ele falha em vez de gerar imagens ou enviar video parcial.
             Invoke-Etapa 'criar-publicar-short.ps1' @{
                 Id=$ep.Id;Modelo=$Modelo;Perfil=$Perfil;VozMotor='edge'
                 MaxChamadas=0;Privacidade='private';Publicar=$true
@@ -172,6 +195,8 @@ try {
         throw "[EN BLOQUEADO] Nao foi possivel preparar o manifesto. Motivo: $_"
     }
 
+    Ensure-ENChannelId
+
     foreach($id in $enIds){
         try {
             $status=Get-EstadoEN -Id $id
@@ -183,19 +208,32 @@ try {
             if($status -eq 'incerto'){
                 throw 'Upload EN anterior incerto. Confira o Studio e o estado local.'
             }
-            Write-Host "[EN] Preparando voz, legendas e MP4: $id" -ForegroundColor Cyan
-            foreach($acao in @('planejar','voz','renderizar')){
-                $p=@{
-                    Acao=$acao;Manifesto=$manifesto;Id=$id
-                    Modelo=$Modelo;Perfil=$Perfil
+            # Primeiro verifica MP4 EN ja criado; no log os IDs 5004 e 202 estao prontos.
+            $mp4Valido=$false
+            try {
+                Invoke-Etapa 'publicar-shorts-en.ps1' @{
+                    Acao='verificar';Manifesto=$manifesto;Id=$id;Perfil=$Perfil
                 }
-                if($ExigirMovimentoPersonagem -and $acao -eq 'renderizar'){
-                    $p.ExigirMovimentoPersonagem=$true
-                }
-                Invoke-Etapa 'gerar-shorts-en.ps1' $p
+                $mp4Valido=$true
+                Write-Host "[EN CACHE MP4] $id: pronto e validado, sem rerender." -ForegroundColor Green
+            } catch {
+                Write-Host "[EN] Cache ainda nao validado para $id; tentando produzir. Causa: $_" -ForegroundColor Yellow
             }
-            Invoke-Etapa 'publicar-shorts-en.ps1' @{
-                Acao='verificar';Manifesto=$manifesto;Id=$id;Perfil=$Perfil
+            if(-not $mp4Valido){
+                Write-Host "[EN] Preparando voz, legendas e MP4: $id" -ForegroundColor Cyan
+                foreach($acao in @('planejar','voz','renderizar')){
+                    $p=@{
+                        Acao=$acao;Manifesto=$manifesto;Id=$id
+                        Modelo=$Modelo;Perfil=$Perfil
+                    }
+                    if($ExigirMovimentoPersonagem -and $acao -eq 'renderizar'){
+                        $p.ExigirMovimentoPersonagem=$true
+                    }
+                    Invoke-Etapa 'gerar-shorts-en.ps1' $p
+                }
+                Invoke-Etapa 'publicar-shorts-en.ps1' @{
+                    Acao='verificar';Manifesto=$manifesto;Id=$id;Perfil=$Perfil
+                }
             }
             Invoke-Etapa 'publicar-shorts-en.ps1' @{
                 Acao='enviar';Manifesto=$manifesto;Id=$id;Perfil=$Perfil
