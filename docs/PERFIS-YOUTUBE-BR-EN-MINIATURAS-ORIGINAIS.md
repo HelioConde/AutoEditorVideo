@@ -86,3 +86,33 @@ python -m pytest -q tests/test_youtube_upload_profiles.py tests/test_youtube_sho
 
 Esses testes usam somente miniaturas sintéticas temporárias. Nenhuma imagem
 é gerada por IA, nenhum vídeo é reenviado e nenhum OAuth é acessado em PRs.
+
+## Identificadores internos e descrições
+
+A chave interna de deduplicação da geração **não pertence à descrição**.
+Versões antigas do uploader adicionavam linhas como
+`AUTOEDITORVIDEO-5011-en-fdc3d3a734833529`; essa prática foi removida.
+
+- O `videos.insert` publica somente descrição editorial, hashtags, CTA e
+  avisos relevantes. A chave de deduplicação fica no recibo do upload, fora
+  do YouTube.
+- O marcador antigo continua sendo procurado no histórico do canal
+  **apenas para detectar uploads já existentes**. Comparação do título
+  continua como proteção extra. Nenhum MP4 deve ser reenviado.
+- O sanitizador compartilhado remove marcadores legados válidos
+  que porventura apareçam em manifestos; marcadores malformados bloqueiam o
+  upload em vez de ir parar na descrição.
+- Essa regra se aplica aos uploaders BR e EN cloud e locais.
+
+**Descrições de vídeos já enviados** não são alteradas automaticamente pelo
+merge do PR. Para retirar o marcador de um Short antigo sem mexer em
+privacidade e agendamento, abra o YouTube Studio, edite somente a última
+linha com `AUTOEDITORVIDEO-...` na descrição e salve. A alternativa via API
+`videos.update(part=snippet)` requer OAuth que inclua `youtube.force-ssl`
+e exige reenviar os demais campos mutáveis do snippet, sob risco de apagar
+tags ou idioma existentes se omitidos — não é a mesma autorização básica
+de upload.
+
+Referência da API:
+https://developers.google.com/youtube/data/reference/rest/v3/videos/update
+
