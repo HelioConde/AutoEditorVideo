@@ -19,7 +19,7 @@ A aprovação de um nome de marca NÃO significa que o nome do canal foi alterad
 ## O que já existe
 
 - BR e EN Otaku: uploaders existentes com OAuth protegido e rotas separadas.
-- Games: entrada canal-gamer.ps1, sem função de publicação, gameplay real.
+- Games: entrada canal-gamer.ps1, sem função de publicação; novos Shorts utilizam somente ilustrações IA, sem gameplay.
 - Kids: série oficial Fofinhos no catálogo Emanuelly; música, fotos e
   classificação infantil exigem salvaguardas próprias.
 - Alchemy Lab: identidade editorial planejada para tutoriais IA e automação;
@@ -51,8 +51,9 @@ docs/CONECTAR-3-CANAIS-OAUTH-GITHUB.md.
 
 ## Políticas obrigatórias
 
-Games: categoria Gaming (20), público gamer geral; só gameplay próprio
-ou autorizado, nunca inventar conquistas. Conde Games ainda é proposta.
+Games: categoria Gaming (20), público gamer geral; NÃO gravar nem exigir gameplay.
+Usar apenas artes e cenas geradas por IA, declaradas como ilustrativas;
+não inventar testes/conquistas. Conde Games ainda é proposta.
 
 Kids: série Fofinhos, Made for Kids = true, categoria Filme e animação (1);
 sem chamadas para crianças comentarem, curtirem ou se inscreverem; respeitar
@@ -62,7 +63,8 @@ upload_enabled=false: NÃO vincular seus Shorts ao Emanuelly Kids sem revisar
 marca, conteúdo e direitos.
 
 Alchemy Lab: categoria Ciência e tecnologia (28); IA e automação com
-experimentos verificáveis; não gerar conteúdo repetitivo de baixo valor;
+ilustrações originais geradas por IA. Explicações factuais e tutoriais conceituais;
+se não houve teste, não insinuar experimento real. Evitar conteúdo repetitivo;
 declarar mídia sintética realista quando exigido. O canal continua exibido
 como Alchemy Flames até o criador alterar o nome.
 
@@ -83,3 +85,9 @@ No diretório do projeto, depois de atualizar a branch main:
 A tentativa de checar autorização de upload para games/kids/alchemy deve
 FALHAR enquanto a implantação de OAuth separado não existir.
 O GitHub Actions verifica as regras, sem Secrets e sem qualquer upload.
+
+## Regra editorial visual confirmada em 05/11/2026
+
+- Gamer: **zero gameplay gravado**; vídeos de curiosidade, nostalgia e jogos em alta usam imagens e animações geradas por IA com aviso de que não são capturas de jogo.
+- IA: explicações e comparações conceituais ilustradas por imagens geradas por IA; sem alegações falsas de testes, resultados ou interface do produto.
+- Os lotes e metadados ativos estão em `conteudos/helio-conde-games-grade-50-seo-v1.json`, `conteudos/alchemy-lab-grade-50-v1.json` e `conteudos/lote-6-games-alchemy-producao-v1.json`.
