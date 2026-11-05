@@ -24,21 +24,29 @@ class RecoveryBlocked(ValueError):
 def guard_event(env: dict) -> None:
     if env.get("GITHUB_REPOSITORY") != REPO or env.get("GITHUB_REF") != "refs/heads/main":
         raise RecoveryBlocked("WRONG_REPOSITORY_OR_REF")
-    if env.get("GITHUB_EVENT_NAME") != "workflow_run" or env.get("GITHUB_RUN_ATTEMPT") != "1":
-        raise RecoveryBlocked("ONE_SHOT_WORKFLOW_RUN_ONLY")
+    if env.get("GITHUB_EVENT_NAME") != "push" or env.get("GITHUB_RUN_ATTEMPT") != "1":
+        raise RecoveryBlocked("SINGLE_PUSH_ATTEMPT_ONLY")
+    if env.get("GITHUB_WORKFLOW") != "Gamer + Alchemy - private upload from completed AI render":
+        raise RecoveryBlocked("UNEXPECTED_WORKFLOW")
     event_file = Path(env.get("GITHUB_EVENT_PATH", ""))
     if not event_file.is_file():
         raise RecoveryBlocked("MISSING_ORIGINAL_EVENT")
     payload = json.loads(event_file.read_text(encoding="utf-8"))
-    run = payload.get("workflow_run") or {}
-    if (run.get("id") != EXPECTED_ID or
-        run.get("name") != EXPECTED_WORKFLOW or
-        run.get("head_sha") != EXPECTED_SHA or
-        run.get("head_branch") != "main" or
-        run.get("event") != "push" or
-        run.get("run_attempt") != 1 or
-        run.get("status") != "completed"):
-        raise RecoveryBlocked("UNRECOGNIZED_SOURCE_WORKFLOW")
+    head = payload.get("head_commit") or {}
+    if (head.get("message") != "feat(games-alchemy): submit finished six AI Shorts for private upload" or
+        head.get("id") != env.get("GITHUB_SHA") or
+        payload.get("ref") != "refs/heads/main"):
+        raise RecoveryBlocked("UNAUTHORIZED_COMMIT_OR_REF")
+    trigger = Path(__file__).resolve().parents[1] / "conteudos" / "games-alchemy-private-upload-20261105.json"
+    if not trigger.is_file():
+        raise RecoveryBlocked("UPLOAD_TRIGGER_MISSING")
+    marker = json.loads(trigger.read_text(encoding="utf-8"))
+    if (marker.get("original_run_id") != EXPECTED_ID or
+        marker.get("original_run_sha") != EXPECTED_SHA or
+        marker.get("visuals") != "AI-only, zero gameplay" or
+        marker.get("youtube_visibility") != "private" or
+        marker.get("approved_by_creator") is not True):
+        raise RecoveryBlocked("UPLOAD_TRIGGER_MISMATCH")
     if not env.get("GH_TOKEN"):
         raise RecoveryBlocked("NO_GITHUB_READ_TOKEN")
 
