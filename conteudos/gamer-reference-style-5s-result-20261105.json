@@ -1,0 +1,46 @@
+{
+  "schema": "autoeditorvideo/gamer-reference-style-five-second-result/v1",
+  "date": "2026-11-05",
+  "status": "one_style_test_rendered_and_uploaded_private",
+  "source_render_run": 42071497586,
+  "source_artifact_id": 13436591790,
+  "receipt_artifact_id": 13435343933,
+  "source_original_ai_art_run": 42044136670,
+  "episode": "game-901-estilo-referencia-5s",
+  "channel": "games",
+  "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+  "video": {
+    "youtube_id": "464eWmgPBnA",
+    "url": "https://www.youtube.com/watch?v=464eWmgPBnA",
+    "privacy": "private",
+    "confirmed_private": true,
+    "video_sha256": "01e59f590a7b9006fcc84e5ae58d87c62037feb017162e413712d94fbfc3db17",
+    "duration_seconds": 5.013,
+    "resolution": "1080x1920",
+    "fps": 30,
+    "codecs": "H.264/AAC"
+  },
+  "thumbnail": {
+    "source": "scripts/capa_cinematografica.py",
+    "preset": "gamer-alchemy-reference",
+    "size": "1080x1920",
+    "api_acknowledged": true,
+    "studio_ui_verified": false,
+    "upload_delay_seconds": 75
+  },
+  "captions": {
+    "engine": "motion-remotion/src/master-short.tsx",
+    "sync": "scripts/legendas_precisas.py",
+    "style": "gamer-alchemy-reference",
+    "active_word_color": "#ffd166",
+    "note": "Reference visual test uses WordBoundary from actual narration; prior uploaded V3 videos remain untouched."
+  },
+  "additional_image_generation_calls": 0,
+  "old_videos_untouched": true,
+  "public_visibility_change": false,
+  "github_workflow": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42071497586",
+  "warnings": [
+    "YouTube Shorts thumbnail API acknowledgement does not necessarily prove correct visual selection on Shorts surfaces; verify YouTube Studio if needed.",
+    "This 5-second clip is solely a visual QA test, not a full replacement for six existing channel videos."
+  ]
+}
