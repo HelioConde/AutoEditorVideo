@@ -1,0 +1,940 @@
+{
+  "schema": "autoeditorvideo/alchemy-lab-editorial-queue/v1",
+  "version": 1,
+  "date_created": "2026-11-05",
+  "channel": {
+    "key": "alchemy",
+    "youtube_channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+    "editorial_brand": "Alchemy Lab",
+    "youtube_name_last_observed": "Alchemy Flames",
+    "branding_status": "planned_not_applied",
+    "language": "pt-BR",
+    "category_id": "28",
+    "audience": "general_not_made_for_kids"
+  },
+  "status": "planning_only_no_scripts_generated_no_media_no_upload",
+  "source_note": "Pautas e títulos aprovados para registro a partir do planejamento no ChatGPT em 2026-11-05. Sinais anteriores do vidIQ e verificações externas foram usados na ideação, mas o vidIQ estava sem créditos na última tentativa; NÃO interpretar esta lista como ranking atual de tendências, dados de volume ou notícias validadas.",
+  "vidiq": {
+    "credits_available_when_checked": 0,
+    "renewal_reported": "2026-12-03T11:41:47Z",
+    "new_trends_ranking_verified": false,
+    "verify_at_production_time": true
+  },
+  "frames": [
+    {
+      "id": "voce-sabia",
+      "name": "Você Sabia?",
+      "duration_min_seconds": 25,
+      "duration_max_seconds": 45,
+      "purpose": "Curiosidades, novidades e descobertas verificáveis sobre IA.",
+      "requires_experiment": false
+    },
+    {
+      "id": "testei-por-voce",
+      "name": "Testei por Você!",
+      "duration_min_seconds": 40,
+      "duration_max_seconds": 90,
+      "purpose": "Experimentos e comparações reais com resultados e limitações documentados.",
+      "requires_experiment": true
+    },
+    {
+      "id": "ia-na-pratica",
+      "name": "IA na Prática",
+      "duration_min_seconds": 60,
+      "duration_max_seconds": 180,
+      "purpose": "Tutoriais demonstráveis e reproduzíveis; passo a passo com capturas de tela ou projeto real.",
+      "requires_experiment": true
+    }
+  ],
+  "rotation": [
+    "voce-sabia",
+    "testei-por-voce",
+    "ia-na-pratica"
+  ],
+  "first_test_batch": {
+    "positions": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "goal": "Testar 3 vídeos por quadro antes de produzir os demais."
+  },
+  "editorial_requirements": [
+    "Verificar as datas, disponibilidade, versões, marcas, preços, licenças e capacidades de ferramentas antes de roteirizar; nomes no título são hipóteses editoriais, não afirmações oficiais.",
+    "Não afirmar 'testei', 'conseguiu', 'ficou melhor' nem apresentar resultados simulados sem demonstração real gravada e verificada.",
+    "Cada vídeo deve entregar valor original, evidências, narração, ilustração e edição próprias; evitar repetição massificada.",
+    "Para tutoriais registrar passos, limitações, versões e evidência visual; demonstrar o fluxo de fato.",
+    "Publicação privada é o padrão; sem autorização OAuth específica do canal Alchemy, nenhum upload ou agendamento.",
+    "Antes de criar roteiro, comando, assets, MP4 ou upload, registrar reserva (channel=alchemy, id) em conteudos/otaku-production-reservations.json, conforme AGENTS.md. Este catálogo NÃO cria reservas.",
+    "Revisar mídia sintética realista e declarar conforme a política da plataforma, quando aplicável.",
+    "Miniaturas específicas por vídeo e canal, originais; não usar imagem genérica de outro canal ou inserir códigos internos na descrição."
+  ],
+  "production_pipeline": [
+    "validar_tendencia_e_fontes",
+    "reservar_episodio_no_github",
+    "realizar_experimento_quando_necessario",
+    "escrever_roteiro_com_evidencias",
+    "gerar_capturas_e_ativos_autorais",
+    "editar_com_audio_legendas_e_thumb",
+    "qa_factual_e_audio_visual",
+    "publicar_privado_apos_oauth_especifico_e_autorizacao"
+  ],
+  "episodes": [
+    {
+      "id": "alchemy-001",
+      "queue_position": 1,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "O ChatGPT agora consegue criar GIFs com IA! 🤯",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-002",
+      "queue_position": 2,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Images 2.6: será que consegue animar o mesmo personagem sem deformar?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-003",
+      "queue_position": 3,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar seu primeiro GIF animado usando inteligência artificial",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-004",
+      "queue_position": 4,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Uma IA já pode usar o computador para executar tarefas?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-005",
+      "queue_position": 5,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Gemini 4 vs GPT-6.1 Terra: dei 3 tarefas iguais para as duas IAs!",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-006",
+      "queue_position": 6,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como organizar tarefas repetitivas usando um assistente de IA",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-007",
+      "queue_position": 7,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "As vozes de IA estão aprendendo a transmitir emoções!",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-008",
+      "queue_position": 8,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "ElevenLabs v4 vs Edge TTS: qual narração ficou mais natural?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-009",
+      "queue_position": 9,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar uma narração profissional com IA para seus vídeos",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-010",
+      "queue_position": 10,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que existem modelos de IA rápidos e outros mais avançados?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-011",
+      "queue_position": 11,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Claude Haiku 5.5 vs modelos maiores: a IA barata dá conta?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-012",
+      "queue_position": 12,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar prompts melhores sem escrever textos gigantes",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-013",
+      "queue_position": 13,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Agora dá para editar trechos de músicas com IA!",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-014",
+      "queue_position": 14,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Suno v6 vs Mureka: quem cria a melhor trilha instrumental?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-015",
+      "queue_position": 15,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar música de fundo original com inteligência artificial",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-016",
+      "queue_position": 16,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "O Canva também está desenvolvendo suas próprias IAs!",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-017",
+      "queue_position": 17,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Canva Craft vs ChatGPT Images: quem cria a melhor thumbnail?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-018",
+      "queue_position": 18,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar uma thumbnail profissional usando apenas 3 elementos",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-019",
+      "queue_position": 19,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que manter o mesmo personagem ainda é difícil para algumas IAs?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-020",
+      "queue_position": 20,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Pedi para uma IA gerar 5 poses do mesmo personagem. Ela conseguiu?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-021",
+      "queue_position": 21,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como montar uma ficha de referência para personagens criados por IA",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-022",
+      "queue_position": 22,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que algumas imagens de IA ainda erram palavras e letras?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-023",
+      "queue_position": 23,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "3 geradores de imagem: qual escreve melhor em português?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-024",
+      "queue_position": 24,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como corrigir textos errados em imagens geradas por IA",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-025",
+      "queue_position": 25,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Uma IA consegue criar logos em SVG que não perdem qualidade!",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-026",
+      "queue_position": 26,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Ideogram vs ChatGPT Images: qual cria a logo mais profissional?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-027",
+      "queue_position": 27,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar uma identidade visual simples com inteligência artificial",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-028",
+      "queue_position": 28,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Por que a inteligência artificial inventa respostas?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-029",
+      "queue_position": 29,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Fiz 5 perguntas difíceis para ChatGPT, Gemini e Claude!",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-030",
+      "queue_position": 30,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como verificar se uma resposta da IA é verdadeira",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-031",
+      "queue_position": 31,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Você pode executar algumas IAs no seu próprio computador!",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-032",
+      "queue_position": 32,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "IA local vs IA na nuvem: vale a pena usar modelos gratuitos?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-033",
+      "queue_position": 33,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como começar a usar modelos locais no PC, passo a passo",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-034",
+      "queue_position": 34,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Qual é a diferença entre um chatbot e um agente de IA?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-035",
+      "queue_position": 35,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "ChatGPT vs Claude vs Gemini: quem resolve melhor 3 tarefas reais?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-036",
+      "queue_position": 36,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar instruções que fazem a IA entregar resultados melhores",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-037",
+      "queue_position": 37,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Como uma única imagem pode se transformar em vídeo?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-038",
+      "queue_position": 38,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Kling vs Runway vs Wan: qual anima melhor a mesma imagem?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-039",
+      "queue_position": 39,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como animar imagens com movimentos de câmera sem gastar com IA de vídeo",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-040",
+      "queue_position": 40,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Como a IA sincroniza a boca dos personagens com a voz?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-041",
+      "queue_position": 41,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Tentei fazer um personagem de IA falar sem parecer artificial!",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-042",
+      "queue_position": 42,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar um personagem que fala com voz e legendas sincronizadas",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-043",
+      "queue_position": 43,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Uma IA consegue criar um jogo a partir de uma descrição? 🎮",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-044",
+      "queue_position": 44,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "ChatGPT vs Claude: quem consegue programar o melhor minigame?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-045",
+      "queue_position": 45,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar seu primeiro jogo simples com ajuda da IA",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-046",
+      "queue_position": 46,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "Usar música criada por IA significa ter todos os direitos?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-047",
+      "queue_position": 47,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Testei 3 ferramentas de áudio: qual entrega o melhor resultado?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-048",
+      "queue_position": 48,
+      "format_id": "ia-na-pratica",
+      "format_name": "IA na Prática",
+      "title_proposed": "Como criar uma trilha original e preparar o áudio para um Short",
+      "target_duration_seconds": {
+        "min": 60,
+        "max": 180
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-049",
+      "queue_position": 49,
+      "format_id": "voce-sabia",
+      "format_name": "Você Sabia?",
+      "title_proposed": "O que mais encarece um vídeo produzido com inteligência artificial?",
+      "target_duration_seconds": {
+        "min": 25,
+        "max": 45
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    },
+    {
+      "id": "alchemy-050",
+      "queue_position": 50,
+      "format_id": "testei-por-voce",
+      "format_name": "Testei por Você!",
+      "title_proposed": "Criei um Short com IA grátis e outro com IA paga: qual ficou melhor?",
+      "target_duration_seconds": {
+        "min": 40,
+        "max": 90
+      },
+      "content_status": "idea_only",
+      "factual_review": "pending",
+      "experiment_status": "not_run",
+      "source_proof": "pending",
+      "production_reservation": "not_reserved",
+      "publish_authorized": false
+    }
+  ]
+}
