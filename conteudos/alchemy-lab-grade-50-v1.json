@@ -101,7 +101,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "ChatGPT cria GIFs com IA? Entenda as possibilidades",
+        "primary_keyword": "GIFs com inteligência artificial",
+        "description_draft": "GIFs com inteligência artificial: Veja quais tipos de animação podem nascer de imagens e quais limitações precisam ser consideradas antes de atribuir a função a um produto específico.\n\nQual detalhe sobre IA mais surpreendeu você?\n\n#GIFcomIA #ChatGPT #Shorts",
+        "hashtags": [
+          "#GIFcomIA",
+          "#ChatGPT",
+          "#Shorts"
+        ],
+        "tags": [
+          "GIF IA",
+          "gerar GIF com IA",
+          "imagens animadas",
+          "ChatGPT imagens",
+          "animação com IA",
+          "imagem para GIF",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-002",
@@ -118,7 +143,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Images 2.6: dá para animar o mesmo personagem?",
+        "primary_keyword": "Images 2.6 personagem consistente",
+        "description_draft": "Images 2.6 personagem consistente: O mesmo personagem pode perder detalhes entre quadros. A comparação precisa mostrar as tentativas, os erros e o resultado sem cortes enganosos.\n\nQual critério deve pesar mais nessa comparação?\n\n#ImagensComIA #AnimacaoIA #Shorts",
+        "hashtags": [
+          "#ImagensComIA",
+          "#AnimacaoIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "Images 2.6",
+          "consistência de personagem",
+          "animação IA",
+          "personagem IA",
+          "imagem para vídeo",
+          "edição de imagem IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm official model/tool name, version, access and supported features before using this title"
+      }
     },
     {
       "id": "alchemy-003",
@@ -135,7 +185,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar GIF animado com IA: tutorial simples",
+        "primary_keyword": "como criar GIF animado com IA",
+        "description_draft": "como criar GIF animado com IA: Da imagem inicial à animação exportada, o tutorial deve mostrar a ferramenta utilizada, o formato do arquivo e as etapas reproduzíveis.\n\nQual etapa desse processo você quer aprender melhor?\n\n#GIFAnimado #TutorialIA #Shorts",
+        "hashtags": [
+          "#GIFAnimado",
+          "#TutorialIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "criar GIF IA",
+          "tutorial GIF",
+          "imagem animada",
+          "animação de imagem",
+          "ferramentas IA",
+          "GIF animado",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-004",
@@ -152,7 +227,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Agentes de IA conseguem usar o computador?",
+        "primary_keyword": "agente IA usando computador",
+        "description_draft": "agente IA usando computador: Agentes podem combinar instruções com ações em interfaces. Descubra como funcionam permissões, supervisão e limites de segurança.\n\nQue outra curiosidade sobre IA vale investigar?\n\n#AgentesIA #Automacao #Shorts",
+        "hashtags": [
+          "#AgentesIA",
+          "#Automacao",
+          "#Shorts"
+        ],
+        "tags": [
+          "agentes de IA",
+          "computer use",
+          "IA no computador",
+          "automação com IA",
+          "assistente inteligente",
+          "tarefas automáticas",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-005",
@@ -169,7 +269,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Gemini 4 vs GPT-6.1 Terra: quem resolve 3 tarefas?",
+        "primary_keyword": "Gemini 4 vs GPT-6.1 Terra",
+        "description_draft": "Gemini 4 vs GPT-6.1 Terra: Três tarefas idênticas permitem observar acerto, velocidade e clareza. O comparativo exige conferir nomes de modelos e registrar execuções reais.\n\nQue desafio você usaria para comparar essas ferramentas?\n\n#Gemini #ChatGPT #Shorts",
+        "hashtags": [
+          "#Gemini",
+          "#ChatGPT",
+          "#Shorts"
+        ],
+        "tags": [
+          "Gemini 4",
+          "GPT 6.1 Terra",
+          "comparação de IA",
+          "benchmark IA",
+          "Gemini vs ChatGPT",
+          "modelos de linguagem",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm official model/tool name, version, access and supported features before using this title"
+      }
     },
     {
       "id": "alchemy-006",
@@ -186,7 +311,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como automatizar tarefas repetitivas com um assistente IA",
+        "primary_keyword": "automatizar tarefas repetitivas com IA",
+        "description_draft": "automatizar tarefas repetitivas com IA: Organização de arquivos, lembretes e rotinas são bons exemplos para demonstrar o que um assistente faz com autorização e revisão.\n\nQue outro tutorial prático de IA ajudaria você?\n\n#AutomacaoIA #Produtividade #Shorts",
+        "hashtags": [
+          "#AutomacaoIA",
+          "#Produtividade",
+          "#Shorts"
+        ],
+        "tags": [
+          "assistente IA",
+          "automação de tarefas",
+          "produtividade IA",
+          "fluxo de trabalho IA",
+          "tarefas repetitivas",
+          "workflow de IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-007",
@@ -203,7 +353,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Vozes de IA conseguem transmitir emoções?",
+        "primary_keyword": "voz de IA com emoção",
+        "description_draft": "voz de IA com emoção: Entonação, pausas e contexto influenciam a naturalidade de vozes sintéticas. Compare exemplos com as respectivas ferramentas e licenças.\n\nQue mito sobre IA você gostaria de ver explicado?\n\n#VozIA #NarracaoIA #Shorts",
+        "hashtags": [
+          "#VozIA",
+          "#NarracaoIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "voz IA",
+          "narração com IA",
+          "síntese de voz",
+          "emoções na voz",
+          "TTS natural",
+          "vozes artificiais",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-008",
@@ -220,7 +395,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "ElevenLabs vs Edge TTS: qual voz soa mais natural?",
+        "primary_keyword": "ElevenLabs v4 vs Edge TTS",
+        "description_draft": "ElevenLabs v4 vs Edge TTS: O mesmo texto e parâmetros comparáveis ajudam a avaliar dicção, pausas e naturalidade. A versão e o custo de cada serviço precisam ser confirmados.\n\nQual resultado você considera mais importante num teste?\n\n#ElevenLabs #EdgeTTS #Shorts",
+        "hashtags": [
+          "#ElevenLabs",
+          "#EdgeTTS",
+          "#Shorts"
+        ],
+        "tags": [
+          "ElevenLabs v4",
+          "Edge TTS",
+          "ElevenLabs vs Edge TTS",
+          "voz neural",
+          "comparar vozes IA",
+          "texto para fala",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm official model/tool name, version, access and supported features before using this title"
+      }
     },
     {
       "id": "alchemy-009",
@@ -237,7 +437,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar narração com IA para vídeos e Shorts",
+        "primary_keyword": "narração profissional com IA",
+        "description_draft": "narração profissional com IA: A escolha da voz, o roteiro, a velocidade e o volume importam tanto quanto a ferramenta. Veja um fluxo reproduzível para vídeos curtos.\n\nEm qual projeto você usaria essa técnica?\n\n#NarracaoIA #ShortsYouTube #Shorts",
+        "hashtags": [
+          "#NarracaoIA",
+          "#ShortsYouTube",
+          "#Shorts"
+        ],
+        "tags": [
+          "criar narração IA",
+          "texto para voz",
+          "voz para Shorts",
+          "narração YouTube",
+          "TTS português",
+          "edição de áudio",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-010",
@@ -254,7 +479,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "IA rápida ou avançada: qual modelo escolher?",
+        "primary_keyword": "modelos de IA rápidos vs avançados",
+        "description_draft": "modelos de IA rápidos vs avançados: Velocidade, custo, contexto e precisão variam entre modelos. Entenda por que o mais complexo nem sempre é necessário.\n\nQual detalhe sobre IA mais surpreendeu você?\n\n#ModelosIA #InteligenciaArtificial #Shorts",
+        "hashtags": [
+          "#ModelosIA",
+          "#InteligenciaArtificial",
+          "#Shorts"
+        ],
+        "tags": [
+          "modelos de IA",
+          "IA rápida",
+          "IA avançada",
+          "latência IA",
+          "custos de IA",
+          "LLM",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-011",
@@ -271,7 +521,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Claude Haiku vs IA maior: compensa o modelo barato?",
+        "primary_keyword": "Claude Haiku 5.5 vs modelos maiores",
+        "description_draft": "Claude Haiku 5.5 vs modelos maiores: Custo e latência só fazem sentido com tarefas equivalentes. Antes do teste, confirme quais variantes do Claude estão realmente disponíveis.\n\nQual critério deve pesar mais nessa comparação?\n\n#ClaudeAI #ModelosIA #Shorts",
+        "hashtags": [
+          "#ClaudeAI",
+          "#ModelosIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "Claude Haiku",
+          "Claude AI",
+          "IA barata",
+          "comparação LLM",
+          "modelos Claude",
+          "modelos compactos IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm official model/tool name, version, access and supported features before using this title"
+      }
     },
     {
       "id": "alchemy-012",
@@ -288,7 +563,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como escrever prompts melhores sem textos enormes",
+        "primary_keyword": "como criar prompts melhores",
+        "description_draft": "como criar prompts melhores: Objetivo, contexto e formato de saída tornam instruções mais claras. O tutorial mostra como melhorar um pedido sem complicá-lo.\n\nQual etapa desse processo você quer aprender melhor?\n\n#Prompts #ChatGPT #Shorts",
+        "hashtags": [
+          "#Prompts",
+          "#ChatGPT",
+          "#Shorts"
+        ],
+        "tags": [
+          "prompt para IA",
+          "prompt engineering",
+          "como escrever prompts",
+          "melhorar prompts",
+          "dicas ChatGPT",
+          "instruções para IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-013",
@@ -305,7 +605,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "IA consegue editar apenas um trecho de música?",
+        "primary_keyword": "editar trechos de música com IA",
+        "description_draft": "editar trechos de música com IA: Edição musical assistida por IA envolve recursos diferentes de geração completa. Identifique o que a ferramenta realmente altera e os direitos envolvidos.\n\nQue outra curiosidade sobre IA vale investigar?\n\n#MusicaComIA #AudioIA #Shorts",
+        "hashtags": [
+          "#MusicaComIA",
+          "#AudioIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "editar música IA",
+          "música com IA",
+          "edição musical",
+          "ferramentas música IA",
+          "alterar música com IA",
+          "produção musical IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-014",
@@ -322,7 +647,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Suno vs Mureka: quem faz a melhor trilha instrumental?",
+        "primary_keyword": "Suno v6 vs Mureka trilha",
+        "description_draft": "Suno v6 vs Mureka trilha: Uma mesma proposta musical permite comparar textura, repetição e adequação ao vídeo. Confirme o plano, a licença e a versão vigente.\n\nQue desafio você usaria para comparar essas ferramentas?\n\n#Suno #Mureka #Shorts",
+        "hashtags": [
+          "#Suno",
+          "#Mureka",
+          "#Shorts"
+        ],
+        "tags": [
+          "Suno v6",
+          "Mureka AI",
+          "Suno vs Mureka",
+          "trilha instrumental IA",
+          "gerador de música",
+          "comparativo música IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm official model/tool name, version, access and supported features before using this title"
+      }
     },
     {
       "id": "alchemy-015",
@@ -339,7 +689,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar música de fundo com IA para vídeos",
+        "primary_keyword": "criar música de fundo com IA",
+        "description_draft": "criar música de fundo com IA: Defina clima, instrumentos e duração antes da geração. A licença deve ser checada para cada ferramenta e tipo de uso.\n\nQue outro tutorial prático de IA ajudaria você?\n\n#MusicaComIA #TrilhaSonora #Shorts",
+        "hashtags": [
+          "#MusicaComIA",
+          "#TrilhaSonora",
+          "#Shorts"
+        ],
+        "tags": [
+          "música de fundo IA",
+          "trilha sonora IA",
+          "música instrumental IA",
+          "criar música IA",
+          "áudio para vídeo",
+          "licença de música IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-016",
@@ -356,7 +731,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Canva com IA: o que dá para criar de verdade?",
+        "primary_keyword": "Canva inteligência artificial",
+        "description_draft": "Canva inteligência artificial: Recursos de IA no Canva incluem fluxos criativos que precisam ser testados na versão atual. Veja em quais tarefas eles ajudam de verdade.\n\nQue mito sobre IA você gostaria de ver explicado?\n\n#Canva #DesignComIA #Shorts",
+        "hashtags": [
+          "#Canva",
+          "#DesignComIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "Canva IA",
+          "Canva inteligência artificial",
+          "Canva AI",
+          "design com IA",
+          "criar artes Canva",
+          "ferramentas Canva",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-017",
@@ -373,7 +773,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Canva vs ChatGPT Images: qual thumbnail ficou melhor?",
+        "primary_keyword": "Canva Craft vs ChatGPT Images",
+        "description_draft": "Canva Craft vs ChatGPT Images: Uma thumbnail com o mesmo briefing permite comparar legibilidade, composição e tempo de edição. Verifique o nome e o acesso a cada produto.\n\nQual resultado você considera mais importante num teste?\n\n#Canva #ThumbnailIA #Shorts",
+        "hashtags": [
+          "#Canva",
+          "#ThumbnailIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "Canva Craft",
+          "ChatGPT Images",
+          "thumbnail com IA",
+          "comparar gerador de imagens",
+          "Canva vs ChatGPT",
+          "capa de vídeo IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm official model/tool name, version, access and supported features before using this title"
+      }
     },
     {
       "id": "alchemy-018",
@@ -390,7 +815,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar thumbnail com IA usando 3 elementos",
+        "primary_keyword": "thumbnail profissional com IA",
+        "description_draft": "thumbnail profissional com IA: Poucos elementos podem comunicar melhor a ideia: assunto claro, contraste e foco visual. O tutorial deve mostrar o processo e a imagem final.\n\nEm qual projeto você usaria essa técnica?\n\n#Thumbnail #YouTubeShorts #Shorts",
+        "hashtags": [
+          "#Thumbnail",
+          "#YouTubeShorts",
+          "#Shorts"
+        ],
+        "tags": [
+          "thumbnail YouTube IA",
+          "capa Shorts",
+          "design de thumbnail",
+          "miniatura YouTube",
+          "thumbnail profissional",
+          "imagens para vídeo",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-019",
@@ -407,7 +857,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que a IA muda o rosto do mesmo personagem?",
+        "primary_keyword": "personagens consistentes com IA",
+        "description_draft": "personagens consistentes com IA: Rosto, roupas e proporções podem variar entre imagens. Entenda por que referências e instruções visuais reduzem inconsistências sem eliminar todos os erros.\n\nQual detalhe sobre IA mais surpreendeu você?\n\n#PersonagensIA #ImagensComIA #Shorts",
+        "hashtags": [
+          "#PersonagensIA",
+          "#ImagensComIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "personagem consistente IA",
+          "consistência visual",
+          "personagens com IA",
+          "referência de personagem",
+          "geração de personagens",
+          "IA imagem",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-020",
@@ -424,7 +899,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "IA consegue gerar 5 poses do mesmo personagem?",
+        "primary_keyword": "cinco poses do mesmo personagem com IA",
+        "description_draft": "cinco poses do mesmo personagem com IA: Uma sequência de poses só é válida quando preserva identidade e membros completos. Registre todas as tentativas e os critérios de aprovação.\n\nQual critério deve pesar mais nessa comparação?\n\n#PosesIA #PersonagensIA #Shorts",
+        "hashtags": [
+          "#PosesIA",
+          "#PersonagensIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "poses com IA",
+          "mesmo personagem IA",
+          "personagem em várias poses",
+          "IA imagem",
+          "consistência de personagens",
+          "pose de personagem",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-021",
@@ -441,7 +941,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar ficha de referência de personagem com IA",
+        "primary_keyword": "ficha de referência de personagem IA",
+        "description_draft": "ficha de referência de personagem IA: Uma boa ficha organiza rosto, roupas, cores e expressões para orientar novas imagens. Veja a montagem por etapas.\n\nQual etapa desse processo você quer aprender melhor?\n\n#CharacterSheet #PersonagensIA #Shorts",
+        "hashtags": [
+          "#CharacterSheet",
+          "#PersonagensIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "ficha personagem IA",
+          "character sheet IA",
+          "referência visual",
+          "design de personagem",
+          "consistência IA",
+          "criar personagem",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-022",
@@ -458,7 +983,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que a IA ainda erra letras nas imagens?",
+        "primary_keyword": "texto errado em imagens geradas por IA",
+        "description_draft": "texto errado em imagens geradas por IA: Letras deformadas e palavras trocadas ainda aparecem em alguns resultados. A clareza do prompt e a edição posterior fazem diferença.\n\nQue outra curiosidade sobre IA vale investigar?\n\n#ImagensComIA #TextoIA #Shorts",
+        "hashtags": [
+          "#ImagensComIA",
+          "#TextoIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "texto em imagem IA",
+          "erros de texto IA",
+          "tipografia IA",
+          "gerador de imagem",
+          "IA escreve errado",
+          "design IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-023",
@@ -475,7 +1025,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "3 geradores de imagem: qual escreve melhor em português?",
+        "primary_keyword": "geradores de imagem com texto português",
+        "description_draft": "geradores de imagem com texto português: O mesmo texto em português serve para avaliar grafia, acentuação e composição. Os exemplos devem ser gerados de verdade e com versões identificadas.\n\nQue desafio você usaria para comparar essas ferramentas?\n\n#ImagemIA #Portugues #Shorts",
+        "hashtags": [
+          "#ImagemIA",
+          "#Portugues",
+          "#Shorts"
+        ],
+        "tags": [
+          "gerador de imagem IA",
+          "texto português IA",
+          "escrever em imagens IA",
+          "comparação geradores",
+          "imagem com texto",
+          "tipografia gerativa",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-024",
@@ -492,7 +1067,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como corrigir letras erradas em imagens de IA",
+        "primary_keyword": "corrigir textos de imagens IA",
+        "description_draft": "corrigir textos de imagens IA: Uma etapa de edição pode resolver palavras e acentos problemáticos sem refazer toda a composição. O tutorial compara antes e depois.\n\nQue outro tutorial prático de IA ajudaria você?\n\n#EdicaoDeImagem #ImagensComIA #Shorts",
+        "hashtags": [
+          "#EdicaoDeImagem",
+          "#ImagensComIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "corrigir texto imagem IA",
+          "editar imagem IA",
+          "texto em imagem",
+          "revisar arte IA",
+          "tipografia Photoshop",
+          "imagem gerada IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-025",
@@ -509,7 +1109,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Logo em SVG com IA: como garantir qualidade?",
+        "primary_keyword": "criar logos SVG com IA",
+        "description_draft": "criar logos SVG com IA: O formato vetorial permite ampliar um desenho sem pixelar. Nem toda IA exporta SVG nativo, então verifique a conversão e os nós do arquivo.\n\nQue mito sobre IA você gostaria de ver explicado?\n\n#LogoIA #SVG #Shorts",
+        "hashtags": [
+          "#LogoIA",
+          "#SVG",
+          "#Shorts"
+        ],
+        "tags": [
+          "logo SVG IA",
+          "logo vetorial",
+          "SVG com IA",
+          "criar logotipo IA",
+          "design vetorial",
+          "identidade visual IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-026",
@@ -526,7 +1151,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Ideogram vs ChatGPT Images: qual cria a logo mais profissional?",
+        "primary_keyword": "Ideogram vs ChatGPT Images logo",
+        "description_draft": "Ideogram vs ChatGPT Images logo: Dois geradores recebem o mesmo briefing para avaliar originalidade, legibilidade e facilidade de editar o resultado.\n\nQual resultado você considera mais importante num teste?\n\n#Ideogram #ChatGPT #Shorts",
+        "hashtags": [
+          "#Ideogram",
+          "#ChatGPT",
+          "#Shorts"
+        ],
+        "tags": [
+          "Ideogram",
+          "ChatGPT Images",
+          "logo com IA",
+          "Ideogram vs ChatGPT",
+          "design de logo IA",
+          "ferramentas de imagem",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm official model/tool name, version, access and supported features before using this title"
+      }
     },
     {
       "id": "alchemy-027",
@@ -543,7 +1193,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar identidade visual simples usando IA",
+        "primary_keyword": "identidade visual com IA",
+        "description_draft": "identidade visual com IA: Cores, tipografia e símbolos precisam funcionar juntos. Um processo simples ajuda a criar peças coerentes sem exageros.\n\nEm qual projeto você usaria essa técnica?\n\n#IdentidadeVisual #DesignIA #Shorts",
+        "hashtags": [
+          "#IdentidadeVisual",
+          "#DesignIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "identidade visual IA",
+          "branding com IA",
+          "logo IA",
+          "paleta de cores",
+          "design para canal",
+          "marca visual",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-028",
@@ -560,7 +1235,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Por que a inteligência artificial inventa respostas?",
+        "primary_keyword": "alucinação de inteligência artificial",
+        "description_draft": "alucinação de inteligência artificial: Modelos podem produzir afirmações convincentes sem base. Entenda por que é preciso verificar fontes e contextos importantes.\n\nQual detalhe sobre IA mais surpreendeu você?\n\n#AlucinacaoIA #ChatGPT #Shorts",
+        "hashtags": [
+          "#AlucinacaoIA",
+          "#ChatGPT",
+          "#Shorts"
+        ],
+        "tags": [
+          "alucinação IA",
+          "erros do ChatGPT",
+          "IA inventa",
+          "confiabilidade IA",
+          "verificar fatos IA",
+          "LLM erros",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-029",
@@ -577,7 +1277,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "ChatGPT vs Gemini vs Claude: teste de 5 perguntas",
+        "primary_keyword": "perguntas difíceis para ChatGPT Gemini Claude",
+        "description_draft": "perguntas difíceis para ChatGPT Gemini Claude: Cinco perguntas iguais permitem observar fontes, precisão e correções. Só divulgar o resultado após executar o teste completo.\n\nQual critério deve pesar mais nessa comparação?\n\n#ChatGPT #Gemini #Shorts",
+        "hashtags": [
+          "#ChatGPT",
+          "#Gemini",
+          "#Shorts"
+        ],
+        "tags": [
+          "ChatGPT",
+          "Gemini",
+          "Claude",
+          "IA comparativo",
+          "perguntas difíceis IA",
+          "teste modelos IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-030",
@@ -594,7 +1319,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como verificar se uma resposta de IA é verdadeira",
+        "primary_keyword": "como verificar respostas da IA",
+        "description_draft": "como verificar respostas da IA: Cheque datas, fontes oficiais e informações técnicas antes de confiar no resultado. Veja um método de conferência passo a passo.\n\nQual etapa desse processo você quer aprender melhor?\n\n#Verificacao #InteligenciaArtificial #Shorts",
+        "hashtags": [
+          "#Verificacao",
+          "#InteligenciaArtificial",
+          "#Shorts"
+        ],
+        "tags": [
+          "verificar respostas IA",
+          "fact checking IA",
+          "fontes ChatGPT",
+          "IA confiável",
+          "checagem de fatos",
+          "pesquisa com IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-031",
@@ -611,7 +1361,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Você pode executar algumas IAs no seu próprio computador!",
+        "primary_keyword": "IA local no próprio computador",
+        "description_draft": "IA local no próprio computador: Modelos locais dependem de memória, armazenamento e processador. Entenda as vantagens de privacidade e as limitações reais.\n\nQue outra curiosidade sobre IA vale investigar?\n\n#IALocal #PC #Shorts",
+        "hashtags": [
+          "#IALocal",
+          "#PC",
+          "#Shorts"
+        ],
+        "tags": [
+          "IA local",
+          "rodar LLM local",
+          "modelo offline",
+          "IA no PC",
+          "LLM no computador",
+          "open source IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-032",
@@ -628,7 +1403,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "IA local vs IA na nuvem: vale a pena usar modelos gratuitos?",
+        "primary_keyword": "IA local vs IA na nuvem",
+        "description_draft": "IA local vs IA na nuvem: Velocidade, privacidade e custo dependem do hardware e do serviço escolhido. Teste cenários comparáveis antes de decidir.\n\nQue desafio você usaria para comparar essas ferramentas?\n\n#IALocal #Nuvem #Shorts",
+        "hashtags": [
+          "#IALocal",
+          "#Nuvem",
+          "#Shorts"
+        ],
+        "tags": [
+          "IA local vs nuvem",
+          "LLM local",
+          "ChatGPT vs IA local",
+          "rodar modelos no PC",
+          "custo IA",
+          "privacidade IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-033",
@@ -645,7 +1445,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como começar com IA local no PC: passo a passo",
+        "primary_keyword": "como instalar IA local no PC",
+        "description_draft": "como instalar IA local no PC: Escolha uma ferramenta compatível, baixe um modelo adequado e teste um prompt simples. Registre requisitos e limitações do computador.\n\nQue outro tutorial prático de IA ajudaria você?\n\n#IALocal #TutorialIA #Shorts",
+        "hashtags": [
+          "#IALocal",
+          "#TutorialIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "instalar IA local",
+          "Ollama tutorial",
+          "LLM offline",
+          "IA no Windows",
+          "modelos locais",
+          "rodar IA PC",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-034",
@@ -662,7 +1487,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Chatbot ou agente de IA: qual a diferença?",
+        "primary_keyword": "chatbot vs agente de IA",
+        "description_draft": "chatbot vs agente de IA: Um chatbot responde mensagens; um agente pode executar etapas e usar ferramentas sob permissões. Entenda as diferenças em exemplos concretos.\n\nQue mito sobre IA você gostaria de ver explicado?\n\n#AgentesIA #Chatbot #Shorts",
+        "hashtags": [
+          "#AgentesIA",
+          "#Chatbot",
+          "#Shorts"
+        ],
+        "tags": [
+          "chatbot IA",
+          "agente de IA",
+          "IA agent",
+          "automação inteligente",
+          "assistente IA",
+          "agentes autônomos",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-035",
@@ -679,7 +1529,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "ChatGPT vs Claude vs Gemini em 3 tarefas reais",
+        "primary_keyword": "ChatGPT Claude Gemini tarefas reais",
+        "description_draft": "ChatGPT Claude Gemini tarefas reais: Três tarefas do cotidiano permitem avaliar clareza, execução e limitações. O comparativo deve incluir resultados reproduzíveis.\n\nQual resultado você considera mais importante num teste?\n\n#ChatGPT #Claude #Shorts",
+        "hashtags": [
+          "#ChatGPT",
+          "#Claude",
+          "#Shorts"
+        ],
+        "tags": [
+          "ChatGPT vs Claude vs Gemini",
+          "comparação IA",
+          "benchmark modelos",
+          "tarefas com IA",
+          "melhor chatbot",
+          "assistentes IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-036",
@@ -696,7 +1571,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar instruções que fazem a IA entregar resultados melhores",
+        "primary_keyword": "instruções melhores para IA",
+        "description_draft": "instruções melhores para IA: Definir o objetivo e especificar a saída reduz ambiguidades. O tutorial demonstra pedidos antes e depois da revisão.\n\nEm qual projeto você usaria essa técnica?\n\n#PromptEngineering #DicasIA #Shorts",
+        "hashtags": [
+          "#PromptEngineering",
+          "#DicasIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "instruções IA",
+          "melhores prompts",
+          "prompt engineering",
+          "comandos ChatGPT",
+          "otimizar prompts",
+          "assistente de IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-037",
@@ -713,7 +1613,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como uma única imagem pode se transformar em vídeo?",
+        "primary_keyword": "imagem para vídeo com IA",
+        "description_draft": "imagem para vídeo com IA: A imagem inicial orienta movimentos e consistência, mas nem toda ferramenta mantém o mesmo resultado. Conheça o fluxo e as limitações.\n\nQual detalhe sobre IA mais surpreendeu você?\n\n#ImagemParaVideo #VideoIA #Shorts",
+        "hashtags": [
+          "#ImagemParaVideo",
+          "#VideoIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "imagem para vídeo",
+          "image to video",
+          "vídeo com IA",
+          "animar foto IA",
+          "gerador de vídeo",
+          "movimento IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-038",
@@ -730,7 +1655,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Kling vs Runway vs Wan: qual anima melhor?",
+        "primary_keyword": "Kling vs Runway vs Wan imagem para vídeo",
+        "description_draft": "Kling vs Runway vs Wan imagem para vídeo: Use a mesma foto e o mesmo movimento desejado para comparar fidelidade, artefatos e duração. Custos e licenças devem ser conferidos.\n\nQual critério deve pesar mais nessa comparação?\n\n#KlingAI #Runway #Shorts",
+        "hashtags": [
+          "#KlingAI",
+          "#Runway",
+          "#Shorts"
+        ],
+        "tags": [
+          "Kling AI",
+          "Runway",
+          "Wan AI",
+          "Kling vs Runway",
+          "comparativo vídeo IA",
+          "image to video IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm official model/tool name, version, access and supported features before using this title"
+      }
     },
     {
       "id": "alchemy-039",
@@ -747,7 +1697,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como animar imagens sem pagar por IA de vídeo",
+        "primary_keyword": "animar imagem sem IA de vídeo paga",
+        "description_draft": "animar imagem sem IA de vídeo paga: Pan, zoom suave e camadas podem trazer movimento sem gerar cada quadro com IA. Veja quando essa técnica funciona e seus limites.\n\nQual etapa desse processo você quer aprender melhor?\n\n#Animacao2D #EdicaoVideo #Shorts",
+        "hashtags": [
+          "#Animacao2D",
+          "#EdicaoVideo",
+          "#Shorts"
+        ],
+        "tags": [
+          "animar imagem grátis",
+          "efeito Ken Burns",
+          "zoom em imagens",
+          "edição de vídeo",
+          "2.5D",
+          "animação sem IA paga",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-040",
@@ -764,7 +1739,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como a IA sincroniza a boca dos personagens com a voz?",
+        "primary_keyword": "sincronização labial com IA",
+        "description_draft": "sincronização labial com IA: A sincronização entre fala e boca envolve marcação temporal e geração de movimentos. Nem todo método mantém a expressão natural.\n\nQue outra curiosidade sobre IA vale investigar?\n\n#LipSync #VideoIA #Shorts",
+        "hashtags": [
+          "#LipSync",
+          "#VideoIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "lip sync IA",
+          "sincronização labial",
+          "boca falando IA",
+          "avatar IA",
+          "áudio e vídeo IA",
+          "personagem animado",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-041",
@@ -781,7 +1781,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Personagem de IA falando: fica natural?",
+        "primary_keyword": "personagem IA falando naturalmente",
+        "description_draft": "personagem IA falando naturalmente: A avaliação combina sincronia da boca, expressões e voz. Exiba tentativas reais, inclusive problemas visíveis no resultado.\n\nQue desafio você usaria para comparar essas ferramentas?\n\n#AvatarIA #LipSync #Shorts",
+        "hashtags": [
+          "#AvatarIA",
+          "#LipSync",
+          "#Shorts"
+        ],
+        "tags": [
+          "avatar falando IA",
+          "personagem que fala",
+          "lip sync IA",
+          "voz IA",
+          "personagem virtual",
+          "animação IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-042",
@@ -798,7 +1823,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar um personagem que fala com voz e legendas sincronizadas",
+        "primary_keyword": "personagem que fala com voz e legendas",
+        "description_draft": "personagem que fala com voz e legendas: Do áudio à sincronização e às legendas, cada etapa precisa de tempo correto. Veja como preparar um vídeo curto com personagem virtual.\n\nQue outro tutorial prático de IA ajudaria você?\n\n#PersonagemIA #Legendas #Shorts",
+        "hashtags": [
+          "#PersonagemIA",
+          "#Legendas",
+          "#Shorts"
+        ],
+        "tags": [
+          "personagem falando IA",
+          "legendas sincronizadas",
+          "text to speech",
+          "lip sync",
+          "edição de Shorts",
+          "avatar animado",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-043",
@@ -815,7 +1865,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Uma IA consegue criar um jogo a partir de uma descrição? 🎮",
+        "primary_keyword": "criar jogo com inteligência artificial",
+        "description_draft": "criar jogo com inteligência artificial: Assistentes podem ajudar com código, design e testes. O resultado depende de instruções claras e validação do jogo executável.\n\nQue mito sobre IA você gostaria de ver explicado?\n\n#CriarJogos #IAProgramacao #Shorts",
+        "hashtags": [
+          "#CriarJogos",
+          "#IAProgramacao",
+          "#Shorts"
+        ],
+        "tags": [
+          "jogo com IA",
+          "criar game com ChatGPT",
+          "programar jogo com IA",
+          "game dev IA",
+          "IA programação",
+          "jogo HTML5",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-044",
@@ -832,7 +1907,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "ChatGPT vs Claude: quem faz o melhor minigame?",
+        "primary_keyword": "ChatGPT vs Claude criando minigame",
+        "description_draft": "ChatGPT vs Claude criando minigame: O desafio exige que ambos recebam a mesma especificação e gerem projetos executáveis. Compare código, bugs e experiência real.\n\nQual resultado você considera mais importante num teste?\n\n#ChatGPT #Claude #Shorts",
+        "hashtags": [
+          "#ChatGPT",
+          "#Claude",
+          "#Shorts"
+        ],
+        "tags": [
+          "ChatGPT programação",
+          "Claude programação",
+          "minigame IA",
+          "ChatGPT vs Claude",
+          "jogo com IA",
+          "comparação de código",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-045",
@@ -849,7 +1949,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar seu primeiro jogo simples com ajuda da IA",
+        "primary_keyword": "como criar jogo simples com IA",
+        "description_draft": "como criar jogo simples com IA: Escolha uma mecânica pequena, gere o código, execute e corrija erros. O vídeo mostra as etapas em vez de prometer um jogo completo.\n\nEm qual projeto você usaria essa técnica?\n\n#GameDev #CriarJogos #Shorts",
+        "hashtags": [
+          "#GameDev",
+          "#CriarJogos",
+          "#Shorts"
+        ],
+        "tags": [
+          "criar jogo com IA",
+          "tutorial game dev IA",
+          "jogo simples HTML5",
+          "Godot IA",
+          "programação iniciante",
+          "jogo com ChatGPT",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-046",
@@ -866,7 +1991,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Usar música criada por IA significa ter todos os direitos?",
+        "primary_keyword": "direitos autorais música gerada por IA",
+        "description_draft": "direitos autorais música gerada por IA: Condições de uso variam entre ferramentas, planos e países. Gerar uma faixa não prova automaticamente exclusividade ou licença comercial.\n\nQual detalhe sobre IA mais surpreendeu você?\n\n#DireitosAutorais #MusicaIA #Shorts",
+        "hashtags": [
+          "#DireitosAutorais",
+          "#MusicaIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "direitos música IA",
+          "copyright música IA",
+          "licença Suno",
+          "licença Mureka",
+          "música AI direitos",
+          "monetizar música IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-047",
@@ -883,7 +2033,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Testei 3 ferramentas de áudio: qual entrega o melhor resultado?",
+        "primary_keyword": "comparativo de ferramentas de áudio IA",
+        "description_draft": "comparativo de ferramentas de áudio IA: Teste clareza, ruído e controle de voz ou trilha com arquivos equivalentes. Informe preços e licenças confirmadas.\n\nQual critério deve pesar mais nessa comparação?\n\n#AudioIA #FerramentasIA #Shorts",
+        "hashtags": [
+          "#AudioIA",
+          "#FerramentasIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "ferramentas áudio IA",
+          "voz com IA",
+          "edição de áudio",
+          "TTS",
+          "gerador de música IA",
+          "comparativo áudio",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-048",
@@ -900,7 +2075,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "Como criar uma trilha original e preparar o áudio para um Short",
+        "primary_keyword": "criar trilha original para YouTube Short",
+        "description_draft": "criar trilha original para YouTube Short: Escolha instrumentos, gere a trilha e faça mixagem para não abafar a fala. Publique somente com os direitos adequados.\n\nQual etapa desse processo você quer aprender melhor?\n\n#TrilhaSonora #YouTubeShorts #Shorts",
+        "hashtags": [
+          "#TrilhaSonora",
+          "#YouTubeShorts",
+          "#Shorts"
+        ],
+        "tags": [
+          "trilha sonora Shorts",
+          "criar música IA",
+          "música para YouTube",
+          "edição áudio vídeo",
+          "mixagem Shorts",
+          "trilha original",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "tutorial IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-049",
@@ -917,7 +2117,32 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "O que mais encarece um vídeo produzido com inteligência artificial?",
+        "primary_keyword": "custo de gerar vídeos com IA",
+        "description_draft": "custo de gerar vídeos com IA: Imagens, voz, animação e renderização têm custos diferentes. Um orçamento realista ajuda a decidir onde vale economizar.\n\nQue outra curiosidade sobre IA vale investigar?\n\n#VideoIA #CustosIA #Shorts",
+        "hashtags": [
+          "#VideoIA",
+          "#CustosIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "custo vídeo IA",
+          "gerar vídeo barato IA",
+          "créditos IA",
+          "ferramentas IA preço",
+          "produção de vídeo IA",
+          "orçamento IA",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "curiosidades de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": false,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     },
     {
       "id": "alchemy-050",
@@ -934,7 +2159,36 @@
       "experiment_status": "not_run",
       "source_proof": "pending",
       "production_reservation": "not_reserved",
-      "publish_authorized": false
+      "publish_authorized": false,
+      "seo": {
+        "title_draft": "IA grátis vs paga: qual Short ficou melhor?",
+        "primary_keyword": "IA grátis vs IA paga para Shorts",
+        "description_draft": "IA grátis vs IA paga para Shorts: O comparativo exige produzir dois vídeos sob critérios equivalentes, medir tempo e qualidade e incluir eventuais limites gratuitos.\n\nQue desafio você usaria para comparar essas ferramentas?\n\n#IAGratis #VideoIA #Shorts",
+        "hashtags": [
+          "#IAGratis",
+          "#VideoIA",
+          "#Shorts"
+        ],
+        "tags": [
+          "IA grátis",
+          "IA paga",
+          "short com IA",
+          "comparar ferramentas IA",
+          "produção Shorts",
+          "vídeo IA grátis",
+          "Alchemy Flames",
+          "inteligência artificial",
+          "comparativo de IA"
+        ],
+        "metadata_status": "draft_pending_factual_and_video_review",
+        "requires_real_experiment": true,
+        "brand_note": "Nome observado do canal: Alchemy Flames; Alchemy Lab ainda é marca planejada.",
+        "extra_review": "Confirm content against actual video and official sources before publishing"
+      }
     }
-  ]
+  ],
+  "seo_policy": "config/seo-metadata-policy-v1.json",
+  "seo_revision": "2026-11-05",
+  "seo_status": "draft_metadata_only; verify live content, product versions, evidence and YouTube channel before release",
+  "seo_credits_status": "No new vidIQ keyword results; account reported zero available credits during planning"
 }
