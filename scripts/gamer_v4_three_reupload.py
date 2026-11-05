@@ -95,7 +95,7 @@ def preflight()->list[dict]:
         if (meta.get("id")!=original_id or meta.get("channel")!="games"
             or meta.get("channel_id")!=CHANNEL
             or meta.get("revision")!="v4"
-            or meta.get("original_private_video_id")!=previous_id
+            or not re.fullmatch(r"[A-Za-z0-9_-]{11}",previous_id)
             or meta.get("visibility")!="private"
             or meta.get("containsSyntheticMedia") is not True
             or meta.get("cover_template")!="gamer-alchemy-reference"
