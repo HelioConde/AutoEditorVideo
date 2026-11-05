@@ -226,7 +226,7 @@ try {
                     Acao='verificar';Manifesto=$manifesto;Id=$id;Perfil=$Perfil
                 }
                 $mp4Valido=$true
-                Write-Host "[EN CACHE MP4] $id: pronto e validado, sem rerender." -ForegroundColor Green
+                Write-Host "[EN CACHE MP4] ${id}: pronto e validado, sem rerender." -ForegroundColor Green
             } catch {
                 Write-Host "[EN] Cache ainda nao validado para $id; tentando produzir. Causa: $_" -ForegroundColor Yellow
             }
