@@ -35,7 +35,7 @@ def test_one_shot_renderer_not_allowed_to_run_without_explicit_environment(monke
 
 def test_subtitle_wrapping_protects_horizontal_safe_area(tmp_path):
     # Fake WordBoundary timestamps: no TTS call or files required.
-    parts="Já existem muitos detalhes que ajudam você a se inscrever no canal e acompanhar mais vídeos".split()
+    parts=("Já existem muitos detalhes que ajudam você a se inscrever no canal e acompanhar mais vídeos " * 4).split()
     words=[{"start":i*.35,"end":i*.35+.27,"text":w} for i,w in enumerate(parts)]
     path=tmp_path/"captions.ass"
     recut.write_safe_subtitles(words,path,25.0)
