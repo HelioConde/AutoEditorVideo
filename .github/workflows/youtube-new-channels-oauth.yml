@@ -7,6 +7,7 @@ on:
       - 'scripts/youtube_new_channels_oauth.py'
       - 'scripts/youtube_new_channels_env_guard.py'
       - 'tests/test_youtube_new_channels_oauth.py'
+      - 'conectar-novos-canais.ps1'
   push:
     branches: [main]
     paths:
@@ -14,6 +15,7 @@ on:
       - 'scripts/youtube_new_channels_oauth.py'
       - 'scripts/youtube_new_channels_env_guard.py'
       - 'tests/test_youtube_new_channels_oauth.py'
+      - 'conectar-novos-canais.ps1'
   workflow_dispatch:
     inputs:
       channel:
@@ -50,6 +52,28 @@ jobs:
         run: python -m pytest -q tests/test_youtube_new_channels_oauth.py tests/test_youtube_channel_registry.py
       - name: Report registered channels without OAuth calls
         run: python scripts/youtube_channel_registry.py --action list
+
+  powershell-syntax-windows:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Parse connector PowerShell without running OAuth
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          [System.Management.Automation.Language.Parser]::ParseFile(
+            (Join-Path $PWD 'conectar-novos-canais.ps1'),
+            [ref]$tokens, [ref]$errors
+          ) | Out-Null
+          if ($errors.Count -gt 0) {
+            $errors | ForEach-Object { Write-Error $_.Message }
+            exit 1
+          }
+          Write-Host 'PowerShell parser OK — sem login, nenhum secret, nenhum upload.'
 
   check-environment-before-using-secrets:
     needs: offline-safety-tests
