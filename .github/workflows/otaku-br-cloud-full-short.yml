@@ -1,0 +1,191 @@
+name: Otaku Multicena BR - real AutoEditorVideo cloud video
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/otaku-br-cloud-full-short.yml'
+      - 'scripts/otaku_br_cloud_short.py'
+      - 'tests/test_otaku_br_cloud_short.py'
+      - 'scripts/estado_codex_proxy.py'
+      - 'scripts/gerar_video_codex.py'
+      - 'scripts/master_scenes.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/otaku-br-cloud-full-short.yml'
+      - 'scripts/otaku_br_cloud_short.py'
+      - 'tests/test_otaku_br_cloud_short.py'
+      - 'scripts/estado_codex_proxy.py'
+      - 'scripts/gerar_video_codex.py'
+      - 'scripts/master_scenes.py'
+  workflow_dispatch:
+    inputs:
+      episode_id:
+        description: 'BR Short (only 5008-firefly-wedding authorized for this pilot)'
+        required: true
+        default: '5008-firefly-wedding'
+        type: choice
+        options:
+          - '5008-firefly-wedding'
+      max_calls:
+        description: 'Explicit maximum of real image requests; 0 = no image generation'
+        required: true
+        default: '0'
+        type: choice
+        options:
+          - '0'
+          - '3'
+          - '6'
+          - '9'
+          - '12'
+          - '15'
+          - '18'
+          - '21'
+
+# The provider is a third-party, community-built, undocumented proxy.
+# Never expose OAuth secrets in PR jobs or artifact uploads.
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-br-cloud-real-short
+  cancel-in-progress: false
+
+jobs:
+  offline-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline QA dependencies
+        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13'
+      - name: Validate the original renderer and branch/budget safeguards
+        run: python -m pytest -q tests/test_otaku_br_cloud_short.py
+
+  validate-environment:
+    needs: offline-safety
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      (
+        (github.event_name == 'push' &&
+         startsWith(github.event.head_commit.message, 'feat(cloud-br): run 5008 full video from AutoEditorVideo'))
+        ||
+        (github.event_name == 'workflow_dispatch' &&
+         inputs.episode_id == '5008-firefly-wedding' &&
+         inputs.max_calls != '0')
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Block if protected Environment is not limited to main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  generate-actual-autoeditorvideo-mp4:
+    needs: [offline-safety, validate-environment]
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      (
+        (github.event_name == 'push' &&
+         startsWith(github.event.head_commit.message, 'feat(cloud-br): run 5008 full video from AutoEditorVideo'))
+        ||
+        (github.event_name == 'workflow_dispatch' &&
+         inputs.episode_id == '5008-firefly-wedding' &&
+         inputs.max_calls != '0')
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout ORIGINAL pinned community Go proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install FFmpeg and official project dependencies BEFORE secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-master.txt
+      - name: Install ORIGINAL Remotion from package lock, BEFORE secrets
+        working-directory: motion-remotion
+        run: npm ci --no-audit --no-fund
+      - name: TypeScript QA of original Remotion components
+        working-directory: motion-remotion
+        run: npm run typecheck
+      - name: Compile upstream native Go proxy BEFORE secrets
+        working-directory: pinned-native-go-proxy
+        shell: bash
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/otaku-native-proxy" ./cmd/api
+      - name: Produce actual seven-scene BR video through repository engine
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
+          MAX_IMAGE_CALLS: ${{ github.event_name == 'workflow_dispatch' && inputs.max_calls || '21' }}
+          EPISODE_ID: '5008-firefly-wedding'
+        run: |
+          set -euo pipefail
+          umask 077
+          state_dir="$RUNNER_TEMP/otaku-br-private-go-auth"
+          test ! -e "$state_dir"
+          mkdir -m 700 "$state_dir"
+          proxy_pid=''
+          cleanup() {
+            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$state_dir"
+            rm -f -- "$RUNNER_TEMP/otaku-br-private-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$state_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/otaku-native-proxy" > "$RUNNER_TEMP/otaku-br-private-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/otaku_br_cloud_short.py \
+            --id "$EPISODE_ID" --max-image-calls "$MAX_IMAGE_CALLS"
+          echo '[CLOUD BR] ORIGINAL_ENGINE_COMPLETED_PRIVATE_STATE_CLEANUP_ON_EXIT'
+      - name: Upload only review MP4, cover, metadata and QA for 1 day
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-multicena-BR-5008-autoeditorvideo-review
+          path: cloud-br-review/
+          retention-days: 1
+          if-no-files-found: error
