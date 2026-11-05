@@ -44,10 +44,16 @@ def preflight(channel: str, env: dict) -> dict:
         raise UploadBlocked("WRONG_REPOSITORY")
     if env.get("GITHUB_REF") != "refs/heads/main":
         raise UploadBlocked("MAIN_ONLY")
-    if env.get("GITHUB_EVENT_NAME") != "push":
-        raise UploadBlocked("ONE_SHOT_PUSH_ONLY")
     if env.get("GITHUB_RUN_ATTEMPT") != "1":
         raise UploadBlocked("NEVER_RERUN_AMBIGUOUS_UPLOAD")
+    if env.get("GITHUB_EVENT_NAME") == "workflow_run":
+        # Exact one-shot source render is independently verified by the
+        # read-only guard, before this protected token job starts.
+        if (env.get("AI_SIX_PILOT_ORIGINAL_RUN_ID") != "42044136670" or
+            env.get("AI_SIX_PILOT_ORIGINAL_SHA") != "a414b9aea8d778f27c765cfb3d45e94612d0ee05"):
+            raise UploadBlocked("UNAUTHORIZED_ORIGINAL_RENDER")
+    elif env.get("GITHUB_EVENT_NAME") != "push":
+        raise UploadBlocked("ONE_SHOT_PUSH_OR_PINNED_WORKFLOW_RUN_ONLY")
     if env.get("AI_SIX_PILOT_USER_APPROVED") != "true":
         raise UploadBlocked("EXPLICIT_PILOT_APPROVAL_REQUIRED")
     cfg = get_channel(channel)
