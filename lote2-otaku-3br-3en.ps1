@@ -13,6 +13,8 @@ param(
     [int]$MaxChamadasNovos=30,
     [ValidateRange(0,24)]
     [int]$MaxChamadasBleach=0,
+    [ValidateRange(0,60)]
+    [int]$MaxChamadasJujutsu=0,
     [switch]$ExigirMovimentoPersonagem
 )
 
@@ -34,7 +36,8 @@ $manifesto='assets\gerados\otaku-en-lote2-3-shorts.json'
 
 foreach($name in @('grade-50-shorts.ps1','criar-publicar-short.ps1',
                    'preparar-publicados-en.ps1','gerar-shorts-en.ps1',
-                   'publicar-shorts-en.ps1','scripts\validar_short_lote2.py')){
+                   'publicar-shorts-en.ps1','gerar-shorts-master.ps1',
+                   'scripts\validar_short_lote2.py')){
     if(-not(Test-Path (Join-Path $root $name) -PathType Leaf)){
         throw "Arquivo ausente: $name. Atualize o projeto com git pull."
     }
@@ -146,6 +149,7 @@ try {
         Write-Host "[BLEACH] Reparo autorizado: ate $MaxChamadasBleach novas chamadas (somente se faltar cache)." -ForegroundColor Yellow
     }
     Write-Host "[TETO IA] Outros 2 BR: ate $($MaxChamadasNovos*2) chamadas adicionais." -ForegroundColor Yellow
+    Write-Host "[JUJUTSU EN] Limite autorizado para completar as cenas PT: $MaxChamadasJujutsu chamada(s). Nao altera upload BR." -ForegroundColor Yellow
     $concluidos=New-Object System.Collections.Generic.List[string]
     $pendentes=New-Object System.Collections.Generic.List[string]
 
@@ -231,6 +235,22 @@ try {
                 Write-Host "[EN] Cache ainda nao validado para $id; tentando produzir. Causa: $_" -ForegroundColor Yellow
             }
             if(-not $mp4Valido){
+                if($id -eq '401-jujutsu-kaisen-ep01'){
+                    Write-Host '[JUJUTSU] Diagnosticando todas as cenas BR do cache. Nenhum upload BR.' -ForegroundColor Cyan
+                    Invoke-Etapa 'gerar-shorts-master.ps1' @{
+                        Id=$id;Modelo=$Modelo;TodasCenas=$true
+                        DiagnosticarCache=$true;MaxChamadas=0
+                    }
+                    if($MaxChamadasJujutsu -gt 0){
+                        Write-Host "[JUJUTSU] Completando somente os arquivos faltantes, teto $MaxChamadasJujutsu chamadas de imagem." -ForegroundColor Yellow
+                        Invoke-Etapa 'gerar-shorts-master.ps1' @{
+                            Id=$id;Modelo=$Modelo;TodasCenas=$true
+                            MaxChamadas=$MaxChamadasJujutsu
+                        }
+                    } else {
+                        Write-Warning '[JUJUTSU] Nenhuma chamada nova autorizada. Se faltar master.png, use -MaxChamadasJujutsu apos conferir diagnostico.'
+                    }
+                }
                 Write-Host "[EN] Preparando voz, legendas e MP4: $id" -ForegroundColor Cyan
                 foreach($acao in @('planejar','voz','renderizar')){
                     $p=@{
