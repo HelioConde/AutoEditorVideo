@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-05",
+  "read_only": true,
+  "reason": "Exact owner/status guard blocked six-tag metadata cleanup; inspect status without writing",
+  "channels": {
+    "games": [
+      "GPJa03DRf5Y",
+      "BCqrEmJa77E",
+      "j7_cAomsPvM"
+    ],
+    "alchemy": [
+      "WNlK9OYe1jc",
+      "bk433QOIdK0",
+      "iKlsUANJ8og"
+    ]
+  }
+}
