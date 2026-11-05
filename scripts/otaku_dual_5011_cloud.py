@@ -114,6 +114,8 @@ def package_both()->dict:
             'language':'pt-BR' if channel=='br' else 'en-US',
             'mp4':f'{channel}-{ID}-autoeditorvideo.mp4',
             'cover':f'{channel}-{ID}-cover.jpg',
+            'cover_sha256':hashlib.sha256(cover.read_bytes()).hexdigest(),
+            'cover_provenance':'original AutoEditorVideo rendered cover - never a video frame fallback',
             'duration_s':round(duration,2),'sha256':digest,
             'qa_status':qa['status']
         })
