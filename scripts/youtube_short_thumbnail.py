@@ -8,6 +8,7 @@ No upstream error body, OAuth token, or request header enters logs.
 from __future__ import annotations
 from pathlib import Path
 import hashlib
+import re
 import time
 from PIL import Image
 from googleapiclient.errors import HttpError
@@ -45,9 +46,9 @@ def verified_generated_cover(review_dir:Path, summary:dict, channel:str,
     immutable GitHub Actions origin and explicitly named generated cover.
     Every future artifact requires a renderer-signed cover SHA-256.
     """
-    if channel not in ("br","en") or episode_id!="5011-gachiakuta":
+    if channel not in ("br","en") or not re.fullmatch(r"[0-9]{4}-[a-z0-9-]+",episode_id):
         raise ThumbnailBlocked("UNKNOWN_OR_UNAPPROVED_COVER")
-    if summary.get("schema")!="autoeditorvideo/dual-cloud-review/v1" or summary.get("episode")!=episode_id:
+    if summary.get("schema") not in ("autoeditorvideo/dual-cloud-review/v1","autoeditorvideo/dual-cloud-review/v2") or summary.get("episode")!=episode_id:
         raise ThumbnailBlocked("RENDER_PROVENANCE_MISSING")
     if summary.get("render_origin")!="original AutoEditorVideo Remotion in GitHub Actions":
         raise ThumbnailBlocked("NOT_AN_AUTOEDITORVIDEO_GENERATED_COVER")
