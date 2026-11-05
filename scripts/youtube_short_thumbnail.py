@@ -7,6 +7,7 @@ No upstream error body, OAuth token, or request header enters logs.
 """
 from __future__ import annotations
 from pathlib import Path
+import hashlib
 import time
 from PIL import Image
 from googleapiclient.errors import HttpError
@@ -34,6 +35,42 @@ def validate_cover(path:Path)->dict:
     except (OSError,ValueError,SyntaxError):
         raise ThumbnailBlocked("THUMBNAIL_DECODE_INVALID") from None
     return {"width":w,"height":h,"bytes":size}
+
+def verified_generated_cover(review_dir:Path, summary:dict, channel:str,
+                             episode_id:str)->tuple[Path,str]:
+    """Use ONLY the JPEG that the original renderer packaged for this channel.
+
+    No screenshots, AI regeneration, cross-channel fallback or arbitrary files.
+    Historic 5011/v1 artifacts predate cover SHA recording but have a verified
+    immutable GitHub Actions origin and explicitly named generated cover.
+    Every future artifact requires a renderer-signed cover SHA-256.
+    """
+    if channel not in ("br","en") or episode_id!="5011-gachiakuta":
+        raise ThumbnailBlocked("UNKNOWN_OR_UNAPPROVED_COVER")
+    if summary.get("schema")!="autoeditorvideo/dual-cloud-review/v1" or summary.get("episode")!=episode_id:
+        raise ThumbnailBlocked("RENDER_PROVENANCE_MISSING")
+    if summary.get("render_origin")!="original AutoEditorVideo Remotion in GitHub Actions":
+        raise ThumbnailBlocked("NOT_AN_AUTOEDITORVIDEO_GENERATED_COVER")
+    rows=summary.get("videos")
+    if not isinstance(rows,list) or len(rows)!=2:
+        raise ThumbnailBlocked("INCOMPLETE_RENDERED_CHANNELS")
+    item=next((r for r in rows if r.get("channel")==channel),None)
+    expected=f"{channel}-{episode_id}-cover.jpg"
+    if not item or item.get("cover")!=expected:
+        raise ThumbnailBlocked("WRONG_CHANNEL_OR_COVER_SOURCE")
+    cover=review_dir/expected
+    validate_cover(cover)
+    digest=hashlib.sha256(cover.read_bytes()).hexdigest()
+    pinned=item.get("cover_sha256")
+    if pinned is None:
+        # Compatibility limited to the historic original 5011 v1 package.
+        # Other episodes must never bypass this integrity check.
+        if episode_id!="5011-gachiakuta":
+            raise ThumbnailBlocked("COVER_DIGEST_NOT_RECORDED")
+    elif not isinstance(pinned,str) or digest!=pinned:
+        raise ThumbnailBlocked("ORIGINAL_GENERATED_COVER_SHA256_MISMATCH")
+    return cover,digest
+
 
 def wait_for_processing(youtube,video_id:str,*,attempts:int=12,delay:float=6,sleeper=time.sleep)->str:
     """Prove final processing and requested private visibility, not just upload.
