@@ -1,0 +1,156 @@
+{
+  "schema": "autoeditorvideo/seo-metadata-policy/v1",
+  "revision": "2026-11-05",
+  "state": "editorial_guidance_only_not_wired_to_publisher",
+  "applies_to": "future_metadata_drafts_only",
+  "does_not_authorize": "publishing, uploads, mass-edits or changes to current YouTube videos",
+  "sources": [
+    "https://support.google.com/youtube/answer/146402?hl=pt-BR",
+    "https://support.google.com/youtube/answer/12948449",
+    "https://support.google.com/youtube/answer/6390658",
+    "https://support.vidiq.com/en/articles/13892020-uploading-and-editing-on-youtube-with-vidiq"
+  ],
+  "vidIQ_note": "vidIQ screenshots / optimize scores can suggest improvements but do not guarantee views. Live keyword metrics were not retrieved because the integration had no credits in the preceding check; never invent scores.",
+  "principles": {
+    "title": {
+      "hard_max_characters": 100,
+      "preferred_characters": {
+        "min": 35,
+        "max": 65
+      },
+      "keyword_first_when_natural": true,
+      "avoid_hype_without_evidence": true,
+      "hashtags_in_title": "normally_zero; at most one when clearly useful",
+      "unique_per_video": true
+    },
+    "description": {
+      "youtube_max_characters": 5000,
+      "preferred_length": "short contextual paragraphs; never pad to reach a score",
+      "keyword_in_first_200_characters_when_natural": true,
+      "never_duplicate_full_script": true,
+      "one_relevant_call_to_action": true,
+      "accurate_original_content_notice": true,
+      "avoid_keyword_stuffing": true
+    },
+    "hashtags": {
+      "editorial_target": {
+        "min": 2,
+        "max": 4
+      },
+      "hard_rule": "relevant only; never use unrelated trending hashtags",
+      "youtube_ignores_if_over_60": true
+    },
+    "tags": {
+      "youtube_max_characters": 500,
+      "editorial_target_count": {
+        "min": 8,
+        "max": 15
+      },
+      "do_not_fill_500_just_for_score": true,
+      "include_specific_subject_terms": true,
+      "include_spelling_variants_only_if_realistic": true,
+      "avoid_unrelated_generic_tags": true,
+      "avoid_terms_suggesting_unlicensed_clips": true
+    },
+    "validation": [
+      "Compare the actual intended YouTube channel ID with the approved registry entry before applying channel-specific metadata.",
+      "Verify that metadata refers only to that channel's exact present branding, or mark upcoming branding as planned; reject stale/foreign brands (Arquivo Otaku in Otaku Multicena).",
+      "Verify all claims, tool versions, dates, prices, experiment outcomes, rights and source descriptions against the real video.",
+      "Reject repeated description blocks, full narrated scripts copied twice, hashtags unrelated to the video, deceptive titles and repeated tags.",
+      "Avoid claims like 'testei' unless the experiment was actually executed and shown.",
+      "Treat vidIQ scores as diagnostic hints, not YouTube ranking guarantees.",
+      "For children-directed videos never include requests for comments, likes or subscriptions directed at children.",
+      "No upload, automatic metadata update, or publication is implied by this policy."
+    ],
+    "performance_review": [
+      "views_and_engaged_views_by_video_age",
+      "percentage_continued_watching",
+      "average_view_duration_and_percentage",
+      "search_terms_and_search_traffic",
+      "new_subscribers",
+      "comments_when_permitted"
+    ]
+  },
+  "channels": {
+    "br": {
+      "id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "current_brand": "Otaku Multicena",
+      "description_focus": "anime + specific series/character and factual detail; CTA to adult/general anime fans",
+      "brand_hashtag": "#OtakuMulticena",
+      "identity_blacklist": [
+        "Arquivo Otaku",
+        "Alchemy Lab",
+        "Otaku Reframe"
+      ],
+      "viewer_comments_cta_allowed": true
+    },
+    "en": {
+      "id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "current_brand": "Otaku Reframe",
+      "description_focus": "English anime explanation with series, character and verified factual detail",
+      "brand_hashtag": "#OtakuReframe",
+      "identity_blacklist": [
+        "Arquivo Otaku",
+        "Otaku Multicena"
+      ],
+      "language": "en-US"
+    },
+    "games": {
+      "id": "UCg77gYc1_wkHuL07XPtKcow",
+      "current_brand": "Hélio Conde",
+      "proposed_brand": "Conde Games not applied",
+      "description_focus": "game title + real gameplay or verified curiosity + platform/version",
+      "brand_hashtag": null,
+      "requires_real_gameplay_if_claimed": true
+    },
+    "kids": {
+      "id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "current_brand": "Emanuelly Kids",
+      "series": "Fofinhos",
+      "description_focus": "gentle episode description for parents/guardians, accurate characters and sequence, music rights",
+      "brand_hashtag": "#Fofinhos",
+      "made_for_kids": true,
+      "children_comments_cta": false,
+      "children_subscribe_cta": false
+    },
+    "alchemy": {
+      "id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "current_brand_last_observed": "Alchemy Flames",
+      "planned_brand": "Alchemy Lab; YouTube rename unverified",
+      "description_focus": "tool/model version + authentic tested result or reproducible tutorial + limitation if relevant",
+      "brand_hashtag": "#AlchemyLab",
+      "requires_verified_demo_if_tested_claim": true,
+      "require_official_tool_version_check": true
+    }
+  },
+  "short_example": {
+    "video_id": "zwyLeTzeCn4",
+    "source": "user supplied YouTube Studio / vidIQ paste on 2026-11-05; not a newly verified video API snapshot",
+    "analytics_observed_in_paste": {
+      "views": 30,
+      "forecast_14d_approx": 35,
+      "title_suggested_score": 92,
+      "description_score": 100
+    },
+    "note": "The paste displays Alchemy Lab and old Arquivo Otaku branding on anime content. The intended upload destination must be checked, not assumed.",
+    "intended_channel_if_reused": "br",
+    "suggested_title": "Death Note: por que saber o nome NÃO é suficiente? 📓",
+    "suggested_description": "Você sabia que conhecer o nome de alguém não é suficiente para usar o Death Note? 📓\n\nExiste uma regra fundamental: quem escreve no caderno também precisa visualizar o rosto da pessoa. Isso impede que outras pessoas com o mesmo nome sejam atingidas por engano.\n\nDescubra por que essa regra torna o confronto entre Light Yagami e L ainda mais interessante.\n\n💬 Você acha que essa é uma das regras mais inteligentes de Death Note? Conte sua opinião!\n\n🎬 Análise, roteiro, narração e edição originais, com ilustrações geradas por IA. Conteúdo independente, não oficial.\n\n#DeathNote #CuriosidadesAnime #OtakuMulticena",
+    "suggested_tags": [
+      "Death Note",
+      "Death Note Brasil",
+      "regras do Death Note",
+      "Death Note explicado",
+      "Light Yagami",
+      "L Lawliet",
+      "Kira",
+      "curiosidades Death Note",
+      "curiosidades anime",
+      "Death Note rules",
+      "anime Brasil",
+      "caderno da morte",
+      "Otaku Multicena"
+    ],
+    "metadata_update_status": "proposal_only_not_applied"
+  }
+}
