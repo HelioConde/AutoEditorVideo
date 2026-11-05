@@ -1,0 +1,35 @@
+name: Gamer + Alchemy - prevent internal uploader SEO tags
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/youtube_public_tags.py'
+      - 'scripts/games_alchemy_*upload.py'
+      - 'scripts/gamer_v4_three_reupload.py'
+      - 'scripts/gamer_reference_style_5s_upload.py'
+      - 'scripts/alchemy_v4_single_request_retry*.py'
+      - 'scripts/cleanup_six_youtube_internal_tags.py'
+      - 'tests/test_youtube_gamer_alchemy_tag_safety.py'
+      - 'tests/test_youtube_public_tags_cleanup.py'
+      - 'conteudos/gamer-alchemy-tag-safety-validation-20261105.json'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-public-SEO-keywords-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test all uploader payloads and preserve non-technical keywords
+        run: |
+          python -m pip install 'pytest>=8,<10'
+          python -m pytest -q tests/test_youtube_public_tags_cleanup.py tests/test_youtube_gamer_alchemy_tag_safety.py
+          python -m compileall -q scripts/youtube_public_tags.py scripts/cleanup_six_youtube_internal_tags.py
