@@ -1,0 +1,126 @@
+name: Fofinhos - GPT Image 2 real cloud probe (exactly one call)
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/fofinhos-one-image-real-cloud.yml'
+      - 'scripts/fofinhos_one_image_cloud_probe.py'
+      - 'tests/test_fofinhos_one_image_cloud_probe.py'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fofinhos-one-image-real-cloud.yml'
+      - 'scripts/fofinhos_one_image_cloud_probe.py'
+      - 'tests/test_fofinhos_one_image_cloud_probe.py'
+
+# This is a one-shot user-authorized CI test. No workflow_dispatch,
+# no schedule, and no credential access on pull requests.
+# Only the specifically titled main merge commit triggers one real call.
+permissions:
+  contents: read
+
+concurrency:
+  group: fofinhos-single-image-real-test
+  cancel-in-progress: false
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline test dependencies
+        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13'
+      - name: Verify one-request budget, output validation and safe logging
+        run: python -m pytest -q tests/test_fofinhos_one_image_cloud_probe.py
+
+  validate-environment:
+    needs: offline-tests
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      startsWith(github.event.head_commit.message, 'test(images): single GPT Image 2 cloud probe')
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify only main can access the protected image Environment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  generate-one-synthetic-image:
+    needs: [offline-tests, validate-environment]
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      startsWith(github.event.head_commit.message, 'test(images): single GPT Image 2 cloud probe')
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install only Pillow to inspect the response in memory
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Build pinned Go proxy before loading private credentials
+        working-directory: pinned-native-go-proxy
+        shell: bash
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/fofinhos-native-proxy" ./cmd/api
+      - name: Run ONE real image request with protected state (no artifacts)
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
+          # This workflow alone temporarily authorizes one call. The Environment
+          # default MAX_IMAGE_CALLS stays at 0 for all other workflows.
+          MAX_IMAGE_CALLS: '1'
+        run: |
+          set -euo pipefail
+          umask 077
+          data_dir="$RUNNER_TEMP/fofinhos-one-image-auth"
+          test ! -e "$data_dir"
+          mkdir -m 700 "$data_dir"
+          proxy_pid=''
+          cleanup() {
+            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$data_dir"
+            rm -f -- "$RUNNER_TEMP/fofinhos-one-image-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$data_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$data_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/fofinhos-native-proxy" > "$RUNNER_TEMP/fofinhos-one-image-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/fofinhos_one_image_cloud_probe.py
+          echo '[SAFETY] TEMP_STATE_DISCARDED_ON_EXIT_ZERO_ARTIFACTS'
