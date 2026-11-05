@@ -191,6 +191,72 @@
       "review_status": "blocked_missing_real_media_and_verified_channel_oauth",
       "catalog_id": "alchemy-003",
       "note": "A reproducible tutorial with genuine capture and output GIF demonstration required."
+    },
+    {
+      "channel": "games",
+      "id": "game-001-gta4-gta5-v2",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v2_20261105",
+      "source": "creator_request_2026-11-05_fix_narration_cta_and_covers",
+      "publication_target": "private_first",
+      "review_status": "pending_recut_qa_and_separate_oauth",
+      "original_video_id": "game-001-gta4-gta5",
+      "note": "Reuse original 6 MP4s as source; do NOT repeat AI image API charges. Strip burned-in captions and narration containing pipeline disclosures; add CTA spoken and white serif top thumbnail. Keep truthful disclosure in description; do not delete/modify old private videos."
+    },
+    {
+      "channel": "games",
+      "id": "game-002-primeira-noite-minecraft-v2",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v2_20261105",
+      "source": "creator_request_2026-11-05_fix_narration_cta_and_covers",
+      "publication_target": "private_first",
+      "review_status": "pending_recut_qa_and_separate_oauth",
+      "original_video_id": "game-002-primeira-noite-minecraft",
+      "note": "Reuse original 6 MP4s as source; do NOT repeat AI image API charges. Strip burned-in captions and narration containing pipeline disclosures; add CTA spoken and white serif top thumbnail. Keep truthful disclosure in description; do not delete/modify old private videos."
+    },
+    {
+      "channel": "games",
+      "id": "game-003-minecraft-sem-amarelo-v2",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v2_20261105",
+      "source": "creator_request_2026-11-05_fix_narration_cta_and_covers",
+      "publication_target": "private_first",
+      "review_status": "pending_recut_qa_and_separate_oauth",
+      "original_video_id": "game-003-minecraft-sem-amarelo",
+      "note": "Reuse original 6 MP4s as source; do NOT repeat AI image API charges. Strip burned-in captions and narration containing pipeline disclosures; add CTA spoken and white serif top thumbnail. Keep truthful disclosure in description; do not delete/modify old private videos."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-001-chatgpt-gifs-v2",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v2_20261105",
+      "source": "creator_request_2026-11-05_fix_narration_cta_and_covers",
+      "publication_target": "private_first",
+      "review_status": "pending_recut_qa_and_separate_oauth",
+      "original_video_id": "alchemy-001-chatgpt-gifs",
+      "note": "Reuse original 6 MP4s as source; do NOT repeat AI image API charges. Strip burned-in captions and narration containing pipeline disclosures; add CTA spoken and white serif top thumbnail. Keep truthful disclosure in description; do not delete/modify old private videos."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-002-images-26-consistencia-v2",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v2_20261105",
+      "source": "creator_request_2026-11-05_fix_narration_cta_and_covers",
+      "publication_target": "private_first",
+      "review_status": "pending_recut_qa_and_separate_oauth",
+      "original_video_id": "alchemy-002-images-26-consistencia",
+      "note": "Reuse original 6 MP4s as source; do NOT repeat AI image API charges. Strip burned-in captions and narration containing pipeline disclosures; add CTA spoken and white serif top thumbnail. Keep truthful disclosure in description; do not delete/modify old private videos."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-003-gif-animado-tutorial-v2",
+      "status": "reserved",
+      "reservation_owner": "games_alchemy_six_shorts_v2_20261105",
+      "source": "creator_request_2026-11-05_fix_narration_cta_and_covers",
+      "publication_target": "private_first",
+      "review_status": "pending_recut_qa_and_separate_oauth",
+      "original_video_id": "alchemy-003-gif-animado-tutorial",
+      "note": "Reuse original 6 MP4s as source; do NOT repeat AI image API charges. Strip burned-in captions and narration containing pipeline disclosures; add CTA spoken and white serif top thumbnail. Keep truthful disclosure in description; do not delete/modify old private videos."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
