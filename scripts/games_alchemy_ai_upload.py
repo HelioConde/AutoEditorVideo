@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import re
 import sys
+import time
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -223,6 +224,10 @@ def upload_trio(channel: str) -> None:
                    "source_sha256": _sha(item["video"])}
         receipts.append(receipt)
         path.write_text(json.dumps(receipts, indent=2), encoding="utf-8")
+        # Shorts may not be ready for a custom cover immediately after upload.
+        # Persist the confirmed video ID FIRST, then wait before thumbnails.set.
+        receipt["thumbnail_wait_after_upload_seconds"] = 75
+        time.sleep(75)
         receipt["thumbnail_acknowledged"] = set_thumbnail(youtube, video_id, item["cover"])
         receipt["confirmed_private"] = confirm_private(
             youtube, video_id, KNOWN_IDS[channel])
@@ -230,6 +235,10 @@ def upload_trio(channel: str) -> None:
         print("UPLOADED_PRIVATE_" + channel + "_" + item["id"] + "_" + video_id, flush=True)
         if not receipt["confirmed_private"]:
             raise UploadBlocked("YOUTUBE_PRIVATE_IDENTITY_UNCONFIRMED_DO_NOT_RETRY")
+        if receipt["thumbnail_acknowledged"] is not True:
+            # The video itself may already be on YouTube. Never call
+            # videos.insert again to repair a cover: use thumbnail-only recovery.
+            raise UploadBlocked("THUMBNAIL_NOT_ACKNOWLEDGED_RECOVER_WITHOUT_VIDEO_REUPLOAD")
     print("THREE_PRIVATE_UPLOADS_VERIFIED_" + channel, flush=True)
 
 def main() -> int:
