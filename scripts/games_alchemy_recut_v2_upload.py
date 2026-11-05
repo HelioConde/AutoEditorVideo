@@ -150,6 +150,11 @@ def perform(channel:str)->None:
     guard(channel)
     jobs=artifact_jobs(channel)
     youtube=get_youtube(channel,dict(os.environ))
+    # Old versions remain PRIVATE; never create a public duplicate by accident.
+    for job in jobs:
+        old_id=job["meta"]["original_private_youtube_video_id"]
+        if not confirm_private(youtube,old_id,KNOWN_IDS[channel]):
+            raise V2UploadBlocked("ORIGINAL_VIDEO_NOT_PRIVATE_OR_WRONG_CHANNEL_"+job["episode"])
     receipt_path=FOLDER/(channel+"-v2-private-upload-receipts.json")
     if receipt_path.exists():
         raise V2UploadBlocked("RECEIPTS_ALREADY_EXIST_NO_REPLAY")
