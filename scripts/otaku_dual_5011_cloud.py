@@ -85,7 +85,7 @@ def package_both()->dict:
         ('br',br_video,br_cover,br_qa),
         ('en',en_video,en_cover,en_qa)
     ]
-    summary={'schema':'autoeditorvideo/dual-cloud-review/v1',
+    summary={'schema':'autoeditorvideo/dual-cloud-review/v2',
              'episode':ID,'youtube_uploads':[],
              'upload_request':'private to separate BR/EN channels after independently verified YouTube OAuth',
              'render_origin':'original AutoEditorVideo Remotion in GitHub Actions',
