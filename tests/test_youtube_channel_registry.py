@@ -135,7 +135,17 @@ def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scr
     for slug in registry.NEW_CHANNELS:
         assert data["channels"][slug]["youtube_channel_id"]==registry.KNOWN_IDS[slug]
         assert data["channels"][slug]["upload_authorized"] is False
-        assert not any(item["channel"]==slug for item in data["entries"])
+        entries=[item for item in data["entries"] if item["channel"]==slug]
+        # Planning reservations are permitted after the creator explicitly requests
+        # a production. They do NOT imply OAuth validation, rendered media or upload.
+        if slug in ("games","alchemy"):
+            assert len(entries)==3
+            assert all(item["status"]=="reserved" for item in entries)
+            assert all(item.get("publication_target")=="private_first" for item in entries)
+            assert all(item.get("review_status","").startswith("blocked_") for item in entries)
+            assert len(set(item["id"] for item in entries))==3
+        else:
+            assert not entries
     with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
         queue.assert_reserved("games","game-001-minecraft-um-coracao","any_worker")
     with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
@@ -151,3 +161,21 @@ def test_new_channels_cannot_infer_next_episode_or_trigger_batch():
     for slug in registry.NEW_CHANNELS:
         with pytest.raises(ValueError,match="EXPLICIT_EDITORIAL_SELECTION"):
             queue.next_available(slug)
+
+
+def test_creator_ai_only_game_visuals_are_not_real_gameplay():
+    channels=registry.load_registry()["channels"]
+    assert channels["games"]["gameplay_policy"].startswith("never_record_gameplay")
+    assert "ai_generated" in channels["games"]["content"]
+    assert "illustrations" in channels["alchemy"]["editorial_rules"][0]
+    games=json.loads((ROOT/"conteudos"/"helio-conde-games-grade-50-seo-v1.json").read_text(encoding="utf-8"))
+    alchemy=json.loads((ROOT/"conteudos"/"alchemy-lab-grade-50-v1.json").read_text(encoding="utf-8"))
+    for manifest,third in ((games,"Jogos em Alta"),(alchemy,"IA na Prática")):
+        assert len(manifest["episodes"])==50
+        for i,episode in enumerate(manifest["episodes"]):
+            assert episode["publish_authorized"] is False
+            assert "ai_generated" in episode["visual_policy"]
+            assert len(episode["seo"]["hashtags"])==3
+            assert episode["seo"]["tags"]
+    assert all(e["format_name"]=="Jogos em Alta" for e in games["episodes"][2::3])
+    assert all(e["format_name"]=="IA Sob a Lupa" for e in alchemy["episodes"][1::3])
