@@ -1,0 +1,43 @@
+{
+  "schema": "autoeditorvideo/one-shot-six-ai-shorts-run/v1",
+  "request_date": "2026-11-05",
+  "request": "Create and publish three videos to Gamer and three to IA using AutoEditorVideo, with only AI-generated images, no gameplay recording.",
+  "user_authorized": true,
+  "production_owner": "games_alchemy_six_shorts_20261105",
+  "run_on": "push_main_only_commit_prefix",
+  "total_videos": 6,
+  "rendering": {
+    "engine": "AutoEditorVideo / existing image proxy / FFmpeg / Edge TTS",
+    "image_model": "gpt-image-2",
+    "max_image_generations": 30,
+    "expected_images_per_video": 5,
+    "one_shot": true
+  },
+  "channel_destination": [
+    {
+      "key": "games",
+      "id": "UCg77gYc1_wkHuL07XPtKcow",
+      "videos": 3
+    },
+    {
+      "key": "alchemy",
+      "id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "videos": 3
+    }
+  ],
+  "youtube_upload": {
+    "initial_visibility": "private",
+    "requires_exact_oauth_channel_id": true,
+    "per_channel_oauth_tokens": true,
+    "no_retry_after_ambiguous_upload": true
+  },
+  "status": "run_requested_github_actions_result_not_yet_known",
+  "references": [
+    "conteudos/lote-6-games-alchemy-producao-v1.json",
+    ".github/workflows/games-alchemy-six-ai-short.yml"
+  ],
+  "warnings": [
+    "A request marker is not proof of generated media, completed upload or public YouTube visibility.",
+    "Do not rerun a paid image or upload job automatically if there is an ambiguous result."
+  ]
+}
