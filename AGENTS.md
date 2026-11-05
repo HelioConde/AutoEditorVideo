@@ -413,6 +413,20 @@ miniaturas e upload OAuth para YouTube.
   Usar `-ExigirMovimentoPersonagem` se o usuario quiser um modo
   estrito e aceitar o bloqueio; caso contrario publico com zoom suave.
   Nao chamar zoom de animacao facial ou gesto corporal.
+- **REGRA OBRIGATORIA CLOUD BR/EN (05/11/2026):** a capa JPG 9:16 do
+  AutoEditorVideo NAO pode apenas existir no artifact. Apos confirmar o upload,
+  o workflow deve consultar `videos.list(part=processingDetails,status)`,
+  verificar `processingStatus=succeeded` e `privacyStatus=private`,
+  executar `thumbnails.set` com a capa aprovada do canal e validar a resposta.
+  Se a capa falhar por 403/429/permissao, marcar thumbnail pendente com codigo
+  seguro e **NUNCA reenviar MP4**. Guardar recibo do video_id ANTES da
+  tentativa de thumbnail. Usar credenciais OAuth diferentes BR e EN.
+  Upload de thumbnail e acao propria, sem alterar privacidade/agendamento,
+  sem produzir nova imagem/voz/video e sem usar outro canal.
+- Reparos em Shorts ja enviados sao **somente thumbnails.set**, condicionados
+  a verificar ID correto, OAuth do canal e SHA/asset da capa. Nunca recriar ou
+  reenviar video so para corrigir capa; respeitar elegibilidade de thumbnail
+  para Shorts no YouTube e registrar falhas sem mascarar sucesso.
 - **Thumbnail:** enviar JPG vertical do editor por `thumbnails.set`
   apenas quando `processingDetails.processingStatus=succeeded`.
   Pode falhar por elegibilidade da conta; registrar pendencia, NUNCA
