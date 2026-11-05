@@ -1,0 +1,99 @@
+{
+  "schema": "autoeditorvideo/six-private-youtube-upload-receipts/v1",
+  "date": "2026-11-05",
+  "status": "all_six_verified_private_on_correct_youtube_channels",
+  "purpose": "Record verified results and prevent duplicate uploads. Not a public publication confirmation.",
+  "original_render": {
+    "workflow_run": 42044136670,
+    "head_sha": "a414b9aea8d778f27c765cfb3d45e94612d0ee05",
+    "artifact_id": 13425056457
+  },
+  "initial_upload_run": 42048524469,
+  "gamer_recovery_run": 42049521888,
+  "source_of_truth": "Verified YouTube API channel identity + private status through uploader logs and downloaded receipt artifacts for both channels.",
+  "privacy": "private",
+  "channel_ids": {
+    "games": "UCg77gYc1_wkHuL07XPtKcow",
+    "alchemy": "UCCTYFE5Cmz2aYZ37cJQ-wcg"
+  },
+  "videos": [
+    {
+      "channel": "games",
+      "id": "game-001-gta4-gta5",
+      "title": "GTA IV vs GTA V: por que a física ainda surpreende?",
+      "youtube_video_id": "61bCmdk2dV8",
+      "youtube_url": "https://www.youtube.com/watch?v=61bCmdk2dV8",
+      "privacy": "private",
+      "confirmed_private": true,
+      "thumbnail_acknowledged": true,
+      "verified_by": "initial_upload_verified_again"
+    },
+    {
+      "channel": "games",
+      "id": "game-002-primeira-noite-minecraft",
+      "title": "Minecraft: você lembra da primeira noite assustadora?",
+      "youtube_video_id": "GJyfGo8Mhtw",
+      "youtube_url": "https://www.youtube.com/watch?v=GJyfGo8Mhtw",
+      "privacy": "private",
+      "confirmed_private": true,
+      "thumbnail_acknowledged": null,
+      "verified_by": "found_existing_after_timeout"
+    },
+    {
+      "channel": "games",
+      "id": "game-003-minecraft-sem-amarelo",
+      "title": "Minecraft sem tocar no amarelo: como seria esse desafio?",
+      "youtube_video_id": "RaHo_rrHk8M",
+      "youtube_url": "https://www.youtube.com/watch?v=RaHo_rrHk8M",
+      "privacy": "private",
+      "confirmed_private": true,
+      "thumbnail_acknowledged": true,
+      "verified_by": "recovered_new_upload"
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-001-chatgpt-gifs",
+      "title": "GIFs com inteligência artificial: como funcionam?",
+      "youtube_video_id": "bdjD6zCEDkw",
+      "youtube_url": "https://www.youtube.com/watch?v=bdjD6zCEDkw",
+      "privacy": "private",
+      "confirmed_private": true,
+      "thumbnail_acknowledged": true,
+      "verified_by": "initial_upload"
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-002-images-26-consistencia",
+      "title": "Images 2.6: o desafio de manter personagens iguais",
+      "youtube_video_id": "GIeHe2gDuiQ",
+      "youtube_url": "https://www.youtube.com/watch?v=GIeHe2gDuiQ",
+      "privacy": "private",
+      "confirmed_private": true,
+      "thumbnail_acknowledged": true,
+      "verified_by": "initial_upload"
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-003-gif-animado-tutorial",
+      "title": "GIF animado com IA: o processo explicado por etapas",
+      "youtube_video_id": "XTc7hjnp4cY",
+      "youtube_url": "https://www.youtube.com/watch?v=XTc7hjnp4cY",
+      "privacy": "private",
+      "confirmed_private": true,
+      "thumbnail_acknowledged": true,
+      "verified_by": "initial_upload"
+    }
+  ],
+  "counts": {
+    "games": 3,
+    "alchemy": 3,
+    "all": 6
+  },
+  "quality_notes": [
+    "Private-only until final visual and audio review; initial image samples showed a few visual consistency issues and some subtitles exceeding the video safe width.",
+    "game-002's YouTube upload succeeded despite a client-side TimeoutError; it was discovered via the owning channel's uploads list and not sent twice.",
+    "game-002's thumbnail acknowledgement was unavailable after the timeout, so inspect its cover in YouTube Studio.",
+    "No extra paid image-generation calls were made during upload recovery."
+  ],
+  "future_workflow_rule": "Before any new upload for these episode IDs, check this result manifest and actual private video IDs. Do not create duplicates."
+}
