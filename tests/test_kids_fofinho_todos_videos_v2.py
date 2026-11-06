@@ -52,7 +52,11 @@ def test_canon_enumerates_four_shorts_and_future_characters_are_deferred():
     data=bible.inventory()
     assert len(data["parts"])==4
     assert {int(p) for p in data["parts"]}=={1,2,3,4}
-    assert [len(bible.STORYBOARDS[x]) for x in range(1,5)]==[9,10,9,9]
+    assert [len(bible.STORYBOARDS[x]) for x in (1,3,4)]==[9,9,9]
+    assert len(bible.STORYBOARDS[2])>10  # sem teto fixo de planos
+    assert len(bible.STORYBOARDS[2])==len(
+        json.loads(bible.PART2_DIRECTION.read_text(encoding="utf-8"))["shots"]
+    )
     assert len(bible.ASSETS)>=8
     assert set(data["future_characters_deferred"])=={
         "fofinha-arco-iris","fofinha-rosa","raposo","porco-espinho"}
@@ -61,7 +65,10 @@ def test_canon_enumerates_four_shorts_and_future_characters_are_deferred():
         imgs,poses=bible.resource_names(part)
         assert imgs and poses
         assert not (set(imgs)&set(bible.FUTURE_CAST))
-        assert len(bible.STORYBOARDS[part])==len(story.load_parts()[part-1]["segments"])
+        if part==2:
+            assert set(s["beat"] for s in bible.STORYBOARDS[2])==set(range(1,11))
+        else:
+            assert len(bible.STORYBOARDS[part])==len(story.load_parts()[part-1]["segments"])
 
 
 def test_egg_and_fofinho_birth_rules_hold_in_every_shot():
@@ -69,16 +76,49 @@ def test_egg_and_fofinho_birth_rules_hold_in_every_shot():
     assert bible.STORYBOARDS[1][0]["egg_phase"]=="closed"
     assert all(s["kitty"] is None for s in bible.STORYBOARDS[1])
     assert all(s["egg_phase"]=="closed" for s in bible.STORYBOARDS[1])
-    assert all(s["kitty"] is None for s in bible.STORYBOARDS[2][:5])
-    assert bible.STORYBOARDS[2][4]["egg_phase"]=="open"
-    assert bible.STORYBOARDS[2][5]["kitty"]=="fofinho-azul"
-    assert all(s["egg_phase"]=="none" for s in bible.STORYBOARDS[2][5:])
+    assert all(s["kitty"] is None for s in bible.STORYBOARDS[2] if s["beat"]<6)
+    assert any(s["egg_phase"]=="open" for s in bible.STORYBOARDS[2] if s["beat"]==5)
+    assert any(s["kitty"]=="fofinho-azul" for s in bible.STORYBOARDS[2] if s["beat"]==6)
+    assert all(s["egg_phase"]=="none" for s in bible.STORYBOARDS[2] if s["beat"]>6)
     assert all(s["egg_phase"]=="none" for p in (3,4)
                for s in bible.STORYBOARDS[p])
-    assert bible.STORYBOARDS[2][9]["drops"]==1
+    assert any(s["beat"]==8 and s["drops"]==1 for s in bible.STORYBOARDS[2])
+    assert all(s["drops"]==0 for s in bible.STORYBOARDS[2] if s["beat"]<8)
     assert bible.STORYBOARDS[3][2]["drops"]==3
     assert bible.STORYBOARDS[4][-1]["future_glow"]
     assert bible.STORYBOARDS[4][-1]["kitty"] is None
+
+
+def test_birth_direction_can_add_visual_shots_without_hard_coded_ceiling(tmp_path,monkeypatch):
+    data=json.loads(bible.PART2_DIRECTION.read_text(encoding="utf-8"))
+    original=len(data["shots"])
+    extra=dict(data["shots"][-1])
+    extra["index"]=original+1
+    extra["beat"]=10
+    extra["visual_cue"]="Mais um plano de reflexo na gotinha, sem cena de voz extra"
+    data["shots"].append(extra)
+    path=tmp_path/"new-direction.json"
+    path.write_text(json.dumps(data,ensure_ascii=False),encoding="utf-8")
+    monkeypatch.setattr(bible,"PART2_DIRECTION",path)
+    result=bible.dynamic_birth_storyboard()
+    assert len(result)==original+1
+    assert result[-1]["beat"]==10
+    assert result[-1]["visual_cue"]==extra["visual_cue"]
+
+
+def test_visual_shot_distribution_follows_voice_times_without_dropping_frames():
+    shots=bible.STORYBOARDS[2]
+    voice=[{"startFrame":i*105,"endFrame":(i+1)*105} for i in range(10)]
+    timeline=composer.distribute_visual_shots(shots,voice)
+    assert len(timeline)==len(shots)
+    assert timeline[0]["startFrame"]==0
+    assert timeline[-1]["endFrame"]==1050
+    assert all(x["endFrame"]>x["startFrame"] for x in timeline)
+    assert all(a["endFrame"]==b["startFrame"]
+               for a,b in zip(timeline,timeline[1:]))
+    with pytest.raises(ValueError,match="frames para"):
+        composer.distribute_visual_shots(shots,
+            [{"startFrame":i*2,"endFrame":(i+1)*2} for i in range(10)])
 
 
 def test_asset_lineage_hash_protects_egg_and_character(tmp_path):
@@ -184,8 +224,12 @@ def test_render_props_all_four_are_layered_and_reuse_narration(tmp_path,monkeypa
         assert props["layeredScenes"][0]["background"].startswith("generated/")
         if part==1:assert props["layeredScenes"][0]["pose"] is None
         if part==2:
-            assert not props["layeredScenes"][4]["kitty"]
-            assert props["layeredScenes"][5]["kitty"]
+            assert all(not s["kitty"] for s in props["layeredScenes"]
+                       if bible.STORYBOARDS[2][s["index"]-1]["beat"]<6)
+            assert any(s["kitty"] for s in props["layeredScenes"]
+                       if bible.STORYBOARDS[2][s["index"]-1]["beat"]==6)
+            assert len(props["layeredScenes"])>len(story.load_parts()[1]["segments"])
+            assert props["brand"]=="Fofinhos"
         assert (story.output_for(story.load_parts()[part-1],tmp_path)/
                 "narracao.mp3").read_bytes()==before
 
