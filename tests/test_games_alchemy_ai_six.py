@@ -48,7 +48,15 @@ def test_upload_requires_approval_secrets_and_render_artifact():
     env={"GITHUB_REPOSITORY":"HelioConde/AutoEditorVideo","GITHUB_REF":"refs/heads/main",
          "GITHUB_EVENT_NAME":"push","GITHUB_RUN_ATTEMPT":"1",
          "AI_SIX_PILOT_USER_APPROVED":"false","YOUTUBE_CLIENT_JSON":"dummy",
-         "YOUTUBE_CHANNEL_TOKEN_JSON":"dummy"}
+         "YOUTUBE_CHANNEL_TOKEN_JSON":"dummy",
+         "GITHUB_WORKFLOW":"Gamer + Alchemy - private upload from completed AI render",
+         "AI_SIX_PILOT_ORIGINAL_RUN_ID":"42044136670",
+         "AI_SIX_PILOT_ORIGINAL_SHA":"a414b9aea8d778f27c765cfb3d45e94612d0ee05"}
+    # Preserve prior workflow and exact-source provenance gates; the
+    # approval test must exercise approval, not a missing unrelated field.
+    rejected=dict(env,GITHUB_WORKFLOW="untrusted")
+    with pytest.raises(uploader.UploadBlocked,match="UNEXPECTED_UPLOAD_WORKFLOW"):
+        uploader.preflight("games",rejected)
     with pytest.raises(uploader.UploadBlocked,match="EXPLICIT_PILOT_APPROVAL_REQUIRED"):
         uploader.preflight("games",env)
     env["AI_SIX_PILOT_USER_APPROVED"]="true"
