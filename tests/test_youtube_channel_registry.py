@@ -202,3 +202,26 @@ def test_creator_ai_only_game_visuals_are_not_real_gameplay():
             assert episode["seo"]["tags"]
     assert all(e["format_name"]=="Jogos em Alta" for e in games["episodes"][2::3])
     assert all(e["format_name"]=="IA Sob a Lupa" for e in alchemy["episodes"][1::3])
+
+
+def test_fofinhos_part_reservation_uses_strict_scoped_identifier():
+    import re
+    import production_reservations as queue
+    expression=re.compile(queue.EPISODE_PATTERNS["kids"])
+    assert expression.fullmatch("kids-emanuelly-ep01-p02-nascimento")
+    assert expression.fullmatch("kids-001-estrela-azul")
+    assert expression.fullmatch("fofinhos-001-ovo-azul")
+    for bad in (
+        "kids-emanuelly-ep1-p02-nascimento",
+        "kids-emanuelly-ep01-p2-nascimento",
+        "kids-other-ep01-p02-nascimento",
+        "kids-emanuelly-ep01-p02-",
+        "game-001-gta4-gta5",
+        "kids-emanuelly-ep01-p02-nascimento/other",
+    ):
+        assert expression.fullmatch(bad) is None
+    row=queue.get_entry("kids","kids-emanuelly-ep01-p02-nascimento")
+    assert row is not None
+    assert row["status"]=="reserved"
+    assert row["reservation_owner"]=="codex_fofinhos_part02_20261106"
+    assert "publication_target" not in row
