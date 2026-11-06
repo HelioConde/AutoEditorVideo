@@ -19,6 +19,7 @@ from PIL import Image, ImageOps, ImageStat
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
 from otaku_br_50_reverso import OUTPUT, validate
+from otaku_br_50_maintenance_gate import check_authorization
 from gerar_video_codex import proxy_key, check_proxy_accounts, request_image
 
 MODEL="gpt-image-2"
@@ -45,6 +46,11 @@ def stage_check(number:int)->dict:
     item=validate()[number-1]
     if item.get("channel_id")!=CHANNEL_ID or item["position"]!=number:
         raise ImageBlocked("CHANNEL_OR_QUEUE_MISMATCH")
+    # No direct image-model usage while the creator's maintenance lock exists.
+    control=ROOT/"conteudos/otaku-br-50-serial-launch-20261106.json"
+    if not control.is_file():
+        raise ImageBlocked("CREATOR_CONTROL_FILE_MISSING")
+    check_authorization(json.loads(control.read_text(encoding="utf-8")))
     return item
 
 # This one story's original action includes an extreme self-sacrifice near
