@@ -99,3 +99,28 @@ A Action `otaku-editorial-quality-offline.yml` também prepara o relatório `ota
 4. Nova autorização explícita do criador ANTES de retomar qualquer geração de Shorts ou upload.
 
 As propostas de dez cenas e os resultados de geometria NÃO significam que os assets ou os vídeos já foram produzidos.
+
+
+## V3.2 — Reprodução suave e preparação segura de materiais
+
+**Melhoria no Remotion:** o arquivo `motion-remotion/src/pose-timeline.ts` agora controla sequências de poses por três modos:
+
+- `pingpong` (padrão): 1 → 2 → 3 → 2 → 1; evita o salto abrupto da última pose para a primeira.
+- `once`: reproduz uma ação uma única vez e mantém a pose final.
+- `loop`: ciclo repetido apenas quando as poses foram desenhadas para fechar o movimento.
+
+O modo é declarado no manifesto V3 como `pose_playback`; valores desconhecidos são rejeitados. Os testes verificam tempos, quadros extremos e valores inválidos, sem renderizar vídeos.
+
+**Segurança dos arquivos:** `scripts/otaku_multicena_quality_v3.py` passou a rejeitar links simbólicos e arquivos que tentem referenciar materiais externos à pasta autorizada do episódio, mesmo que exista um hash SHA-256 fornecido no manifesto.
+
+**Preprodução sem imagens ou upload:** `scripts/otaku_multicena_asset_package.py` transforma os roteiros aprovados em listas explícitas dos materiais a obter posteriormente. Para cada Short pendente, o plano solicita dez fundos originais e quatro momentos com animação real (dois quadros de pose por momento). O balanço é um alvo editorial, **não um pedido automático à API de imagens**. As poses podem ser criadas por desenho/edição própria a partir de material autorizado, evitando chamadas desnecessárias.
+
+Para criar apenas checklists textuais dos Shorts 5, 4, 3, 2 e 1:
+
+    python scripts/otaku_multicena_asset_package.py --numbers 5 4 3 2 1 --output reports/otaku-v3-asset-checklists.json
+
+Os arquivos de modelo mantêm `duration_frames` e licenças sem preencher, hashes vazios, `clean_plate_confirmed=false`, `manual_visual_review=false` e `publish_authorized=false`. Portanto **não podem passar pelo validador de vídeo V3** antes da obtenção e verificação dos assets reais.
+
+No lote de cinco Shorts, são **50 fundos e 40 quadros de poses planejados**. Não foram geradas imagens, voz ou vídeos e não houve uploads. A Action editorial anexa a lista de arquivos pendentes para revisão. O criador deverá aprovar eventual orçamento e a qualidade das artes antes de iniciar uma produção.
+
+**Próxima etapa pendente:** importar arte original real, provar continuidade de personagens e fundo limpo com revisão visual, testar MP4 local e só depois decidir sobre retomar a geração. A fase YouTube continua separada.
