@@ -170,9 +170,52 @@ def storyteller_safe_scene_override(row:dict,index:int)->str|None:
         f"Illustration {index} of five: {STORYTELLER_SAFE_SHOTS[index-1]}"
     )
 
+# Short 31: the provider refused the fourth general storyboard prompt (HTTP 400).
+# Visualize the nautical weather expertise without peril or combat. This
+# single, explicit editorial revision preserves the original narration.
+NAVIGATOR_SAFE_SHOTS=(
+    "A skilled adult red-haired fantasy navigator in a practical blue jacket "
+    "studies wind direction and a brass compass on a peaceful wooden sailboat deck. "
+    "Distant clouds drift across the horizon, no storm damage.",
+    "The same navigator marks a route on a hand-drawn sea chart beside a simple "
+    "barometer, while two fully clothed adult crewmates listen attentively.",
+    "A calm panoramic seascape shows sunlight through layered clouds and a "
+    "turning weather vane on the ship. The navigator observes weather signs "
+    "and points toward a clear path.",
+    "The navigator helps a crewmate adjust the ship's route on a tabletop map "
+    "to avoid distant gray rain clouds, using a brass compass and a pencil. "
+    "Everyone remains safe; emphasize clever preparation and teamwork.",
+    "Golden afternoon light illuminates a safe harbor as the navigator and crew "
+    "smile while checking the completed sailing route, reflecting the value "
+    "of navigation knowledge.",
+)
+
+def navigator_safe_scene_override(row:dict,index:int)->str|None:
+    if row.get("position")!=31 or row.get("id")!="6131-multicena-experimento-novembro":
+        return None
+    if index not in range(1,6):
+        raise ImageBlocked("INVALID_SCENE_INDEX")
+    return (
+        "Produce ONE ORIGINAL hand-painted 2D editorial fantasy anime illustration, "
+        "vertical 2:3 portrait, 1024x1536. Five distinct peaceful scenes tell "
+        "the story of a skilled sea navigator using knowledge of weather, "
+        "wind and charts. Characters are adult, fully clothed, safe and unharmed. "
+        "No violence, battle, disasters, injuries, blood or danger. Use original "
+        "character artwork, not frames from any existing animation. "
+        "Keep consistent costumes, map and ship across the five scenes. "
+        "Cinematic atmosphere, clear props and expressive calm gestures. "
+        "Keep the lower 22 percent clear for timed external subtitles; no "
+        "written text, logos, watermarks, borders or panels. "
+        "Every subject must fit completely inside the image. "
+        f"Specific illustration {index} of 5: {NAVIGATOR_SAFE_SHOTS[index-1]}"
+    )
+
 def prompt_for(row:dict,index:int)->str:
     # Editorial stills are explicitly specified for the two sensitive
     # strategy-focused storylines. Never regenerate on a provider refusal.
+    override=navigator_safe_scene_override(row,index)
+    if override is not None:
+        return override
     override=storyteller_safe_scene_override(row,index)
     if override is not None:
         return override
