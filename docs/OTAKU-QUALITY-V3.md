@@ -69,3 +69,33 @@ Nenhum dos comandos cria um vídeo nem publica no YouTube. O QA retorna sempre s
 Os dados da auditoria são hipóteses para roteiros, não garantia de visualizações. Qualidade do vídeo é prioritária sobre volume de uploads.
 
 Os comandos legados de geração de imagens e renderização agora também conferem localmente a autorização do criador antes de gastar recursos. A fase de planejamento quality-plan continua disponível durante a pausa porque não gera mídia. O pipeline de publicação tem uma segunda checagem contra o estado atual de main no GitHub.
+
+
+## V3.1 — Planos editoriais e verificações de poses (offline)
+
+A pausa de geração e upload permanece em vigor. O modo atual somente prepara relatórios e valida assets já existentes.
+
+### Sequências de poses RGBA
+
+O arquivo `scripts/otaku_multicena_pose_qa.py` verifica personagens inteiros no enquadramento, transições sem saltos bruscos, escala/opacidade relativamente estáveis e diferenças perceptíveis entre quadros. Compara pixels decodificados, não apenas nomes ou hashes. Diferenças de expressão facial podem ser válidas mesmo sem deslocamento da silhueta.
+
+O arquivo `scripts/otaku_multicena_quality_v3.py` exige essas verificações antes de classificar uma cena como multilayer animada. Os relatórios identificam claramente que não verificam identidade, naturalidade da atuação, contatos, anatomia nem fidelidade aos acontecimentos do anime: isso ainda exige revisão audiovisual humana.
+
+### Dez tomadas para cada Short pendente
+
+O arquivo `scripts/otaku_multicena_ten_shot_plan.py` reorganiza os cinco blocos originais em dez propostas distintas de enquadramento/ação, sem reescrever a narração. Frases candidatas são ligadas a posições aproximadas em palavras. São rascunhos de direção de arte, não storyboard aprovado nem imagens geradas.
+
+Comando para elaborar apenas o texto do plano:
+
+    python scripts/otaku_multicena_ten_shot_plan.py --numbers 5 4 3 2 1 --output reports/otaku-pendentes-ten-shots.json
+
+A Action `otaku-editorial-quality-offline.yml` também prepara o relatório `otaku-ten-shot-pending-drafts.json` para os Shorts 5, 4, 3, 2 e 1. Os cinco já publicados anteriormente permanecem intocados; não deve haver duplicações.
+
+### Critérios de conclusão
+
+1. Testes de Python/TypeScript e auditoria offline aprovados.
+2. Dez artes e poses consistentes produzidas futuramente com direitos verificados.
+3. Prévia audiovisual real conferida em narração, legendas, efeitos, movimento independente e fidelidade narrativa.
+4. Nova autorização explícita do criador ANTES de retomar qualquer geração de Shorts ou upload.
+
+As propostas de dez cenas e os resultados de geometria NÃO significam que os assets ou os vídeos já foram produzidos.
