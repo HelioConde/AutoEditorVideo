@@ -169,6 +169,32 @@ O carinho e o amor podem despertar coisas mágicas. Uma descoberta especial ganh
 9. **Realização:** registrar a voz, pausas, animação e duração reais após a produção. Se o áudio passar de 59,2s com as pausas mínimas de resposta, **reescrever em duas partes ou encurtar narração**, nunca forçar velocidade excessiva.
 10. **Avaliação:** render, QA técnico e revisão do vídeo completo em ambiente apropriado. Não publicar automaticamente; canais, OAuth e permissões são fluxos separados.
 
+## Parte 2 — direcao visual sem limite de cenas (05/11/2026)
+
+O segundo **video** da historia (EP 01, Parte 02/04: nascimento de Fofinho)
+mantem blocos de narracao curtos e calorosos, mas **NAO tem limite fixo
+de cenas visuais**. O roteiro da Parte 2 referencia
+`conteudos/fofinhos-ep01-parte02-direcao-v2.json`: a versao atual detalha
+25 planos para 10 trechos narrados; 25 e uma escolha artistica, NAO um teto.
+O compositor aceita adicionar novos planos sem alterar codigo nem cortar voz.
+
+Cada cena visual deve ter uma acao visivel, um enquadramento intencional,
+movimento de objetos independente da camera, luz ou ambiente animado discretamente
+e continuidade de mesma caminha, mesmo ovo azul, mesmo quarto e mesmos personagens.
+Os sprites animados por transformacoes 2D NAO sao rigging articulado; gestos
+complexos exigem novas poses aprovadas e QA visual de cada render.
+
+A Biblia original mostra a primeira gotinha de agua ANTES do nome
+Fofinho. A Parte 2 foi alinhada: nasce o gatinho, mia, surge a gotinha,
+Emanuelly o nomeia e encerra com uma curiosidade sobre seu poder.
+
+**Distinguir cenas de duracao:** a quantidade de planos e ilimitada, mas
+a duracao de video/audio ainda e configurada em 60s/59,2s na trilha atual
+de Shorts. Nenhum novo plano deve ter duracao zero; se a historia pedir mais
+tempo para respirar, planejar uma edicao longa com mudanca explicita na
+politica de duracao, em vez de acelerar voz, comprimir pausas ou cortar acoes.
+Nao ha publicacao automatica: revisar narracao, efeitos sonoros, licencas e MP4.
+
 ## EP 1 — divisão editorial aprovada para teste
 
 A primeira história foi dividida em **quatro partes**. A fonte roteirizada e os ganchos estão em:
