@@ -7,6 +7,8 @@ on:
       - 'conteudos/otaku-production-reservations.json'
       - 'scripts/otaku_br_50_reverso.py'
       - 'scripts/otaku_br_50_render.py'
+      - 'scripts/otaku_br_50_setup_media.py'
+      - '.github/workflows/otaku-br-50-toolchain-prime.yml'
       - 'scripts/otaku_br_50_generate_images.py'
       - 'scripts/otaku_br_50_upload_public.py'
       - 'tests/test_otaku_br_50_serial_public.py'
@@ -35,7 +37,7 @@ jobs:
         run: |
           python -m pytest -q tests/test_otaku_br_50_reverso.py tests/test_otaku_br_50_serial_public.py
           python scripts/otaku_br_50_reverso.py --action validate
-          python -m py_compile scripts/otaku_br_50_render.py scripts/otaku_br_50_generate_images.py scripts/otaku_br_50_upload_public.py
+          python -m py_compile scripts/otaku_br_50_render.py scripts/otaku_br_50_generate_images.py scripts/otaku_br_50_upload_public.py scripts/otaku_br_50_setup_media.py
       - name: Export 50 editorial production plans only (NO uploads)
         run: python scripts/otaku_br_50_reverso.py --action plan
       - name: Upload metadata-only plans as QA artifact
