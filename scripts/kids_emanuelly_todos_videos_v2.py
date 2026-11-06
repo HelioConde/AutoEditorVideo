@@ -29,8 +29,10 @@ FPS=30
 
 def _episode(part:int)->dict:
     p=story.load_parts()[part-1]
-    if len(p["segments"])!=len(bible.STORYBOARDS[part]):
+    if part!=2 and len(p["segments"])!=len(bible.STORYBOARDS[part]):
         raise ValueError("Roteiro e storyboard divergentes: Parte "+str(part))
+    if part==2 and set(s["beat"] for s in bible.STORYBOARDS[2])!=set(range(1,len(p["segments"])+1)):
+        raise ValueError("Ha falas sem planos visuais no Episodio 2")
     return p
 
 
@@ -43,7 +45,7 @@ def _shot_layout(scene:dict, part:int) ->dict:
     kitty_x=.68 if garden else .66
     egg_x=.66 if not garden else .63
     if part==1 and i==1:egg_x=.53
-    return {
+    layout={
         "index":i,"poseX":pose_x,"poseY":.13,
         "poseSize":.70 if garden else .72,
         "eggX":egg_x,"eggY":.72 if garden else .76,
@@ -53,6 +55,68 @@ def _shot_layout(scene:dict, part:int) ->dict:
         "waterX":kitty_x-.09,"waterY":.60 if garden else .62,
         "waterSize":.07,
     }
+    # Enquadramentos alteram tamanho/posicao de cada camada sem fabricar
+    # novos personagens nem esticar toda a imagem para simular animacao.
+    framing=scene.get("framing","two-shot")
+    if framing=="egg-close":
+        layout.update(eggX=.56,eggY=.69,eggSize=.36,nestX=.58,nestY=.82,nestSize=.47)
+    elif framing=="kitten-close":
+        layout.update(kittyX=.59,kittyY=.68,kittySize=.34,nestX=.60,nestSize=.42)
+    elif framing=="kitten-reveal":
+        layout.update(eggX=.57,eggSize=.27,kittyX=.58,kittyY=.71,
+                      kittySize=.26,nestX=.58,nestSize=.43)
+    elif framing=="girl-reaction":
+        layout.update(poseX=.43,poseSize=.84,eggX=.76,kittyX=.76)
+    elif framing=="water-close":
+        layout.update(kittyX=.62,kittyY=.75,kittySize=.29,
+                      waterX=.57,waterY=.54,waterSize=.11)
+    layout["cameraMotion"]=scene.get("camera_motion","still")
+    layout["visualCue"]=scene.get("visual_cue","")
+    layout["soundDirection"]=scene.get("sfx_cue","")
+    return layout
+
+
+def distribute_visual_shots(shots:tuple[dict,...],timing:list[dict])->list[dict]:
+    """N planos visuais por bloco de voz, sem teto fixo nem cortes de fala.
+
+    Cada plano recebe pelo menos UM frame. Se a fala for curta demais
+    para o numero de planos escolhido, pedir revisao editorial ou duracao
+    maior: nunca descartar cena nem gerar plano com zero frames.
+    """
+    result=[]
+    for beat_index,span in enumerate(timing,1):
+        group=[s for s in shots if s.get("beat",s["index"])==beat_index]
+        if not group:
+            raise ValueError("Fala "+str(beat_index)+" nao tem plano visual")
+        start=int(span["startFrame"])
+        end=int(span["endFrame"])
+        frames=end-start
+        if frames<len(group):
+            raise ValueError(
+                f"Fala {beat_index} tem {frames} frames para {len(group)} planos; "
+                "amplie a duracao/roteiro ou ajuste os planos sem cortar a voz."
+            )
+        extra=frames-len(group)
+        weights=[float(s.get("shot_weight",1)) for s in group]
+        weight_sum=sum(weights)
+        fractional=[extra*w/weight_sum for w in weights]
+        allocated=[int(math.floor(x)) for x in fractional]
+        remainder=extra-sum(allocated)
+        priorities=sorted(range(len(group)),
+                          key=lambda i:(fractional[i]-allocated[i],-i),
+                          reverse=True)
+        for i in priorities[:remainder]:
+            allocated[i]+=1
+        cursor=start
+        for shot,bonus in zip(group,allocated):
+            end_frame=cursor+1+bonus
+            result.append({"startFrame":cursor,"endFrame":end_frame})
+            cursor=end_frame
+        if cursor!=end:
+            raise ValueError("Erro de contagem de frames no beat "+str(beat_index))
+    if len(result)!=len(shots):
+        raise ValueError("Faltam planos visuais na distribuicao da narração")
+    return result
 
 
 def _public_path(part:dict,name:str)->str:
@@ -76,8 +140,9 @@ def build(part:int,*,root:Path=ROOT)->tuple[dict,Path,dict]:
         story.episode_for_tts(chapter),marker,duration_frames
     )
     expected=bible.STORYBOARDS[part]
-    if len(timing)!=len(expected):
-        raise ValueError("Tempos da narracao nao correspondem aos beats da parte")
+    if len(timing)!=len(chapter["segments"]):
+        raise ValueError("Tempos de voz nao correspondem as falas")
+    visual_timing=distribute_visual_shots(expected,timing)
     dest=root/"motion-remotion/public/generated/kids-emanuelly"/chapter["id"]/"layers-v2"
     dest.mkdir(parents=True,exist_ok=True)
     copied=set()
@@ -94,7 +159,7 @@ def build(part:int,*,root:Path=ROOT)->tuple[dict,Path,dict]:
         return _public_path(chapter,dst.name)
     audio=use(voice)
     shots=[]
-    for shot,t in zip(expected,timing):
+    for shot,t in zip(expected,visual_timing):
         layer=_shot_layout(shot,part)
         layer["startFrame"]=t["startFrame"]
         layer["endFrame"]=t["endFrame"]
@@ -121,7 +186,7 @@ def build(part:int,*,root:Path=ROOT)->tuple[dict,Path,dict]:
         layer["waterCount"]=shot["drops"]
         if part==1 and shot["index"]==1 and (layer["pose"] or layer["kitty"]):
             raise ValueError("Primeira cena nao pode mostrar Emanuelly/Fofinho")
-        if part==2 and shot["index"]<6 and layer["kitty"]:
+        if part==2 and shot.get("beat",shot["index"])<6 and layer["kitty"]:
             raise ValueError("Fofinho visivel antes do nascimento")
         if part==1 and layer["kitty"]:
             raise ValueError("Spoiler: personagem futuro na Parte 1")
@@ -136,7 +201,7 @@ def build(part:int,*,root:Path=ROOT)->tuple[dict,Path,dict]:
                             "|".join(signatures)).encode("utf8"))
     props={
         "episodeId":chapter["id"],"title":chapter["title"],
-        "brand":"Emanuelly e seus Amigos de Pelúcia",
+        "brand":"Fofinhos",
         "chapter":f"EP 1 · PARTE {part}/4",
         "durationFrames":duration_frames,
         "frames":[],"layeredScenes":shots,
