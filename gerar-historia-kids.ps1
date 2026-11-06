@@ -41,6 +41,24 @@ if($Parte -eq '1' -and $Acao -in @('Voz','Planejar','Verificar','Renderizar','Ab
   }
   return
 }
+# A Parte 2 tem planos visuais SEM LIMITE FIXO. Nao usar o compositor
+# legado de 10 imagens para a renderizacao do nascimento.
+if($Parte -eq '2' -and $Acao -in @('Planejar','Verificar','Imagens','Renderizar','Abrir')){
+  $layered=Join-Path $root 'animar-emanuelly.ps1'
+  if(-not(Test-Path -LiteralPath $layered -PathType Leaf)){
+    throw 'Motor de cenas ilimitadas da Parte 2 ausente; atualize a main.'
+  }
+  $names=@{
+    'Planejar'='Planejar'; 'Verificar'='Verificar'; 'Imagens'='GerarImagens'
+    'Renderizar'='Renderizar'; 'Abrir'='Abrir'
+  }
+  Write-Host '[FOFINHOS PARTE 2] Direcionando ao storyboard vivo e sem limite fixo de planos.' -ForegroundColor Cyan
+  & $layered -Acao $names[$Acao] -Parte 2 -MaxChamadas $MaxChamadas -Refazer:$Refazer
+  return
+}
+if($Parte -eq '2' -and $Acao -eq 'Gerar'){
+  throw 'Parte 2: execute Voz primeiro; depois Imagens/Renderizar pelo motor novo. Gerar tudo pelo modo antigo foi bloqueado.'
+}
 $program=Join-Path $root 'scripts\serie_kids_emanuelly_v1.py'
 if(-not(Test-Path -LiteralPath $program -PathType Leaf)){
   throw 'Motor da serie ausente. Execute git pull --ff-only origin main.'
