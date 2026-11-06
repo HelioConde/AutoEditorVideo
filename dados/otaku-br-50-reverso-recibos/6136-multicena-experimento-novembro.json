@@ -1,5 +1,5 @@
 {
-  "stage": "public_processed_pending_cover",
+  "stage": "public_processed_cover_acknowledged",
   "number": 36,
   "episode_id": "6136-multicena-experimento-novembro",
   "video_id": "vcskSUXNqM8",
@@ -10,5 +10,8 @@
   "cover_sha256": "0df7d9fdee6302bb35559e070563b9f5bc9db0eef600760dc6451e970d33e92e",
   "human_visual_review": false,
   "uploaded_utc": "2026-11-06T11:43:40.045511+00:00",
-  "visibility_claim": "public_verified"
+  "visibility_claim": "public_verified",
+  "thumbnail_api_acknowledged": true,
+  "completed_utc": "2026-11-06T11:44:11.030251+00:00",
+  "public_verified": true
 }
