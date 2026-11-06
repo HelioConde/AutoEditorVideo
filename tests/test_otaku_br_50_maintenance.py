@@ -71,3 +71,20 @@ def test_manual_workflow_dispatch_cannot_override_creator_pause():
     assert "Enforce LIVE creator maintenance pause" in wf
     assert "GH_TOKEN: ${{ github.token }}" in wf
     assert "pause_requested" in (ROOT/"scripts/otaku_br_50_maintenance_gate.py").read_text(encoding="utf-8")
+
+
+def test_parallel_short_generator_and_launcher_are_paused_too():
+    for path in (
+        ".github/workflows/otaku-br-parallel-one.yml",
+        ".github/workflows/otaku-br-5-parallel-launch.yml",
+    ):
+        src=(ROOT/path).read_text(encoding="utf-8")
+        wf=yaml.load(src,Loader=yaml.BaseLoader)
+        job=list(wf["jobs"].values())[0]
+        assert any(
+            "python scripts/otaku_br_50_maintenance_gate.py" in str(step.get("run",""))
+            for step in job["steps"]
+        )
+    generator=(ROOT/".github/workflows/otaku-br-parallel-one.yml").read_text(encoding="utf-8")
+    assert generator.count("python scripts/otaku_br_50_maintenance_gate.py")>=2
+    assert "GH_TOKEN: ${{ github.token }}" in generator
