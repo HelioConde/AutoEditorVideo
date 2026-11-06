@@ -62,3 +62,20 @@ def test_one_shot_upload_does_not_run_without_approval(monkeypatch):
         monkeypatch.delenv(name,raising=False)
     with pytest.raises(NativeRecutBlocked,match="WRONG_REPOSITORY"):
         guard()
+
+
+def test_historic_v4_private_upload_is_readable_but_cannot_be_rendered_again():
+    from production_reservations import get_entry
+    plan=validate_plan()
+    assert len(plan["projects"])==6
+    for project in plan["projects"]:
+        episode=project["source_episode_id"]+"-v4"
+        item=get_entry(project["channel"],episode)
+        assert item is not None
+        assert item["reservation_owner"]==OWNER
+        assert item["status"]=="private_uploaded"
+        assert item["publication_target"]=="private_first"
+    # Reviewing old metadata must never make an already uploaded clip
+    # eligible for another rendering/upload.
+    with pytest.raises(ValueError,match="ALREADY_PUBLISHED_OR_RESERVED_BY_ANOTHER_WORKFLOW"):
+        validate_plan(for_render=True)
