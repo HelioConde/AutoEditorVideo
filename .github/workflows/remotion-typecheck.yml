@@ -26,3 +26,6 @@ jobs:
       - name: Verificar TypeScript do motor
         working-directory: motion-remotion
         run: npx tsc --noEmit --project tsconfig.json
+      - name: Testar movimento de personagens e cortes sem gerar videos
+        working-directory: motion-remotion
+        run: npm run test:qa
