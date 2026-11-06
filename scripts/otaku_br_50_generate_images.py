@@ -47,7 +47,52 @@ def stage_check(number:int)->dict:
         raise ImageBlocked("CHANNEL_OR_QUEUE_MISMATCH")
     return item
 
+# This one story's original action includes an extreme self-sacrifice near
+# tremendous heat. The image provider rejected a prompt with HTTP 400.
+# Use non-graphic, editorial storytelling instead of depicting injuries or
+# burning people. The separately approved narration remains untouched.
+# This is a single prompt revision, NOT an automated retry/guardrail bypass.
+ARMIN_SAFE_SHOTS=(
+    "An original 2D editorial anime illustration: a blonde young fantasy scout, "
+    "Armin, quietly studying a tactical sketch beside a window. A colossal distant "
+    "silhouette appears across the misty city skyline. Emphasize thoughtful determination.",
+    "Armin and his dark-haired ally Eren point at a hand-drawn tactical map in "
+    "a stone tower while luminous mist drifts outside. Emphasize the clever distraction plan.",
+    "A tiny distant scout silhouette creates a distraction with a bright beam of "
+    "reflected daylight on a city rooftop, drawing the attention of a very large "
+    "shadow in the distance. Keep all figures safe, unharmed, and fully clothed.",
+    "Eren notices an opening beyond the drifting vapor while the scout's "
+    "carefully chosen route on the city map aligns with the view outside. "
+    "Focus on strategic consequences and a tense, cinematic expression.",
+    "Close with Armin's marked-up tactical map held gently by Eren and a "
+    "hopeful sunlight-lit skyline. Symbolize courage and personal cost through "
+    "a quiet, thoughtful face, without injuries or distressing scenes.",
+)
+
+def safe_scene_override(row:dict,index:int)->str|None:
+    # Do not edit unrelated videos or the spoken narration.
+    if row.get("position")!=37 or row.get("id")!="6137-multicena-experimento-novembro":
+        return None
+    if index not in range(1,6):
+        raise ImageBlocked("INVALID_SCENE_INDEX")
+    return (
+        "Create ONE ORIGINAL non-graphic, hand-painted 2D fantasy anime editorial "
+        "illustration, portrait 2:3 1024x1536. It is analysis artwork, not "
+        "a screenshot or a recreation of existing animation frames. "
+        "No fighting, burns, injuries, injured children, smoke inhalation, "
+        "violent contact, graphic harm, fire touching humans, or self-harm imagery. "
+        "Use atmospheric mist and warm backlighting rather than flames. "
+        "Maintain stable characters and scenery across the five different images. "
+        "Keep the bottom 22 percent uncluttered for narration captions. "
+        "No lettering, captions, logos, brands, watermarks or panels. "
+        "Keep all objects and characters completely within the image. "
+        f"Distinct image {index} of 5: {ARMIN_SAFE_SHOTS[index-1]}"
+    )
+
 def prompt_for(row:dict,index:int)->str:
+    override=safe_scene_override(row,index)
+    if override is not None:
+        return override
     scene=row["storyboard"][index-1]
     common=(
         "Create ONE ORIGINAL hand-painted 2D anime editorial illustration, "
