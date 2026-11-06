@@ -17,13 +17,17 @@
   "require_approval": "pre-approved_editorial_catalog_by_creator; technical automated checks; no false claim of human visual review",
   "note": "O processo pode parar por limite/cota de IA, direitos, OAuth ou thumbnail. Cada identificador de upload e conservado.",
   "resume_reason": "Short 30, navigation comedy / Zoro analysis, failed scene 03/05 with provider HTTP 400 in run 42255340900. Scoped original nonviolent comic wayfinding illustrations approved in code; preserved narration, title and publication order. Previous Short 31 public processed plus cover receipt confirmed.",
-  "last_verified_complete_episode": 31,
+  "last_verified_complete_episode": 6,
   "retry_request": "PAUSED - DO NOT RUN",
   "retry_number": null,
   "retry_policy": "Do not reupload Shorts 50..31; require preceding public+thumbnail receipt; fail closed on provider errors; reuse validated parallel-prepared Shorts 26..22 via cache when reached.",
   "last_verified_public_video_id": "r61iOcC0cTg",
   "pause_requested": true,
   "pause_reason": "Creator requested STOP all AI video generation and YouTube publishing to improve AutoEditorVideo first based on 30-day audience, retention, subscribers, search and 48-hour analysis. Do not resume automatically.",
-  "resume_policy": "Explicit creator authorization required only AFTER editorial quality improvements, offline tests and manual review of outputs. Never resume merely on workflow success.",
-  "pause_utc_note": "2026-11-06 creator request; exact time not asserted"
+  "resume_policy": "Do not auto-resume. Explicit consent required AFTER editor QA and media review; four maintenance gate flags must all permit resumption.",
+  "pause_utc_note": "2026-11-06 creator request; exact time not asserted",
+  "maintenance_complete": false,
+  "resume_authorized_after_maintenance": false,
+  "quality_phase": "editorial_and_metadata_audit_no_generation_no_upload",
+  "manual_review_required_before_resume": true
 }
