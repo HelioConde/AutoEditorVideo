@@ -150,3 +150,22 @@ def test_main_render_cli_exposes_preflight_without_unlocking_generation():
     # verifies the local control before calling voice/image/video engines.
     assert "check_authorization(json.loads(control.read_text" in source
     assert source.index("check_authorization(json.loads(control.read_text") < source.index("audio, subtitle = ensure_voice(")
+
+
+def test_unknown_pose_playback_fails_closed(tmp_path):
+    manifest,captions,doc=make_fixture(tmp_path)
+    doc["shots"][2]["pose_playback"]="invented_playback"
+    manifest.write_text(json.dumps(doc),encoding="utf-8")
+    with pytest.raises(quality.QualityBlocked,match="UNKNOWN_POSE_PLAYBACK"):
+        quality.build_preview(manifest,captions,tmp_path/"public")
+
+def test_external_asset_symlinks_are_not_accepted_even_with_valid_hash(tmp_path):
+    manifest,captions,doc=make_fixture(tmp_path)
+    original=manifest.parent/"clean-02.png"
+    external=tmp_path/"external.png"
+    original.rename(external)
+    original.symlink_to(external)
+    doc["sha256"][original.name]=sha256(external.read_bytes()).hexdigest()
+    manifest.write_text(json.dumps(doc),encoding="utf-8")
+    with pytest.raises(quality.QualityBlocked,match="ASSET_SYMLINK_OR_EXTERNAL_PATH_FORBIDDEN"):
+        quality.build_preview(manifest,captions,tmp_path/"public")
