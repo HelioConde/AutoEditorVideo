@@ -21,6 +21,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from otaku_br_50_reverso import OUTPUT, validate
 from narracao_shorts import ensure_voice
 from legendas_precisas import captions_from_markers
+from otaku_multicena_scene_pacing import story_cuts
 from capa_cinematografica import render_cover, STYLE as COVER_STYLE
 
 MOTION = ROOT / "motion-remotion"
@@ -111,7 +112,9 @@ def render_one(row: dict, *, force: bool = False) -> dict:
     static = MOTION / "public" / "generated" / namespace
     static.mkdir(parents=True, exist_ok=True)
     frames = math.ceil(FPS * seconds)
-    cuts = [round(frames * i / len(art)) for i in range(len(art) + 1)]
+    # Align scene boundaries to actual narrated sentence/word timing
+    # instead of dividing the whole video into five uniform still-image holds.
+    cuts = story_cuts(captions, frames, fps=FPS)
     scenes = []
     for i, file in enumerate(art):
         img = static / ("scene-%02d.png" % (i + 1))
@@ -137,6 +140,7 @@ def render_one(row: dict, *, force: bool = False) -> dict:
         "audio": "generated/" + namespace + "/voz-master.mp3",
         "scenes": scenes, "captions": captions,
         "hook": row["cover_text"], "animationMode": "cinematica",
+        "cutStrategy": "narration_word_aligned_v2", "cutFrames": cuts,
         "characterPreset": "equilibrado", "visualProfile": "original",
         "editorialProfile": "otaku-br-experimento-50"
     }
@@ -166,6 +170,8 @@ def render_one(row: dict, *, force: bool = False) -> dict:
           "voice_sha256": digest(audio),
           "scene_sha256": [digest(p) for p in art],
           "technical": "preview_rendered_unreviewed",
+          "cut_strategy": "narration_word_aligned_v2",
+          "cut_frames": cuts,
           "editorial_review": "manifest_approved_by_creator_not_individual_video",
           "human_visual_review": False,
           "rights_review": "no_imported_media_automated_check_only",
