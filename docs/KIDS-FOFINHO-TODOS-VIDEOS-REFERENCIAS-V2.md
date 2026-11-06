@@ -39,6 +39,32 @@ no meio da série.
 As imagens dos cenários não podem conter personagens, ovo ou textos
 embutidos. O ovo e os bichinhos devem ter transparência real.
 
+## Regra nova: Parte 2 sem teto de cenas visuais
+
+O roteiro do nascimento (segundo video da serie) usa **quantos planos
+forem necessarios**, nao apenas os dez do desenho anterior. A direcao
+atual possui 25 planos visuais distribuidos entre dez blocos de voz.
+Novo arquivo de direcao:
+`conteudos/fofinhos-ep01-parte02-direcao-v2.json`.
+
+Para adicionar cenas, acrescente planos ao arquivo de direcao, mantendo
+`index` sequencial e `beat` igual ao trecho de voz (1–10).
+Nao existe teto artificial de planos; o programa calcula duracoes por peso
+`shot_weight` e pelo tempo real do TTS. Se uma fala tiver menos frames
+que planos, bloqueia a renderizacao em vez de apagar imagens ou cortar fala.
+
+Cada plano declara ambiente, enquadramento, movimento de ovo, reacao de
+Emanuelly, movimento de Fofinho, gotinha, iluminacao e direcao de efeito
+sonoro. `sfx_cue` e uma recomendacao editorial, NAO uma faixa de audio
+gerada automaticamente. Nao substituir poses e gestos por zoom na imagem
+inteira. A camera e apenas mais uma camada.
+
+Limites que continuam: os materiais visuais devem ser autorizados e
+consistentes; Fofinho so aparece no trecho de voz 06, apos abrir a casca;
+a gotinha estreia no trecho 08 antes de o gatinho ser nomeado no trecho 09;
+outros personagens aguardam as suas introducoes. A duracao de Shorts ainda
+segue as configuracoes tecnicas do projeto, nao o numero de cenas.
+
 ## Storyboard por parte
 
 | Short | Sequência | Recursos principais |
