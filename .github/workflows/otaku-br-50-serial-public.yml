@@ -316,6 +316,12 @@ jobs:
       contents: read
       actions: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
       - name: Dispatch only next lower number (NO simultaneous generation)
         shell: bash
         env:
