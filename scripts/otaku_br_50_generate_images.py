@@ -176,6 +176,9 @@ def generate(number:int)->dict:
     hashes=[]
     try:
         for i,dest in enumerate(art,1):
+            # Safe per-scene progress markers expose no prompts, accounts,
+            # credentials, or provider response bodies in public CI logs.
+            print(f"[OTAKU BR IMAGE] REQUESTED_SCENE={i:02d}/05",flush=True)
             raw=request_image(prompt_for(row,i),MODEL,key,"1024x1536")
             with Image.open(io.BytesIO(raw)) as image:
                 image.load()
@@ -187,6 +190,7 @@ def generate(number:int)->dict:
                     raise ImageBlocked("IMAGE_VISUALLY_BLANK")
                 canvas.save(dest,"PNG",optimize=True)
             hashes.append(sha(dest))
+            print(f"[OTAKU BR IMAGE] VERIFIED_SCENE={i:02d}/05",flush=True)
         if len(set(hashes))!=5:
             raise ImageBlocked("DUPLICATE_OR_REPEATED_IMAGES")
         report={
