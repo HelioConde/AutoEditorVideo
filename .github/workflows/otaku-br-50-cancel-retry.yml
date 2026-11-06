@@ -1,0 +1,60 @@
+name: Otaku BR - Cancelar run antigo 49 com seguranca
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/otaku-br-50-cancel-retry-20261106.json'
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: otaku-br-50-stale-run-cancellation-20261106
+  cancel-in-progress: false
+
+jobs:
+  cancel-exact-stuck-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Confirm creator-authorized cancel request and exact run/channel
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REPOSITORY" = "HelioConde/AutoEditorVideo"
+          test "$GITHUB_REF" = "refs/heads/main"
+          test "$GITHUB_RUN_ATTEMPT" = "1"
+          jq -e '
+            .authorized == true and
+            .channel_id == "UCXGYTuBYn-0Ziqin5ajKhOw" and
+            .stuck_run_id == 42172370639 and
+            .new_queued_run_id == 42175587861 and
+            .resume_number == 49
+          ' conteudos/otaku-br-50-cancel-retry-20261106.json
+          old="repos/$GITHUB_REPOSITORY/actions/runs/42172370639"
+          existing="repos/$GITHUB_REPOSITORY/contents/dados/otaku-br-50-reverso-recibos/6149-multicena-experimento-novembro.json"
+          if gh api "$existing" >/dev/null 2>&1; then
+            echo "[ABORT] Video 49 already has a receipt; reconcile before a retry."
+            exit 1
+          fi
+          old_status="$(gh api "$old" --jq '.status')"
+          old_name="$(gh api "$old" --jq '.name')"
+          test "$old_name" = "Otaku Multicena BR - 50 Shorts SERIAIS publicos (um por vez)"
+          if [[ "$old_status" == "completed" ]]; then
+            echo "[CANCEL] Original run already finished; new queued run decides safe continuation."
+            exit 0
+          fi
+          running_upload="$(gh api "$old/jobs?per_page=100" --jq '[.jobs[] | select(.name == "upload-public-cover-one" and .status == "in_progress")] | length')"
+          if [[ "$running_upload" != "0" ]]; then
+            echo "[ABORT] Old upload is currently running; do not cancel during ambiguous YouTube insert."
+            exit 1
+          fi
+          echo "[CANCEL] Requesting cancel of exact stuck run 42172370639, before any upload."
+          gh api -X POST "$old/cancel" >/dev/null
+          echo "[CANCEL] Cancellation requested. New serial run was already queued separately."
