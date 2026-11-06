@@ -8,6 +8,7 @@ on:
       - 'scripts/otaku_multicena_scene_pacing.py'
       - 'scripts/otaku_multicena_quality_v3.py'
       - 'scripts/otaku_multicena_pose_qa.py'
+      - 'scripts/otaku_multicena_ten_shot_plan.py'
       - 'scripts/otaku_multicena_video_qa.py'
       - 'motion-remotion/src/master-short.tsx'
       - 'scripts/otaku_br_50_maintenance_gate.py'
@@ -16,6 +17,7 @@ on:
       - 'tests/test_otaku_multicena_scene_pacing.py'
       - 'tests/test_otaku_multicena_quality_v3.py'
       - 'tests/test_otaku_multicena_pose_qa.py'
+      - 'tests/test_otaku_multicena_ten_shot_plan.py'
       - 'tests/test_otaku_multicena_video_qa.py'
       - 'tests/test_otaku_br_50_maintenance.py'
       - 'conteudos/otaku-multicena-insights-editor-v2.json'
@@ -52,11 +54,13 @@ jobs:
           jq -e '.pause_requested == true and .authorized_public == false and .maintenance_complete == false and .resume_authorized_after_maintenance == false' \
             conteudos/otaku-br-50-serial-launch-20261106.json
       - name: Run offline tags and creator-consent tests
-        run: python -m pytest -q tests/test_otaku_multicena_editorial_audit.py tests/test_otaku_br_50_maintenance.py tests/test_otaku_multicena_strategy_plan.py tests/test_otaku_multicena_scene_pacing.py tests/test_otaku_multicena_quality_v3.py tests/test_otaku_multicena_pose_qa.py tests/test_otaku_multicena_video_qa.py
+        run: python -m pytest -q tests/test_otaku_multicena_editorial_audit.py tests/test_otaku_br_50_maintenance.py tests/test_otaku_multicena_strategy_plan.py tests/test_otaku_multicena_scene_pacing.py tests/test_otaku_multicena_quality_v3.py tests/test_otaku_multicena_pose_qa.py tests/test_otaku_multicena_ten_shot_plan.py tests/test_otaku_multicena_video_qa.py
       - name: Prepare editorial report from 50 planned Shorts (no publication)
         run: python scripts/otaku_multicena_editorial_audit.py --output "$RUNNER_TEMP/otaku-editorial-report-v2.json"
       - name: Build offline 15-topic strategy and cadence hypotheses
         run: python scripts/otaku_multicena_strategy_plan.py --output "$RUNNER_TEMP/otaku-strategy-v3.json"
+      - name: Draft 10 visual shots for each of the five pending episodes
+        run: python scripts/otaku_multicena_ten_shot_plan.py --numbers 5 4 3 2 1 --output "$RUNNER_TEMP/otaku-ten-shot-pending-drafts.json"
       - name: Keep offline report for review
         uses: actions/upload-artifact@v4
         with:
@@ -64,5 +68,6 @@ jobs:
           path: |
             ${{ runner.temp }}/otaku-editorial-report-v2.json
             ${{ runner.temp }}/otaku-strategy-v3.json
+            ${{ runner.temp }}/otaku-ten-shot-pending-drafts.json
           retention-days: 14
           if-no-files-found: error
