@@ -53,6 +53,8 @@ def test_workflow_separates_secrets_starts_one_video_and_next_only_after_upload(
     assert jobs["generate-render-one"]["env"]["EPISODE_NUMBER"]
     assert "upload-public-cover-one" in jobs["launch-next-only-after-covered-publication"]["needs"]
     assert "gh workflow run otaku-br-50-serial-public.yml" in src
+    assert '-R "$GITHUB_REPOSITORY" --ref main' in src
+    assert 'then .number_start else error("INVALID_SERIAL_RESUME_AUTHORIZATION")' in src
     assert "sleep 180" in src
     assert "YOUTUBE_BR_TOKEN_JSON" not in str(jobs["generate-render-one"])
     assert "PROXY_ACCOUNTS_JSON" not in str(jobs["upload-public-cover-one"])
