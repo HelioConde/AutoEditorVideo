@@ -6,7 +6,9 @@ only channels.list, playlistItems.list, videos.list. Never uploads or edits.
 Prints public aggregate data and highest/lowest videos for evidence-based audit.
 """
 from __future__ import annotations
-from collections import Counter
+from collections import Counter, defaultdict
+from statistics import median
+from zoneinfo import ZoneInfo
 from datetime import datetime,timezone
 import json
 import os
@@ -112,6 +114,34 @@ def fetch() -> dict:
        "subscribers":summary["channel_subscribers"]},ensure_ascii=False),flush=True)
     for i,v in enumerate(rows,1):
         print("[PUBLIC_VIDEO] "+json.dumps(v,ensure_ascii=False),flush=True)
+    # Compare cohorts by publication date in the creator's Brazilian timezone.
+    # These are cumulative public Data API metrics, NOT historical daily watch data.
+    groups=defaultdict(list)
+    for video in rows:
+        stamp=video.get("published_at")
+        try:
+            date=datetime.fromisoformat(stamp.replace("Z","+00:00")).astimezone(
+                ZoneInfo("America/Sao_Paulo")
+            ).date().isoformat()
+        except (AttributeError,ValueError):
+            date="unknown"
+        groups[date].append(video)
+    for date,group in sorted(groups.items()):
+        v=sum(item["views"] for item in group)
+        l=sum(item["likes"] for item in group)
+        ages=[item["age_hours"] for item in group if item["age_hours"] is not None]
+        print("[PUBLIC_COHORT] "+json.dumps({
+            "local_publish_date":date,
+            "public_video_count":len(group),
+            "views_cumulative_as_of_snapshot":v,
+            "likes_cumulative_as_of_snapshot":l,
+            "mean_views_per_video":round(v/len(group),2),
+            "median_views_per_video":median(item["views"] for item in group),
+            "videos_with_zero_views":sum(item["views"]==0 for item in group),
+            "youngest_video_age_hours":min(ages) if ages else None,
+            "oldest_video_age_hours":max(ages) if ages else None,
+            "limitation":"Cumulative snapshot; not daily views or causal impact."
+        },ensure_ascii=False),flush=True)
     print("[AUDIT] COMPLETED_READ_ONLY_NO_CHANGES",flush=True)
     return summary
 
