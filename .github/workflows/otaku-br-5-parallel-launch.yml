@@ -34,7 +34,9 @@ jobs:
           jq -e '
             .schema == "autoeditorvideo/otaku-br-5-parallel-pilot/v1"
             and .authorized_generation == true
-            and .public_upload == false
+            and .public_upload == true
+            and .publication_strategy == "serial_existing_workflow_after_prior_receipts"
+            and .publication_workflow == "otaku-br-50-serial-public.yml"
             and .channel == "br"
             and .numbers == [26,25,24,23,22]
             and .independent_workflow_runs == 5
@@ -47,7 +49,7 @@ jobs:
               exit 1
             fi
           done
-          echo "[PILOT] Five pending Shorts authorized for preview-only generation."
+          echo "[PILOT] Five pending Shorts authorized for parallel preparation; publication will be handled by existing serial public uploader after Shorts 31..27."
       - name: Dispatch five SEPARATE GitHub Actions runs (five runners)
         shell: bash
         env:
@@ -61,4 +63,10 @@ jobs:
             echo "[PILOT] DISPATCHED_GENERATION_ONLY=$number"
             sleep 5
           done
-          echo "[PILOT] SENT_FIVE_INDEPENDENT_WORKFLOW_DISPATCHES_NO_YOUTUBE_UPLOAD"
+          echo "[PILOT] FIVE_INDEPENDENT_GENERATORS_REQUESTED; SERIAL_PUBLICATION_USES_VERIFIED_CACHE"
+          {
+            echo "### Five-way experiment: prepare in parallel, publish in order"
+            echo "Prepared Shorts: 26, 25, 24, 23, 22."
+            echo "Public uploads: via otaku-br-50-serial-public.yml ONLY after 31..27 receipts are verified."
+            echo "No YouTube OAuth available to the five parallel preparation jobs."
+          } >> "$GITHUB_STEP_SUMMARY"
