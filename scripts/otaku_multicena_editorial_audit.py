@@ -83,7 +83,9 @@ def contains_phrase(haystack:str,needle:str)->bool:
 def review_candidates(row:dict,candidates:list[str],max_tags:int=12,max_chars:int=260)->dict:
     """Propose only topical metadata; never edit uploaded records in place."""
     series=normalized(row.get("series",""))
-    aliases=FRANCHISE_ALIASES.get(series,{series})
+    aliases=next((items for key,items in FRANCHISE_ALIASES.items()
+                  if normalized(key)==series),{series})
+    aliases={normalized(a) for a in aliases}
     story=" ".join(str(row.get(k,"")) for k in
                    ("series","title","hook","narration_script","cover_text"))
     selected=[]
