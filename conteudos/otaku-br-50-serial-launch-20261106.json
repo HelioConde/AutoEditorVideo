@@ -5,7 +5,7 @@
   "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
   "authorized_public": true,
   "creator_request": "Gerar e publicar os 50 Shorts um por um, de 50 a 1. Em cada um: gerar, narrar, legendar, renderizar, enviar PUBLICO, anexar capa e confirmar antes do proximo.",
-  "number_start": 37,
+  "number_start": 34,
   "number_end": 1,
   "sequence_policy": "ONE_AT_A_TIME_PUBLIC_PROCESSED_COVER_ACKNOWLEDGED",
   "secrets_policy": "image-generation e youtube-private-upload em jobs separados, tokens nao expostos",
@@ -16,10 +16,10 @@
   "workflow": ".github/workflows/otaku-br-50-serial-public.yml",
   "require_approval": "pre-approved_editorial_catalog_by_creator; technical automated checks; no false claim of human visual review",
   "note": "O processo pode parar por limite/cota de IA, direitos, OAuth ou thumbnail. Cada identificador de upload e conservado.",
-  "resume_reason": "Shorts 50 a 38 têm recibos públicos e capas confirmadas. Short 37 falhou durante geração das imagens, nenhum recibo nem upload, cena 37 visual revisada e QA offline aprovado no run 42210177865. Reiniciar somente 37; manter fail-closed e sequência 36..1",
-  "last_verified_complete_episode": 38,
-  "last_verified_public_video_id": "riV8i9vza_g",
-  "retry_request": "Reiniciar Short 37 após HTTP 400 do provedor de imagens (execucao 42198633654), com prompts editoriais não gráficos apenas neste episódio",
-  "retry_number": 37,
-  "retry_policy": "On push cancel prior workflow concurrency run before new episode generation. Never retry number 50. Stop if current receipt exists."
+  "resume_reason": "The 50..35 published receipts are complete with public + thumbnail; no episode 34 receipt. A single story-specific editorial visual revision to Erwin's tactical map planning scene avoids disturbing graphic material; preserves spoken narration, story, title and ordering. No blind retry of rejected prompt.",
+  "last_verified_complete_episode": 35,
+  "last_verified_public_video_id": "WPpuZ-FoSMc",
+  "retry_request": "Retry 34 following HTTP 400 provider refusal in run 42214140453; five original, non-graphic tactical storyboard frames replacing visual generation prompt only, validated by QA 42222673703",
+  "retry_number": 34,
+  "retry_policy": "Creator-authorized push resumes only next missing episode; receipt existence fails closed. Never reupload 50..35. Wait for confirmed upload, processing and cover before 33."
 }
