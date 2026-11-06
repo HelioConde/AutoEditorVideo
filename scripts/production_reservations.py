@@ -21,7 +21,9 @@ EPISODE_PATTERNS={
     'br':r'[0-9]{4}-[a-z0-9-]+',
     'en':r'[0-9]{4}-[a-z0-9-]+',
     'games':r'game-[0-9]{3}-[a-z0-9-]+',
-    'kids':r'(?:kids|fofinhos)-[0-9]{3}-[a-z0-9-]+',
+    # A serie Fofinhos usa IDs canonicos por episodio/parte; preservar tambem
+    # os IDs numerados legados. Nao aceitar outros formatos arbitrarios.
+    'kids':r'(?:kids-[0-9]{3}-[a-z0-9-]+|fofinhos-[0-9]{3}-[a-z0-9-]+|kids-emanuelly-ep[0-9]{2}-p[0-9]{2}-[a-z0-9-]+)',
     'alchemy':r'alchemy-[0-9]{3}-[a-z0-9-]+',
 }
 
