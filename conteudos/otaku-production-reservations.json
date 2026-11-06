@@ -1145,6 +1145,14 @@
       "requested_by_creator_publication": true,
       "creative_status": "metadata_and_storyboard_pending",
       "note": "Experimento de 50 Shorts distintos: ordem editorial 50 ate 1; sem uploads sem MP4 original, capa, narracao e legenda validados. Preservar todos os videos antigos; evitar spam."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-emanuelly-ep01-p03-poder-agua",
+      "status": "reserved",
+      "reservation_owner": "codex_fofinhos_part03_20261106",
+      "source": "user_request_2026-11-06",
+      "note": "Parte 3 longa ~2min45 conforme roteiro completo do usuario; mesmo nivel visual da Parte 2; sem upload."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
