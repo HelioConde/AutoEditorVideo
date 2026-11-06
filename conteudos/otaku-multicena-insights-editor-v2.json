@@ -1,0 +1,157 @@
+{
+  "schema": "otaku-multicena/audience-insights/v2",
+  "period": "ultimos 30 dias conforme resumo do vidIQ enviado pelo criador em 2026-11-06",
+  "status": "amostra editorial - nao importar como metricas oficiais do YouTube Studio",
+  "retention_definition": "percentual exibido pelo vidIQ; comparar com porcentagem media visualizada na mesma janela temporal no Studio",
+  "best_examples": [
+    {
+      "title": "Light caçou Kira SEM SABER que era ele mesmo!",
+      "views": 508,
+      "retention_percent": 69.45,
+      "avg_view_seconds": 28,
+      "watch_minutes": 241,
+      "subscribers_gained": 6,
+      "pattern": "contradicao + misterio + revelacao"
+    },
+    {
+      "title": "Steel Ball Run: A corrida que muda tudo",
+      "views": 521,
+      "retention_percent": 37.05,
+      "avg_view_seconds": 14,
+      "watch_minutes": 122,
+      "pattern": "evento grande, apelo de tendencia"
+    },
+    {
+      "title": "O custo real de ser uma lenda em Night City",
+      "views": 305,
+      "retention_percent": 35.85,
+      "avg_view_seconds": 14,
+      "watch_minutes": 69,
+      "pattern": "consequencia emocional"
+    },
+    {
+      "title": "The Apothecary Diaries: O método genial da Maomao",
+      "views": 195,
+      "retention_percent": 41.54,
+      "avg_view_seconds": 17,
+      "watch_minutes": 54,
+      "subscribers_gained": 5,
+      "pattern": "inteligencia + descoberta"
+    },
+    {
+      "title": "Blue Box: AMOR OU ESPORTE",
+      "views": 256,
+      "retention_percent": 32.34,
+      "avg_view_seconds": 12,
+      "watch_minutes": 51,
+      "subscribers_gained": 6,
+      "pattern": "dilema emocional"
+    },
+    {
+      "title": "Light virou o mal tentando fazer justiça?",
+      "views": 120,
+      "retention_percent": 58.43,
+      "avg_view_seconds": 17,
+      "pattern": "dilema moral"
+    },
+    {
+      "title": "Death Note: por que 40 SEGUNDOS mudam tudo?",
+      "views": 109,
+      "retention_percent": 46.56,
+      "avg_view_seconds": 23,
+      "pattern": "regra com consequencia"
+    },
+    {
+      "title": "Firefly Wedding: CASAMENTO PERIGOSO",
+      "views": 138,
+      "retention_percent": 37.44,
+      "avg_view_seconds": 15,
+      "subscribers_gained": 3,
+      "pattern": "historia emocional"
+    }
+  ],
+  "vph_snapshot": [
+    {
+      "topic": "Zenitsu luta melhor DORMINDO?",
+      "vph": 69
+    },
+    {
+      "topic": "Kurapika olhos vermelhos",
+      "vph": 6
+    },
+    {
+      "topic": "Lelouch uma ordem por pessoa",
+      "vph": 2
+    }
+  ],
+  "search_terms_displayed": [
+    {
+      "term": "death note moments",
+      "views": 2
+    },
+    {
+      "term": "the apothecary diaries",
+      "views": 2
+    },
+    {
+      "term": "anjo da morte",
+      "views": 1
+    },
+    {
+      "term": "beyblade caseiro",
+      "views": 1
+    },
+    {
+      "term": "blue box",
+      "views": 1
+    },
+    {
+      "term": "death note",
+      "views": 1
+    }
+  ],
+  "vidiq_metadata_snapshot": {
+    "seo_score": 28,
+    "seo_score_max": 50,
+    "avg_title_chars": 49,
+    "avg_description_chars": 629,
+    "avg_tag_chars": 255
+  },
+  "competitor_names_for_future_manual_benchmark": [
+    "Shin Animes 心",
+    "Animakai KAI",
+    "D+ANIMES",
+    "Mavua Animes",
+    "Anime Voz BR",
+    "Sabia Geek"
+  ],
+  "competitors_note": "Nomes enviados pelo criador; inscritos, alcance e identidade dos canais ainda nao verificados. Nao usar nomes como tags.",
+  "editorial_experiments": [
+    {
+      "name": "misterio-revelacao",
+      "sample_count": 5,
+      "hypothesis": "Gancho de contradicao com pagamento antes dos ultimos 5s pode elevar retencao",
+      "inspired_by": "Light caçou Kira"
+    },
+    {
+      "name": "emoção-e-escolha",
+      "sample_count": 5,
+      "hypothesis": "Dilemas pessoais podem melhorar inscritos a cada 100 views",
+      "inspired_by": "Blue Box, Maomao"
+    },
+    {
+      "name": "curiosidade-poder",
+      "sample_count": 5,
+      "hypothesis": "Perguntas inesperadas podem melhorar distribuicao inicial do feed",
+      "inspired_by": "Zenitsu"
+    }
+  ],
+  "acceptance_criteria": {
+    "hook": "Promessa identificavel nos primeiros 3 segundos, sem introducao de canal",
+    "reward": "O roteiro precisa responder a pergunta ou revelar a ideia antes de terminar",
+    "retention_measure": "Comparar primeira janela de 48 horas de cada Short; nao comparar uploads com diferentes idades",
+    "animation": "Aprovar movimento real de personagem/objetos quando possivel; nao declarar zoom como animacao articulada",
+    "metadata": "Relevancia por video; remover termos desconexos; priorizar titulo e descricao",
+    "production": "Manter pausa e sem upload ate aprovacao do criador"
+  }
+}
