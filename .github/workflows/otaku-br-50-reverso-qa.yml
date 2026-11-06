@@ -7,6 +7,10 @@ on:
       - 'conteudos/otaku-production-reservations.json'
       - 'scripts/otaku_br_50_reverso.py'
       - 'scripts/otaku_br_50_render.py'
+      - 'scripts/otaku_br_50_generate_images.py'
+      - 'scripts/otaku_br_50_upload_public.py'
+      - 'tests/test_otaku_br_50_serial_public.py'
+      - '.github/workflows/otaku-br-50-serial-public.yml'
       - 'tests/test_otaku_br_50_reverso.py'
       - '.github/workflows/otaku-br-50-reverso-qa.yml'
   workflow_dispatch:
@@ -26,12 +30,12 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install test runner (no image or YouTube APIs)
-        run: python -m pip install 'pytest>=8,<10'
+        run: python -m pip install 'pytest>=8,<10' 'PyYAML>=6,<7'
       - name: Validate 50 unique Shorts, titles, tags, reservation and reverse order
         run: |
-          python -m pytest -q tests/test_otaku_br_50_reverso.py
+          python -m pytest -q tests/test_otaku_br_50_reverso.py tests/test_otaku_br_50_serial_public.py
           python scripts/otaku_br_50_reverso.py --action validate
-          python -m py_compile scripts/otaku_br_50_render.py
+          python -m py_compile scripts/otaku_br_50_render.py scripts/otaku_br_50_generate_images.py scripts/otaku_br_50_upload_public.py
       - name: Export 50 editorial production plans only (NO uploads)
         run: python scripts/otaku_br_50_reverso.py --action plan
       - name: Upload metadata-only plans as QA artifact
