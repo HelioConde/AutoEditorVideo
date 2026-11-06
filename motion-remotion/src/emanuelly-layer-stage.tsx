@@ -9,7 +9,10 @@ export type EmanuellyLayeredScene = {
  background:string; pose?:string; egg:string; showEgg:boolean;
  poseX:number; poseY:number; poseSize:number;
  eggX:number; eggY:number; eggSize:number;
- animation:'still'|'walk'|'approach'|'lift'|'prepare'|'promise'|'rock'|'wonder';
+ animation:'still'|'walk'|'approach'|'lift'|'prepare'|'promise'|'rock'|'wonder'
+  |'pulse'|'crack'|'open'|'reveal'|'listen'|'name'|'rise';
+ cameraMotion?:'still'|'slow-push'|'slow-pull'|'drift-left'|'drift-right';
+ visualCue?:string; soundDirection?:string;
  magic?:boolean; night?:boolean;
  kitty?:string|null; kittyX?:number; kittyY?:number; kittySize?:number;
  kittenMotion?:'idle'|'pop'|'meow'|'paws'|'hop'|'snuggle'|'approach';
@@ -29,19 +32,34 @@ export const EmanuellyLayerStage:React.FC<{
   const duration=Math.max(1,scene.endFrame-scene.startFrame);
   const t=ease(local/duration);
   const walk=scene.animation==='walk'||scene.animation==='approach';
+  const rocking=['rock','pulse','crack'].includes(scene.animation);
+  const pulse=['pulse','crack','open','reveal','rise'].includes(scene.animation);
   const horizontal=walk?(-.12+.15*t):0;
+  // Respiracao delicada da pose em camada separada (nao e rigging/lipsync).
   const bob=walk?Math.sin(local*.4)*4:
-    scene.animation==='prepare'?Math.sin(local*.11)*2:0;
-  const eggRock=scene.animation==='rock'?Math.sin(local*.44)*8:
+    scene.animation==='prepare'?Math.sin(local*.11)*2:
+    Math.sin(local*.10)*2.5;
+  const poseTilt=scene.animation==='listen'?-3*t:
+    scene.animation==='wonder'?1.5*Math.sin(local*.08):0;
+  const eggRock=scene.animation==='crack'?Math.sin(local*.8)*4:
+    rocking?Math.sin(local*.40)*7:
     scene.animation==='lift'?-11*t:0;
   const eggFloat=(scene.animation==='lift'?-0.10*t:0)+
-    (scene.animation==='rock'?Math.sin(local*.23)*.004:0);
-  const eggGlow=scene.animation==='rock'?
-    .3+.15*Math.sin(local*.35):.09;
-  const charOpacity=scene.pose?Math.min(1,local/5):0;
+    (rocking?Math.sin(local*.23)*.004:0);
+  const eggGlow=pulse?.22+.23*(.5+.5*Math.sin(local*.19)):
+    rocking?.22+.13*Math.sin(local*.25):.08;
+  const eggScale=pulse?1+.025*Math.sin(local*.19):1;
+  const charOpacity=scene.pose?Math.min(1,local/3):0;
+  const bgMotion=scene.cameraMotion??'still';
+  const bgScale=bgMotion==='slow-push'?1.025+.035*t:
+    bgMotion==='slow-pull'?1.06-.035*t:1.026;
+  const bgMoveX=bgMotion==='drift-left'?(-18*t):
+    bgMotion==='drift-right'?18*t:0;
   return <AbsoluteFill style={{overflow:'hidden'}}>
     <Img src={staticFile(scene.background)}
-      style={{position:'absolute',width:'100%',height:'100%',objectFit:'cover'}}/>
+      style={{position:'absolute',width:'100%',height:'100%',objectFit:'cover',
+        transform:'translateX('+bgMoveX+'px) scale('+bgScale+')',
+        transformOrigin:'50% 50%'}}/>
     {scene.night&&<AbsoluteFill style={{
       backgroundColor:'rgba(14,25,70,.35)',pointerEvents:'none',
     }}/>}
@@ -59,7 +77,7 @@ export const EmanuellyLayerStage:React.FC<{
         objectFit:'contain',objectPosition:'bottom center',
         left:pct(scene.poseX+horizontal),top:pct(scene.poseY),
         opacity:charOpacity,
-        transform:'translateX(-50%) translateY('+bob+'px)',
+        transform:'translateX(-50%) translateY('+bob+'px) rotate('+poseTilt+'deg)',
       }}/>}
     {scene.showEgg&&<>
       <div style={{
@@ -75,7 +93,7 @@ export const EmanuellyLayerStage:React.FC<{
           position:'absolute',width:pct(scene.eggSize),height:'auto',
           objectFit:'contain',
           left:pct(scene.eggX),top:pct(scene.eggY+eggFloat),
-          transform:'translate(-50%,-50%) rotate('+eggRock+'deg)',
+          transform:'translate(-50%,-50%) rotate('+eggRock+'deg) scale('+eggScale+')',
           transformOrigin:'50% 75%',
         }}/>
     </>}
@@ -90,7 +108,8 @@ export const EmanuellyLayerStage:React.FC<{
         top:pct((scene.kittyY??.76)+
           (scene.kittenMotion==='pop'?
             .09*(1-t):0)),
-        transform:'translate(-50%,-50%) translateY('+
+        transform:'translate(-50%,-50%) scale('+
+          (1+.012*Math.sin(local*.10))+') translateY('+
           (scene.kittenMotion==='hop'?
             (-18*Math.abs(Math.sin(local*.23))):
            scene.kittenMotion==='paws'?(-6*Math.sin(local*.35)):
@@ -109,11 +128,21 @@ export const EmanuellyLayerStage:React.FC<{
         left:pct((scene.waterX??.56)+
           (i-1)*.07+Math.sin(local*.04+i)*.025),
         top:pct((scene.waterY??.61)-
+          (scene.animation==='rise'? .14*t:0)-
           Math.abs(Math.sin(local*.06+i))* .065),
         transform:'translate(-50%,-50%) rotate('+
           (Math.sin(local*.045+i)*12)+'deg)',
         opacity:Math.min(1,local/10),
       }}/>)}
+    {scene.night&&<svg viewBox="0 0 1080 1920" width="100%" height="100%"
+      aria-hidden="true" style={{position:'absolute',inset:0,pointerEvents:'none'}}>
+      {Array.from({length:9},(_,i)=>{
+        const x=95+(i*169)%875+Math.sin(local/49+i)*14;
+        const y=430+(i*179)%1060-Math.sin(local/54+i)*12;
+        return <circle key={i} cx={x} cy={y} r={2+(i%3)}
+          fill="#e4f1ff" opacity={.07+.04*Math.sin(local/32+i)}/>;
+      })}
+    </svg>}
     {scene.futureGlow&&<svg viewBox="0 0 1080 1920"
       style={{position:'absolute',inset:0,width:'100%',height:'100%',
               pointerEvents:'none'}}>
