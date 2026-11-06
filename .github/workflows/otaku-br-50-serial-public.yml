@@ -22,7 +22,9 @@ permissions:
 
 concurrency:
   group: otaku-multicena-50-shorts-serial-public
-  cancel-in-progress: false
+  # A creator-authorized push retry cancels a stuck previous run. Normal
+  # per-episode workflow_dispatch keeps strict single-file sequencing.
+  cancel-in-progress: ${{ github.event_name == 'push' }}
 
 jobs:
   queue-and-contract:
