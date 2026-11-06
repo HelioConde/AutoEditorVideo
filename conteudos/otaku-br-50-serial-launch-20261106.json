@@ -16,9 +16,9 @@
   "workflow": ".github/workflows/otaku-br-50-serial-public.yml",
   "require_approval": "pre-approved_editorial_catalog_by_creator; technical automated checks; no false claim of human visual review",
   "note": "O processo pode parar por limite/cota de IA, direitos, OAuth ou thumbnail. Cada identificador de upload e conservado.",
-  "resume_reason": "Run 42224329621 completed Short 33 generation, public upload and cover, with receipt. Auto-dispatched Short 32 run 42225862641 was rerun (run_attempt > 1) and generation skipped by the workflow's first-attempt guard; queue validation confirmed Short 33 public processed plus cover. Resume from Short 32 with a fresh push trigger, then continue serially through 01.",
+  "resume_reason": "Short 32 run failed after three verified images; image provider refused scene 04/05 (HTTP 400). Approved scoped rewrite uses five original, peaceful seaside-storyteller illustrations without reproducing anime character design, no changes to narration or metadata. CI PyYAML missing dependency fixed.",
   "last_verified_complete_episode": 33,
-  "retry_request": "Resume exactly Short 32 via fresh authorized push event; don't rerun skipped workflow attempt 2.",
+  "retry_request": "Fresh authorized push to retry exactly Short 32 with corrected visuals and passing PyYAML import; proceed 31..1 only after public upload and cover are confirmed.",
   "retry_number": 32,
-  "retry_policy": "Do not duplicate Shorts 50..33. Check prior receipt, render one, publish public and attach cover, then dispatch next descending number only on confirmed success."
+  "retry_policy": "Fail closed on provider refusal, no blind retries of a refused prompt, skip no episode, never reupload receipts 50..33."
 }
