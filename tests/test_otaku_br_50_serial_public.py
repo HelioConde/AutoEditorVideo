@@ -116,3 +116,39 @@ def test_episode_37_safe_visual_direction_preserves_sequencing():
     assert source.index("if override is not None:") < source.index('scene=row["storyboard"][index-1]')
     assert "MAX_IMAGE_CALLS" in source
     assert "YOUTUBE_BR_TOKEN_JSON" not in source
+
+def test_episode_34_strategy_illustrations_are_safe_distinct_and_scoped():
+    """Erwin's non-graphic tactical visuals must not affect another anime."""
+    path=ROOT/"scripts/otaku_br_50_generate_images.py"
+    source=path.read_text(encoding="utf-8")
+    tree=ast.parse(source)
+    nodes=[
+      node for node in tree.body
+      if (isinstance(node,ast.Assign) and any(
+          isinstance(target,ast.Name) and target.id=="ERWIN_SAFE_SHOTS"
+          for target in node.targets))
+      or (isinstance(node,ast.FunctionDef) and node.name=="erwin_safe_scene_override")
+    ]
+    assert len(nodes)==2
+    local={"ImageBlocked":ValueError}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),str(path),"exec"),local)
+    override=local["erwin_safe_scene_override"]
+    erwin={"position":34,"id":"6134-multicena-experimento-novembro"}
+    images=[override(erwin,n) for n in range(1,6)]
+    assert all(isinstance(x,str) and len(x)>200 for x in images)
+    assert len(set(images))==5
+    assert all("fully clothed, safe and unharmed" in x for x in images)
+    assert all("Do not depict an attack, injuries" in x for x in images)
+    assert override({"position":35,"id":"6135-multicena-experimento-novembro"},1) is None
+    assert override({"position":37,"id":"6137-multicena-experimento-novembro"},1) is None
+    for invalid in (0,6):
+        try:
+            override(erwin,invalid)
+            assert False, "Invalid index should be rejected"
+        except ValueError:
+            pass
+    assert "override=erwin_safe_scene_override(row,index)" in source
+    assert "override=safe_scene_override(row,index)" in source
+    assert "Story to faithfully visualize: {row['narration_script']}" in source
+    assert "if override is not None:" in source
+    assert "YOUTUBE_BR_TOKEN_JSON" not in source
