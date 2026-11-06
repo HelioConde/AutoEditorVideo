@@ -129,3 +129,38 @@ def test_small_valid_json_receipts_do_not_block_parallel_cache(tmp_path, monkeyp
     assert prov_len < 1000
     assert (folder / "metadata.json").stat().st_size < 1000
     assert validator.check(number)["cached_media_verified"] is True
+
+
+def test_cache_fallback_reuses_validated_prepared_media_after_new_prompt_override():
+    for path in (
+        ".github/workflows/otaku-br-parallel-one.yml",
+        ".github/workflows/otaku-br-50-serial-public.yml",
+    ):
+        src=read(path)
+        assert "cache-matched-key == ''" in src
+        assert "restore-keys: |" in src
+        assert "otaku-br-50-prepared-v1-" in src
+        assert "otaku_br_50_validate_prepared.py --number" in src
+
+
+def test_short_31_safe_navigation_images_do_not_change_other_short_scripts():
+    source=read("scripts/otaku_br_50_generate_images.py")
+    tree=ast.parse(source)
+    nodes=[
+        node for node in tree.body
+        if (isinstance(node,ast.Assign) and any(
+            isinstance(target,ast.Name) and target.id=="NAVIGATOR_SAFE_SHOTS"
+            for target in node.targets
+        )) or (isinstance(node,ast.FunctionDef) and
+                node.name=="navigator_safe_scene_override")
+    ]
+    assert len(nodes)==2
+    ns={"ImageBlocked":ValueError}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),"short31", "exec"),ns)
+    fun=ns["navigator_safe_scene_override"]
+    row={"position":31,"id":"6131-multicena-experimento-novembro"}
+    prompts=[fun(row,i) for i in range(1,6)]
+    assert all(isinstance(p,str) and "No violence" in p for p in prompts)
+    assert len(set(prompts))==5
+    assert fun({"position":26,"id":"6126-multicena-experimento-novembro"},4) is None
+    assert "override=navigator_safe_scene_override(row,index)" in source
