@@ -152,3 +152,26 @@ def test_episode_34_strategy_illustrations_are_safe_distinct_and_scoped():
     assert "Story to faithfully visualize: {row['narration_script']}" in source
     assert "if override is not None:" in source
     assert "YOUTUBE_BR_TOKEN_JSON" not in source
+
+
+def test_episode_32_storyteller_visuals_are_original_and_nonviolent():
+    source=(ROOT/"scripts/otaku_br_50_generate_images.py").read_text(encoding="utf-8")
+    tree=ast.parse(source)
+    nodes=[
+      node for node in tree.body
+      if (isinstance(node,ast.Assign) and any(
+          isinstance(target,ast.Name) and target.id=="STORYTELLER_SAFE_SHOTS"
+          for target in node.targets))
+      or (isinstance(node,ast.FunctionDef) and node.name=="storyteller_safe_scene_override")
+    ]
+    assert len(nodes)==2
+    local={"ImageBlocked":ValueError}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),"storyteller-32","exec"),local)
+    fn=local["storyteller_safe_scene_override"]
+    episode={"position":32,"id":"6132-multicena-experimento-novembro"}
+    prompts=[fn(episode,n) for n in range(1,6)]
+    assert len(set(prompts))==5
+    assert all("original character design" in prompt for prompt in prompts)
+    assert all("nonviolent" in prompt for prompt in prompts)
+    assert fn({"position":33,"id":"6133-multicena-experimento-novembro"},1) is None
+    assert "override=storyteller_safe_scene_override(row,index)" in source
