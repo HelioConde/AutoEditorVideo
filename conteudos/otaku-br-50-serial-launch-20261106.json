@@ -5,7 +5,7 @@
   "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
   "authorized_public": true,
   "creator_request": "Gerar e publicar os 50 Shorts um por um, de 50 a 1. Em cada um: gerar, narrar, legendar, renderizar, enviar PUBLICO, anexar capa e confirmar antes do proximo.",
-  "number_start": 32,
+  "number_start": 31,
   "number_end": 1,
   "sequence_policy": "ONE_AT_A_TIME_PUBLIC_PROCESSED_COVER_ACKNOWLEDGED",
   "secrets_policy": "image-generation e youtube-private-upload em jobs separados, tokens nao expostos",
@@ -16,9 +16,10 @@
   "workflow": ".github/workflows/otaku-br-50-serial-public.yml",
   "require_approval": "pre-approved_editorial_catalog_by_creator; technical automated checks; no false claim of human visual review",
   "note": "O processo pode parar por limite/cota de IA, direitos, OAuth ou thumbnail. Cada identificador de upload e conservado.",
-  "resume_reason": "Short 32 run failed after three verified images; image provider refused scene 04/05 (HTTP 400). Approved scoped rewrite uses five original, peaceful seaside-storyteller illustrations without reproducing anime character design, no changes to narration or metadata. CI PyYAML missing dependency fixed.",
-  "last_verified_complete_episode": 33,
-  "retry_request": "Fresh authorized push to retry exactly Short 32 with corrected visuals and passing PyYAML import; proceed 31..1 only after public upload and cover are confirmed.",
-  "retry_number": 32,
-  "retry_policy": "Fail closed on provider refusal, no blind retries of a refused prompt, skip no episode, never reupload receipts 50..33."
+  "resume_reason": "Run 42238839781 failed at short 31, image request 04/05 HTTP 400. Edited original calm nautical imagery for Short 31 and added backwards-compatible validated cache restoration to preserve the five fully prepared pilot Shorts 26..22. Short 32 has completed PUBLIC and cover receipt.",
+  "last_verified_complete_episode": 32,
+  "retry_request": "Fresh authorized push to retry exactly Short 31 with scoped, non-violent nautical storyboard after provider HTTP 400 on scene 04/05; continue 30..1 only after public processing and thumbnail verified. Reuse verified pre-rendered caches 26..22.",
+  "retry_number": 31,
+  "retry_policy": "One at a time public publishing with verified prior receipts, no reupload 50..32; reuse 26..22 pre-rendered assets from 5 parallel Actions only if strict hashes/QA pass. Fail closed on refusals.",
+  "last_verified_public_video_id": "mdb0P12yNdg"
 }
