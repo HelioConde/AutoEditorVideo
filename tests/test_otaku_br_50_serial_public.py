@@ -59,3 +59,15 @@ def test_workflow_separates_secrets_starts_one_video_and_next_only_after_upload(
     assert "YOUTUBE_BR_TOKEN_JSON" not in str(jobs["generate-render-one"])
     assert "PROXY_ACCOUNTS_JSON" not in str(jobs["upload-public-cover-one"])
     assert data["concurrency"]["cancel-in-progress"]=="${{ github.event_name == 'push' }}"
+
+def test_media_prerequisites_do_not_fail_on_font_path_and_stall_apt():
+    """Regression: run 42177011211 timed out at 180s while apt-get
+    tried to install a font even though FFmpeg was already present.
+    """
+    src=(ROOT/".github/workflows/otaku-br-50-serial-public.yml").read_text(encoding="utf-8")
+    assert 'if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then' in src
+    assert 'timeout 60s sudo apt-get update -qq' in src
+    assert 'timeout 120s sudo apt-get install -y -qq ffmpeg' in src
+    assert 'fonts-dejavu-core' not in src
+    assert "from capa_cinematografica import load_font" in src
+    assert 'test -f /usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf' not in src
