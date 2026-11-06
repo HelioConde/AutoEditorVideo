@@ -63,6 +63,10 @@ jobs:
           [[ "$number" =~ ^[0-9]{1,2}$ ]]
           ((10#$number >= 1 && 10#$number <= 50))
           printf 'number=%s\n' "$((10#$number))" >> "$GITHUB_OUTPUT"
+      - name: Enforce LIVE creator maintenance pause before any generation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/otaku_br_50_maintenance_gate.py
       - name: Verify exactly 50 reserved originals and reverse queue
         run: |
           python scripts/otaku_br_50_reverso.py --action validate
@@ -226,6 +230,7 @@ jobs:
           MAX_IMAGE_CALLS: '5'
           PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
           PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           umask 077
@@ -238,6 +243,8 @@ jobs:
             rm -f "$RUNNER_TEMP/otaku-br-50-proxy.log"
           }
           trap cleanup EXIT
+          # Recheck immediately before accessing provider accounts.
+          python scripts/otaku_br_50_maintenance_gate.py
           python scripts/proxy_accounts_private_stage.py "$state_dir"
           unset PROXY_ACCOUNTS_JSON
           DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
@@ -314,6 +321,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           NUM: ${{ needs.queue-and-contract.outputs.number }}
+          PYTHONDONTWRITEBYTECODE: '1'
         run: |
           set -euo pipefail
           if ((NUM == 1)); then
@@ -322,6 +330,9 @@ jobs:
           fi
           next=$((NUM-1))
           sleep 180
+          # Recheck live main AFTER the delay; no stale run may restart
+          # after the creator has requested maintenance.
+          python scripts/otaku_br_50_maintenance_gate.py
           gh workflow run otaku-br-50-serial-public.yml \
             -R "$GITHUB_REPOSITORY" --ref main \
             -f number="$next" -f authorized_public=true
