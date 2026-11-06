@@ -17,7 +17,7 @@ RIGHTS={"type":"creator_original","evidence":"Original fixture authored entirely
 
 def make_fixture(tmp_path: Path, count: int = 10, animated: bool = True):
     work=tmp_path/"assets"
-    work.mkdir()
+    work.mkdir(parents=True)
     caption_words=[]
     shot_words=[]
     for i in range(count):
