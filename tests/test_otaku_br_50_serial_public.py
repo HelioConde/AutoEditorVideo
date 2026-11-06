@@ -89,3 +89,30 @@ def test_ffmpeg_cache_script_checks_version_and_copy_atomicity():
     assert "os.replace(stage/name,folder/name)" in source
     assert 'folder/"ffprobe"' in source
     assert "setup(args.dir)" in source
+
+def test_episode_37_safe_visual_direction_preserves_sequencing():
+    """A provider 400 on Short 37 must not cause skipping or graphic retries."""
+    path=ROOT/"scripts/otaku_br_50_generate_images.py"
+    source=path.read_text(encoding="utf-8")
+    tree=ast.parse(source)
+    nodes=[
+        node for node in tree.body
+        if (isinstance(node,ast.Assign) and any(
+                isinstance(target,ast.Name) and target.id=="ARMIN_SAFE_SHOTS"
+                for target in node.targets
+            )) or (isinstance(node,ast.FunctionDef) and node.name=="safe_scene_override")
+    ]
+    assert len(nodes)==2
+    local={"ImageBlocked":ValueError}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),str(path),"exec"),local)
+    f=local["safe_scene_override"]
+    episode37={"position":37,"id":"6137-multicena-experimento-novembro"}
+    scenes=[f(episode37,n) for n in range(1,6)]
+    assert all(isinstance(prompt,str) and len(prompt)>200 for prompt in scenes)
+    assert len(set(scenes))==5
+    assert all("family-friendly" in prompt for prompt in scenes)
+    assert f({"position":38,"id":"6138-multicena-experimento-novembro"},1) is None
+    assert "override=safe_scene_override(row,index)" in source
+    assert source.index("if override is not None:") < source.index('scene=row["storyboard"][index-1]')
+    assert "MAX_IMAGE_CALLS" in source
+    assert "YOUTUBE_BR_TOKEN_JSON" not in source
