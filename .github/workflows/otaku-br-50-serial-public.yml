@@ -169,10 +169,12 @@ jobs:
           command -v ffmpeg
           command -v ffprobe
           python - <<'PY'
-from PIL import ImageFont
-font=ImageFont.truetype("DejaVuSans.ttf", 22)
+import sys
+sys.path.insert(0,"scripts")
+from capa_cinematografica import load_font
+font=load_font(22)
 assert font.getbbox("TESTE") is not None
-print("[MEDIA] FFmpeg e renderizacao de fontes disponiveis")
+print("[MEDIA] FFmpeg e gerador oficial de fontes disponiveis")
 PY
       - name: Install and typecheck AutoEditorVideo Remotion
         working-directory: motion-remotion
