@@ -28,7 +28,7 @@ Não há evidência de que mudar só as tags reproduza esses números. Segundo o
 
 ## Problemas técnicos encontrados no editor atual
 
-1. O renderizador BR em `scripts/otaku_br_50_render.py` divide cinco imagens em intervalos iguais (`cuts`) sem considerar a frase exata de cada revelação. O momento narrativo pode ficar fora de sincronia com a ação visual.
+1. **Implementado:** o renderizador BR agora usa limites reais de palavras/frases do TTS para os cinco cortes. **Pendente:** as cinco imagens legadas ainda não garantem correspondência semântica entre cena e narração; o modo V3 verifica frases-gatilho em cada tomada.
 2. O compositor recebe `renderMode="master_static"` e um primeiro plano RGBA transparente de 1024x1536. Assim, a geração com cinco PNGs estáticos produz apenas movimento da câmera e luz ambiente — **não** animação articulada dos personagens.
 3. O perfil aplica uma tela de gancho nos primeiros 2,2s, mas não audita automaticamente a correspondência entre pergunta inicial e recompensa final.
 4. A geração de cenas pode receber HTTP 400; os prompts precisam ser mais claros, adequados e autorais, com alternativas revisadas editorialmente, sem repetir às cegas pedidos recusados.
@@ -104,3 +104,8 @@ O renderizador futuro já possui um planejador de cortes por limites reais da na
 `scripts/otaku_multicena_scene_pacing.py`. O renderizador BR usa esta função em vez de 5 cortes em partes iguais. Isso **não** afirma rigging: cenas ainda são PNGs estáticos com câmera/luz. Animação articulada, novas poses e expressão facial dependem de outra implementação, direitos de uso e QA de vídeo.
 
 A Action `otaku-editorial-quality-offline.yml` executa testes e entrega relatórios das 50 pautas e das hipóteses de novos experimentos. Não usa API de YouTube nem provedores de imagem e não libera a pausa.
+
+
+## Nova documentação de áudio, poses e validação V3
+
+Consulte [OTAKU-QUALITY-V3.md](OTAKU-QUALITY-V3.md). O modo V3 permite 8–12 tomadas com quadros de poses RGBA, efeitos sonoros licenciados e auditoria audiovisual local, mas não produz imagens automaticamente nem autoriza novos uploads. Os testes de CI são sintéticos; uma prévia real ainda precisa de análise humana.
