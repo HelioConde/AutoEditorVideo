@@ -75,10 +75,13 @@ def preflight(row: dict) -> tuple[Path, list[Path]]:
         raise RenderBlocked("MISSING_SOURCE_RIGHTS_AND_CHARACTER_QA")
     data = json.loads(source.read_text(encoding="utf-8"))
     if (data.get("episode_id") != row["id"]
+            or data.get("channel_id") != row["channel_id"]
+            or data.get("model") != "gpt-image-2"
             or data.get("art_original") is not True
-            or data.get("visual_qa") != "approved"
-            or data.get("rights_qa") != "approved"):
-        raise RenderBlocked("ORIGINAL_ART_NOT_APPROVED_FOR_THIS_VIDEO")
+            or data.get("visual_qa") != "automated_technical_checks_only"
+            or data.get("rights_qa") != "AI_generated_no_imported_media"
+            or data.get("scene_count") != 5):
+        raise RenderBlocked("ORIGINAL_ART_TECHNICAL_PROVENANCE_MISSING")
     hashes = data.get("scene_sha256")
     if hashes != [digest(p) for p in originals]:
         raise RenderBlocked("IMAGE_CHECKSUM_OR_EPISODE_MISMATCH")
@@ -154,6 +157,7 @@ def render_one(row: dict, *, force: bool = False) -> dict:
                 "description": row["description"], "tags": row["tags"],
                 "language": "pt-BR", "category_id": "1",
                 "self_declared_made_for_kids": False,
+                "containsSyntheticMedia": True,
                 "requested_privacy": "public_after_qa"}
     (folder / "metadata.json").write_text(
         json.dumps(metadata, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
@@ -162,8 +166,9 @@ def render_one(row: dict, *, force: bool = False) -> dict:
           "voice_sha256": digest(audio),
           "scene_sha256": [digest(p) for p in art],
           "technical": "preview_rendered_unreviewed",
-          "editorial_review": "pending",
-          "rights_review": "approved_art_only",
+          "editorial_review": "manifest_approved_by_creator_not_individual_video",
+          "human_visual_review": False,
+          "rights_review": "no_imported_media_automated_check_only",
           "youtube_upload": "not_performed",
           "publication": "not_performed"}
     (folder / "qa.json").write_text(json.dumps(qa, indent=2)+"\n",encoding="utf-8")
