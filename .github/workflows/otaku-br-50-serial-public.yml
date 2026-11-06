@@ -154,18 +154,26 @@ jobs:
         with:
           go-version-file: pinned-native-go-proxy/go.mod
           cache: false
-      - name: Install media tools before loading secrets (skip slow apt if already available)
+      - name: Install AutoEditorVideo dependencies without unnecessary apt update
         shell: bash
         run: |
           set -euo pipefail
-          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1 || ! test -f /usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf; then
-            timeout 180s sudo apt-get update -qq
-            timeout 180s sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          # GitHub hosted runners include FFmpeg in most images. A specific
+          # DejaVu font path must NOT force a slow apt-get update; the native
+          # AutoEditorVideo cover renderer supports Liberation and fallback fonts.
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            timeout 60s sudo apt-get update -qq
+            timeout 120s sudo apt-get install -y -qq ffmpeg
           fi
-          python -m pip install -r requirements-master.txt
+          python -m pip install --disable-pip-version-check -r requirements-master.txt
           command -v ffmpeg
           command -v ffprobe
-          test -f /usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf
+          python - <<'PY'
+from PIL import ImageFont
+font=ImageFont.truetype("DejaVuSans.ttf", 22)
+assert font.getbbox("TESTE") is not None
+print("[MEDIA] FFmpeg e renderizacao de fontes disponiveis")
+PY
       - name: Install and typecheck AutoEditorVideo Remotion
         working-directory: motion-remotion
         run: |
