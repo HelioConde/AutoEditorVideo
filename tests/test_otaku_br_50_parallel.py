@@ -164,3 +164,28 @@ def test_short_31_safe_navigation_images_do_not_change_other_short_scripts():
     assert len(set(prompts))==5
     assert fun({"position":26,"id":"6126-multicena-experimento-novembro"},4) is None
     assert "override=navigator_safe_scene_override(row,index)" in source
+
+
+def test_short_30_comic_wayfinding_visuals_are_nonviolent_and_episode_scoped():
+    source=read("scripts/otaku_br_50_generate_images.py")
+    tree=ast.parse(source)
+    nodes=[
+        node for node in tree.body
+        if (isinstance(node,ast.Assign) and any(
+            isinstance(target,ast.Name) and target.id=="LOST_WAYFINDER_SAFE_SHOTS"
+            for target in node.targets))
+        or (isinstance(node,ast.FunctionDef) and
+            node.name=="lost_wayfinder_safe_scene_override")
+    ]
+    assert len(nodes)==2
+    ns={"ImageBlocked":ValueError}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),"short30", "exec"),ns)
+    fn=ns["lost_wayfinder_safe_scene_override"]
+    target={"position":30,"id":"6130-multicena-experimento-novembro"}
+    prompts=[fn(target,i) for i in range(1,6)]
+    assert len(set(prompts))==5
+    assert all("No battles, violence" in p for p in prompts)
+    assert all("original character" in p for p in prompts)
+    assert fn({"position":31,"id":"6131-multicena-experimento-novembro"},3) is None
+    assert fn({"position":26,"id":"6126-multicena-experimento-novembro"},3) is None
+    assert "override=lost_wayfinder_safe_scene_override(row,index)" in source
