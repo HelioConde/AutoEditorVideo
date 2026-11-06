@@ -12,6 +12,7 @@ FILES=[
   "scripts/otaku_br_50_generate_images.py",
   "scripts/otaku_br_50_render.py",
   "scripts/otaku_br_50_upload_public.py",
+  "scripts/otaku_br_50_setup_media.py",
 ]
 
 def test_new_generation_and_publication_scripts_compile_without_execution():
@@ -60,14 +61,31 @@ def test_workflow_separates_secrets_starts_one_video_and_next_only_after_upload(
     assert "PROXY_ACCOUNTS_JSON" not in str(jobs["upload-public-cover-one"])
     assert data["concurrency"]["cancel-in-progress"]=="${{ github.event_name == 'push' }}"
 
-def test_media_prerequisites_do_not_fail_on_font_path_and_stall_apt():
-    """Regression: run 42177011211 timed out at 180s while apt-get
-    tried to install a font even though FFmpeg was already present.
+def test_media_toolchain_is_reused_and_apt_is_never_invoked():
+    """Regression: #45 and #48 failed with timeout 124 during apt-get.
+    Cached binaries/npm/node_modules/proxy avoid repeated setup and compilation.
     """
     src=(ROOT/".github/workflows/otaku-br-50-serial-public.yml").read_text(encoding="utf-8")
-    assert 'if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then' in src
-    assert 'timeout 60s sudo apt-get update -qq' in src
-    assert 'timeout 120s sudo apt-get install -y -qq ffmpeg' in src
-    assert 'fonts-dejavu-core' not in src
+    data=yaml.load(src,Loader=yaml.BaseLoader)
+    steps=data["jobs"]["generate-render-one"]["steps"]
+    assert data["jobs"]["generate-render-one"]["runs-on"] == "ubuntu-24.04"
+    assert "sudo apt-get" not in src
+    assert "static-ffmpeg==3.0" in src
+    assert "otaku_br_50_setup_media.py --dir .cache/otaku-br-50/ffmpeg" in src
+    assert 'echo "$GITHUB_WORKSPACE/.cache/otaku-br-50/ffmpeg" >> "$GITHUB_PATH"' in src
     assert "from capa_cinematografica import load_font" in src
-    assert 'test -f /usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf' not in src
+    cache_names={x.get("id") for x in steps if x.get("uses","").startswith("actions/cache")}
+    assert {"ffmpeg-cache","remotion-cache","proxy-cache"} <= cache_names
+    assert "steps.remotion-cache.outputs.cache-hit != 'true'" in src
+    assert "steps.proxy-cache.outputs.cache-hit != 'true'" in src
+    assert "npm ci --no-audit --no-fund" in src
+    assert "otaku-native-proxy" in src
+
+
+def test_ffmpeg_cache_script_checks_version_and_copy_atomicity():
+    source=(ROOT/"scripts/otaku_br_50_setup_media.py").read_text(encoding="utf-8")
+    assert "get_or_fetch_platform_executables_else_raise" in source
+    assert '("ffmpeg","ffprobe")' in source
+    assert "os.replace(stage/name,folder/name)" in source
+    assert 'folder/"ffprobe"' in source
+    assert "setup(args.dir)" in source
