@@ -44,7 +44,11 @@ Os nomes dos arquivos são restritos a uma única pasta do episódio, sem caminh
 
 ## Comandos de uso futuro (NÃO executar durante a manutenção)
 
-Para somente montar as props offline, depois de obter artes, poses e narração com direitos verificados:
+Para somente montar as props offline, depois de obter artes, poses e narração com direitos verificados, pelo comando principal do editor:
+
+    python scripts/otaku_br_50_render.py --action quality-plan --quality-manifest "caminho/quality.json" --quality-captions "caminho/marcacoes-remotion.json" --quality-props "caminho/props-v3.json"
+
+Ou usar o módulo diretamente:
 
     python scripts/otaku_multicena_quality_v3.py --manifest "caminho/quality.json" --captions "caminho/marcacoes-remotion.json" --public-root "motion-remotion/public" --output "caminho/props-v3.json"
 
@@ -63,3 +67,5 @@ Nenhum dos comandos cria um vídeo nem publica no YouTube. O QA retorna sempre s
 5. Publicação só pode ser retomada com novo consentimento explícito do criador, depois da manutenção concluída. Os Shorts pendentes 5 a 1 permanecem bloqueados.
 
 Os dados da auditoria são hipóteses para roteiros, não garantia de visualizações. Qualidade do vídeo é prioritária sobre volume de uploads.
+
+Os comandos legados de geração de imagens e renderização agora também conferem localmente a autorização do criador antes de gastar recursos. A fase de planejamento quality-plan continua disponível durante a pausa porque não gera mídia. O pipeline de publicação tem uma segunda checagem contra o estado atual de main no GitHub.
