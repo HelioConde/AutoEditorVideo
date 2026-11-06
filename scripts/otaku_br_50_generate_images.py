@@ -210,9 +210,55 @@ def navigator_safe_scene_override(row:dict,index:int)->str|None:
         f"Specific illustration {index} of 5: {NAVIGATOR_SAFE_SHOTS[index-1]}"
     )
 
+# Short 30: image provider refused scene 03/05 (HTTP 400) from the
+# generic storyboard. This one-off editorial redraw focuses on the running
+# joke of a gifted swordsman getting lost; no combat or hazardous situations.
+# The approved narration, title and publication order are unchanged.
+LOST_WAYFINDER_SAFE_SHOTS=(
+    "A fictional adult green-haired traveler with three swords securely "
+    "sheathed at his waist looks puzzled at a winding village map in a "
+    "peaceful coastal marketplace, bright morning light and playful expression.",
+    "The same traveler confidently points along a forest footpath that "
+    "bends in the opposite direction from the clearly visible harbor. "
+    "Friends stand behind him, amused, on a sunny and calm afternoon.",
+    "A cheerful overhead view of the traveler studying a compass beside a "
+    "forked cobblestone path, with a small village clock tower in view. "
+    "He has an exaggerated confused expression; no fighting or danger.",
+    "On a quiet harbor street the traveler walks past the same bakery sign "
+    "for the second time, while friends exchange a humorous, friendly "
+    "glance. His three swords stay in their sheaths.",
+    "The traveler finally returns to his companions at the harbor, "
+    "holding an upside-down folded map and smiling sheepishly, "
+    "with warm sunset light across the dock.",
+)
+
+def lost_wayfinder_safe_scene_override(row:dict,index:int)->str|None:
+    if row.get("position")!=30 or row.get("id")!="6130-multicena-experimento-novembro":
+        return None
+    if index not in range(1,6):
+        raise ImageBlocked("INVALID_SCENE_INDEX")
+    return (
+        "Make one ORIGINAL nonviolent editorial fantasy illustration, "
+        "hand-painted 2D animation aesthetic, vertical portrait 2:3, "
+        "1024x1536. Five connected comic scenes show a gifted "
+        "green-haired adult traveler with very poor sense of direction. "
+        "Use a consistent original character and geography; not a screenshot "
+        "or a copied animation frame. Focus on navigation confusion, "
+        "friends' funny reactions, maps, roads, compass and harbor. "
+        "All characters are safe and fully clothed. No battles, violence, "
+        "blood, injuries, peril, weapons in use or frightening scenes. "
+        "Keep every subject fully in frame and the lower 22 percent clear "
+        "for separately added subtitles. Do not draw text, brand names, "
+        "labels, emblems, collage panels or watermarks. "
+        f"Unique illustration {index} of 5: {LOST_WAYFINDER_SAFE_SHOTS[index-1]}"
+    )
+
 def prompt_for(row:dict,index:int)->str:
     # Editorial stills are explicitly specified for the two sensitive
     # strategy-focused storylines. Never regenerate on a provider refusal.
+    override=lost_wayfinder_safe_scene_override(row,index)
+    if override is not None:
+        return override
     override=navigator_safe_scene_override(row,index)
     if override is not None:
         return override
