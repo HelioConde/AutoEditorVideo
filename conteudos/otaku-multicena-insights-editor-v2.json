@@ -153,5 +153,99 @@
     "animation": "Aprovar movimento real de personagem/objetos quando possivel; nao declarar zoom como animacao articulada",
     "metadata": "Relevancia por video; remover termos desconexos; priorizar titulo e descricao",
     "production": "Manter pausa e sem upload ate aprovacao do criador"
+  },
+  "audit_snapshots": [
+    {
+      "source": "user-provided channel audit, 2026-11-06",
+      "period": "last 28 days plus channel totals; metric windows differ",
+      "subscribers_total": 31,
+      "views_total": 7753,
+      "video_count": 69,
+      "shorts_count": 69,
+      "longform_count": 0,
+      "shorts_view_average_reported": 130,
+      "views_per_uploaded_video_computed": 112.36,
+      "average_engagement_percent_reported": 3.12,
+      "average_retention_percent_reported": 55.09,
+      "subscribers_gained_28d": 16,
+      "subscribers_lost_28d": 2,
+      "subscribers_net_28d": 14,
+      "top_five": [
+        {
+          "title": "Light caçou Kira SEM SABER que era ele mesmo!",
+          "views": 1193,
+          "franchise": "Death Note"
+        },
+        {
+          "title": "Steel Ball Run: A corrida que muda tudo",
+          "views": 1142,
+          "franchise": "JoJo's Bizarre Adventure"
+        },
+        {
+          "title": "Zenitsu luta melhor DORMINDO?!",
+          "views": 651,
+          "franchise": "Demon Slayer"
+        },
+        {
+          "title": "Blue Box: AMOR OU ESPORTE",
+          "views": 645,
+          "franchise": "Blue Box"
+        },
+        {
+          "title": "Light vs. L: quem venceria esse xadrez mortal?",
+          "views": 610,
+          "franchise": "Death Note"
+        }
+      ],
+      "notes": [
+        "Two of the five leaders are Death Note, not three.",
+        "Reported 130 Shorts views average is not equal to overall 7753/69 = 112.36, possibly due to different filters/windows.",
+        "The five Shorts posted today with zero views have not yet matured; 48h comparisons needed.",
+        "High publishing volume potentially affects measurement and audience overlap; it is not proof the recommendation algorithm penalized uploads.",
+        "Do not treat 55.09% average retention as proof every Short is high quality."
+      ]
+    }
+  ],
+  "editorial_strategy_v3": {
+    "status": "proposal_for_offline_experiments_not_publication",
+    "prioritize": [
+      "character-specific curiosity with a truthful answer",
+      "contradiction plus payoff",
+      "emotional character choices",
+      "consistent original visuals rather than zoom-only"
+    ],
+    "title_policy": "Character + specific verifiable fact or surprising question, optional restrained uppercase/emojis; no formula lock-in, no misleading promises",
+    "next_short_experiments": {
+      "mystery_reveal": 5,
+      "emotional_choice": 5,
+      "power_curiosity": 5
+    },
+    "topic_mix_hypothesis": {
+      "known_franchise_majority_not_mandatory": true,
+      "death_note_share_to_test": "33%-50% of experiment, not 2/3 precommitted"
+    },
+    "publishing_cadence_hypothesis": {
+      "phase_a": "2/day",
+      "phase_b": "3/day",
+      "min_comparison_window_hours": 48,
+      "publication_remains_paused": true
+    },
+    "longform_hypothesis": {
+      "duration_minutes": [
+        8,
+        12
+      ],
+      "frequency": "one pilot only after short-form tests and creator approval",
+      "source_policy": "fresh original factual screenplay and transformed visuals, not Shorts concatenated verbatim"
+    },
+    "metrics_priority": [
+      "48-hour impressions and Shorts feed exposure",
+      "viewed vs swiped away",
+      "average_view_duration",
+      "average_percentage_viewed",
+      "subscribers_per_1000_views",
+      "shares_per_1000_views"
+    ],
+    "causality_warning": "Organic distribution fluctuations and time-of-day effects require matched comparison; do not attribute them solely to posting volume"
   }
 }
