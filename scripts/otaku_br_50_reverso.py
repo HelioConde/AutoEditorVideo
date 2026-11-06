@@ -153,7 +153,7 @@ def prepare(rows: list[dict], limit: int) -> list[dict]:
                        "render_engine": "motion-remotion/src/master-short.tsx"}
             file.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
                             encoding="utf-8")
-        output.append({"position": row["position"], "plan_path": str(file.relative_to(ROOT))})
+        output.append({"position": row["position"], "plan_path": str(file.relative_to(OUTPUT))})
     return output
 
 
