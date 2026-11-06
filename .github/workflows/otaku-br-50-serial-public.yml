@@ -135,7 +135,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Restore pre-rendered Short from five-way parallel test
+        id: prepared-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: assets/gerados/otaku-multicena-experimento-50/
+          key: otaku-br-50-prepared-v1-${{ env.EPISODE_NUMBER }}-${{ hashFiles('scripts/otaku_br_50_generate_images.py', 'scripts/otaku_br_50_render.py', 'conteudos/otaku-multicena-br-50-inéditos-reverso-20261106.json', 'motion-remotion/src/**', 'motion-remotion/package-lock.json') }}
       - name: Fetch immutable upstream image-provider proxy BEFORE secrets
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
           repository: 10/chatgpt-codex-proxy
@@ -143,26 +150,31 @@ jobs:
           path: pinned-native-go-proxy
           persist-credentials: false
       - uses: actions/setup-python@v5
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         with:
           python-version: '3.11'
           cache: pip
           cache-dependency-path: requirements-master.txt
       - uses: actions/setup-node@v4
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: motion-remotion/package-lock.json
       - uses: actions/setup-go@v6
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         with:
           go-version-file: pinned-native-go-proxy/go.mod
           cache: false
       - name: Restore persistent FFmpeg+FFprobe binaries between Shorts
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         id: ffmpeg-cache
         uses: actions/cache@v4
         with:
           path: .cache/otaku-br-50/ffmpeg
           key: otaku-br-50-ffmpeg8-static-3.0-ubuntu24-x64-v1
       - name: Install Python dependencies and prepare cached FFmpeg without apt
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -174,33 +186,38 @@ jobs:
           command -v ffprobe
           python -c 'import sys; sys.path.insert(0,"scripts"); from capa_cinematografica import load_font; assert load_font(22).getbbox("TESTE") is not None; print("[MEDIA] Gerador de fontes aprovado")'
       - name: Restore Remotion installed dependencies from the prior Shorts
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         id: remotion-cache
         uses: actions/cache@v4
         with:
           path: motion-remotion/node_modules
           key: otaku-br-50-remotion-ubuntu24-node22-${{ hashFiles('motion-remotion/package-lock.json') }}
       - name: Install Remotion only when lockfile cache changes
-        if: steps.remotion-cache.outputs.cache-hit != 'true'
+        if: steps.prepared-cache.outputs.cache-hit != 'true' && steps.remotion-cache.outputs.cache-hit != 'true'
         working-directory: motion-remotion
         run: npm ci --no-audit --no-fund
       - name: Validate cached Remotion and TypeScript (no repeated npm ci)
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         working-directory: motion-remotion
         run: npm run typecheck
       - name: Restore previously compiled pinned image provider
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         id: proxy-cache
         uses: actions/cache@v4
         with:
           path: .cache/otaku-br-50/proxy/otaku-native-proxy
           key: otaku-br-50-proxy-go1269-1da5476e-ubuntu24-v1-${{ hashFiles('pinned-native-go-proxy/go.sum') }}
       - name: Compile pinned Go image provider ONCE per cache version
-        if: steps.proxy-cache.outputs.cache-hit != 'true'
+        if: steps.prepared-cache.outputs.cache-hit != 'true' && steps.proxy-cache.outputs.cache-hit != 'true'
         working-directory: pinned-native-go-proxy
         run: |
           mkdir -p "$GITHUB_WORKSPACE/.cache/otaku-br-50/proxy"
           CGO_ENABLED=0 go build -trimpath -o "$GITHUB_WORKSPACE/.cache/otaku-br-50/proxy/otaku-native-proxy" ./cmd/api
       - name: Verify cached provider is executable
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         run: test -x .cache/otaku-br-50/proxy/otaku-native-proxy
       - name: Generate one video's FIVE images; then narrate, align, render and make the official cover
+        if: steps.prepared-cache.outputs.cache-hit != 'true'
         shell: bash
         env:
           IMAGE_MODEL: gpt-image-2
@@ -227,6 +244,8 @@ jobs:
           python scripts/otaku_br_50_generate_images.py --number "$EPISODE_NUMBER"
           python scripts/otaku_br_50_render.py --action render --number "$EPISODE_NUMBER"
           echo "[ONE VIDEO] RENDERED_AND_COVER_CREATED_NO_YOUTUBE_OAUTH_PRESENT"
+      - name: Verify complete media whether restored or freshly rendered
+        run: python scripts/otaku_br_50_validate_prepared.py --number "$EPISODE_NUMBER"
       - name: Retain this single video, original cover, word timings and QA
         if: success()
         uses: actions/upload-artifact@v4
