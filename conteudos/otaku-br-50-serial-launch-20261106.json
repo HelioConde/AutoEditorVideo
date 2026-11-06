@@ -5,7 +5,7 @@
   "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
   "authorized_public": true,
   "creator_request": "Gerar e publicar os 50 Shorts um por um, de 50 a 1. Em cada um: gerar, narrar, legendar, renderizar, enviar PUBLICO, anexar capa e confirmar antes do proximo.",
-  "number_start": 31,
+  "number_start": 30,
   "number_end": 1,
   "sequence_policy": "ONE_AT_A_TIME_PUBLIC_PROCESSED_COVER_ACKNOWLEDGED",
   "secrets_policy": "image-generation e youtube-private-upload em jobs separados, tokens nao expostos",
@@ -16,10 +16,10 @@
   "workflow": ".github/workflows/otaku-br-50-serial-public.yml",
   "require_approval": "pre-approved_editorial_catalog_by_creator; technical automated checks; no false claim of human visual review",
   "note": "O processo pode parar por limite/cota de IA, direitos, OAuth ou thumbnail. Cada identificador de upload e conservado.",
-  "resume_reason": "Run 42238839781 failed at short 31, image request 04/05 HTTP 400. Edited original calm nautical imagery for Short 31 and added backwards-compatible validated cache restoration to preserve the five fully prepared pilot Shorts 26..22. Short 32 has completed PUBLIC and cover receipt.",
-  "last_verified_complete_episode": 32,
-  "retry_request": "Fresh authorized push to retry exactly Short 31 with scoped, non-violent nautical storyboard after provider HTTP 400 on scene 04/05; continue 30..1 only after public processing and thumbnail verified. Reuse verified pre-rendered caches 26..22.",
-  "retry_number": 31,
-  "retry_policy": "One at a time public publishing with verified prior receipts, no reupload 50..32; reuse 26..22 pre-rendered assets from 5 parallel Actions only if strict hashes/QA pass. Fail closed on refusals.",
-  "last_verified_public_video_id": "mdb0P12yNdg"
+  "resume_reason": "Short 30, navigation comedy / Zoro analysis, failed scene 03/05 with provider HTTP 400 in run 42255340900. Scoped original nonviolent comic wayfinding illustrations approved in code; preserved narration, title and publication order. Previous Short 31 public processed plus cover receipt confirmed.",
+  "last_verified_complete_episode": 31,
+  "retry_request": "Creator-authorized push to resume exactly Short 30 with scoped revised original comic navigator images; subsequently continue 29..1 with each Short public processed and cover verified.",
+  "retry_number": 30,
+  "retry_policy": "Do not reupload Shorts 50..31; require preceding public+thumbnail receipt; fail closed on provider errors; reuse validated parallel-prepared Shorts 26..22 via cache when reached.",
+  "last_verified_public_video_id": "r61iOcC0cTg"
 }
