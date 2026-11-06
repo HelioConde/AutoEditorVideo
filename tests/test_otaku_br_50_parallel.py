@@ -34,6 +34,9 @@ def test_five_way_launcher_dispatches_five_separate_runs_not_matrix_jobs():
     assert "for number in 26 25 24 23 22" in workflow
     assert "gh workflow run otaku-br-parallel-one.yml" in workflow
     assert "confirm_generation=true" in workflow
+    assert '.public_upload == true' in workflow
+    assert "serial_existing_workflow_after_prior_receipts" in workflow
+    assert "otaku-br-50-serial-public.yml" in workflow
     assert data["jobs"]["dispatch-five-generators"]["permissions"]["actions"] == "write"
 
 
