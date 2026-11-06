@@ -1,0 +1,10 @@
+{
+  "authorized": true,
+  "requested_at": "2026-11-06",
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "stuck_run_id": 42172370639,
+  "new_queued_run_id": 42175587861,
+  "resume_number": 49,
+  "reason": "O usuário pediu cancelamento e nova tentativa do Short 49 travado; garantir que o vídeo 50 permanece publicado, e verificar que não há recibo ou upload do 49 antes de cancelar.",
+  "never_reupload_published": true
+}
