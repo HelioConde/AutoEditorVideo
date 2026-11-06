@@ -123,7 +123,7 @@ jobs:
 
   generate-render-one:
     needs: [queue-and-contract, check-image-environment, check-youtube-environment]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 110
     environment: image-generation
     permissions:
@@ -145,6 +145,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -154,29 +156,50 @@ jobs:
         with:
           go-version-file: pinned-native-go-proxy/go.mod
           cache: false
-      - name: Install AutoEditorVideo dependencies without unnecessary apt update
+      - name: Restore persistent FFmpeg+FFprobe binaries between Shorts
+        id: ffmpeg-cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/otaku-br-50/ffmpeg
+          key: otaku-br-50-ffmpeg8-static-3.0-ubuntu24-x64-v1
+      - name: Install Python dependencies and prepare cached FFmpeg without apt
         shell: bash
         run: |
           set -euo pipefail
-          # GitHub hosted runners include FFmpeg in most images. A specific
-          # DejaVu font path must NOT force a slow apt-get update; the native
-          # AutoEditorVideo cover renderer supports Liberation and fallback fonts.
-          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
-            timeout 60s sudo apt-get update -qq
-            timeout 120s sudo apt-get install -y -qq ffmpeg
-          fi
-          python -m pip install --disable-pip-version-check -r requirements-master.txt
+          python -m pip install --disable-pip-version-check -r requirements-master.txt 'static-ffmpeg==3.0'
+          python scripts/otaku_br_50_setup_media.py --dir .cache/otaku-br-50/ffmpeg
+          export PATH="$GITHUB_WORKSPACE/.cache/otaku-br-50/ffmpeg:$PATH"
+          echo "$GITHUB_WORKSPACE/.cache/otaku-br-50/ffmpeg" >> "$GITHUB_PATH"
           command -v ffmpeg
           command -v ffprobe
-          python -c 'import sys; sys.path.insert(0,"scripts"); from capa_cinematografica import load_font; assert load_font(22).getbbox("TESTE") is not None; print("[MEDIA] FFmpeg e gerador oficial de fontes disponiveis")'
-      - name: Install and typecheck AutoEditorVideo Remotion
+          python -c 'import sys; sys.path.insert(0,"scripts"); from capa_cinematografica import load_font; assert load_font(22).getbbox("TESTE") is not None; print("[MEDIA] Gerador de fontes aprovado")'
+      - name: Restore Remotion installed dependencies from the prior Shorts
+        id: remotion-cache
+        uses: actions/cache@v4
+        with:
+          path: motion-remotion/node_modules
+          key: otaku-br-50-remotion-ubuntu24-node22-${{ hashFiles('motion-remotion/package-lock.json') }}
+      - name: Install Remotion only when lockfile cache changes
+        if: steps.remotion-cache.outputs.cache-hit != 'true'
         working-directory: motion-remotion
-        run: |
-          npm ci --no-audit --no-fund
-          npm run typecheck
-      - name: Compile pinned image provider before loading secrets
+        run: npm ci --no-audit --no-fund
+      - name: Validate cached Remotion and TypeScript (no repeated npm ci)
+        working-directory: motion-remotion
+        run: npm run typecheck
+      - name: Restore previously compiled pinned image provider
+        id: proxy-cache
+        uses: actions/cache@v4
+        with:
+          path: .cache/otaku-br-50/proxy/otaku-native-proxy
+          key: otaku-br-50-proxy-go1269-1da5476e-ubuntu24-v1-${{ hashFiles('pinned-native-go-proxy/go.sum') }}
+      - name: Compile pinned Go image provider ONCE per cache version
+        if: steps.proxy-cache.outputs.cache-hit != 'true'
         working-directory: pinned-native-go-proxy
-        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/otaku-br-50-native-proxy" ./cmd/api
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/.cache/otaku-br-50/proxy"
+          CGO_ENABLED=0 go build -trimpath -o "$GITHUB_WORKSPACE/.cache/otaku-br-50/proxy/otaku-native-proxy" ./cmd/api
+      - name: Verify cached provider is executable
+        run: test -x .cache/otaku-br-50/proxy/otaku-native-proxy
       - name: Generate one video's FIVE images; then narrate, align, render and make the official cover
         shell: bash
         env:
@@ -199,7 +222,7 @@ jobs:
           python scripts/proxy_accounts_private_stage.py "$state_dir"
           unset PROXY_ACCOUNTS_JSON
           DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
-            "$RUNNER_TEMP/otaku-br-50-native-proxy" >"$RUNNER_TEMP/otaku-br-50-proxy.log" 2>&1 &
+            "$GITHUB_WORKSPACE/.cache/otaku-br-50/proxy/otaku-native-proxy" >"$RUNNER_TEMP/otaku-br-50-proxy.log" 2>&1 &
           proxy_pid=$!
           python scripts/otaku_br_50_generate_images.py --number "$EPISODE_NUMBER"
           python scripts/otaku_br_50_render.py --action render --number "$EPISODE_NUMBER"
