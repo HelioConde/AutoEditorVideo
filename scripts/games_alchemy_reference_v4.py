@@ -23,7 +23,7 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
-from production_reservations import assert_reserved
+from production_reservations import assert_reserved, get_entry
 from youtube_channel_registry import KNOWN_IDS
 from narracao_shorts import ensure_voice
 from legendas_precisas import captions_from_markers
@@ -55,7 +55,7 @@ SCENE_TIMES={
 
 class NativeRecutBlocked(ValueError):pass
 
-def validate_plan()->dict:
+def validate_plan(*, for_render:bool=False)->dict:
     d=json.loads(PLAN.read_text(encoding="utf-8"))
     if (d.get("schema")!="autoeditorvideo/games-alchemy-six-recut-v2/v1" or
         d.get("source_run")!=SOURCE_RUN or
@@ -65,7 +65,21 @@ def validate_plan()->dict:
         ch=p["channel"]
         if ch not in ("games","alchemy") or p["channel_id"]!=KNOWN_IDS[ch]:
             raise NativeRecutBlocked("WRONG_CHANNEL")
-        assert_reserved(ch,p["source_episode_id"]+"-v4",OWNER)
+        episode=p["source_episode_id"]+"-v4"
+        if for_render:
+            # Rendering is strictly one-shot. Already uploaded material
+            # must never be rendered or published a second time.
+            assert_reserved(ch,episode,OWNER)
+        else:
+            # Offline plan/QA inspection must recognize historic private
+            # uploads without misrepresenting them as fresh reservations.
+            entry=get_entry(ch,episode)
+            if not entry or entry.get("reservation_owner")!=OWNER:
+                raise NativeRecutBlocked("REFERENCE_V4_RESERVATION_OWNER_MISMATCH")
+            if entry.get("status") not in ("reserved","private_uploaded"):
+                raise NativeRecutBlocked("REFERENCE_V4_NOT_VALID_FOR_REVIEW")
+            if entry.get("publication_target")!="private_first":
+                raise NativeRecutBlocked("REFERENCE_V4_PRIVATE_ONLY_POLICY_CHANGED")
         script=p["narration"].lower()
         if "se inscreve" not in script:
             raise NativeRecutBlocked("CTA_NOT_FOUND")
@@ -148,8 +162,8 @@ def build_scene_props(row:dict,frames:list[Path],voice:Path,captions:list[dict],
 
 def render()->None:
     from PIL import Image
-    plan=validate_plan()
     guard()
+    plan=validate_plan(for_render=True)
     if OUTPUT.exists():
         raise NativeRecutBlocked("OUTPUT_EXISTS_DO_NOT_OVERWRITE")
     if not SOURCE.is_dir() or not (SOURCE/"summary.json").is_file():
