@@ -17,6 +17,7 @@ import shutil
 import unicodedata
 
 from PIL import Image
+from otaku_multicena_pose_qa import inspect_poses
 
 WIDTH, HEIGHT = 1024, 1536
 FPS = 30
@@ -168,6 +169,7 @@ def build_preview(manifest_path: Path, captions_path: Path, public_root: Path,
     background_hashes = []
     cue_indexes = []
     pose_scene_count = 0
+    pose_geometry_reports: list[dict] = []
     assets: dict[str, Path] = {doc["voice"]: voice}
     for shot in shots:
         if not isinstance(shot, dict) or shot.get("beat_role") not in ALLOWED_BEATS:
@@ -194,13 +196,17 @@ def build_preview(manifest_path: Path, captions_path: Path, public_root: Path,
                 raise QualityBlocked("POSES_REQUIRE_CLEAN_PLATE_AND_FPS")
             pose_scene_count += 1
             pixel_hashes = []
+            pose_paths = []
             for filename in pose_names:
                 image = check_manifest_path(folder, filename, catalog)
                 pixel_hashes.append(verify_image(image, pose=True))
+                pose_paths.append(image)
                 validate_rights(shot, filename)
                 assets[filename] = image
             if len(set(pixel_hashes)) < 2:
                 raise QualityBlocked("POSE_FRAMES_NOT_ACTUALLY_DIFFERENT")
+            pose_geometry_reports.append({"shot_index":len(locations)+1,
+                                         **inspect_poses(pose_paths)})
         locations.append({"shot":shot,"pose":pose_names})
     if len(set(cue_indexes)) != len(cue_indexes) or cue_indexes != sorted(cue_indexes):
         raise QualityBlocked("STORY_SCENES_OUT_OF_SEQUENCE")
@@ -295,6 +301,7 @@ def build_preview(manifest_path: Path, captions_path: Path, public_root: Path,
         "pose_animated_shots": pose_scene_count,
         "static_shots": len(shots) - pose_scene_count,
         "sound_effect_count": len(sound_cues),
+        "pose_geometry_checks": pose_geometry_reports,
         "shot_start_frames": cuts,
         "asset_sha256": {name: digest(path) for name, path in assets.items()},
         "technical_preflight": "assets_and_voice_markers_checked",
