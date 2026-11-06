@@ -3,7 +3,7 @@
   "date": "2026-11-06",
   "channel": "br",
   "authorized_generation": true,
-  "public_upload": false,
+  "public_upload": true,
   "independent_workflow_runs": 5,
   "numbers": [
     26,
@@ -12,8 +12,19 @@
     23,
     22
   ],
-  "purpose": "Compare the time for five independent GitHub Actions to prepare five Shorts concurrently; preserve existing sequential YouTube publication.",
-  "output": "Each run generates 5 original AI images, narration, captions, complete MP4, cover, technical QA and reusable Actions cache.",
-  "safety": "No YouTube OAuth in any pilot runner; skip published receipts; preserve approved titles, scripts and metadata; no automatic retries of rejected image prompts.",
-  "monitoring": "https://github.com/HelioConde/AutoEditorVideo/actions/workflows/otaku-br-parallel-one.yml"
+  "purpose": "Generate five Shorts concurrently in five separate GitHub Actions runs, then publish those five videos to the authorized BR YouTube channel via existing sequential public uploader with thumbnail verification.",
+  "output": "5 original images, narration, captions, MP4, cover and QA per video; reusable cache. Published in verified sequence, not concurrently.",
+  "safety": "Generation workflows have no YouTube credentials. A single existing serial uploader handles PUBLIC publication, checks preceding receipts, detects duplicate titles and confirms processing + cover before next. Do not claim publication until receipts confirm.",
+  "monitoring": "https://github.com/HelioConde/AutoEditorVideo/actions/workflows/otaku-br-parallel-one.yml",
+  "publication_strategy": "serial_existing_workflow_after_prior_receipts",
+  "publication_workflow": "otaku-br-50-serial-public.yml",
+  "publication_target": "public",
+  "pilot_publication_order": [
+    26,
+    25,
+    24,
+    23,
+    22
+  ],
+  "publication_prerequisites": "Existing serial workflow must first complete 31,30,29,28,27 with public processed + thumbnail verified before 26..22 can be published; already published receipts are never reuploaded."
 }
