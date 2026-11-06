@@ -6,6 +6,7 @@ on:
       - 'conteudos/otaku-multicena-br-50-inéditos-reverso-20261106.json'
       - 'conteudos/otaku-production-reservations.json'
       - 'scripts/otaku_br_50_reverso.py'
+      - 'scripts/otaku_br_50_render.py'
       - 'tests/test_otaku_br_50_reverso.py'
       - '.github/workflows/otaku-br-50-reverso-qa.yml'
   workflow_dispatch:
@@ -30,6 +31,7 @@ jobs:
         run: |
           python -m pytest -q tests/test_otaku_br_50_reverso.py
           python scripts/otaku_br_50_reverso.py --action validate
+          python -m py_compile scripts/otaku_br_50_render.py
       - name: Export 50 editorial production plans only (NO uploads)
         run: python scripts/otaku_br_50_reverso.py --action plan
       - name: Upload metadata-only plans as QA artifact
