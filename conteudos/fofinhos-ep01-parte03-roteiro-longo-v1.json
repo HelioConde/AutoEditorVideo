@@ -1,0 +1,187 @@
+{
+  "schema": "fofinhos/ep01-parte03-roteiro-longo/v1",
+  "series": "Fofinhos",
+  "episode": 1,
+  "part": 3,
+  "part_id": "kids-emanuelly-ep01-p03-poder-agua",
+  "title": "Fofinho e a Magia da Água 💧🐱 | Fofinhos Ep. 1 — Parte 3",
+  "language": "pt-BR",
+  "audience": "crianças pequenas e responsáveis",
+  "narrator_voice": "pt-BR-FranciscaNeural",
+  "target_duration_seconds": {
+    "min": 150,
+    "preferred": 165,
+    "max": 180
+  },
+  "estimated_spoken_word_count": 293,
+  "planned_pause_total_seconds": 21,
+  "estimated_duration_seconds_by_speaking_rate_wpm": {
+    "120": 167.5,
+    "125": 161.6,
+    "130": 156.2
+  },
+  "timing_note": "Estimativas editoriais; medir TTS real e duração de SFX/respirações para confirmar 150..180s. Não acelerar a voz nem congelar quadros para preencher tempo.",
+  "continuity_from_previous": "Na Parte 2, Fofinho nasceu no mesmo quarto, uma gotinha apareceu antes de receber o nome e continuou dançando ao fim da Parte 2.",
+  "continuity_to_next": "A Parte 4 mostra Fofinho acolhendo Emanuelly num dia triste, usando a gotinha e o abraço mágico. Não antecipar essa conclusão.",
+  "plot_summary": "O recém-nascido Fofinho aprende a mover gotas no quarto; no dia seguinte, no mesmo jardim onde Emanuelly encontrou o ovo, aprende com ela a regar uma flor ressecada e descobre que seu dom também serve para cuidar.",
+  "canon_policy": [
+    "Um único Fofinho, gatinho de pelúcia azul nascido do ovo azul; nenhuma irmã ou outro personagem novo neste episódio.",
+    "Usar a aparência aprovada de Emanuelly e Fofinho; não inventar roupas ou traços distintos sem necessidade.",
+    "Mesma cama/quarto/jardim da Parte 1 e 2; transição noite para manhã é explícita.",
+    "Água em gotinhas, bolhas e garoa suave. Não transformar o poder em gelo, fogo ou arco-íris.",
+    "Não entregar o momento do abraço mágico antes da Parte 4.",
+    "Cada trecho admite múltiplos planos; não repetir só zoom de câmera."
+  ],
+  "segments": [
+    {
+      "index": 1,
+      "spoken_text": "A gotinha azul ainda dançava no ar. Emanuelly arregalou os olhos. Como Fofinho fazia aquilo? Era a mesma gotinha que aparecera quando ele nasceu.",
+      "pause_after_s": 1.8,
+      "visual_direction": "Retomar o mesmo quarto e a mesma gotinha ao lado da pata de Fofinho, sem salto temporal.",
+      "motion_sfx_direction": "Gota sobe levemente; Emanuelly acompanha com os olhos; brilho de luar.",
+      "emotion": "descoberta_alegre"
+    },
+    {
+      "index": 2,
+      "spoken_text": "Fofinho levantou uma patinha. A gotinha subiu. Ele abaixou a patinha... e ela desceu!",
+      "pause_after_s": 0.9,
+      "visual_direction": "Gato azul experimenta seu poder dentro do quarto; Fofinho tem movimento real nas patinhas.",
+      "motion_sfx_direction": "Patinha e gota animadas de forma independente, sem depender apenas do zoom.",
+      "emotion": "descoberta_alegre"
+    },
+    {
+      "index": 3,
+      "spoken_text": "— Consegue fazer mais uma? — perguntou Emanuelly. Plim! Uma segunda gota apareceu. Plim! Agora eram três!",
+      "pause_after_s": 1.3,
+      "visual_direction": "Emanuelly encoraja Fofinho e acompanha a multiplicação delicada das gotas.",
+      "motion_sfx_direction": "Três gotas em sequência, com sons plim suaves e reação de surpresa.",
+      "emotion": "descoberta_alegre"
+    },
+    {
+      "index": 4,
+      "spoken_text": "As gotinhas rodopiavam juntas. Fofinho pulava alegremente, tentando acompanhá-las com o focinho.",
+      "pause_after_s": 0.8,
+      "visual_direction": "A dança tem começo, meio e fim, e o gatinho pula sem perder a identidade.",
+      "motion_sfx_direction": "Plano aberto do quarto, depois close nas patinhas e no focinho.",
+      "emotion": "descoberta_alegre"
+    },
+    {
+      "index": 5,
+      "spoken_text": "— Será que pousam aqui? — perguntou Emanuelly, abrindo a mão. Fofinho miou baixinho.",
+      "pause_after_s": 1.8,
+      "visual_direction": "Pergunta com espaço para observar a reação do amigo.",
+      "motion_sfx_direction": "Palma aberta e gotinhas diminuindo a velocidade; miado de Fofinho.",
+      "emotion": "descoberta_alegre"
+    },
+    {
+      "index": 6,
+      "spoken_text": "As gotinhas se juntaram numa bolha transparente, que subiu até pertinho da janela.",
+      "pause_after_s": 0.9,
+      "visual_direction": "A bolha deve se formar a partir das três gotas visíveis, sem surgir de lugar nenhum.",
+      "motion_sfx_direction": "Bolha cresce e reflete a lua da mesma janela.",
+      "emotion": "descoberta_alegre"
+    },
+    {
+      "index": 7,
+      "spoken_text": "— Uau! — Emanuelly sorriu. A bolha fez plof! E uma chuvinha fresquinha caiu sobre suas mãos.",
+      "pause_after_s": 1,
+      "visual_direction": "Pequeno clímax da primeira brincadeira, gentil e engraçado.",
+      "motion_sfx_direction": "Bolha estoura com plof suave; água cai apenas sobre as mãos; Emanuelly ri.",
+      "emotion": "descoberta_alegre"
+    },
+    {
+      "index": 8,
+      "spoken_text": "Na manhã seguinte, Emanuelly levou Fofinho para conhecer o jardim. Ele olhava tudo, encantado. O sol aquecia suavemente seu pelo macio.",
+      "pause_after_s": 0.8,
+      "visual_direction": "Transição noite-dia clara, depois quarto-jardim, sem teleportar personagens.",
+      "motion_sfx_direction": "Raio de sol no quarto, caminhada pelo corredor, chegada ao mesmo jardim.",
+      "emotion": "exploracao_suave"
+    },
+    {
+      "index": 9,
+      "spoken_text": "Borboletas voavam entre as flores. Nuvens passeavam pelo céu, enquanto uma brisa mexia as folhas. Ele tentou seguir uma borboleta, mas voltou correndo para a amiga.",
+      "pause_after_s": 0.8,
+      "visual_direction": "Jardim já conhecido, em sua versão de dia, com ambiente vivo.",
+      "motion_sfx_direction": "Borboletas, nuvens e pétalas movem-se separadas dos personagens.",
+      "emotion": "exploracao_suave"
+    },
+    {
+      "index": 10,
+      "spoken_text": "Emanuelly encontrou uma flor murchinha. A terra estava seca. — Acho que ela precisa de água!",
+      "pause_after_s": 1,
+      "visual_direction": "Problema leve, compreensível para crianças pequenas, sem medo ou risco.",
+      "motion_sfx_direction": "Plano da flor murchinha no canteiro e de solo seco, sem mudar o cenário oficial.",
+      "emotion": "exploracao_suave"
+    },
+    {
+      "index": 11,
+      "spoken_text": "Fofinho chegou pertinho. — Podemos ajudar essa flor, meu amigo? — perguntou ela, ajoelhando-se.",
+      "pause_after_s": 1.8,
+      "visual_direction": "Emanuelly mostra a terra correta para Fofinho, reforçando cuidado.",
+      "motion_sfx_direction": "Emanuelly ajoelha; olhos e dedo indicam a flor real, não outro objeto.",
+      "emotion": "cooperacao_cuidado"
+    },
+    {
+      "index": 12,
+      "spoken_text": "Ele ergueu as patinhas. Duas gotinhas apareceram, mas ficaram rodando sem chegar à flor.",
+      "pause_after_s": 0.8,
+      "visual_direction": "Uma tentativa imperfeita mas segura, mostrando desenvolvimento do poder.",
+      "motion_sfx_direction": "Gotas flutuam perto das patas e hesitam antes de cair.",
+      "emotion": "cooperacao_cuidado"
+    },
+    {
+      "index": 13,
+      "spoken_text": "— Devagarinho. Mire na terra — ensinou Emanuelly. Fofinho respirou fundo e tentou de novo.",
+      "pause_after_s": 1,
+      "visual_direction": "O poder funciona melhor com calma e ajuda, não por força.",
+      "motion_sfx_direction": "Gatinho observa a flor, aponta as patinhas e concentra-se.",
+      "emotion": "cooperacao_cuidado"
+    },
+    {
+      "index": 14,
+      "spoken_text": "Plim, plim! Uma chuva bem fininha molhou a terra ao redor da flor. Só a quantidade certa.",
+      "pause_after_s": 1.1,
+      "visual_direction": "Recompensa concreta e visualmente verificável, sem afogar o jardim.",
+      "motion_sfx_direction": "Gotas caem no solo; solo escurece levemente de umidade.",
+      "emotion": "cooperacao_cuidado"
+    },
+    {
+      "index": 15,
+      "spoken_text": "As folhinhas se levantaram devagar. — Conseguimos! — comemorou Emanuelly, batendo palmas. Fofinho deu um pulinho. Uma borboleta pousou perto, como se agradecesse.",
+      "pause_after_s": 1.2,
+      "visual_direction": "Mostrar consequência das gotinhas e sentimento de alegria por ajudar.",
+      "motion_sfx_direction": "Flor recupera postura, criança bate palmas, gato pula e borboleta pousa.",
+      "emotion": "cooperacao_cuidado"
+    },
+    {
+      "index": 16,
+      "spoken_text": "Depois vieram bolhas, um arco de gotinhas e uma garoinha gostosa. O jardim ficou fresquinho!",
+      "pause_after_s": 0.8,
+      "visual_direction": "Montagem de três brincadeiras com água, sem criar poderes novos de arco-íris.",
+      "motion_sfx_direction": "Bolhas, arco de gotas de água azul, garoa suave, cada um em plano separado.",
+      "emotion": "alegria_afeto"
+    },
+    {
+      "index": 17,
+      "spoken_text": "Emanuelly fez carinho no gatinho azul. Sua magia servia para brincar, mas também para cuidar.",
+      "pause_after_s": 1,
+      "visual_direction": "Fechamento afetivo da descoberta, reservando o abraço mágico para Parte 4.",
+      "motion_sfx_direction": "Fazer carinho delicado, ronronar leve e reflexão do sol no jardim.",
+      "emotion": "alegria_afeto"
+    },
+    {
+      "index": 18,
+      "spoken_text": "Só que Fofinho guardava uma surpresa ainda mais bonita. Será que suas gotinhas poderiam alegrar Emanuelly num dia triste?",
+      "pause_after_s": 2.2,
+      "visual_direction": "Gancho suave e inequívoco para a Parte 4, sem mostrar antecipadamente o consolo mágico.",
+      "motion_sfx_direction": "Emanuelly observa Fofinho com carinho, gotinha brilha na patinha, fade suave.",
+      "emotion": "curiosidade_gentil"
+    }
+  ],
+  "narration": "A gotinha azul ainda dançava no ar. Emanuelly arregalou os olhos. Como Fofinho fazia aquilo? Era a mesma gotinha que aparecera quando ele nasceu. Fofinho levantou uma patinha. A gotinha subiu. Ele abaixou a patinha... e ela desceu! — Consegue fazer mais uma? — perguntou Emanuelly. Plim! Uma segunda gota apareceu. Plim! Agora eram três! As gotinhas rodopiavam juntas. Fofinho pulava alegremente, tentando acompanhá-las com o focinho. — Será que pousam aqui? — perguntou Emanuelly, abrindo a mão. Fofinho miou baixinho. As gotinhas se juntaram numa bolha transparente, que subiu até pertinho da janela. — Uau! — Emanuelly sorriu. A bolha fez plof! E uma chuvinha fresquinha caiu sobre suas mãos. Na manhã seguinte, Emanuelly levou Fofinho para conhecer o jardim. Ele olhava tudo, encantado. O sol aquecia suavemente seu pelo macio. Borboletas voavam entre as flores. Nuvens passeavam pelo céu, enquanto uma brisa mexia as folhas. Ele tentou seguir uma borboleta, mas voltou correndo para a amiga. Emanuelly encontrou uma flor murchinha. A terra estava seca. — Acho que ela precisa de água! Fofinho chegou pertinho. — Podemos ajudar essa flor, meu amigo? — perguntou ela, ajoelhando-se. Ele ergueu as patinhas. Duas gotinhas apareceram, mas ficaram rodando sem chegar à flor. — Devagarinho. Mire na terra — ensinou Emanuelly. Fofinho respirou fundo e tentou de novo. Plim, plim! Uma chuva bem fininha molhou a terra ao redor da flor. Só a quantidade certa. As folhinhas se levantaram devagar. — Conseguimos! — comemorou Emanuelly, batendo palmas. Fofinho deu um pulinho. Uma borboleta pousou perto, como se agradecesse. Depois vieram bolhas, um arco de gotinhas e uma garoinha gostosa. O jardim ficou fresquinho! Emanuelly fez carinho no gatinho azul. Sua magia servia para brincar, mas também para cuidar. Só que Fofinho guardava uma surpresa ainda mais bonita. Será que suas gotinhas poderiam alegrar Emanuelly num dia triste?",
+  "visual_plan": "18 blocos narrados; planejar cerca de 28–36 enquadramentos, sem teto rígido. Animar patinhas/olhos/orelhas, gotas, bolhas, borboletas, folhas e nuvens de forma independente.",
+  "audio_plan": "Narração acolhedora e pausada; SFX curtos 'plim', 'plof', miado, água suave, pássaros e brisa; música instrumental infantil discreta, com direitos verificados.",
+  "production_status": "roteiro_longo_criado_requer_adaptacao_render_180s_tts_e_qa",
+  "current_renderer_warning": "O fluxo legado conteudos/kids-emanuelly-ep01-shortserie-v1.json e scripts/serie_kids_emanuelly_v1.py limitam saída a 60s/59.2s. Não substituir parte03 diretamente nesse arquivo sem implementar suporte a 150-180s, novas vozes e QA.",
+  "upload_authorized": false
+}
