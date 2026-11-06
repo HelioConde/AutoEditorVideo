@@ -89,8 +89,55 @@ def safe_scene_override(row:dict,index:int)->str|None:
         f"Distinct image {index} of 5: {ARMIN_SAFE_SHOTS[index-1]}"
     )
 
+
+# The Erwin episode concerns a high-risk command decision. Keep the same
+# approved factual narration while telling its visual story through maps,
+# cavalry staging and thoughtful faces, not harm or combat outcomes.
+# Episode-specific safe ART direction; never retry a refused graphic prompt.
+ERWIN_SAFE_SHOTS=(
+    "Erwin, an adult blond commander wearing a green exploration cape, quietly "
+    "studies an original hand-painted tactical map in a sunlit command tent. "
+    "A peaceful field and distant horses are visible beyond the canvas doorway.",
+    "Erwin uses a pencil to trace two routes across a parchment terrain map. "
+    "Beside him a small brass horse figurine marks an approaching formation, "
+    "with a second route highlighted for his dark-haired ally Levi.",
+    "Several fully clothed adult scouts stand beside calm horses at the edge of "
+    "a wide green plain. The commander gestures towards the distant horizon; "
+    "focus on solemn preparation, not an attack or anyone in danger.",
+    "A close-up of the commander's thoughtful expression and a gloved hand "
+    "resting on the folded parchment plan. Two figures exchange a nod of "
+    "understanding. Strong cinematic lighting suggests the gravity of a decision.",
+    "Levi studies the same map with a steady expression while an unoccupied "
+    "sunlit grassy field stretches towards the horizon. Close on the route "
+    "marker and a folded green cape, symbolizing responsibility and courage.",
+)
+
+def erwin_safe_scene_override(row:dict,index:int)->str|None:
+    if row.get("position")!=34 or row.get("id")!="6134-multicena-experimento-novembro":
+        return None
+    if index not in range(1,6):
+        raise ImageBlocked("INVALID_SCENE_INDEX")
+    return (
+        "Draw one ORIGINAL 2D hand-painted editorial fantasy anime illustration, "
+        "portrait 2:3 at 1024x1536. The video examines a commander's strategy "
+        "and ethical dilemma through peaceful planning scenes. All adults are "
+        "fully clothed, safe and unharmed. Use only maps, horses at rest, quiet "
+        "teamwork, respectful expressions, sunlight and atmospheric landscapes. "
+        "Do not depict an attack, injuries, blood, distressing scenes, or weapons "
+        "in use. Do not reproduce a copyrighted animation frame. Maintain "
+        "the same character designs and props in all five distinct images. "
+        "Preserve the bottom 22 percent for external timed captions. "
+        "No words, titles, logos, graphic symbols or watermarks. "
+        "Show each complete subject and main prop inside the frame. "
+        f"Unique scene {index} of 5: {ERWIN_SAFE_SHOTS[index-1]}"
+    )
+
 def prompt_for(row:dict,index:int)->str:
-    override=safe_scene_override(row,index)
+    # Editorial stills are explicitly specified for the two sensitive
+    # strategy-focused storylines. Never regenerate on a provider refusal.
+    override=erwin_safe_scene_override(row,index)
+    if override is None:
+        override=safe_scene_override(row,index)
     if override is not None:
         return override
     scene=row["storyboard"][index-1]
