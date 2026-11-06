@@ -187,8 +187,21 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--number", type=int, default=50)
     ap.add_argument("--force", action="store_true")
-    ap.add_argument("--action", choices=("preflight", "render"), default="preflight")
+    ap.add_argument("--action", choices=("preflight", "render", "quality-plan"), default="preflight")
+    ap.add_argument("--quality-manifest", type=Path, default=None)
+    ap.add_argument("--quality-captions", type=Path, default=None)
+    ap.add_argument("--quality-props", type=Path, default=None)
     a = ap.parse_args()
+    if a.action == "quality-plan":
+        # Editor V3 only assembles existing, rights-tracked assets and TTS
+        # markers. This branch does not render, narrate, generate or upload.
+        if not a.quality_manifest or not a.quality_captions:
+            ap.error("quality-plan requires --quality-manifest and --quality-captions")
+        from otaku_multicena_quality_v3 import build_preview
+        result=build_preview(a.quality_manifest,a.quality_captions,
+                             MOTION/"public",output_path=a.quality_props)
+        print(json.dumps(result["qa"],ensure_ascii=False,indent=2))
+        return 0
     if a.number not in range(1,51):
         ap.error("Number must be 01..50")
     rows = validate()
