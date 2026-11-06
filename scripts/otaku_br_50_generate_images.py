@@ -132,9 +132,50 @@ def erwin_safe_scene_override(row:dict,index:int)->str|None:
         f"Unique scene {index} of 5: {ERWIN_SAFE_SHOTS[index-1]}"
     )
 
+
+# Episode 32: provider refused a generic storyboard image (HTTP 400) at
+# scene four. Use distinct, peaceful, originally designed illustrations
+# without copying copyrighted character designs. Not a blind retry.
+STORYTELLER_SAFE_SHOTS=(
+    "A cheerful young coastal villager wearing a simple linen vest tells a "
+    "playful tall tale to friends near brightly colored wooden fishing boats.",
+    "The same imaginative storyteller draws a fanciful sea creature in sand "
+    "while three amused friends listen near the village marketplace.",
+    "Under a cloudy sky, the young storyteller gently comforts a worried "
+    "friend beside a seaside path, with the village visible in the distance.",
+    "At the village harbor, the storyteller stands confidently alongside "
+    "friends, holding a small handmade wooden slingshot at rest; nobody "
+    "is threatened, and the emphasis is on friendship and quiet courage.",
+    "The friends share a warm laugh at sunset by the calm harbor as the "
+    "storyteller gestures toward paper drawings of imaginary adventures.",
+)
+
+def storyteller_safe_scene_override(row:dict,index:int)->str|None:
+    if row.get("position")!=32 or row.get("id")!="6132-multicena-experimento-novembro":
+        return None
+    if index not in range(1,6):
+        raise ImageBlocked("INVALID_SCENE_INDEX")
+    return (
+        "Create one ORIGINAL 2D editorial fantasy illustration, vertical "
+        "portrait 2:3 at 1024x1536. Five distinct scenes depict the same "
+        "fictional seaside storyteller, with consistent clothing, friends "
+        "and cheerful maritime village; use an original character design, "
+        "not a screenshot or recognizable reproduction of any anime figure. "
+        "Wholesome, nonviolent, family-friendly visual storytelling: "
+        "friendship, imagination, quiet bravery and humorous expressions. "
+        "Everyone is safe and fully clothed, with no combat, threats, "
+        "injuries or graphic content. No franchise names, logos, letters, "
+        "captions, watermarks or panels. Keep the bottom 22 percent clear "
+        "for external timed subtitles and all subjects inside the frame. "
+        f"Illustration {index} of five: {STORYTELLER_SAFE_SHOTS[index-1]}"
+    )
+
 def prompt_for(row:dict,index:int)->str:
     # Editorial stills are explicitly specified for the two sensitive
     # strategy-focused storylines. Never regenerate on a provider refusal.
+    override=storyteller_safe_scene_override(row,index)
+    if override is not None:
+        return override
     override=erwin_safe_scene_override(row,index)
     if override is None:
         override=safe_scene_override(row,index)
