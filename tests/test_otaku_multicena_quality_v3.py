@@ -139,3 +139,14 @@ def test_quality_module_has_no_youtube_or_image_generation_calls():
     for marker in ("youtube.videos().insert", "request_image(", "gh workflow run",
                    "render:master","ensure_voice("):
         assert marker not in txt
+
+
+def test_main_render_cli_exposes_preflight_without_unlocking_generation():
+    source=(ROOT/"scripts/otaku_br_50_render.py").read_text(encoding="utf-8")
+    assert '"quality-plan"' in source
+    assert "from otaku_multicena_quality_v3 import build_preview" in source
+    assert source.index('if a.action == "quality-plan":') < source.index("rows = validate()")
+    # The creator's live state is enforced in Actions; direct CLI render also
+    # verifies the local control before calling voice/image/video engines.
+    assert "check_authorization(json.loads(control.read_text" in source
+    assert source.index("check_authorization(json.loads(control.read_text") < source.index("audio, subtitle = ensure_voice(")
