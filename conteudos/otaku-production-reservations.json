@@ -32,6 +32,14 @@
   },
   "entries": [
     {
+      "channel": "kids",
+      "id": "kids-emanuelly-ep01-p02-nascimento",
+      "status": "reserved",
+      "reservation_owner": "codex_fofinhos_part02_20261106",
+      "source": "user_request_2026-11-06",
+      "note": "Continuacao autorizada do ovo azul. Producao local; sem autorizacao de upload."
+    },
+    {
       "channel": "br",
       "id": "5001-black-clover",
       "status": "published",
