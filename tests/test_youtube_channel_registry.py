@@ -161,10 +161,11 @@ def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scr
             assert all(item.get("review_status") for item in entries)
             assert all(item.get("reservation_owner") for item in entries)
         else:
-            # Fofinhos parte 2 foi reservada explicitamente para producao
-            # local, sem autorizar upload automatico para o canal infantil.
+            # Partes 2 e 3 de Fofinhos sao reservas locais solicitadas
+            # pelo criador. Nenhuma delas autoriza publicar no canal Kids.
             assert {item["id"] for item in entries}=={
-                "kids-emanuelly-ep01-p02-nascimento"
+                "kids-emanuelly-ep01-p02-nascimento",
+                "kids-emanuelly-ep01-p03-poder-agua",
             }
             assert all(item["status"]=="reserved" for item in entries)
             assert all(item.get("reservation_owner") for item in entries)
