@@ -33,7 +33,7 @@ def make_fixture(tmp_path: Path, count: int = 10, animated: bool = True):
     doc={"schema":"autoeditorvideo/quality-preview/v3",
          "episode_id":"episode-original-quality-v3", "manual_visual_review":False,
          "duration_frames":1200,"voice":"voz-master.mp3",
-         "voice_rights":RIGHTS,
+         "voice_rights":copy.deepcopy(RIGHTS),
          "narration_script":script,"hook_text":"cena0 historia",
          "payoff_text":f"cena{count-1} historia",
          "shots":[],"sha256":{}}
@@ -42,7 +42,7 @@ def make_fixture(tmp_path: Path, count: int = 10, animated: bool = True):
         Image.new("RGB",(1024,1536),(24+i*15,40,90)).save(work/fname)
         shot={"start_phrase":f"cena{i} historia","background":fname,
               "beat_role":"hook" if i==0 else "answer" if i==count-1 else "detail",
-              "shot_type":"medium","rights":RIGHTS}
+              "shot_type":"medium","rights":copy.deepcopy(RIGHTS)}
         if animated and i==2:
             frames=[]
             for j in range(2):
@@ -58,7 +58,7 @@ def make_fixture(tmp_path: Path, count: int = 10, animated: bool = True):
             name="fx-audio.wav"
             (work/name).write_bytes(b"test sfx bytes "*60)
             shot["sound_effects"]=[{"file":name,"offset_seconds":.3,
-                   "duration_seconds":.7,"volume":.22,"rights":RIGHTS}]
+                   "duration_seconds":.7,"volume":.22,"rights":copy.deepcopy(RIGHTS)}]
         doc["shots"].append(shot)
     for path in work.iterdir():
         if path.suffix in (".png",".mp3",".wav"):
