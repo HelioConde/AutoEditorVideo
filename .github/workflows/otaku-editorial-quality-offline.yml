@@ -4,8 +4,12 @@ on:
     branches: [main]
     paths:
       - 'scripts/otaku_multicena_editorial_audit.py'
+      - 'scripts/otaku_multicena_strategy_plan.py'
+      - 'scripts/otaku_multicena_scene_pacing.py'
       - 'scripts/otaku_br_50_maintenance_gate.py'
       - 'tests/test_otaku_multicena_editorial_audit.py'
+      - 'tests/test_otaku_multicena_strategy_plan.py'
+      - 'tests/test_otaku_multicena_scene_pacing.py'
       - 'tests/test_otaku_br_50_maintenance.py'
       - 'conteudos/otaku-multicena-insights-editor-v2.json'
       - 'docs/OTAKU-MULTICENA-EDITOR-QUALIDADE-V2.md'
@@ -41,13 +45,17 @@ jobs:
           jq -e '.pause_requested == true and .authorized_public == false and .maintenance_complete == false and .resume_authorized_after_maintenance == false' \
             conteudos/otaku-br-50-serial-launch-20261106.json
       - name: Run offline tags and creator-consent tests
-        run: python -m pytest -q tests/test_otaku_multicena_editorial_audit.py tests/test_otaku_br_50_maintenance.py
+        run: python -m pytest -q tests/test_otaku_multicena_editorial_audit.py tests/test_otaku_br_50_maintenance.py tests/test_otaku_multicena_strategy_plan.py tests/test_otaku_multicena_scene_pacing.py
       - name: Prepare editorial report from 50 planned Shorts (no publication)
         run: python scripts/otaku_multicena_editorial_audit.py --output "$RUNNER_TEMP/otaku-editorial-report-v2.json"
+      - name: Build offline 15-topic strategy and cadence hypotheses
+        run: python scripts/otaku_multicena_strategy_plan.py --output "$RUNNER_TEMP/otaku-strategy-v3.json"
       - name: Keep offline report for review
         uses: actions/upload-artifact@v4
         with:
           name: otaku-editorial-v2-report-${{ github.run_number }}
-          path: ${{ runner.temp }}/otaku-editorial-report-v2.json
+          path: |
+            ${{ runner.temp }}/otaku-editorial-report-v2.json
+            ${{ runner.temp }}/otaku-strategy-v3.json
           retention-days: 14
           if-no-files-found: error
