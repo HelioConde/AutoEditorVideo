@@ -72,3 +72,35 @@ Nomes informados pelo criador, ainda sem verificação de métricas: Shin Animes
 ## Liberação da manutenção
 
 Somente com novo consentimento explícito do criador e com testes/revisão aprovados. **Não retomar a fila dos 5 pendentes automaticamente.**
+
+
+## Auditoria adicional fornecida pelo criador: 7.753 visualizações
+
+Snapshot adicionado a `conteudos/otaku-multicena-insights-editor-v2.json`:
+
+- 31 inscritos; 69 vídeos (todos Shorts); 7.753 views acumuladas
+- Retenção média de 55,09% nos últimos 28 dias; 16 inscritos ganhos e 2 perdidos (saldo +14)
+- Maior vídeo: `Light caçou Kira SEM SABER que era ele mesmo`, agora com 1.193 views
+- Top 5: Light (1.193), Steel Ball Run (1.142), Zenitsu (651), Blue Box (645), Light vs L (610)
+- **Correções de leitura:** 2 dos 5 líderes são de Death Note, não 3. 7.753 / 69 = 112,36 views por vídeo; a média informada de 130 views/Short provavelmente utiliza filtro ou janela diferente. Não misturar métricas.
+- A hipótese de "cannibalização" ao publicar 10–15 Shorts/dia **não está demonstrada**. Usar teste com controle de janela de 48h, sem prometer efeito do algoritmo.
+
+## Nova fase: editor antes de YouTube
+
+O planejamento offline e sem qualquer upload está em
+`scripts/otaku_multicena_strategy_plan.py`, com testes em
+`tests/test_otaku_multicena_strategy_plan.py`.
+
+- Avaliação de títulos por especificidade, pergunta/contradição e tamanho. Alertas são **heurísticas de revisão**, não nota preditiva de visualizações.
+- **15 novas ideias para teste:** 5 de mistério/revelação, 5 de escolhas emocionais, 5 de curiosidades/poderes. O roteiro final deve ser factual e original.
+- Duas cadências **somente propostas**: 2 Shorts/dia versus 3 Shorts/dia. Usar métricas nas primeiras 48h de cada Short e observar também permanência/visualização intencional.
+- Estrutura de títulos "personagem + contradição" é uma opção forte a testar, não requisito universal. Steel Ball Run já performou sem essa construção.
+- Não fixar 2/3 de Death Note: dois líderes do top 5 são desse anime e a amostra não sustenta a predominância como regra. Testar distribuição de franquias.
+- Long-form 8–12 minutos: apenas hipótese de piloto **depois da fase de Shorts e de revisão editorial**. Não juntar Shorts automaticamente, não reutilizar mídia sem análise de direitos.
+
+## Ritmo visual da geração futura
+
+O renderizador futuro já possui um planejador de cortes por limites reais da narração:
+`scripts/otaku_multicena_scene_pacing.py`. O renderizador BR usa esta função em vez de 5 cortes em partes iguais. Isso **não** afirma rigging: cenas ainda são PNGs estáticos com câmera/luz. Animação articulada, novas poses e expressão facial dependem de outra implementação, direitos de uso e QA de vídeo.
+
+A Action `otaku-editorial-quality-offline.yml` executa testes e entrega relatórios das 50 pautas e das hipóteses de novos experimentos. Não usa API de YouTube nem provedores de imagem e não libera a pausa.
