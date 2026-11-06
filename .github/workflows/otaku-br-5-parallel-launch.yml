@@ -1,0 +1,64 @@
+name: Otaku Multicena BR - Iniciar teste de 5 Actions independentes
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/otaku-br-5-parallel-test-20261106.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-br-five-actions-pilot-launch
+  cancel-in-progress: false
+
+jobs:
+  dispatch-five-generators:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate explicit five-way experiment (generation only)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          config=conteudos/otaku-br-5-parallel-test-20261106.json
+          jq -e '
+            .schema == "autoeditorvideo/otaku-br-5-parallel-pilot/v1"
+            and .authorized_generation == true
+            and .public_upload == false
+            and .channel == "br"
+            and .numbers == [26,25,24,23,22]
+            and .independent_workflow_runs == 5
+          ' "$config" >/dev/null
+          python scripts/otaku_br_50_reverso.py --action validate >/dev/null
+          for number in 26 25 24 23 22; do
+            n=$((6100 + number))
+            if gh api "repos/$GITHUB_REPOSITORY/contents/dados/otaku-br-50-reverso-recibos/$n-multicena-experimento-novembro.json" --jq .sha >/dev/null 2>&1; then
+              echo "Already published Short $number; no duplicate generation."
+              exit 1
+            fi
+          done
+          echo "[PILOT] Five pending Shorts authorized for preview-only generation."
+      - name: Dispatch five SEPARATE GitHub Actions runs (five runners)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for number in 26 25 24 23 22; do
+            gh workflow run otaku-br-parallel-one.yml \
+              -R "$GITHUB_REPOSITORY" --ref main \
+              -f number="$number" -f confirm_generation=true
+            echo "[PILOT] DISPATCHED_GENERATION_ONLY=$number"
+            sleep 5
+          done
+          echo "[PILOT] SENT_FIVE_INDEPENDENT_WORKFLOW_DISPATCHES_NO_YOUTUBE_UPLOAD"
