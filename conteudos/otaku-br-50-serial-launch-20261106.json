@@ -5,7 +5,7 @@
   "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
   "authorized_public": true,
   "creator_request": "Gerar e publicar os 50 Shorts um por um, de 50 a 1. Em cada um: gerar, narrar, legendar, renderizar, enviar PUBLICO, anexar capa e confirmar antes do proximo.",
-  "number_start": 34,
+  "number_start": 32,
   "number_end": 1,
   "sequence_policy": "ONE_AT_A_TIME_PUBLIC_PROCESSED_COVER_ACKNOWLEDGED",
   "secrets_policy": "image-generation e youtube-private-upload em jobs separados, tokens nao expostos",
@@ -16,10 +16,9 @@
   "workflow": ".github/workflows/otaku-br-50-serial-public.yml",
   "require_approval": "pre-approved_editorial_catalog_by_creator; technical automated checks; no false claim of human visual review",
   "note": "O processo pode parar por limite/cota de IA, direitos, OAuth ou thumbnail. Cada identificador de upload e conservado.",
-  "resume_reason": "The 50..35 published receipts are complete with public + thumbnail; no episode 34 receipt. A single story-specific editorial visual revision to Erwin's tactical map planning scene avoids disturbing graphic material; preserves spoken narration, story, title and ordering. No blind retry of rejected prompt.",
-  "last_verified_complete_episode": 35,
-  "last_verified_public_video_id": "WPpuZ-FoSMc",
-  "retry_request": "Retry 34 following HTTP 400 provider refusal in run 42214140453; five original, non-graphic tactical storyboard frames replacing visual generation prompt only, validated by QA 42222673703",
-  "retry_number": 34,
-  "retry_policy": "Creator-authorized push resumes only next missing episode; receipt existence fails closed. Never reupload 50..35. Wait for confirmed upload, processing and cover before 33."
+  "resume_reason": "Run 42224329621 completed Short 33 generation, public upload and cover, with receipt. Auto-dispatched Short 32 run 42225862641 was rerun (run_attempt > 1) and generation skipped by the workflow's first-attempt guard; queue validation confirmed Short 33 public processed plus cover. Resume from Short 32 with a fresh push trigger, then continue serially through 01.",
+  "last_verified_complete_episode": 33,
+  "retry_request": "Resume exactly Short 32 via fresh authorized push event; don't rerun skipped workflow attempt 2.",
+  "retry_number": 32,
+  "retry_policy": "Do not duplicate Shorts 50..33. Check prior receipt, render one, publish public and attach cover, then dispatch next descending number only on confirmed success."
 }
