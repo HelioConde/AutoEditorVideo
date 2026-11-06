@@ -594,6 +594,16 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
     parts = select(load_parts(), args.parte)
+    # O compositor antigo gera apenas uma imagem por fala; para a Parte 2
+    # isso descartaria planos visuais e faria um render incorreto.
+    if args.acao in ("imagens","renderizar","testar") and any(
+        p["part"]==2 for p in parts
+    ):
+        raise ValueError(
+            "Parte 2 agora usa planos visuais SEM LIMITE FIXO. "
+            "Use animar-emanuelly.ps1 -Acao Planejar/Renderizar -Parte 2; "
+            "para narracao, este programa ainda aceita -Acao Voz -Parte 2."
+        )
     if args.acao in ("planejar", "verificar"):
         result = {
             "schema": "kids-emanuelly/preflight/v1",
