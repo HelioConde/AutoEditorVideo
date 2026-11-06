@@ -42,6 +42,9 @@ def check_manifest_path(folder: Path, filename: str, hashes: dict) -> Path:
     if not isinstance(filename, str) or not FILE_RE.fullmatch(filename):
         raise QualityBlocked("INVALID_ASSET_FILENAME")
     path = folder / filename
+    # No symlink imports from outside the approved scene directory.
+    if path.is_symlink() or path.resolve().parent != folder.resolve():
+        raise QualityBlocked("ASSET_SYMLINK_OR_EXTERNAL_PATH_FORBIDDEN")
     if not path.is_file():
         raise QualityBlocked("MISSING_ASSET_" + filename)
     expected = hashes.get(filename)
@@ -194,6 +197,9 @@ def build_preview(manifest_path: Path, captions_path: Path, public_root: Path,
                 not isinstance(shot.get("pose_fps"), int) or
                 not 4 <= shot["pose_fps"] <= 12):
                 raise QualityBlocked("POSES_REQUIRE_CLEAN_PLATE_AND_FPS")
+            playback = shot.get("pose_playback", "pingpong")
+            if playback not in ("pingpong", "once", "loop"):
+                raise QualityBlocked("UNKNOWN_POSE_PLAYBACK")
             pose_scene_count += 1
             pixel_hashes = []
             pose_paths = []
@@ -243,7 +249,9 @@ def build_preview(manifest_path: Path, captions_path: Path, public_root: Path,
             item["layers"] = [{
                 "id": f"{i+1:02d}-character", "role": "character",
                 "src": paths[0], "z": 10,
-                "rigFrames": {"fps": shot["pose_fps"], "frames": paths}
+                "rigFrames": {"fps": shot["pose_fps"],
+                              "frames": paths,
+                              "playback": shot.get("pose_playback", "pingpong")}
             }]
         scene_items.append(item)
     sound_cues = []
