@@ -27,6 +27,7 @@ from cloud_youtube_private_5011 import authorized_youtube, exists_in_playlist
 from youtube_upload_profiles import build_insert_body,upload_notify_subscribers
 from youtube_public_tags import public_tags
 from youtube_short_thumbnail import validate_cover
+from otaku_br_50_maintenance_gate import ensure_unpaused_live
 
 REPO="HelioConde/AutoEditorVideo"
 CHANNEL="UCXGYTuBYn-0Ziqin5ajKhOw"
@@ -102,6 +103,8 @@ def preflight(number:int)->tuple[dict,Path,Path,dict]:
             raise UploadBlocked("ENVIRONMENT_GUARD_FAILED_"+k)
     if os.environ.get("GITHUB_EVENT_NAME") not in ("push","workflow_dispatch"):
         raise UploadBlocked("INVALID_WORKFLOW_EVENT")
+    # Live main-branch creator consent supersedes stale run inputs.
+    ensure_unpaused_live()
     if number not in range(1,51):raise UploadBlocked("NUMBER_OUT_OF_RANGE")
     row=validate()[number-1]
     if row["position"]!=number or row["channel_id"]!=CHANNEL:
@@ -179,6 +182,9 @@ def publish(number:int)->dict:
     body=build_insert_body("br",prepared,privacy="public")
     if body["status"]["privacyStatus"]!="public" or body["status"]["selfDeclaredMadeForKids"]:
         raise UploadBlocked("PUBLIC_ADULT_ANIME_CHANNEL_PROFILE_NOT_VALID")
+    # A pause might have happened while earlier checks prepared the upload.
+    # Reconfirm immediately before any irreversible YouTube insert.
+    ensure_unpaused_live()
     print("[OTAKU BR] VERIFICADO_CHANNEL_PUBLIC_UPLOAD_ONE_NUMBER_"+str(number),flush=True)
     attempt=mp4.parent/"public-upload-result.json"
     media=MediaFileUpload(str(mp4),mimetype="video/mp4",resumable=False)
