@@ -48,8 +48,11 @@ def check(number: int) -> dict:
         "qa.json", "metadata.json", "original-art-provenance.json",
         "props.json", "marcacoes-voz.json"
     )}
+    # Small JSON receipts (especially art provenance and QA) are normal.
+    # Require a present, non-empty file; validate its schema and hashes below.
+    # A global 1000-byte minimum rejected otherwise complete videos.
     for file in files.values():
-        require_file(file)
+        require_file(file, 2)
     qa = json.loads(files["qa.json"].read_text(encoding="utf-8"))
     meta = json.loads(files["metadata.json"].read_text(encoding="utf-8"))
     provenance = json.loads(files["original-art-provenance.json"].read_text(encoding="utf-8"))
