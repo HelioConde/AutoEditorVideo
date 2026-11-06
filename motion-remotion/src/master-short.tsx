@@ -2,12 +2,13 @@ import React from 'react';
 import {AbsoluteFill,Audio,Img,Sequence,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
 import {AnimationMode,cannotMoveSeparately,motionAtFrame,openingCutAtFrame,longHoldCutAtFrame} from './cinematic-motion';
 import {CharacterPreset,characterPoseAtFrame} from './character-idle';
+import {RigPlayback,poseFrameIndex} from './pose-timeline';
 
 export type SemanticLayer={
   id:string;role:string;z:number;src:string;
   alphaCoverage?:number;anchorX?:number;anchorY?:number;
   contactRisk?:number;heroRisk?:number;heightFraction?:number;motionSeed?:number;
-  rigFrames?:{fps:number;frames:string[]}
+  rigFrames?:{fps:number;frames:string[];playback?:RigPlayback}
 };
 export type Scene={
   id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
@@ -76,8 +77,12 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
           // All poses retain original 1024x1536 canvas coordinates. Do not
           // stack procedural transforms on top of authored bones.
           const rig=mode==='esqueleto2d'?layer.rigFrames:undefined;
-          const rigIndex=rig?.frames.length && Number.isFinite(rig.fps)
-            ? Math.floor(Math.max(0,frame-scene.startFrame)*rig.fps/fps)%rig.frames.length
+          // Prefer a reversible authored gesture over jumping from the
+          // last painted pose directly back to the first.
+          const rigIndex=rig?.frames.length
+            ? poseFrameIndex({frame,sceneStart:scene.startFrame,
+                compositionFps:fps,rigFps:rig.fps,
+                frameCount:rig.frames.length,playback:rig.playback})
             : 0;
           const imageSource=rig?.frames[rigIndex]||layer.src;
           // Furniture, board and large hero masks are always STATIC in scene
