@@ -22,6 +22,7 @@ from otaku_br_50_reverso import OUTPUT, validate
 from narracao_shorts import ensure_voice
 from legendas_precisas import captions_from_markers
 from otaku_multicena_scene_pacing import story_cuts
+from otaku_br_50_maintenance_gate import check_authorization
 from capa_cinematografica import render_cover, STYLE as COVER_STYLE
 
 MOTION = ROOT / "motion-remotion"
@@ -92,6 +93,12 @@ def preflight(row: dict) -> tuple[Path, list[Path]]:
 
 
 def render_one(row: dict, *, force: bool = False) -> dict:
+    # Direct CLI calls must respect the creator pause just like GitHub Actions.
+    # No new TTS, images or MP4 are produced while maintenance is active.
+    control = ROOT / "conteudos/otaku-br-50-serial-launch-20261106.json"
+    if not control.is_file():
+        raise RenderBlocked("CREATOR_CONTROL_FILE_MISSING")
+    check_authorization(json.loads(control.read_text(encoding="utf-8")))
     from PIL import Image
     folder, art = preflight(row)
     mp4 = folder / "final.mp4"
