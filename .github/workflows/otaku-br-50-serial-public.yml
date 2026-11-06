@@ -1,0 +1,272 @@
+name: Otaku Multicena BR - 50 Shorts SERIAIS publicos (um por vez)
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/otaku-br-50-serial-launch-20261106.json'
+  workflow_dispatch:
+    inputs:
+      number:
+        description: 'Short na fila 50 ate 1'
+        type: string
+        required: true
+        default: '50'
+      authorized_public:
+        description: 'O criador autorizou publicacao publica em serie, sem pular QA'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-multicena-50-shorts-serial-public
+  cancel-in-progress: false
+
+jobs:
+  queue-and-contract:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      (github.event_name == 'push' ||
+       (github.event_name == 'workflow_dispatch' && inputs.authorized_public == true))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      number: ${{ steps.number.outputs.number }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - id: number
+        name: Pick exactly one entry in descending sequence
+        shell: bash
+        env:
+          INPUT_NUMBER: ${{ inputs.number }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT" == "push" ]]; then
+            grep -q '"authorized_public": true' conteudos/otaku-br-50-serial-launch-20261106.json
+            number=50
+          else
+            number="$INPUT_NUMBER"
+          fi
+          [[ "$number" =~ ^[0-9]{1,2}$ ]]
+          ((10#$number >= 1 && 10#$number <= 50))
+          printf 'number=%s\n' "$((10#$number))" >> "$GITHUB_OUTPUT"
+      - name: Verify exactly 50 reserved originals and reverse queue
+        run: |
+          python scripts/otaku_br_50_reverso.py --action validate
+          python -m py_compile scripts/otaku_br_50_generate_images.py \
+            scripts/otaku_br_50_render.py scripts/otaku_br_50_upload_public.py
+      - name: Confirm previous Short had a public processed video AND cover before spending images
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ steps.number.outputs.number }}
+        run: |
+          set -euo pipefail
+          current=$((6100 + NUM))
+          path="repos/$GITHUB_REPOSITORY/contents/dados/otaku-br-50-reverso-recibos/$current-multicena-experimento-novembro.json"
+          if gh api "$path" --jq '.sha' >/dev/null 2>&1; then
+            echo "FAIL: receipt exists, never repeat upload or charge new images"
+            exit 1
+          fi
+          if ((NUM < 50)); then
+            previous=$((current + 1))
+            prior="repos/$GITHUB_REPOSITORY/contents/dados/otaku-br-50-reverso-recibos/$previous-multicena-experimento-novembro.json"
+            gh api "$prior" --jq '.content' | base64 --decode |
+              jq -e '.stage == "public_processed_cover_acknowledged" and .public_verified == true and .thumbnail_api_acknowledged == true'
+          fi
+          echo "[SERIAL] ONE_AT_A_TIME_PREVIOUS_COVER_CONFIRMED"
+
+  check-image-environment:
+    needs: queue-and-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Confirm image-generation Environment restricted to main only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  check-youtube-environment:
+    needs: queue-and-contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Confirm YouTube Environment restricted to main only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/youtube_env_policy_guard.py
+
+  generate-render-one:
+    needs: [queue-and-contract, check-image-environment, check-youtube-environment]
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    environment: image-generation
+    permissions:
+      contents: read
+      actions: read
+    env:
+      EPISODE_NUMBER: ${{ needs.queue-and-contract.outputs.number }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch immutable upstream image-provider proxy BEFORE secrets
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install media tools before loading secrets
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt
+      - name: Install and typecheck AutoEditorVideo Remotion
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned image provider before loading secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/otaku-br-50-native-proxy" ./cmd/api
+      - name: Generate one video's FIVE images; then narrate, align, render and make the official cover
+        shell: bash
+        env:
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: '5'
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          state_dir="$RUNNER_TEMP/otaku-50-image-private"
+          mkdir -m 700 "$state_dir"
+          proxy_pid=''
+          cleanup() {
+            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$state_dir"
+            rm -f "$RUNNER_TEMP/otaku-br-50-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$state_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/otaku-br-50-native-proxy" >"$RUNNER_TEMP/otaku-br-50-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/otaku_br_50_generate_images.py --number "$EPISODE_NUMBER"
+          python scripts/otaku_br_50_render.py --action render --number "$EPISODE_NUMBER"
+          echo "[ONE VIDEO] RENDERED_AND_COVER_CREATED_NO_YOUTUBE_OAUTH_PRESENT"
+      - name: Retain this single video, original cover, word timings and QA
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-br-50-one-${{ env.EPISODE_NUMBER }}
+          path: assets/gerados/otaku-multicena-experimento-50/
+          retention-days: 10
+          if-no-files-found: error
+
+  upload-public-cover-one:
+    needs: [queue-and-contract, generate-render-one, check-youtube-environment]
+    if: >-
+      needs.generate-render-one.result == 'success' &&
+      needs.check-youtube-environment.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    environment: youtube-private-upload
+    permissions:
+      contents: write
+      actions: read
+    env:
+      EPISODE_NUMBER: ${{ needs.queue-and-contract.outputs.number }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official upload and cover dependencies (no secrets in logs)
+        run: python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Download ONLY this video's audited media, no other videos
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-br-50-one-${{ env.EPISODE_NUMBER }}
+          path: assets/gerados/otaku-multicena-experimento-50/
+      - name: Verify BR OAuth ID, publish PUBLIC, wait for processing, attach generated cover, record receipt
+        env:
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_BR_TOKEN_JSON: ${{ secrets.YOUTUBE_BR_TOKEN_JSON }}
+          PUBLIC_50_BR_AUTHORIZED: 'true'
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/otaku_br_50_upload_public.py --number "$EPISODE_NUMBER"
+      - name: Preserve receipt on failure to prevent duplicate uploads
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-br-50-upload-result-${{ env.EPISODE_NUMBER }}
+          path: assets/gerados/otaku-multicena-experimento-50/*/public-upload-result.json
+          if-no-files-found: ignore
+          retention-days: 30
+
+  launch-next-only-after-covered-publication:
+    needs: [queue-and-contract, upload-public-cover-one]
+    if: needs.upload-public-cover-one.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Dispatch only next lower number (NO simultaneous generation)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ needs.queue-and-contract.outputs.number }}
+        run: |
+          set -euo pipefail
+          if ((NUM == 1)); then
+            echo "[COMPLETED] Last number 01 covered and public. Nothing else to dispatch."
+            exit 0
+          fi
+          next=$((NUM-1))
+          sleep 180
+          gh workflow run otaku-br-50-serial-public.yml \
+            --ref main -f number="$next" -f authorized_public=true
+          echo "[SERIAL] NEXT_ONLY_NUMBER=$next"
