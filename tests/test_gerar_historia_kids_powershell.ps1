@@ -19,6 +19,13 @@ from pathlib import Path
 Path(__file__).resolve().parents[1].joinpath("args-fofinhos.json").write_text(
   json.dumps(sys.argv[1:]),encoding="utf8")
 '@ | Set-Content -LiteralPath (Join-Path $temp 'scripts\fofinhos_ep01_render.py') -Encoding UTF8
+  # Stub do compositor por camadas da Parte 2, SEM imagens nem render.
+  @'
+[CmdletBinding()]
+param([string]$Acao,[string]$Parte,[int]$MaxChamadas,[switch]$Refazer)
+@{acao=$Acao;parte=$Parte;chamadas=$MaxChamadas;refazer=$Refazer.IsPresent} |
+  ConvertTo-Json | Set-Content -LiteralPath (Join-Path $PSScriptRoot 'args-camadas.json') -Encoding UTF8
+'@ | Set-Content -LiteralPath (Join-Path $temp 'animar-emanuelly.ps1') -Encoding UTF8
   Copy-Item -LiteralPath $source -Destination (Join-Path $temp 'gerar-historia-kids.ps1')
   @'
 import json,sys
@@ -38,10 +45,20 @@ Path(__file__).resolve().parent.parent.joinpath("registro.json").write_text(
     throw 'Voz Parte 1 precisa usar a narracao canônica de 15 cenas'
   }
   & $wrapper -Acao Planejar -Parte 2 | Out-Null
+  $camadas=Get-Content -LiteralPath (Join-Path $temp 'args-camadas.json') -Raw | ConvertFrom-Json
+  if($camadas.acao -ne 'Planejar' -or $camadas.parte -ne '2'){
+    throw 'Planejar Parte 2 deve usar storyboard sem limite fixo de cenas'
+  }
+  & $wrapper -Acao Renderizar -Parte 2 | Out-Null
+  $camadas=Get-Content -LiteralPath (Join-Path $temp 'args-camadas.json') -Raw | ConvertFrom-Json
+  if($camadas.acao -ne 'Renderizar' -or $camadas.parte -ne '2'){
+    throw 'Renderizar Parte 2 deve usar camadas, nao 10 quadros antigos'
+  }
+  & $wrapper -Acao Voz -Parte 2 | Out-Null
   $argsPy=Get-Content -LiteralPath (Join-Path $temp 'registro.json') -Raw | ConvertFrom-Json
-  if($argsPy[0] -ne '--acao' -or $argsPy[1] -ne 'planejar' -or
+  if($argsPy[0] -ne '--acao' -or $argsPy[1] -ne 'voz' -or
      -not ($argsPy -contains '--parte') -or -not ($argsPy -contains '2')){
-    throw 'Planejar Parte 2 deve continuar no motor antigo'
+    throw 'Voz Parte 2 usa motor de narracao, sem gerar quadros antigos'
   }
   $blocked=$false
   try{& $wrapper -Acao Gerar -Parte 1 -MaxChamadas 9 | Out-Null}catch{$blocked=$true}
