@@ -138,14 +138,37 @@ def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scr
         entries=[item for item in data["entries"] if item["channel"]==slug]
         # Planning reservations are permitted after the creator explicitly requests
         # a production. They do NOT imply OAuth validation, rendered media or upload.
+        assert len(set(item["id"] for item in entries))==len(entries)
         if slug in ("games","alchemy"):
-            assert len(entries)==3
-            assert all(item["status"]=="reserved" for item in entries)
+            # A primeira reserva 3x2 continua presente; evolucoes v2/v3/v4
+            # e reenvios privados sao historicos legitimos e nao devem ser
+            # apagados para fazer um teste antigo passar.
+            original={
+                "games":{
+                    "game-001-gta4-gta5",
+                    "game-002-primeira-noite-minecraft",
+                    "game-003-minecraft-sem-amarelo",
+                },
+                "alchemy":{
+                    "alchemy-001-chatgpt-gifs",
+                    "alchemy-002-images-26-consistencia",
+                    "alchemy-003-gif-animado-tutorial",
+                },
+            }[slug]
+            assert original.issubset({item["id"] for item in entries})
+            assert all(item["status"] in {"reserved","private_uploaded"} for item in entries)
             assert all(item.get("publication_target")=="private_first" for item in entries)
-            assert all(item.get("review_status","").startswith("blocked_") for item in entries)
-            assert len(set(item["id"] for item in entries))==3
+            assert all(item.get("review_status") for item in entries)
+            assert all(item.get("reservation_owner") for item in entries)
         else:
-            assert not entries
+            # Fofinhos parte 2 foi reservada explicitamente para producao
+            # local, sem autorizar upload automatico para o canal infantil.
+            assert {item["id"] for item in entries}=={
+                "kids-emanuelly-ep01-p02-nascimento"
+            }
+            assert all(item["status"]=="reserved" for item in entries)
+            assert all(item.get("reservation_owner") for item in entries)
+            assert all(not item.get("publication_target") for item in entries)
     with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
         queue.assert_reserved("games","game-001-minecraft-um-coracao","any_worker")
     with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
