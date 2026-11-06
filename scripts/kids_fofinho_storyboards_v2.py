@@ -6,7 +6,8 @@ they debut, never when they are present on a reference sheet.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+import json
+from pathlib import Path
 
 SCHEMA = "kids/emanuelly/storyboard-fixed-assets/v2"
 CANON_OLD = tuple(f"jardim-{i:02d}" for i in range(1, 5)) + tuple(
@@ -141,6 +142,45 @@ def shot(index: int, backdrop: str, pose: str | None = None,
     }
 
 
+# O episodio 2 nao limita a quantidade de cenas visuais. Elas sao
+# independentes dos blocos da narracao e podem ser ampliadas por direcao.
+PART2_DIRECTION=Path(__file__).resolve().parents[1]/"conteudos/fofinhos-ep01-parte02-direcao-v2.json"
+MANIFEST=Path(__file__).resolve().parents[1]/"conteudos/kids-emanuelly-ep01-shortserie-v1.json"
+
+
+def dynamic_birth_storyboard() -> tuple[dict, ...]:
+    data=json.loads(PART2_DIRECTION.read_text(encoding="utf-8"))
+    if data.get("schema")!="fofinhos/parte02-direcao-visual/v2":
+        raise ValueError("Direcao visual do nascimento nao reconhecida")
+    raw=data.get("shots",[])
+    if not isinstance(raw,list) or not raw:
+        raise ValueError("Episodio 2 sem planos visuais")
+    output=[]
+    previous_beat=0
+    for number,item in enumerate(raw,1):
+        beat=item.get("beat")
+        if item.get("index")!=number or not isinstance(beat,int) or beat<previous_beat or beat<1:
+            raise ValueError("Planos do nascimento fora de ordem")
+        previous_beat=beat
+        view=shot(number,item["backdrop"],item.get("pose"),
+                  egg=item.get("egg_phase","none"),kitty=item.get("kitty"),
+                  nest=item.get("nest",False),drops=item.get("drops",0),
+                  magic=item.get("magic",False),night=item.get("night",False),
+                  future_glow=item.get("future_glow",False),
+                  movement=item.get("movement","still"),
+                  kitten_motion=item.get("kitten_motion","idle"))
+        weight=float(item.get("shot_weight",1))
+        if not 0<weight<=10:
+            raise ValueError("Duracao relativa invalida no plano "+str(number))
+        view.update(beat=beat,shot_weight=weight,
+                    visual_cue=item["visual_cue"],
+                    sfx_cue=item.get("sfx_cue",""),
+                    framing=item.get("framing","two-shot"),
+                    camera_motion=item.get("camera_motion","still"))
+        output.append(view)
+    return tuple(output)
+
+
 STORYBOARDS: dict[int, tuple[dict, ...]] = {
     1: (
         shot(1, "jardim-01", egg="closed", magic=True),
@@ -157,26 +197,7 @@ STORYBOARDS: dict[int, tuple[dict, ...]] = {
         shot(9, "quarto-04", "estendendo-mao", egg="closed", nest=True,
              night=True, movement="wonder"),
     ),
-    2: (
-        shot(1, "quarto-04", egg="closed", nest=True, night=True,
-             movement="rock"),
-        shot(2, "quarto-03", egg="closed", nest=True, night=True,
-             movement="rock"),
-        shot(3, "quarto-04", egg="cracked", nest=True, night=True,
-             movement="rock"),
-        shot(4, "quarto-02", "escutando-ovo", egg="cracked",
-             nest=True, night=True),
-        shot(5, "quarto-03", egg="open", nest=True, magic=True, night=True),
-        shot(6, "quarto-01", "surpresa", kitty="fofinho-azul",
-             nest=True, magic=True, kitten_motion="pop"),
-        shot(7, "quarto-02", "observando", kitty="fofinho-miando",
-             nest=True, kitten_motion="meow"),
-        shot(8, "quarto-03", "sorrindo", kitty="fofinho-azul", nest=True),
-        shot(9, "quarto-01", "comemorando", kitty="fofinho-patinhas",
-             kitten_motion="paws"),
-        shot(10, "quarto-04", "encantada", kitty="fofinho-azul",
-             drops=1, magic=True, kitten_motion="paws"),
-    ),
+    2: dynamic_birth_storyboard(),
     3: (
         shot(1, "quarto-04", "encantada", kitty="fofinho-patinhas", drops=1),
         shot(2, "quarto-03", "observando", kitty="fofinho-patinhas",
@@ -230,16 +251,28 @@ def validate_storyboard() -> None:
                 raise ValueError("Estado do ovo desconhecido")
             if part == 1 and s["kitty"]:
                 raise ValueError("Fofinho NAO existe visivelmente na Parte 1")
-            if part == 2 and s["index"] < 6 and s["kitty"]:
-                raise ValueError("Fofinho so nasce na Parte 2 quadro 06")
-            if part == 2 and s["index"] >= 6 and s["egg_phase"] != "none":
-                raise ValueError("O ovo nao pode continuar fechado apos o nascimento")
+            if part == 2 and s["beat"] < 6 and s["kitty"]:
+                raise ValueError("Fofinho so aparece apos o ovo abrir, no beat 06")
+            if part == 2 and s["beat"] > 6 and s["egg_phase"] != "none":
+                raise ValueError("O ovo nao pode continuar em cena apos a revelacao")
+            if part == 2 and s["beat"] < 8 and s["drops"]:
+                raise ValueError("A primeira gotinha nao pode aparecer antes do primeiro miau")
             if part >= 3 and s["egg_phase"] != "none":
                 raise ValueError("Ovo original nao reaparece depois do nascimento")
             if s["kitty"] and s["kitty"] not in ASSETS:
                 raise ValueError("Referencia de Fofinho nao conhecida")
             if s["drops"] < 0 or (part == 1 and s["drops"]):
                 raise ValueError("Poder da agua nao aparece antes do nascimento")
+    # Plano e fala NAO sao sinonimos: a Parte 2 aceita N planos para cada fala.
+    manifest=json.loads(MANIFEST.read_text(encoding="utf-8"))
+    beats_count=len(manifest["parts"][1]["segments"])
+    birth=STORYBOARDS[2]
+    if set(s["beat"] for s in birth)!=set(range(1,beats_count+1)):
+        raise ValueError("Toda fala da Parte 2 deve receber pelo menos um plano visual")
+    if not any(s["beat"]==6 and s["kitty"] for s in birth):
+        raise ValueError("Nascimento do Fofinho nao esta visivel no beat 06")
+    if not any(s["beat"]==8 and s["drops"]==1 for s in birth):
+        raise ValueError("O primeiro poder de agua deve surgir antes de receber o nome")
     if STORYBOARDS[1][0]["pose"] is not None:
         raise ValueError("O PRIMEIRO quadro e somente ovo e jardim")
     if STORYBOARDS[4][-1]["kitty"] is not None:
