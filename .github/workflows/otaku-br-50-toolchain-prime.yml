@@ -1,0 +1,92 @@
+name: Otaku BR 50 - preparar ferramentas uma vez e reutilizar cache
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/otaku-br-50-toolchain-prime.yml'
+      - '.github/workflows/otaku-br-50-serial-public.yml'
+      - 'scripts/otaku_br_50_setup_media.py'
+      - 'requirements-master.txt'
+      - 'motion-remotion/package-lock.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-br-50-toolchain-cache-prime
+  cancel-in-progress: false
+
+jobs:
+  prime-original-toolchain:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout EXACT pinned image provider source
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - uses: actions/cache@v4
+        id: ffmpeg-cache
+        with:
+          path: .cache/otaku-br-50/ffmpeg
+          key: otaku-br-50-ffmpeg8-static-3.0-ubuntu24-x64-v1
+      - name: Prepare and verify FFmpeg + FFprobe ONCE, no sudo apt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements-master.txt 'static-ffmpeg==3.0'
+          python scripts/otaku_br_50_setup_media.py --dir .cache/otaku-br-50/ffmpeg
+          python scripts/otaku_br_50_setup_media.py --dir .cache/otaku-br-50/ffmpeg --check-only
+          export PATH="$GITHUB_WORKSPACE/.cache/otaku-br-50/ffmpeg:$PATH"
+          ffmpeg -hide_banner -version | head -n 1
+          ffprobe -hide_banner -version | head -n 1
+      - uses: actions/cache@v4
+        id: remotion-cache
+        with:
+          path: motion-remotion/node_modules
+          key: otaku-br-50-remotion-ubuntu24-node22-${{ hashFiles('motion-remotion/package-lock.json') }}
+      - name: Install Remotion ONLY if missing from cache
+        if: steps.remotion-cache.outputs.cache-hit != 'true'
+        working-directory: motion-remotion
+        run: npm ci --no-audit --no-fund
+      - name: Typecheck exactly the original Remotion compositor
+        working-directory: motion-remotion
+        run: npm run typecheck
+      - uses: actions/cache@v4
+        id: proxy-cache
+        with:
+          path: .cache/otaku-br-50/proxy/otaku-native-proxy
+          key: otaku-br-50-proxy-go1269-1da5476e-ubuntu24-v1-${{ hashFiles('pinned-native-go-proxy/go.sum') }}
+      - name: Build provider binary ONLY if cache is empty
+        if: steps.proxy-cache.outputs.cache-hit != 'true'
+        working-directory: pinned-native-go-proxy
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/.cache/otaku-br-50/proxy"
+          CGO_ENABLED=0 go build -trimpath -o "$GITHUB_WORKSPACE/.cache/otaku-br-50/proxy/otaku-native-proxy" ./cmd/api
+      - name: Verify cached executable and offline catalog (NO video generation, NO uploads)
+        run: |
+          test -x .cache/otaku-br-50/proxy/otaku-native-proxy
+          python scripts/otaku_br_50_reverso.py --action validate
+          echo "[TOOLCHAIN] FFmpeg/FFprobe, Remotion and Go cached for serial Shorts"
+          echo "[SAFETY] No YouTube, proxy or image credentials loaded"
