@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill,Audio,Img,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
+import {AbsoluteFill,Audio,Img,Sequence,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
 import {AnimationMode,cannotMoveSeparately,motionAtFrame,openingCutAtFrame,longHoldCutAtFrame} from './cinematic-motion';
 import {CharacterPreset,characterPoseAtFrame} from './character-idle';
 
@@ -17,11 +17,14 @@ export type Scene={
 };
 export type Caption={startFrame:number;endFrame:number;text:string;
   words?:{startFrame:number;endFrame:number;text:string}[]};
+export type SoundCue={src:string;startFrame:number;endFrame:number;volume:number};
+export type BackgroundMusic={src:string;volume:number};
 export type MasterProps={
   id:string;durationFrames:number;audio:string;scenes:Scene[];
   captions:Caption[];hook:string;animationMode?:AnimationMode;
   characterPreset?:CharacterPreset;editorialProfile?:string;
-  visualProfile?:'original'|'gamer-alchemy-reference'
+  visualProfile?:'original'|'gamer-alchemy-reference';
+  soundCues?:SoundCue[];backgroundMusic?:BackgroundMusic;
 };
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
 
@@ -114,7 +117,8 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
 
 export const MasterShort:React.FC<MasterProps>=({
   scenes,audio,captions,hook,animationMode='cinematica',
-  characterPreset='equilibrado',visualProfile='original'
+  characterPreset='equilibrado',visualProfile='original',
+  soundCues=[],backgroundMusic
 })=>{
   const frame=useCurrentFrame();
   const {fps}=useVideoConfig();
@@ -194,6 +198,16 @@ export const MasterShort:React.FC<MasterProps>=({
           </React.Fragment>;
         }):caption.text}
     </div>:null}
+    {backgroundMusic?.src?<Audio src={staticFile(backgroundMusic.src)}
+      volume={Math.min(.20,Math.max(0,backgroundMusic.volume))}/>:null}
+    {soundCues.filter(c=>c.startFrame>=0 && c.endFrame>c.startFrame &&
+      c.startFrame<Number.MAX_SAFE_INTEGER).map((cue,i)=>
+      <Sequence key={i} from={cue.startFrame}
+        durationInFrames={cue.endFrame-cue.startFrame}>
+        <Audio src={staticFile(cue.src)}
+          volume={Math.min(.40,Math.max(0,cue.volume))}/>
+      </Sequence>
+    )}
     {audio?<Audio src={staticFile(audio)}/>:null}
   </AbsoluteFill>;
 };
