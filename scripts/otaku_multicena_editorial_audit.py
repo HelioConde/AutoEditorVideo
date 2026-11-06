@@ -80,6 +80,8 @@ def contains_phrase(haystack:str,needle:str)->bool:
     if not needle:return False
     return (" "+normalized(needle)+" ") in (" "+normalized(haystack)+" ")
 
+OFF_TOPIC_NORMALIZED={normalized(x) for x in OFF_TOPIC | COMPETITORS}
+
 def review_candidates(row:dict,candidates:list[str],max_tags:int=12,max_chars:int=260)->dict:
     """Propose only topical metadata; never edit uploaded records in place."""
     series=normalized(row.get("series",""))
@@ -105,7 +107,7 @@ def review_candidates(row:dict,candidates:list[str],max_tags:int=12,max_chars:in
             rejected.append({"tag":tag,"reason":"DUPLICATE"})
             continue
         seen.add(norm)
-        if (norm in OFF_TOPIC or norm in COMPETITORS):
+        if norm in OFF_TOPIC_NORMALIZED:
             rejected.append({"tag":tag,"reason":"OFF_TOPIC_OR_COMPETITOR"})
             continue
         if len(tag)>55 or len(tag.split())>7:
