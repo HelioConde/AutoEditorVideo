@@ -18,5 +18,9 @@
   "note": "O processo pode parar por limite/cota de IA, direitos, OAuth ou thumbnail. Cada identificador de upload e conservado.",
   "resume_reason": "Short 50 publicado com YouTube ID En5M9Nsdet4, processado e com capa; etapa de disparo 49 falhou por gh sem -R (diretorio sem .git), corrigido na main; retomar SEM reenviar 50.",
   "last_verified_complete_episode": 50,
-  "last_verified_public_video_id": "En5M9Nsdet4"
+  "last_verified_public_video_id": "En5M9Nsdet4",
+  "retry_request": "cancel_in_progress_run_42172370639_then_restart_number_49_20261106",
+  "cancel_previous_run_id": 42172370639,
+  "retry_number": 49,
+  "retry_policy": "On push cancel prior workflow concurrency run before new episode generation. Never retry number 50. Stop if current receipt exists."
 }
