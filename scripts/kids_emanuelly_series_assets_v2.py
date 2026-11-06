@@ -180,8 +180,11 @@ def plan(parts: list[int], *,root:Path=ROOT) -> dict:
     for number in parts:
         p=story.load_parts()[number-1]
         scenes=bible.STORYBOARDS[number]
-        if len(scenes)!=len(p["segments"]):
+        if number!=2 and len(scenes)!=len(p["segments"]):
             raise ValueError("Storyboard incompatível com roteiro: Parte "+str(number))
+        # Parte 2: os planos visuais sao independentes das falas, sem teto fixo.
+        if number==2 and set(shot["beat"] for shot in scenes)!=set(range(1,len(p["segments"])+1)):
+            raise ValueError("Ha trechos da narracao sem enquadramento na Parte 2")
         images, characters=bible.resource_names(number)
         missing=[n for n in images if not valid(n,root)]
         missing_pose=[n for n in characters if not poses.valid(n,root)]
@@ -199,7 +202,8 @@ def plan(parts: list[int], *,root:Path=ROOT) -> dict:
         all_missing.extend(block)
         episodes.append({
             "part":number,"episode_id":p["id"],
-            "scene_count":len(scenes),"images":images,
+            "scene_count":len(scenes),"narration_segments":len(p["segments"]),
+            "unlimited_visual_shots":number==2,"images":images,
             "poses":characters,"missing":block,
             "ready":not block,"no_upload":True,
         })
