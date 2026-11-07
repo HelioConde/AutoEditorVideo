@@ -23,11 +23,11 @@ A seleção de temporada também considera a programação anunciada da Crunchyr
 ## A. Núcleo de franquias já publicadas (1–17)
 | Posição | Anime | Novo título proposto | Foco | Situação |
 |---:|---|---|---|---|
-| 01 | **Death Note** | Por que Light precisava que L confiasse nele? 📓 | misterio | ✅ Franquia já publicada — preservar |
+| 01 | **Death Note** | Por que L convidou LIGHT para investigar Kira?! 📓 | misterio | ✅ Franquia já publicada — preservar |
 | 02 | **JoJo's Bizarre Adventure: Steel Ball Run** | Johnny entrou na corrida sem conseguir ANDAR?! 🐎 | paradoxo | ✅ Franquia já publicada — preservar |
 | 03 | **Demon Slayer** | Por que Rengoku não desistiu nem no LIMITE?! 🔥 | emocao | ✅ Franquia já publicada — preservar |
 | 04 | **Blue Box** | Por que Chinatsu foi morar na casa de Taiki?! 🏸 | romance | ✅ Franquia já publicada — preservar |
-| 05 | **The Apothecary Diaries** | Por que Maomao arrisca tanto por UMA pista?! 🧪 | misterio | ✅ Franquia já publicada — preservar |
+| 05 | **The Apothecary Diaries** | Maomao descobriu o VENENO ignorado no palácio?! 🧪 | misterio | ✅ Franquia já publicada — preservar |
 | 06 | **Cyberpunk: Edgerunners** | Por que Lucy sonhava em chegar à LUA?! 🌙 | emocao | ✅ Franquia já publicada — preservar |
 | 07 | **Hunter x Hunter** | Hisoka ajudou Gon... mas por QUÊ?! 🎭 | paradoxo | ✅ Franquia já publicada — preservar |
 | 08 | **Code Geass** | Como Lelouch venceu sem ser o MAIS FORTE?! ♟️ | estrategia | ✅ Franquia já publicada — preservar |
@@ -123,3 +123,8 @@ Os seis títulos abaixo **não foram identificados nos registros de publicação
 
 - [Indicadores editoriais](../conteudos/otaku-multicena-insights-editor-v2.json)
 
+
+
+## Revisão de planejamento para 9/10 — pilotos de 1:30
+
+A curadoria de 50 franquias permanece intacta. Os cinco primeiros roteiros foram revisados com acontecimentos concretos, consultas a fontes sobre o cânone, quatro pontos de descoberta previstos (aproximadamente 15, 31, 51 e 70 segundos), dez tomadas planejadas e final **somente com o resultado, sem CTA**. A nota 9/10 descreve **completude do planejamento dos cinco pilotos**, não qualidade real de vídeo, direitos aprovados ou potencial de visualizações. Os outros 45 ainda precisam de roteiro. Consulte [a avaliação V5](OTAKU-MULTICENA-TESTE-DURACAO-90S.md).
