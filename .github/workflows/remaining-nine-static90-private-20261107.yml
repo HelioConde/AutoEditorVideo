@@ -240,7 +240,7 @@ jobs:
           REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
           REMAINING_CHANNEL: en
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
-          YOUTUBE_en_TOKEN_JSON: en_TOKEN_PLACEHOLDER
+          YOUTUBE_CHANNEL_TOKEN_JSON: ${{ secrets.YOUTUBE_EN_TOKEN_JSON }}
         run: python scripts/remaining_static_90s_upload_20261107.py --channel en --action upload
       - name: Preserve every matched/uploaded real YouTube ID, even on a partial failure
         if: always()
@@ -369,7 +369,7 @@ jobs:
           REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
           REMAINING_CHANNEL: games
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
-          YOUTUBE_games_TOKEN_JSON: games_TOKEN_PLACEHOLDER
+          YOUTUBE_CHANNEL_TOKEN_JSON: ${{ secrets.YOUTUBE_GAMES_TOKEN_JSON }}
         run: python scripts/remaining_static_90s_upload_20261107.py --channel games --action upload
       - name: Preserve every matched/uploaded real YouTube ID, even on a partial failure
         if: always()
@@ -498,7 +498,7 @@ jobs:
           REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
           REMAINING_CHANNEL: alchemy
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
-          YOUTUBE_alchemy_TOKEN_JSON: alchemy_TOKEN_PLACEHOLDER
+          YOUTUBE_CHANNEL_TOKEN_JSON: ${{ secrets.YOUTUBE_ALCHEMY_TOKEN_JSON }}
         run: python scripts/remaining_static_90s_upload_20261107.py --channel alchemy --action upload
       - name: Preserve every matched/uploaded real YouTube ID, even on a partial failure
         if: always()
