@@ -169,3 +169,33 @@ def test_external_asset_symlinks_are_not_accepted_even_with_valid_hash(tmp_path)
     manifest.write_text(json.dumps(doc),encoding="utf-8")
     with pytest.raises(quality.QualityBlocked,match="ASSET_SYMLINK_OR_EXTERNAL_PATH_FORBIDDEN"):
         quality.build_preview(manifest,captions,tmp_path/"public")
+
+
+def test_opt_in_ninety_second_profile_accepts_realistic_12sec_shot_holds(tmp_path):
+    manifest,captions_path,doc=make_fixture(tmp_path, animated=False)
+    original=json.loads(captions_path.read_text(encoding="utf-8"))
+    # Ten scenes, six spoken tokens each: redistribute existing recorded
+    # marker fixtures across 90s, without generating voice or media.
+    for i,caption in enumerate(original):
+        start=i*44
+        caption.update(startFrame=start,endFrame=start+36)
+        caption["words"][0].update(startFrame=start,endFrame=start+36)
+    captions_path.write_text(json.dumps(original),encoding="utf-8")
+    doc["duration_profile"]="short_90s_test"
+    doc["duration_frames"]=2700
+    manifest.write_text(json.dumps(doc),encoding="utf-8")
+    result=quality.build_preview(manifest,captions_path,tmp_path/"public")
+    assert result["qa"]["duration_profile"]=="short_90s_test"
+    assert result["qa"]["actual_seconds_from_tts_markers"]==90
+    assert result["props"]["durationFrames"]==2700
+    assert len(result["props"]["scenes"])==10
+    # A legacy video must never silently opt into the new duration contract.
+    del doc["duration_profile"]
+    manifest.write_text(json.dumps(doc),encoding="utf-8")
+    with pytest.raises(quality.QualityBlocked,match="VIDEO_DURATION_OUT_OF_RANGE"):
+        quality.build_preview(manifest,captions_path,tmp_path/"public")
+    doc["duration_profile"]="short_90s_test"
+    doc["duration_frames"]=94*30
+    manifest.write_text(json.dumps(doc),encoding="utf-8")
+    with pytest.raises(quality.QualityBlocked,match="NINETY_SECOND_PROFILE_REQUIRES"):
+        quality.build_preview(manifest,captions_path,tmp_path/"public")
