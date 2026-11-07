@@ -1,0 +1,227 @@
+{
+  "schema": "autoeditorvideo/motion-brush-v1",
+  "canvas": [
+    1024,
+    1536
+  ],
+  "source": "V6 original pose-05-1.png, pinned by SHA-256",
+  "notes": "Masks are manually positioned for this single V9 original. No generated body parts; movements remain small to avoid revealing missing anatomy.",
+  "brushes": [
+    {
+      "id": "hair",
+      "region": "hair",
+      "polygon": [
+        [
+          350,
+          245
+        ],
+        [
+          420,
+          230
+        ],
+        [
+          520,
+          228
+        ],
+        [
+          605,
+          246
+        ],
+        [
+          655,
+          329
+        ],
+        [
+          643,
+          398
+        ],
+        [
+          590,
+          420
+        ],
+        [
+          520,
+          403
+        ],
+        [
+          445,
+          418
+        ],
+        [
+          354,
+          382
+        ],
+        [
+          338,
+          305
+        ]
+      ],
+      "feather_px": 27,
+      "motion": {
+        "kind": "sway",
+        "amplitude_px": [
+          8,
+          -3
+        ],
+        "hz": 0.33,
+        "starts_at": 0,
+        "ends_at": 8
+      }
+    },
+    {
+      "id": "right_forearm",
+      "region": "right_forearm_and_free_hand",
+      "polygon": [
+        [
+          730,
+          914
+        ],
+        [
+          787,
+          969
+        ],
+        [
+          807,
+          1181
+        ],
+        [
+          809,
+          1405
+        ],
+        [
+          772,
+          1476
+        ],
+        [
+          703,
+          1460
+        ],
+        [
+          687,
+          1293
+        ],
+        [
+          692,
+          1107
+        ]
+      ],
+      "feather_px": 55,
+      "motion": {
+        "kind": "gesture",
+        "amplitude_px": [
+          18,
+          -12
+        ],
+        "starts_at": 3.9,
+        "peak_at": 5.3,
+        "ends_at": 7.3
+      }
+    },
+    {
+      "id": "left_sleeve",
+      "region": "left_coat_sleeve",
+      "polygon": [
+        [
+          302,
+          696
+        ],
+        [
+          394,
+          705
+        ],
+        [
+          478,
+          782
+        ],
+        [
+          465,
+          871
+        ],
+        [
+          402,
+          988
+        ],
+        [
+          317,
+          1004
+        ],
+        [
+          233,
+          901
+        ],
+        [
+          223,
+          771
+        ]
+      ],
+      "feather_px": 48,
+      "motion": {
+        "kind": "gesture",
+        "amplitude_px": [
+          -7,
+          4
+        ],
+        "starts_at": 1.1,
+        "peak_at": 2.5,
+        "ends_at": 4.1
+      }
+    }
+  ],
+  "protections": [
+    {
+      "id": "face",
+      "ellipse": [
+        502,
+        470,
+        118,
+        91
+      ],
+      "feather_px": 18
+    },
+    {
+      "id": "hand_on_chin",
+      "ellipse": [
+        473,
+        610,
+        105,
+        107
+      ],
+      "feather_px": 30
+    },
+    {
+      "id": "torso",
+      "ellipse": [
+        534,
+        913,
+        108,
+        310
+      ],
+      "feather_px": 35
+    },
+    {
+      "id": "right_shoulder_anchor",
+      "ellipse": [
+        729,
+        722,
+        105,
+        160
+      ],
+      "feather_px": 45
+    },
+    {
+      "id": "feet_anchor",
+      "ellipse": [
+        505,
+        1500,
+        350,
+        70
+      ],
+      "feather_px": 25
+    }
+  ],
+  "limits": {
+    "max_displacement_px": 25,
+    "max_neighbour_gradient": 0.22,
+    "min_alpha_iou": 0.94
+  }
+}
