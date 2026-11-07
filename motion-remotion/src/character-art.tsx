@@ -2,7 +2,11 @@ import React, { useCallback, useLayoutEffect, useRef } from 'react';
 import { Img, staticFile } from 'remotion';
 
 type Eye = [number, number, number, number];
-type Face = { box: [number, number, number, number]; eyes: Eye[] };
+type Face = {
+  box: [number, number, number, number];
+  eyes: Eye[];
+  arm?: [number, number, number, number];
+};
 export type Performance = {
   width: number;
   height: number;
@@ -84,10 +88,24 @@ function movePortrait(
   const chestY = y + 1.68 * h,
     chestRx = w * 1.22,
     chestRy = h * 0.7;
-  const left = Math.max(0, Math.floor(cx - rx) - 1),
-    top = Math.max(0, Math.floor(cy - ry) - 1);
-  const width = Math.min(ctx.canvas.width, Math.ceil(cx + rx) + 1) - left;
-  const bottom = isolated ? Math.max(cy + ry, chestY + chestRy) : cy + ry;
+  const arm = isolated ? face.arm : undefined;
+  const [elbowX, elbowY, handX, handY] = arm ?? [cx, cy, cx, cy];
+  const armX = handX - elbowX,
+    armY = handY - elbowY,
+    length2 = armX ** 2 + armY ** 2;
+  const tipX = handX + 0.48 * armX,
+    tipY = handY + 0.48 * armY;
+  const armRadius = arm ? 0.85 * w : 0;
+  const left = Math.max(0, Math.floor(Math.min(cx - rx, elbowX - armRadius, tipX - armRadius)) - 1);
+  const top = Math.max(0, Math.floor(Math.min(cy - ry, elbowY - armRadius, tipY - armRadius)) - 1);
+  const right = Math.max(cx + rx, elbowX + armRadius, tipX + armRadius);
+  const bottom = Math.max(
+    cy + ry,
+    isolated ? chestY + chestRy : cy,
+    elbowY + armRadius,
+    tipY + armRadius,
+  );
+  const width = Math.min(ctx.canvas.width, Math.ceil(right) + 1) - left;
   const height = Math.min(ctx.canvas.height, Math.ceil(bottom) + 1) - top;
   if (width < 3 || height < 3) return;
   const src = ctx.getImageData(left, top, width, height);
@@ -104,14 +122,31 @@ function movePortrait(
       const chest = isolated
         ? ease(1 - ((px - cx) / chestRx) ** 2 - ((py - chestY) / chestRy) ** 2)
         : 0;
-      if (r >= 1 && !chest) continue;
+      let armAngle = 0;
+      if (arm && length2 > 0) {
+        const along = ((px - elbowX) * armX + (py - elbowY) * armY) / length2;
+        const lateral = ((px - elbowX) * armY - (py - elbowY) * armX) ** 2 / length2;
+        armAngle =
+          0.036 *
+          nod *
+          ease(along / 0.45) *
+          ease((1.5 - along) / 0.3) *
+          ease((1 - lateral / armRadius ** 2) / 0.75);
+      }
+      if (r >= 1 && !chest && !armAngle) continue;
       const weight = ease((1 - r) / 0.56);
-      const sx = Math.max(0, Math.min(width - 1.001, i - weight * (pivot - py) * angle));
+      const sx = Math.max(
+        0,
+        Math.min(width - 1.001, i - weight * (pivot - py) * angle + armAngle * (py - elbowY)),
+      );
       const sy = Math.max(
         0,
         Math.min(
           height - 1.001,
-          j - weight * ((px - cx) * angle + dy) + chest * breath * h * 0.014,
+          j -
+            weight * ((px - cx) * angle + dy) +
+            chest * breath * h * 0.014 -
+            armAngle * (px - elbowX),
         ),
       );
       const ix = Math.floor(sx),

@@ -71,6 +71,107 @@ def _eye(rgb, point, face_width):
     ]
 
 
+def _locate_free_arms(rgba, rgb, faces):
+    """Use an isolated person's silhouette to crop the pose estimator's input."""
+    import cv2
+
+    alpha = rgba[:, :, 3]
+    if alpha.min() > 64:
+        return
+    _, labels, stats, _ = cv2.connectedComponentsWithStats(
+        (alpha > 96).astype(np.uint8)
+    )
+    net = None
+    for face in faces:
+        x, y, fw, fh = face["box"]
+        center = np.array([x + fw / 2, y + fh / 2])
+        component = labels[int(center[1]), int(center[0])]
+        if component == 0:
+            continue
+        left, top, width, height, _ = stats[component]
+        if height < 2.8 * fh:
+            continue
+        side = int(max(width, height) * 1.15)
+        origin = np.array([left + (width - side) / 2, top + (height - side) / 2])
+        scale = 256 / side
+        affine = np.array(
+            [[scale, 0, -origin[0] * scale], [0, scale, -origin[1] * scale]]
+        )
+        crop = cv2.warpAffine(rgb, affine, (256, 256), borderValue=(160, 160, 160))
+        if net is None:
+            net = cv2.dnn.readNet(
+                str(
+                    MODEL.parent.parent
+                    / "mediapipe-pose/pose_estimation_mediapipe_2023mar.onnx"
+                )
+            )
+        net.setInput(crop.astype(np.float32)[None] / 255)
+        landmarks, confidence, *_ = net.forward(net.getUnconnectedOutLayersNames())
+        if confidence.item() < 0.85:
+            continue
+        raw = landmarks.reshape(-1, 5)
+        points = raw[:, :2] / scale + origin
+        if np.linalg.norm(points[0] - center) > 0.53 * fh:
+            continue  # A nearby person was picked up by the pose network.
+        best = 0
+        for elbow, wrist, finger in ((13, 15, 19), (14, 16, 20)):
+            confidence = float(raw[[elbow, wrist, finger], 3:5].min())
+            if confidence < max(1.6, best):  # logit 1.6 is ~83% visibility/presence.
+                continue
+            arm = points[[elbow, wrist, finger]]
+            length = np.linalg.norm(arm[1] - arm[0])
+            if (
+                length < 0.5 * fw
+                or length > 3.7 * fw
+                or np.linalg.norm(arm[2] - arm[1]) > 0.8 * length
+            ):
+                continue
+            xi, yi = np.rint(arm).astype(int).T
+            if (
+                xi.min() < 0
+                or yi.min() < 0
+                or xi.max() >= labels.shape[1]
+                or yi.max() >= labels.shape[0]
+            ):
+                continue
+            # Thin wrists can land just outside the matte at network resolution.
+            # Project to the nearest pixel of this person within a small radius.
+            radius = max(2, round(0.23 * fw))
+            for index, (px, py) in enumerate(zip(xi, yi)):
+                if labels[py, px] == component:
+                    continue
+                x0, y0 = max(0, px - radius), max(0, py - radius)
+                ys, xs = np.where(
+                    labels[y0 : py + radius + 1, x0 : px + radius + 1] == component
+                )
+                if xs.size:
+                    distances = (xs + x0 - px) ** 2 + (ys + y0 - py) ** 2
+                    k = distances.argmin()
+                    if distances[k] <= radius**2:
+                        arm[index] = [xs[k] + x0, ys[k] + y0]
+            xi, yi = np.rint(arm).astype(int).T
+            if not np.all(labels[yi, xi] == component):
+                continue
+            # Require an exposed hand, away from faces, rather than dragging a
+            # crossed arm, a hand against the chin or the neighboring subject.
+            if any(
+                np.linalg.norm(arm[2] - [bx + bw / 2, by + bh / 2]) < 1.05 * bh
+                for bx, by, bw, bh in (f["box"] for f in faces)
+            ):
+                continue
+            radius = max(3, round(0.42 * fw))
+            near_hand = labels[
+                max(0, yi[2] - radius) : yi[2] + radius + 1,
+                max(0, xi[2] - radius) : xi[2] + radius + 1,
+            ]
+            if np.mean(near_hand == 0) < 0.10 or np.any(
+                (near_hand != 0) & (near_hand != component)
+            ):
+                continue
+            best = confidence
+            face["arm"] = np.round(arm[[0, 2]].reshape(-1), 2).tolist()
+
+
 def analyze_art(path):
     import cv2
 
@@ -117,6 +218,7 @@ def analyze_art(path):
         )
     if not faces:
         return None
+    _locate_free_arms(rgba, rgb, faces)
     seed = int.from_bytes(hashlib.sha256(rgba.tobytes()).digest()[:4], "big")
     return {"width": w, "height": h, "seed": seed, "faces": faces}
 
