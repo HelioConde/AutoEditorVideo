@@ -1,0 +1,150 @@
+name: Otaku V5 - REAL 90s MP4 review from AutoEditorVideo (no upload)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/otaku-90s-real-preview.yml'
+
+# Intentionally one-time real review. No dispatch, schedule, public queue,
+# YouTube OAuth or publishing job. Never re-run paid generation.
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-v5-one-real-90s-preview
+  cancel-in-progress: false
+
+jobs:
+  preflight-safe-main:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'test(editor): run ONE real AutoEditorVideo Death Note 90s preview (no YouTube)'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+    env:
+      IMAGE_MODEL: gpt-image-2
+      MAX_IMAGE_CALLS: '10'
+      OTAKU_SINGLE_REVIEW_AUTHORIZED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check protected image environment BEFORE accessing secrets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+      - name: Install original Python test requirements without provider access
+        run: python -m pip install --disable-pip-version-check -r requirements-master.txt 'pytest>=8,<10'
+      - name: Check original editor contracts and one-test-only authorization
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q tests/test_otaku_multicena_90s_real_preview.py tests/test_otaku_multicena_duration_90.py tests/test_otaku_multicena_editorial_score_v5.py
+          python scripts/otaku_multicena_90s_real_preview.py --preflight
+          jq -e '.pause_requested==true and .authorized_public==false and .maintenance_complete==false and .resume_authorized_after_maintenance==false' \
+            conteudos/otaku-br-50-serial-launch-20261106.json
+          echo "[REVIEW ONLY] NO_PUBLICATION_NOT_A_50_SHORT_RESUME"
+
+  generate-one-with-real-autoeditorvideo:
+    needs: preflight-safe-main
+    if: needs.preflight-safe-main.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 125
+    environment: image-generation
+    permissions:
+      contents: read
+      actions: read
+    env:
+      IMAGE_MODEL: gpt-image-2
+      MAX_IMAGE_CALLS: '10'
+      OTAKU_SINGLE_REVIEW_AUTHORIZED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout original pinned Go image-provider proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Prepare genuine AutoEditorVideo dependencies and FFmpeg
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          python -m pip install --disable-pip-version-check -r requirements-master.txt
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Install ORIGINAL Remotion, not a separate renderer
+        working-directory: motion-remotion
+        run: npm ci --no-audit --no-fund
+      - name: Validate original character components
+        working-directory: motion-remotion
+        run: npm run typecheck && npm run test:qa
+      - name: Compile upstream image-provider proxy without credentials
+        working-directory: pinned-native-go-proxy
+        shell: bash
+        run: |
+          set -euo pipefail
+          CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/otaku-v5-pinned-proxy" ./cmd/api
+          test -x "$RUNNER_TEMP/otaku-v5-pinned-proxy"
+      - name: REAL single preview - images, Edge voice, captions and Remotion
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+        run: |
+          set -euo pipefail
+          umask 077
+          state_dir="$RUNNER_TEMP/otaku-v5-auth"
+          mkdir -m 700 "$state_dir"
+          proxy_pid=''
+          cleanup() {
+            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$state_dir"
+            rm -f -- "$RUNNER_TEMP/otaku-v5-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/otaku_multicena_90s_real_preview.py --preflight
+          python scripts/proxy_accounts_private_stage.py "$state_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/otaku-v5-pinned-proxy" > "$RUNNER_TEMP/otaku-v5-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/otaku_multicena_90s_real_preview.py
+          echo "[REVIEW ONLY] ONE MP4_READY_NO_YOUTUBE_OAUTH_OR_UPLOAD"
+      - name: Keep ONE review MP4, cover, script and QA report
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-v5-death-note-real-AutoEditorVideo-90s-review
+          path: otaku-real-90s-review/
+          if-no-files-found: error
+          retention-days: 7
