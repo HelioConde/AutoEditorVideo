@@ -46,7 +46,20 @@ Para comparar, usar cinco temas parecidos em cada grupo; medir **cada Short exat
 3. 19–40s: detalhe surpreendente e risco.
 4. 40–61s: conflito, contraintuição ou ponto de virada.
 5. 61–81s: explicação concreta / recompensa emocional da pergunta inicial.
-6. 81–90s: encerramento breve e CTA contextual, sem alongar o vídeo à força.
+6. 81–90s: **entregar a resposta ou a consequência concreta da história**, com a última frase terminando em ponto final. **Sem perguntas finais, pedidos de inscrição, curtida, comentário, compartilhamento ou convite para o próximo vídeo.**
+
+### Novo padrão de encerramento — resultado, sem convite
+
+Nos cinco roteiros-piloto, a seção final agora se chama `resultado`, não `fechamento`, e a narrativa prepara essa conclusão. Nos outros 45 animes, o mesmo contrato já foi configurado, mas as histórias completas ainda não foram escritas.
+
+- A narração deve soar natural e direta, sem tom de propaganda ou aumento artificial de volume.
+- A pergunta inicial deve ser resolvida por uma conclusão específica e verificável. Uma última pergunta retórica ou pedido de engajamento **não conta como resultado**.
+- **Proibidos ao final:** “inscreva-se”, “curta”, “deixe o like”, “comente”, “compartilhe”, “siga”, “e você?”, “veja a parte 2”, slogan do canal ou voz pedindo uma ação.
+- Última frase curta, com ponto final e sem alongar o vídeo em silêncio. O tempo de 90 segundos continua condicionado à medição de TTS real.
+- Comparar o novo fechamento com vídeos anteriores nas mesmas primeiras 48 horas, sem atribuir mudança de retenção exclusivamente à ausência de CTA.
+
+**Novos roteiros-piloto revisados:**
+Death Note encerra explicando a estratégia de Light perto de L; Steel Ball Run encerra com a motivação de Johnny; Demon Slayer encerra com o princípio de Rengoku; Blue Box esclarece por que Chinatsu ficou na casa de Taiki; The Apothecary Diaries conclui com a consequência da curiosidade de Maomao. Todos continuam sujeitos a checagem factual e revisão da narração.
 
 **10 tomadas** são uma referência, não uma obrigação cega de cortar a cada X segundos. Adicionar ângulos e poses reais quando necessário, com arte original e qualidade revisada.
 
