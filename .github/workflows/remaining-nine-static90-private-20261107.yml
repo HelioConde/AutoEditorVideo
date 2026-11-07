@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'conteudos/remaining-nine-static90-launch-20261107.json'
+      - 'conteudos/remaining-nine-static90-recovery-launch-20261107.json'
 
 permissions:
   contents: read
@@ -19,7 +19,7 @@ jobs:
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'feat(remaining): launch nine 90-120s videos for private upload EN Gamer Alchemy'
+      github.event.head_commit.message == 'fix(remaining): relaunch nine 90-120s private uploads after channel env correction'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -43,8 +43,10 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import json
-          c=json.loads(Path('conteudos/remaining-nine-static90-launch-20261107.json').read_text(encoding='utf-8'))
+          c=json.loads(Path('conteudos/remaining-nine-static90-recovery-launch-20261107.json').read_text(encoding='utf-8'))
           assert c == {
+            'recovery_of_failed_run_id':42403043344,
+            'no_previous_render_or_upload':True,
             'schema':'autoeditorvideo/remaining-nine-static90-one-shot/v1',
             'source_manifest':'conteudos/lote-12-estatico-90s-20261107.json',
             'production_owner':'lote12_static_original_20261107',
@@ -170,7 +172,7 @@ jobs:
           PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
           IMAGE_MODEL: gpt-image-2
           MAX_IMAGE_CALLS: '24'
-          REMAINING_en: en
+          REMAINING_CHANNEL: en
           REMAINING_STATIC_BATCH_AUTHORIZED: 'yes'
         run: |
           set -euo pipefail
@@ -236,7 +238,7 @@ jobs:
       - name: Confirm exact channel ID and private upload each of 3, deduping by own uploads list
         env:
           REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
-          REMAINING_en: en
+          REMAINING_CHANNEL: en
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
           YOUTUBE_en_TOKEN_JSON: en_TOKEN_PLACEHOLDER
         run: python scripts/remaining_static_90s_upload_20261107.py --channel en --action upload
@@ -299,7 +301,7 @@ jobs:
           PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
           IMAGE_MODEL: gpt-image-2
           MAX_IMAGE_CALLS: '24'
-          REMAINING_games: games
+          REMAINING_CHANNEL: games
           REMAINING_STATIC_BATCH_AUTHORIZED: 'yes'
         run: |
           set -euo pipefail
@@ -365,7 +367,7 @@ jobs:
       - name: Confirm exact channel ID and private upload each of 3, deduping by own uploads list
         env:
           REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
-          REMAINING_games: games
+          REMAINING_CHANNEL: games
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
           YOUTUBE_games_TOKEN_JSON: games_TOKEN_PLACEHOLDER
         run: python scripts/remaining_static_90s_upload_20261107.py --channel games --action upload
@@ -428,7 +430,7 @@ jobs:
           PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
           IMAGE_MODEL: gpt-image-2
           MAX_IMAGE_CALLS: '24'
-          REMAINING_alchemy: alchemy
+          REMAINING_CHANNEL: alchemy
           REMAINING_STATIC_BATCH_AUTHORIZED: 'yes'
         run: |
           set -euo pipefail
@@ -494,7 +496,7 @@ jobs:
       - name: Confirm exact channel ID and private upload each of 3, deduping by own uploads list
         env:
           REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
-          REMAINING_alchemy: alchemy
+          REMAINING_CHANNEL: alchemy
           YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
           YOUTUBE_alchemy_TOKEN_JSON: alchemy_TOKEN_PLACEHOLDER
         run: python scripts/remaining_static_90s_upload_20261107.py --channel alchemy --action upload
