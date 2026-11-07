@@ -159,7 +159,7 @@
         "6109-multicena-experimento-novembro"
       ],
       "previous_published_registry_ids": [],
-      "new_short_title_proposal": "Por que Light precisava que L confiasse nele? 📓",
+      "new_short_title_proposal": "Por que L convidou LIGHT para investigar Kira?! 📓",
       "hook_type": "misterio",
       "reason": "A curiosidade central do campeão de retenção permite outro ângulo sem repetir a história da perda de memória.",
       "angle_policy": "Nova pauta editorial; conferir se não repete roteiro existente antes de qualquer produção.",
@@ -171,7 +171,7 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review",
+      "duration_test_script_status": "canon_source_grounded_draft_waiting_editor",
       "new_story_ending_policy": "answer_only_no_cta",
       "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
@@ -199,7 +199,7 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review",
+      "duration_test_script_status": "canon_source_grounded_draft_waiting_editor",
       "new_story_ending_policy": "answer_only_no_cta",
       "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
@@ -233,7 +233,7 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review",
+      "duration_test_script_status": "canon_source_grounded_draft_waiting_editor",
       "new_story_ending_policy": "answer_only_no_cta",
       "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
@@ -261,7 +261,7 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review",
+      "duration_test_script_status": "canon_source_grounded_draft_waiting_editor",
       "new_story_ending_policy": "answer_only_no_cta",
       "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
@@ -294,7 +294,7 @@
       "previous_published_registry_ids": [
         "5002-apothecary-diaries"
       ],
-      "new_short_title_proposal": "Por que Maomao arrisca tanto por UMA pista?! 🧪",
+      "new_short_title_proposal": "Maomao descobriu o VENENO ignorado no palácio?! 🧪",
       "hook_type": "misterio",
       "reason": "Maomao apresentou boa relação de inscritos por visualização; explorar uma investigação específica.",
       "angle_policy": "Nova pauta editorial; conferir se não repete roteiro existente antes de qualquer produção.",
@@ -306,7 +306,7 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review",
+      "duration_test_script_status": "canon_source_grounded_draft_waiting_editor",
       "new_story_ending_policy": "answer_only_no_cta",
       "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
@@ -1594,6 +1594,8 @@
     "narration_style": "ptBR_human_natural_specific_payoff_end",
     "no_questions_after_payoff": true,
     "no_subscribe_like_comment_follow_prompts": true,
-    "end_screen_silent_no_brand_slogan": true
+    "end_screen_silent_no_brand_slogan": true,
+    "editorial_v5_plan": "conteudos/otaku-multicena-teste-90s-v1.json",
+    "planning_score_target": "9/10 editorial strategy, not measured video performance"
   }
 }
