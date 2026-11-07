@@ -192,7 +192,7 @@ def render(report:dict):
     dest=REVIEW/"Otaku_Multicena_V8_Puppet_Pins_8s_Teste.mp4"
     proc=subprocess.run(["npm","run","render:master","--",str(dest.resolve()),
        "--props",str((REVIEW/"props-v8.json").resolve()),
-       "--concurrency","2","--codec","h264","--crf","19"],
+       "--concurrency","1","--codec","h264","--crf","19"],
        cwd=ROOT/"motion-remotion",text=True,capture_output=True,timeout=3600)
     if proc.returncode:
         print("[OTAKU V8] REMOTION_STDERR: "+proc.stderr[-1700:],file=sys.stderr)
