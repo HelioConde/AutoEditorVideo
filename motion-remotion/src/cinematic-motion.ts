@@ -6,7 +6,7 @@
  * tiny in-place transform, while the whole frame has a cinematic camera move.
  * First frame retains the exact approved scene preview.
  */
-export type AnimationMode='cinematica'|'desligada'|'esqueleto2d'|'malha2d'|'pins2d';
+export type AnimationMode='cinematica'|'desligada'|'esqueleto2d'|'malha2d'|'pins2d'|'brush2d';
 export type ShotProfile='establish'|'duel'|'king'|'reaction'|'reply'|'final';
 
 type Camera={zoom:number;panX:number;panY:number;fill:number;focus:number;breath:number;lighting:number};
@@ -45,7 +45,7 @@ export const motionAtFrame=(
     frame:number,startFrame:number,endFrame:number,
     shotType:string|undefined,sceneId:string,
     mode:AnimationMode='cinematica'):Camera=>{
-  if(mode==='desligada'||mode==='malha2d'||mode==='pins2d')return {zoom:1,panX:0,panY:0,fill:0,focus:0,breath:0,lighting:0};
+  if(mode==='desligada'||mode==='malha2d'||mode==='pins2d'||mode==='brush2d')return {zoom:1,panX:0,panY:0,fill:0,focus:0,breath:0,lighting:0};
   const duration=Math.max(1,endFrame-startFrame);
   const t=clamp((frame-startFrame)/duration,0,1);
   const smooth=ease(t);
