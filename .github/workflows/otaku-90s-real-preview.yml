@@ -20,7 +20,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'test(editor): run ONE real AutoEditorVideo Death Note 90s preview (no YouTube)'
+      github.event.head_commit.message == 'test(editor): retry ONE real AutoEditorVideo 90s preview after safe preflight fix'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
