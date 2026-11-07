@@ -44,6 +44,28 @@ def test_explicit_authorization_cannot_unlock_publishing_or_old_queue():
     assert pause["pause_requested"] and not pause["authorized_public"]
     assert not pause["resume_authorized_after_maintenance"]
 
+def test_saved_original_artifact_requires_zero_new_images_and_same_protected_one_shot():
+    env={**ENV,"MAX_IMAGE_CALLS":"0","OTAKU_V6_REUSE_ARTIFACT":v6.CACHED_SOURCE_RUN}
+    row=v6.check_env(env)
+    assert row["anime"]=="Death Note"
+    assert len(v6.CACHED_ORIGINAL_SHA256)==22  # 20 PNGs, original TTS and markers
+    assert sum(n.startswith("pose-") for n in v6.CACHED_ORIGINAL_SHA256)==10
+    assert sum(n.startswith("background-") for n in v6.CACHED_ORIGINAL_SHA256)==10
+    for invalid in (
+        {**env,"MAX_IMAGE_CALLS":"20"},
+        {**env,"OTAKU_V6_REUSE_ARTIFACT":"unverified"},
+        {**env,"GITHUB_EVENT_NAME":"workflow_dispatch"},
+        {**env,"GITHUB_RUN_ATTEMPT":"2"},
+    ):
+        with pytest.raises(v6.V6Blocked):
+            v6.check_env(invalid)
+    source=(ROOT/"scripts/otaku_multicena_90s_v6_preview.py").read_text(encoding="utf-8")
+    assert 'repaired=[WORK/"pose-01-1.png",WORK/"pose-03-2.png"]' in source
+    assert 'repair_report=inspect_poses(repaired)' in source
+    assert 'reused_from_original_shot' in source
+    assert 'new_paid_image_calls' in source
+
+
 def test_storyboard_is_varied_and_creates_real_pose_pairs_without_fake_fallback():
     assert v6.SCENES==10 and v6.ART_REQUESTS==20
     assert v6.ANIMATED_SHOTS==(0,2,4,6,8)
