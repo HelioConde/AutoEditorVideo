@@ -2,6 +2,8 @@
 
 **Data:** 06/11/2026 · **Canal:** Otaku Multicena BR · **Situação:** somente planejamento editorial, sem geração de imagens, narração, MP4 ou upload.
 
+> **Limite da conferência:** os 17 animes preservados são os identificados nos registros de publicação disponíveis no GitHub. O painel informou 69 vídeos, mas não foi possível listar integralmente os uploads atuais pelo vidIQ (créditos insuficientes; nenhuma cobrança). Portanto, as seis exclusões são **provisórias, reversíveis e somente desta lista**. Se um deles aparecer entre os vídeos já publicados, deverá retornar à seleção sem excluir a franquia publicada. Nenhum vídeo, registro ou arquivo antigo foi apagado.
+
 ## O que foi preservado
 
 - As **45 publicações com comprovantes** do lote 50→1, incluindo todos os seus IDs, títulos, roteiros, capas e registros de envio. Os episódios 01–05 continuam pendentes e pausados.
