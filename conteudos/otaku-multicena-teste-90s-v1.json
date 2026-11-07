@@ -63,7 +63,7 @@
           "end": 81
         },
         {
-          "name": "fechamento",
+          "name": "resultado",
           "start": 81,
           "end": 90
         }
@@ -98,21 +98,30 @@
         },
         {
           "role": "resposta",
-          "text": "Por isso, a resposta é mais interessante do que parece. Light não precisava conquistar uma amizade verdadeira. Precisava manter sua presença dentro do jogo, onde pudesse antecipar movimentos sem entregar a própria identidade. Quanto mais próximos ficavam, mais perigoso era o próximo erro.",
-          "word_count": 43
+          "text": "Cada nova prova deixava a situação mais delicada. Se Light parecesse interessado demais, levantaria suspeitas. Se fingisse desinteresse, perderia informações. Naquela investigação, até uma conversa simples podia se transformar numa armadilha planejada com cuidado.",
+          "word_count": 34
         },
         {
-          "role": "fechamento",
-          "text": "E você? Nesse duelo, quem controlava melhor a situação: Light ou L?",
-          "word_count": 12
+          "role": "resultado",
+          "text": "Light se aproximou para acompanhar os passos de L e antecipar armadilhas. Mas L nunca deixou de suspeitar dele.",
+          "word_count": 19
         }
       ],
-      "narration_script": "Light aproximou-se de L por QUÊ?! Em Death Note, Light não enfrenta um inimigo comum. L é brilhante, suspeita dele desde cedo e transforma cada conversa numa disputa de informações. O desafio de Light não era apenas esconder o caderno: precisava descobrir quem L realmente era, entender suas provas e continuar parecendo inocente. Quando Light entra na investigação, o risco aumenta. Cada pergunta pode revelar algo, e qualquer comportamento fora do normal desperta desconfiança. Ao mesmo tempo, ficar perto de L dá acesso a pistas sobre o que a polícia sabe, quais suspeitas ganharam força e quais erros o adversário está tentando provocar. Mas aqui está o paradoxo: trabalhar com L não significava que L confiava totalmente nele. Na verdade, os dois continuavam se observando. Light tentava parecer indispensável, enquanto L procurava uma contradição capaz de expor Kira. Essa proximidade era uma vantagem e uma armadilha para ambos. Por isso, a resposta é mais interessante do que parece. Light não precisava conquistar uma amizade verdadeira. Precisava manter sua presença dentro do jogo, onde pudesse antecipar movimentos sem entregar a própria identidade. Quanto mais próximos ficavam, mais perigoso era o próximo erro. E você? Nesse duelo, quem controlava melhor a situação: Light ou L?",
-      "word_count": 203,
-      "estimated_seconds_at_150_wpm": 81.2,
+      "narration_script": "Light aproximou-se de L por QUÊ?! Em Death Note, Light não enfrenta um inimigo comum. L é brilhante, suspeita dele desde cedo e transforma cada conversa numa disputa de informações. O desafio de Light não era apenas esconder o caderno: precisava descobrir quem L realmente era, entender suas provas e continuar parecendo inocente. Quando Light entra na investigação, o risco aumenta. Cada pergunta pode revelar algo, e qualquer comportamento fora do normal desperta desconfiança. Ao mesmo tempo, ficar perto de L dá acesso a pistas sobre o que a polícia sabe, quais suspeitas ganharam força e quais erros o adversário está tentando provocar. Mas aqui está o paradoxo: trabalhar com L não significava que L confiava totalmente nele. Na verdade, os dois continuavam se observando. Light tentava parecer indispensável, enquanto L procurava uma contradição capaz de expor Kira. Essa proximidade era uma vantagem e uma armadilha para ambos. Cada nova prova deixava a situação mais delicada. Se Light parecesse interessado demais, levantaria suspeitas. Se fingisse desinteresse, perderia informações. Naquela investigação, até uma conversa simples podia se transformar numa armadilha planejada com cuidado. Light se aproximou para acompanhar os passos de L e antecipar armadilhas. Mas L nunca deixou de suspeitar dele.",
+      "word_count": 201,
+      "estimated_seconds_at_150_wpm": 80.4,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 2,
@@ -158,7 +167,7 @@
           "end": 81
         },
         {
-          "name": "fechamento",
+          "name": "resultado",
           "start": 81,
           "end": 90
         }
@@ -193,21 +202,30 @@
         },
         {
           "role": "resposta",
-          "text": "É isso que torna a premissa tão forte: Johnny não entra simplesmente para provar que consegue vencer uma corrida. Ele está atrás da possibilidade de recuperar um caminho para a própria vida. E, a cada obstáculo, a pergunta muda: o que significa avançar quando tudo parece parado?",
-          "word_count": 47
+          "text": "A cada etapa, a distância física importa menos do que a sensação de avançar pela primeira vez desde o acidente. Johnny passa a olhar para Gyro de outra maneira e percebe que o maior prêmio talvez nem esteja na linha de chegada.",
+          "word_count": 42
         },
         {
-          "role": "fechamento",
-          "text": "Você acompanharia Gyro e Johnny até a linha de chegada?",
-          "word_count": 10
+          "role": "resultado",
+          "text": "Johnny entrou porque Gyro e a técnica do Spin representavam uma possibilidade de recuperar o controle sobre o próprio corpo.",
+          "word_count": 20
         }
       ],
-      "narration_script": "Johnny correu sem conseguir ANDAR?! Em Steel Ball Run, Johnny Joestar foi um jóquei famoso antes de um acontecimento que mudou completamente sua vida. A perda da capacidade de andar também abalou sua confiança e seu futuro. Participar de uma travessia gigantesca parecia uma decisão absurda, especialmente quando cada etapa podia ser perigosa até para competidores experientes. Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Johnny percebe algo inesperado e passa a enxergar naquela habilidade a possibilidade de compreender o próprio corpo de outra forma. A corrida deixa de ser apenas uma competição por dinheiro ou prestígio. Para ele, cada avanço representa uma chance de descobrir algo que parecia perdido. Só que Gyro não entrega respostas prontas. Johnny precisa observar, experimentar, falhar e voltar a tentar. Ao longo do caminho, os dois encontram rivais e situações que exigem estratégia, não só velocidade. A relação entre eles se transforma numa parte essencial da jornada. É isso que torna a premissa tão forte: Johnny não entra simplesmente para provar que consegue vencer uma corrida. Ele está atrás da possibilidade de recuperar um caminho para a própria vida. E, a cada obstáculo, a pergunta muda: o que significa avançar quando tudo parece parado? Você acompanharia Gyro e Johnny até a linha de chegada?",
-      "word_count": 215,
-      "estimated_seconds_at_150_wpm": 86,
+      "narration_script": "Johnny correu sem conseguir ANDAR?! Em Steel Ball Run, Johnny Joestar foi um jóquei famoso antes de um acontecimento que mudou completamente sua vida. A perda da capacidade de andar também abalou sua confiança e seu futuro. Participar de uma travessia gigantesca parecia uma decisão absurda, especialmente quando cada etapa podia ser perigosa até para competidores experientes. Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Johnny percebe algo inesperado e passa a enxergar naquela habilidade a possibilidade de compreender o próprio corpo de outra forma. A corrida deixa de ser apenas uma competição por dinheiro ou prestígio. Para ele, cada avanço representa uma chance de descobrir algo que parecia perdido. Só que Gyro não entrega respostas prontas. Johnny precisa observar, experimentar, falhar e voltar a tentar. Ao longo do caminho, os dois encontram rivais e situações que exigem estratégia, não só velocidade. A relação entre eles se transforma numa parte essencial da jornada. A cada etapa, a distância física importa menos do que a sensação de avançar pela primeira vez desde o acidente. Johnny passa a olhar para Gyro de outra maneira e percebe que o maior prêmio talvez nem esteja na linha de chegada. Johnny entrou porque Gyro e a técnica do Spin representavam uma possibilidade de recuperar o controle sobre o próprio corpo.",
+      "word_count": 220,
+      "estimated_seconds_at_150_wpm": 88,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 3,
@@ -253,7 +271,7 @@
           "end": 81
         },
         {
-          "name": "fechamento",
+          "name": "resultado",
           "start": 81,
           "end": 90
         }
@@ -288,21 +306,30 @@
         },
         {
           "role": "resposta",
-          "text": "A resposta está no que Rengoku acredita sobre a própria força. Para ele, proteger os outros não é um gesto ocasional. É parte de quem decidiu ser. E sua determinação marca profundamente Tanjiro e os companheiros.",
-          "word_count": 36
+          "text": "Tanjiro e os companheiros veem naquela batalha muito mais do que golpes e técnicas. Percebem o peso das escolhas de um Hashira e entendem por que os ensinamentos de Rengoku continuam importantes depois do confronto.",
+          "word_count": 35
         },
         {
-          "role": "fechamento",
-          "text": "Qual momento de Rengoku mais ficou na sua memória?",
-          "word_count": 9
+          "role": "resultado",
+          "text": "Rengoku continuou porque proteger os passageiros e seus companheiros era mais importante para ele do que salvar a si mesmo.",
+          "word_count": 20
         }
       ],
-      "narration_script": "Rengoku lutou até o LIMITE. Por quê?! Em Demon Slayer, o Hashira das Chamas tem uma responsabilidade enorme: proteger pessoas ameaçadas por demônios. No arco do Trem Infinito, ele enfrenta uma situação em que a segurança de muitos passageiros depende de decisões rápidas. Não basta possuir uma técnica poderosa. É preciso saber por quem e por que lutar. Rengoku demonstra coragem, mas o detalhe mais marcante não é a ausência de medo. É o compromisso que carrega mesmo quando o confronto fica muito difícil. Ele leva a sério o papel de Hashira, se preocupa com os mais fracos e entende que sua força tem uma finalidade. Isso dá outro significado às cenas de ação. Quando surge um adversário muito perigoso, a batalha passa a ser também um teste de princípios. Rengoku poderia pensar somente em sobreviver. Em vez disso, coloca sua missão em primeiro lugar. A história não diz que vencer é fácil; mostra que nem todo resultado pode ser medido apenas por quem permanece de pé. A resposta está no que Rengoku acredita sobre a própria força. Para ele, proteger os outros não é um gesto ocasional. É parte de quem decidiu ser. E sua determinação marca profundamente Tanjiro e os companheiros. Qual momento de Rengoku mais ficou na sua memória?",
-      "word_count": 212,
-      "estimated_seconds_at_150_wpm": 84.8,
+      "narration_script": "Rengoku lutou até o LIMITE. Por quê?! Em Demon Slayer, o Hashira das Chamas tem uma responsabilidade enorme: proteger pessoas ameaçadas por demônios. No arco do Trem Infinito, ele enfrenta uma situação em que a segurança de muitos passageiros depende de decisões rápidas. Não basta possuir uma técnica poderosa. É preciso saber por quem e por que lutar. Rengoku demonstra coragem, mas o detalhe mais marcante não é a ausência de medo. É o compromisso que carrega mesmo quando o confronto fica muito difícil. Ele leva a sério o papel de Hashira, se preocupa com os mais fracos e entende que sua força tem uma finalidade. Isso dá outro significado às cenas de ação. Quando surge um adversário muito perigoso, a batalha passa a ser também um teste de princípios. Rengoku poderia pensar somente em sobreviver. Em vez disso, coloca sua missão em primeiro lugar. A história não diz que vencer é fácil; mostra que nem todo resultado pode ser medido apenas por quem permanece de pé. Tanjiro e os companheiros veem naquela batalha muito mais do que golpes e técnicas. Percebem o peso das escolhas de um Hashira e entendem por que os ensinamentos de Rengoku continuam importantes depois do confronto. Rengoku continuou porque proteger os passageiros e seus companheiros era mais importante para ele do que salvar a si mesmo.",
+      "word_count": 222,
+      "estimated_seconds_at_150_wpm": 88.8,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 4,
@@ -348,7 +375,7 @@
           "end": 81
         },
         {
-          "name": "fechamento",
+          "name": "resultado",
           "start": 81,
           "end": 90
         }
@@ -383,21 +410,30 @@
         },
         {
           "role": "resposta",
-          "text": "Por isso essa mudança funciona tão bem na história: um acontecimento doméstico simples cria um conflito enorme para quem está apaixonado. Eles estão mais perto fisicamente, mas ainda precisam aprender a se entender de verdade.",
-          "word_count": 35
+          "text": "Para Taiki, a convivência traz uma pressão inesperada: estar perto de Chinatsu sem perder a concentração nos treinos. Para ela, cada dia no Japão representa a oportunidade de continuar perseguindo um sonho que não queria abandonar.",
+          "word_count": 36
         },
         {
-          "role": "fechamento",
-          "text": "Você conseguiria treinar normalmente morando com seu maior crush?",
-          "word_count": 9
+          "role": "resultado",
+          "text": "Chinatsu passou a morar com a família de Taiki para seguir treinando no Japão enquanto seus pais se mudavam para o exterior.",
+          "word_count": 22
         }
       ],
-      "narration_script": "Chinatsu foi morar com Taiki?! Blue Box acompanha Taiki, um estudante dedicado ao badminton, e Chinatsu, uma atleta de basquete que ele admira. Os dois se encontram no ambiente de treino, cercados por metas, horários apertados e a vontade de melhorar a cada dia. Para Taiki, estar perto dela já era motivo suficiente para ficar nervoso. Então acontece algo inesperado: os pais de Chinatsu precisam se mudar para o exterior, mas ela deseja continuar no Japão, perto da escola e dos treinos. Por uma ligação entre as famílias, surge a possibilidade de ficar na casa de Taiki. De repente, aquela pessoa que ele via na quadra passa a dividir parte da rotina familiar. O detalhe importante é que isso não transforma tudo em romance instantâneo. Chinatsu continua focada em seus objetivos, e Taiki também precisa levar o badminton a sério. A convivência aproxima os dois, mas aumenta a dificuldade de falar sobre sentimentos sem interferir na relação e nos sonhos de cada um. Por isso essa mudança funciona tão bem na história: um acontecimento doméstico simples cria um conflito enorme para quem está apaixonado. Eles estão mais perto fisicamente, mas ainda precisam aprender a se entender de verdade. Você conseguiria treinar normalmente morando com seu maior crush?",
-      "word_count": 207,
-      "estimated_seconds_at_150_wpm": 82.8,
+      "narration_script": "Chinatsu foi morar com Taiki?! Blue Box acompanha Taiki, um estudante dedicado ao badminton, e Chinatsu, uma atleta de basquete que ele admira. Os dois se encontram no ambiente de treino, cercados por metas, horários apertados e a vontade de melhorar a cada dia. Para Taiki, estar perto dela já era motivo suficiente para ficar nervoso. Então acontece algo inesperado: os pais de Chinatsu precisam se mudar para o exterior, mas ela deseja continuar no Japão, perto da escola e dos treinos. Por uma ligação entre as famílias, surge a possibilidade de ficar na casa de Taiki. De repente, aquela pessoa que ele via na quadra passa a dividir parte da rotina familiar. O detalhe importante é que isso não transforma tudo em romance instantâneo. Chinatsu continua focada em seus objetivos, e Taiki também precisa levar o badminton a sério. A convivência aproxima os dois, mas aumenta a dificuldade de falar sobre sentimentos sem interferir na relação e nos sonhos de cada um. Para Taiki, a convivência traz uma pressão inesperada: estar perto de Chinatsu sem perder a concentração nos treinos. Para ela, cada dia no Japão representa a oportunidade de continuar perseguindo um sonho que não queria abandonar. Chinatsu passou a morar com a família de Taiki para seguir treinando no Japão enquanto seus pais se mudavam para o exterior.",
+      "word_count": 221,
+      "estimated_seconds_at_150_wpm": 88.4,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 5,
@@ -443,7 +479,7 @@
           "end": 81
         },
         {
-          "name": "fechamento",
+          "name": "resultado",
           "start": 81,
           "end": 90
         }
@@ -478,21 +514,30 @@
         },
         {
           "role": "resposta",
-          "text": "A resposta está na mistura de curiosidade, experiência e responsabilidade. Maomao quer compreender o problema e evitar consequências piores. Sua inteligência funciona melhor quando ela reconhece não só o que precisa investigar, mas também com quem deve conversar.",
-          "word_count": 38
+          "text": "Ela precisa avaliar a gravidade de cada detalhe antes de falar. O problema é que uma pista pode incomodar alguém poderoso, enquanto o silêncio também pode provocar consequências graves. Maomao precisa reconhecer o momento certo de agir.",
+          "word_count": 37
         },
         {
-          "role": "fechamento",
-          "text": "Você confiaria numa pista de Maomao mesmo contra a opinião do palácio?",
-          "word_count": 12
+          "role": "resultado",
+          "text": "Maomao arrisca porque uma pista ignorada pode colocar alguém em perigo. Para ela, descobrir a verdade tem consequências reais.",
+          "word_count": 19
         }
       ],
-      "narration_script": "Maomao arriscava tudo por uma pista?! Em The Apothecary Diaries, Maomao conhece remédios, venenos e sinais que passam despercebidos pela maioria das pessoas. Quando começa a trabalhar perto da corte imperial, descobre um ambiente em que até um detalhe pequeno pode ter consequências enormes. Uma informação aparentemente simples pode tocar em disputas de poder. O talento dela não está em usar magia ou adivinhar respostas. Maomao observa sintomas, compara possibilidades e procura uma explicação que faça sentido. Só que investigar não é apenas uma questão técnica. No palácio, apontar um erro pode constranger pessoas influentes. Dizer a verdade na hora errada também pode colocar alguém em perigo. É aqui que nasce o paradoxo. Maomao tenta manter um perfil discreto, mas a própria curiosidade chama atenção. Quanto mais ela demonstra conhecimento, mais pessoas passam a depender de suas descobertas. Ela sabe que nem todo mistério deveria ser tratado como brincadeira, mas encontra dificuldade em ignorar uma pista intrigante. A resposta está na mistura de curiosidade, experiência e responsabilidade. Maomao quer compreender o problema e evitar consequências piores. Sua inteligência funciona melhor quando ela reconhece não só o que precisa investigar, mas também com quem deve conversar. Você confiaria numa pista de Maomao mesmo contra a opinião do palácio?",
-      "word_count": 207,
-      "estimated_seconds_at_150_wpm": 82.8,
+      "narration_script": "Maomao arriscava tudo por uma pista?! Em The Apothecary Diaries, Maomao conhece remédios, venenos e sinais que passam despercebidos pela maioria das pessoas. Quando começa a trabalhar perto da corte imperial, descobre um ambiente em que até um detalhe pequeno pode ter consequências enormes. Uma informação aparentemente simples pode tocar em disputas de poder. O talento dela não está em usar magia ou adivinhar respostas. Maomao observa sintomas, compara possibilidades e procura uma explicação que faça sentido. Só que investigar não é apenas uma questão técnica. No palácio, apontar um erro pode constranger pessoas influentes. Dizer a verdade na hora errada também pode colocar alguém em perigo. É aqui que nasce o paradoxo. Maomao tenta manter um perfil discreto, mas a própria curiosidade chama atenção. Quanto mais ela demonstra conhecimento, mais pessoas passam a depender de suas descobertas. Ela sabe que nem todo mistério deveria ser tratado como brincadeira, mas encontra dificuldade em ignorar uma pista intrigante. Ela precisa avaliar a gravidade de cada detalhe antes de falar. O problema é que uma pista pode incomodar alguém poderoso, enquanto o silêncio também pode provocar consequências graves. Maomao precisa reconhecer o momento certo de agir. Maomao arrisca porque uma pista ignorada pode colocar alguém em perigo. Para ela, descobrir a verdade tem consequências reais.",
+      "word_count": 213,
+      "estimated_seconds_at_150_wpm": 85.2,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 6,
@@ -555,7 +600,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 7,
@@ -618,7 +672,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 8,
@@ -681,7 +744,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 9,
@@ -744,7 +816,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 10,
@@ -807,7 +888,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 11,
@@ -870,7 +960,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 12,
@@ -933,7 +1032,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 13,
@@ -996,7 +1104,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 14,
@@ -1059,7 +1176,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 15,
@@ -1122,7 +1248,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 16,
@@ -1185,7 +1320,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 17,
@@ -1248,7 +1392,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 18,
@@ -1311,7 +1464,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 19,
@@ -1374,7 +1536,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 20,
@@ -1437,7 +1608,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 21,
@@ -1500,7 +1680,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 22,
@@ -1563,7 +1752,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 23,
@@ -1626,7 +1824,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 24,
@@ -1689,7 +1896,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 25,
@@ -1752,7 +1968,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 26,
@@ -1815,7 +2040,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 27,
@@ -1878,7 +2112,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 28,
@@ -1941,7 +2184,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 29,
@@ -2004,7 +2256,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 30,
@@ -2067,7 +2328,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 31,
@@ -2130,7 +2400,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 32,
@@ -2193,7 +2472,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 33,
@@ -2256,7 +2544,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 34,
@@ -2319,7 +2616,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 35,
@@ -2382,7 +2688,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 36,
@@ -2445,7 +2760,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 37,
@@ -2508,7 +2832,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 38,
@@ -2571,7 +2904,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 39,
@@ -2634,7 +2976,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 40,
@@ -2697,7 +3048,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 41,
@@ -2760,7 +3120,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 42,
@@ -2823,7 +3192,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 43,
@@ -2886,7 +3264,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 44,
@@ -2949,7 +3336,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 45,
@@ -3012,7 +3408,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 46,
@@ -3075,7 +3480,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 47,
@@ -3138,7 +3552,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 48,
@@ -3201,7 +3624,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 49,
@@ -3264,7 +3696,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     },
     {
       "rank": 50,
@@ -3327,7 +3768,16 @@
       "word_count": 0,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
-      "target_shot_count": 10
+      "target_shot_count": 10,
+      "ending_policy": "answer_only_no_cta",
+      "narration_style": "direct_factual_storytelling_natural_ptbr",
+      "outro_music_or_logo_speech": false,
+      "speech_direction": {
+        "voice": "português brasileiro natural e envolvente, sem locução publicitária ou gritos",
+        "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
+        "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
+        "no_closing_cta": true
+      }
     }
   ],
   "visual_timing_reference": {
@@ -3401,11 +3851,29 @@
       {
         "start": 81,
         "end": 90,
-        "role": "fechamento",
+        "role": "resultado",
         "shot": "final",
         "number": 10
       }
     ]
   },
-  "completion_policy": "Os 50 animes possuem alvo 90s; apenas cinco roteiros completos foram escritos nesta fase. Nenhum vídeo de 90s deve ser produzido/publicado sem revisão e medição real de TTS."
+  "completion_policy": "Os 50 animes possuem alvo 90s; apenas cinco roteiros completos foram escritos nesta fase. Nenhum vídeo de 90s deve ser produzido/publicado sem revisão e medição real de TTS.",
+  "ending_policy": {
+    "type": "result_only",
+    "no_spoken_cta": true,
+    "no_request_like_subscribe_comment_share_follow": true,
+    "no_end_question": true,
+    "no_channel_signoff": true,
+    "last_beat": "entregar a resposta específica ao mistério ou consequência principal, sem pedido de ação",
+    "scope": "todos os 50 novos roteiros 90s",
+    "prior_published_videos_unchanged": true
+  },
+  "narration_policy": {
+    "hook": "frase concreta com curiosidade nas primeiras palavras",
+    "development": "narrativa humana com fatos e ações específicas; contexto enxuto, tensão crescente",
+    "rehook": "virada natural ligada à história, sem promessas vazias",
+    "last_seconds": "resultado exato ou conclusão emocional; terminar com ponto final, sem perguntas",
+    "voice": "PT-BR expressivo sem exagerar volume, pausas naturais; pronúncia e tempo real ainda precisam de TTS e QA",
+    "no_silent_padding": true
+  }
 }
