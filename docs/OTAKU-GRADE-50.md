@@ -1,5 +1,8 @@
 # Grade de 50 Shorts — Otaku Multicena
 
+> **CURADORIA ATUAL — 06/11/2026:** esta grade é um registro histórico, não a nova seleção recomendada. A nova lista editorial de **50 animes diferentes**, organizada por retenção, inscritos e tendências, está em [OTAKU-MULTICENA-50-ANIMES-CURADORIA-V4.md](OTAKU-MULTICENA-50-ANIMES-CURADORIA-V4.md) e em [conteudos/otaku-multicena-animes-50-curadoria-v4.json](../conteudos/otaku-multicena-animes-50-curadoria-v4.json). **Não execute comandos antigos de geração/publicação durante a manutenção.** Os 45 comprovantes já existentes e os registros de outros vídeos publicados permanecem protegidos; a curadoria V4 não é uma fila de uploads e não substitui arquivos/IDs antigos.
+
+
 **Status:** 50 roteiros + títulos + ganchos + capas + descrições registrados no
 GitHub. **Nenhum dos 50 Shorts foi gerado ou publicado por este cadastro.**
 A geração de PNG/voz/MP4 e o upload OAuth só rodam no computador Windows do
