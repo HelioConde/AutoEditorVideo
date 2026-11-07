@@ -101,7 +101,7 @@ def build(row:dict)->dict:
     checks=[]
     paths=[]
     keyframes=(0,48,72,105,135,159,180,210,239)
-    for n in range(BRUSH_FPS*SECONDS):
+    for n in range(int(BRUSH_FPS*SECONDS)):
         second=n/BRUSH_FPS
         current=animator.warp(original,second)
         name=f"brush-{n:03d}.webp"
