@@ -30,7 +30,10 @@
     "channel_identity_check": true,
     "music": "only cleared original/royalty-free; no content ID claims",
     "kids_made_for_kids": true,
-    "never_run_br": true
+    "never_run_br": true,
+    "kids_no_engagement_calls": true,
+    "kids_original_standalone_no_fofinhos": true,
+    "kids_real_duration_validation_required": true
   },
   "research_note": "vidIQ trending videos queried 2026-11-07; headings indicate topic interest, not guaranteed audience response. Official Black Clover & Apothecary sources linked. Existing private gamer/alchemy uploads must not be re-uploaded. Roblox obby 2026-11-02 trend independently validated with vidIQ. Trending signals do not prove video performance.",
   "episodes": [
@@ -1042,104 +1045,226 @@
       }
     },
     {
-      "id": "kids-20261107-fofinhos-flor",
+      "id": "kids-20261107-elefantinho-agua-escondida",
       "channel": "kids",
       "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
       "language": "pt-BR",
       "visibility_intent": "private_after_verified_QA",
       "status": "script_draft_not_rendered",
       "made_for_kids": true,
-      "title": "Fofinhos: A Flor que Precisava de Água 🌸💧",
-      "cover_text": "A FLOR COM SEDE",
-      "description": "No jardim dos Fofinhos, Emanuelly encontra uma flor que precisa de cuidado. Com delicadeza, Fofinho e sua amiga descobrem que ajudar também é observar e ter paciência. História original, tranquila e apropriada para crianças.\n\n#Fofinhos #DesenhoInfantil #HistoriasInfantis",
+      "title": "O Elefantinho e a Água Escondida 🐘💧 | História Infantil",
+      "cover_text": "CADÊ A ÁGUA?",
+      "description": "O elefantinho Tito encontra um riacho quase seco e resolve investigar para ajudar seus amigos. Uma história infantil original sobre trabalho em equipe, paciência e cuidado com a natureza, contada com imagens ilustradas e narração acolhedora.\n\nHistória fictícia, com personagens originais. Conteúdo infantil com ilustrações geradas por IA.\n\n#HistoriaInfantil #AnimaisParaCriancas #DesenhoInfantil #EmanuellyKids",
       "hashtags": [
-        "#Fofinhos",
+        "#HistoriaInfantil",
+        "#AnimaisParaCriancas",
         "#DesenhoInfantil",
-        "#HistoriasInfantis"
+        "#EmanuellyKids"
       ],
       "tags": [
-        "Fofinhos",
-        "Emanuelly Kids",
         "história infantil",
+        "elefantinho",
+        "história de animais",
         "desenho infantil",
-        "flor com sede",
-        "cuidar das plantas",
+        "animais para crianças",
+        "aventura infantil",
         "amizade",
+        "trabalho em equipe",
+        "historinha para crianças",
+        "Emanuelly Kids",
+        "história educativa",
+        "elefante"
+      ],
+      "format": "história original de aventura e cooperação",
+      "voice_style": "acolhedora_lenta",
+      "narration_script": "Era uma manhã ensolarada quando Tito, um elefantinho curioso, acordou com vontade de brincar. Ele correu até o pequeno riacho da floresta, mas encontrou apenas algumas gotinhas brilhando entre as pedras. Onde teria ido parar a água? Tito olhou ao redor. A coelhinha Bela queria beber, e o passarinho Lilo procurava uma poça para tomar banho. O elefantinho ficou preocupado, mas logo teve uma ideia. Em vez de adivinhar, ele decidiu seguir o caminho do riacho. Pelo caminho, Tito encontrou folhas grandes, flores amarelas e marcas de água na terra. O som de um fio de água vinha de trás de algumas pedras. O elefantinho chegou mais perto, com passos bem cuidadosos. Atrás das pedras, um monte de galhos e folhas caídas havia desviado o pequeno fluxo para uma poça escondida. Tito tentou mover um galhinho, mas percebeu que seria melhor pedir ajuda. Ele chamou Bela e Lilo, que vieram correndo. Juntos, os amigos afastaram apenas os galhos soltos do caminho, sem mexer nas pedras pesadas. Lilo mostrou por onde a água passava. Bela organizou as folhas do lado de fora. Tito observou, esperando a água encontrar seu caminho. Primeiro surgiu uma gotinha. Depois, um fio de água deslizou pelo chão. Logo o riacho voltou a correr suavemente até o jardim. Tito abriu um sorriso enorme! Os amigos comemoraram, mas continuaram deixando o lugar limpo e seguro. A coelhinha bebeu um pouco de água fresquinha. O passarinho molhou as peninhas na beiradinha rasa, enquanto Tito descansou à sombra de uma árvore. O elefantinho percebeu que não precisava resolver tudo sozinho para fazer a diferença. Quando a tarde chegou, Tito olhou para o riacho brilhando ao sol. Ele tinha encontrado a água escondida, mas descoberto algo ainda mais bonito: quando os amigos observam, conversam e se ajudam, até um problema grande pode ficar menor.",
+      "narration_word_count": 303,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 105,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [
+        "https://www.youtube.com/watch?v=VHhK5Vs2foQ"
+      ],
+      "scene_policy": "8 original static illustrations; hard cuts/crossfade clean only; avoid character motion/rig/morph/warp or shaky camera; quiz silhouette reveal using two stills",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Era uma manhã ensolarada quando Tito, um elefantinho curioso, acordou com vontade de brincar. Ele correu até o pequeno riacho da floresta, mas encontrou apenas algumas gotinhas brilhando entre as pedras. Onde teria ido parar a água?",
+          "visual_instruction": "Ilustração 2D original de livro infantil; elefantinho Tito cinza-claro de orelhas grandes e olhos castanhos, manhã no riacho quase seco da floresta, corpo inteiro no quadro",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Tito olhou ao redor. A coelhinha Bela queria beber, e o passarinho Lilo procurava uma poça para tomar banho. O elefantinho ficou preocupado, mas logo teve uma ideia. Em vez de adivinhar, ele decidiu seguir o caminho do riacho.",
+          "visual_instruction": "Mesma aparência de Tito; coelhinha Bela branca e passarinho Lilo amarelo observam riacho raso; expressões acolhedoras",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Pelo caminho, Tito encontrou folhas grandes, flores amarelas e marcas de água na terra. O som de um fio de água vinha de trás de algumas pedras. O elefantinho chegou mais perto, com passos bem cuidadosos.",
+          "visual_instruction": "Tito segue marcas úmidas, passa por flores amarelas, encontra sons atrás de pedras, plano amplo estático",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Atrás das pedras, um monte de galhos e folhas caídas havia desviado o pequeno fluxo para uma poça escondida. Tito tentou mover um galhinho, mas percebeu que seria melhor pedir ajuda. Ele chamou Bela e Lilo, que vieram correndo.",
+          "visual_instruction": "Pequeno riacho desviado por folhas e galhos soltos; três amigos reconhecem a situação com cuidado",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Juntos, os amigos afastaram apenas os galhos soltos do caminho, sem mexer nas pedras pesadas. Lilo mostrou por onde a água passava. Bela organizou as folhas do lado de fora. Tito observou, esperando a água encontrar seu caminho.",
+          "visual_instruction": "Plano estático dos três amigos colaborando apenas com galhos leves e folhas; sem perigo nem arrastar pedras pesadas",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Primeiro surgiu uma gotinha. Depois, um fio de água deslizou pelo chão. Logo o riacho voltou a correr suavemente até o jardim. Tito abriu um sorriso enorme! Os amigos comemoraram, mas continuaram deixando o lugar limpo e seguro.",
+          "visual_instruction": "Água volta a correr em riacho raso, jardim iluminado e amigos felizes com anatomia consistente",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false
+        },
+        {
+          "number": 7,
+          "editorial_beat": "A coelhinha bebeu um pouco de água fresquinha. O passarinho molhou as peninhas na beiradinha rasa, enquanto Tito descansou à sombra de uma árvore. O elefantinho percebeu que não precisava resolver tudo sozinho para fazer a diferença.",
+          "visual_instruction": "Amigos descansam em segurança à beira do riacho, coelhinha e passarinho usando água de maneira natural",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Quando a tarde chegou, Tito olhou para o riacho brilhando ao sol. Ele tinha encontrado a água escondida, mas descoberto algo ainda mais bonito: quando os amigos observam, conversam e se ajudam, até um problema grande pode ficar menor.",
+          "visual_instruction": "Plano final amplo do riacho restabelecido, Tito sorri e a floresta tem luz de fim de tarde",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false
+        }
+      ],
+      "ai_disclosure": "Fictional story or educational original illustration; no Fofinhos assets used",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "frame_qa": "not_started",
+        "thumbnail": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "kids-20261107-quiz-sombras-animais",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "language": "pt-BR",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": true,
+      "title": "Adivinhe o ANIMAL pela Sombra! 🐾 | 6 Desafios Infantis",
+      "cover_text": "QUE ANIMAL É?",
+      "description": "Seis animais escondidos e várias pistas divertidas. A brincadeira mostra uma sombra, conta duas características e dá um tempinho para pensar antes de revelar a resposta. Quiz visual original para crianças com animais reais e ilustrações próprias.\n\nConteúdo infantil com imagens ilustrativas originais geradas por IA.\n\n#QuizInfantil #AdivinheOAnimal #Animais #EmanuellyKids",
+      "hashtags": [
+        "#QuizInfantil",
+        "#AdivinheOAnimal",
+        "#Animais",
+        "#EmanuellyKids"
+      ],
+      "tags": [
+        "adivinhe o animal",
+        "quiz infantil",
+        "quiz de animais",
+        "animais para crianças",
+        "brincadeira de adivinhar",
+        "sombra dos animais",
         "educação infantil",
-        "histórias para crianças",
-        "aventura no jardim"
+        "bichos",
+        "jogo educativo",
+        "Emanuelly Kids",
+        "animais brasileiros",
+        "descubra o animal"
       ],
+      "format": "brincadeira interativa educativa",
       "voice_style": "acolhedora_lenta",
-      "narration_script": "Numa manhã de sol, Emanuelly abriu a janela e sorriu. Lá fora, o jardim parecia acordar bem devagar. Fofinho veio pertinho dela, com suas patinhas macias e um olhar cheio de curiosidade. Os dois passearam pelo caminho de pedrinhas. Havia folhas verdes, flores coloridas e uma borboleta descansando. Mas uma flor pequenina estava com a cabeça inclinada, como se tivesse perdido a alegria. — Olha, Fofinho. Acho que essa flor precisa de ajuda — disse Emanuelly, ajoelhando-se com cuidado. Fofinho observou a terra. Ela parecia seca, e as folhas estavam um pouquinho caídas. Emanuelly buscou seu regador azul. Colocou um pouco de água perto das raízes, sem molhar demais. Fofinho soltou uma gotinha brilhante, que ficou flutuando pertinho da flor como uma pequena estrela. — Vamos esperar um pouquinho — falou Emanuelly. Eles ficaram quietinhos à sombra de uma árvore. O vento passou macio pelas folhas, e Fofinho se aninhou ao lado da amiga. Depois de algum tempo, a flor pareceu mais firme. Sua pétala cor-de-rosa se ergueu devagar, acompanhando a luz do sol. Emanuelly sorriu, mas não puxou a flor nem tentou apressar seu crescimento. Fofinho deu um miadinho feliz. A gotinha azul desceu suavemente até a terra. Os dois perceberam que cuidar de alguém nem sempre significa fazer muitas coisas. Às vezes, significa prestar atenção e ter paciência. Antes de voltar para casa, Emanuelly prometeu observar o jardim todos os dias. E Fofinho, contente, ficou olhando a flor balançar ao vento. Naquele dia, eles aprenderam que pequenos cuidados podem fazer muita diferença.",
-      "narration_word_count": 254,
+      "narration_script": "Vamos brincar de descobrir animais? Hoje temos seis sombras misteriosas. Você vai ouvir pistas, olhar o formato de cada bichinho e ter um tempinho para pensar. Não precisa correr. O mais divertido é observar e aprender! Primeiro desafio! Vejo um corpo arredondado, quatro patinhas e orelhas pequenas. Esse animal gosta de ficar perto da água e é conhecido por ser um roedor bem grandão. Pense um pouquinho... É a capivara! Que carinha tranquila! Segundo desafio! A sombra mostra uma cabeça redondinha, olhos grandes e asas. Esse bichinho consegue virar bastante a cabeça e muitas espécies procuram alimento quando escurece. Você descobriu? É a coruja! Observe suas penas bem macias. Terceiro desafio! Olha só quantos braços aparecem nesta sombra! Esse animal vive no mar, tem oito braços e consegue se espremer por espaços bem apertados. Já imaginou quem é? É o polvo! Seus braços são cheios de ventosas. Quarto desafio! A sombra tem um bico grande e um corpo de ave. Esse bichinho vive em florestas tropicais e pode ajudar a espalhar sementes de frutas. Pensou em qual animal? É o tucano! Repare como seu bico é diferente. Quinto desafio! Temos um corpo arredondado, duas nadadeiras e um jeitinho de caminhar muito engraçado. É uma ave, mas não usa as asas para voar. Ela nada muito bem. É o pinguim! Olha como ele se move na água. Sexto e último desafio! Veja as orelhas grandes e uma tromba comprida. Esse animal usa a tromba para pegar água e explorar o ambiente. Conseguiu adivinhar? É o elefante! Ele também usa sua tromba para sentir cheiros. Agora apareceram todas as respostas: capivara, coruja, polvo, tucano, pinguim e elefante. Cada um tem um corpo diferente, feito para viver do seu jeito. Nossa brincadeira termina aqui, mas a natureza continua cheia de bichinhos incríveis!",
+      "narration_word_count": 299,
       "duration": {
         "minimum_seconds": 90,
-        "target_seconds": 100,
+        "target_seconds": 105,
         "maximum_seconds": 120,
         "measured_tts_seconds": null,
         "verified": false
       },
-      "topic_source_urls": [],
-      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "topic_source_urls": [
+        "https://www.youtube.com/watch?v=d_XMslgbq1M",
+        "https://www.youtube.com/watch?v=jd4FeiSFTXw"
+      ],
+      "scene_policy": "8 original static illustrations; hard cuts/crossfade clean only; avoid character motion/rig/morph/warp or shaky camera; quiz silhouette reveal using two stills",
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Numa manhã de sol, Emanuelly abriu a janela e sorriu. Lá fora, o jardim parecia acordar bem devagar. Fofinho veio pertinho dela, com suas patinhas macias e um olhar cheio de curiosidade.",
-          "visual_instruction": "Canon Emanuelly and Fofinho by morning window",
+          "editorial_beat": "Vamos brincar de descobrir animais? Hoje temos seis sombras misteriosas. Você vai ouvir pistas, olhar o formato de cada bichinho e ter um tempinho para pensar. Não precisa correr. O mais divertido é observar e aprender!",
+          "visual_instruction": "Quadro de apresentação: seis silhuetas genéricas numeradas, visual infantil pastel claro sem marcas de terceiros, sem ícone de inscrição",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 2,
-          "editorial_beat": "Os dois passearam pelo caminho de pedrinhas. Havia folhas verdes, flores coloridas e uma borboleta descansando. Mas uma flor pequenina estava com a cabeça inclinada, como se tivesse perdido a alegria.",
-          "visual_instruction": "Original gentle garden flower bed",
+          "editorial_beat": "Primeiro desafio! Vejo um corpo arredondado, quatro patinhas e orelhas pequenas. Esse animal gosta de ficar perto da água e é conhecido por ser um roedor bem grandão. Pense um pouquinho... É a capivara! Que carinha tranquila!",
+          "visual_instruction": "Sombra da capivara e ilustração original da capivara em ambiente aquático raso; duas poses, sombra primeiro e revelação posterior",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 3,
-          "editorial_beat": "— Olha, Fofinho. Acho que essa flor precisa de ajuda — disse Emanuelly, ajoelhando-se com cuidado. Fofinho observou a terra. Ela parecia seca, e as folhas estavam um pouquinho caídas.",
-          "visual_instruction": "Drooping little pink flower in dry soil",
+          "editorial_beat": "Segundo desafio! A sombra mostra uma cabeça redondinha, olhos grandes e asas. Esse bichinho consegue virar bastante a cabeça e muitas espécies procuram alimento quando escurece. Você descobriu? É a coruja! Observe suas penas bem macias.",
+          "visual_instruction": "Sombra de coruja de cabeça redonda, depois coruja original ilustrada no galho, sem luzes piscantes",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 4,
-          "editorial_beat": "Emanuelly buscou seu regador azul. Colocou um pouco de água perto das raízes, sem molhar demais. Fofinho soltou uma gotinha brilhante, que ficou flutuando pertinho da flor como uma pequena estrela.",
-          "visual_instruction": "Emanuelly with blue watering can and tiny floating water drop",
+          "editorial_beat": "Terceiro desafio! Olha só quantos braços aparecem nesta sombra! Esse animal vive no mar, tem oito braços e consegue se espremer por espaços bem apertados. Já imaginou quem é? É o polvo! Seus braços são cheios de ventosas.",
+          "visual_instruction": "Sombra de polvo com oito braços, depois polvo original colorido no mar sem misturar anatomia com cabeça de outro animal",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 5,
-          "editorial_beat": "— Vamos esperar um pouquinho — falou Emanuelly. Eles ficaram quietinhos à sombra de uma árvore. O vento passou macio pelas folhas, e Fofinho se aninhou ao lado da amiga.",
-          "visual_instruction": "Two friends sitting peacefully in shade",
+          "editorial_beat": "Quarto desafio! A sombra tem um bico grande e um corpo de ave. Esse bichinho vive em florestas tropicais e pode ajudar a espalhar sementes de frutas. Pensou em qual animal? É o tucano! Repare como seu bico é diferente.",
+          "visual_instruction": "Sombra de tucano com bico longo, depois tucano original em ramo tropical, sem marca ou uniforme",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 6,
-          "editorial_beat": "Depois de algum tempo, a flor pareceu mais firme. Sua pétala cor-de-rosa se ergueu devagar, acompanhando a luz do sol. Emanuelly sorriu, mas não puxou a flor nem tentou apressar seu crescimento.",
-          "visual_instruction": "Recovering pink flower opening toward sunlight",
+          "editorial_beat": "Quinto desafio! Temos um corpo arredondado, duas nadadeiras e um jeitinho de caminhar muito engraçado. É uma ave, mas não usa as asas para voar. Ela nada muito bem. É o pinguim! Olha como ele se move na água.",
+          "visual_instruction": "Sombra de pinguim, depois pinguim original junto à água; manter pés e asas naturais",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 7,
-          "editorial_beat": "Fofinho deu um miadinho feliz. A gotinha azul desceu suavemente até a terra. Os dois perceberam que cuidar de alguém nem sempre significa fazer muitas coisas. Às vezes, significa prestar atenção e ter paciência.",
-          "visual_instruction": "Fofinho smiling as water drop reaches soil",
+          "editorial_beat": "Sexto e último desafio! Veja as orelhas grandes e uma tromba comprida. Esse animal usa a tromba para pegar água e explorar o ambiente. Conseguiu adivinhar? É o elefante! Ele também usa sua tromba para sentir cheiros.",
+          "visual_instruction": "Sombra de elefante com tromba e grandes orelhas, depois elefante original em savana",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 8,
-          "editorial_beat": "Antes de voltar para casa, Emanuelly prometeu observar o jardim todos os dias. E Fofinho, contente, ficou olhando a flor balançar ao vento. Naquele dia, eles aprenderam que pequenos cuidados podem fazer muita diferença.",
-          "visual_instruction": "Calm wide garden sunset with flower",
+          "editorial_beat": "Agora apareceram todas as respostas: capivara, coruja, polvo, tucano, pinguim e elefante. Cada um tem um corpo diferente, feito para viver do seu jeito. Nossa brincadeira termina aqui, mas a natureza continua cheia de bichinhos incríveis!",
+          "visual_instruction": "Quadro de recapitulação das seis espécies em círculos separados, sem deformação, sem pedido de comentários",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         }
       ],
-      "ai_disclosure": "fantasy stylized; preserve approved character references",
+      "ai_disclosure": "Fictional story or educational original illustration; no Fofinhos assets used",
       "production_state": {
         "image_generation": "not_started",
         "voice": "not_started",
@@ -1148,216 +1273,117 @@
         "thumbnail": "not_started",
         "upload": "not_started",
         "youtube_id": null
-      }
+      },
+      "pacing_notes": "2.5-3.5 s de pausa de pensamento real antes de cada revelação; manter duração medida de 90-120 s sem acelerar a voz"
     },
     {
-      "id": "kids-20261107-fofinhos-borboleta",
+      "id": "kids-20261107-dinos-segredos-incriveis",
       "channel": "kids",
       "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
       "language": "pt-BR",
       "visibility_intent": "private_after_verified_QA",
       "status": "script_draft_not_rendered",
       "made_for_kids": true,
-      "title": "Fofinhos: A Borboleta que Perdeu o Caminho 🦋",
-      "cover_text": "CADÊ O JARDIM?",
-      "description": "Uma borboleta procura seu cantinho favorito no jardim e recebe ajuda de Emanuelly e Fofinho. Uma história original sobre calma, orientação e gentileza.\n\n#Fofinhos #Borboleta #DesenhoInfantil",
+      "title": "3 DINOSSAUROS com Segredos Incríveis! 🦖 | Curiosidades",
+      "cover_text": "3 DINOS SURPRESA",
+      "description": "Conheça três dinossauros de verdade: o Triceratops com três chifres, o Stegosaurus com placas nas costas e o Ankylosaurus com armadura natural e cauda especial. Curiosidades apresentadas com linguagem simples e ilustrações originais.\n\nVisuais ilustrativos gerados por IA; a aparência dos dinossauros é uma reconstrução artística baseada em evidências científicas.\n\n#Dinossauros #CuriosidadesInfantis #AprenderBrincando #EmanuellyKids",
       "hashtags": [
-        "#Fofinhos",
-        "#Borboleta",
-        "#DesenhoInfantil"
+        "#Dinossauros",
+        "#CuriosidadesInfantis",
+        "#AprenderBrincando",
+        "#EmanuellyKids"
       ],
       "tags": [
-        "Fofinhos",
-        "borboleta",
+        "dinossauros",
+        "dinossauros para crianças",
+        "curiosidades dinossauros",
+        "Triceratops",
+        "Stegosaurus",
+        "Ankylosaurus",
+        "desenho educativo",
+        "pré-história",
+        "dinossauros infantis",
         "Emanuelly Kids",
-        "história infantil",
-        "amigos do jardim",
-        "ajudar animais",
-        "desenhos animados",
-        "histórias para dormir",
-        "gentileza",
-        "aventura infantil"
+        "animais pré-históricos",
+        "ciência para crianças"
       ],
+      "format": "curiosidade infantil científica",
       "voice_style": "acolhedora_lenta",
-      "narration_script": "Num fim de tarde dourado, Emanuelly e Fofinho estavam sentados perto das flores. Uma borboleta amarela passou voando e fez uma volta bem grande, depois outra. Parecia procurar alguma coisa. — Olá, borboletinha! — disse Emanuelly com voz suave. A borboleta pousou numa folha. Suas asas se abriram e fecharam devagar, como se estivesse pensando no caminho de volta. Fofinho aproximou o focinho, curioso. Emanuelly fez carinho nele e pediu que ficasse quietinho, para não assustar a visitante. Os dois observaram as flores do jardim e procuraram onde a borboleta poderia descansar. Primeiro, eles olharam perto da árvore alta. Ali havia sombra e folhas frescas, mas não a flor que a borboleta parecia querer encontrar. Depois, seguiram pelo caminho de pedrinhas, com passos bem tranquilos. De repente, a borboleta abriu as asas e voou na direção de um canteiro de flores amarelas. Emanuelly percebeu que ela gostava de pousar ali. Fofinho deu um miadinho alegre, sem correr atrás dela. Uma brisa levantou algumas folhas. A borboleta ficou parada por um instante, depois encontrou uma flor ensolarada e pousou. Emanuelly sorriu. Nem sempre precisamos carregar um bichinho para ajudar; às vezes basta oferecer espaço. Fofinho levantou uma gotinha azul, que refletiu a luz do fim da tarde. A borboleta passou pertinho do brilho e voltou para sua flor. Emanuelly entendeu que os animais também precisam escolher onde ficar. Quando o céu começou a ficar alaranjado, os amigos acenaram de longe. A borboleta continuou segura entre as flores. E Emanuelly voltou para casa feliz por ter ajudado de um jeito delicado e respeitoso.",
-      "narration_word_count": 261,
+      "narration_script": "Você sabia que existiram dinossauros com três chifres, placas enormes nas costas e até uma cauda parecida com uma clava? Hoje vamos conhecer três animais pré-históricos incríveis. Eles viveram há muitos milhões de anos, muito antes de existirem pessoas na Terra. O primeiro é o Triceratops. Seu nome lembra uma característica muito fácil de perceber: ele tinha três chifres na cabeça! Dois ficavam acima dos olhos, e o outro, menor, perto do nariz. Seu rosto também possuía uma grande estrutura óssea. O Triceratops andava sobre quatro patas e se alimentava de plantas. Seus chifres provavelmente ajudavam em situações de defesa e em encontros com outros dinossauros da mesma espécie. Mas ninguém estava lá para filmar, então os cientistas estudam seus fósseis! O segundo é o Stegosaurus. Olha que curioso! Ele carregava grandes placas ao longo das costas e espinhos na ponta da cauda. Era um dinossauro herbívoro, com corpo grande e uma cabeça relativamente pequena em comparação com o restante. Para que serviam aquelas placas? Os cientistas ainda investigam. Elas podem ter ajudado a exibir sinais para outros animais ou a controlar a temperatura do corpo. O importante é lembrar: uma hipótese científica não é uma certeza absoluta. O terceiro é o Ankylosaurus. Ele fazia parte de um grupo de dinossauros com uma armadura de placas ósseas sobre o corpo. Alguns desses animais tinham, na ponta da cauda, uma estrutura pesada que parecia uma clava. Impressionante, não é? Vamos comparar! O Triceratops tinha três chifres. O Stegosaurus exibia placas nas costas e espinhos na cauda. Já o Ankylosaurus era conhecido por sua armadura e cauda especial. Cada um tinha características diferentes para viver no seu ambiente. E agora vem a descoberta final: não precisamos imaginar que todos os dinossauros eram iguais. Seus fósseis contam histórias de formas, tamanhos e modos de vida muito variados. A pré-história é um quebra-cabeça gigante, e os cientistas continuam descobrindo novas peças!",
+      "narration_word_count": 317,
       "duration": {
         "minimum_seconds": 90,
-        "target_seconds": 100,
+        "target_seconds": 105,
         "maximum_seconds": 120,
         "measured_tts_seconds": null,
         "verified": false
       },
-      "topic_source_urls": [],
-      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "topic_source_urls": [
+        "https://www.youtube.com/watch?v=cN85Azmlc-s",
+        "https://www.nhm.ac.uk/discover/dino-directory/triceratops.html",
+        "https://www.nhm.ac.uk/discover/dino-directory/Stegosaurus.html",
+        "https://www.nhm.ac.uk/discover/ankylosaurs-the-dinosaurs-with-built-in-armour.html"
+      ],
+      "scene_policy": "8 original static illustrations; hard cuts/crossfade clean only; avoid character motion/rig/morph/warp or shaky camera; quiz silhouette reveal using two stills",
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Num fim de tarde dourado, Emanuelly e Fofinho estavam sentados perto das flores. Uma borboleta amarela passou voando e fez uma volta bem grande, depois outra. Parecia procurar alguma coisa.",
-          "visual_instruction": "Friends beside flowers at golden hour",
+          "editorial_beat": "Você sabia que existiram dinossauros com três chifres, placas enormes nas costas e até uma cauda parecida com uma clava? Hoje vamos conhecer três animais pré-históricos incríveis. Eles viveram há muitos milhões de anos, muito antes de existirem pessoas na Terra.",
+          "visual_instruction": "Três dinossauros originais reconstruídos artisticamente numa paisagem pré-histórica, Triceratops Stegosaurus Ankylosaurus em painéis separados",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 2,
-          "editorial_beat": "— Olá, borboletinha! — disse Emanuelly com voz suave. A borboleta pousou numa folha. Suas asas se abriram e fecharam devagar, como se estivesse pensando no caminho de volta.",
-          "visual_instruction": "Yellow butterfly circling and landing on leaf",
+          "editorial_beat": "O primeiro é o Triceratops. Seu nome lembra uma característica muito fácil de perceber: ele tinha três chifres na cabeça! Dois ficavam acima dos olhos, e o outro, menor, perto do nariz. Seu rosto também possuía uma grande estrutura óssea.",
+          "visual_instruction": "Close de Triceratops original com três chifres anatomicamente corretos e grande gola óssea",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 3,
-          "editorial_beat": "Fofinho aproximou o focinho, curioso. Emanuelly fez carinho nele e pediu que ficasse quietinho, para não assustar a visitante. Os dois observaram as flores do jardim e procuraram onde a borboleta poderia descansar.",
-          "visual_instruction": "Emanuelly calmly keeping Fofinho close",
+          "editorial_beat": "O Triceratops andava sobre quatro patas e se alimentava de plantas. Seus chifres provavelmente ajudavam em situações de defesa e em encontros com outros dinossauros da mesma espécie. Mas ninguém estava lá para filmar, então os cientistas estudam seus fósseis!",
+          "visual_instruction": "Triceratops herbívoro comendo folhas ao nível do chão em paisagem cientificamente plausível, sem pessoas",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 4,
-          "editorial_beat": "Primeiro, eles olharam perto da árvore alta. Ali havia sombra e folhas frescas, mas não a flor que a borboleta parecia querer encontrar. Depois, seguiram pelo caminho de pedrinhas, com passos bem tranquilos.",
-          "visual_instruction": "Tree shade and garden stepping stones",
+          "editorial_beat": "O segundo é o Stegosaurus. Olha que curioso! Ele carregava grandes placas ao longo das costas e espinhos na ponta da cauda. Era um dinossauro herbívoro, com corpo grande e uma cabeça relativamente pequena em comparação com o restante.",
+          "visual_instruction": "Stegosaurus lateral, placas alternadas verticais ao longo das costas e espinhos da cauda",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 5,
-          "editorial_beat": "De repente, a borboleta abriu as asas e voou na direção de um canteiro de flores amarelas. Emanuelly percebeu que ela gostava de pousar ali. Fofinho deu um miadinho alegre, sem correr atrás dela.",
-          "visual_instruction": "Yellow flower bed from distance",
+          "editorial_beat": "Para que serviam aquelas placas? Os cientistas ainda investigam. Elas podem ter ajudado a exibir sinais para outros animais ou a controlar a temperatura do corpo. O importante é lembrar: uma hipótese científica não é uma certeza absoluta.",
+          "visual_instruction": "Placas de Stegosaurus ilustradas com ícones de hipótese exibicao / temperatura, não afirmar função comprovada",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 6,
-          "editorial_beat": "Uma brisa levantou algumas folhas. A borboleta ficou parada por um instante, depois encontrou uma flor ensolarada e pousou. Emanuelly sorriu. Nem sempre precisamos carregar um bichinho para ajudar; às vezes basta oferecer espaço.",
-          "visual_instruction": "Butterfly resting on sunlit flower",
+          "editorial_beat": "O terceiro é o Ankylosaurus. Ele fazia parte de um grupo de dinossauros com uma armadura de placas ósseas sobre o corpo. Alguns desses animais tinham, na ponta da cauda, uma estrutura pesada que parecia uma clava. Impressionante, não é?",
+          "visual_instruction": "Ankylosaurus original, corpo baixo robusto com armadura óssea e cauda com clava anatomicamente coerente",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 7,
-          "editorial_beat": "Fofinho levantou uma gotinha azul, que refletiu a luz do fim da tarde. A borboleta passou pertinho do brilho e voltou para sua flor. Emanuelly entendeu que os animais também precisam escolher onde ficar.",
-          "visual_instruction": "Water droplet shimmering in foreground",
+          "editorial_beat": "Vamos comparar! O Triceratops tinha três chifres. O Stegosaurus exibia placas nas costas e espinhos na cauda. Já o Ankylosaurus era conhecido por sua armadura e cauda especial. Cada um tinha características diferentes para viver no seu ambiente.",
+          "visual_instruction": "Infográfico infantil estático de três silhuetas originais e características distintas, legenda legível",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         },
         {
           "number": 8,
-          "editorial_beat": "Quando o céu começou a ficar alaranjado, os amigos acenaram de longe. A borboleta continuou segura entre as flores. E Emanuelly voltou para casa feliz por ter ajudado de um jeito delicado e respeitoso.",
-          "visual_instruction": "Evening garden with butterfly safe in flowers",
+          "editorial_beat": "E agora vem a descoberta final: não precisamos imaginar que todos os dinossauros eram iguais. Seus fósseis contam histórias de formas, tamanhos e modos de vida muito variados. A pré-história é um quebra-cabeça gigante, e os cientistas continuam descobrindo novas peças!",
+          "visual_instruction": "Close em fósseis ilustrados e quadro final com três dinossauros simpáticos cientificamente distinguíveis",
           "generated_asset_ready": false,
           "reference_rights_verified": false
         }
       ],
-      "ai_disclosure": "fantasy stylized; preserve approved character references",
-      "production_state": {
-        "image_generation": "not_started",
-        "voice": "not_started",
-        "render": "not_started",
-        "frame_qa": "not_started",
-        "thumbnail": "not_started",
-        "upload": "not_started",
-        "youtube_id": null
-      }
-    },
-    {
-      "id": "kids-20261107-fofinhos-nuvem",
-      "channel": "kids",
-      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
-      "language": "pt-BR",
-      "visibility_intent": "private_after_verified_QA",
-      "status": "script_draft_not_rendered",
-      "made_for_kids": true,
-      "title": "Fofinhos: A Nuvem e a Primeira Chuvinha ☁️💙",
-      "cover_text": "VEM CHUVINHA!",
-      "description": "Uma nuvem chega ao jardim dos Fofinhos, e Emanuelly descobre com seu amigo azul a beleza de uma chuvinha leve. Uma história original sobre natureza, atenção e alegria.\n\n#Fofinhos #Chuva #DesenhoInfantil",
-      "hashtags": [
-        "#Fofinhos",
-        "#Chuva",
-        "#DesenhoInfantil"
-      ],
-      "tags": [
-        "Fofinhos",
-        "nuvem",
-        "chuvinha",
-        "Emanuelly Kids",
-        "desenho infantil",
-        "história infantil",
-        "natureza para crianças",
-        "amizade",
-        "aprendendo sobre chuva",
-        "histórias fofinhas"
-      ],
-      "voice_style": "acolhedora_lenta",
-      "narration_script": "Naquela manhã, o céu estava azul e cheio de luz. Emanuelly e Fofinho brincavam perto da janela quando uma nuvem redondinha apareceu lá no alto, navegando devagar como um barquinho branco. Fofinho inclinou a cabeça e olhou para cima. A nuvem passou por cima do jardim e ficou um pouco cinzenta. Emanuelly percebeu que o vento estava mais fresco e convidou o amigo para sentar na varanda. Logo apareceu uma gotinha sobre uma folha. Depois outra. Plim, plim, plim! Era uma chuvinha delicada, tão baixinha que parecia uma música de água tocando no telhado da casinha. — A chuva está dando água para as plantas — comentou Emanuelly. Fofinho esticou a patinha, mas ficou protegido da chuva. Ele observou as pequenas gotas caindo perto do canteiro de flores. As folhas brilharam, a terra escureceu um pouquinho e um cheiro gostoso de jardim molhado apareceu. Emanuelly explicou que a água é importante para as plantas, mas que a natureza também precisa de equilíbrio. Quando a chuva diminuiu, um raio de sol atravessou as nuvens. Algumas gotas ficaram penduradas nas pontas das folhas, parecendo pequenas contas brilhantes. Fofinho acompanhou cada brilho com os olhos curiosos. Os dois esperaram a chuvinha parar antes de sair. Caminharam devagar pelo jardim e observaram uma poça pequenina refletindo o céu. Emanuelly segurou a mão do amigo para que ele não escorregasse no caminho. Pouco depois, a nuvem seguiu viagem e o sol aqueceu novamente as flores. Fofinho soltou um miadinho contente. E Emanuelly aprendeu que uma mudança no tempo pode trazer uma descoberta bonita quando observamos com carinho.",
-      "narration_word_count": 262,
-      "duration": {
-        "minimum_seconds": 90,
-        "target_seconds": 100,
-        "maximum_seconds": 120,
-        "measured_tts_seconds": null,
-        "verified": false
-      },
-      "topic_source_urls": [],
-      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
-      "scenes": [
-        {
-          "number": 1,
-          "editorial_beat": "Naquela manhã, o céu estava azul e cheio de luz. Emanuelly e Fofinho brincavam perto da janela quando uma nuvem redondinha apareceu lá no alto, navegando devagar como um barquinho branco.",
-          "visual_instruction": "Emanuelly and Fofinho seeing white cloud from window",
-          "generated_asset_ready": false,
-          "reference_rights_verified": false
-        },
-        {
-          "number": 2,
-          "editorial_beat": "Fofinho inclinou a cabeça e olhou para cima. A nuvem passou por cima do jardim e ficou um pouco cinzenta. Emanuelly percebeu que o vento estava mais fresco e convidou o amigo para sentar na varanda.",
-          "visual_instruction": "Soft gray cloud above calm garden",
-          "generated_asset_ready": false,
-          "reference_rights_verified": false
-        },
-        {
-          "number": 3,
-          "editorial_beat": "Logo apareceu uma gotinha sobre uma folha. Depois outra. Plim, plim, plim! Era uma chuvinha delicada, tão baixinha que parecia uma música de água tocando no telhado da casinha.",
-          "visual_instruction": "First raindrops on leaf and rooftop",
-          "generated_asset_ready": false,
-          "reference_rights_verified": false
-        },
-        {
-          "number": 4,
-          "editorial_beat": "— A chuva está dando água para as plantas — comentou Emanuelly. Fofinho esticou a patinha, mas ficou protegido da chuva. Ele observou as pequenas gotas caindo perto do canteiro de flores.",
-          "visual_instruction": "Dry veranda protected from light rain",
-          "generated_asset_ready": false,
-          "reference_rights_verified": false
-        },
-        {
-          "number": 5,
-          "editorial_beat": "As folhas brilharam, a terra escureceu um pouquinho e um cheiro gostoso de jardim molhado apareceu. Emanuelly explicou que a água é importante para as plantas, mas que a natureza também precisa de equilíbrio.",
-          "visual_instruction": "Wet soil and glossy leaves",
-          "generated_asset_ready": false,
-          "reference_rights_verified": false
-        },
-        {
-          "number": 6,
-          "editorial_beat": "Quando a chuva diminuiu, um raio de sol atravessou as nuvens. Algumas gotas ficaram penduradas nas pontas das folhas, parecendo pequenas contas brilhantes. Fofinho acompanhou cada brilho com os olhos curiosos.",
-          "visual_instruction": "Sunbeam through cloud and jewel-like droplets",
-          "generated_asset_ready": false,
-          "reference_rights_verified": false
-        },
-        {
-          "number": 7,
-          "editorial_beat": "Os dois esperaram a chuvinha parar antes de sair. Caminharam devagar pelo jardim e observaram uma poça pequenina refletindo o céu. Emanuelly segurou a mão do amigo para que ele não escorregasse no caminho.",
-          "visual_instruction": "Small puddle reflection and careful walk",
-          "generated_asset_ready": false,
-          "reference_rights_verified": false
-        },
-        {
-          "number": 8,
-          "editorial_beat": "Pouco depois, a nuvem seguiu viagem e o sol aqueceu novamente as flores. Fofinho soltou um miadinho contente. E Emanuelly aprendeu que uma mudança no tempo pode trazer uma descoberta bonita quando observamos com carinho.",
-          "visual_instruction": "Cloud receding above blooming garden",
-          "generated_asset_ready": false,
-          "reference_rights_verified": false
-        }
-      ],
-      "ai_disclosure": "fantasy stylized; preserve approved character references",
+      "ai_disclosure": "Fictional story or educational original illustration; no Fofinhos assets used",
       "production_state": {
         "image_generation": "not_started",
         "voice": "not_started",
@@ -1368,5 +1394,23 @@
         "youtube_id": null
       }
     }
-  ]
+  ],
+  "kids_editorial_revision": {
+    "updated_at": "2026-11-07",
+    "change": "3 Fofinhos ideas replaced with 3 independent kids videos; canonical Fofinhos story and assets unaffected",
+    "replaced_episode_ids": [
+      "kids-20261107-fofinhos-flor",
+      "kids-20261107-fofinhos-borboleta",
+      "kids-20261107-fofinhos-nuvem"
+    ],
+    "replacements": [
+      "kids-20261107-elefantinho-agua-escondida",
+      "kids-20261107-quiz-sombras-animais",
+      "kids-20261107-dinos-segredos-incriveis"
+    ],
+    "kids_series_fofinhos": "reserved for personal/manual supervision; never generate or publish from this batch",
+    "vidiq_evidence_note": "2026-11-07 recent trend samples animal stories, guess-the-animal quizzes, dinosaur Shorts; no guarantee of results; vidIQ credits exhausted after discovery",
+    "original_illustrations_only": true,
+    "characters": "original stand-alone only; no Emanuelly/Fofinhos characters"
+  }
 }
