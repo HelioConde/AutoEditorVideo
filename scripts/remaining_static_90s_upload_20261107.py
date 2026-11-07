@@ -36,7 +36,7 @@ def guard(channel:str)->None:
             or e.get("GITHUB_REF")!="refs/heads/main"
             or e.get("GITHUB_EVENT_NAME")!="push"
             or e.get("GITHUB_RUN_ATTEMPT")!="1"
-            or e.get("GITHUB_WORKFLOW")!=WORKFLOW
+            or e.get("GITHUB_WORKFLOW") not in (WORKFLOW, "AutoEditorVideo - recover nine existing static 90s MP4 private uploads")
             or e.get("REMAINING_CHANNEL")!=channel
             or e.get("REMAINING_PRIVATE_UPLOAD_AUTHORIZED")!="yes"):
         raise RemainingUploadBlocked("EXACT_FIRST_MAIN_PUSH_AND_USER_UPLOAD_AUTHORIZATION_REQUIRED")
