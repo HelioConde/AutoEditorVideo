@@ -66,11 +66,19 @@ def inspect_poses(files:list[Path])->dict:
             # Compare visible RGB and alpha, not hashes: identical pixels can be
             # re-encoded as different files. Both mouth expressions (RGB changes)
             # and limb movements (alpha changes) are valid authored frames.
-            rgb=ImageChops.difference(
-                previous_thumb.convert("RGB"),thumbnail.convert("RGB"))
+            # Transparent RGB can contain arbitrary invisible pixel data from
+            # image providers. Ignore it rather than falsely approving motion
+            # that will never appear in the composed video.
+            before_alpha=previous_thumb.getchannel("A")
+            after_alpha=thumbnail.getchannel("A")
+            black=Image.new("RGB",THUMB,(0,0,0))
+            before_visible=Image.composite(
+                previous_thumb.convert("RGB"),black,before_alpha)
+            after_visible=Image.composite(
+                thumbnail.convert("RGB"),black,after_alpha)
+            rgb=ImageChops.difference(before_visible,after_visible)
             lum=rgb.convert("L")
-            alpha_delta=ImageChops.difference(
-                previous_thumb.getchannel("A"),thumbnail.getchannel("A"))
+            alpha_delta=ImageChops.difference(before_alpha,after_alpha)
             visual=ImageChops.lighter(lum,alpha_delta)
             changed=visual.point(lambda x:255 if x>=25 else 0).histogram()[255]
             small_visible=min(visible,prior_coverage)*THUMB[0]*THUMB[1]/(CANVAS[0]*CANVAS[1])
