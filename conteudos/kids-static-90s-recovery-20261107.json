@@ -1,0 +1,21 @@
+{
+  "schema": "autoeditorvideo/kids-original-static-private-recovery/v1",
+  "user_authorized_at": "2026-11-07",
+  "recovered_from_failed_run": 42393346725,
+  "source_artifact_id": 13583072874,
+  "source_artifact_name": "emanuelly-kids-static-three-mp4-20261107",
+  "source_artifact_sha256": "2297ca1cfd51567a460d4007eb628dd34bf900b5f5ae83dc275d24a3ffead77f",
+  "channel": "kids",
+  "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+  "episode_ids": [
+    "kids-101-elefantinho-agua-escondida",
+    "kids-102-quiz-sombras-animais",
+    "kids-103-dinos-segredos-incriveis"
+  ],
+  "image_generation": false,
+  "youtube_upload_initial_privacy": "private",
+  "made_for_kids": true,
+  "fofinhos_series_excluded": true,
+  "require_readonly_reconcile_before_insert": true,
+  "no_blind_retry": true
+}
