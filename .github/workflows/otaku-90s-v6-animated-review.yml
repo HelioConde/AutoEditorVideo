@@ -6,8 +6,8 @@ on:
     paths:
       - '.github/workflows/otaku-90s-v6-animated-review.yml'
 
-# Exactly one creator-requested V6 real review; no dispatch, schedule, public
-# queue, YouTube OAuth or publishing job. No reties or parallel paid generations.
+# One creator-requested V6 review: reuse the verified original prior-run artwork.
+# Zero paid image calls, no dispatch, schedule, YouTube credentials or publishing.
 permissions:
   contents: read
 
@@ -20,7 +20,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'test(editor): resume ONE V6 review with pose diagnostics and saved original assets'
+      github.event.head_commit.message == 'test(editor): render ONE V6 from pinned saved original artwork (no new images)'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -57,25 +57,18 @@ jobs:
     needs: preflight-safe-main
     if: needs.preflight-safe-main.result == 'success'
     runs-on: ubuntu-24.04
-    timeout-minutes: 125
-    environment: image-generation
+    timeout-minutes: 95
     permissions:
       contents: read
       actions: read
     env:
       IMAGE_MODEL: gpt-image-2
-      MAX_IMAGE_CALLS: '20'
+      MAX_IMAGE_CALLS: '0'
       OTAKU_V6_ONE_PREVIEW: '1'
+      OTAKU_V6_REUSE_ARTIFACT: '42332358380'
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
-      - name: Checkout original pinned Go image-provider proxy
-        uses: actions/checkout@v4
-        with:
-          repository: 10/chatgpt-codex-proxy
-          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
-          path: pinned-native-go-proxy
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
@@ -87,11 +80,7 @@ jobs:
           node-version: '22'
           cache: npm
           cache-dependency-path: motion-remotion/package-lock.json
-      - uses: actions/setup-go@v6
-        with:
-          go-version-file: pinned-native-go-proxy/go.mod
-          cache: false
-      - name: Prepare genuine AutoEditorVideo dependencies and FFmpeg
+      - name: Prepare original AutoEditorVideo dependencies and FFmpeg
         shell: bash
         run: |
           set -euo pipefail
@@ -102,58 +91,36 @@ jobs:
           python -m pip install --disable-pip-version-check -r requirements-master.txt
           command -v ffmpeg
           command -v ffprobe
-      - name: Install ORIGINAL Remotion, not a separate renderer
+      - name: Install original Remotion, not another video generator
         working-directory: motion-remotion
         run: npm ci --no-audit --no-fund
-      - name: Validate original character components
+      - name: Validate original animated character components
         working-directory: motion-remotion
         run: npm run typecheck && npm run test:qa
-      - name: Compile upstream image-provider proxy without credentials
-        working-directory: pinned-native-go-proxy
+      - name: Restore immutable original V6 frames and Edge narration from prior run
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-v6-original-art-and-pose-evidence
+          run-id: 42332358380
+          github-token: ${{ github.token }}
+          path: assets/gerados/otaku-v6-real-90s
+      - name: Render ONE V6 with real saved RGBA poses and voice (zero image calls)
         shell: bash
         run: |
           set -euo pipefail
-          CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/otaku-v6-pinned-proxy" ./cmd/api
-          test -x "$RUNNER_TEMP/otaku-v6-pinned-proxy"
-      - name: REAL V6 animated preview - 20 original RGBA and background images, segmented Edge voice and Remotion
-        shell: bash
-        env:
-          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
-          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
-        run: |
-          set -euo pipefail
-          umask 077
-          state_dir="$RUNNER_TEMP/otaku-v6-auth"
-          mkdir -m 700 "$state_dir"
-          proxy_pid=''
-          cleanup() {
-            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
-            rm -rf -- "$state_dir"
-            rm -f -- "$RUNNER_TEMP/otaku-v6-proxy.log"
-          }
-          trap cleanup EXIT
-          python scripts/otaku_multicena_90s_v6_preview.py --preflight
-          python scripts/proxy_accounts_private_stage.py "$state_dir"
-          unset PROXY_ACCOUNTS_JSON
-          DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
-            "$RUNNER_TEMP/otaku-v6-pinned-proxy" > "$RUNNER_TEMP/otaku-v6-proxy.log" 2>&1 &
-          proxy_pid=$!
           python scripts/otaku_multicena_90s_v6_preview.py
-          echo "[REVIEW ONLY] ONE V6 ANIMATED MP4_READY_NO_YOUTUBE_OAUTH_OR_UPLOAD"
-      - name: Preserve original generated assets and pose rejection report, even on QA failure
+          echo "[REVIEW ONLY] ONE ORIGINAL V6 MP4_READY_NO_YOUTUBE_UPLOAD_NO_NEW_IMAGE_CALLS"
+      - name: Preserve pose QA evidence even if rendering fails
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: otaku-v6-original-art-and-pose-evidence
+          name: otaku-v6-verified-reuse-pose-qa
           path: |
-            assets/gerados/otaku-v6-real-90s/background-*.png
-            assets/gerados/otaku-v6-real-90s/pose-*.png
             assets/gerados/otaku-v6-real-90s/pose-validation-v6.json
-            assets/gerados/otaku-v6-real-90s/voz-master.mp3
-            assets/gerados/otaku-v6-real-90s/marcacoes-voz.json
-          retention-days: 3
+            assets/gerados/otaku-v6-real-90s/pose-validation-v6-reuse.json
           if-no-files-found: ignore
-      - name: Keep ONE original V6 MP4, pose QA, cover, script and report
+          retention-days: 7
+      - name: Keep ONE 90-second V6 MP4 for review, never publish
         if: success()
         uses: actions/upload-artifact@v4
         with:
