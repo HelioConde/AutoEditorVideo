@@ -114,3 +114,13 @@ def test_curated_markdown_shows_all_titles_and_preservation_warning():
     for row in doc["items"]:
         assert row["new_short_title_proposal"] in content
     assert "Não substituir roteiros/MP4s" in content
+
+
+def test_unverified_channel_history_does_not_count_as_definite_exclusion():
+    doc,*_=sources()
+    assert doc["live_channel_inventory_complete"] is False
+    assert doc["exclusions_are_non_destructive"] is True
+    assert all(x["restore_if_found_published"] is True
+               for x in doc["exclude_from_new_50_only"])
+    assert all(x["publication_check"]=="not_seen_in_available_repository_evidence_not_exhaustive"
+               for x in doc["exclude_from_new_50_only"])
