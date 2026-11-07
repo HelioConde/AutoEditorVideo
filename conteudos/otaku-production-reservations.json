@@ -1,6 +1,6 @@
 {
   "schema": "autoeditorvideo/production-reservations/v1",
-  "updated_at": "2026-11-06",
+  "updated_at": "2026-11-07",
   "policy": "Before creating any video generation script, PowerShell or cloud workflow, reserve the exact (channel, episode_id) pair here and merge to main first. All five channels use unique channel IDs; registration never authorizes image or YouTube requests.",
   "channels": {
     "br": {
@@ -1203,6 +1203,102 @@
       "publication_target": "none_review_artifact_only",
       "source_artifact_run_id": 42332358380,
       "note": "One 8-second no-cost, no-upload review-only test of PR #81 adaptive face animation, using pinned original V6 backgrounds, RGBA and narration; compare actual result with earlier V10; production queue must remain paused."
+    },
+    {
+      "channel": "en",
+      "id": "en-20261107-noelle-black-clover",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "en",
+      "id": "en-20261107-maomao-apothecary",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "en",
+      "id": "en-20261107-shizuku-hunter",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "games",
+      "id": "games-20261107-minecraft-agua",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "games",
+      "id": "games-20261107-roblox-obby",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "games",
+      "id": "games-20261107-minecraft-creeper",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-20261107-video-ia-realidade",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-20261107-agentes-chatbot",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-20261107-prompt-consistencia",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-20261107-fofinhos-flor",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-20261107-fofinhos-borboleta",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-20261107-fofinhos-nuvem",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_explicit_2026-11-07",
+      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
