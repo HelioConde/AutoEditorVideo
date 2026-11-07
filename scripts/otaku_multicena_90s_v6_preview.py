@@ -176,8 +176,11 @@ def standardize_pose(image:Image.Image)->Image.Image:
     newsize=(max(1,round(cut.width*scale)),max(1,round(cut.height*scale)))
     cut=cut.resize(newsize,Image.Resampling.LANCZOS)
     out=Image.new("RGBA",SIZE,(0,0,0,0))
+    # Align the visual center instead of bottom-aligning every separately
+    # illustrated pose. With different aspect ratios, bottom alignment shifts
+    # the head/torso by hundreds of pixels and creates a fake teleport.
     x=round((SIZE[0]-cut.width)/2)
-    y=round(1465-cut.height)
+    y=round(840-cut.height/2)
     if x<12 or y<12 or x+cut.width>SIZE[0]-12 or y+cut.height>SIZE[1]-12:
         raise V6Blocked("CHARACTER_POSE_CROPS_AT_EDGE")
     out.alpha_composite(cut,(x,y))
@@ -231,9 +234,10 @@ def produce_art(row:dict,key:str)->tuple[list[Path],dict[int,list[Path]],dict]:
         except ValueError as error:
             # Generated frames remain available as unreviewed originals for
             # human inspection, but may NEVER animate in an approved scene.
-            rejected[str(scene+1)]=str(error)
+            reason=str(error)
+            rejected[str(scene+1)]=reason
             print("[OTAKU V6] POSE_REJECTED_SHOT_%02d_REASON_%s"%
-                  (scene+1,str(error)),flush=True)
+                  (scene+1,reason),flush=True)
     reports["rejected_scene_reasons"]=rejected
     reports["validated_scene_count"]=len(validated)
     reports["generated_pose_scene_count"]=len(frames)
