@@ -110,7 +110,20 @@ class MotionBrush2D:
             dy+=weight*float(vy)*t
         length=np.sqrt(dx*dx+dy*dy)
         maximum=np.maximum(1.,length/max(1e-4,self.max_displacement))
-        return dx/maximum,dy/maximum
+        dx=dx/maximum
+        dy=dy/maximum
+        # Reduce the motion amplitude, not the safety threshold, whenever
+        # neighboring pixels would shear too far apart. All brush colors,
+        # face protection and start/end identity remain untouched.
+        strain=max(float(np.max(np.abs(np.diff(dx,axis=1)))),
+                   float(np.max(np.abs(np.diff(dy,axis=1)))),
+                   float(np.max(np.abs(np.diff(dx,axis=0)))),
+                   float(np.max(np.abs(np.diff(dy,axis=0)))))
+        if strain>self.max_gradient:
+            correction=(self.max_gradient*.98)/strain
+            dx*=correction
+            dy*=correction
+        return dx,dy
 
     def quality(self,second:float)->dict:
         dx,dy=self.displacement(second)
