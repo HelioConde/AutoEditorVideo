@@ -1,0 +1,509 @@
+name: AutoEditorVideo - 9 original static 90s Shorts three channels private
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/remaining-nine-static90-launch-20261107.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: remaining-nine-20261107-private-uploads-once
+  cancel-in-progress: false
+
+jobs:
+  offline-preflight:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(remaining): launch nine 90-120s videos for private upload EN Gamer Alchemy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test original nine editorial plans, reservations, static renderer and safe private uploader
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'pytest>=8,<10'
+          python -m py_compile scripts/remaining_static_90s_20261107.py scripts/remaining_static_90s_upload_20261107.py
+          python -m pytest -q tests/test_remaining_static_90s_20261107.py
+          for channel in en games alchemy; do
+            python scripts/remaining_static_90s_20261107.py --channel "$channel" --action validate
+            python scripts/remaining_static_90s_upload_20261107.py --channel "$channel" --action preflight
+          done
+      - name: One-shot user-approved exact 9-episode batch contract, default private, 24 AI images per channel
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          c=json.loads(Path('conteudos/remaining-nine-static90-launch-20261107.json').read_text(encoding='utf-8'))
+          assert c == {
+            'schema':'autoeditorvideo/remaining-nine-static90-one-shot/v1',
+            'source_manifest':'conteudos/lote-12-estatico-90s-20261107.json',
+            'production_owner':'lote12_static_original_20261107',
+            'user_authorized_at':'2026-11-07',
+            'channels_in_order':['en','games','alchemy'],
+            'channel_ids':{
+              'en':'UCBoNbQjaMYdpJqPLRZAFkvQ',
+              'games':'UCg77gYc1_wkHuL07XPtKcow',
+              'alchemy':'UCCTYFE5Cmz2aYZ37cJQ-wcg'
+            },
+            'episode_ids':{
+              'en':['7011-noelle-black-clover','7012-maomao-apothecary','7013-shizuku-hunter'],
+              'games':['game-101-minecraft-agua','game-102-roblox-obby','game-103-minecraft-creeper'],
+              'alchemy':['alchemy-101-video-ia-realidade','alchemy-102-agentes-chatbot','alchemy-103-prompt-consistencia']
+            },
+            'image_model':'gpt-image-2',
+            'max_image_requests_per_channel':24,
+            'total_image_requests_ceiling':72,
+            'duration_seconds_min':90,
+            'duration_seconds_max':120,
+            'render':'original_remotion_static_stills_no_warp',
+            'upload_privacy':'private',
+            'made_for_kids':False,
+            'exclude_kids':True,
+            'exclude_otaku_br':True,
+            'require_readonly_dedup_before_insert':True,
+            'no_blind_retry_on_ambiguous_upload':True,
+            'no_public_uploads':True
+          }
+          print('REMAINING_EXACT_NINE_CHANNEL_ISOLATED_ONE_SHOT_BATCH_CHECKED')
+          PY
+
+  verify-image-environment:
+    needs: offline-preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require locked-down image environment before any image-generation secrets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  verify-youtube-environment:
+    needs: offline-preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require exact shared YouTube environment main-only policy before channel OAuth
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: scripts
+        run: |
+          python - <<'PY'
+          import os
+          from youtube_channel_registry import get_channel
+          from youtube_new_channels_env_guard import fetch_protected_policy,policy_is_main_only
+          e,policies=fetch_protected_policy('games',os.environ.get('GH_TOKEN',''))
+          policy_is_main_only('games',e,policies)
+          for slug in ('en','games','alchemy'):
+            assert get_channel(slug)['youtube_environment']=='youtube-private-upload'
+          print('REMAINING_YOUTUBE_SHARED_ENVIRONMENT_MAIN_ONLY_VERIFIED_NO_OAUTH_USED')
+          PY
+
+  render-en:
+    needs: [offline-preflight, verify-image-environment]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 245
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Use pinned original Go image-generation proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install FFmpeg, Edge TTS, Pillow and canonical media dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Install and typecheck ORIGINAL Remotion renderer
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned original proxy without any image API secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/remaining-static-native-proxy-en" ./cmd/api
+      - name: Synthesize 3 voices, generate maximum 24 original STILL images, render 3 90-120s Shorts and official covers
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: '24'
+          REMAINING_en: en
+          REMAINING_STATIC_BATCH_AUTHORIZED: 'yes'
+        run: |
+          set -euo pipefail
+          umask 077
+          private_dir="$RUNNER_TEMP/remaining-static-en-proxy-state"
+          test ! -e "$private_dir"
+          mkdir -m 700 "$private_dir"
+          proxy_pid=''
+          cleanup() {
+            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$private_dir"
+            rm -f -- "$RUNNER_TEMP/remaining-static-en-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$private_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$private_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/remaining-static-native-proxy-en" > "$RUNNER_TEMP/remaining-static-en-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/remaining_static_90s_20261107.py --channel en --action render
+          echo "REMAINING_en_THREE_MP4_COMPLETE_en_NO_OAUTH"
+      - name: Store only the 3 validated MP4, covers and QA files, never proxy state or OAuth
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-static-90s-en-three-mp4-20261107
+          path: |
+            cloud-remaining-static-20261107/en/summary.json
+            cloud-remaining-static-20261107/en/**/final.mp4
+            cloud-remaining-static-20261107/en/**/thumb.jpg
+            cloud-remaining-static-20261107/en/**/qa.json
+            cloud-remaining-static-20261107/en/**/metadata.json
+          retention-days: 7
+          if-no-files-found: error
+
+  upload-en-private:
+    needs: [render-en, verify-youtube-environment]
+    if: >-
+      needs.render-en.result == 'success' &&
+      needs.verify-youtube-environment.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Google official API, ffprobe, Pillow and SHA256 verification tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Download only same-run original QA passed 3 MP4s and covers
+        uses: actions/download-artifact@v4
+        with:
+          name: remaining-static-90s-en-three-mp4-20261107
+          path: cloud-remaining-static-20261107/en/
+      - name: Confirm exact channel ID and private upload each of 3, deduping by own uploads list
+        env:
+          REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
+          REMAINING_en: en
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_en_TOKEN_JSON: en_TOKEN_PLACEHOLDER
+        run: python scripts/remaining_static_90s_upload_20261107.py --channel en --action upload
+      - name: Preserve every matched/uploaded real YouTube ID, even on a partial failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-private-youtube-en-receipts-20261107
+          path: cloud-remaining-static-20261107/en/youtube-private-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
+
+  render-games:
+    needs: [offline-preflight, verify-image-environment, render-en]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 245
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Use pinned original Go image-generation proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install FFmpeg, Edge TTS, Pillow and canonical media dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Install and typecheck ORIGINAL Remotion renderer
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned original proxy without any image API secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/remaining-static-native-proxy-games" ./cmd/api
+      - name: Synthesize 3 voices, generate maximum 24 original STILL images, render 3 90-120s Shorts and official covers
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: '24'
+          REMAINING_games: games
+          REMAINING_STATIC_BATCH_AUTHORIZED: 'yes'
+        run: |
+          set -euo pipefail
+          umask 077
+          private_dir="$RUNNER_TEMP/remaining-static-games-proxy-state"
+          test ! -e "$private_dir"
+          mkdir -m 700 "$private_dir"
+          proxy_pid=''
+          cleanup() {
+            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$private_dir"
+            rm -f -- "$RUNNER_TEMP/remaining-static-games-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$private_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$private_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/remaining-static-native-proxy-games" > "$RUNNER_TEMP/remaining-static-games-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/remaining_static_90s_20261107.py --channel games --action render
+          echo "REMAINING_games_THREE_MP4_COMPLETE_games_NO_OAUTH"
+      - name: Store only the 3 validated MP4, covers and QA files, never proxy state or OAuth
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-static-90s-games-three-mp4-20261107
+          path: |
+            cloud-remaining-static-20261107/games/summary.json
+            cloud-remaining-static-20261107/games/**/final.mp4
+            cloud-remaining-static-20261107/games/**/thumb.jpg
+            cloud-remaining-static-20261107/games/**/qa.json
+            cloud-remaining-static-20261107/games/**/metadata.json
+          retention-days: 7
+          if-no-files-found: error
+
+  upload-games-private:
+    needs: [render-games, verify-youtube-environment]
+    if: >-
+      needs.render-games.result == 'success' &&
+      needs.verify-youtube-environment.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Google official API, ffprobe, Pillow and SHA256 verification tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Download only same-run original QA passed 3 MP4s and covers
+        uses: actions/download-artifact@v4
+        with:
+          name: remaining-static-90s-games-three-mp4-20261107
+          path: cloud-remaining-static-20261107/games/
+      - name: Confirm exact channel ID and private upload each of 3, deduping by own uploads list
+        env:
+          REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
+          REMAINING_games: games
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_games_TOKEN_JSON: games_TOKEN_PLACEHOLDER
+        run: python scripts/remaining_static_90s_upload_20261107.py --channel games --action upload
+      - name: Preserve every matched/uploaded real YouTube ID, even on a partial failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-private-youtube-games-receipts-20261107
+          path: cloud-remaining-static-20261107/games/youtube-private-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
+
+  render-alchemy:
+    needs: [offline-preflight, verify-image-environment, render-games]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 245
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Use pinned original Go image-generation proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install FFmpeg, Edge TTS, Pillow and canonical media dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Install and typecheck ORIGINAL Remotion renderer
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned original proxy without any image API secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/remaining-static-native-proxy-alchemy" ./cmd/api
+      - name: Synthesize 3 voices, generate maximum 24 original STILL images, render 3 90-120s Shorts and official covers
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: '24'
+          REMAINING_alchemy: alchemy
+          REMAINING_STATIC_BATCH_AUTHORIZED: 'yes'
+        run: |
+          set -euo pipefail
+          umask 077
+          private_dir="$RUNNER_TEMP/remaining-static-alchemy-proxy-state"
+          test ! -e "$private_dir"
+          mkdir -m 700 "$private_dir"
+          proxy_pid=''
+          cleanup() {
+            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$private_dir"
+            rm -f -- "$RUNNER_TEMP/remaining-static-alchemy-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$private_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$private_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/remaining-static-native-proxy-alchemy" > "$RUNNER_TEMP/remaining-static-alchemy-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/remaining_static_90s_20261107.py --channel alchemy --action render
+          echo "REMAINING_alchemy_THREE_MP4_COMPLETE_alchemy_NO_OAUTH"
+      - name: Store only the 3 validated MP4, covers and QA files, never proxy state or OAuth
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-static-90s-alchemy-three-mp4-20261107
+          path: |
+            cloud-remaining-static-20261107/alchemy/summary.json
+            cloud-remaining-static-20261107/alchemy/**/final.mp4
+            cloud-remaining-static-20261107/alchemy/**/thumb.jpg
+            cloud-remaining-static-20261107/alchemy/**/qa.json
+            cloud-remaining-static-20261107/alchemy/**/metadata.json
+          retention-days: 7
+          if-no-files-found: error
+
+  upload-alchemy-private:
+    needs: [render-alchemy, verify-youtube-environment]
+    if: >-
+      needs.render-alchemy.result == 'success' &&
+      needs.verify-youtube-environment.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Google official API, ffprobe, Pillow and SHA256 verification tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Download only same-run original QA passed 3 MP4s and covers
+        uses: actions/download-artifact@v4
+        with:
+          name: remaining-static-90s-alchemy-three-mp4-20261107
+          path: cloud-remaining-static-20261107/alchemy/
+      - name: Confirm exact channel ID and private upload each of 3, deduping by own uploads list
+        env:
+          REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
+          REMAINING_alchemy: alchemy
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_alchemy_TOKEN_JSON: alchemy_TOKEN_PLACEHOLDER
+        run: python scripts/remaining_static_90s_upload_20261107.py --channel alchemy --action upload
+      - name: Preserve every matched/uploaded real YouTube ID, even on a partial failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-private-youtube-alchemy-receipts-20261107
+          path: cloud-remaining-static-20261107/alchemy/youtube-private-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
+
