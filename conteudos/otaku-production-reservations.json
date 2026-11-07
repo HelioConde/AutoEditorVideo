@@ -1206,129 +1206,99 @@
     },
     {
       "channel": "en",
-      "id": "en-20261107-noelle-black-clover",
+      "id": "7011-noelle-black-clover",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "en",
-      "id": "en-20261107-maomao-apothecary",
+      "id": "7012-maomao-apothecary",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "en",
-      "id": "en-20261107-shizuku-hunter",
+      "id": "7013-shizuku-hunter",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "games",
-      "id": "games-20261107-minecraft-agua",
+      "id": "game-101-minecraft-agua",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "games",
-      "id": "games-20261107-roblox-obby",
+      "id": "game-102-roblox-obby",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "games",
-      "id": "games-20261107-minecraft-creeper",
+      "id": "game-103-minecraft-creeper",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "alchemy",
-      "id": "alchemy-20261107-video-ia-realidade",
+      "id": "alchemy-101-video-ia-realidade",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "alchemy",
-      "id": "alchemy-20261107-agentes-chatbot",
+      "id": "alchemy-102-agentes-chatbot",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "alchemy",
-      "id": "alchemy-20261107-prompt-consistencia",
+      "id": "alchemy-103-prompt-consistencia",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "kids",
-      "id": "kids-20261107-fofinhos-flor",
-      "status": "cancelled",
-      "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Pauta do lote 2026-11-07 substituída por conteúdo infantil independente. Não altera a série Fofinhos nem seus episódios originais.",
-      "cancelled_at": "2026-11-07",
-      "replaced_by": "kids-20261107-elefantinho-agua-escondida"
-    },
-    {
-      "channel": "kids",
-      "id": "kids-20261107-fofinhos-borboleta",
-      "status": "cancelled",
-      "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Pauta do lote 2026-11-07 substituída por conteúdo infantil independente. Não altera a série Fofinhos nem seus episódios originais.",
-      "cancelled_at": "2026-11-07",
-      "replaced_by": "kids-20261107-quiz-sombras-animais"
-    },
-    {
-      "channel": "kids",
-      "id": "kids-20261107-fofinhos-nuvem",
-      "status": "cancelled",
-      "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_explicit_2026-11-07",
-      "note": "Pauta do lote 2026-11-07 substituída por conteúdo infantil independente. Não altera a série Fofinhos nem seus episódios originais.",
-      "cancelled_at": "2026-11-07",
-      "replaced_by": "kids-20261107-dinos-segredos-incriveis"
-    },
-    {
-      "channel": "kids",
-      "id": "kids-20261107-elefantinho-agua-escondida",
+      "id": "kids-101-elefantinho-agua-escondida",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_revision_2026-11-07",
-      "note": "Emanuelly Kids: vídeo avulso, sem Fofinhos, 90-120s, original, Made for Kids, modo estático, sem execução/upload autorizado apenas pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "kids",
-      "id": "kids-20261107-quiz-sombras-animais",
+      "id": "kids-102-quiz-sombras-animais",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_revision_2026-11-07",
-      "note": "Emanuelly Kids: vídeo avulso, sem Fofinhos, 90-120s, original, Made for Kids, modo estático, sem execução/upload autorizado apenas pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     },
     {
       "channel": "kids",
-      "id": "kids-20261107-dinos-segredos-incriveis",
+      "id": "kids-103-dinos-segredos-incriveis",
       "status": "reserved",
       "reservation_owner": "lote12_static_original_20261107",
-      "source": "user_revision_2026-11-07",
-      "note": "Emanuelly Kids: vídeo avulso, sem Fofinhos, 90-120s, original, Made for Kids, modo estático, sem execução/upload autorizado apenas pela reserva."
+      "source": "user_request_2026-11-07",
+      "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
