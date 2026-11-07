@@ -6,7 +6,7 @@
 
 - **Os 50 animes únicos** do catálogo V4 receberam o perfil de duração `short_90s_test`, alvo de **01:30 (90 segundos)** e tolerância técnica de **87 a 93 segundos**.
 - O arquivo `conteudos/otaku-multicena-teste-90s-v1.json` contém **50 perfis editoriais**, mas **apenas os cinco primeiros** possuem roteiros originais completos de teste. Os 45 restantes são pautas e **não** devem ser tratados como roteiros prontos.
-- Os cinco roteiros foram reescritos com narrativas específicas e fontes para conferência: Death Note (225 palavras), Steel Ball Run (220), Demon Slayer (223), Blue Box (221) e The Apothecary Diaries (217). Os 45 restantes ainda não têm roteiros.
+- Os cinco roteiros foram reescritos com narrativas específicas e fontes para conferência: Death Note (222 palavras), Steel Ball Run (220), Demon Slayer (223), Blue Box (221) e The Apothecary Diaries (217). Os 45 restantes ainda não têm roteiros.
 - O gancho falado foi reduzido para cerca de **5–7 palavras**, pensando numa abertura de 1–3 segundos, sem perder contexto.
 - O tempo real **só é confirmado com o arquivo de áudio do TTS**; 200 palavras por si só não garantem 90 segundos. Não acelerar a narração demais nem inserir silêncios artificiais para forçar a meta.
 - O planejamento visual sugere **10 tomadas distintas**, com marcos aproximados em 0, 4, 12, 19, 29, 40, 50, 61, 71, 81 e 90 segundos. Os cortes efetivos devem respeitar as marcações reais das palavras e as ações da cena.
