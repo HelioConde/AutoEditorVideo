@@ -1,0 +1,24 @@
+{
+  "schema": "autoeditorvideo/remaining-nine-upload-only-recovery/v1",
+  "authorized_by_user": "2026-11-07",
+  "render_source_run_id": 42403948203,
+  "source_artifacts": {
+    "en": "remaining-static-90s-en-three-mp4-20261107",
+    "games": "remaining-static-90s-games-three-mp4-20261107",
+    "alchemy": "remaining-static-90s-alchemy-three-mp4-20261107"
+  },
+  "channel_order": [
+    "en",
+    "games",
+    "alchemy"
+  ],
+  "visibility": "private",
+  "made_for_kids": false,
+  "no_new_images": true,
+  "no_new_audio": true,
+  "no_new_video_render": true,
+  "no_publication": true,
+  "no_blind_retry": true,
+  "verify_sha256_and_reservations": true,
+  "reuse_existing_youtube_id_when_owned_and_exact": true
+}
