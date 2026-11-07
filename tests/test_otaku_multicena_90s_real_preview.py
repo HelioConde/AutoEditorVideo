@@ -61,7 +61,7 @@ def test_provider_budget_and_no_fake_artwork_fallback():
     assert 'inspect_mp4(mp4,duration_profile="short_90s_test")' in src
     assert "youtube.videos().insert" not in src
     assert "--publicar" not in src
-    assert '"otaku-real-90s-review"' not in src  # artifact path is named clearly
+    assert 'YOUTUBE_BR_TOKEN_JSON' in src  # explicit safety gate only
     assert "no_fake_art_or_voice_fallback" in src
 
 def test_control_flags_are_unchanged():
