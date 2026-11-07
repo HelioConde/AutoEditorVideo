@@ -38,7 +38,7 @@
   "research_note": "vidIQ trending videos queried 2026-11-07; headings indicate topic interest, not guaranteed audience response. Official Black Clover & Apothecary sources linked. Existing private gamer/alchemy uploads must not be re-uploaded. Roblox obby 2026-11-02 trend independently validated with vidIQ. Trending signals do not prove video performance.",
   "episodes": [
     {
-      "id": "en-20261107-noelle-black-clover",
+      "id": "7011-noelle-black-clover",
       "channel": "en",
       "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
       "language": "en-US",
@@ -150,7 +150,7 @@
       }
     },
     {
-      "id": "en-20261107-maomao-apothecary",
+      "id": "7012-maomao-apothecary",
       "channel": "en",
       "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
       "language": "en-US",
@@ -263,7 +263,7 @@
       }
     },
     {
-      "id": "en-20261107-shizuku-hunter",
+      "id": "7013-shizuku-hunter",
       "channel": "en",
       "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
       "language": "en-US",
@@ -376,7 +376,7 @@
       }
     },
     {
-      "id": "games-20261107-minecraft-agua",
+      "id": "game-101-minecraft-agua",
       "channel": "games",
       "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
       "language": "pt-BR",
@@ -489,7 +489,7 @@
       }
     },
     {
-      "id": "games-20261107-roblox-obby",
+      "id": "game-102-roblox-obby",
       "channel": "games",
       "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
       "language": "pt-BR",
@@ -601,7 +601,7 @@
       }
     },
     {
-      "id": "games-20261107-minecraft-creeper",
+      "id": "game-103-minecraft-creeper",
       "channel": "games",
       "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
       "language": "pt-BR",
@@ -713,7 +713,7 @@
       }
     },
     {
-      "id": "alchemy-20261107-video-ia-realidade",
+      "id": "alchemy-101-video-ia-realidade",
       "channel": "alchemy",
       "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
       "language": "pt-BR",
@@ -825,7 +825,7 @@
       }
     },
     {
-      "id": "alchemy-20261107-agentes-chatbot",
+      "id": "alchemy-102-agentes-chatbot",
       "channel": "alchemy",
       "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
       "language": "pt-BR",
@@ -935,7 +935,7 @@
       }
     },
     {
-      "id": "alchemy-20261107-prompt-consistencia",
+      "id": "alchemy-103-prompt-consistencia",
       "channel": "alchemy",
       "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
       "language": "pt-BR",
@@ -1045,7 +1045,7 @@
       }
     },
     {
-      "id": "kids-20261107-elefantinho-agua-escondida",
+      "id": "kids-101-elefantinho-agua-escondida",
       "channel": "kids",
       "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
       "language": "pt-BR",
@@ -1160,7 +1160,7 @@
       }
     },
     {
-      "id": "kids-20261107-quiz-sombras-animais",
+      "id": "kids-102-quiz-sombras-animais",
       "channel": "kids",
       "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
       "language": "pt-BR",
@@ -1277,7 +1277,7 @@
       "pacing_notes": "2.5-3.5 s de pausa de pensamento real antes de cada revelação; manter duração medida de 90-120 s sem acelerar a voz"
     },
     {
-      "id": "kids-20261107-dinos-segredos-incriveis",
+      "id": "kids-103-dinos-segredos-incriveis",
       "channel": "kids",
       "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
       "language": "pt-BR",
@@ -1404,13 +1404,27 @@
       "kids-20261107-fofinhos-nuvem"
     ],
     "replacements": [
-      "kids-20261107-elefantinho-agua-escondida",
-      "kids-20261107-quiz-sombras-animais",
-      "kids-20261107-dinos-segredos-incriveis"
+      "kids-101-elefantinho-agua-escondida",
+      "kids-102-quiz-sombras-animais",
+      "kids-103-dinos-segredos-incriveis"
     ],
     "kids_series_fofinhos": "reserved for personal/manual supervision; never generate or publish from this batch",
     "vidiq_evidence_note": "2026-11-07 recent trend samples animal stories, guess-the-animal quizzes, dinosaur Shorts; no guarantee of results; vidIQ credits exhausted after discovery",
     "original_illustrations_only": true,
-    "characters": "original stand-alone only; no Emanuelly/Fofinhos characters"
+    "characters": "original stand-alone only; no Emanuelly/Fofinhos characters",
+    "original_draft_ids_archived": [
+      "en-20261107-noelle-black-clover",
+      "en-20261107-maomao-apothecary",
+      "en-20261107-shizuku-hunter",
+      "games-20261107-minecraft-agua",
+      "games-20261107-roblox-obby",
+      "games-20261107-minecraft-creeper",
+      "alchemy-20261107-video-ia-realidade",
+      "alchemy-20261107-agentes-chatbot",
+      "alchemy-20261107-prompt-consistencia",
+      "kids-20261107-elefantinho-agua-escondida",
+      "kids-20261107-quiz-sombras-animais",
+      "kids-20261107-dinos-segredos-incriveis"
+    ]
   }
 }
