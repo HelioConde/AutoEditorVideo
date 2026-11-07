@@ -223,8 +223,13 @@ def main()->int:
         render(report)
         return 0
     except Exception as exc:
-        print("[OTAKU V9 BLOCKED] "+
-              (str(exc) if isinstance(exc,Blocked) else type(exc).__name__),
+        # Print only the trusted local filename and line number, never
+        # provider payloads, secrets or user-controlled exception strings.
+        import traceback
+        details=traceback.extract_tb(exc.__traceback__)
+        origin=details[-1] if details else None
+        location=(Path(origin.filename).name+":"+str(origin.lineno)+":"+origin.name) if origin else "unknown"
+        print("[OTAKU V9 BLOCKED] "+type(exc).__name__+" at "+location,
               file=sys.stderr)
         return 1
 
