@@ -103,5 +103,10 @@ test('both renderers consume opening cuts and keep captions off the face',()=>{
   assert.ok(master.includes("safeZoom=Math.min(1.115"));
   assert.ok(legacy.includes("background:'rgba(2,5,15,.86)'"));
   assert.ok(master.includes("background:'rgba(2,5,15,.85)'"));
-  assert.ok(master.includes('top:1258') && legacy.includes('top:1280'));
+  // V6 moves captions into the mobile-safe zone, while all legacy
+  // compositions retain their exact historic caption baseline.
+  assert.ok(master.includes("top:visualProfile==='otaku-v6-vertical'?1360:1258"));
+  assert.ok(legacy.includes('top:1280'));
+  assert.ok(master.includes("left:visualProfile==='otaku-v6-vertical'?116:78"));
+  assert.ok(master.includes("fontSize:visualProfile==='otaku-v6-vertical'?65:79"));
 });
