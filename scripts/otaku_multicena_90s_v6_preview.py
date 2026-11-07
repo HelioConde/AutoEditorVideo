@@ -48,6 +48,33 @@ SIZE=(1024,1536)
 VOICE_RATES=(5,8,8,6,6,4)
 VOICE_PITCHES=(4,-2,3,0,-2,-4)
 PAUSES=(.12,.16,.19,.12,.17,0.)
+# Immutable GitHub artifact from the preceding real generation: reuse first,
+# verify every byte, and never buy the same 20 pictures twice.
+CACHED_SOURCE_RUN="42332358380"
+CACHED_ORIGINAL_SHA256={
+"background-01.png":"1ca6e5aecb89be5bcc0bfa1ac4860c925963ca29ba595119a422ecc732315219",
+"background-02.png":"9a22e120077e64f6cc169c7aa5628c5c0ea2a547ae7583debf1c6a32b213bcce",
+"background-03.png":"8f2902986e2dd5713fb05686d3ae9b7b8c7c0c4f593bfc914d115fa9de46de6e",
+"background-04.png":"10950bab42e3cecf21cadb5919f47f2942ff244ebdf96a583150acab8e8c6fee",
+"background-05.png":"038181a5ce82ffa061f9ce4bf5f56cb62445e130672a7eeb61a26d541f120db5",
+"background-06.png":"fe409e0e8d1731be621c5a41ce2f684cd3245f019f0a1c3d4f40d3dbb9ccfcd1",
+"background-07.png":"dfb025321f5c62b6526a1d8b20a9d2317a3bbfd5e9b7d9b100ff1cda26adb038",
+"background-08.png":"b5a939980a29db9b335186ff8d71bad3d74404322dd2fd033d5f12c60bad76f7",
+"background-09.png":"a0466da0e7985a516cfe7fa6cd8b0e03956d4d27889ae9a22f01af4cf05e6aee",
+"background-10.png":"8af357fc6ebcd85c8e6990d081e53bfcf7b0c1e2390fd9165fa0f4471c0acab4",
+"pose-01-1.png":"cfabe0133c86ac428186a8a1dcb454fc8b980c9fa0ef99dc3355deae9cb98695",
+"pose-01-2.png":"7aad7f9461b8acaf806e851c18fb032379d89bdf823b46f950b0dd2e01058806",
+"pose-03-1.png":"b0da83dc458f22694ea61cab7d8fe23f5de18dda852da6274e3b9a3e6422620d",
+"pose-03-2.png":"1cdb8b4e2ed9df5ffe8138ca5838d3d29b204a7f85b6f497c0360c6e76811389",
+"pose-05-1.png":"fcebfb9b195325d52ec79abc3d58d287ed8c456b8f39f888873cb6b8026709e8",
+"pose-05-2.png":"0fc56b638dda154364f44701f5b82102ff35ed0d8445e21d4df767b34d92132d",
+"pose-07-1.png":"9bb01ad14d811fa94b0976a2ac6afb3822e9340e67080559e415bd5cd50c0ada",
+"pose-07-2.png":"5bf830387d9e71999646ebb382a2b64db71096833f41631d9f71ecf279dfad9f",
+"pose-09-1.png":"0f96b5f65d2e778472e730ae219ba801970225748f3b7a30f2a0d3679e917970",
+"pose-09-2.png":"ddc91ebd1833b994c38e4f9073509371879c65a0fbe4f5e06ea660d912873e10",
+"voz-master.mp3":"d67cd58ff30c45d4aeede31484434360e96f9bd855a27fce96f2866646927398",
+"marcacoes-voz.json":"544f61af96fade7b23639725894b3336727a55bb6c95c97a3b402c049e19c530",
+}
 
 class V6Blocked(RuntimeError):
     pass
@@ -60,7 +87,8 @@ def check_env(env:dict[str,str])->dict:
         "OTAKU_V6_ONE_PREVIEW":"1","GITHUB_REPOSITORY":"HelioConde/AutoEditorVideo",
         "GITHUB_REF":"refs/heads/main","GITHUB_RUN_ATTEMPT":"1",
         "GITHUB_EVENT_NAME":"push","GITHUB_WORKFLOW":WORKFLOW,
-        "IMAGE_MODEL":MODEL,"MAX_IMAGE_CALLS":"20"}.items())):
+        "IMAGE_MODEL":MODEL,
+        "MAX_IMAGE_CALLS":("0" if env.get("OTAKU_V6_REUSE_ARTIFACT")==CACHED_SOURCE_RUN else "20")}.items())):
         raise V6Blocked("ONLY_EXPLICIT_FIRST_MAIN_PREVIEW_ACCEPTED")
     if env.get("YOUTUBE_BR_TOKEN_JSON") or env.get("YOUTUBE_CLIENT_JSON"):
         raise V6Blocked("YOUTUBE_CREDENTIALS_ARE_FORBIDDEN")
@@ -78,8 +106,13 @@ def check_env(env:dict[str,str])->dict:
         row.get("ready_to_render") is not False or
         row.get("story_segments",[])[-1]["role"]!="resultado"):
         raise V6Blocked("DEATH_NOTE_SCRIPT_CONTRACT_WRONG")
-    if WORK.exists() or MEDIA.exists() or REVIEW.exists():
+    reuse=env.get("OTAKU_V6_REUSE_ARTIFACT")
+    if reuse and reuse!=CACHED_SOURCE_RUN:
+        raise V6Blocked("UNAUTHORIZED_CACHED_ARTIFACT")
+    if MEDIA.exists() or REVIEW.exists() or (WORK.exists() and not reuse):
         raise V6Blocked("V6_ARTIFACT_EXISTS_DO_NOT_DUPLICATE")
+    if reuse and env.get("MAX_IMAGE_CALLS")!="0":
+        raise V6Blocked("REUSE_MUST_NOT_GENERATE_ANY_PAID_IMAGE")
     return row
 
 # Every generated still must be an original editorial illustration, not an
@@ -246,6 +279,69 @@ def produce_art(row:dict,key:str)->tuple[list[Path],dict[int,list[Path]],dict]:
     if len(validated)<3:
         raise V6Blocked("FEWER_THAN_THREE_REAL_POSE_ANIMATIONS_PASSED")
     return backgrounds,validated,reports
+
+def reuse_original_art_and_voice(row:dict)->tuple[Path,float,list[dict],dict,list[Path],dict[int,list[Path]],dict]:
+    """Read immutable original PNG/TTS evidence; do not call proxy or TTS."""
+    if not WORK.is_dir():
+        raise V6Blocked("CACHED_ARTIFACT_NOT_RESTORED")
+    for name,expected in CACHED_ORIGINAL_SHA256.items():
+        p=WORK/name
+        if not p.is_file() or sha(p)!=expected:
+            raise V6Blocked("CACHED_SOURCE_HASH_MISMATCH_"+name.replace(".","_"))
+    backgrounds=[WORK/("background-%02d.png"%(i+1)) for i in range(SCENES)]
+    originals={i:[WORK/("pose-%02d-%d.png"%(i+1,n)) for n in (1,2)]
+               for i in ANIMATED_SHOTS}
+    for file in backgrounds:
+        with Image.open(file) as im:
+            if im.size!=SIZE or im.mode!="RGB":
+                raise V6Blocked("CACHED_BACKGROUND_FORMAT_INVALID")
+    report={"source_run_id":CACHED_SOURCE_RUN,
+            "artwork_sha256_verified":True,
+            "original_pose_scene_count":len(originals),
+            "originals_preserved_without_rewriting":True,
+            "original_rejections":{},
+            "validated_original_scenes":[]}
+    valid={}
+    for scene,files in originals.items():
+        try:
+            report[str(scene+1)]=inspect_poses(files)
+            valid[scene]=files
+            report["validated_original_scenes"].append(scene+1)
+        except ValueError as exc:
+            report["original_rejections"][str(scene+1)]=str(exc)
+    # Scene 01 poses were independently generated with radically different
+    # framing (full body vs seated crop). Scene 03 pose 2 is a separately
+    # generated, original, FULL-BODY variant of the SAME two investigators,
+    # with a changed questioning gesture. Reassign it transparently, never
+    # warp or fabricate pixels or silently accept invalid scene pairs.
+    repaired=[WORK/"pose-01-1.png",WORK/"pose-03-2.png"]
+    repair_report=inspect_poses(repaired)
+    valid[0]=repaired
+    report["1"]=repair_report
+    report["repaired_scene_pairs"]={"1":{
+        "pose_files":[x.name for x in repaired],
+        "reused_from_original_shot":3,
+        "review_only":True,
+        "human_identity_continuity_review_required":True}}
+    report["validated_scene_count"]=len(valid)
+    report["generated_original_images_reused"]=20
+    if len(valid)<3:
+        raise V6Blocked("CACHED_ART_REPAIR_STILL_BELOW_THREE_REAL_ANIMATIONS")
+    audio=WORK/"voz-master.mp3"
+    duration=previous.probe_seconds(audio)
+    if not 87<=duration<=93:
+        raise V6Blocked("CACHED_ORIGINAL_TTS_OUT_OF_90S_RANGE")
+    captions=captions_from_markers(audio,row["narration_script"],duration,fps=FPS)
+    if not captions or len(captions)<45:
+        raise V6Blocked("CACHED_ORIGINAL_CAPTIONS_INVALID")
+    voiceqa={"source":"original cached Edge TTS WordBoundary from GitHub Actions run "+CACHED_SOURCE_RUN,
+             "segments":6,"voice_duration_seconds":duration,
+             "reuse_sha256_verified":True}
+    (WORK/"pose-validation-v6-reuse.json").write_text(
+        json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    print("[OTAKU V6] CACHED_ART_VERIFIED_WITHOUT_NEW_PAID_GENERATION",flush=True)
+    print("[OTAKU V6] AUTHENTIC_REPAIRED_ANIMATED_SCENES_"+str(sorted(i+1 for i in valid)),flush=True)
+    return audio,duration,captions,voiceqa,backgrounds,valid,report
 
 async def edge_part(text:str,rate:int,pitch:int)->tuple[bytes,list[dict]]:
     import edge_tts
@@ -458,6 +554,8 @@ def build_preview(row:dict,audio:Path,seconds:float,captions:list[dict],
       "animated_rgba_shots":valid_animated_count,
       "independent_rgba_pose_images":valid_animated_count*2,
       "generated_rgba_pose_images_before_qa":10,
+      "original_cached_run_id":(CACHED_SOURCE_RUN if os.environ.get("OTAKU_V6_REUSE_ARTIFACT") else None),
+      "new_paid_image_calls":(0 if os.environ.get("OTAKU_V6_REUSE_ARTIFACT") else ART_REQUESTS),
       "actual_pose_qa":poseqa,"pose_frame_changes_real":True,
       "true_skeletal_2d_bones":False,
       "voice_segments":voiceqa,"voice_and_captions_real":True,
@@ -479,12 +577,15 @@ def main()->int:
             print(json.dumps({"status":"V6_ONE_AUTHORIZED_OFFLINE_REVIEW_ONLY",
                "expected_image_calls":ART_REQUESTS,"youtube":False},ensure_ascii=False))
             return 0
-        audio,duration,captions,voiceqa=compose_voice(row)
-        print("[OTAKU V6] MEASURED_EXPRESSIVE_TTS_%.3f"%duration,flush=True)
-        # Do not spend images if TTS is invalid or account is ineligible.
-        key=proxy_key()
-        check_proxy_accounts(key)
-        bg,poses,poseqa=produce_art(row,key)
+        if os.environ.get("OTAKU_V6_REUSE_ARTIFACT")==CACHED_SOURCE_RUN:
+            audio,duration,captions,voiceqa,bg,poses,poseqa=reuse_original_art_and_voice(row)
+        else:
+            audio,duration,captions,voiceqa=compose_voice(row)
+            print("[OTAKU V6] MEASURED_EXPRESSIVE_TTS_%.3f"%duration,flush=True)
+            # Do not spend images if TTS is invalid or account is ineligible.
+            key=proxy_key()
+            check_proxy_accounts(key)
+            bg,poses,poseqa=produce_art(row,key)
         build_preview(row,audio,duration,captions,bg,poses,poseqa,voiceqa)
         return 0
     except Exception as error:
