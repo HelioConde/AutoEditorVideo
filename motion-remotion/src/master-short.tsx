@@ -73,7 +73,7 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
         ? ordered.map(layer=>{
           // V7: every frame comes from one and the same RGBA illustration.
           // One layer at a time avoids the duplicate/ghost artifacts of V6.
-          const mesh=mode==='malha2d'?layer.meshFrames:mode==='pins2d'?layer.meshFrames:undefined;
+          const mesh=mode==='malha2d'?layer.meshFrames:mode==='pins2d'?layer.meshFrames:mode==='brush2d'?layer.meshFrames:undefined;
           if(mesh?.frames.length){
             const index=meshFrameIndex({
               frame,sceneStart:scene.startFrame,
