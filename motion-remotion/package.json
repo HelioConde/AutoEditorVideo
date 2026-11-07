@@ -11,7 +11,7 @@
     "render:emanuelly": "remotion render src/index.ts EmanuellySerieV1",
     "test:character": "node --test tests/character-idle.test.cjs",
     "test:shorts": "node --test tests/shorts-pacing.test.cjs",
-    "test:qa": "node --test tests/character-idle.test.cjs tests/shorts-pacing.test.cjs tests/pose-timeline.test.cjs",
+    "test:qa": "node --test tests/character-idle.test.cjs tests/shorts-pacing.test.cjs tests/pose-timeline.test.cjs tests/mesh-timeline.test.cjs",
     "typecheck": "tsc --noEmit",
     "render:fofinhos": "remotion render src/index.ts FofinhosEP01Canonico"
   },
