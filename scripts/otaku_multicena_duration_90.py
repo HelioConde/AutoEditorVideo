@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import unicodedata
 
 ROOT=Path(__file__).resolve().parents[1]
 PLAN=ROOT/"conteudos/otaku-multicena-teste-90s-v1.json"
@@ -19,9 +20,17 @@ CURATION=ROOT/"conteudos/otaku-multicena-animes-50-curadoria-v4.json"
 PAUSE=ROOT/"conteudos/otaku-br-50-serial-launch-20261106.json"
 TARGET=90
 TOLERANCE=3
-ROLES=("hook","contexto","tensao","virada","resposta","fechamento")
+ROLES=("hook","contexto","tensao","virada","resposta","resultado")
 MIN_WORDS=190
 MAX_WORDS=225
+
+FORBIDDEN_ENDING_TERMS=(
+    "inscreva", "inscrever", "inscricao", "curta", "curte", "curtir",
+    "like", "comente", "comenta", "comentarios", "compartilhe",
+    "compartilhar", "siga", "segue", "seguir", "ative o sininho",
+    "acompanhe", "proximo video", "proximo episodio", "deixe sua",
+    "link na", "e voce", "voce", "o que acha", "qual voce"
+)
 
 class DurationBlocked(ValueError):
     pass
@@ -31,6 +40,29 @@ def load(path:Path)->dict:
 
 def word_count(script:str)->int:
     return len(script.strip().split()) if script.strip() else 0
+
+def normalized_text(value:str)->str:
+    raw=unicodedata.normalize("NFKD",value.casefold())
+    return "".join(c for c in raw if not unicodedata.combining(c))
+
+
+def validate_result_only(story:dict)->str:
+    # A 90s test should end ON the story's payoff, not an audience prompt.
+    segments=story.get("story_segments",[])
+    if not segments:
+        return "planned_result_only_not_scripted"
+    ending=segments[-1].get("text","").strip()
+    norm=normalized_text(ending)
+    if (segments[-1].get("role")!="resultado" or
+        word_count(ending)<10 or word_count(ending)>30 or
+        not ending.endswith(".") or "?" in ending or
+        "!" in ending):
+        raise DurationBlocked("LAST_SEGMENT_MUST_DELIVER_RESULT_NOT_QUESTION")
+    if any(re.search(r"(?<!\\w)"+re.escape(term)+r"(?!\\w)",norm)
+           for term in FORBIDDEN_ENDING_TERMS):
+        raise DurationBlocked("END_OF_VIDEO_MUST_NOT_ASK_FOR_ENGAGEMENT")
+    return "result_only_verified_offline"
+
 
 def verify_record(plan:dict,story:dict)->dict:
     if (plan.get("schema")!="otaku-multicena/shorts-90s-editorial-test/v1"
@@ -42,7 +74,10 @@ def verify_record(plan:dict,story:dict)->dict:
         or story.get("factual_review") is not False
         or story.get("narration_generated") is not False
         or story.get("rendered") is not False
-        or story.get("no_auto_upload") is not True):
+        or story.get("no_auto_upload") is not True
+        or story.get("ending_policy")!="answer_only_no_cta"
+        or story.get("outro_music_or_logo_speech") is not False
+        or story.get("speech_direction",{}).get("no_closing_cta") is not True):
         raise DurationBlocked("INVALID_UNAPPROVED_90S_STORY_PROFILE")
     result={
         "rank":story["rank"],"anime":story["anime"],
@@ -52,6 +87,7 @@ def verify_record(plan:dict,story:dict)->dict:
         "story_status":story.get("script_status"),
         "reviewed":False,"safe_to_render":False,
     }
+    result["ending_check"]=validate_result_only(story)
     segments=story.get("story_segments",[])
     if segments:
         if [s.get("role") for s in segments]!=list(ROLES):
@@ -92,7 +128,11 @@ def verify_catalog()->dict:
     rows=plan.get("items")
     if not isinstance(rows,list) or len(rows)!=50 or len(cur.get("items",[]))!=50:
         raise DurationBlocked("FIFTY_ANIME_REQUIRED")
-    if plan.get("target_seconds")!=TARGET or plan.get("actual_duration_must_be_measured_from_tts") is not True:
+    if (plan.get("target_seconds")!=TARGET or
+        plan.get("actual_duration_must_be_measured_from_tts") is not True or
+        plan.get("ending_policy",{}).get("no_spoken_cta") is not True or
+        plan.get("ending_policy",{}).get("no_end_question") is not True or
+        plan.get("narration_policy",{}).get("last_seconds") is None):
         raise DurationBlocked("NINETY_SECOND_CONTRACT_MISSING")
     for a,b in zip(rows,cur["items"]):
         if (a.get("rank"),a.get("anime"),a.get("title")) != (
