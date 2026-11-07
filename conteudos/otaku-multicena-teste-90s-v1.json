@@ -111,7 +111,8 @@
       "word_count": 203,
       "estimated_seconds_at_150_wpm": 81.2,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 2,
@@ -205,7 +206,8 @@
       "word_count": 215,
       "estimated_seconds_at_150_wpm": 86,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 3,
@@ -299,7 +301,8 @@
       "word_count": 212,
       "estimated_seconds_at_150_wpm": 84.8,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 4,
@@ -393,7 +396,8 @@
       "word_count": 207,
       "estimated_seconds_at_150_wpm": 82.8,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 5,
@@ -487,7 +491,8 @@
       "word_count": 207,
       "estimated_seconds_at_150_wpm": 82.8,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 6,
@@ -549,7 +554,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 7,
@@ -611,7 +617,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 8,
@@ -673,7 +680,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 9,
@@ -735,7 +743,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 10,
@@ -797,7 +806,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 11,
@@ -859,7 +869,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 12,
@@ -921,7 +932,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 13,
@@ -983,7 +995,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 14,
@@ -1045,7 +1058,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 15,
@@ -1107,7 +1121,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 16,
@@ -1169,7 +1184,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 17,
@@ -1231,7 +1247,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 18,
@@ -1293,7 +1310,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 19,
@@ -1355,7 +1373,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 20,
@@ -1417,7 +1436,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 21,
@@ -1479,7 +1499,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 22,
@@ -1541,7 +1562,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 23,
@@ -1603,7 +1625,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 24,
@@ -1665,7 +1688,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 25,
@@ -1727,7 +1751,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 26,
@@ -1789,7 +1814,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 27,
@@ -1851,7 +1877,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 28,
@@ -1913,7 +1940,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 29,
@@ -1975,7 +2003,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 30,
@@ -2037,7 +2066,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 31,
@@ -2099,7 +2129,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 32,
@@ -2161,7 +2192,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 33,
@@ -2223,7 +2255,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 34,
@@ -2285,7 +2318,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 35,
@@ -2347,7 +2381,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 36,
@@ -2409,7 +2444,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 37,
@@ -2471,7 +2507,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 38,
@@ -2533,7 +2570,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 39,
@@ -2595,7 +2633,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 40,
@@ -2657,7 +2696,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 41,
@@ -2719,7 +2759,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 42,
@@ -2781,7 +2822,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 43,
@@ -2843,7 +2885,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 44,
@@ -2905,7 +2948,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 45,
@@ -2967,7 +3011,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 46,
@@ -3029,7 +3074,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 47,
@@ -3091,7 +3137,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 48,
@@ -3153,7 +3200,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 49,
@@ -3215,7 +3263,8 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     },
     {
       "rank": 50,
@@ -3277,7 +3326,86 @@
       "narration_script": null,
       "word_count": 0,
       "real_tts_measured_seconds": null,
-      "ready_to_render": false
+      "ready_to_render": false,
+      "target_shot_count": 10
     }
-  ]
+  ],
+  "visual_timing_reference": {
+    "shot_count": 10,
+    "estimated_only": true,
+    "notes": "NÃO cortar apenas pelo relógio: ajustar cada tomada às marcações reais da narração e às mudanças de ação; nunca manter 90s sobre cinco PNGs estáticos.",
+    "shots": [
+      {
+        "start": 0,
+        "end": 4,
+        "role": "hook",
+        "shot": "close",
+        "number": 1
+      },
+      {
+        "start": 4,
+        "end": 12,
+        "role": "contexto",
+        "shot": "wide",
+        "number": 2
+      },
+      {
+        "start": 12,
+        "end": 19,
+        "role": "contexto",
+        "shot": "detail",
+        "number": 3
+      },
+      {
+        "start": 19,
+        "end": 29,
+        "role": "tensao",
+        "shot": "medium",
+        "number": 4
+      },
+      {
+        "start": 29,
+        "end": 40,
+        "role": "tensao",
+        "shot": "reaction",
+        "number": 5
+      },
+      {
+        "start": 40,
+        "end": 50,
+        "role": "virada",
+        "shot": "wide",
+        "number": 6
+      },
+      {
+        "start": 50,
+        "end": 61,
+        "role": "virada",
+        "shot": "detail",
+        "number": 7
+      },
+      {
+        "start": 61,
+        "end": 71,
+        "role": "resposta",
+        "shot": "medium",
+        "number": 8
+      },
+      {
+        "start": 71,
+        "end": 81,
+        "role": "resposta",
+        "shot": "close",
+        "number": 9
+      },
+      {
+        "start": 81,
+        "end": 90,
+        "role": "fechamento",
+        "shot": "final",
+        "number": 10
+      }
+    ]
+  },
+  "completion_policy": "Os 50 animes possuem alvo 90s; apenas cinco roteiros completos foram escritos nesta fase. Nenhum vídeo de 90s deve ser produzido/publicado sem revisão e medição real de TTS."
 }
