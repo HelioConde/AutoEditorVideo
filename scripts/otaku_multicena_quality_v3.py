@@ -139,8 +139,17 @@ def build_preview(manifest_path: Path, captions_path: Path, public_root: Path,
     if doc.get("manual_visual_review") is not False:
         raise QualityBlocked("PREVIEW_CANNOT_CLAIM_HUMAN_APPROVAL")
     duration = doc.get("duration_frames")
-    if not isinstance(duration, int) or not 20 * FPS <= duration <= 60 * FPS:
-        raise QualityBlocked("VIDEO_DURATION_OUT_OF_RANGE")
+    # The 90-second experiment is explicitly opt-in. The legacy 20-60s
+    # limits and old published content remain unchanged.
+    duration_profile=doc.get("duration_profile", "legacy_short")
+    if duration_profile=="short_90s_test":
+        if not isinstance(duration, int) or not 87 * FPS <= duration <= 93 * FPS:
+            raise QualityBlocked("NINETY_SECOND_PROFILE_REQUIRES_MEASURED_87_TO_93S")
+    elif duration_profile=="legacy_short":
+        if not isinstance(duration, int) or not 20 * FPS <= duration <= 60 * FPS:
+            raise QualityBlocked("VIDEO_DURATION_OUT_OF_RANGE")
+    else:
+        raise QualityBlocked("UNKNOWN_DURATION_PROFILE")
     catalog = doc.get("sha256", {})
     shots = doc.get("shots", [])
     if not isinstance(catalog, dict) or not isinstance(shots, list) or not 8 <= len(shots) <= 12:
@@ -226,8 +235,11 @@ def build_preview(manifest_path: Path, captions_path: Path, public_root: Path,
     cuts = [0] + [marker_words[i]["startFrame"] for i in cue_indexes[1:]] + [duration]
     if any(b-a < 45 for a, b in zip(cuts, cuts[1:])):
         raise QualityBlocked("SHOTS_TOO_SHORT_FOR_READABILITY")
-    if any(b-a > 7 * FPS for a, b in zip(cuts, cuts[1:])):
-        raise QualityBlocked("SHOT_HELD_OVER_SEVEN_SECONDS")
+    # 90s episodes use up to twelve shots; holding every shot below 7s
+    # would make a full 90s programme mathematically impossible with ten.
+    max_hold=12 * FPS if duration_profile=="short_90s_test" else 7 * FPS
+    if any(b-a > max_hold for a, b in zip(cuts, cuts[1:])):
+        raise QualityBlocked("SHOT_HELD_TOO_LONG_FOR_DURATION_PROFILE")
     root = Path(public_root)
     relative = f"generated/otaku-quality-v3/{episode}"
     scene_items = []
@@ -311,6 +323,9 @@ def build_preview(manifest_path: Path, captions_path: Path, public_root: Path,
         "sound_effect_count": len(sound_cues),
         "pose_geometry_checks": pose_geometry_reports,
         "shot_start_frames": cuts,
+        "duration_profile": duration_profile,
+        "target_seconds": 90 if duration_profile=="short_90s_test" else None,
+        "actual_seconds_from_tts_markers": round(duration/FPS,3),
         "asset_sha256": {name: digest(path) for name, path in assets.items()},
         "technical_preflight": "assets_and_voice_markers_checked",
         "human_visual_review": False,
