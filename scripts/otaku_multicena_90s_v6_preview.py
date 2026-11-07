@@ -186,7 +186,7 @@ def standardize_pose(image:Image.Image)->Image.Image:
 def produce_art(row:dict,key:str)->tuple[list[Path],dict[int,list[Path]],dict]:
     if len(DIRECTIONS)!=SCENES or set(POSES)!=set(ANIMATED_SHOTS):
         raise V6Blocked("STORYBOARD_IMAGE_PLAN_INVALID")
-    WORK.mkdir(parents=True,exist_ok=False)
+    WORK.mkdir(parents=True,exist_ok=True)
     # Alpha-capability FIRST, so unsupported transparency cannot waste all
     # ten scene generations. Never use an opaque/green-screen fallback.
     first=image_original(key,original_prompt(0,pose=0),alpha=True)
@@ -255,11 +255,12 @@ def compose_voice(row:dict)->tuple[Path,float,list[dict],dict]:
         raise V6Blocked("NARRATION_STRUCTURE_OR_ENDING_INVALID")
     # Each segment gets a deliberately different pace and small pitch shift.
     # No time-stretch, clip reuse or artificial long silence.
+    direction=0
     for attempt in range(2):
         waveparts=[]
         marker=[]
         offset=0.
-        global_delta=0 if attempt==0 else 4
+        global_delta=direction
         for i,section in enumerate(sections):
             rate=VOICE_RATES[i]+global_delta
             audio,words=asyncio.run(edge_part(section["text"],rate,VOICE_PITCHES[i]))
@@ -281,9 +282,7 @@ def compose_voice(row:dict)->tuple[Path,float,list[dict],dict]:
         total=offset
         print("[OTAKU V6] TTS_EXPRESSIVE_TAKE_%d_%.3fs"%(attempt+1,total),flush=True)
         if not 87<=total<=93:
-            if attempt==0 and total<87:
-                # Next attempt should speak more slowly.
-                global_delta=-4
+            direction=-4 if total<87 else 4
             if attempt==1:raise V6Blocked("EXPRESSIVE_TTS_NOT_WITHIN_87_TO_93_SECONDS")
             continue
         combined=np.concatenate(waveparts)
