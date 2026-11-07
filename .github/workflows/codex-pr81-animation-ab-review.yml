@@ -1,0 +1,106 @@
+name: Codex PR81 - real adaptive character animation A/B review (no upload)
+
+on:
+  push:
+    branches:
+      - test/codex-face-performance-review-20261107
+    paths:
+      - .github/workflows/codex-pr81-animation-ab-review.yml
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: codex-pr81-one-no-cost-ab-review
+  cancel-in-progress: false
+
+jobs:
+  original-codex-engine-preflight:
+    if: >-
+      github.ref == 'refs/heads/test/codex-face-performance-review-20261107' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'test(review): launch one Codex PR81 A-B render from pinned artwork'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CODEX_PR81_ONE_REVIEW: '1'
+      MAX_IMAGE_CALLS: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
+      - name: Install existing Codex PR81 model and test dependencies
+        run: python -m pip install -r requirements-master.txt 'pytest>=8,<10'
+      - name: Verify reserved private test and original adaptive detector
+        run: |
+          set -euo pipefail
+          python -m pytest -q tests/test_codex_face_performance_review.py tests/test_adaptive_performance.py
+          python scripts/codex_face_performance_review.py --preflight
+          jq -e '.pause_requested==true and .authorized_public==false and .resume_authorized_after_maintenance==false' \
+            conteudos/otaku-br-50-serial-launch-20261106.json
+          python scripts/production_reservations.py --acao verificar-reserva \
+            --canal br --id 5995-codex-face-animation-test \
+            --owner chatgpt_codex_adaptive_performance_review_20261107
+
+  compare-a-b-videos:
+    needs: original-codex-engine-preflight
+    if: needs.original-codex-engine-preflight.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      CODEX_PR81_ONE_REVIEW: '1'
+      MAX_IMAGE_CALLS: '0'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - name: Install original FFmpeg, face analysis models and Remotion
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          python -m pip install -r requirements-master.txt
+          cd motion-remotion
+          npm ci --no-audit --no-fund
+          npm run typecheck
+          npm run test:qa
+      - name: Restore pinned authentic V6 art, backgrounds and voice
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-v6-original-art-and-pose-evidence
+          run-id: 42332358380
+          github-token: ${{ github.token }}
+          path: assets/gerados/otaku-v6-real-90s
+      - name: Render real original static A and Codex adaptive Canvas B
+        run: |
+          set -euo pipefail
+          python scripts/codex_face_performance_review.py
+          echo '[CODEX PR81] REAL_ENGINE_A_B_PASSED_NO_UPLOAD_NO_PAID_IMAGE_CALLS'
+      - name: Upload A/B MP4, detection report and sampled comparisons
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codex-pr81-natural-character-animation-A-B-review
+          path: codex-pr81-animation-review/
+          if-no-files-found: error
+          retention-days: 7
