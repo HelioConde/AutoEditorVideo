@@ -21,7 +21,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'fix(editor): retry ONE V7 mesh preview with FFmpeg installed (review only)'
+      github.event.head_commit.message == 'fix(editor): render ONE V7 mesh preview after Remotion timeline test fix'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
