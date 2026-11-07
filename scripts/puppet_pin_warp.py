@@ -107,6 +107,12 @@ def _inverse_tps(second:float)->tuple[np.ndarray,np.ndarray]:
                   (WIDTH,HEIGHT),interpolation=cv2.INTER_LINEAR)*HEIGHT
     return mx,my
 
+from functools import lru_cache
+
+@lru_cache(maxsize=1)
+def _identity_tps()->tuple[np.ndarray,np.ndarray]:
+    return _inverse_tps(0.)
+
 def warp_rgba(image:np.ndarray,second:float)->np.ndarray:
     """Pixel-safe premultiplied alpha, one original source, no ghost poses."""
     if image.shape!=(HEIGHT,WIDTH,4) or image.dtype!=np.uint8:
@@ -114,6 +120,11 @@ def warp_rgba(image:np.ndarray,second:float)->np.ndarray:
     if second<=0 or second>=SECONDS:
         return image.copy()
     mx,my=_inverse_tps(second)
+    # Cancel the TPS sampling grid's own subpixel identity offset.
+    # Otherwise the first nonzero frame causes a whole-body blur/flash.
+    base_x,base_y=_identity_tps()
+    mx=mx-base_x+np.arange(WIDTH,dtype=np.float32)[None,:]
+    my=my-base_y+np.arange(HEIGHT,dtype=np.float32)[:,None]
     normalized=image.astype(np.float32)/255.
     alpha=normalized[:,:,3:4]
     pre=np.concatenate([normalized[:,:,:3]*alpha,alpha],axis=2)
