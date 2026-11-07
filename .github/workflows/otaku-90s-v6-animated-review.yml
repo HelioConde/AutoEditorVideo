@@ -140,6 +140,19 @@ jobs:
           proxy_pid=$!
           python scripts/otaku_multicena_90s_v6_preview.py
           echo "[REVIEW ONLY] ONE V6 ANIMATED MP4_READY_NO_YOUTUBE_OAUTH_OR_UPLOAD"
+      - name: Preserve original generated assets and pose rejection report, even on QA failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-v6-original-art-and-pose-evidence
+          path: |
+            assets/gerados/otaku-v6-real-90s/background-*.png
+            assets/gerados/otaku-v6-real-90s/pose-*.png
+            assets/gerados/otaku-v6-real-90s/pose-validation-v6.json
+            assets/gerados/otaku-v6-real-90s/voz-master.mp3
+            assets/gerados/otaku-v6-real-90s/marcacoes-voz.json
+          retention-days: 3
+          if-no-files-found: ignore
       - name: Keep ONE original V6 MP4, pose QA, cover, script and report
         if: success()
         uses: actions/upload-artifact@v4
