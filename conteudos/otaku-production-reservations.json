@@ -1173,6 +1173,16 @@
       "source_artifact_run_id": 42332358380,
       "publication_target": "none_review_artifact_only",
       "note": "Single 8-second V8 Puppet Pin preview using pinned original V6 RGBA/background/voice. CPU inverse TPS deformation from anchored and movable artist control pins, no image calls, no YouTube upload, no 50-short queue changes."
+    },
+    {
+      "channel": "br",
+      "id": "5997-otaku-v9-motion-brush-8s-review",
+      "status": "reserved",
+      "reservation_owner": "chatgpt_v9_motion_brush_20261107",
+      "source": "creator_request_motion_brush_masked_animation_2026-11-07",
+      "source_artifact_run_id": 42332358380,
+      "publication_target": "none_review_artifact_only",
+      "note": "One 8s review-only, mask-guided brush vector motion of a single original RGBA + original background, with face protection and CPU flow QC; zero paid image calls, never resume paused 50 Shorts or publish."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
