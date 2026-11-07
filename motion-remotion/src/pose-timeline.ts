@@ -26,3 +26,19 @@ export const poseFrameIndex=({
   const p=steps%period;
   return p<frameCount?p:period-p;
 };
+
+
+/** Single-source mesh frames can be longer than the 2-24 frame pose rig.
+ * Always advance monotonically; never loop or blend with another identity. */
+export const meshFrameIndex=({
+  frame,sceneStart,compositionFps,meshFps,frameCount
+}:{
+  frame:number;sceneStart:number;compositionFps:number;
+  meshFps:number;frameCount:number
+}):number=>{
+  if(![frame,sceneStart,compositionFps,meshFps,frameCount].every(Number.isFinite) ||
+    compositionFps<=0 || meshFps<=0 || !Number.isInteger(frameCount) ||
+    frameCount<1 || frameCount>900)return 0;
+  return Math.min(frameCount-1,
+    Math.max(0,Math.floor((frame-sceneStart)*meshFps/compositionFps)));
+};
