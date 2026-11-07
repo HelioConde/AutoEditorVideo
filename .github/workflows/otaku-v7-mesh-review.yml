@@ -21,7 +21,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'test(editor): produce ONE V7 8s deformable mesh preview from saved V6 art'
+      github.event.head_commit.message == 'fix(editor): retry ONE V7 mesh preview with FFmpeg installed (review only)'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
@@ -74,6 +74,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
           command -v ffmpeg
           command -v ffprobe
           python -m pip install -r requirements-master.txt 'opencv-python-headless>=4.10,<5'
