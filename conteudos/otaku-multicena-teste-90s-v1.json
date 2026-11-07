@@ -1,0 +1,3283 @@
+{
+  "schema": "otaku-multicena/shorts-90s-editorial-test/v1",
+  "date": "2026-11-06",
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "scope": "50 anime candidates planned for 90-second format; 5 fully drafted pilot scripts; 45 require full rewrite before TTS and video.",
+  "target_seconds": 90,
+  "tolerance_seconds": 3,
+  "target_word_range": [
+    190,
+    225
+  ],
+  "actual_duration_must_be_measured_from_tts": true,
+  "avoid_dead_air_or_speed_distortion": true,
+  "baseline": "Compare against 35-45s Shorts by same franchise, equal 48h windows; experimental not causal proof.",
+  "visuals": "Target 10-12 meaningful scenes; do not present camera zoom as independent character animation.",
+  "copyright": "90s Shorts with active Content ID claims can be globally blocked; music, artwork and narration rights must be reviewed.",
+  "auto_generate_media": false,
+  "youtube_uploads_authorized": false,
+  "existing_45_receipts_preserved": true,
+  "legacy_workflows_unmodified": true,
+  "items": [
+    {
+      "rank": 1,
+      "anime": "Death Note",
+      "title": "Por que Light precisava que L confiasse nele? 📓",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [
+        {
+          "role": "hook",
+          "text": "Light queria derrotar L. Então por que decidiu trabalhar tão perto do próprio investigador?",
+          "word_count": 14
+        },
+        {
+          "role": "contexto",
+          "text": "Em Death Note, Light não enfrenta um inimigo comum. L é brilhante, suspeita dele desde cedo e transforma cada conversa numa disputa de informações. O desafio de Light não era apenas esconder o caderno: precisava descobrir quem L realmente era, entender suas provas e continuar parecendo inocente.",
+          "word_count": 47
+        },
+        {
+          "role": "tensao",
+          "text": "Quando Light entra na investigação, o risco aumenta. Cada pergunta pode revelar algo, e qualquer comportamento fora do normal desperta desconfiança. Ao mesmo tempo, ficar perto de L dá acesso a pistas sobre o que a polícia sabe, quais suspeitas ganharam força e quais erros o adversário está tentando provocar.",
+          "word_count": 50
+        },
+        {
+          "role": "virada",
+          "text": "Mas aqui está o paradoxo: trabalhar com L não significava que L confiava totalmente nele. Na verdade, os dois continuavam se observando. Light tentava parecer indispensável, enquanto L procurava uma contradição capaz de expor Kira. Essa proximidade era uma vantagem e uma armadilha para ambos.",
+          "word_count": 45
+        },
+        {
+          "role": "resposta",
+          "text": "Por isso, a resposta é mais interessante do que parece. Light não precisava conquistar uma amizade verdadeira. Precisava manter sua presença dentro do jogo, onde pudesse antecipar movimentos sem entregar a própria identidade. Quanto mais próximos ficavam, mais perigoso era o próximo erro.",
+          "word_count": 43
+        },
+        {
+          "role": "fechamento",
+          "text": "E você? Nesse duelo, quem controlava melhor a situação: Light ou L?",
+          "word_count": 12
+        }
+      ],
+      "narration_script": "Light queria derrotar L. Então por que decidiu trabalhar tão perto do próprio investigador? Em Death Note, Light não enfrenta um inimigo comum. L é brilhante, suspeita dele desde cedo e transforma cada conversa numa disputa de informações. O desafio de Light não era apenas esconder o caderno: precisava descobrir quem L realmente era, entender suas provas e continuar parecendo inocente. Quando Light entra na investigação, o risco aumenta. Cada pergunta pode revelar algo, e qualquer comportamento fora do normal desperta desconfiança. Ao mesmo tempo, ficar perto de L dá acesso a pistas sobre o que a polícia sabe, quais suspeitas ganharam força e quais erros o adversário está tentando provocar. Mas aqui está o paradoxo: trabalhar com L não significava que L confiava totalmente nele. Na verdade, os dois continuavam se observando. Light tentava parecer indispensável, enquanto L procurava uma contradição capaz de expor Kira. Essa proximidade era uma vantagem e uma armadilha para ambos. Por isso, a resposta é mais interessante do que parece. Light não precisava conquistar uma amizade verdadeira. Precisava manter sua presença dentro do jogo, onde pudesse antecipar movimentos sem entregar a própria identidade. Quanto mais próximos ficavam, mais perigoso era o próximo erro. E você? Nesse duelo, quem controlava melhor a situação: Light ou L?",
+      "word_count": 211,
+      "estimated_seconds_at_150_wpm": 84.4,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 2,
+      "anime": "JoJo's Bizarre Adventure: Steel Ball Run",
+      "title": "Johnny entrou na corrida sem conseguir ANDAR?! 🐎",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [
+        {
+          "role": "hook",
+          "text": "Johnny entrou numa corrida de cavalos mesmo sem conseguir andar. Mas por quê?",
+          "word_count": 13
+        },
+        {
+          "role": "contexto",
+          "text": "Em Steel Ball Run, Johnny Joestar foi um jóquei famoso antes de um acontecimento que mudou completamente sua vida. A perda da capacidade de andar também abalou sua confiança e seu futuro. Participar de uma travessia gigantesca parecia uma decisão absurda, especialmente quando cada etapa podia ser perigosa até para competidores experientes.",
+          "word_count": 52
+        },
+        {
+          "role": "tensao",
+          "text": "Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Johnny percebe algo inesperado e passa a enxergar naquela habilidade a possibilidade de compreender o próprio corpo de outra forma. A corrida deixa de ser apenas uma competição por dinheiro ou prestígio. Para ele, cada avanço representa uma chance de descobrir algo que parecia perdido.",
+          "word_count": 58
+        },
+        {
+          "role": "virada",
+          "text": "Só que Gyro não entrega respostas prontas. Johnny precisa observar, experimentar, falhar e voltar a tentar. Ao longo do caminho, os dois encontram rivais e situações que exigem estratégia, não só velocidade. A relação entre eles se transforma numa parte essencial da jornada.",
+          "word_count": 43
+        },
+        {
+          "role": "resposta",
+          "text": "É isso que torna a premissa tão forte: Johnny não entra simplesmente para provar que consegue vencer uma corrida. Ele está atrás da possibilidade de recuperar um caminho para a própria vida. E, a cada obstáculo, a pergunta muda: o que significa avançar quando tudo parece parado?",
+          "word_count": 47
+        },
+        {
+          "role": "fechamento",
+          "text": "Você acompanharia Gyro e Johnny até a linha de chegada?",
+          "word_count": 10
+        }
+      ],
+      "narration_script": "Johnny entrou numa corrida de cavalos mesmo sem conseguir andar. Mas por quê? Em Steel Ball Run, Johnny Joestar foi um jóquei famoso antes de um acontecimento que mudou completamente sua vida. A perda da capacidade de andar também abalou sua confiança e seu futuro. Participar de uma travessia gigantesca parecia uma decisão absurda, especialmente quando cada etapa podia ser perigosa até para competidores experientes. Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Johnny percebe algo inesperado e passa a enxergar naquela habilidade a possibilidade de compreender o próprio corpo de outra forma. A corrida deixa de ser apenas uma competição por dinheiro ou prestígio. Para ele, cada avanço representa uma chance de descobrir algo que parecia perdido. Só que Gyro não entrega respostas prontas. Johnny precisa observar, experimentar, falhar e voltar a tentar. Ao longo do caminho, os dois encontram rivais e situações que exigem estratégia, não só velocidade. A relação entre eles se transforma numa parte essencial da jornada. É isso que torna a premissa tão forte: Johnny não entra simplesmente para provar que consegue vencer uma corrida. Ele está atrás da possibilidade de recuperar um caminho para a própria vida. E, a cada obstáculo, a pergunta muda: o que significa avançar quando tudo parece parado? Você acompanharia Gyro e Johnny até a linha de chegada?",
+      "word_count": 223,
+      "estimated_seconds_at_150_wpm": 89.2,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 3,
+      "anime": "Demon Slayer",
+      "title": "Por que Rengoku não desistiu nem no LIMITE?! 🔥",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [
+        {
+          "role": "hook",
+          "text": "Rengoku estava no limite. Então por que continuou lutando até o fim?",
+          "word_count": 12
+        },
+        {
+          "role": "contexto",
+          "text": "Em Demon Slayer, o Hashira das Chamas tem uma responsabilidade enorme: proteger pessoas ameaçadas por demônios. No arco do Trem Infinito, ele enfrenta uma situação em que a segurança de muitos passageiros depende de decisões rápidas. Não basta possuir uma técnica poderosa. É preciso saber por quem e por que lutar.",
+          "word_count": 51
+        },
+        {
+          "role": "tensao",
+          "text": "Rengoku demonstra coragem, mas o detalhe mais marcante não é a ausência de medo. É o compromisso que carrega mesmo quando o confronto fica muito difícil. Ele leva a sério o papel de Hashira, se preocupa com os mais fracos e entende que sua força tem uma finalidade. Isso dá outro significado às cenas de ação.",
+          "word_count": 56
+        },
+        {
+          "role": "virada",
+          "text": "Quando surge um adversário muito perigoso, a batalha passa a ser também um teste de princípios. Rengoku poderia pensar somente em sobreviver. Em vez disso, coloca sua missão em primeiro lugar. A história não diz que vencer é fácil; mostra que nem todo resultado pode ser medido apenas por quem permanece de pé.",
+          "word_count": 53
+        },
+        {
+          "role": "resposta",
+          "text": "A resposta está no que Rengoku acredita sobre a própria força. Para ele, proteger os outros não é um gesto ocasional. É parte de quem decidiu ser. E sua determinação marca profundamente Tanjiro e os companheiros.",
+          "word_count": 36
+        },
+        {
+          "role": "fechamento",
+          "text": "Qual momento de Rengoku mais ficou na sua memória?",
+          "word_count": 9
+        }
+      ],
+      "narration_script": "Rengoku estava no limite. Então por que continuou lutando até o fim? Em Demon Slayer, o Hashira das Chamas tem uma responsabilidade enorme: proteger pessoas ameaçadas por demônios. No arco do Trem Infinito, ele enfrenta uma situação em que a segurança de muitos passageiros depende de decisões rápidas. Não basta possuir uma técnica poderosa. É preciso saber por quem e por que lutar. Rengoku demonstra coragem, mas o detalhe mais marcante não é a ausência de medo. É o compromisso que carrega mesmo quando o confronto fica muito difícil. Ele leva a sério o papel de Hashira, se preocupa com os mais fracos e entende que sua força tem uma finalidade. Isso dá outro significado às cenas de ação. Quando surge um adversário muito perigoso, a batalha passa a ser também um teste de princípios. Rengoku poderia pensar somente em sobreviver. Em vez disso, coloca sua missão em primeiro lugar. A história não diz que vencer é fácil; mostra que nem todo resultado pode ser medido apenas por quem permanece de pé. A resposta está no que Rengoku acredita sobre a própria força. Para ele, proteger os outros não é um gesto ocasional. É parte de quem decidiu ser. E sua determinação marca profundamente Tanjiro e os companheiros. Qual momento de Rengoku mais ficou na sua memória?",
+      "word_count": 217,
+      "estimated_seconds_at_150_wpm": 86.8,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 4,
+      "anime": "Blue Box",
+      "title": "Por que Chinatsu foi morar na casa de Taiki?! 🏸",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [
+        {
+          "role": "hook",
+          "text": "Chinatsu foi morar na casa de Taiki. Mas como isso aconteceu?",
+          "word_count": 11
+        },
+        {
+          "role": "contexto",
+          "text": "Blue Box acompanha Taiki, um estudante dedicado ao badminton, e Chinatsu, uma atleta de basquete que ele admira. Os dois se encontram no ambiente de treino, cercados por metas, horários apertados e a vontade de melhorar a cada dia. Para Taiki, estar perto dela já era motivo suficiente para ficar nervoso.",
+          "word_count": 51
+        },
+        {
+          "role": "tensao",
+          "text": "Então acontece algo inesperado: os pais de Chinatsu precisam se mudar para o exterior, mas ela deseja continuar no Japão, perto da escola e dos treinos. Por uma ligação entre as famílias, surge a possibilidade de ficar na casa de Taiki. De repente, aquela pessoa que ele via na quadra passa a dividir parte da rotina familiar.",
+          "word_count": 57
+        },
+        {
+          "role": "virada",
+          "text": "O detalhe importante é que isso não transforma tudo em romance instantâneo. Chinatsu continua focada em seus objetivos, e Taiki também precisa levar o badminton a sério. A convivência aproxima os dois, mas aumenta a dificuldade de falar sobre sentimentos sem interferir na relação e nos sonhos de cada um.",
+          "word_count": 50
+        },
+        {
+          "role": "resposta",
+          "text": "Por isso essa mudança funciona tão bem na história: um acontecimento doméstico simples cria um conflito enorme para quem está apaixonado. Eles estão mais perto fisicamente, mas ainda precisam aprender a se entender de verdade.",
+          "word_count": 35
+        },
+        {
+          "role": "fechamento",
+          "text": "Você conseguiria treinar normalmente morando com seu maior crush?",
+          "word_count": 9
+        }
+      ],
+      "narration_script": "Chinatsu foi morar na casa de Taiki. Mas como isso aconteceu? Blue Box acompanha Taiki, um estudante dedicado ao badminton, e Chinatsu, uma atleta de basquete que ele admira. Os dois se encontram no ambiente de treino, cercados por metas, horários apertados e a vontade de melhorar a cada dia. Para Taiki, estar perto dela já era motivo suficiente para ficar nervoso. Então acontece algo inesperado: os pais de Chinatsu precisam se mudar para o exterior, mas ela deseja continuar no Japão, perto da escola e dos treinos. Por uma ligação entre as famílias, surge a possibilidade de ficar na casa de Taiki. De repente, aquela pessoa que ele via na quadra passa a dividir parte da rotina familiar. O detalhe importante é que isso não transforma tudo em romance instantâneo. Chinatsu continua focada em seus objetivos, e Taiki também precisa levar o badminton a sério. A convivência aproxima os dois, mas aumenta a dificuldade de falar sobre sentimentos sem interferir na relação e nos sonhos de cada um. Por isso essa mudança funciona tão bem na história: um acontecimento doméstico simples cria um conflito enorme para quem está apaixonado. Eles estão mais perto fisicamente, mas ainda precisam aprender a se entender de verdade. Você conseguiria treinar normalmente morando com seu maior crush?",
+      "word_count": 213,
+      "estimated_seconds_at_150_wpm": 85.2,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 5,
+      "anime": "The Apothecary Diaries",
+      "title": "Por que Maomao arrisca tanto por UMA pista?! 🧪",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [
+        {
+          "role": "hook",
+          "text": "Maomao vê uma pista que ninguém percebe. Mas vale a pena correr esse risco?",
+          "word_count": 14
+        },
+        {
+          "role": "contexto",
+          "text": "Em The Apothecary Diaries, Maomao conhece remédios, venenos e sinais que passam despercebidos pela maioria das pessoas. Quando começa a trabalhar perto da corte imperial, descobre um ambiente em que até um detalhe pequeno pode ter consequências enormes. Uma informação aparentemente simples pode tocar em disputas de poder.",
+          "word_count": 48
+        },
+        {
+          "role": "tensao",
+          "text": "O talento dela não está em usar magia ou adivinhar respostas. Maomao observa sintomas, compara possibilidades e procura uma explicação que faça sentido. Só que investigar não é apenas uma questão técnica. No palácio, apontar um erro pode constranger pessoas influentes. Dizer a verdade na hora errada também pode colocar alguém em perigo.",
+          "word_count": 53
+        },
+        {
+          "role": "virada",
+          "text": "É aqui que nasce o paradoxo. Maomao tenta manter um perfil discreto, mas a própria curiosidade chama atenção. Quanto mais ela demonstra conhecimento, mais pessoas passam a depender de suas descobertas. Ela sabe que nem todo mistério deveria ser tratado como brincadeira, mas encontra dificuldade em ignorar uma pista intrigante.",
+          "word_count": 50
+        },
+        {
+          "role": "resposta",
+          "text": "A resposta está na mistura de curiosidade, experiência e responsabilidade. Maomao quer compreender o problema e evitar consequências piores. Sua inteligência funciona melhor quando ela reconhece não só o que precisa investigar, mas também com quem deve conversar.",
+          "word_count": 38
+        },
+        {
+          "role": "fechamento",
+          "text": "Você confiaria numa pista de Maomao mesmo contra a opinião do palácio?",
+          "word_count": 12
+        }
+      ],
+      "narration_script": "Maomao vê uma pista que ninguém percebe. Mas vale a pena correr esse risco? Em The Apothecary Diaries, Maomao conhece remédios, venenos e sinais que passam despercebidos pela maioria das pessoas. Quando começa a trabalhar perto da corte imperial, descobre um ambiente em que até um detalhe pequeno pode ter consequências enormes. Uma informação aparentemente simples pode tocar em disputas de poder. O talento dela não está em usar magia ou adivinhar respostas. Maomao observa sintomas, compara possibilidades e procura uma explicação que faça sentido. Só que investigar não é apenas uma questão técnica. No palácio, apontar um erro pode constranger pessoas influentes. Dizer a verdade na hora errada também pode colocar alguém em perigo. É aqui que nasce o paradoxo. Maomao tenta manter um perfil discreto, mas a própria curiosidade chama atenção. Quanto mais ela demonstra conhecimento, mais pessoas passam a depender de suas descobertas. Ela sabe que nem todo mistério deveria ser tratado como brincadeira, mas encontra dificuldade em ignorar uma pista intrigante. A resposta está na mistura de curiosidade, experiência e responsabilidade. Maomao quer compreender o problema e evitar consequências piores. Sua inteligência funciona melhor quando ela reconhece não só o que precisa investigar, mas também com quem deve conversar. Você confiaria numa pista de Maomao mesmo contra a opinião do palácio?",
+      "word_count": 215,
+      "estimated_seconds_at_150_wpm": 86,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 6,
+      "anime": "Cyberpunk: Edgerunners",
+      "title": "Por que Lucy sonhava em chegar à LUA?! 🌙",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 7,
+      "anime": "Hunter x Hunter",
+      "title": "Hisoka ajudou Gon... mas por QUÊ?! 🎭",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 8,
+      "anime": "Code Geass",
+      "title": "Como Lelouch venceu sem ser o MAIS FORTE?! ♟️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 9,
+      "anime": "Firefly Wedding",
+      "title": "Por que Satoko precisava de tempo para SOBREVIVER?! 💍",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 10,
+      "anime": "Black Clover",
+      "title": "Magna enfrentou um inimigo muito mais FORTE?! 🔥",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 11,
+      "anime": "Jujutsu Kaisen",
+      "title": "Por que Todo tratou Yuji como MELHOR AMIGO?! 🤝",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 12,
+      "anime": "Frieren: Beyond Journey's End",
+      "title": "Frieren coleciona feitiços quase INÚTEIS?! ✨",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 13,
+      "anime": "Fullmetal Alchemist: Brotherhood",
+      "title": "Edward faz alquimia SEM desenhar círculos?! ⚗️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 14,
+      "anime": "Attack on Titan",
+      "title": "O que havia no PORÃO que mudou tudo?! 🔑",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 15,
+      "anime": "Naruto",
+      "title": "Por que Kakashi sempre chegava ATRASADO?! ⏰",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 16,
+      "anime": "One Piece",
+      "title": "Por que Luffy declarou GUERRA por Robin?! 🏴‍☠️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 17,
+      "anime": "Tokyo Revengers",
+      "title": "Mikey parecia invencível... por que sofria tanto?! 🏍️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 18,
+      "anime": "Overgeared",
+      "title": "Por que um FERREIRO virou jogador lendário?! 🔨",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 19,
+      "anime": "Aoashi",
+      "title": "Por que Ashito foi tirado do ATAQUE?! ⚽",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 20,
+      "anime": "Gachiakuta",
+      "title": "Como Rudo transforma LIXO em arma?! 🧤",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 21,
+      "anime": "Bleach: Thousand-Year Blood War",
+      "title": "Por que Ichigo tem poderes tão DIFERENTES?! ⚔️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 22,
+      "anime": "Ranma ½",
+      "title": "Como Ranma muda de corpo com ÁGUA FRIA?! 💧",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 23,
+      "anime": "Solo Leveling",
+      "title": "Como Jinwoo ganhou uma SEGUNDA chance?! 👑",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 24,
+      "anime": "SAKAMOTO DAYS",
+      "title": "Por que um assassino virou DONO DE LOJA?! 🛒",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 25,
+      "anime": "Oshi no Ko",
+      "title": "Por que Aqua entrou na indústria dos ÍDOLOS?! 🎤",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 26,
+      "anime": "Spy x Family",
+      "title": "Como Anya conhece SEGREDOS que ninguém contou?! 🧠",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 27,
+      "anime": "DAN DA DAN",
+      "title": "Como uma MALDIÇÃO deu poderes a Okarun?! 👻",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 28,
+      "anime": "Kaiju No. 8",
+      "title": "Kafka combate monstros sendo UM DELES?! 🐲",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 29,
+      "anime": "Chainsaw Man",
+      "title": "Denji ganhou poderes... mas só queria vida NORMAL?! 🪚",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 30,
+      "anime": "Re:ZERO",
+      "title": "Por que Subaru volta no tempo só depois de MORRER?! ⏳",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 31,
+      "anime": "Dr. STONE",
+      "title": "Como Senku reacendeu a CIÊNCIA após 3.700 anos?! 🧪",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 32,
+      "anime": "Blue Lock",
+      "title": "Por que o EGO virou regra no futebol?! ⚽",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 33,
+      "anime": "The Fragrant Flower Blooms with Dignity",
+      "title": "Por que Rintaro era julgado pela APARÊNCIA?! 🌸",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 34,
+      "anime": "Haikyu!!",
+      "title": "Hinata virou ameaça mesmo sendo BAIXINHO?! 🏐",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 35,
+      "anime": "One-Punch Man",
+      "title": "Por que Saitama se entedia quando VENCE?! 👊",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 36,
+      "anime": "My Hero Academia",
+      "title": "Deku nasceu SEM poder... como virou herói?! 💥",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 37,
+      "anime": "Vinland Saga",
+      "title": "Por que Thorfinn decidiu não ter INIMIGOS?! 🛡️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 38,
+      "anime": "Shangri-La Frontier",
+      "title": "Por que Sunraku prefere games RUINS?! 🎮",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 39,
+      "anime": "Mob Psycho 100",
+      "title": "Por que Mob teme as próprias EMOÇÕES?! 🌪️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 40,
+      "anime": "Steins;Gate",
+      "title": "Uma MENSAGEM pode mudar o passado?! 📱",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 41,
+      "anime": "Erased",
+      "title": "Por que Satoru voltou à INFÂNCIA?! ⏪",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 42,
+      "anime": "Dragon Ball",
+      "title": "Por que Goku poupou quem queria MATÁ-LO?! 🐉",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 43,
+      "anime": "Yu Yu Hakusho",
+      "title": "Yusuke morreu... e virou DETETIVE?! 👻",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 44,
+      "anime": "Saint Seiya",
+      "title": "Por que Seiya luta com a armadura QUEBRADA?! 🛡️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 45,
+      "anime": "Pokémon",
+      "title": "Por que Pikachu não queria a POKÉBOLA?! ⚡",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 46,
+      "anime": "Sword Art Online",
+      "title": "Como Kirito saiu de um jogo SEM SAÍDA?! 🎮",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 47,
+      "anime": "Delicious in Dungeon",
+      "title": "Por que Laios resolveu COMER os monstros?! 🍲",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 48,
+      "anime": "Medalist",
+      "title": "Por que Inori insistiu em patinar SEM APOIO?! ⛸️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 49,
+      "anime": "Wind Breaker",
+      "title": "Por que Sakura luta para PROTEGER desconhecidos?! 🥊",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    },
+    {
+      "rank": 50,
+      "anime": "Tokyo Ghoul",
+      "title": "Kaneki virou monstro... mas ainda era HUMANO?! 👁️",
+      "target_duration_seconds": 90,
+      "target_duration_label": "01:30",
+      "duration_tolerance_seconds": 3,
+      "format": "shorts_vertical_9_16",
+      "duration_profile": "short_90s_test",
+      "recommended_speech_rate_wpm": [
+        145,
+        160
+      ],
+      "recommended_story_word_count": [
+        190,
+        225
+      ],
+      "segment_targets": [
+        {
+          "name": "hook",
+          "start": 0,
+          "end": 4
+        },
+        {
+          "name": "contexto",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "name": "tensao",
+          "start": 19,
+          "end": 40
+        },
+        {
+          "name": "virada",
+          "start": 40,
+          "end": 61
+        },
+        {
+          "name": "resposta",
+          "start": 61,
+          "end": 81
+        },
+        {
+          "name": "fechamento",
+          "start": 81,
+          "end": 90
+        }
+      ],
+      "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
+      "published_content_untouched": true,
+      "no_auto_upload": true,
+      "script_status": "90s_story_outline_only",
+      "factual_review": false,
+      "narration_generated": false,
+      "rendered": false,
+      "story_segments": [],
+      "narration_script": null,
+      "word_count": 0,
+      "real_tts_measured_seconds": null,
+      "ready_to_render": false
+    }
+  ]
+}
