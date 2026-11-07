@@ -35,7 +35,9 @@ def guard() -> None:
             or env.get("GITHUB_EVENT_NAME") != "push"
             or env.get("GITHUB_RUN_ATTEMPT") != "1"):
         raise KidsUploadBlocked("ONLY_FIRST_MAIN_PUSH")
-    if env.get("GITHUB_WORKFLOW") != "Emanuelly Kids - 3 original static 90s Shorts private upload":
+    if env.get("GITHUB_WORKFLOW") not in (
+            "Emanuelly Kids - 3 original static 90s Shorts private upload",
+            "Emanuelly Kids - reconcile and recover 3 rendered private Shorts"):
         raise KidsUploadBlocked("WRONG_GITHUB_WORKFLOW")
     if env.get("KIDS_UPLOAD_AUTHORIZED") != "yes":
         raise KidsUploadBlocked("EXPLICIT_USER_UPLOAD_AUTHORIZATION_MISSING")
@@ -123,7 +125,15 @@ def youtube_client():
                        "https://www.googleapis.com/auth/youtube.readonly"])
         if not cred.valid:
             cred.refresh(Request())
-        http = AuthorizedHttp(cred, http=httplib2.Http(timeout=180))
+        # YouTube uses HTTP 308 for resumable media INCOMPLETE, not redirect.
+        # Custom httplib2.Http must copy the Google client library's 308 guard.
+        transport = httplib2.Http(timeout=180)
+        if not hasattr(transport, "redirect_codes"):
+            raise KidsUploadBlocked("HTTP_TRANSPORT_308_POLICY_UNAVAILABLE")
+        transport.redirect_codes = set(transport.redirect_codes) - {308}
+        if 308 in transport.redirect_codes:
+            raise KidsUploadBlocked("HTTP_TRANSPORT_308_POLICY_INVALID")
+        http = AuthorizedHttp(cred, http=transport)
         api = build("youtube", "v3", http=http, cache_discovery=False)
         verified = verify_channel_identity(api, "kids")
         if verified != CHANNEL_ID:
@@ -167,50 +177,157 @@ def insert_private(youtube, item: dict) -> str:
         raise KidsUploadBlocked("VIDEO_ID_NOT_CONFIRMED_STOP_NO_REUPLOAD")
     return video_id
 
+def find_owned_uploads(youtube, item: dict) -> list[str]:
+    """Fail-closed reconciliation by title+description+private+Made for Kids.
+
+    Only read the authenticated channel's own uploads playlist, INCLUDING
+    private uploads. Never write internal reservation IDs into public tags.
+    """
+    meta = item["metadata"]
+    ch = youtube.channels().list(part="id,contentDetails", mine=True).execute()
+    rows = ch.get("items") or []
+    if len(rows) != 1 or rows[0].get("id") != CHANNEL_ID:
+        raise KidsUploadBlocked("RECOVERY_OWN_CHANNEL_ID_UNVERIFIED")
+    uploads = rows[0].get("contentDetails", {}).get("relatedPlaylists", {}).get("uploads")
+    if not uploads:
+        raise KidsUploadBlocked("RECOVERY_OWN_UPLOADS_PLAYLIST_UNAVAILABLE")
+    ids = []
+    token = None
+    for page in range(10):
+        args = {"part": "contentDetails", "playlistId": uploads, "maxResults": 50}
+        if token:
+            args["pageToken"] = token
+        response = youtube.playlistItems().list(**args).execute()
+        ids.extend(x.get("contentDetails", {}).get("videoId")
+                   for x in response.get("items", [])
+                   if x.get("contentDetails", {}).get("videoId"))
+        token = response.get("nextPageToken")
+        if not token:
+            break
+    if token:
+        raise KidsUploadBlocked("RECOVERY_OWN_UPLOAD_SCAN_LIMIT_REACHED")
+    found = []
+    for idx in range(0, len(ids), 50):
+        page = youtube.videos().list(part="snippet,status",
+                                    id=",".join(ids[idx:idx + 50])).execute()
+        for v in page.get("items", []):
+            snip = v.get("snippet", {})
+            if snip.get("title") != meta["title"]:
+                continue
+            status = v.get("status", {})
+            if (snip.get("channelId") != CHANNEL_ID
+                    or snip.get("description") != meta["description"]
+                    or status.get("privacyStatus") != "private"
+                    or status.get("madeForKids") is not True):
+                raise KidsUploadBlocked("EXISTING_TITLE_AMBIGUOUS_OR_NOT_PRIVATE_MADE_FOR_KIDS")
+            if not re.fullmatch(r"[a-zA-Z0-9_-]{11}", v.get("id", "")):
+                raise KidsUploadBlocked("EXISTING_VIDEO_ID_INVALID")
+            found.append(v["id"])
+    if len(set(found)) != len(found):
+        raise KidsUploadBlocked("DUPLICATE_PLAYLIST_ENTRY_UNEXPECTED")
+    if len(found) > 1:
+        raise KidsUploadBlocked("TWO_EXISTING_SAME_KIDS_VIDEOS_MANUAL_REVIEW")
+    return found
+
 def verify_private(youtube, video_id: str) -> bool:
     try:
-        response = youtube.videos().list(part="snippet,status", id=video_id).execute()
-        videos = response.get("items") or []
+        result = youtube.videos().list(part="snippet,status", id=video_id).execute()
+        videos = result.get("items") or []
         return (len(videos) == 1
-                and videos[0]["snippet"].get("channelId") == CHANNEL_ID
-                and videos[0]["status"].get("privacyStatus") == "private"
-                and videos[0]["status"].get("madeForKids") is True)
+                and videos[0].get("snippet", {}).get("channelId") == CHANNEL_ID
+                and videos[0].get("status", {}).get("privacyStatus") == "private"
+                and videos[0].get("status", {}).get("madeForKids") is True)
     except Exception:
         return False
+
+def recover_ambiguous_insert(youtube, item: dict) -> str:
+    """Only read-only retries following uncertain response, NEVER re-insert."""
+    for seconds in (12, 24, 35):
+        time.sleep(seconds)
+        found = find_owned_uploads(youtube, item)
+        if len(found) == 1:
+            return found[0]
+    raise KidsUploadBlocked(
+        "AMBIGUOUS_UPLOAD_NO_CONFIRMED_ID_DO_NOT_REUPLOAD_MANUAL_RECONCILIATION"
+    )
 
 def upload() -> None:
     guard()
     videos = validate_artifacts()
     api = youtube_client()
+    # Scan ALL three exact titles BEFORE any mutation: a prior 308 may have
+    # accepted a video without returning a receipt or video ID.
+    previous = {item["episode_id"]: find_owned_uploads(api, item)
+                for item in videos}
+    print("KIDS_READONLY_RECONCILIATION_FINISHED", flush=True)
     receipts = []
     for item in videos:
-        video_id = insert_private(api, item)
-        receipt = {"episode_id": item["episode_id"], "youtube_id": video_id,
-                   "channel_id": CHANNEL_ID, "visibility": "private",
-                   "made_for_kids": True, "video_sha256": item["sha256"],
-                   "thumbnail_acknowledged": False, "confirmed_private": False}
-        receipts.append(receipt)
-        persist(receipts)  # BEFORE attempting thumbnail or second upload.
+        matches = previous[item["episode_id"]]
+        recovered = bool(matches)
+        if matches:
+            video_id = matches[0]
+            print("KIDS_PREVIOUS_PRIVATE_UPLOAD_RECOVERED_" + item["episode_id"],
+                  flush=True)
+        else:
+            # Fresh insert only when the authenticated private uploads list
+            # demonstrably has no matching title; no automatic insert retry.
+            receipt = {"episode_id": item["episode_id"], "youtube_id": None,
+                       "channel_id": CHANNEL_ID, "visibility": "private",
+                       "made_for_kids": True, "video_sha256": item["sha256"],
+                       "upload_state": "request_started_result_uncertain"}
+            receipts.append(receipt)
+            persist(receipts)  # Before risky network request.
+            try:
+                video_id = insert_private(api, item)
+            except Exception:
+                try:
+                    video_id = recover_ambiguous_insert(api, item)
+                    recovered = True
+                except KidsUploadBlocked:
+                    raise
+                except Exception:
+                    raise KidsUploadBlocked(
+                        "UPLOAD_UNCERTAIN_RECONCILIATION_UNAVAILABLE_STOP"
+                    ) from None
+            receipt["youtube_id"] = video_id
+            receipt["upload_state"] = "id_confirmed"
+            persist(receipts)
+        if matches:
+            receipt = {"episode_id": item["episode_id"], "youtube_id": video_id,
+                       "channel_id": CHANNEL_ID, "visibility": "private",
+                       "made_for_kids": True, "video_sha256": item["sha256"],
+                       "upload_state": "existing_id_reconciled"}
+            receipts.append(receipt)
+            persist(receipts)
+        receipt["recovered_from_existing_upload"] = recovered
+        receipt["thumbnail_acknowledged"] = False
         receipt["confirmed_private"] = verify_private(api, video_id)
         persist(receipts)
         if not receipt["confirmed_private"]:
-            raise KidsUploadBlocked("UPLOAD_ACCEPTED_BUT_CHANNEL_STATUS_UNCONFIRMED")
+            raise KidsUploadBlocked(
+                "UPLOAD_ID_ACCEPTED_BUT_PRIVATE_AND_MADE_FOR_KIDS_UNCONFIRMED"
+            )
         try:
             from googleapiclient.http import MediaFileUpload
-            time.sleep(75)  # allow initial YouTube processing
+            if not recovered:
+                time.sleep(75)
             result = api.thumbnails().set(
                 videoId=video_id,
-                media_body=MediaFileUpload(str(item["cover"]), mimetype="image/jpeg")).execute()
+                media_body=MediaFileUpload(str(item["cover"]),
+                                           mimetype="image/jpeg")).execute()
             receipt["thumbnail_acknowledged"] = bool(result.get("items"))
         except Exception:
-            # May be a Shorts thumbnail API limitation or processing delay.
-            # Keep already-created ID; NEVER re-insert the same video.
+            # Shorts cover upload may not work; keep confirmed video ID and
+            # never duplicate the MP4 to recover a thumbnail.
             receipt["thumbnail_acknowledged"] = False
             receipt["thumbnail_review_required"] = True
         persist(receipts)
-        print("KIDS_PRIVATE_UPLOADED_" + item["episode_id"] + "_" + video_id,
+        print("KIDS_PRIVATE_VERIFIED_" + item["episode_id"] + "_" + video_id,
               flush=True)
-    print("KIDS_3_PRIVATE_VIDEOS_UPLOADED_AND_VERIFIED", flush=True)
+    if len(receipts) != 3 or not all(r.get("confirmed_private") for r in receipts):
+        raise KidsUploadBlocked("THREE_PRIVATE_IDS_NOT_CONFIRMED")
+    print("KIDS_THREE_PRIVATE_VIDEOS_VERIFIED", flush=True)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
