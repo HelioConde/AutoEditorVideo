@@ -1279,26 +1279,56 @@
     {
       "channel": "kids",
       "id": "kids-20261107-fofinhos-flor",
-      "status": "reserved",
+      "status": "cancelled",
       "reservation_owner": "lote12_static_original_20261107",
       "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "note": "Pauta do lote 2026-11-07 substituída por conteúdo infantil independente. Não altera a série Fofinhos nem seus episódios originais.",
+      "cancelled_at": "2026-11-07",
+      "replaced_by": "kids-20261107-elefantinho-agua-escondida"
     },
     {
       "channel": "kids",
       "id": "kids-20261107-fofinhos-borboleta",
-      "status": "reserved",
+      "status": "cancelled",
       "reservation_owner": "lote12_static_original_20261107",
       "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "note": "Pauta do lote 2026-11-07 substituída por conteúdo infantil independente. Não altera a série Fofinhos nem seus episódios originais.",
+      "cancelled_at": "2026-11-07",
+      "replaced_by": "kids-20261107-quiz-sombras-animais"
     },
     {
       "channel": "kids",
       "id": "kids-20261107-fofinhos-nuvem",
-      "status": "reserved",
+      "status": "cancelled",
       "reservation_owner": "lote12_static_original_20261107",
       "source": "user_explicit_2026-11-07",
-      "note": "Lote 3x4, vídeo estático 90-120s, editor original AutoEditorVideo; sem render/upload autorizado só pela reserva."
+      "note": "Pauta do lote 2026-11-07 substituída por conteúdo infantil independente. Não altera a série Fofinhos nem seus episódios originais.",
+      "cancelled_at": "2026-11-07",
+      "replaced_by": "kids-20261107-dinos-segredos-incriveis"
+    },
+    {
+      "channel": "kids",
+      "id": "kids-20261107-elefantinho-agua-escondida",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_revision_2026-11-07",
+      "note": "Emanuelly Kids: vídeo avulso, sem Fofinhos, 90-120s, original, Made for Kids, modo estático, sem execução/upload autorizado apenas pela reserva."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-20261107-quiz-sombras-animais",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_revision_2026-11-07",
+      "note": "Emanuelly Kids: vídeo avulso, sem Fofinhos, 90-120s, original, Made for Kids, modo estático, sem execução/upload autorizado apenas pela reserva."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-20261107-dinos-segredos-incriveis",
+      "status": "reserved",
+      "reservation_owner": "lote12_static_original_20261107",
+      "source": "user_revision_2026-11-07",
+      "note": "Emanuelly Kids: vídeo avulso, sem Fofinhos, 90-120s, original, Made for Kids, modo estático, sem execução/upload autorizado apenas pela reserva."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
