@@ -60,3 +60,27 @@ def test_quality_v3_requires_pose_inspection_before_marking_multilayer():
     assert '"pose_geometry_checks": pose_geometry_reports' in source
     assert "request_image(" not in source
     assert "youtube.videos().insert" not in source
+
+
+def test_invisible_rgb_pixels_do_not_count_as_character_animation(tmp_path):
+    # Some generators leave colorful but fully transparent pixels outside the
+    # visible pose. They must not pass motion QA if the visible art is identical.
+    original=Image.new("RGBA",(1024,1536),(0,0,0,0))
+    ImageDraw.Draw(original).rectangle((240,270,460,640),fill=(190,80,120,255))
+    same=original.copy()
+    ImageDraw.Draw(same).rectangle((520,270,830,740),fill=(50,200,100,0))
+    a,b=tmp_path/"transparent-a.png",tmp_path/"transparent-b.png"
+    original.save(a);same.save(b)
+    with pytest.raises(pose.PoseBlocked,match="VISUALLY_IDENTICAL"):
+        pose.inspect_poses([a,b])
+
+def test_pose_centering_is_stable_for_different_real_silhouettes():
+    from otaku_multicena_90s_v6_preview import standardize_pose
+    centers=[]
+    for bounds in ((240,300,800,1120),(250,200,770,1200)):
+        im=Image.new("RGBA",(1024,1536),(0,0,0,0))
+        ImageDraw.Draw(im).rectangle(bounds,fill=(90,130,170,255))
+        transformed=standardize_pose(im)
+        bbox=transformed.getchannel("A").getbbox()
+        centers.append((bbox[1]+bbox[3])/2)
+    assert all(abs(c-840)<=2 for c in centers)
