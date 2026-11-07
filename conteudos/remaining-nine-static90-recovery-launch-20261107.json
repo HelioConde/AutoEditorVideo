@@ -1,0 +1,48 @@
+{
+  "recovery_of_failed_run_id": 42403043344,
+  "no_previous_render_or_upload": true,
+  "schema": "autoeditorvideo/remaining-nine-static90-one-shot/v1",
+  "source_manifest": "conteudos/lote-12-estatico-90s-20261107.json",
+  "production_owner": "lote12_static_original_20261107",
+  "user_authorized_at": "2026-11-07",
+  "channels_in_order": [
+    "en",
+    "games",
+    "alchemy"
+  ],
+  "channel_ids": {
+    "en": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+    "games": "UCg77gYc1_wkHuL07XPtKcow",
+    "alchemy": "UCCTYFE5Cmz2aYZ37cJQ-wcg"
+  },
+  "episode_ids": {
+    "en": [
+      "7011-noelle-black-clover",
+      "7012-maomao-apothecary",
+      "7013-shizuku-hunter"
+    ],
+    "games": [
+      "game-101-minecraft-agua",
+      "game-102-roblox-obby",
+      "game-103-minecraft-creeper"
+    ],
+    "alchemy": [
+      "alchemy-101-video-ia-realidade",
+      "alchemy-102-agentes-chatbot",
+      "alchemy-103-prompt-consistencia"
+    ]
+  },
+  "image_model": "gpt-image-2",
+  "max_image_requests_per_channel": 24,
+  "total_image_requests_ceiling": 72,
+  "duration_seconds_min": 90,
+  "duration_seconds_max": 120,
+  "render": "original_remotion_static_stills_no_warp",
+  "upload_privacy": "private",
+  "made_for_kids": false,
+  "exclude_kids": true,
+  "exclude_otaku_br": true,
+  "require_readonly_dedup_before_insert": true,
+  "no_blind_retry_on_ambiguous_upload": true,
+  "no_public_uploads": true
+}
