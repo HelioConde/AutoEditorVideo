@@ -238,7 +238,7 @@ def produce_art(row:dict,key:str)->tuple[list[Path],dict[int,list[Path]],dict]:
     reports["validated_scene_count"]=len(validated)
     reports["generated_pose_scene_count"]=len(frames)
     (WORK/"pose-validation-v6.json").write_text(json.dumps(
-        reports,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+        reports,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     if len(validated)<3:
         raise V6Blocked("FEWER_THAN_THREE_REAL_POSE_ANIMATIONS_PASSED")
     return backgrounds,validated,reports
