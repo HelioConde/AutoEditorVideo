@@ -46,10 +46,11 @@ def head_turn(t):
 
 class PerformanceBrush2D:
     def __init__(self):
-        self.head=ellipse(505,425,183,218,30)
-        self.hair=polygon([
-            (346,249),(417,217),(527,216),(619,245),(669,315),
-            (627,422),(576,423),(510,405),(444,430),(350,394)],20)
+        # Keep the entire crown and its loose strands inside the rigid core.
+        # Blend into the original neck mask below the jaw.
+        face = ellipse(505,425,183,218,30)
+        crown = ellipse(495,335,235,185,30)
+        self.head = np.maximum(face, crown)
         self.chest=ellipse(520,854,300,260,25)
         self.tie=polygon([
             (492,689),(537,693),(551,762),(558,1015),
@@ -104,8 +105,6 @@ class PerformanceBrush2D:
         breath=math.sin(2*math.pi*.28*t)*math.sin(math.pi*t/SECONDS)**2
         dx+=self.chest*(X-520)/330*.004*breath*220
         dy+=self.chest*(-2.6*breath)
-        hair=math.sin(2*math.pi*.48*t)*math.sin(math.pi*t/SECONDS)**2
-        dx+=self.hair*(2.4*hair + 6*(head_turn(t-.16)-yaw))
         swing=math.sin(2*math.pi*.42*t+.3)*math.sin(math.pi*t/SECONDS)**2
         dx+=self.tie*((Y-718).clip(min=0)/460)*(3*swing + 4*breath + 6*(head_turn(t-.23)-yaw))
         gesture=smooth((t-4.15)/1.08)*(1-smooth((t-6.55)/.96))

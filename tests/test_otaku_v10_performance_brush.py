@@ -91,3 +91,17 @@ def test_lid_moves_down_before_covering_lower_iris():
     assert np.array_equal(half_closed[437, 452], art[437, 452])
     assert np.array_equal(half_closed[:, :, 3], art[:, :, 3])
     assert blink_envelope(1.54 + .07) > blink_envelope(1.54 - .07)
+
+def test_crown_turns_with_face_instead_of_sliding_over_it():
+    rig = PerformanceBrush2D()
+    # Outer tuft, crown and fringe landmarks on the calibrated pose.
+    ys = np.array([300, 240, 400])
+    xs = np.array([359, 439, 624])
+    for second in (2.4, 3.2, 5.5):
+        dx, dy = rig.displacement(second)
+        # A rigid turn has the same horizontal slope from eyes to crown.
+        slope = (dx[420, 500] - dx[440, 500]) / 20
+        expected_x = dx[420, 500] + (420 - ys) * slope
+        expected_y = dy[420, 500] + (xs - 500) * slope
+        np.testing.assert_allclose(dx[ys, xs], expected_x, atol=.03)
+        np.testing.assert_allclose(dy[ys, xs], expected_y, atol=.03)
