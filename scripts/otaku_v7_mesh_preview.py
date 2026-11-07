@@ -26,7 +26,7 @@ from legendas_precisas import captions_from_markers
 from otaku_multicena_duration_90 import PLAN, PAUSE, load
 
 NAME = "Otaku V7 - Malha 2D 8s real AutoEditorVideo preview (no upload)"
-EPISODE = "otaku-v7-malha-8s-review-only"
+EPISODE = "5999-otaku-v7-malha-8s-review-only"
 OWNER = "chatgpt_v7_mesh_trial_20261107"
 ORIGINAL_RUN = "42332358380"
 ORIGINAL = ROOT / "assets/gerados/otaku-v6-real-90s"
