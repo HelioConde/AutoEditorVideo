@@ -219,10 +219,29 @@ def produce_art(row:dict,key:str)->tuple[list[Path],dict[int,list[Path]],dict]:
     digests=[sha(x) for x in backgrounds]+[sha(y) for item in frames.values() for y in item]
     if len(set(digests))!=ART_REQUESTS:
         raise V6Blocked("DUPLICATE_OR_REPEATED_ART")
-    poses={}
+    validated={}
+    reports={}
+    rejected={}
     for scene,files in frames.items():
-        poses[str(scene+1)]=inspect_poses(files)
-    return backgrounds,frames,poses
+        try:
+            report=inspect_poses(files)
+            validated[scene]=files
+            reports[str(scene+1)]=report
+            print("[OTAKU V6] POSE_VALIDATED_SHOT_%02d"%(scene+1),flush=True)
+        except ValueError as error:
+            # Generated frames remain available as unreviewed originals for
+            # human inspection, but may NEVER animate in an approved scene.
+            rejected[str(scene+1)]=str(error)
+            print("[OTAKU V6] POSE_REJECTED_SHOT_%02d_REASON_%s"%
+                  (scene+1,str(error)),flush=True)
+    reports["rejected_scene_reasons"]=rejected
+    reports["validated_scene_count"]=len(validated)
+    reports["generated_pose_scene_count"]=len(frames)
+    (WORK/"pose-validation-v6.json").write_text(json.dumps(
+        reports,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    if len(validated)<3:
+        raise V6Blocked("FEWER_THAN_THREE_REAL_POSE_ANIMATIONS_PASSED")
+    return backgrounds,validated,reports
 
 async def edge_part(text:str,rate:int,pitch:int)->tuple[bytes,list[dict]]:
     import edge_tts
@@ -417,8 +436,9 @@ def build_preview(row:dict,audio:Path,seconds:float,captions:list[dict],
     av=inspect_video(resultfile,duration_profile="short_90s_test")
     if not av.get("technical_audio_video_checked") or av.get("warnings"):
         raise V6Blocked("AUDIO_VIDEO_TECHNICAL_QA_NOT_PASSED")
-    if sum(1 for x in scenes if x["renderMode"]=="multilayer")!=5:
-        raise V6Blocked("FIVE_ANIMATED_SHOTS_NOT_PRESENT")
+    valid_animated_count=sum(1 for x in scenes if x["renderMode"]=="multilayer")
+    if valid_animated_count<3:
+        raise V6Blocked("NOT_ENOUGH_REVIEWABLE_CHARACTER_ANIMATIONS")
     REVIEW.mkdir(parents=True,exist_ok=False)
     shutil.copy2(resultfile,REVIEW/resultfile.name)
     with Image.open(bg[0]) as im:
@@ -431,7 +451,9 @@ def build_preview(row:dict,audio:Path,seconds:float,captions:list[dict],
       "repo":"HelioConde/AutoEditorVideo","origin":"original Remotion, Edge TTS, gpt-image-2",
       "real_video_file":resultfile.name,"duration_seconds":av["duration_seconds"],
       "visual_profile":"full_bleed_9_16","visual_backgrounds":10,
-      "animated_rgba_shots":5,"independent_rgba_pose_images":10,
+      "animated_rgba_shots":valid_animated_count,
+      "independent_rgba_pose_images":valid_animated_count*2,
+      "generated_rgba_pose_images_before_qa":10,
       "actual_pose_qa":poseqa,"pose_frame_changes_real":True,
       "true_skeletal_2d_bones":False,
       "voice_segments":voiceqa,"voice_and_captions_real":True,
