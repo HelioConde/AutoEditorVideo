@@ -21,7 +21,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'fix(editor): retry ONE V9 motion-brush preview with safe strain limiter'
+      github.event.head_commit.message == 'test(editor): diagnose ONE V9 brush mask preview with source-safe trace'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     env:
