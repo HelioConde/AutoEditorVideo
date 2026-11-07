@@ -16,6 +16,14 @@ SECONDS=8.
 X=np.arange(WIDTH,dtype=np.float32)[None,:]
 Y=np.arange(HEIGHT,dtype=np.float32)[:,None]
 
+EYE_CONTOURS = (
+    ([429, 435, 446, 457, 469, 477], [427, 424, 422, 422, 425, 432],
+     [427, 434, 440, 440, 437, 432]),
+    ([521, 527, 538, 550, 561, 569], [431, 425, 420, 418, 419, 422],
+     [431, 435, 436, 436, 432, 422]),
+)
+
+
 def smooth(x):
     p=np.clip(x,0.,1.)
     return p*p*(3-2*p)
@@ -63,6 +71,39 @@ class PerformanceBrush2D:
             (336,1000),(219,891)],28)
         self.neck=ellipse(506,624,124,115,20)
 
+    def _gaze(self, source, t):
+        # The eyes find the target first. As the head catches up they settle
+        # partway back, then return to center just before the head does.
+        looking = smooth((t - 1.82) / .14) * (1 - smooth((t - 3.56) / .18))
+        shift = looking * (3.5 - 2 * head_turn(t))
+        if shift == 0:
+            return source
+
+        result = source.copy()
+        for columns, upper, lower in EYE_CONTOURS:
+            left, right = columns[0], columns[-1]
+            top, bottom = min(upper), max(lower)
+            x, y = np.meshgrid(np.arange(left, right + 1, dtype=np.float32),
+                               np.arange(top, bottom + 1, dtype=np.float32))
+            # Follow the sloping aperture when sampling the iris. Preserve
+            # the original corner pixels and composite beneath both lashes.
+            corner = smooth(np.minimum(x - left, right - x) / 9)
+            sample_x = x - shift * corner
+            upper_y = np.interp(x, columns, upper)
+            lower_y = np.interp(x, columns, lower)
+            depth = np.clip((y - upper_y) / np.maximum(1, lower_y - upper_y), 0, 1)
+            sample_top = np.interp(sample_x, columns, upper)
+            sample_bottom = np.interp(sample_x, columns, lower)
+            sample_y = sample_top + depth * (sample_bottom - sample_top)
+            eye = source[top:bottom+1, left:right+1, :3]
+            shifted = cv2.remap(eye, (sample_x - left).astype(np.float32),
+                                (sample_y - top).astype(np.float32), cv2.INTER_LINEAR,
+                                borderMode=cv2.BORDER_REPLICATE)
+            coverage = smooth((np.minimum(y - upper_y, lower_y - y) - 1) / 2)
+            region = result[top:bottom+1, left:right+1, :3]
+            region[:] = np.rint(eye + (shifted.astype(float) - eye) * coverage[:, :, None])
+        return result
+
     def _blink(self,source,t):
         strength=blink_envelope(t)
         if strength<.005:
@@ -70,12 +111,7 @@ class PerformanceBrush2D:
         result=source.copy()
         # Trace both lid contours on the approved pose. Move the lash line
         # across the iris while leaving the fringe and brows in place.
-        for columns, upper, lower in (
-            ([429, 435, 446, 457, 469, 477], [427, 424, 422, 422, 425, 432],
-             [427, 434, 440, 440, 437, 432]),
-            ([521, 527, 538, 550, 561, 569], [431, 425, 420, 418, 419, 422],
-             [431, 435, 436, 436, 432, 422]),
-        ):
+        for columns, upper, lower in EYE_CONTOURS:
             x = np.arange(columns[0], columns[-1] + 1)
             top = np.interp(x, columns, upper)
             bottom = np.interp(x, columns, lower)
@@ -83,7 +119,12 @@ class PerformanceBrush2D:
             y0, y1 = min(upper) - 2, max(lower) + 3
             y = np.arange(y0, y1)[:, None]
             region = result[y0:y1, x[0]:x[-1]+1, :3]
-            skin = source[np.rint(bottom).astype(int)+3, x, :3]
+            # Reflect a small patch of cheek skin over the lid. Sampling an
+            # area keeps lash detail from becoming a streak across the lid.
+            height = np.maximum(1., bottom - top)
+            lid_depth = np.clip((bottom - y) / height, 0., 1.)
+            skin_y = np.rint(bottom + 5 + 8 * lid_depth).astype(int)
+            skin = cv2.GaussianBlur(source[skin_y, x, :3], (7, 5), 1.8)
             coverage = np.clip(edge-y+1, 0, 1) * np.clip(y-top+2, 0, 1)
             taper = np.clip((bottom-top)/5, 0, 1)
             coverage *= taper * min(1., strength * 8)
@@ -142,7 +183,7 @@ class PerformanceBrush2D:
             raise ValueError("ONE_ORIGINAL_1024X1536_RGBA_REQUIRED")
         if t<=0 or t>=SECONDS:
             return source.copy()
-        image=self._blink(source,t)
+        image=self._blink(self._gaze(source, t), t)
         dx,dy=self.displacement(t)
         premul=image.astype(np.float32)/255
         premul[:,:,:3]*=premul[:,:,3:4]

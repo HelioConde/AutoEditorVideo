@@ -105,3 +105,21 @@ def test_crown_turns_with_face_instead_of_sliding_over_it():
         expected_y = dy[420, 500] + (xs - 500) * slope
         np.testing.assert_allclose(dx[ys, xs], expected_x, atol=.03)
         np.testing.assert_allclose(dy[ys, xs], expected_y, atol=.03)
+
+def test_eyes_acquire_target_together_before_head_turn():
+    rig = PerformanceBrush2D()
+    art = np.full((HEIGHT, WIDTH, 4), 255, dtype=np.uint8)
+    pupils = [(453, 431), (546, 426)]
+    for x, y in pupils:
+        art[y-1:y+2, x-1:x+2, :3] = 0
+    # A short dark line on each upper lid should stay attached to the face.
+    art[422, 448:456, :3] = 0
+    art[419, 545:551, :3] = 0
+    look = rig.warp(art, 1.98)
+    for x, y in pupils:
+        row = look[y, x-5:x+9, 0]
+        center = np.average(np.arange(-5, 9), weights=255 - row)
+        assert 3 <= center <= 4
+    assert np.array_equal(look[422, 448:456], art[422, 448:456])
+    assert np.array_equal(look[419, 545:551], art[419, 545:551])
+    assert np.array_equal(rig._gaze(art, 3.8), art)
