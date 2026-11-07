@@ -6,7 +6,7 @@
 
 - **Os 50 animes únicos** do catálogo V4 receberam o perfil de duração `short_90s_test`, alvo de **01:30 (90 segundos)** e tolerância técnica de **87 a 93 segundos**.
 - O arquivo `conteudos/otaku-multicena-teste-90s-v1.json` contém **50 perfis editoriais**, mas **apenas os cinco primeiros** possuem roteiros originais completos de teste. Os 45 restantes são pautas e **não** devem ser tratados como roteiros prontos.
-- Os cinco roteiros foram elaborados para a duração-alvo: Death Note (203 palavras), JoJo: Steel Ball Run (215), Demon Slayer (212), Blue Box (207) e The Apothecary Diaries (207).
+- Os cinco roteiros foram reescritos com narrativas específicas e fontes para conferência: Death Note (225 palavras), Steel Ball Run (220), Demon Slayer (223), Blue Box (221) e The Apothecary Diaries (217). Os 45 restantes ainda não têm roteiros.
 - O gancho falado foi reduzido para cerca de **5–7 palavras**, pensando numa abertura de 1–3 segundos, sem perder contexto.
 - O tempo real **só é confirmado com o arquivo de áudio do TTS**; 200 palavras por si só não garantem 90 segundos. Não acelerar a narração demais nem inserir silêncios artificiais para forçar a meta.
 - O planejamento visual sugere **10 tomadas distintas**, com marcos aproximados em 0, 4, 12, 19, 29, 40, 50, 61, 71, 81 e 90 segundos. Os cortes efetivos devem respeitar as marcações reais das palavras e as ações da cena.
@@ -89,3 +89,21 @@ O planejamento dos cinco primeiros roteiros está no JSON; sua correção factua
 - `pause_requested=true`, `authorized_public=false`, `maintenance_complete=false` e `resume_authorized_after_maintenance=false` permanecem intactos.
 
 A conclusão desta etapa é **perfil de tempo e roteiros-piloto preparados**; a aprovação do formato 90s depende de narração medida, prévia real revisada e posterior avaliação de desempenho.
+
+## Planejamento editorial V5 — 9/10 como meta de preparação, não garantia
+
+A auditoria `scripts/otaku_multicena_editorial_score_v5.py` valida dez critérios. Os primeiros nove são de planejamento: gancho curto e específico; alegações de cânone ligadas a URLs de consulta; estrutura com seis etapas e cerca de 190–225 palavras; quatro descobertas ao longo dos 90 segundos; conclusão direta sem CTA; dez tomadas com instruções originais; direção da narração e pronúncia; bloqueios de direitos e spoilers; e teste comparativo de 40s versus 90s sem repetir os vídeos.
+
+**O décimo critério não pode ser aprovado offline:** exige locução real de 87–93 segundos, vídeo renderizado e assistido, revisão factual humana, checagem visual e direitos de áudio/imagem. Portanto, atingir 9/10 aqui não significa que o vídeo esteja pronto, nem previsão de alcance ou retenção.
+
+Para cada um dos cinco pilotos:
+- Quatro descobertas previstas em aproximadamente 15, 31, 51 e 70 segundos. Esses tempos são editoriais; ajustar pelo TTS real.
+- O encerramento do segundo 81 ao 90 apresenta a resposta, sem chamada para curtir, se inscrever ou comentar.
+- Pelo menos dez tomadas planejadas, mas **nenhuma imagem/pose é declarada produzida**.
+- Fontes externas do cânone são **pistas para verificação pelo editor**, não licença para usar capturas, música oficial nem garantia de fidelidade.
+- A comparação de duração exige um controle **novo, com 40 segundos e também sem CTA**, de tópico comparável, mas roteiro e cenas diferentes para evitar duplicação. A duração é a variável principal; não utilizar vídeos antigos com CTA como se fossem controle igual.
+- Antes de qualquer decisão sobre o novo formato, comparar taxa de continuidade no feed, segundos assistidos, percentual assistido, inscrições por mil e alcance após as primeiras 48 horas de cada vídeo.
+
+Os roteiros de Death Note agora diferenciam expressamente a época em que Light conhecia o caderno e aquela em que ele perdeu as memórias. Maomao passa a investigar o caso específico do pó facial venenoso. Fontes para conferência: [Death Note — episódios na HBO Max](https://www.hbomax.com/br/pt/show/fabd8a3d-dd29-4f94-bc46-55941b14eacf); [The Apothecary Diaries E1](https://www.crunchyroll.com/pt-br/watch/GMKUXQ2VM/maomao); [Steel Ball Run — site oficial](https://jojo-portal.com/anime/sbr/story/); [Demon Slayer — Trem Infinito](https://demonslayer-anime.com/mugentrainarc/story/?id=ep5); [Blue Box — Netflix](https://media.netflix.com/en/only-on-netflix/81663323).
+
+**Status:** geração e publicação continuam bloqueadas. Nenhum arquivo antigo, reserva, Short público ou comprovante foi substituído. Os cinco roteiros são rascunhos, não publicações aprovadas.
