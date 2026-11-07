@@ -238,18 +238,54 @@ def draw_reference_shorts_title(canvas: Image.Image, text: str) -> Image.Image:
                                  Image.alpha_composite(glow, rule))
 
 
+
+def draw_kids_pastel_title(canvas: Image.Image, title: str) -> Image.Image:
+    """Child-friendly original cover in the existing AutoEditorVideo generator."""
+    if not (1 <= len(title.strip()) <= 42):
+        raise ValueError('Kids: titulo precisa ser curto')
+    overlay = Image.new('RGBA', SIZE, (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay)
+    draw.rounded_rectangle((55, 74, 1025, 474), radius=54,
+                           fill=(255, 249, 237, 237),
+                           outline=(113, 192, 210, 255), width=10)
+    words = title.strip().upper().split()
+    font = load_font(112)
+    lines = []
+    current = ''
+    for word in words:
+        candidate = (current + ' ' + word).strip()
+        if current and draw.textbbox((0, 0), candidate, font=font)[2] > 810:
+            lines.append(current)
+            current = word
+        else:
+            current = candidate
+    if current:
+        lines.append(current)
+    if len(lines) > 3:
+        raise ValueError('Kids: titulo nao cabe na area superior')
+    for i, line in enumerate(lines):
+        b = draw.textbbox((0, 0), line, font=font)
+        x = round((1080 - (b[2] - b[0])) / 2 - b[0])
+        y = 115 + i * 112 - b[1]
+        draw.text((x, y), line, font=font, fill=(31, 70, 99, 255),
+                  stroke_width=1, stroke_fill=(241, 249, 252, 255))
+    return Image.alpha_composite(canvas.convert('RGBA'), overlay)
+
 def render_cover(source: Image.Image, title: str, destination: Path,
                  *,zoom: float=1.07, focus_x: float=.5, focus_y: float=.4,
                    template: str='default') -> dict:
     """Render deterministic high-impact cover from cached pixels only."""
     if not 1.0<=zoom<=1.4 or not 0<=focus_x<=1 or not 0<=focus_y<=1:
         raise ValueError('Zoom/foco da capa invalido')
-    if template not in ('default', 'gamer-alchemy-reference'):
+    if template not in ('default', 'gamer-alchemy-reference', 'kids-pastel'):
         raise ValueError('Preset de capa desconhecido')
     image=zoom_cover(source,zoom,focus_x,focus_y)
-    graded=add_cinematic_grade(image)
-    result=(draw_reference_shorts_title(graded,title) if template=='gamer-alchemy-reference'
-            else draw_title(graded,title)).convert('RGB')
+    if template == 'kids-pastel':
+        result = draw_kids_pastel_title(image.convert('RGBA'), title).convert('RGB')
+    else:
+        graded=add_cinematic_grade(image)
+        result=(draw_reference_shorts_title(graded,title) if template=='gamer-alchemy-reference'
+                else draw_title(graded,title)).convert('RGB')
     destination.parent.mkdir(parents=True,exist_ok=True)
     result.save(destination,'JPEG',quality=94,subsampling=0,optimize=True)
     return {'size':list(SIZE),'style':STYLE,'title':title.upper(),
