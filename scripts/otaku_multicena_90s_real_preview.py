@@ -200,9 +200,8 @@ def build_cuts(row:dict,voice:Path,frames:int)->list[int]:
     for count in counts[1:5]:
         indices.extend([running+round(count/2),running+count])
         running+=count
-    indices.append(running)
-    # 11 cut boundaries including start and end. Do not use uniform timelines.
-    if len(indices)!=11:raise PreviewBlocked("INVALID_TEN_SHOT_SEGMENT_MAP")
+    # Ten scene starts, plus the measured audio end, for eleven boundaries.
+    if len(indices)!=10:raise PreviewBlocked("INVALID_TEN_SHOT_SEGMENT_MAP")
     # TTS WordBoundary can tokenize numbers/names slightly differently.
     total=sum(counts)
     actual=len(real)
