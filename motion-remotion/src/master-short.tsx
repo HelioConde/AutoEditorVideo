@@ -2,7 +2,8 @@ import React from 'react';
 import {AbsoluteFill,Audio,Img,Sequence,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
 import {AnimationMode,cannotMoveSeparately,motionAtFrame,openingCutAtFrame,longHoldCutAtFrame} from './cinematic-motion';
 import {CharacterPreset,characterPoseAtFrame} from './character-idle';
-import {RigPlayback,poseFrameIndex,meshFrameIndex} from './pose-timeline';
+import {RigPlayback,poseFrameIndex} from './pose-timeline';
+import {meshFrameIndex} from './pose-timeline';
 
 export type SemanticLayer={
   id:string;role:string;z:number;src:string;
