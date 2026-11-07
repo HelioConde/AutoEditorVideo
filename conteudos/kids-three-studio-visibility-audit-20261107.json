@@ -1,0 +1,19 @@
+{
+  "schema": "autoeditorvideo/kids-three-video-visibility-readonly/v1",
+  "youtube_channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+  "video_ids": [
+    "d7hjFP6Ky6w",
+    "ax0ude5BUhE",
+    "It-7R1o9k7Q"
+  ],
+  "source_verification_run_id": 42396980506,
+  "allowed_operations": [
+    "channels.list",
+    "videos.list",
+    "playlistItems.list"
+  ],
+  "videos_insert": false,
+  "videos_update": false,
+  "thumbnails_set": false,
+  "new_image_generation": false
+}
