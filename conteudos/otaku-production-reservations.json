@@ -1163,6 +1163,16 @@
       "publication_target": "none_review_artifact_only",
       "source_artifact_run_id": 42332358380,
       "note": "One 8-second V7 CPU 2D deformable-mesh animation test, reusing verified original RGBA pose and background from V6. No paid AI generation, no YouTube publishing, preserve 50-video production pause. Not an approved episode. Technical review entry uses a 4-digit BR ID to satisfy the existing production registry schema."
+    },
+    {
+      "channel": "br",
+      "id": "5998-otaku-v8-pins-8s-review",
+      "status": "reserved",
+      "reservation_owner": "chatgpt_otaku_v8_pin_warp_20261107",
+      "source": "creator_request_pin_control_animation_2026-11-07",
+      "source_artifact_run_id": 42332358380,
+      "publication_target": "none_review_artifact_only",
+      "note": "Single 8-second V8 Puppet Pin preview using pinned original V6 RGBA/background/voice. CPU inverse TPS deformation from anchored and movable artist control pins, no image calls, no YouTube upload, no 50-short queue changes."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
