@@ -110,6 +110,15 @@ def validate_artifacts() -> list[dict]:
                         "sha256": qa["mp4_sha256"]})
     return outputs
 
+def configure_resumable_transport(transport):
+    """Match googleapiclient.http.build_http: 308 means Resume Incomplete."""
+    if not hasattr(transport, "redirect_codes"):
+        raise KidsUploadBlocked("HTTP_TRANSPORT_308_POLICY_UNAVAILABLE")
+    transport.redirect_codes = set(transport.redirect_codes) - {308}
+    if 308 in transport.redirect_codes:
+        raise KidsUploadBlocked("HTTP_TRANSPORT_308_POLICY_INVALID")
+    return transport
+
 def youtube_client():
     from google.oauth2.credentials import Credentials
     from google.auth.transport.requests import Request
@@ -127,12 +136,7 @@ def youtube_client():
             cred.refresh(Request())
         # YouTube uses HTTP 308 for resumable media INCOMPLETE, not redirect.
         # Custom httplib2.Http must copy the Google client library's 308 guard.
-        transport = httplib2.Http(timeout=180)
-        if not hasattr(transport, "redirect_codes"):
-            raise KidsUploadBlocked("HTTP_TRANSPORT_308_POLICY_UNAVAILABLE")
-        transport.redirect_codes = set(transport.redirect_codes) - {308}
-        if 308 in transport.redirect_codes:
-            raise KidsUploadBlocked("HTTP_TRANSPORT_308_POLICY_INVALID")
+        transport = configure_resumable_transport(httplib2.Http(timeout=180))
         http = AuthorizedHttp(cred, http=transport)
         api = build("youtube", "v3", http=http, cache_discovery=False)
         verified = verify_channel_identity(api, "kids")
