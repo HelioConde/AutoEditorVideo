@@ -171,7 +171,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review"
+      "duration_test_script_status": "complete_draft_needs_review",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 2,
@@ -197,7 +199,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review"
+      "duration_test_script_status": "complete_draft_needs_review",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 3,
@@ -229,7 +233,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review"
+      "duration_test_script_status": "complete_draft_needs_review",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 4,
@@ -255,7 +261,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review"
+      "duration_test_script_status": "complete_draft_needs_review",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 5,
@@ -298,7 +306,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "complete_draft_needs_review"
+      "duration_test_script_status": "complete_draft_needs_review",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 6,
@@ -324,7 +334,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 7,
@@ -356,7 +368,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 8,
@@ -386,7 +400,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 9,
@@ -412,7 +428,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 10,
@@ -451,7 +469,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 11,
@@ -485,7 +505,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 12,
@@ -515,7 +537,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 13,
@@ -547,7 +571,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 14,
@@ -581,7 +607,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 15,
@@ -615,7 +643,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 16,
@@ -649,7 +679,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 17,
@@ -675,7 +707,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 18,
@@ -699,7 +733,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 19,
@@ -723,7 +759,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 20,
@@ -747,7 +785,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 21,
@@ -771,7 +811,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 22,
@@ -795,7 +837,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 23,
@@ -819,7 +863,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 24,
@@ -843,7 +889,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 25,
@@ -867,7 +915,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 26,
@@ -891,7 +941,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 27,
@@ -915,7 +967,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 28,
@@ -939,7 +993,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 29,
@@ -963,7 +1019,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 30,
@@ -987,7 +1045,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 31,
@@ -1011,7 +1071,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 32,
@@ -1035,7 +1097,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 33,
@@ -1059,7 +1123,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 34,
@@ -1083,7 +1149,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 35,
@@ -1107,7 +1175,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 36,
@@ -1131,7 +1201,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 37,
@@ -1155,7 +1227,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 38,
@@ -1179,7 +1253,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 39,
@@ -1203,7 +1279,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 40,
@@ -1227,7 +1305,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 41,
@@ -1251,7 +1331,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 42,
@@ -1275,7 +1357,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 43,
@@ -1299,7 +1383,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 44,
@@ -1323,7 +1409,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 45,
@@ -1347,7 +1435,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 46,
@@ -1371,7 +1461,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 47,
@@ -1395,7 +1487,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 48,
@@ -1419,7 +1513,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 49,
@@ -1443,7 +1539,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     },
     {
       "rank": 50,
@@ -1467,7 +1565,9 @@
       "publication_authorized": false,
       "new_story_duration_profile": "short_90s_test",
       "new_story_target_seconds": 90,
-      "duration_test_script_status": "90s_plan_only"
+      "duration_test_script_status": "90s_plan_only",
+      "new_story_ending_policy": "answer_only_no_cta",
+      "new_story_last_beat": "resultado direto e específico da história, sem convite ou pergunta"
     }
   ],
   "live_channel_inventory_complete": false,
@@ -1489,6 +1589,11 @@
     "requires_tts_measurement": true,
     "auto_generate": false,
     "auto_publish": false,
-    "published_videos_unchanged": true
+    "published_videos_unchanged": true,
+    "ending_policy": "answer_only_no_cta",
+    "narration_style": "ptBR_human_natural_specific_payoff_end",
+    "no_questions_after_payoff": true,
+    "no_subscribe_like_comment_follow_prompts": true,
+    "end_screen_silent_no_brand_slogan": true
   }
 }
