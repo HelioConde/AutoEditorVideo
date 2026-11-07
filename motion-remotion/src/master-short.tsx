@@ -174,8 +174,11 @@ export const MasterShort:React.FC<MasterProps>=({
         textShadow:'0 5px 10px #000,0 1px 3px #000'
       }}>{hook}</div>
       : hook && frame<fps*2.2
-        ? <div style={{position:'absolute',top:102,left:75,right:75,
-          fontSize:76,lineHeight:1.08,color:'#fff',textAlign:'center',fontWeight:900,
+        ? <div style={{position:'absolute',top:visualProfile==='otaku-v6-vertical'?205:102,
+          left:visualProfile==='otaku-v6-vertical'?112:75,
+          right:visualProfile==='otaku-v6-vertical'?112:75,
+          fontSize:visualProfile==='otaku-v6-vertical'?68:76,
+          lineHeight:1.08,color:'#fff',textAlign:'center',fontWeight:900,
           letterSpacing:'0.016em',
           WebkitTextStroke:'1.2px rgba(4,7,18,.95)',
           textShadow:'0 5px 18px rgba(0,0,0,.95), 0 0 15px rgba(252,78,78,.45), 0 0 3px #fff',
@@ -206,12 +209,15 @@ export const MasterShort:React.FC<MasterProps>=({
         fontFamily:'Arial,DejaVu Sans,sans-serif',
         WebkitTextStroke:'1px rgba(1,3,9,.85)',
         textShadow:'0 3px 8px #000'}
-      : {position:'absolute',top:1258,left:78,right:78,
-        padding:'18px 25px',borderRadius:22,
+      : {position:'absolute',top:visualProfile==='otaku-v6-vertical'?1360:1258,
+        left:visualProfile==='otaku-v6-vertical'?116:78,
+        right:visualProfile==='otaku-v6-vertical'?116:78,
+        padding:visualProfile==='otaku-v6-vertical'?'16px 22px':'18px 25px',borderRadius:22,
         background:'rgba(2,5,15,.85)',
         border:'2px solid rgba(255,255,255,.18)',
         boxShadow:'0 12px 32px rgba(0,0,0,.68)',
-        fontSize:79,lineHeight:1.12,fontWeight:900,textAlign:'center',color:'#fff',
+        fontSize:visualProfile==='otaku-v6-vertical'?65:79,
+        lineHeight:1.12,fontWeight:900,textAlign:'center',color:'#fff',
         WebkitTextStroke:'2px rgba(1,3,9,.96)',
         textShadow:'0 5px 13px #000,0 0 15px rgba(240,240,255,.2)'}}>
       {caption.words?.length
