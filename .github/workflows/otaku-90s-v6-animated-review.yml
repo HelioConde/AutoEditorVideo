@@ -20,7 +20,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'test(editor): rerun ONE V6 animated preview after safe mobile QA correction'
+      github.event.head_commit.message == 'test(editor): resume ONE V6 review with pose diagnostics and saved original assets'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -m pytest -q tests/test_otaku_multicena_90s_v6_preview.py tests/test_otaku_multicena_duration_90.py tests/test_otaku_multicena_editorial_score_v5.py
+          python -m pytest -q tests/test_otaku_multicena_90s_v6_preview.py tests/test_otaku_multicena_pose_qa.py tests/test_otaku_multicena_duration_90.py tests/test_otaku_multicena_editorial_score_v5.py
           python scripts/otaku_multicena_90s_v6_preview.py --preflight
           jq -e '.pause_requested==true and .authorized_public==false and .maintenance_complete==false and .resume_authorized_after_maintenance==false' \
             conteudos/otaku-br-50-serial-launch-20261106.json
