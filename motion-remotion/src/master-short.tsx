@@ -9,6 +9,9 @@ export type SemanticLayer={
   alphaCoverage?:number;anchorX?:number;anchorY?:number;
   contactRisk?:number;heroRisk?:number;heightFraction?:number;motionSeed?:number;
   rigFrames?:{fps:number;frames:string[];playback?:RigPlayback}
+  // Baked frames from a continuous mesh deformation of ONE original RGBA.
+  // No opacity crossfades between distinct characters.
+  meshFrames?:{fps:number;frames:string[]}
 };
 export type Scene={
   id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
@@ -65,8 +68,21 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
       transform:camera,transformOrigin:'center center',overflow:'hidden'}}>
       <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
         objectFit:v6?'cover':'contain'}}/>
-      {scene.renderMode==='multilayer' && ordered.length
+      {(scene.renderMode==='multilayer'||scene.renderMode==='mesh2d') && ordered.length
         ? ordered.map(layer=>{
+          // V7: every frame comes from one and the same RGBA illustration.
+          // One layer at a time avoids the duplicate/ghost artifacts of V6.
+          const mesh=mode==='malha2d'?layer.meshFrames:undefined;
+          if(mesh?.frames.length){
+            const index=poseFrameIndex({
+              frame,sceneStart:scene.startFrame,
+              compositionFps:fps,rigFps:mesh.fps,
+              frameCount:mesh.frames.length,playback:'once'
+            });
+            return <Img key={layer.id} src={staticFile(mesh.frames[index])}
+              style={{position:'absolute',inset:0,width:'100%',height:'100%',
+                objectFit:v6?'cover':'contain',zIndex:layer.z}}/>;
+          }
           const pose=characterPoseAtFrame({
             role:layer.role,id:layer.id,coverage:layer.alphaCoverage ?? NaN,
             contactRisk:layer.contactRisk,heroRisk:layer.heroRisk,
