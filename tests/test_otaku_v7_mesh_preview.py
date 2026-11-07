@@ -7,6 +7,9 @@ import numpy as np
 from PIL import Image, ImageDraw
 import pytest
 
+# Generic repo CI does not install optional OpenCV; the V7 media job does.
+pytest.importorskip("cv2")
+
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
 import otaku_v7_mesh_preview as mesh
