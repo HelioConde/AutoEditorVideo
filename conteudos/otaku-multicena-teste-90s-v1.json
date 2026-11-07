@@ -22,7 +22,7 @@
     {
       "rank": 1,
       "anime": "Death Note",
-      "title": "Por que Light precisava que L confiasse nele? 📓",
+      "title": "Por que L convidou LIGHT para investigar Kira?! 📓",
       "target_duration_seconds": 90,
       "target_duration_label": "01:30",
       "duration_tolerance_seconds": 3,
@@ -71,45 +71,45 @@
       "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
       "published_content_untouched": true,
       "no_auto_upload": true,
-      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "script_status": "canon_grounded_draft_needs_human_fact_check",
       "factual_review": false,
       "narration_generated": false,
       "rendered": false,
       "story_segments": [
         {
           "role": "hook",
-          "text": "Light aproximou-se de L por QUÊ?!",
+          "text": "L convidou Light para caçar Kira?!",
           "word_count": 6
         },
         {
           "role": "contexto",
-          "text": "Em Death Note, Light não enfrenta um inimigo comum. L é brilhante, suspeita dele desde cedo e transforma cada conversa numa disputa de informações. O desafio de Light não era apenas esconder o caderno: precisava descobrir quem L realmente era, entender suas provas e continuar parecendo inocente.",
+          "text": "Light era um dos maiores suspeitos de L. Eles se encontraram na universidade, onde cada conversa parecia uma partida de xadrez. Mesmo assim, o detetive acabou convidando Light a participar da investigação. Isso parece um erro: por que deixar alguém suspeito tão perto das informações da polícia?",
           "word_count": 47
         },
         {
           "role": "tensao",
-          "text": "Quando Light entra na investigação, o risco aumenta. Cada pergunta pode revelar algo, e qualquer comportamento fora do normal desperta desconfiança. Ao mesmo tempo, ficar perto de L dá acesso a pistas sobre o que a polícia sabe, quais suspeitas ganharam força e quais erros o adversário está tentando provocar.",
-          "word_count": 50
+          "text": "Primeiro, L não confundia proximidade com confiança. Ele queria observar as reações de Light, ouvir suas respostas e perceber contradições. Enquanto isso, Light, que ainda conhecia o segredo do Death Note, ganhava a chance de entender o raciocínio do adversário. Os dois obtinham informações, mas nenhum estava seguro.",
+          "word_count": 48
         },
         {
           "role": "virada",
-          "text": "Mas aqui está o paradoxo: trabalhar com L não significava que L confiava totalmente nele. Na verdade, os dois continuavam se observando. Light tentava parecer indispensável, enquanto L procurava uma contradição capaz de expor Kira. Essa proximidade era uma vantagem e uma armadilha para ambos.",
-          "word_count": 45
+          "text": "Depois surge o segundo Kira. L usa a inteligência de Light para tentar identificar o imitador, mas continua desconfiando dele. A tensão aumenta até Light abrir mão da posse do caderno e perder as próprias memórias. Nesse período, ele realmente ajuda a investigar Kira sem saber que já tinha sido o assassino.",
+          "word_count": 52
         },
         {
           "role": "resposta",
-          "text": "Cada nova prova deixava a situação mais delicada. Se Light parecesse interessado demais, levantaria suspeitas. Se fingisse desinteresse, perderia informações. Naquela investigação, até uma conversa simples podia se transformar numa armadilha planejada com cuidado.",
-          "word_count": 34
+          "text": "A parte decisiva é essa mudança de perspectiva. O Light que planejou a perda de memória e o Light que colaborou sem lembranças não tinham o mesmo conhecimento. L continuou observando mesmo quando as atitudes pareciam sinceras. Sua estratégia era manter o suspeito perto para testar cada versão da história.",
+          "word_count": 50
         },
         {
           "role": "resultado",
-          "text": "Light se aproximou para acompanhar os passos de L e antecipar armadilhas. Mas L nunca deixou de suspeitar dele.",
-          "word_count": 19
+          "text": "L não convidou Light porque acreditava nele. Convidou porque investigar alguém de perto podia revelar o que uma acusação distante não mostraria.",
+          "word_count": 22
         }
       ],
-      "narration_script": "Light aproximou-se de L por QUÊ?! Em Death Note, Light não enfrenta um inimigo comum. L é brilhante, suspeita dele desde cedo e transforma cada conversa numa disputa de informações. O desafio de Light não era apenas esconder o caderno: precisava descobrir quem L realmente era, entender suas provas e continuar parecendo inocente. Quando Light entra na investigação, o risco aumenta. Cada pergunta pode revelar algo, e qualquer comportamento fora do normal desperta desconfiança. Ao mesmo tempo, ficar perto de L dá acesso a pistas sobre o que a polícia sabe, quais suspeitas ganharam força e quais erros o adversário está tentando provocar. Mas aqui está o paradoxo: trabalhar com L não significava que L confiava totalmente nele. Na verdade, os dois continuavam se observando. Light tentava parecer indispensável, enquanto L procurava uma contradição capaz de expor Kira. Essa proximidade era uma vantagem e uma armadilha para ambos. Cada nova prova deixava a situação mais delicada. Se Light parecesse interessado demais, levantaria suspeitas. Se fingisse desinteresse, perderia informações. Naquela investigação, até uma conversa simples podia se transformar numa armadilha planejada com cuidado. Light se aproximou para acompanhar os passos de L e antecipar armadilhas. Mas L nunca deixou de suspeitar dele.",
-      "word_count": 201,
-      "estimated_seconds_at_150_wpm": 80.4,
+      "narration_script": "L convidou Light para caçar Kira?! Light era um dos maiores suspeitos de L. Eles se encontraram na universidade, onde cada conversa parecia uma partida de xadrez. Mesmo assim, o detetive acabou convidando Light a participar da investigação. Isso parece um erro: por que deixar alguém suspeito tão perto das informações da polícia? Primeiro, L não confundia proximidade com confiança. Ele queria observar as reações de Light, ouvir suas respostas e perceber contradições. Enquanto isso, Light, que ainda conhecia o segredo do Death Note, ganhava a chance de entender o raciocínio do adversário. Os dois obtinham informações, mas nenhum estava seguro. Depois surge o segundo Kira. L usa a inteligência de Light para tentar identificar o imitador, mas continua desconfiando dele. A tensão aumenta até Light abrir mão da posse do caderno e perder as próprias memórias. Nesse período, ele realmente ajuda a investigar Kira sem saber que já tinha sido o assassino. A parte decisiva é essa mudança de perspectiva. O Light que planejou a perda de memória e o Light que colaborou sem lembranças não tinham o mesmo conhecimento. L continuou observando mesmo quando as atitudes pareciam sinceras. Sua estratégia era manter o suspeito perto para testar cada versão da história. L não convidou Light porque acreditava nele. Convidou porque investigar alguém de perto podia revelar o que uma acusação distante não mostraria.",
+      "word_count": 225,
+      "estimated_seconds_at_150_wpm": 90,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
       "target_shot_count": 10,
@@ -175,7 +175,7 @@
       "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
       "published_content_untouched": true,
       "no_auto_upload": true,
-      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "script_status": "canon_grounded_draft_needs_human_fact_check",
       "factual_review": false,
       "narration_generated": false,
       "rendered": false,
@@ -192,7 +192,7 @@
         },
         {
           "role": "tensao",
-          "text": "Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Johnny percebe algo inesperado e passa a enxergar naquela habilidade a possibilidade de compreender o próprio corpo de outra forma. A corrida deixa de ser apenas uma competição por dinheiro ou prestígio. Para ele, cada avanço representa uma chance de descobrir algo que parecia perdido.",
+          "text": "Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Quando Johnny toca as esferas de Gyro, suas pernas se movem brevemente: um sinal de que talvez possa andar novamente. A corrida deixa de ser apenas uma competição por dinheiro ou prestígio. Para ele, cada avanço representa uma chance de descobrir algo que parecia perdido.",
           "word_count": 58
         },
         {
@@ -211,7 +211,7 @@
           "word_count": 20
         }
       ],
-      "narration_script": "Johnny correu sem conseguir ANDAR?! Em Steel Ball Run, Johnny Joestar foi um jóquei famoso antes de um acontecimento que mudou completamente sua vida. A perda da capacidade de andar também abalou sua confiança e seu futuro. Participar de uma travessia gigantesca parecia uma decisão absurda, especialmente quando cada etapa podia ser perigosa até para competidores experientes. Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Johnny percebe algo inesperado e passa a enxergar naquela habilidade a possibilidade de compreender o próprio corpo de outra forma. A corrida deixa de ser apenas uma competição por dinheiro ou prestígio. Para ele, cada avanço representa uma chance de descobrir algo que parecia perdido. Só que Gyro não entrega respostas prontas. Johnny precisa observar, experimentar, falhar e voltar a tentar. Ao longo do caminho, os dois encontram rivais e situações que exigem estratégia, não só velocidade. A relação entre eles se transforma numa parte essencial da jornada. A cada etapa, a distância física importa menos do que a sensação de avançar pela primeira vez desde o acidente. Johnny passa a olhar para Gyro de outra maneira e percebe que o maior prêmio talvez nem esteja na linha de chegada. Johnny entrou porque Gyro e a técnica do Spin representavam uma possibilidade de recuperar o controle sobre o próprio corpo.",
+      "narration_script": "Johnny correu sem conseguir ANDAR?! Em Steel Ball Run, Johnny Joestar foi um jóquei famoso antes de um acontecimento que mudou completamente sua vida. A perda da capacidade de andar também abalou sua confiança e seu futuro. Participar de uma travessia gigantesca parecia uma decisão absurda, especialmente quando cada etapa podia ser perigosa até para competidores experientes. Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Quando Johnny toca as esferas de Gyro, suas pernas se movem brevemente: um sinal de que talvez possa andar novamente. A corrida deixa de ser apenas uma competição por dinheiro ou prestígio. Para ele, cada avanço representa uma chance de descobrir algo que parecia perdido. Só que Gyro não entrega respostas prontas. Johnny precisa observar, experimentar, falhar e voltar a tentar. Ao longo do caminho, os dois encontram rivais e situações que exigem estratégia, não só velocidade. A relação entre eles se transforma numa parte essencial da jornada. A cada etapa, a distância física importa menos do que a sensação de avançar pela primeira vez desde o acidente. Johnny passa a olhar para Gyro de outra maneira e percebe que o maior prêmio talvez nem esteja na linha de chegada. Johnny entrou porque Gyro e a técnica do Spin representavam uma possibilidade de recuperar o controle sobre o próprio corpo.",
       "word_count": 220,
       "estimated_seconds_at_150_wpm": 88,
       "real_tts_measured_seconds": null,
@@ -279,7 +279,7 @@
       "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
       "published_content_untouched": true,
       "no_auto_upload": true,
-      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "script_status": "canon_grounded_draft_needs_human_fact_check",
       "factual_review": false,
       "narration_generated": false,
       "rendered": false,
@@ -301,8 +301,8 @@
         },
         {
           "role": "virada",
-          "text": "Quando surge um adversário muito perigoso, a batalha passa a ser também um teste de princípios. Rengoku poderia pensar somente em sobreviver. Em vez disso, coloca sua missão em primeiro lugar. A história não diz que vencer é fácil; mostra que nem todo resultado pode ser medido apenas por quem permanece de pé.",
-          "word_count": 53
+          "text": "Depois de proteger os passageiros, Rengoku enfrenta Akaza, e a batalha se torna um teste de princípios. Rengoku poderia pensar somente em sobreviver. Em vez disso, coloca sua missão em primeiro lugar. A história não diz que vencer é fácil; mostra que nem todo resultado pode ser medido apenas por quem permanece de pé.",
+          "word_count": 54
         },
         {
           "role": "resposta",
@@ -315,9 +315,9 @@
           "word_count": 20
         }
       ],
-      "narration_script": "Rengoku lutou até o LIMITE. Por quê?! Em Demon Slayer, o Hashira das Chamas tem uma responsabilidade enorme: proteger pessoas ameaçadas por demônios. No arco do Trem Infinito, ele enfrenta uma situação em que a segurança de muitos passageiros depende de decisões rápidas. Não basta possuir uma técnica poderosa. É preciso saber por quem e por que lutar. Rengoku demonstra coragem, mas o detalhe mais marcante não é a ausência de medo. É o compromisso que carrega mesmo quando o confronto fica muito difícil. Ele leva a sério o papel de Hashira, se preocupa com os mais fracos e entende que sua força tem uma finalidade. Isso dá outro significado às cenas de ação. Quando surge um adversário muito perigoso, a batalha passa a ser também um teste de princípios. Rengoku poderia pensar somente em sobreviver. Em vez disso, coloca sua missão em primeiro lugar. A história não diz que vencer é fácil; mostra que nem todo resultado pode ser medido apenas por quem permanece de pé. Tanjiro e os companheiros veem naquela batalha muito mais do que golpes e técnicas. Percebem o peso das escolhas de um Hashira e entendem por que os ensinamentos de Rengoku continuam importantes depois do confronto. Rengoku continuou porque proteger os passageiros e seus companheiros era mais importante para ele do que salvar a si mesmo.",
-      "word_count": 222,
-      "estimated_seconds_at_150_wpm": 88.8,
+      "narration_script": "Rengoku lutou até o LIMITE. Por quê?! Em Demon Slayer, o Hashira das Chamas tem uma responsabilidade enorme: proteger pessoas ameaçadas por demônios. No arco do Trem Infinito, ele enfrenta uma situação em que a segurança de muitos passageiros depende de decisões rápidas. Não basta possuir uma técnica poderosa. É preciso saber por quem e por que lutar. Rengoku demonstra coragem, mas o detalhe mais marcante não é a ausência de medo. É o compromisso que carrega mesmo quando o confronto fica muito difícil. Ele leva a sério o papel de Hashira, se preocupa com os mais fracos e entende que sua força tem uma finalidade. Isso dá outro significado às cenas de ação. Depois de proteger os passageiros, Rengoku enfrenta Akaza, e a batalha se torna um teste de princípios. Rengoku poderia pensar somente em sobreviver. Em vez disso, coloca sua missão em primeiro lugar. A história não diz que vencer é fácil; mostra que nem todo resultado pode ser medido apenas por quem permanece de pé. Tanjiro e os companheiros veem naquela batalha muito mais do que golpes e técnicas. Percebem o peso das escolhas de um Hashira e entendem por que os ensinamentos de Rengoku continuam importantes depois do confronto. Rengoku continuou porque proteger os passageiros e seus companheiros era mais importante para ele do que salvar a si mesmo.",
+      "word_count": 223,
+      "estimated_seconds_at_150_wpm": 89.2,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
       "target_shot_count": 10,
@@ -383,7 +383,7 @@
       "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
       "published_content_untouched": true,
       "no_auto_upload": true,
-      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "script_status": "canon_grounded_draft_needs_human_fact_check",
       "factual_review": false,
       "narration_generated": false,
       "rendered": false,
@@ -438,7 +438,7 @@
     {
       "rank": 5,
       "anime": "The Apothecary Diaries",
-      "title": "Por que Maomao arrisca tanto por UMA pista?! 🧪",
+      "title": "Maomao descobriu o VENENO ignorado no palácio?! 🧪",
       "target_duration_seconds": 90,
       "target_duration_label": "01:30",
       "duration_tolerance_seconds": 3,
@@ -487,45 +487,45 @@
       "original_catalog_reference": "conteudos/otaku-multicena-animes-50-curadoria-v4.json",
       "published_content_untouched": true,
       "no_auto_upload": true,
-      "script_status": "pilot_draft_needs_factual_and_voice_review",
+      "script_status": "canon_grounded_draft_needs_human_fact_check",
       "factual_review": false,
       "narration_generated": false,
       "rendered": false,
       "story_segments": [
         {
           "role": "hook",
-          "text": "Maomao arriscava tudo por uma pista?!",
-          "word_count": 6
+          "text": "Maomao descobriu o veneno que ninguém via?!",
+          "word_count": 7
         },
         {
           "role": "contexto",
-          "text": "Em The Apothecary Diaries, Maomao conhece remédios, venenos e sinais que passam despercebidos pela maioria das pessoas. Quando começa a trabalhar perto da corte imperial, descobre um ambiente em que até um detalhe pequeno pode ter consequências enormes. Uma informação aparentemente simples pode tocar em disputas de poder.",
-          "word_count": 48
+          "text": "No palácio imperial, os filhos das consortes começam a adoecer, e muitos funcionários falam numa maldição. Maomao, que conhece remédios e venenos, desconfia de uma causa muito mais comum. O perigo pode estar justamente num objeto usado todos os dias.",
+          "word_count": 40
         },
         {
           "role": "tensao",
-          "text": "O talento dela não está em usar magia ou adivinhar respostas. Maomao observa sintomas, compara possibilidades e procura uma explicação que faça sentido. Só que investigar não é apenas uma questão técnica. No palácio, apontar um erro pode constranger pessoas influentes. Dizer a verdade na hora errada também pode colocar alguém em perigo.",
-          "word_count": 53
+          "text": "Ela percebe que o pó branco aplicado no rosto pode ser tóxico. Não é um feitiço, nem uma conspiração sobrenatural. É um produto de beleza que pode afetar até uma criança. O problema é que Maomao trabalha como serviçal e não pode simplesmente acusar pessoas importantes do palácio.",
+          "word_count": 48
         },
         {
           "role": "virada",
-          "text": "É aqui que nasce o paradoxo. Maomao tenta manter um perfil discreto, mas a própria curiosidade chama atenção. Quanto mais ela demonstra conhecimento, mais pessoas passam a depender de suas descobertas. Ela sabe que nem todo mistério deveria ser tratado como brincadeira, mas encontra dificuldade em ignorar uma pista intrigante.",
-          "word_count": 50
+          "text": "Então ela escolhe um caminho discreto: deixa um aviso escrito num pedaço de tecido, preso a uma flor, para alertar sobre o pó facial. A consorte Gyokuyou leva a advertência a sério. Mas a mensagem também desperta uma nova pergunta dentro do palácio: quem descobriu a causa?",
+          "word_count": 47
         },
         {
           "role": "resposta",
-          "text": "Ela precisa avaliar a gravidade de cada detalhe antes de falar. O problema é que uma pista pode incomodar alguém poderoso, enquanto o silêncio também pode provocar consequências graves. Maomao precisa reconhecer o momento certo de agir.",
-          "word_count": 37
+          "text": "Jinshi começa a investigar a autoria do bilhete, e a tentativa de Maomao de permanecer invisível não funciona por muito tempo. A habilidade que poderia protegê-la acaba atraindo atenção. O caso também mostra por que conhecimento sem coragem não basta quando uma criança corre perigo.",
+          "word_count": 45
         },
         {
           "role": "resultado",
-          "text": "Maomao arrisca porque uma pista ignorada pode colocar alguém em perigo. Para ela, descobrir a verdade tem consequências reais.",
-          "word_count": 19
+          "text": "Maomao arriscou sua posição para alertar sobre o pó facial venenoso. A pista salvou quem recebeu o aviso a tempo e revelou que a suposta maldição tinha uma causa real.",
+          "word_count": 30
         }
       ],
-      "narration_script": "Maomao arriscava tudo por uma pista?! Em The Apothecary Diaries, Maomao conhece remédios, venenos e sinais que passam despercebidos pela maioria das pessoas. Quando começa a trabalhar perto da corte imperial, descobre um ambiente em que até um detalhe pequeno pode ter consequências enormes. Uma informação aparentemente simples pode tocar em disputas de poder. O talento dela não está em usar magia ou adivinhar respostas. Maomao observa sintomas, compara possibilidades e procura uma explicação que faça sentido. Só que investigar não é apenas uma questão técnica. No palácio, apontar um erro pode constranger pessoas influentes. Dizer a verdade na hora errada também pode colocar alguém em perigo. É aqui que nasce o paradoxo. Maomao tenta manter um perfil discreto, mas a própria curiosidade chama atenção. Quanto mais ela demonstra conhecimento, mais pessoas passam a depender de suas descobertas. Ela sabe que nem todo mistério deveria ser tratado como brincadeira, mas encontra dificuldade em ignorar uma pista intrigante. Ela precisa avaliar a gravidade de cada detalhe antes de falar. O problema é que uma pista pode incomodar alguém poderoso, enquanto o silêncio também pode provocar consequências graves. Maomao precisa reconhecer o momento certo de agir. Maomao arrisca porque uma pista ignorada pode colocar alguém em perigo. Para ela, descobrir a verdade tem consequências reais.",
-      "word_count": 213,
-      "estimated_seconds_at_150_wpm": 85.2,
+      "narration_script": "Maomao descobriu o veneno que ninguém via?! No palácio imperial, os filhos das consortes começam a adoecer, e muitos funcionários falam numa maldição. Maomao, que conhece remédios e venenos, desconfia de uma causa muito mais comum. O perigo pode estar justamente num objeto usado todos os dias. Ela percebe que o pó branco aplicado no rosto pode ser tóxico. Não é um feitiço, nem uma conspiração sobrenatural. É um produto de beleza que pode afetar até uma criança. O problema é que Maomao trabalha como serviçal e não pode simplesmente acusar pessoas importantes do palácio. Então ela escolhe um caminho discreto: deixa um aviso escrito num pedaço de tecido, preso a uma flor, para alertar sobre o pó facial. A consorte Gyokuyou leva a advertência a sério. Mas a mensagem também desperta uma nova pergunta dentro do palácio: quem descobriu a causa? Jinshi começa a investigar a autoria do bilhete, e a tentativa de Maomao de permanecer invisível não funciona por muito tempo. A habilidade que poderia protegê-la acaba atraindo atenção. O caso também mostra por que conhecimento sem coragem não basta quando uma criança corre perigo. Maomao arriscou sua posição para alertar sobre o pó facial venenoso. A pista salvou quem recebeu o aviso a tempo e revelou que a suposta maldição tinha uma causa real.",
+      "word_count": 217,
+      "estimated_seconds_at_150_wpm": 86.8,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
       "target_shot_count": 10,
