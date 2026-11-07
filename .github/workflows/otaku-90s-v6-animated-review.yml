@@ -20,7 +20,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'test(editor): run ONE AutoEditorVideo V6 90s animated preview (no YouTube)'
+      github.event.head_commit.message == 'test(editor): rerun ONE V6 animated preview after safe mobile QA correction'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
