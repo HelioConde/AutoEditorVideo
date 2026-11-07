@@ -81,3 +81,13 @@ def test_no_moving_anchor_jump_or_ghost_pose_crossfade():
     assert '\"MAX_IMAGE_CALLS\":\"0\"' in src
     assert "youtube.videos().insert" not in src
     assert "request_image(" not in src
+
+def test_lid_moves_down_before_covering_lower_iris():
+    rig = PerformanceBrush2D()
+    art = np.full((HEIGHT, WIDTH, 4), [200, 140, 100, 255], np.uint8)
+    art[422:441, 445:458, :3] = [20, 35, 40]
+    half_closed = rig._blink(art, 1.49)
+    assert not np.array_equal(half_closed[426, 452], art[426, 452])
+    assert np.array_equal(half_closed[437, 452], art[437, 452])
+    assert np.array_equal(half_closed[:, :, 3], art[:, :, 3])
+    assert blink_envelope(1.54 + .07) > blink_envelope(1.54 - .07)

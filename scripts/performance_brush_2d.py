@@ -30,8 +30,19 @@ def polygon(vertices,sigma):
     return cv2.GaussianBlur(mask.astype(np.float32)/255,(0,0),sigmaX=sigma,sigmaY=sigma)
 
 def blink_envelope(t):
-    return max((max(0.,(1+math.cos(math.pi*(t-center)/.22))/2)**1.35
-        if abs(t-center)<.22 else 0.) for center in (1.54,5.64))
+    # Fast close, brief contact, slower release. Both ends have zero velocity.
+    for center, closing, opening in ((1.54, .10, .16), (5.64, .12, .19)):
+        elapsed = t - center
+        if -closing <= elapsed < 0:
+            return float(smooth(1 + elapsed / closing))
+        if 0 <= elapsed <= opening:
+            return float(1 - smooth(max(0., elapsed - .02) / (opening - .02)))
+    return 0.
+
+
+def head_turn(t):
+    return smooth((t-2.)/.86)*(1-smooth((t-3.75)/.78))
+
 
 class PerformanceBrush2D:
     def __init__(self):
@@ -56,40 +67,34 @@ class PerformanceBrush2D:
         if strength<.005:
             return source
         result=source.copy()
-        # Annotated eyes only. Reuse original skin directly below each eye,
-        # keep alpha unchanged and add a narrow antialiased eyelid crease.
-        for cx,cy,rx,ry in ((453,438,32,17),(557,437,34,17)):
-            x0,x1=cx-rx-7,cx+rx+8
-            y0,y1=cy-ry-7,cy+ry+8
-            roi=result[y0:y1,x0:x1].astype(np.float32)
-            xx=np.arange(x0,x1,dtype=np.float32)[None,:]
-            yy=np.arange(y0,y1,dtype=np.float32)[:,None]
-            mask=np.clip(2.3*np.maximum(0,1-(
-                ((xx-cx)/rx)**2+((yy-cy)/ry)**2)),0,1)
-            mask=cv2.GaussianBlur(mask,(0,0),sigmaX=2.2)
-            # No invented iris/identity. Sample and soften skin of the source.
-            pixels=source[min(HEIGHT-1,cy+25),x0:x1,:3].astype(np.float32)
-            pixels=cv2.GaussianBlur(pixels[None,:,:],(0,0),sigmaX=3)[0]
-            skin=np.broadcast_to(pixels[None,:,:],roi[:,:,:3].shape).copy()
-            skin*=1-.06*np.clip(-(yy-cy)/ry,0,1)[:,:,None]
-            strength_mask=mask[:,:,None]*strength
-            roi[:,:,:3]=roi[:,:,:3]*(1-strength_mask)+skin*strength_mask
-            line=np.zeros((y1-y0,x1-x0,3),np.uint8)
-            points=np.asarray([[
-                (cx-rx+5-x0,cy-2-y0),(cx-8-x0,cy+1-y0),
-                (cx+7-x0,cy+1-y0),(cx+rx-4-x0,cy-3-y0)
-            ]],dtype=np.int32)
-            cv2.polylines(line,points,False,(44,28,28),2,lineType=cv2.LINE_AA)
-            ink=cv2.cvtColor(line,cv2.COLOR_RGB2GRAY).astype(np.float32)
-            ink=(ink/max(1,float(line.max())))[:,:,None]*strength
-            roi[:,:,:3]=roi[:,:,:3]*(1-ink)+np.array(
-                [43,29,25],dtype=np.float32)[None,None,:]*ink
-            result[y0:y1,x0:x1]=np.uint8(np.clip(roi,0,255))
+        # Trace both lid contours on the approved pose. Move the lash line
+        # across the iris while leaving the fringe and brows in place.
+        for columns, upper, lower in (
+            ([429, 435, 446, 457, 469, 477], [427, 424, 422, 422, 425, 432],
+             [427, 434, 440, 440, 437, 432]),
+            ([521, 527, 538, 550, 561, 569], [431, 425, 420, 418, 419, 422],
+             [431, 435, 436, 436, 432, 422]),
+        ):
+            x = np.arange(columns[0], columns[-1] + 1)
+            top = np.interp(x, columns, upper)
+            bottom = np.interp(x, columns, lower)
+            edge = top + strength * (bottom - top)
+            y0, y1 = min(upper) - 2, max(lower) + 3
+            y = np.arange(y0, y1)[:, None]
+            region = result[y0:y1, x[0]:x[-1]+1, :3]
+            skin = source[np.rint(bottom).astype(int)+3, x, :3]
+            coverage = np.clip(edge-y+1, 0, 1) * np.clip(y-top+2, 0, 1)
+            taper = np.clip((bottom-top)/5, 0, 1)
+            coverage *= taper * min(1., strength * 8)
+            color = region*(1-coverage[:,:,None]) + skin*coverage[:,:,None]
+            lash = np.clip(1.6-abs(y-edge), 0, 1) * taper * strength
+            region[:] = np.rint(color*(1-lash[:,:,None]) +
+                                np.array([48, 29, 25])*lash[:,:,None])
         return result
 
     def displacement(self,t):
         t=max(0.,min(float(t),SECONDS))
-        yaw=smooth((t-2.)/.86)*(1-smooth((t-3.75)/.78))
+        yaw=head_turn(t)
         nod=smooth((t-4.13)/.69)*(1-smooth((t-6.45)/.78))
         theta=(.026*yaw-.012*nod)
         # Same affine transform throughout the face core: nose-eye geometry
@@ -100,12 +105,17 @@ class PerformanceBrush2D:
         dx+=self.chest*(X-520)/330*.004*breath*220
         dy+=self.chest*(-2.6*breath)
         hair=math.sin(2*math.pi*.48*t)*math.sin(math.pi*t/SECONDS)**2
-        dx+=self.hair*(6.5*hair)
+        dx+=self.hair*(2.4*hair + 6*(head_turn(t-.16)-yaw))
         swing=math.sin(2*math.pi*.42*t+.3)*math.sin(math.pi*t/SECONDS)**2
-        dx+=self.tie*((Y-718).clip(min=0)/460)*(11*swing)
+        dx+=self.tie*((Y-718).clip(min=0)/460)*(3*swing + 4*breath + 6*(head_turn(t-.23)-yaw))
         gesture=smooth((t-4.15)/1.08)*(1-smooth((t-6.55)/.96))
-        dx+=self.arm*gesture*(15*((Y-1110)/370).clip(0,1))
-        dy+=self.arm*gesture*(-6*((Y-1110)/370).clip(0,1))
+        # Rotate the forearm around the elbow. A short anticipation and
+        # delayed release give the hand a readable arc through the pose.
+        anticipation = smooth((t-3.83)/.32)*(1-smooth((t-4.15)/.42))
+        angle = .040*gesture - .006*anticipation
+        cosine, sine = math.cos(angle), math.sin(angle)
+        dx += self.arm*((1-cosine)*(X-716) + sine*(Y-1115))
+        dy += self.arm*((1-cosine)*(Y-1115) - sine*(X-716))
         thinking=smooth((t-1.15))*(1-smooth((t-2.95)/.8))
         dy+=self.sleeve*(-2.5*thinking)
         dx+=self.neck*(2*yaw)
@@ -123,7 +133,7 @@ class PerformanceBrush2D:
             "maximum_motion_px":round(max_motion,3),
             "max_local_shear":round(gradient,4),
             "blink_fraction":round(blink_envelope(t),3),
-            "head_yaw":round(float(smooth((t-2.)/.86)*(1-smooth((t-3.75)/.78))),3),
+            "head_yaw":round(float(head_turn(t)),3),
             "arm_beat":round(float(smooth((t-4.15)/1.08)*(1-smooth((t-6.55)/.96))),3),
             "safe":max_motion<19 and gradient<.28
         }
