@@ -2,7 +2,7 @@ import React from 'react';
 import {AbsoluteFill,Audio,Img,Sequence,interpolate,staticFile,useCurrentFrame,useVideoConfig} from 'remotion';
 import {AnimationMode,cannotMoveSeparately,motionAtFrame,openingCutAtFrame,longHoldCutAtFrame} from './cinematic-motion';
 import {CharacterPreset,characterPoseAtFrame} from './character-idle';
-import {RigPlayback,poseFrameIndex} from './pose-timeline';
+import {RigPlayback,poseFrameIndex,meshFrameIndex} from './pose-timeline';
 
 export type SemanticLayer={
   id:string;role:string;z:number;src:string;
@@ -74,10 +74,10 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
           // One layer at a time avoids the duplicate/ghost artifacts of V6.
           const mesh=mode==='malha2d'?layer.meshFrames:undefined;
           if(mesh?.frames.length){
-            const index=poseFrameIndex({
+            const index=meshFrameIndex({
               frame,sceneStart:scene.startFrame,
-              compositionFps:fps,rigFps:mesh.fps,
-              frameCount:mesh.frames.length,playback:'once'
+              compositionFps:fps,meshFps:mesh.fps,
+              frameCount:mesh.frames.length
             });
             return <Img key={layer.id} src={staticFile(mesh.frames[index])}
               style={{position:'absolute',inset:0,width:'100%',height:'100%',
