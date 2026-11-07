@@ -206,7 +206,7 @@ def build_cuts(row:dict,voice:Path,frames:int)->list[int]:
     total=sum(counts)
     actual=len(real)
     starts=[]
-    for index in indices[:-1]:
+    for index in indices:
         k=min(actual-1,max(0,round(index*actual/total)))
         starts.append(round(float(real[k]["start"])*FPS) if index else 0)
     cuts=starts+[frames]
