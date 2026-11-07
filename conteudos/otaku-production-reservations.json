@@ -1156,13 +1156,13 @@
     },
     {
       "channel": "br",
-      "id": "otaku-v7-malha-8s-review-only",
+      "id": "5999-otaku-v7-malha-8s-review-only",
       "status": "reserved",
       "reservation_owner": "chatgpt_v7_mesh_trial_20261107",
       "source": "creator_request_mesh_animation_prototype_2026-11-07",
       "publication_target": "none_review_artifact_only",
       "source_artifact_run_id": 42332358380,
-      "note": "One 8-second V7 CPU 2D deformable-mesh animation test, reusing verified original RGBA pose and background from V6. No paid AI generation, no YouTube publishing, preserve 50-video production pause. Not an approved episode."
+      "note": "One 8-second V7 CPU 2D deformable-mesh animation test, reusing verified original RGBA pose and background from V6. No paid AI generation, no YouTube publishing, preserve 50-video production pause. Not an approved episode. Technical review entry uses a 4-digit BR ID to satisfy the existing production registry schema."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
