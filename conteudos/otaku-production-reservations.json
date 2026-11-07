@@ -1183,6 +1183,16 @@
       "source_artifact_run_id": 42332358380,
       "publication_target": "none_review_artifact_only",
       "note": "One 8s review-only, mask-guided brush vector motion of a single original RGBA + original background, with face protection and CPU flow QC; zero paid image calls, never resume paused 50 Shorts or publish."
+    },
+    {
+      "channel": "br",
+      "id": "5996-otaku-v10-performance-brush-8s-review",
+      "status": "reserved",
+      "reservation_owner": "chatgpt_v10_performance_brush_20261107",
+      "source": "creator_request_improve_v9_animation_2026-11-07",
+      "source_artifact_run_id": 42332358380,
+      "publication_target": "none_review_artifact_only",
+      "note": "Single eight-second V10 micro-performance review with eye blinks, head pose, hair and necktie motion driven by one original RGBA; zero new image generation, no YouTube upload; retain paused production queue."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
