@@ -1,0 +1,42 @@
+{
+  "schema": "autoeditorvideo/kids-3-video-visibility-audit-20261107/v1",
+  "audit_run": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42398049066",
+  "checked_at_utc": "2026-11-07T17:48:14Z",
+  "channel": "Emanuelly Kids",
+  "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+  "current_public_count": 2,
+  "ids_registered_count": 3,
+  "note": "This is a later point-in-time status than the previous three-private verification. Do not claim all three are public or completed.",
+  "no_reupload_authorized": false,
+  "no_visibility_changes_authorized": false,
+  "videos": [
+    {
+      "id": "d7hjFP6Ky6w",
+      "title": "O Elefantinho e a Água Escondida",
+      "visibility": "private",
+      "upload_status": "uploaded",
+      "processing_status": "processing",
+      "api_duration": "P0D",
+      "in_own_upload_playlist": true,
+      "action": "Investigate incomplete processing before any public change or new versioned upload."
+    },
+    {
+      "id": "ax0ude5BUhE",
+      "title": "Adivinhe o Animal pela Sombra",
+      "visibility": "public",
+      "upload_status": "processed",
+      "processing_status": "succeeded",
+      "api_duration": "PT1M57S",
+      "in_own_upload_playlist": true
+    },
+    {
+      "id": "It-7R1o9k7Q",
+      "title": "3 Dinossauros com Segredos Incríveis",
+      "visibility": "public",
+      "upload_status": "processed",
+      "processing_status": "succeeded",
+      "api_duration": "PT1M45S",
+      "in_own_upload_playlist": true
+    }
+  ]
+}
