@@ -27,7 +27,7 @@ MAX_WORDS=225
 FORBIDDEN_ENDING_TERMS=(
     "inscreva", "inscrever", "inscricao", "curta", "curte", "curtir",
     "like", "comente", "comenta", "comentarios", "compartilhe",
-    "compartilhar", "siga", "segue", "seguir", "ative o sininho",
+    "compartilhar", "siga", "ative o sininho",
     "acompanhe", "proximo video", "proximo episodio", "deixe sua",
     "link na", "e voce", "voce", "o que acha", "qual voce"
 )
