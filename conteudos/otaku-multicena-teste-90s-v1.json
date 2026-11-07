@@ -121,6 +121,192 @@
         "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
         "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
         "no_closing_cta": true
+      },
+      "story_quality_v5": {
+        "core_promise": "L convidou Light para caçar Kira?!",
+        "canon_claims": [
+          {
+            "claim": "L suspeitava de Light e o chamou para a investigação.",
+            "source_url": "https://www.hbomax.com/br/pt/show/fabd8a3d-dd29-4f94-bc46-55941b14eacf",
+            "human_verified": false
+          },
+          {
+            "claim": "O segundo Kira levou L a trabalhar mais perto de Light.",
+            "source_url": "https://www.hbomax.com/br/pt/show/fabd8a3d-dd29-4f94-bc46-55941b14eacf",
+            "human_verified": false
+          },
+          {
+            "claim": "Light perdeu as memórias do caderno e investigou Kira genuinamente.",
+            "source_url": "https://www.hbomax.com/br/pt/show/fabd8a3d-dd29-4f94-bc46-55941b14eacf",
+            "human_verified": false
+          }
+        ],
+        "sources_for_editor": [
+          "https://www.hbomax.com/br/pt/show/fabd8a3d-dd29-4f94-bc46-55941b14eacf"
+        ],
+        "micro_reveals": [
+          {
+            "approx_second": 15,
+            "anchor": "era um dos maiores suspeitos",
+            "editorial_function": "pista concreta",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 31,
+            "anchor": "L não confundia proximidade com",
+            "editorial_function": "consequência",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 51,
+            "anchor": "surge o segundo Kira. L",
+            "editorial_function": "virada",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 70,
+            "anchor": "parte decisiva é essa mudança",
+            "editorial_function": "preparação da conclusão",
+            "actual_audio_second": null
+          }
+        ],
+        "visual_shots": [
+          {
+            "shot_number": 1,
+            "approx_second": 0,
+            "shot_type": "close",
+            "story_role": "hook",
+            "script_reference": "L convidou Light para caçar Kira?!",
+            "visual_instruction": "Mostrar imediatamente o conflito e o protagonista",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 2,
+            "approx_second": 4,
+            "shot_type": "wide",
+            "story_role": "contexto",
+            "script_reference": "Light era um dos maiores suspeitos de L. Eles se encontraram na universidade, onde cada conversa parecia uma partida de xadrez. Me",
+            "visual_instruction": "Situar ambiente e personagem com imagem original",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 3,
+            "approx_second": 12,
+            "shot_type": "detail",
+            "story_role": "contexto",
+            "script_reference": "Light era um dos maiores suspeitos de L. Eles se encontraram na universidade, onde cada conversa parecia uma partida de xadrez. Me",
+            "visual_instruction": "Destacar objeto ou pista ligada à história",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 4,
+            "approx_second": 19,
+            "shot_type": "medium",
+            "story_role": "tensao",
+            "script_reference": "Primeiro, L não confundia proximidade com confiança. Ele queria observar as reações de Light, ouvir suas respostas e perceber cont",
+            "visual_instruction": "Mostrar ação que produziu a primeira consequência",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 5,
+            "approx_second": 29,
+            "shot_type": "reaction",
+            "story_role": "tensao",
+            "script_reference": "Primeiro, L não confundia proximidade com confiança. Ele queria observar as reações de Light, ouvir suas respostas e perceber cont",
+            "visual_instruction": "Registrar reação com expressão genuína e pose distinta",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 6,
+            "approx_second": 40,
+            "shot_type": "wide",
+            "story_role": "virada",
+            "script_reference": "Depois surge o segundo Kira. L usa a inteligência de Light para tentar identificar o imitador, mas continua desconfiando dele. A t",
+            "visual_instruction": "Representar obstáculo concreto ou mudança no plano",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 7,
+            "approx_second": 50,
+            "shot_type": "detail",
+            "story_role": "virada",
+            "script_reference": "Depois surge o segundo Kira. L usa a inteligência de Light para tentar identificar o imitador, mas continua desconfiando dele. A t",
+            "visual_instruction": "Detalhar a reviravolta sem inventar acontecimentos",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 8,
+            "approx_second": 61,
+            "shot_type": "medium",
+            "story_role": "resposta",
+            "script_reference": "A parte decisiva é essa mudança de perspectiva. O Light que planejou a perda de memória e o Light que colaborou sem lembranças não",
+            "visual_instruction": "Explicar causa com evidência visual específica",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 9,
+            "approx_second": 71,
+            "shot_type": "close",
+            "story_role": "resposta",
+            "script_reference": "A parte decisiva é essa mudança de perspectiva. O Light que planejou a perda de memória e o Light que colaborou sem lembranças não",
+            "visual_instruction": "Preparar a consequência final com plano diferente",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 10,
+            "approx_second": 81,
+            "shot_type": "final",
+            "story_role": "resultado",
+            "script_reference": "L não convidou Light porque acreditava nele. Convidou porque investigar alguém de perto podia revelar o que uma acusação distante ",
+            "visual_instruction": "Entregar resposta com final limpo, sem pergunta ou CTA",
+            "asset_ready": false,
+            "rights_checked": false
+          }
+        ],
+        "narration": {
+          "locale": "pt-BR",
+          "style": "conversacional e expressivo, sem narração publicitária; pausas naturais e sem preenchimento artificial",
+          "segment_tones": [
+            "intriga",
+            "contexto objetivo",
+            "risco crescente",
+            "surpresa",
+            "esclarecimento",
+            "afirmação conclusiva"
+          ],
+          "names_to_pronounce": [
+            "Light",
+            "L",
+            "Kira"
+          ],
+          "pronunciation_reviewed": false,
+          "measured_tts_seconds": null
+        },
+        "editorial_safety": {
+          "spoilers_level": "alto",
+          "spoilers_approved": false,
+          "canon_human_verified": false,
+          "rights_verified": false
+        },
+        "experiment_pair": {
+          "short_duration_seconds": 40,
+          "long_duration_seconds": 90,
+          "control_script_ready": false,
+          "both_no_cta": true,
+          "no_duplicate_visual_assets": true,
+          "matched_48h": true,
+          "no_publication_authorized": true
+        },
+        "approved_for_media": false
       }
     },
     {
@@ -225,6 +411,193 @@
         "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
         "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
         "no_closing_cta": true
+      },
+      "story_quality_v5": {
+        "core_promise": "Johnny correu sem conseguir ANDAR?!",
+        "canon_claims": [
+          {
+            "claim": "Johnny tinha paralisia após levar um tiro.",
+            "source_url": "https://jojo-portal.com/anime/sbr/story/",
+            "human_verified": false
+          },
+          {
+            "claim": "O Spin de Gyro fez suas pernas se moverem por instantes.",
+            "source_url": "https://jojo-portal-anime.com/sbr/character/01/",
+            "human_verified": false
+          },
+          {
+            "claim": "Ele entrou na corrida para entender a rotação das esferas.",
+            "source_url": "https://jojo-portal-anime.com/sbr/character/01/",
+            "human_verified": false
+          }
+        ],
+        "sources_for_editor": [
+          "https://jojo-portal.com/anime/sbr/story/",
+          "https://jojo-portal-anime.com/sbr/character/01/"
+        ],
+        "micro_reveals": [
+          {
+            "approx_second": 15,
+            "anchor": "Steel Ball Run, Johnny Joestar",
+            "editorial_function": "pista concreta",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 31,
+            "anchor": "Johnny conhece Gyro Zeppeli, um",
+            "editorial_function": "consequência",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 51,
+            "anchor": "que Gyro não entrega respostas",
+            "editorial_function": "virada",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 70,
+            "anchor": "cada etapa, a distância física",
+            "editorial_function": "preparação da conclusão",
+            "actual_audio_second": null
+          }
+        ],
+        "visual_shots": [
+          {
+            "shot_number": 1,
+            "approx_second": 0,
+            "shot_type": "close",
+            "story_role": "hook",
+            "script_reference": "Johnny correu sem conseguir ANDAR?!",
+            "visual_instruction": "Mostrar imediatamente o conflito e o protagonista",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 2,
+            "approx_second": 4,
+            "shot_type": "wide",
+            "story_role": "contexto",
+            "script_reference": "Em Steel Ball Run, Johnny Joestar foi um jóquei famoso antes de um acontecimento que mudou completamente sua vida. A perda da capa",
+            "visual_instruction": "Situar ambiente e personagem com imagem original",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 3,
+            "approx_second": 12,
+            "shot_type": "detail",
+            "story_role": "contexto",
+            "script_reference": "Em Steel Ball Run, Johnny Joestar foi um jóquei famoso antes de um acontecimento que mudou completamente sua vida. A perda da capa",
+            "visual_instruction": "Destacar objeto ou pista ligada à história",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 4,
+            "approx_second": 19,
+            "shot_type": "medium",
+            "story_role": "tensao",
+            "script_reference": "Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Quando Johnny toca as esferas de Gyro, suas",
+            "visual_instruction": "Mostrar ação que produziu a primeira consequência",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 5,
+            "approx_second": 29,
+            "shot_type": "reaction",
+            "story_role": "tensao",
+            "script_reference": "Então Johnny conhece Gyro Zeppeli, um competidor que utiliza uma técnica chamada Spin. Quando Johnny toca as esferas de Gyro, suas",
+            "visual_instruction": "Registrar reação com expressão genuína e pose distinta",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 6,
+            "approx_second": 40,
+            "shot_type": "wide",
+            "story_role": "virada",
+            "script_reference": "Só que Gyro não entrega respostas prontas. Johnny precisa observar, experimentar, falhar e voltar a tentar. Ao longo do caminho, o",
+            "visual_instruction": "Representar obstáculo concreto ou mudança no plano",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 7,
+            "approx_second": 50,
+            "shot_type": "detail",
+            "story_role": "virada",
+            "script_reference": "Só que Gyro não entrega respostas prontas. Johnny precisa observar, experimentar, falhar e voltar a tentar. Ao longo do caminho, o",
+            "visual_instruction": "Detalhar a reviravolta sem inventar acontecimentos",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 8,
+            "approx_second": 61,
+            "shot_type": "medium",
+            "story_role": "resposta",
+            "script_reference": "A cada etapa, a distância física importa menos do que a sensação de avançar pela primeira vez desde o acidente. Johnny passa a olh",
+            "visual_instruction": "Explicar causa com evidência visual específica",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 9,
+            "approx_second": 71,
+            "shot_type": "close",
+            "story_role": "resposta",
+            "script_reference": "A cada etapa, a distância física importa menos do que a sensação de avançar pela primeira vez desde o acidente. Johnny passa a olh",
+            "visual_instruction": "Preparar a consequência final com plano diferente",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 10,
+            "approx_second": 81,
+            "shot_type": "final",
+            "story_role": "resultado",
+            "script_reference": "Johnny entrou porque Gyro e a técnica do Spin representavam uma possibilidade de recuperar o controle sobre o próprio corpo.",
+            "visual_instruction": "Entregar resposta com final limpo, sem pergunta ou CTA",
+            "asset_ready": false,
+            "rights_checked": false
+          }
+        ],
+        "narration": {
+          "locale": "pt-BR",
+          "style": "conversacional e expressivo, sem narração publicitária; pausas naturais e sem preenchimento artificial",
+          "segment_tones": [
+            "intriga",
+            "contexto objetivo",
+            "risco crescente",
+            "surpresa",
+            "esclarecimento",
+            "afirmação conclusiva"
+          ],
+          "names_to_pronounce": [
+            "Johnny Joestar",
+            "Gyro Zeppeli",
+            "Spin"
+          ],
+          "pronunciation_reviewed": false,
+          "measured_tts_seconds": null
+        },
+        "editorial_safety": {
+          "spoilers_level": "baixo",
+          "spoilers_approved": false,
+          "canon_human_verified": false,
+          "rights_verified": false
+        },
+        "experiment_pair": {
+          "short_duration_seconds": 40,
+          "long_duration_seconds": 90,
+          "control_script_ready": false,
+          "both_no_cta": true,
+          "no_duplicate_visual_assets": true,
+          "matched_48h": true,
+          "no_publication_authorized": true
+        },
+        "approved_for_media": false
       }
     },
     {
@@ -329,6 +702,193 @@
         "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
         "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
         "no_closing_cta": true
+      },
+      "story_quality_v5": {
+        "core_promise": "Rengoku lutou até o LIMITE. Por quê?!",
+        "canon_claims": [
+          {
+            "claim": "Mais de duzentos passageiros foram ameaçados por Enmu.",
+            "source_url": "https://demonslayer-anime.com/mugentrainarc/story/?id=ep5",
+            "human_verified": false
+          },
+          {
+            "claim": "O trem descarrilou depois da luta contra Enmu.",
+            "source_url": "https://demonslayer-anime.com/mugentrainarc/story/?id=ep6",
+            "human_verified": false
+          },
+          {
+            "claim": "Akaza apareceu e Rengoku o enfrentou.",
+            "source_url": "https://demonslayer-anime.com/mugentrainarc/story/?id=ep6",
+            "human_verified": false
+          }
+        ],
+        "sources_for_editor": [
+          "https://demonslayer-anime.com/mugentrainarc/story/?id=ep5",
+          "https://demonslayer-anime.com/mugentrainarc/story/?id=ep6"
+        ],
+        "micro_reveals": [
+          {
+            "approx_second": 15,
+            "anchor": "Demon Slayer, o Hashira das",
+            "editorial_function": "pista concreta",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 31,
+            "anchor": "demonstra coragem, mas o detalhe",
+            "editorial_function": "consequência",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 51,
+            "anchor": "de proteger os passageiros, Rengoku",
+            "editorial_function": "virada",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 70,
+            "anchor": "e os companheiros veem naquela",
+            "editorial_function": "preparação da conclusão",
+            "actual_audio_second": null
+          }
+        ],
+        "visual_shots": [
+          {
+            "shot_number": 1,
+            "approx_second": 0,
+            "shot_type": "close",
+            "story_role": "hook",
+            "script_reference": "Rengoku lutou até o LIMITE. Por quê?!",
+            "visual_instruction": "Mostrar imediatamente o conflito e o protagonista",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 2,
+            "approx_second": 4,
+            "shot_type": "wide",
+            "story_role": "contexto",
+            "script_reference": "Em Demon Slayer, o Hashira das Chamas tem uma responsabilidade enorme: proteger pessoas ameaçadas por demônios. No arco do Trem In",
+            "visual_instruction": "Situar ambiente e personagem com imagem original",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 3,
+            "approx_second": 12,
+            "shot_type": "detail",
+            "story_role": "contexto",
+            "script_reference": "Em Demon Slayer, o Hashira das Chamas tem uma responsabilidade enorme: proteger pessoas ameaçadas por demônios. No arco do Trem In",
+            "visual_instruction": "Destacar objeto ou pista ligada à história",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 4,
+            "approx_second": 19,
+            "shot_type": "medium",
+            "story_role": "tensao",
+            "script_reference": "Rengoku demonstra coragem, mas o detalhe mais marcante não é a ausência de medo. É o compromisso que carrega mesmo quando o confro",
+            "visual_instruction": "Mostrar ação que produziu a primeira consequência",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 5,
+            "approx_second": 29,
+            "shot_type": "reaction",
+            "story_role": "tensao",
+            "script_reference": "Rengoku demonstra coragem, mas o detalhe mais marcante não é a ausência de medo. É o compromisso que carrega mesmo quando o confro",
+            "visual_instruction": "Registrar reação com expressão genuína e pose distinta",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 6,
+            "approx_second": 40,
+            "shot_type": "wide",
+            "story_role": "virada",
+            "script_reference": "Depois de proteger os passageiros, Rengoku enfrenta Akaza, e a batalha se torna um teste de princípios. Rengoku poderia pensar som",
+            "visual_instruction": "Representar obstáculo concreto ou mudança no plano",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 7,
+            "approx_second": 50,
+            "shot_type": "detail",
+            "story_role": "virada",
+            "script_reference": "Depois de proteger os passageiros, Rengoku enfrenta Akaza, e a batalha se torna um teste de princípios. Rengoku poderia pensar som",
+            "visual_instruction": "Detalhar a reviravolta sem inventar acontecimentos",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 8,
+            "approx_second": 61,
+            "shot_type": "medium",
+            "story_role": "resposta",
+            "script_reference": "Tanjiro e os companheiros veem naquela batalha muito mais do que golpes e técnicas. Percebem o peso das escolhas de um Hashira e e",
+            "visual_instruction": "Explicar causa com evidência visual específica",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 9,
+            "approx_second": 71,
+            "shot_type": "close",
+            "story_role": "resposta",
+            "script_reference": "Tanjiro e os companheiros veem naquela batalha muito mais do que golpes e técnicas. Percebem o peso das escolhas de um Hashira e e",
+            "visual_instruction": "Preparar a consequência final com plano diferente",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 10,
+            "approx_second": 81,
+            "shot_type": "final",
+            "story_role": "resultado",
+            "script_reference": "Rengoku continuou porque proteger os passageiros e seus companheiros era mais importante para ele do que salvar a si mesmo.",
+            "visual_instruction": "Entregar resposta com final limpo, sem pergunta ou CTA",
+            "asset_ready": false,
+            "rights_checked": false
+          }
+        ],
+        "narration": {
+          "locale": "pt-BR",
+          "style": "conversacional e expressivo, sem narração publicitária; pausas naturais e sem preenchimento artificial",
+          "segment_tones": [
+            "intriga",
+            "contexto objetivo",
+            "risco crescente",
+            "surpresa",
+            "esclarecimento",
+            "afirmação conclusiva"
+          ],
+          "names_to_pronounce": [
+            "Rengoku",
+            "Akaza",
+            "Enmu"
+          ],
+          "pronunciation_reviewed": false,
+          "measured_tts_seconds": null
+        },
+        "editorial_safety": {
+          "spoilers_level": "alto",
+          "spoilers_approved": false,
+          "canon_human_verified": false,
+          "rights_verified": false
+        },
+        "experiment_pair": {
+          "short_duration_seconds": 40,
+          "long_duration_seconds": 90,
+          "control_script_ready": false,
+          "both_no_cta": true,
+          "no_duplicate_visual_assets": true,
+          "matched_48h": true,
+          "no_publication_authorized": true
+        },
+        "approved_for_media": false
       }
     },
     {
@@ -433,6 +993,192 @@
         "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
         "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
         "no_closing_cta": true
+      },
+      "story_quality_v5": {
+        "core_promise": "Chinatsu foi morar com Taiki?!",
+        "canon_claims": [
+          {
+            "claim": "Taiki joga badminton e Chinatsu joga basquete.",
+            "source_url": "https://media.netflix.com/en/only-on-netflix/81663323",
+            "human_verified": false
+          },
+          {
+            "claim": "Os pais de Chinatsu se mudam para o exterior.",
+            "source_url": "https://www.viz.com/blue-box",
+            "human_verified": false
+          },
+          {
+            "claim": "Chinatsu vai morar com a família Inomata enquanto treina no Japão.",
+            "source_url": "https://www.viz.com/blue-box",
+            "human_verified": false
+          }
+        ],
+        "sources_for_editor": [
+          "https://media.netflix.com/en/only-on-netflix/81663323",
+          "https://www.viz.com/blue-box"
+        ],
+        "micro_reveals": [
+          {
+            "approx_second": 15,
+            "anchor": "Box acompanha Taiki, um estudante",
+            "editorial_function": "pista concreta",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 31,
+            "anchor": "acontece algo inesperado: os pais",
+            "editorial_function": "consequência",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 51,
+            "anchor": "detalhe importante é que isso",
+            "editorial_function": "virada",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 70,
+            "anchor": "Taiki, a convivência traz uma",
+            "editorial_function": "preparação da conclusão",
+            "actual_audio_second": null
+          }
+        ],
+        "visual_shots": [
+          {
+            "shot_number": 1,
+            "approx_second": 0,
+            "shot_type": "close",
+            "story_role": "hook",
+            "script_reference": "Chinatsu foi morar com Taiki?!",
+            "visual_instruction": "Mostrar imediatamente o conflito e o protagonista",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 2,
+            "approx_second": 4,
+            "shot_type": "wide",
+            "story_role": "contexto",
+            "script_reference": "Blue Box acompanha Taiki, um estudante dedicado ao badminton, e Chinatsu, uma atleta de basquete que ele admira. Os dois se encont",
+            "visual_instruction": "Situar ambiente e personagem com imagem original",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 3,
+            "approx_second": 12,
+            "shot_type": "detail",
+            "story_role": "contexto",
+            "script_reference": "Blue Box acompanha Taiki, um estudante dedicado ao badminton, e Chinatsu, uma atleta de basquete que ele admira. Os dois se encont",
+            "visual_instruction": "Destacar objeto ou pista ligada à história",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 4,
+            "approx_second": 19,
+            "shot_type": "medium",
+            "story_role": "tensao",
+            "script_reference": "Então acontece algo inesperado: os pais de Chinatsu precisam se mudar para o exterior, mas ela deseja continuar no Japão, perto da",
+            "visual_instruction": "Mostrar ação que produziu a primeira consequência",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 5,
+            "approx_second": 29,
+            "shot_type": "reaction",
+            "story_role": "tensao",
+            "script_reference": "Então acontece algo inesperado: os pais de Chinatsu precisam se mudar para o exterior, mas ela deseja continuar no Japão, perto da",
+            "visual_instruction": "Registrar reação com expressão genuína e pose distinta",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 6,
+            "approx_second": 40,
+            "shot_type": "wide",
+            "story_role": "virada",
+            "script_reference": "O detalhe importante é que isso não transforma tudo em romance instantâneo. Chinatsu continua focada em seus objetivos, e Taiki ta",
+            "visual_instruction": "Representar obstáculo concreto ou mudança no plano",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 7,
+            "approx_second": 50,
+            "shot_type": "detail",
+            "story_role": "virada",
+            "script_reference": "O detalhe importante é que isso não transforma tudo em romance instantâneo. Chinatsu continua focada em seus objetivos, e Taiki ta",
+            "visual_instruction": "Detalhar a reviravolta sem inventar acontecimentos",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 8,
+            "approx_second": 61,
+            "shot_type": "medium",
+            "story_role": "resposta",
+            "script_reference": "Para Taiki, a convivência traz uma pressão inesperada: estar perto de Chinatsu sem perder a concentração nos treinos. Para ela, ca",
+            "visual_instruction": "Explicar causa com evidência visual específica",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 9,
+            "approx_second": 71,
+            "shot_type": "close",
+            "story_role": "resposta",
+            "script_reference": "Para Taiki, a convivência traz uma pressão inesperada: estar perto de Chinatsu sem perder a concentração nos treinos. Para ela, ca",
+            "visual_instruction": "Preparar a consequência final com plano diferente",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 10,
+            "approx_second": 81,
+            "shot_type": "final",
+            "story_role": "resultado",
+            "script_reference": "Chinatsu passou a morar com a família de Taiki para seguir treinando no Japão enquanto seus pais se mudavam para o exterior.",
+            "visual_instruction": "Entregar resposta com final limpo, sem pergunta ou CTA",
+            "asset_ready": false,
+            "rights_checked": false
+          }
+        ],
+        "narration": {
+          "locale": "pt-BR",
+          "style": "conversacional e expressivo, sem narração publicitária; pausas naturais e sem preenchimento artificial",
+          "segment_tones": [
+            "intriga",
+            "contexto objetivo",
+            "risco crescente",
+            "surpresa",
+            "esclarecimento",
+            "afirmação conclusiva"
+          ],
+          "names_to_pronounce": [
+            "Chinatsu",
+            "Taiki"
+          ],
+          "pronunciation_reviewed": false,
+          "measured_tts_seconds": null
+        },
+        "editorial_safety": {
+          "spoilers_level": "baixo",
+          "spoilers_approved": false,
+          "canon_human_verified": false,
+          "rights_verified": false
+        },
+        "experiment_pair": {
+          "short_duration_seconds": 40,
+          "long_duration_seconds": 90,
+          "control_script_ready": false,
+          "both_no_cta": true,
+          "no_duplicate_visual_assets": true,
+          "matched_48h": true,
+          "no_publication_authorized": true
+        },
+        "approved_for_media": false
       }
     },
     {
@@ -537,6 +1283,193 @@
         "pace": "tensão e informação claras, pausas curtas nas viradas; não acelerar artificialmente para encaixar 90s",
         "delivery": "tom humano, personagens pronunciados com cuidado, efeito da revelação na última frase",
         "no_closing_cta": true
+      },
+      "story_quality_v5": {
+        "core_promise": "Maomao descobriu o veneno que ninguém via?!",
+        "canon_claims": [
+          {
+            "claim": "Os filhos das consortes adoecem no palácio.",
+            "source_url": "https://www.crunchyroll.com/pt-br/watch/GMKUXQ2VM/maomao",
+            "human_verified": false
+          },
+          {
+            "claim": "Maomao identifica o perigo do pó facial.",
+            "source_url": "https://www.anime.com/shows/the-apothecary-diaries/episode-summaries/1-maomao",
+            "human_verified": false
+          },
+          {
+            "claim": "Ela deixa um aviso anônimo e Jinshi busca quem o escreveu.",
+            "source_url": "https://www.anime.com/shows/the-apothecary-diaries/episode-summaries/1-maomao",
+            "human_verified": false
+          }
+        ],
+        "sources_for_editor": [
+          "https://www.crunchyroll.com/pt-br/watch/GMKUXQ2VM/maomao",
+          "https://www.anime.com/shows/the-apothecary-diaries/episode-summaries/1-maomao"
+        ],
+        "micro_reveals": [
+          {
+            "approx_second": 15,
+            "anchor": "palácio imperial, os filhos das",
+            "editorial_function": "pista concreta",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 31,
+            "anchor": "percebe que o pó branco",
+            "editorial_function": "consequência",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 51,
+            "anchor": "ela escolhe um caminho discreto:",
+            "editorial_function": "virada",
+            "actual_audio_second": null
+          },
+          {
+            "approx_second": 70,
+            "anchor": "começa a investigar a autoria",
+            "editorial_function": "preparação da conclusão",
+            "actual_audio_second": null
+          }
+        ],
+        "visual_shots": [
+          {
+            "shot_number": 1,
+            "approx_second": 0,
+            "shot_type": "close",
+            "story_role": "hook",
+            "script_reference": "Maomao descobriu o veneno que ninguém via?!",
+            "visual_instruction": "Mostrar imediatamente o conflito e o protagonista",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 2,
+            "approx_second": 4,
+            "shot_type": "wide",
+            "story_role": "contexto",
+            "script_reference": "No palácio imperial, os filhos das consortes começam a adoecer, e muitos funcionários falam numa maldição. Maomao, que conhece rem",
+            "visual_instruction": "Situar ambiente e personagem com imagem original",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 3,
+            "approx_second": 12,
+            "shot_type": "detail",
+            "story_role": "contexto",
+            "script_reference": "No palácio imperial, os filhos das consortes começam a adoecer, e muitos funcionários falam numa maldição. Maomao, que conhece rem",
+            "visual_instruction": "Destacar objeto ou pista ligada à história",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 4,
+            "approx_second": 19,
+            "shot_type": "medium",
+            "story_role": "tensao",
+            "script_reference": "Ela percebe que o pó branco aplicado no rosto pode ser tóxico. Não é um feitiço, nem uma conspiração sobrenatural. É um produto de",
+            "visual_instruction": "Mostrar ação que produziu a primeira consequência",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 5,
+            "approx_second": 29,
+            "shot_type": "reaction",
+            "story_role": "tensao",
+            "script_reference": "Ela percebe que o pó branco aplicado no rosto pode ser tóxico. Não é um feitiço, nem uma conspiração sobrenatural. É um produto de",
+            "visual_instruction": "Registrar reação com expressão genuína e pose distinta",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 6,
+            "approx_second": 40,
+            "shot_type": "wide",
+            "story_role": "virada",
+            "script_reference": "Então ela escolhe um caminho discreto: deixa um aviso escrito num pedaço de tecido, preso a uma flor, para alertar sobre o pó faci",
+            "visual_instruction": "Representar obstáculo concreto ou mudança no plano",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 7,
+            "approx_second": 50,
+            "shot_type": "detail",
+            "story_role": "virada",
+            "script_reference": "Então ela escolhe um caminho discreto: deixa um aviso escrito num pedaço de tecido, preso a uma flor, para alertar sobre o pó faci",
+            "visual_instruction": "Detalhar a reviravolta sem inventar acontecimentos",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 8,
+            "approx_second": 61,
+            "shot_type": "medium",
+            "story_role": "resposta",
+            "script_reference": "Jinshi começa a investigar a autoria do bilhete, e a tentativa de Maomao de permanecer invisível não funciona por muito tempo. A h",
+            "visual_instruction": "Explicar causa com evidência visual específica",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 9,
+            "approx_second": 71,
+            "shot_type": "close",
+            "story_role": "resposta",
+            "script_reference": "Jinshi começa a investigar a autoria do bilhete, e a tentativa de Maomao de permanecer invisível não funciona por muito tempo. A h",
+            "visual_instruction": "Preparar a consequência final com plano diferente",
+            "asset_ready": false,
+            "rights_checked": false
+          },
+          {
+            "shot_number": 10,
+            "approx_second": 81,
+            "shot_type": "final",
+            "story_role": "resultado",
+            "script_reference": "Maomao arriscou sua posição para alertar sobre o pó facial venenoso. A pista salvou quem recebeu o aviso a tempo e revelou que a s",
+            "visual_instruction": "Entregar resposta com final limpo, sem pergunta ou CTA",
+            "asset_ready": false,
+            "rights_checked": false
+          }
+        ],
+        "narration": {
+          "locale": "pt-BR",
+          "style": "conversacional e expressivo, sem narração publicitária; pausas naturais e sem preenchimento artificial",
+          "segment_tones": [
+            "intriga",
+            "contexto objetivo",
+            "risco crescente",
+            "surpresa",
+            "esclarecimento",
+            "afirmação conclusiva"
+          ],
+          "names_to_pronounce": [
+            "Maomao",
+            "Jinshi",
+            "Gyokuyou"
+          ],
+          "pronunciation_reviewed": false,
+          "measured_tts_seconds": null
+        },
+        "editorial_safety": {
+          "spoilers_level": "moderado",
+          "spoilers_approved": false,
+          "canon_human_verified": false,
+          "rights_verified": false
+        },
+        "experiment_pair": {
+          "short_duration_seconds": 40,
+          "long_duration_seconds": 90,
+          "control_script_ready": false,
+          "both_no_cta": true,
+          "no_duplicate_visual_assets": true,
+          "matched_48h": true,
+          "no_publication_authorized": true
+        },
+        "approved_for_media": false
       }
     },
     {
@@ -3875,5 +4808,45 @@
     "last_seconds": "resultado exato ou conclusão emocional; terminar com ponto final, sem perguntas",
     "voice": "PT-BR expressivo sem exagerar volume, pausas naturais; pronúncia e tempo real ainda precisam de TTS e QA",
     "no_silent_padding": true
+  },
+  "editorial_v5": {
+    "schema": "otaku-multicena/editorial-plan-quality/v1",
+    "target_planning_score": 9,
+    "note": "Nota interna de completude de planejamento, não nota de vídeo pronto nem previsão de desempenho.",
+    "full_drafts": 5,
+    "outlines_only": 45,
+    "approx_micro_reveal_seconds": [
+      15,
+      31,
+      51,
+      70
+    ],
+    "experiment": {
+      "baseline_seconds": 40,
+      "pilot_seconds": 90,
+      "both_without_cta": true,
+      "compare_first_hours": 48,
+      "no_duplicate_script_or_images": true,
+      "metrics": [
+        "views_48h",
+        "feed_exposure_48h",
+        "viewed_vs_swiped_away",
+        "average_watch_seconds",
+        "average_percentage_viewed",
+        "subscribers_per_1000_views",
+        "shares_per_1000_views"
+      ],
+      "limitation": "Cinco pares são piloto exploratório, não prova causal."
+    },
+    "safety_requirements": [
+      "revisão do cânone",
+      "TTS medido 87–93s",
+      "imagens originais aprovadas",
+      "licenças comprovadas",
+      "QA audiovisual",
+      "autorização posterior explícita"
+    ],
+    "paused_generation": true,
+    "paused_publication": true
   }
 }
