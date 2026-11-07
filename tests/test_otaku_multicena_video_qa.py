@@ -61,3 +61,17 @@ def test_quality_qa_has_no_publication_or_image_calls():
     src=(ROOT/"scripts/otaku_multicena_video_qa.py").read_text(encoding="utf-8")
     for marker in ("youtube.videos()", "request_image(", "gh workflow run", "publish("):
         assert marker not in src
+
+
+def test_ninety_second_video_is_opt_in_and_measured_from_mp4():
+    p=sample_probe()
+    p["format"]["duration"]="90.07"
+    assert av.parse_probe(p,duration_profile="short_90s_test")["duration_seconds"]==90.07
+    with pytest.raises(av.AVBlocked,match="VIDEO_OUTSIDE_SHORT_DURATION"):
+        av.parse_probe(p)
+    for seconds in ("86.8","93.3","180.0"):
+        p["format"]["duration"]=seconds
+        with pytest.raises(av.AVBlocked,match="NINETY_SECOND_VIDEO_OUTSIDE"):
+            av.parse_probe(p,duration_profile="short_90s_test")
+    with pytest.raises(av.AVBlocked,match="UNKNOWN_DURATION_PROFILE"):
+        av.parse_probe(sample_probe(),duration_profile="invented")
