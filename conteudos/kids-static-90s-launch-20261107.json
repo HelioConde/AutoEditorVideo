@@ -1,0 +1,20 @@
+{
+  "schema": "autoeditorvideo/kids-static-90s-one-shot-launch/v1",
+  "user_authorized_at": "2026-11-07",
+  "original_manifest": "conteudos/lote-12-estatico-90s-20261107.json",
+  "channel": "kids",
+  "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+  "episode_ids": [
+    "kids-101-elefantinho-agua-escondida",
+    "kids-102-quiz-sombras-animais",
+    "kids-103-dinos-segredos-incriveis"
+  ],
+  "max_ai_image_requests": 24,
+  "render_mode": "original_autoeditorvideo_static_no_deformation",
+  "voice_duration_min_seconds": 90,
+  "voice_duration_max_seconds": 120,
+  "upload_initial_privacy": "private",
+  "made_for_kids": true,
+  "fofinhos_series_excluded": true,
+  "no_retries_on_uncertain_video_upload": true
+}
