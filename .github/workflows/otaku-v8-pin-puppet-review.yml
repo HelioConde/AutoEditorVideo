@@ -1,0 +1,113 @@
+name: Otaku V8 - Puppet Pin 2D 8s real AutoEditorVideo review (no upload)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/otaku-v8-pin-puppet-review.yml'
+
+# One creator-authorized 8s puppet-pin preview. No provider, OAuth,
+# public upload, batch generation, workflow dispatch, or schedule.
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: otaku-v8-one-puppet-pin-preview
+  cancel-in-progress: false
+
+jobs:
+  safe-preflight:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'test(editor): generate ONE V8 puppet-pin preview without AI calls'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      OTAKU_V8_PIN_REVIEW: '1'
+      MAX_IMAGE_CALLS: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
+      - name: Install existing editor requirements and offline pinned-geometry tests
+        run: python -m pip install -r requirements-master.txt 'opencv-python-headless>=4.10,<5' 'pytest>=8,<10'
+      - name: Authorize exactly one private V8 preview and validate pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q tests/test_otaku_v8_pins_preview.py
+          python scripts/otaku_v8_pins_preview.py --preflight
+          jq -e '.pause_requested==true and .authorized_public==false and .resume_authorized_after_maintenance==false' \
+            conteudos/otaku-br-50-serial-launch-20261106.json
+          python scripts/production_reservations.py --acao verificar-reserva \
+            --canal br --id 5998-otaku-v8-pins-8s-review \
+            --owner chatgpt_otaku_v8_pin_warp_20261107
+
+  render-one-pin-preview:
+    needs: safe-preflight
+    if: needs.safe-preflight.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    permissions:
+      contents: read
+      actions: read
+    env:
+      OTAKU_V8_PIN_REVIEW: '1'
+      MAX_IMAGE_CALLS: '0'
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - name: Install FFmpeg, CPU inverse-TPS dependencies and ORIGINAL Remotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+          python -m pip install -r requirements-master.txt 'opencv-python-headless>=4.10,<5'
+          cd motion-remotion
+          npm ci --no-audit --no-fund
+          npm run typecheck
+          npm run test:qa
+      - name: Download original authenticated V6 art and TTS by immutable artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-v6-original-art-and-pose-evidence
+          run-id: 42332358380
+          github-token: ${{ github.token }}
+          path: assets/gerados/otaku-v6-real-90s
+      - name: Generate and render 120 frames using movable and fixed PINS
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/otaku_v8_pins_preview.py
+          echo '[V8] ONE ORIGINAL MP4 WITH PUPPET PINS, ZERO IMAGE CALLS, NO YOUTUBE'
+      - name: Upload MP4, QA, pin-overlay debug and actual 6 review frames
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-v8-puppet-pins-8s-AutoEditorVideo-test
+          path: otaku-v8-pins-review/
+          if-no-files-found: error
+          retention-days: 7
