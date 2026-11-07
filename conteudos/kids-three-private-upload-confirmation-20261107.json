@@ -1,0 +1,74 @@
+{
+  "schema": "autoeditorvideo/kids-three-private-upload-confirmation/v1",
+  "created_at": "2026-11-07",
+  "verified_at_utc": "2026-11-07T17:35:26Z",
+  "channel": "Emanuelly Kids",
+  "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+  "made_for_kids": true,
+  "verified_privacy": "private",
+  "visible_to_public": false,
+  "original_editor": "AutoEditorVideo/ArquivoOtakuMaster",
+  "render_mode": "master_static",
+  "animation_mode": "desligada",
+  "original_render_run": 42393346725,
+  "initial_upload_error": "RedirectMissingLocation",
+  "upload_recovery_run": 42396417881,
+  "final_existing_video_verification_run": 42396980506,
+  "general_ci_last_success_run": 42396980511,
+  "no_reupload_on_ambiguous_response": true,
+  "image_generation_on_recovery": false,
+  "manual_visual_review": false,
+  "videos": [
+    {
+      "episode_id": "kids-101-elefantinho-agua-escondida",
+      "title": "O Elefantinho e a Água Escondida 🐘💧 | História Infantil",
+      "youtube_video_id": "d7hjFP6Ky6w",
+      "youtube_url": "https://www.youtube.com/watch?v=d7hjFP6Ky6w",
+      "video_seconds": 110.272,
+      "video_resolution": [
+        1080,
+        1920
+      ],
+      "visibility": "private",
+      "made_for_kids": true,
+      "cover_api_acknowledged": true,
+      "upload_source": "reconciled_from_first_ambiguous_upload",
+      "sha256": "a886f63c89b7def376e8d08e4e9b6d899670a99c277ecd8c30554592c2d4661f"
+    },
+    {
+      "episode_id": "kids-102-quiz-sombras-animais",
+      "title": "Adivinhe o ANIMAL pela Sombra! 🐾 | 6 Desafios Infantis",
+      "youtube_video_id": "ax0ude5BUhE",
+      "youtube_url": "https://www.youtube.com/watch?v=ax0ude5BUhE",
+      "video_seconds": 116.352,
+      "video_resolution": [
+        1080,
+        1920
+      ],
+      "visibility": "private",
+      "made_for_kids": true,
+      "cover_api_acknowledged": true,
+      "upload_source": "recovery_run",
+      "sha256": "0241cc0e9b4e146fd2c8dc0d4e9ee60f176696a72777205d92e48ac2197db25e"
+    },
+    {
+      "episode_id": "kids-103-dinos-segredos-incriveis",
+      "title": "3 DINOSSAUROS com Segredos Incríveis! 🦖 | Curiosidades",
+      "youtube_video_id": "It-7R1o9k7Q",
+      "youtube_url": "https://www.youtube.com/watch?v=It-7R1o9k7Q",
+      "video_seconds": 104.619,
+      "video_resolution": [
+        1080,
+        1920
+      ],
+      "visibility": "private",
+      "made_for_kids": true,
+      "cover_api_acknowledged": true,
+      "upload_source": "recovery_run_then_verified_existing",
+      "sha256": "f75e371b91c45e46330517911ceee6eb81c5fe7d401371527e5177526630e774"
+    }
+  ],
+  "original_source_artifact": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42393346725",
+  "verification_evidence": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42396980506",
+  "next_action": "Manual visual and narration review in YouTube Studio before any public visibility change. Fofinhos serialized show remains independent."
+}
