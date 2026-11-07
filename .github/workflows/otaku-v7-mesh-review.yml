@@ -1,0 +1,100 @@
+name: Otaku V7 - Malha 2D 8s real AutoEditorVideo preview (no upload)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/otaku-v7-mesh-review.yml'
+
+# Creator requested ONE 8-second animation preview.
+# No dispatch, recurring automation, paid image calls, OAuth or YouTube.
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: otaku-v7-mesh-one-preview
+  cancel-in-progress: false
+
+jobs:
+  check-one-safe-review:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'test(editor): produce ONE V7 8s deformable mesh preview from saved V6 art'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      OTAKU_V7_MESH_ONE_REVIEW: '1'
+      MAX_IMAGE_CALLS: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
+      - name: Install tests and original media libraries without image providers
+        run: python -m pip install -r requirements-master.txt 'opencv-python-headless>=4.10,<5' 'pytest>=8,<10'
+      - name: Check reserved source, mesh continuity and no uploads
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pytest -q tests/test_otaku_v7_mesh_preview.py
+          python scripts/otaku_v7_mesh_preview.py --preflight
+          jq -e '.pause_requested==true and .authorized_public==false and .resume_authorized_after_maintenance==false' \
+            conteudos/otaku-br-50-serial-launch-20261106.json
+          echo "[V7] SOURCE_RESERVED_ZERO_NEW_IMAGE_CALLS_NO_UPLOAD"
+
+  render-one-mesh-prototype:
+    needs: check-one-safe-review
+    if: needs.check-one-safe-review.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    env:
+      OTAKU_V7_MESH_ONE_REVIEW: '1'
+      MAX_IMAGE_CALLS: '0'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements-master.txt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - name: Prepare offline CPU mesh and original editing pipeline
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v ffmpeg
+          command -v ffprobe
+          python -m pip install -r requirements-master.txt 'opencv-python-headless>=4.10,<5'
+          cd motion-remotion
+          npm ci --no-audit --no-fund
+          npm run typecheck
+          npm run test:qa
+      - name: Restore original verified V6 backgrounds, RGBA and Edge narration
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-v6-original-art-and-pose-evidence
+          run-id: 42332358380
+          github-token: \${{ github.token }}
+          path: assets/gerados/otaku-v6-real-90s
+      - name: Generate and render ONE 8-second V7 CPU mesh prototype
+        run: python scripts/otaku_v7_mesh_preview.py
+      - name: Preserve ONE new V7 MP4 with QA and before-after samples
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-v7-malha2d-8s-real-AutoEditorVideo-review
+          path: otaku-v7-mesh-review/
+          if-no-files-found: error
+          retention-days: 7
