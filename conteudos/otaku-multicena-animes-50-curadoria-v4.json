@@ -80,32 +80,44 @@
     {
       "anime": "The Summer Hikaru Died",
       "previous_status": "legacy_candidate_not_in_verified_published_set",
-      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada."
+      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada.",
+      "publication_check": "not_seen_in_available_repository_evidence_not_exhaustive",
+      "restore_if_found_published": true
     },
     {
       "anime": "Takopi's Original Sin",
       "previous_status": "legacy_candidate_not_in_verified_published_set",
-      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada."
+      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada.",
+      "publication_check": "not_seen_in_available_repository_evidence_not_exhaustive",
+      "restore_if_found_published": true
     },
     {
       "anime": "The Elusive Samurai",
       "previous_status": "legacy_candidate_not_in_verified_published_set",
-      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada."
+      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada.",
+      "publication_check": "not_seen_in_available_repository_evidence_not_exhaustive",
+      "restore_if_found_published": true
     },
     {
       "anime": "Hell's Paradise",
       "previous_status": "legacy_candidate_not_in_verified_published_set",
-      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada."
+      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada.",
+      "publication_check": "not_seen_in_available_repository_evidence_not_exhaustive",
+      "restore_if_found_published": true
     },
     {
       "anime": "Mushoku Tensei",
       "previous_status": "legacy_candidate_not_in_verified_published_set",
-      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada."
+      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada.",
+      "publication_check": "not_seen_in_available_repository_evidence_not_exhaustive",
+      "restore_if_found_published": true
     },
     {
       "anime": "Digimon Adventure",
       "previous_status": "legacy_candidate_not_in_verified_published_set",
-      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada."
+      "reason": "Sai apenas desta seleção de 50 para abrir espaço a franquias com sinais internos ou melhor hipótese de curiosidade/mistério; pode voltar em testes futuros. Nenhuma mídia apagada.",
+      "publication_check": "not_seen_in_available_repository_evidence_not_exhaustive",
+      "restore_if_found_published": true
     }
   ],
   "added_to_new_50": [
@@ -1307,5 +1319,9 @@
       "queue_enabled": false,
       "publication_authorized": false
     }
-  ]
+  ],
+  "live_channel_inventory_complete": false,
+  "published_verification_scope": "45 comprovantes públicos do lote 6106–6150 + 7 registros de publicação do catálogo anterior; snapshot histórico adicional. Não abrange necessariamente todas as 69 publicações vistas no painel do canal.",
+  "live_inventory_limitation": "Não foi possível listar todos os uploads no vidIQ nesta revisão por saldo insuficiente de créditos; consulta recusada sem cobrança. Nunca inferir que uma franquia não foi publicada apenas por estar ausente dos registros locais.",
+  "exclusions_are_non_destructive": true
 }
