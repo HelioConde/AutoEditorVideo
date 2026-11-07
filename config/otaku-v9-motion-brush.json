@@ -5,7 +5,7 @@
     1536
   ],
   "source": "V6 original pose-05-1.png, pinned by SHA-256",
-  "notes": "Masks are manually positioned for this single V9 original. No generated body parts; movements remain small to avoid revealing missing anatomy.",
+  "notes": "Masks are manually positioned for this single V9 original. No generated body parts; movements remain small to avoid revealing missing anatomy. Feather radii broadened to distribute motion across fabric/hair; global shear auto-limiter scales intensity when needed.",
   "brushes": [
     {
       "id": "hair",
@@ -56,7 +56,7 @@
           305
         ]
       ],
-      "feather_px": 27,
+      "feather_px": 52,
       "motion": {
         "kind": "sway",
         "amplitude_px": [
@@ -105,7 +105,7 @@
           1107
         ]
       ],
-      "feather_px": 55,
+      "feather_px": 92,
       "motion": {
         "kind": "gesture",
         "amplitude_px": [
@@ -154,7 +154,7 @@
           771
         ]
       ],
-      "feather_px": 48,
+      "feather_px": 82,
       "motion": {
         "kind": "gesture",
         "amplitude_px": [
