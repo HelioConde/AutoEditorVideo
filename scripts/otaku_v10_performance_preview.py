@@ -2,7 +2,7 @@
 """One authentic V10 performance-brush 8s review through AutoEditorVideo.
 
 Original character/background/voice from verified V6 workflow; all 240 RGBA
-frames use one identity, with subtle head rotation, eyes blinking, hair, tie,
+frames use one identity, with subtle head rotation, a leading glance, blinks, tie sway,
 and purposeful hand movement. No AI image APIs, no YouTube upload.
 """
 from __future__ import annotations
@@ -175,9 +175,9 @@ def prepare(row:dict)->dict:
         "schema":"autoeditorvideo/v10-performance-brush-review/v1",
         "source_run_id":SOURCE_RUN,
         "original_rgba_sha256":SOURCE_SHA["pose-05-1.png"],
-        "authentic_performance_beats":["blink 1.54s","head look 2-4s",
+        "authentic_performance_beats":["blink 1.54s","gaze lead 1.82s","head look 2-4s",
             "nod 4.1-6.5s","free arm 4.2-6.6s","blink 5.64s",
-            "hair drift","tie sway","breathing"],
+            "hair follows head","tie sway","breathing"],
         "source_character_count":1,"source_background_count":1,
         "frame_count":len(paths),"fps":FPS,
         "no_generated_or_replaced_subjects":True,

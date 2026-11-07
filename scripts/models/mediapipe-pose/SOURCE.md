@@ -1,0 +1,1 @@
+MediaPipe pose estimator distributed by [OpenCV Zoo](https://github.com/opencv/opencv_zoo/tree/48b10fa505aeb51fbd127fc60a5c660040e823b7/models/pose_estimation_mediapipe). The bundled March 2023 ONNX file uses the adjacent Apache 2.0 license. SHA-256: 9d89c599319a18fb7d2e28451a883476164543182bafca5f09eb2cf767ed2f3f.
