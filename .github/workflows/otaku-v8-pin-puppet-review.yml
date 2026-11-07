@@ -21,7 +21,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'test(editor): generate ONE V8 puppet-pin preview without AI calls'
+      github.event.head_commit.message == 'test(editor): retry ONE V8 puppet-pin preview on single-core runner'
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     env:
