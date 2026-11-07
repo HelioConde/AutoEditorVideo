@@ -60,7 +60,7 @@ def validate(channel:str)->list[dict]:
     selected=[r for r in d["episodes"] if r.get("channel")==channel]
     if tuple(r.get("id") for r in selected)!=EXPECTED[channel]:
         raise RemainingBlocked("EXACT_THREE_ORDER_AND_IDS_REQUIRED")
-    if d.get("privacy_if_uploaded") not in ("private",None):
+    if d.get("privacy_if_uploaded") != "private_initial_only":
         raise RemainingBlocked("PUBLICATION_NOT_PRIVATE")
     for row in selected:
         assert_reserved(channel,row["id"],OWNER)
