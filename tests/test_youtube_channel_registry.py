@@ -161,15 +161,27 @@ def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scr
             assert all(item.get("review_status") for item in entries)
             assert all(item.get("reservation_owner") for item in entries)
         else:
-            # Partes 2 e 3 de Fofinhos sao reservas locais solicitadas
-            # pelo criador. Nenhuma delas autoriza publicar no canal Kids.
-            assert {item["id"] for item in entries}=={
+            # Preserve the original Fofinhos parts and allow the separate
+            # user-requested 3-video Kids batch. A reservation is NOT upload approval.
+            canonical = {
                 "kids-emanuelly-ep01-p02-nascimento",
                 "kids-emanuelly-ep01-p03-poder-agua",
             }
-            assert all(item["status"]=="reserved" for item in entries)
-            assert all(item.get("reservation_owner") for item in entries)
-            assert all(not item.get("publication_target") for item in entries)
+            approved_standalone = {
+                "kids-101-elefantinho-agua-escondida",
+                "kids-102-quiz-sombras-animais",
+                "kids-103-dinos-segredos-incriveis",
+            }
+            assert {item["id"] for item in entries} == canonical | approved_standalone
+            for item in entries:
+                assert item["status"] == "reserved"
+                assert item.get("reservation_owner")
+                if item["id"] in canonical:
+                    assert not item.get("publication_target")
+                else:
+                    assert item["publication_target"] == "private_first"
+                    assert item["reservation_owner"] == "lote12_static_original_20261107"
+                    assert item.get("review_status")
     with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
         queue.assert_reserved("games","game-001-minecraft-um-coracao","any_worker")
     with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
