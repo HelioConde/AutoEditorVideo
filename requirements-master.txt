@@ -2,3 +2,4 @@ Pillow>=10,<13
 numpy>=1.24,<3
 requests>=2.31,<3
 edge-tts>=7,<9
+opencv-python-headless>=4.10,<5

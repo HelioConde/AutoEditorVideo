@@ -153,7 +153,8 @@ def assess_character_motion(props: dict, *, strict: bool = False) -> dict:
     character = [s for s in props.get("scenes", []) if s.get("subject") == "personagens"]
     movable = [s for s in character if s.get("motionCapability") == "character-layer"
                and s.get("movableCharacterLayers", 0) > 0]
-    camera_only = [str(s.get("id", "?")) for s in character if s not in movable]
+    facial = [s for s in character if s.get("motionCapability") == "face-performance"]
+    camera_only = [str(s.get("id", "?")) for s in character if s not in movable and s not in facial]
     if strict and camera_only:
         raise ValueError(
             "EN sem movimento independente dos personagens nas cenas: "
@@ -163,6 +164,7 @@ def assess_character_motion(props: dict, *, strict: bool = False) -> dict:
     return {
         "character_scenes": len(character),
         "character_layer_scenes": len(movable),
+        "face_performance_scenes": len(facial),
         "camera_only_character_scene_ids": camera_only,
         "character_motion_verified": not camera_only and bool(character),
         "note": "Camada movel nao garante rigging articulado; verificar video inteiro",

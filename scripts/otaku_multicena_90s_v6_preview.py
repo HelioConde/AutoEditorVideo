@@ -520,6 +520,8 @@ def build_preview(row:dict,audio:Path,seconds:float,captions:list[dict],
       "characterPreset":"equilibrado",
       "backgroundMusic":{"src":"generated/otaku-v6-real-90s/original-score.wav","volume":.2},
       "soundCues":cues,"editorialProfile":"Otaku Multicena V6 - review only"}
+    from adaptive_performance import prepare_scene_art
+    prepare_scene_art(scenes, MOTION/"public", painted_poses=True)
     propsfile=WORK/"remotion-props-v6.json"
     propsfile.write_text(json.dumps(props,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     resultfile=WORK/"Otaku_Multicena_Death_Note_AutoEditorVideo_V6_90s.mp4"

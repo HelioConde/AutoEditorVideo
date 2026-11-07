@@ -3,10 +3,12 @@ import {AbsoluteFill,Audio,Img,Sequence,interpolate,staticFile,useCurrentFrame,u
 import {AnimationMode,cannotMoveSeparately,motionAtFrame,openingCutAtFrame,longHoldCutAtFrame} from './cinematic-motion';
 import {CharacterPreset,characterPoseAtFrame} from './character-idle';
 import {RigPlayback,poseFrameIndex} from './pose-timeline';
+import {CharacterArt,Performance} from './character-art';
 import {meshFrameIndex} from './pose-timeline';
 
 export type SemanticLayer={
   id:string;role:string;z:number;src:string;
+  performance?:Performance;posePerformances?:Record<string,Performance>;
   alphaCoverage?:number;anchorX?:number;anchorY?:number;
   contactRisk?:number;heroRisk?:number;heightFraction?:number;motionSeed?:number;
   rigFrames?:{fps:number;frames:string[];playback?:RigPlayback}
@@ -17,6 +19,7 @@ export type SemanticLayer={
 export type Scene={
   id:string;subject:'personagens'|'objeto';startFrame:number;endFrame:number;
   background:string;foreground:string;renderMode?:string;layers?:SemanticLayer[];
+  backgroundPerformance?:Performance;foregroundPerformance?:Performance;
   shotType?:string;cameraAngle?:string;focusSubject?:string;action?:string;
   transitionStyle?:'hard'|'crossfade';beatRole?:string;headline?:string
 };
@@ -41,7 +44,7 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
                             scene.shotType,scene.id,mode);
   const hasHero=Boolean(scene.layers?.some(l=>l.role==='hero_prop'));
   const urlbg=staticFile(scene.background);
-  const urlfg=staticFile(scene.foreground);
+  const second=mode==='desligada'?0:Math.max(0,Math.min(frame,scene.endFrame-1)-scene.startFrame)/fps;
   // Image master has the 2:3 ratio. Never fill/cover the portrait: it would
   // crop heads or board. The WHOLE content, including the table, moves under
   // one fixed camera. This avoids character/prop penetration.
@@ -67,7 +70,7 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
     <div style={{position:'absolute',left:v6?0:70,top:v6?0:245,
       width:v6?1080:940,height:v6?1920:1410,
       transform:camera,transformOrigin:'center center',overflow:'hidden'}}>
-      <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
+      <CharacterArt src={scene.background} plan={scene.backgroundPerformance} second={second} style={{position:'absolute',inset:0,width:'100%',height:'100%',
         objectFit:v6?'cover':'contain'}}/>
       {(scene.renderMode==='multilayer'||scene.renderMode==='mesh2d') && ordered.length
         ? ordered.map(layer=>{
@@ -137,13 +140,13 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
           };
           if(v6 && rig && rig.frames.length>=2 && nextIndex!==rigIndex){
             return <React.Fragment key={layer.id}>
-              <Img src={staticFile(imageSource)} style={{...poseStyle,opacity:1-rigBlend}}/>
-              <Img src={staticFile(nextSource)} style={{...poseStyle,opacity:rigBlend}}/>
+              <CharacterArt src={imageSource} plan={layer.posePerformances?.[imageSource]} second={second} style={{...poseStyle,opacity:1-rigBlend}}/>
+              <CharacterArt src={nextSource} plan={layer.posePerformances?.[nextSource]} second={second} style={{...poseStyle,opacity:rigBlend}}/>
             </React.Fragment>;
           }
-          return <Img key={layer.id} src={staticFile(imageSource)} style={poseStyle}/>;
+          return <CharacterArt key={layer.id} src={imageSource} plan={layer.posePerformances?.[imageSource] ?? layer.performance} second={second} style={poseStyle}/>;
         })
-        : <Img src={urlfg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
+        : <CharacterArt src={scene.foreground} plan={scene.foregroundPerformance} second={second} style={{position:'absolute',inset:0,width:'100%',height:'100%',
           objectFit:v6?'cover':'contain'}}/>}
       {mode==='cinematica'?<>
         {/* In-scene colored bounce light, always tiny and slowly varying.
