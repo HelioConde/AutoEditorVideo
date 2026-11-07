@@ -206,7 +206,8 @@ def analyze_art(path):
                 a, b = eyes
                 if (
                     b[0] - a[0] < 0.25 * fw
-                    or abs(a[1] - b[1]) > 0.23 * (b[0] - a[0])
+                    or abs(a[1] - b[1]) > 0.30 * (b[0] - a[0])
+                    or min(a[3], b[3]) < 0.5 * max(a[3], b[3])
                     or min(a[2], b[2]) < 0.54 * max(a[2], b[2])
                     or min(a[3], b[3]) < 1.5
                 ):
