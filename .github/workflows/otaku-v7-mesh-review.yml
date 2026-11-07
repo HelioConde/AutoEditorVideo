@@ -21,7 +21,7 @@ jobs:
     if: >-
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'fix(editor): render ONE V7 mesh preview after Remotion timeline test fix'
+      github.event.head_commit.message == 'fix(editor): render ONE V7 mesh preview with valid artifact token'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     env:
@@ -90,7 +90,7 @@ jobs:
         with:
           name: otaku-v6-original-art-and-pose-evidence
           run-id: 42332358380
-          github-token: \${{ github.token }}
+          github-token: ${{ github.token }}
           path: assets/gerados/otaku-v6-real-90s
       - name: Generate and render ONE 8-second V7 CPU mesh prototype
         run: python scripts/otaku_v7_mesh_preview.py
