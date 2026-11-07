@@ -37,6 +37,11 @@ def test_pilots_are_fully_different_stories_with_short_hooks_and_six_beats():
         assert row["real_tts_measured_seconds"] is None
         assert row["factual_review"] is False
         assert row["ready_to_render"] is False
+        assert row["ending_policy"]=="answer_only_no_cta"
+        assert row["story_segments"][-1]["role"]=="resultado"
+        assert row["story_segments"][-1]["text"].endswith(".")
+        assert "?" not in row["story_segments"][-1]["text"]
+        assert duration.validate_result_only(row)=="result_only_verified_offline"
 
 def test_actual_voice_must_be_measured_to_enforce_ninety_seconds():
     for valid in (87,89.7,90,92.9,93):
@@ -75,3 +80,56 @@ def test_planning_script_has_no_generation_and_upload_side_effects():
     for token in ("youtube.videos().insert", "gh workflow run", "request_image(",
                   "ensure_voice(", "render:master", "youtube.upload", "proxy_key("):
         assert token not in source
+
+def test_future_outlines_have_result_only_contract_even_without_finished_scripts():
+    plan=duration.load(duration.PLAN)
+    assert plan["ending_policy"]["no_spoken_cta"] is True
+    assert plan["ending_policy"]["no_end_question"] is True
+    for item in plan["items"]:
+        assert item["ending_policy"]=="answer_only_no_cta"
+        assert item["outro_music_or_logo_speech"] is False
+        assert item["speech_direction"]["no_closing_cta"] is True
+        assert duration.validate_result_only(item) in (
+            "result_only_verified_offline","planned_result_only_not_scripted"
+        )
+
+def test_forbidden_cta_and_ending_question_fail_closed():
+    plan=duration.load(duration.PLAN)
+    for ending, message in (
+        ("Inscreva-se para acompanhar mais curiosidades.", "ENGAGEMENT"),
+        ("E você, acha que o Light venceu?", "QUESTION"),
+        ("Deixe o like e compartilhe com amigos.", "ENGAGEMENT"),
+        ("Agora veja o próximo episódio.", "ENGAGEMENT"),
+        ("Curtam e comentem sua opinião.", "ENGAGEMENT"),
+    ):
+        story=plan["items"][0].copy()
+        story["story_segments"]=[x.copy() for x in story["story_segments"]]
+        story["story_segments"][-1]["text"]=ending
+        story["story_segments"][-1]["word_count"]=duration.word_count(ending)
+        with pytest.raises(duration.DurationBlocked,match="LAST_SEGMENT|ENGAGEMENT"):
+            duration.validate_result_only(story)
+
+def test_call_to_action_may_not_be_disguised_as_results():
+    plan=duration.load(duration.PLAN)
+    endings=[
+        "Light se aproximou de L e conseguiu mais pistas. Inscreva-se agora para continuar.",
+        "Johnny seguiu ao lado de Gyro e mudou seu caminho. E você, acompanharia o próximo episódio?",
+        "Rengoku fez essa escolha pela missão de proteger os passageiros. Deixe sua opinião.",
+        "A decisão de Chinatsu foi continuar no Japão. Compartilhe essa história com amigos."
+    ]
+    for ending in endings:
+        story=plan["items"][0].copy()
+        story["story_segments"]=[x.copy() for x in story["story_segments"]]
+        story["story_segments"][-1]["text"]=ending
+        with pytest.raises(duration.DurationBlocked):
+            duration.validate_result_only(story)
+
+def test_legacy_catalog_and_paused_publication_state_not_modified_by_90s_script_changes():
+    pause=duration.load(duration.PAUSE)
+    assert pause["pause_requested"] is True
+    assert pause["authorized_public"] is False
+    assert pause["maintenance_complete"] is False
+    assert pause["resume_authorized_after_maintenance"] is False
+    cur=duration.load(duration.CURATION)
+    assert cur["duration_experiment"]["ending_policy"]=="answer_only_no_cta"
+    assert all(x["new_story_ending_policy"]=="answer_only_no_cta" for x in cur["items"])
