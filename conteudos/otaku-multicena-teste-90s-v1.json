@@ -83,8 +83,8 @@
         },
         {
           "role": "contexto",
-          "text": "Light era um dos maiores suspeitos de L. Eles se encontraram na universidade, onde cada conversa parecia uma partida de xadrez. Mesmo assim, o detetive acabou convidando Light a participar da investigação. Isso parece um erro: por que deixar alguém suspeito tão perto das informações da polícia?",
-          "word_count": 47
+          "text": "Light era um dos maiores suspeitos de L. Eles se encontraram na universidade, onde conversas pareciam partidas de xadrez. Mesmo assim, o detetive acabou convidando Light a participar da investigação. Parece um erro: por que deixar alguém suspeito tão perto das informações da polícia?",
+          "word_count": 44
         },
         {
           "role": "tensao",
@@ -107,9 +107,9 @@
           "word_count": 22
         }
       ],
-      "narration_script": "L convidou Light para caçar Kira?! Light era um dos maiores suspeitos de L. Eles se encontraram na universidade, onde cada conversa parecia uma partida de xadrez. Mesmo assim, o detetive acabou convidando Light a participar da investigação. Isso parece um erro: por que deixar alguém suspeito tão perto das informações da polícia? Primeiro, L não confundia proximidade com confiança. Ele queria observar as reações de Light, ouvir suas respostas e perceber contradições. Enquanto isso, Light, que ainda conhecia o segredo do Death Note, ganhava a chance de entender o raciocínio do adversário. Os dois obtinham informações, mas nenhum estava seguro. Depois surge o segundo Kira. L usa a inteligência de Light para tentar identificar o imitador, mas continua desconfiando dele. A tensão aumenta até Light abrir mão da posse do caderno e perder as próprias memórias. Nesse período, ele realmente ajuda a investigar Kira sem saber que já tinha sido o assassino. A parte decisiva é essa mudança de perspectiva. O Light que planejou a perda de memória e o Light que colaborou sem lembranças não tinham o mesmo conhecimento. L continuou observando mesmo quando as atitudes pareciam sinceras. Sua estratégia era manter o suspeito perto para testar cada versão da história. L não convidou Light porque acreditava nele. Convidou porque investigar alguém de perto podia revelar o que uma acusação distante não mostraria.",
-      "word_count": 225,
-      "estimated_seconds_at_150_wpm": 90,
+      "narration_script": "L convidou Light para caçar Kira?! Light era um dos maiores suspeitos de L. Eles se encontraram na universidade, onde conversas pareciam partidas de xadrez. Mesmo assim, o detetive acabou convidando Light a participar da investigação. Parece um erro: por que deixar alguém suspeito tão perto das informações da polícia? Primeiro, L não confundia proximidade com confiança. Ele queria observar as reações de Light, ouvir suas respostas e perceber contradições. Enquanto isso, Light, que ainda conhecia o segredo do Death Note, ganhava a chance de entender o raciocínio do adversário. Os dois obtinham informações, mas nenhum estava seguro. Depois surge o segundo Kira. L usa a inteligência de Light para tentar identificar o imitador, mas continua desconfiando dele. A tensão aumenta até Light abrir mão da posse do caderno e perder as próprias memórias. Nesse período, ele realmente ajuda a investigar Kira sem saber que já tinha sido o assassino. A parte decisiva é essa mudança de perspectiva. O Light que planejou a perda de memória e o Light que colaborou sem lembranças não tinham o mesmo conhecimento. L continuou observando mesmo quando as atitudes pareciam sinceras. Sua estratégia era manter o suspeito perto para testar cada versão da história. L não convidou Light porque acreditava nele. Convidou porque investigar alguém de perto podia revelar o que uma acusação distante não mostraria.",
+      "word_count": 222,
+      "estimated_seconds_at_150_wpm": 88.8,
       "real_tts_measured_seconds": null,
       "ready_to_render": false,
       "target_shot_count": 10,
