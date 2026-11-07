@@ -1,0 +1,244 @@
+name: AutoEditorVideo - recover nine existing static 90s MP4 private uploads
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/remaining-nine-static90-upload-recovery-20261107.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: remaining-nine-20261107-upload-recovery-no-new-generation
+  cancel-in-progress: false
+
+jobs:
+  offline-preflight:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'fix(remaining): recover nine existing 90s MP4s and upload each privately'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test no new image calls, correct channel authorization and existing batch
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'pytest>=8,<10'
+          python -m py_compile scripts/remaining_static_90s_upload_20261107.py scripts/remaining_static_90s_20261107.py
+          python -m pytest -q tests/test_remaining_static_90s_20261107.py
+          for ch in en games alchemy; do
+            python scripts/remaining_static_90s_upload_20261107.py --channel "$ch" --action preflight
+          done
+      - name: Check fixed source run, exact nine IDs, first private upload, no generation allowed
+        run: |
+          python - <<'PY'
+          import json
+          p='conteudos/remaining-nine-static90-upload-recovery-20261107.json'
+          obj=json.load(open(p,encoding='utf-8'))
+          assert obj == {
+            'schema':'autoeditorvideo/remaining-nine-upload-only-recovery/v1',
+            'authorized_by_user':'2026-11-07',
+            'render_source_run_id':42403948203,
+            'source_artifacts':{
+              'en':'remaining-static-90s-en-three-mp4-20261107',
+              'games':'remaining-static-90s-games-three-mp4-20261107',
+              'alchemy':'remaining-static-90s-alchemy-three-mp4-20261107'
+            },
+            'channel_order':['en','games','alchemy'],
+            'visibility':'private',
+            'made_for_kids':False,
+            'no_new_images':True,
+            'no_new_audio':True,
+            'no_new_video_render':True,
+            'no_publication':True,
+            'no_blind_retry':True,
+            'verify_sha256_and_reservations':True,
+            'reuse_existing_youtube_id_when_owned_and_exact':True
+          }
+          print('REMAINING_UPLOAD_ONLY_RECOVERY_PROVENANCE_APPROVED')
+          PY
+
+  verify-protected-environment:
+    needs: offline-preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Ensure main-only Youtube Environment before any OAuth credentials
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: scripts
+        run: |
+          python - <<'PY'
+          import os
+          from youtube_channel_registry import get_channel
+          from youtube_new_channels_env_guard import fetch_protected_policy,policy_is_main_only
+          env,policies=fetch_protected_policy('games',os.environ.get('GH_TOKEN',''))
+          policy_is_main_only('games',env,policies)
+          for ch in ('en','games','alchemy'):
+            assert get_channel(ch)['youtube_environment']=='youtube-private-upload'
+          print('REMAINING_RECOVERY_PROTECTED_YOUTUBE_ENVIRONMENT_OK')
+          PY
+
+  upload-en-private:
+    needs: verify-protected-environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube Google API SDK and FFprobe, no proxy or generation tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Download PREVIOUS ORIGINAL successful render artifact, not a new batch
+        uses: actions/download-artifact@v4
+        with:
+          name: remaining-static-90s-en-three-mp4-20261107
+          run-id: 42403948203
+          github-token: ${{ github.token }}
+          path: cloud-remaining-static-20261107/en/
+      - name: SHA256 verify 3 originals, exact owned channel, read-only dedup and private YouTube upload
+        env:
+          REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
+          REMAINING_en: en
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_en_TOKEN_JSON: YOUTUBE_en_SECRET
+        run: python scripts/remaining_static_90s_upload_20261107.py --channel en --action upload
+      - name: Preserve actual YouTube ID receipts, even if a thumbnail or later upload fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-recovery-en-private-upload-receipts-20261107
+          path: cloud-remaining-static-20261107/en/youtube-private-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
+
+  upload-games-private:
+    needs: verify-protected-environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube Google API SDK and FFprobe, no proxy or generation tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Download PREVIOUS ORIGINAL successful render artifact, not a new batch
+        uses: actions/download-artifact@v4
+        with:
+          name: remaining-static-90s-games-three-mp4-20261107
+          run-id: 42403948203
+          github-token: ${{ github.token }}
+          path: cloud-remaining-static-20261107/games/
+      - name: SHA256 verify 3 originals, exact owned channel, read-only dedup and private YouTube upload
+        env:
+          REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
+          REMAINING_games: games
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_games_TOKEN_JSON: YOUTUBE_games_SECRET
+        run: python scripts/remaining_static_90s_upload_20261107.py --channel games --action upload
+      - name: Preserve actual YouTube ID receipts, even if a thumbnail or later upload fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-recovery-games-private-upload-receipts-20261107
+          path: cloud-remaining-static-20261107/games/youtube-private-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
+
+  upload-alchemy-private:
+    needs: [verify-protected-environment, upload-en-private, upload-games-private]
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube Google API SDK and FFprobe, no proxy or generation tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Wait for original Alchemy render ARTIFACT (no generation, no re-render)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json,os,time
+          from urllib.request import Request,urlopen
+          url="https://api.github.com/repos/HelioConde/AutoEditorVideo/actions/runs/42403948203/artifacts?per_page=100"
+          headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+os.environ["GH_TOKEN"],
+                   "User-Agent":"AutoEditorVideo-Reuse-Original-Rendered-Artifacts"}
+          for i in range(40):
+            with urlopen(Request(url,headers=headers),timeout=20) as response:
+              obj=json.load(response)
+            arts=[x for x in obj.get("artifacts",[]) if x.get("name")=="remaining-static-90s-alchemy-three-mp4-20261107" and not x.get("expired")]
+            if len(arts)==1:
+              print("REMAINING_ALCHEMY_ORIGINAL_ARTIFACT_READY_{}".format(arts[0]["id"]))
+              break
+            if i==39:raise SystemExit("ALCHEMY_RENDER_ARTIFACT_NOT_AVAILABLE_STOP_NO_NEW_GEN")
+            time.sleep(30)
+          PY
+      - name: Download PREVIOUS ORIGINAL successful render artifact, not a new batch
+        uses: actions/download-artifact@v4
+        with:
+          name: remaining-static-90s-alchemy-three-mp4-20261107
+          run-id: 42403948203
+          github-token: ${{ github.token }}
+          path: cloud-remaining-static-20261107/alchemy/
+      - name: SHA256 verify 3 originals, exact owned channel, read-only dedup and private YouTube upload
+        env:
+          REMAINING_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
+          REMAINING_alchemy: alchemy
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_alchemy_TOKEN_JSON: YOUTUBE_alchemy_SECRET
+        run: python scripts/remaining_static_90s_upload_20261107.py --channel alchemy --action upload
+      - name: Preserve actual YouTube ID receipts, even if a thumbnail or later upload fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: remaining-recovery-alchemy-private-upload-receipts-20261107
+          path: cloud-remaining-static-20261107/alchemy/youtube-private-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
+
