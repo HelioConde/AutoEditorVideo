@@ -75,6 +75,9 @@ def test_invisible_rgb_pixels_do_not_count_as_character_animation(tmp_path):
         pose.inspect_poses([a,b])
 
 def test_pose_centering_is_stable_for_different_real_silhouettes():
+    # The offline editorial runner intentionally does not install numpy.
+    # Run this integration check only on the fully provisioned media runner.
+    pytest.importorskip("numpy")
     from otaku_multicena_90s_v6_preview import standardize_pose
     centers=[]
     for bounds in ((240,300,800,1120),(250,200,770,1200)):
