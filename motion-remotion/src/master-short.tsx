@@ -24,12 +24,13 @@ export type MasterProps={
   id:string;durationFrames:number;audio:string;scenes:Scene[];
   captions:Caption[];hook:string;animationMode?:AnimationMode;
   characterPreset?:CharacterPreset;editorialProfile?:string;
-  visualProfile?:'original'|'gamer-alchemy-reference';
+  visualProfile?:'original'|'gamer-alchemy-reference'|'otaku-v6-vertical';
   soundCues?:SoundCue[];backgroundMusic?:BackgroundMusic;
 };
 const clamp={extrapolateLeft:'clamp' as const,extrapolateRight:'clamp' as const};
 
-const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:CharacterPreset}>=({scene,opacity,mode,preset})=>{
+const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:CharacterPreset;profile?:MasterProps['visualProfile']}>=({scene,opacity,mode,preset,profile})=>{
+  const v6=profile==='otaku-v6-vertical';
   const frame=useCurrentFrame();
   const {fps}=useVideoConfig();
   const motion=motionAtFrame(frame,scene.startFrame,scene.endFrame,
@@ -59,10 +60,11 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
   return <AbsoluteFill style={{opacity,background:'#070912',overflow:'hidden'}}>
     <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
       objectFit:'cover',filter:'blur(60px) brightness(.34)',transform:'scale(1.25)'}}/>
-    <div style={{position:'absolute',left:70,top:245,width:940,height:1410,
+    <div style={{position:'absolute',left:v6?0:70,top:v6?0:245,
+      width:v6?1080:940,height:v6?1920:1410,
       transform:camera,transformOrigin:'center center',overflow:'hidden'}}>
       <Img src={urlbg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
-        objectFit:'contain'}}/>
+        objectFit:v6?'cover':'contain'}}/>
       {scene.renderMode==='multilayer' && ordered.length
         ? ordered.map(layer=>{
           const pose=characterPoseAtFrame({
@@ -85,6 +87,20 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
                 frameCount:rig.frames.length,playback:rig.playback})
             : 0;
           const imageSource=rig?.frames[rigIndex]||layer.src;
+          // V6 soft morphs between REAL authored RGBA poses; never
+          // represent a pan or still-image zoom as character animation.
+          const rawProgress=rig?.frames.length
+            ? Math.max(0,(frame-scene.startFrame)*rig.fps/fps):0;
+          const rigStep=Math.floor(rawProgress);
+          const blendLinear=rawProgress-rigStep;
+          const rigBlend=blendLinear*blendLinear*(3-2*blendLinear);
+          const nextIndex=rig?.frames.length
+            ? poseFrameIndex({frame:scene.startFrame+
+                (rigStep+1)*fps/rig.fps,sceneStart:scene.startFrame,
+                compositionFps:fps,rigFps:rig.fps,
+                frameCount:rig.frames.length,playback:rig.playback})
+            : rigIndex;
+          const nextSource=rig?.frames[nextIndex]||imageSource;
           // Furniture, board and large hero masks are always STATIC in scene
           // coordinates. Never animate a chess piece independently if its
           // alpha also contains a hand/arm or another person's sleeve.
@@ -96,15 +112,22 @@ const Shot:React.FC<{scene:Scene;opacity:number;mode:AnimationMode;preset:Charac
               pose.translateY.toFixed(3)+'px) rotate('+pose.rotateDeg.toFixed(4)+
               'deg)'
             : undefined;
-          return <Img key={layer.id} src={staticFile(imageSource)} style={{
+          const poseStyle:React.CSSProperties={
             position:'absolute',inset:0,width:'100%',height:'100%',
-            objectFit:'contain',zIndex:layer.z,
+            objectFit:v6?'cover':'contain',zIndex:layer.z,
             transform,
             transformOrigin:(layer.anchorX ?? 50)+'% '+(layer.anchorY ?? 80)+'%',
-          }}/>;
+          };
+          if(v6 && rig && rig.frames.length>=2 && nextIndex!==rigIndex){
+            return <React.Fragment key={layer.id}>
+              <Img src={staticFile(imageSource)} style={{...poseStyle,opacity:1-rigBlend}}/>
+              <Img src={staticFile(nextSource)} style={{...poseStyle,opacity:rigBlend}}/>
+            </React.Fragment>;
+          }
+          return <Img key={layer.id} src={staticFile(imageSource)} style={poseStyle}/>;
         })
         : <Img src={urlfg} style={{position:'absolute',inset:0,width:'100%',height:'100%',
-          objectFit:'contain'}}/>}
+          objectFit:v6?'cover':'contain'}}/>}
       {mode==='cinematica'?<>
         {/* In-scene colored bounce light, always tiny and slowly varying.
             No flashes, jitter, or fabricated movement of faces/pieces. */}
@@ -138,8 +161,8 @@ export const MasterShort:React.FC<MasterProps>=({
     [current.startFrame,current.startFrame+10],[0,1],clamp):1;
   const caption=captions.find(c=>frame>=c.startFrame&&frame<c.endFrame);
   return <AbsoluteFill style={{background:'#080a14',fontFamily:'Arial,sans-serif'}}>
-    {previous&&fade<1?<Shot scene={previous} opacity={1} mode={animationMode} preset={characterPreset}/>:null}
-    <Shot scene={current} opacity={fade} mode={animationMode} preset={characterPreset}/>
+    {previous&&fade<1?<Shot scene={previous} opacity={1} mode={animationMode} preset={characterPreset} profile={visualProfile}/>:null}
+    <Shot scene={current} opacity={fade} mode={animationMode} preset={characterPreset} profile={visualProfile}/>
     <AbsoluteFill style={{background:'linear-gradient(180deg,rgba(0,0,0,.15),transparent 20%,rgba(0,0,0,.13) 55%,rgba(0,0,0,.65) 100%)'}}/>
     {visualProfile==='gamer-alchemy-reference' && hook
       ? <div style={{
