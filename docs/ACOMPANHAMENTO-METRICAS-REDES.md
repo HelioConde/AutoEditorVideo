@@ -134,3 +134,16 @@ e retenção. **Não somar ou comparar diretamente os números semanais com
 os de 28 dias ou com o relatório API 09/10–07/11.**
 
 Nenhuma postagem, configuração do YouTube, segredo ou automação foi alterada.
+
+## Marco de 11.000 visualizações acumuladas — 08/11/2026
+
+O vidIQ exibiu uma conquista de **11.000 views** para o canal Otaku Multicena,
+atingida em **08/11/2026**, conforme captura enviada pelo proprietário. Registro:
+[dados/metricas-redes/2026-11-08-youtube-marco-11000-views.json](../dados/metricas-redes/2026-11-08-youtube-marco-11000-views.json).
+
+A última referência de visualizações vitalícias presente no snapshot de API anterior
+foi **10.864**. A diferença matemática até o marco (136 views) **não** representa
+crescimento em um período fixo e não é uma contagem diária. A conquista também
+não comprova que o contador atual estivesse exatamente em 11.000; é o limiar
+alcançado. Próximo marco editorial sugerido: 15.000 views, mantendo acompanhamento
+de retenção e engajamento. Nenhum workflow ou publicação foi alterado.
