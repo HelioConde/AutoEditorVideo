@@ -1,0 +1,72 @@
+name: Otaku Multicena - Autotune editorial baseado em dados
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dados/metricas-redes/**'
+      - 'scripts/otaku_growth_autotune.py'
+      - 'scripts/otaku_growth_v3.py'
+      - 'scripts/roteiro_para_storyboard.py'
+      - 'scripts/planejador_editorial.py'
+      - 'tests/test_otaku_growth_autotune.py'
+      - '.github/workflows/otaku-growth-autotune.yml'
+  schedule:
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: otaku-growth-autotune-editorial-main
+  cancel-in-progress: false
+
+jobs:
+  growth-offline-validate-and-update:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout project and existing metric snapshots
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline-only QA libraries
+        run: python -m pip install --disable-pip-version-check 'pytest>=8,<10' 'Pillow>=10,<13'
+      - name: Recalculate guarded future production profile from GitHub metric snapshots
+        run: |
+          python -m py_compile scripts/otaku_growth_autotune.py scripts/otaku_growth_v3.py scripts/roteiro_para_storyboard.py scripts/planejador_editorial.py
+          python scripts/otaku_growth_autotune.py --output config/otaku-growth-active-v1.json
+          python scripts/otaku_growth_autotune.py --output config/otaku-growth-active-v1.json --check
+      - name: Prove metric integrity, caption/visual safeguards and no remote publication
+        run: |
+          python -m pytest -q \
+            tests/test_otaku_growth_autotune.py \
+            tests/test_otaku_growth_v3.py \
+            tests/test_otaku_multicena_strategy_plan.py
+      - name: Store only verified editorial rules, never videos, tokens or cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- config/otaku-growth-active-v1.json
+          if git diff --cached --quiet; then
+            echo "AUTOEDITOR_GROWTH_NO_NEW_VALIDATED_CHANGE"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(growth): refresh evidence-based future Shorts production profile"
+          git push origin HEAD:main
+          echo "AUTOEDITOR_GROWTH_PROFILE_APPLIED_TO_FUTURE_EDITORIAL_AUDITS"
+      - name: Preserve reproducible profile report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-multicena-growth-profile
+          path: config/otaku-growth-active-v1.json
+          if-no-files-found: ignore
+          retention-days: 14
