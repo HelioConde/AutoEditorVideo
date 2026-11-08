@@ -1,0 +1,29 @@
+{
+  "schema": "autoeditorvideo/otaku-br-3-original-public-launch/v1",
+  "creator_authorized_at": "2026-11-07",
+  "creator_authorized_public": true,
+  "channel": "br",
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "reserved_owner": "otaku_br_3_public_20261107",
+  "manifest": "conteudos/otaku-br-three-public-20261107.json",
+  "episode_ids": [
+    "5012-solo-leveling-igris",
+    "5013-blue-lock-isagi",
+    "5014-mob-psycho-emocoes"
+  ],
+  "max_image_calls": 24,
+  "image_model": "gpt-image-2",
+  "video_duration_seconds_min": 90,
+  "video_duration_seconds_max": 120,
+  "render": "original_AutoEditorVideo_Remotion_8_static_stills_no_warp",
+  "youtube_upload": "public_after_automated_media_QA",
+  "require_original_canonical_covers": true,
+  "require_original_word_boundary_captions": true,
+  "verify_youtube_processed_and_public": true,
+  "require_thumbnail_acknowledged": true,
+  "upload_one_by_one": true,
+  "no_blind_reupload": true,
+  "leave_50_video_queue_paused": true,
+  "do_not_touch_earlier_videos": true,
+  "exclude_other_channels": true
+}
