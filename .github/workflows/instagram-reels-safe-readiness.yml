@@ -1,0 +1,106 @@
+name: AutoEditorVideo - Instagram Reels OAuth preparation (no publishing)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/instagram-reels-preflight-launch-20261108.json'
+  workflow_dispatch:
+    inputs:
+      confirm_safe_offline_only:
+        description: 'Concordo: verificar somente configuracao e testes, sem tokens, login ou publicacao'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autoeditorvideo-instagram-reels-offline-preflight
+  cancel-in-progress: false
+
+jobs:
+  instagram-offline-readiness:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      (
+        (github.event_name == 'push' &&
+         github.event.head_commit.message == 'test(instagram): launch isolated no-secret Reels readiness checks') ||
+        (github.event_name == 'workflow_dispatch' &&
+         inputs.confirm_safe_offline_only == true)
+      )
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Require exact offline Instagram Reels launch scope
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path("config/instagram-reels-preflight-launch-20261108.json").read_text())
+          expected={
+            "schema":"autoeditorvideo/instagram-reels-no-secrets-launch/v1",
+            "creator_authorized_at":"2026-11-08",
+            "repository":"HelioConde/AutoEditorVideo",
+            "platform":"instagram_reels_only",
+            "target_channels":["br","en","games","kids","alchemy"],
+            "no_credential_access":True,
+            "no_oauth_login":True,
+            "no_video_upload":True,
+            "no_reel_publishing":True,
+            "no_changes_to_youtube":True,
+            "only_unit_tests_and_report":True
+          }
+          assert data==expected, "INSTAGRAM_UNSAFE_LAUNCH_SCOPE"
+          print("INSTAGRAM_SAFE_NO_LOGIN_NO_PUBLISH_SCOPE_VERIFIED")
+          PY
+      - name: Test official Meta Instagram Login scopes, routing and publishing guard
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/instagram_api_readiness.py
+          python -m unittest discover -s tests -p 'test_instagram_api_readiness.py' -v
+          python scripts/instagram_api_readiness.py --action preflight
+      - name: Create harmless no-account readiness report
+        shell: bash
+        run: |
+          mkdir -p instagram-readiness-report
+          python scripts/instagram_api_readiness.py --action inspect > instagram-readiness-report/status.json
+          python - <<'PY'
+          import json
+          d=json.load(open("instagram-readiness-report/status.json"))
+          assert d["oauth_connected"] is False
+          assert d["live_upload_enabled"] is False
+          assert d["connected_channels"]==[]
+          print("INSTAGRAM_NO_ACCOUNTS_CONNECTED_NO_PUBLICATION")
+          PY
+      - name: Save only nonsecret readiness report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instagram-api-readiness-no-secrets
+          path: instagram-readiness-report/status.json
+          retention-days: 5
+          if-no-files-found: warn
+      - name: Report limitations
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## AutoEditorVideo / Instagram Reels"
+            echo "Somente planejamento e testes locais, sem Secrets, sem OAuth e sem upload."
+            echo "Requer Meta app, conta Instagram Criador/Comercial, login oficial e hospedagem HTTPS de MP4."
+            echo "Nenhum canal foi conectado nem publicou Reels."
+          } >> "$GITHUB_STEP_SUMMARY"
