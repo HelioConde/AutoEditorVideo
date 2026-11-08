@@ -64,7 +64,7 @@ def device_serial(adb:str)->str:
     if len(parsed)!=1 or parsed[0][1]!="device":
         raise BridgeBlocked("EXACTLY_ONE_AUTHORIZED_ADB_DEVICE_REQUIRED")
     serial=parsed[0][0]
-    if (serial.startswith("emulator-") or not re.fullmatch(r"[A-Za-z0-9_.:-]{5,140}",serial)):
+    if (serial.startswith("emulator-") or not re.fullmatch(r"[A-Za-z0-9_.:--]{5,140}",serial)):
         raise BridgeBlocked("UNEXPECTED_OR_EMULATED_DEVICE")
     return serial
 
