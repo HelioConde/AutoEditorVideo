@@ -29,6 +29,7 @@ SOURCE=ROOT/"conteudos"/"lote-12-estatico-90s-20261107.json"
 OUTPUT_ROOT=ROOT/"cloud-nine-visual-replacements-v2-20261108"
 OWNER="all_channels_visual_replacement_v2_20261108"
 WORKFLOW="AutoEditorVideo - nine image-corrected replacements EN Gamer Alchemy"
+RETRY_WORKFLOW="AutoEditorVideo - retry Gamer-only V2 after exact failed original render"
 CHANNELS=("en","games","alchemy")
 CALLS={"en":29,"games":27,"alchemy":27}
 IDS={
@@ -107,20 +108,43 @@ def validate(channel:str)->list[dict]:
     if calls!=CALLS[channel]:raise ReplacementBlocked("CHANNEL_IMAGE_BUDGET_CHANGED")
     return rows
 
+def _retry_source_confirmed(env:dict)->bool:
+    if (env.get("GITHUB_EVENT_NAME")!="workflow_run"
+            or env.get("GITHUB_WORKFLOW")!=RETRY_WORKFLOW):
+        return False
+    path=Path(env.get("GITHUB_EVENT_PATH",""))
+    if not path.is_file():return False
+    source=json.loads(path.read_text(encoding="utf-8")).get("workflow_run",{})
+    return (
+        source.get("id")==42449154499
+        and source.get("name")==WORKFLOW
+        and source.get("head_sha")=="0841f7523e5a50bb48ab4f6399cd95350a82a36a"
+        and source.get("head_branch")=="main"
+        and source.get("conclusion")=="failure"
+        and source.get("repository",{}).get("full_name")=="HelioConde/AutoEditorVideo"
+    )
+
 def guard(channel:str):
     e=os.environ
+    standard=(e.get("GITHUB_EVENT_NAME")=="push"
+              and e.get("GITHUB_WORKFLOW")==WORKFLOW
+              and e.get("MAX_IMAGE_CALLS")==str(CALLS[channel]))
+    games_recovery=(channel=="games"
+                    and e.get("GITHUB_WORKFLOW")==RETRY_WORKFLOW
+                    and e.get("REPLACEMENTS_RETRY_APPROVED")=="yes"
+                    and e.get("MAX_IMAGE_CALLS")=="33"
+                    and _retry_source_confirmed(e))
     if (e.get("GITHUB_REPOSITORY")!="HelioConde/AutoEditorVideo"
             or e.get("GITHUB_REF")!="refs/heads/main"
-            or e.get("GITHUB_EVENT_NAME")!="push"
             or e.get("GITHUB_RUN_ATTEMPT")!="1"
-            or e.get("GITHUB_WORKFLOW")!=WORKFLOW
             or e.get("V2_REPLACEMENTS_RENDER_APPROVED")!="yes"
             or e.get("REPLACEMENTS_CHANNEL")!=channel
             or e.get("IMAGE_MODEL")!="gpt-image-2"
-            or e.get("MAX_IMAGE_CALLS")!=str(CALLS[channel])):
-        raise ReplacementBlocked("EXACT_MAIN_ONE_SHOT_AND_IMAGE_CALL_BUDGET_REQUIRED")
+            or not (standard or games_recovery)):
+        raise ReplacementBlocked("EXACT_MAIN_OR_FAILED_GAMER_RECOVERY_ONE_SHOT_REQUIRED")
     if any(e.get(k) for k in ("YOUTUBE_CLIENT_JSON","YOUTUBE_CHANNEL_TOKEN_JSON",
-                             "YOUTUBE_KIDS_TOKEN_JSON","YOUTUBE_BR_TOKEN_JSON")):
+                             "YOUTUBE_KIDS_TOKEN_JSON","YOUTUBE_BR_TOKEN_JSON",
+                             "YOUTUBE_EN_TOKEN_JSON","YOUTUBE_GAMES_TOKEN_JSON")):
         raise ReplacementBlocked("NO_YOUTUBE_OAUTH_ALLOWED_IN_GENERATION")
 
 def render(channel:str):
@@ -138,6 +162,30 @@ def render(channel:str):
     from gerar_video_codex import proxy_key,check_proxy_accounts
     key=proxy_key()
     check_proxy_accounts(key)
+    if os.environ.get("GITHUB_WORKFLOW")==RETRY_WORKFLOW:
+        # The first Gamer render hit a provider RuntimeError during the second
+        # reference edit. Allow at most one extra attempt per failing scene,
+        # with a GLOBAL ceiling of six extra image calls (27 + 6 = 33).
+        # Preserve the original anchor reference; never use text-only fallback.
+        import master_scenes as scene_engine
+        import time
+        unwrapped_edit=scene_engine.request_edit
+        retry_budget=[6]
+        def retry_if_transient(*args,**kwargs):
+            for attempt in range(2):
+                try:
+                    return unwrapped_edit(*args,**kwargs)
+                except RuntimeError as exc:
+                    msg=str(exc)
+                    if (attempt>0 or retry_budget[0]==0
+                            or any(code in msg for code in (
+                                "HTTP 400","HTTP 401","HTTP 403","HTTP 404"))):
+                        raise
+                    retry_budget[0]-=1
+                    print("NINE_V2_GAMER_PROVIDER_TRANSIENT_RETRY_WITH_SAME_CHARACTER_REFERENCE",flush=True)
+                    time.sleep(30)
+            raise ReplacementBlocked("UNREACHABLE_IMAGE_RETRY_EXIT")
+        scene_engine.request_edit=retry_if_transient
     report={
         "schema":"autoeditorvideo/nine-visual-replacements-rendered/v2",
         "owner":OWNER,"channel":channel,"channel_id":KNOWN_IDS[channel],
@@ -202,7 +250,12 @@ def main():
             print("NINE_V2_"+x.channel.upper()+"_THREE_EPISODES_VALIDATED")
         return 0
     except Exception as exc:
-        name=str(exc) if isinstance(exc,(ReplacementBlocked,IdentityBlocked)) else type(exc).__name__
+        if isinstance(exc,RuntimeError):
+            import re
+            code=re.search(r"HTTP [0-9]{3}",str(exc))
+            name="REFERENCE_EDIT_PROVIDER_"+(code.group().replace(" ","_") if code else "RUNTIME_FAILURE")
+        else:
+            name=str(exc) if isinstance(exc,(ReplacementBlocked,IdentityBlocked)) else type(exc).__name__
         print("NINE_V2_RENDER_BLOCKED_"+name,file=sys.stderr)
         return 2
 
