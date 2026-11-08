@@ -156,10 +156,23 @@ def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scr
                 },
             }[slug]
             assert original.issubset({item["id"] for item in entries})
-            assert all(item["status"] in {"reserved","private_uploaded"} for item in entries)
-            assert all(item.get("publication_target")=="private_first" for item in entries)
-            assert all(item.get("review_status") for item in entries)
-            assert all(item.get("reservation_owner") for item in entries)
+            # Historic reservations retain the original private-first
+            # contract. New V2 replacements must be explicitly versioned,
+            # channel-owned, and require visual review BEFORE publicity.
+            for item in entries:
+                assert item["status"] in {"reserved", "private_uploaded"}
+                owner=item.get("reservation_owner")
+                assert owner
+                if owner=="all_channels_visual_replacement_v2_20261108":
+                    assert item["id"].endswith("-v2")
+                    assert item["status"]=="reserved"
+                    assert item["publication_target"]=="private_first_until_visual_review"
+                    assert item.get("old_youtube_id")
+                    assert item.get("original_episode_id")
+                    assert item.get("requested_by_creator_publication") is True
+                else:
+                    assert item.get("publication_target")=="private_first"
+                    assert item.get("review_status")
         else:
             # Preserve the original Fofinhos parts and allow the separate
             # user-requested 3-video Kids batch. A reservation is NOT upload approval.
