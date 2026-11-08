@@ -67,8 +67,22 @@ def experiment_plan(snapshot:dict)->dict:
     videos=latest.get("video_count")
     if not isinstance(total,int) or not isinstance(videos,int) or videos<=0:
         raise StrategyBlocked("CHANNEL_METRICS_INVALID")
+    from otaku_growth_autotune import load_policy
+    adaptive=load_policy()
     plan={
         "schema":"otaku-multicena/strategy-experiments/v1",
+        "adaptive_growth":({
+            "status":"metric_grounded_experiments_only",
+            "priority":adaptive["priority"],
+            "viewed_vs_swiped_28d_percent":adaptive["inputs"]["views_vs_swiped_28d_percent"],
+            "viewed_rate_target_is_experiment_not_prediction":adaptive["viewed_rate_aspirational_target_percent"],
+            "content_variants":adaptive["production_rules"]["content"]["experiments"],
+            "hook_first_seconds":adaptive["production_rules"]["hook"]["first_seconds"],
+            "short_duration_range_seconds":adaptive["production_rules"]["duration"]["baseline_experiment_seconds"],
+            "extended_duration_range_seconds":adaptive["production_rules"]["duration"]["extended_experiment_seconds"],
+            "max_extended_test_share_pct":adaptive["production_rules"]["duration"]["extended_max_share_of_new_tests_percent"],
+            "no_automatic_publication_or_length_change":True
+        } if adaptive else None),
         "mode":"offline_only_generation_and_upload_paused",
         "top_five_death_note_count":death_note,
         "channel_views_per_video":round(total/videos,2),
