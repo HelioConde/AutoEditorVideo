@@ -174,6 +174,8 @@ def install_channel_adapters() -> None:
     kids.check_manifest=lambda:validate("kids")
     kids.safe_environment=safe_kids_render
     kids_upload.OUT=kids.OUT
+    kids_upload.OWNER=OWNER
+    kids_upload.IDS=EXPECTED["kids"]
     kids_upload.RECEIPTS=kids.OUT/"kids-private-youtube-receipts.json"
     kids_upload.check_manifest=kids.check_manifest
     kids_upload.guard=safe_kids_upload
