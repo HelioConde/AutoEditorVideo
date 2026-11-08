@@ -26,6 +26,7 @@ from remaining_static_90s_20261107 import probe
 from googleapiclient.http import MediaFileUpload
 
 WORKFLOW="AutoEditorVideo - auto stage nine corrected MP4 replacements privately"
+GAMER_RETRY_WORKFLOW="AutoEditorVideo - retry Gamer-only V2 after exact failed original render"
 SOURCE_WORKFLOW="AutoEditorVideo - nine image-corrected replacements EN Gamer Alchemy"
 SOURCE_RUN_ID=42449154499
 SOURCE_COMMIT="0841f7523e5a50bb48ab4f6399cd95350a82a36a"
@@ -38,7 +39,9 @@ def guard(channel):
             or e.get("GITHUB_REF")!="refs/heads/main"
             or e.get("GITHUB_EVENT_NAME")!="workflow_run"
             or e.get("GITHUB_RUN_ATTEMPT")!="1"
-            or e.get("GITHUB_WORKFLOW")!=WORKFLOW
+            or e.get("GITHUB_WORKFLOW") not in (WORKFLOW,GAMER_RETRY_WORKFLOW)
+            or (e.get("GITHUB_WORKFLOW")==GAMER_RETRY_WORKFLOW
+                and (channel!="games" or e.get("REPLACEMENTS_RETRY_APPROVED")!="yes"))
             or e.get("REPLACEMENTS_PRIVATE_STAGE_APPROVED")!="yes"
             or e.get("REPLACEMENTS_CHANNEL")!=channel
             or not e.get("YOUTUBE_CLIENT_JSON")
