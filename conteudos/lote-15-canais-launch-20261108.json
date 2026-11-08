@@ -1,0 +1,29 @@
+{
+  "schema": "autoeditorvideo/lote15-private-first-20261108/v1",
+  "creator_authorized_date": "2026-11-08",
+  "user_requested": "3 new videos for each of 5 channels, uploaded via GitHub",
+  "manifest": "conteudos/lote-15-canais-20261108.json",
+  "reservation_owner": "lote15_novos_20261108",
+  "channels": [
+    "br",
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "total_videos": 15,
+  "per_channel": 3,
+  "image_model": "gpt-image-2",
+  "image_budget_per_channel": 24,
+  "max_total_image_calls": 120,
+  "upload_visibility": "private",
+  "publish_public_after_visual_review": false,
+  "require_idempotent_youtube_upload": true,
+  "children_marked_made_for_kids": true,
+  "do_not_touch_previous_videos": true,
+  "no_gameplay_claims": true,
+  "no_fabricated_software_demonstrations": true,
+  "technical_qa_required": true,
+  "visual_review_status": "pending",
+  "launch_source": "creator_request_2026-11-08"
+}
