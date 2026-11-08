@@ -54,3 +54,21 @@ gera o artefato audience-lab-br-pilot quando ha Pull Request. Nao publica videos
 4. Opcionalmente testar agentes LLM em execucao limitada, com orcamento
    explicito e autorizacao, sem acoplar o sistema MiroFish completo.
 5. Manter o fluxo atual de uploads independente enquanto o piloto e validado.
+
+## Melhorias do segundo ciclo
+- **Gancho literal x reformulado:** a sobreposicao de palavras relevantes distingue
+  `literal`, `vocabulario_relacionado` e `revisar_abertura`.
+  A ferramenta nao determina equivalencia semantica nem intencao.
+- **Desfecho:** a expressao 'No fundo' conta como marcador possivel de
+  conclusao, reduzindo falsos alarmes no roteiro Dungeon Meshi.
+- **Sincronia:** compara a narracao completa com a concatenacao das cenas;
+  divergencia gera alerta antes da producao dos assets.
+- **Relatorio legivel:** use `--markdown-output reports/audiencia-simulada-br-piloto.md`
+  para gerar uma versao humana juntamente com o JSON.
+- **CI:** exporta JSON e Markdown em cada PR; depois de merge na branch
+  principal, tambem executara uma verificacao diaria por GitHub Actions.
+  Agendamentos no GitHub so executam a versao do workflow no branch default.
+  Um monitoramento separado no ChatGPT foi ativado para acompanhar o piloto.
+
+**Nota:** vocabulario relacionado nao equivale a promessa narrativa cumprida.
+A avaliacao sempre exige revisao editorial; nao altera videos nem uploads.
