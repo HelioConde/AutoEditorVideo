@@ -1,0 +1,23 @@
+{
+  "schema": "autoeditorvideo/otaku-br-3-public-readonly-inspection/v1",
+  "run_id": 42432267960,
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "video_ids": [
+    "alHbSHUN0dA"
+  ],
+  "episode_ids": [
+    "5012-solo-leveling-igris",
+    "5013-blue-lock-isagi",
+    "5014-mob-psycho-emocoes"
+  ],
+  "read_only": true,
+  "allowed_operations": [
+    "channels.list",
+    "playlistItems.list",
+    "videos.list"
+  ],
+  "upload_new_video": false,
+  "update_existing_video": false,
+  "change_visibility": false,
+  "regenerate_images": false
+}
