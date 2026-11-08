@@ -116,7 +116,7 @@ def guard()->None:
             "YOUTUBE_EN_TOKEN_JSON","YOUTUBE_GAMES_TOKEN_JSON")):
         raise RenderBlocked("OAUTH_FORBIDDEN_IN_IMAGE_GENERATION_JOB")
 
-def generate_anchored_art(row:dict,folder:Path,key:str)->tuple[list[Path],dict]:
+def generate_anchored_art(row:dict,folder:Path,key:str,*,gamer_http400_repair:bool=False,extra_edit_budget:list[int]|None=None)->tuple[list[Path],dict]:
     from gerar_video_codex import request_image
     from master_scenes import request_edit
     characters=verify_manifest_identity(row)
@@ -136,8 +136,16 @@ def generate_anchored_art(row:dict,folder:Path,key:str)->tuple[list[Path],dict]:
         dest=folder/("scene-%02d.png"%i)
         # Only images/edits, using one or more explicit actual reference
         # portraits; NO text-only image generation for any story scene.
-        blob=request_edit(composite,edit_prompt(row,scene,characters),
-                          MODEL,key,transparent=False)
+        if gamer_http400_repair:
+            if row.get("channel")!="games" or extra_edit_budget is None:
+                raise RenderBlocked("GAMER_REFERENCE_REPAIR_MISSCOPED")
+            from gamer_v2_edit_recovery import edit_with_bounded_http400_repair
+            blob,edit_strategy=edit_with_bounded_http400_repair(
+                composite,row,scene,characters,MODEL,key,request_edit,extra_edit_budget)
+        else:
+            blob=request_edit(composite,edit_prompt(row,scene,characters),
+                              MODEL,key,transparent=False)
+            edit_strategy="canonical_full_reference_edit"
         save_image(blob,dest)
         if not visually_distinct(composite,dest):
             raise RenderBlocked("SCENE_DUPLICATED_REFERENCE_POSE_OR_BACKGROUND_"+str(i))
@@ -149,6 +157,7 @@ def generate_anchored_art(row:dict,folder:Path,key:str)->tuple[list[Path],dict]:
             "anchor_sha256":{k:digest(anchors[k]) for k in scene["character_keys"]},
             "reference_sha256":digest(composite),"image_sha256":digest(dest),
             "generation_endpoint":"images/edits",
+            "prompt_strategy":edit_strategy,
             "visual_character_identity_review":"pending_manual_or_visual_model_review"
         })
         print("OTAKU_CHARACTER_EDIT_SCENE_"+row["id"]+"_%02d_OF_08"%i,flush=True)
