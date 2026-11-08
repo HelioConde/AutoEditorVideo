@@ -49,7 +49,14 @@ def test_all_three_tokens_are_distinct_and_categories_match():
         "alchemy":"YOUTUBE_ALCHEMY_TOKEN_JSON",
     }
     assert len(set(TOKENS.values()))==3
-    assert CATEGORY=={"en":"24","games":"20","alchemy":"28"}
+    # The original 3-channel mapping must remain correct even after modules
+    # register the additional BR route in the same pytest process.
+    assert {ch: CATEGORY[ch] for ch in TOKENS} == {
+        "en": "24", "games": "20", "alchemy": "28",
+    }
+    assert set(CATEGORY).issubset(set(TOKENS) | {"br"})
+    if "br" in CATEGORY:
+        assert CATEGORY["br"] == "24"
 
 def test_custom_httplib2_transport_uses_308_upload_resume():
     c=SimpleNamespace(redirect_codes={301,302,303,307,308})
