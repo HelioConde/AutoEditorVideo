@@ -1,0 +1,54 @@
+{
+  "schema": "autoeditorvideo/otaku-character-identity-policy/v1",
+  "adopted_at": "2026-11-08",
+  "scope_channels": [
+    "br",
+    "en"
+  ],
+  "creator_instruction": "Use recognizable named anime character appearance and canonical story context in independently generated editorial illustrations; do not replace them with generic original actors.",
+  "lock": "requires_explicit_new_creator_authorization_to_change",
+  "priority": "overrides older generic-character prompts in otaku anime content only",
+  "required_rules": {
+    "named_characters_must_be_recognizable": true,
+    "canonical_hairstyle_face_costume_color_accessories": true,
+    "story_context_scene_alignment": true,
+    "episode_character_anchor_before_scenes": true,
+    "scene_generation_requires_anchor_image_edit": true,
+    "character_consistency_across_scenes": true,
+    "independent_illustration_not_official_anime_screenshot": true,
+    "no_misleading_claim_of_official_animation": true,
+    "fail_closed_on_image_edit_failure": true,
+    "block_publication_when_reference_or_identity_qa_missing": true,
+    "no_direct_unanchored_text2image_for_story_scene": true,
+    "no_automatic_delete_before_replacement_public_and_processed": true,
+    "never_change_policy_without_explicit_owner_instruction": true
+  },
+  "forbidden_prompt_patterns": [
+    "entirely fresh fictional silhouettes",
+    "original generic athlete",
+    "generic athlete",
+    "generic student",
+    "simple shy school-age hero silhouette not copied exactly",
+    "avoid brand-specific costume copying",
+    "do not reproduce commercial characters verbatim",
+    "not a reproduction of any existing copyrighted character design",
+    "no exact copyrighted anime designs",
+    "avoid character likeness"
+  ],
+  "qa_required_fields": [
+    "policy_schema",
+    "identity_bible_complete",
+    "anchor_image_sha256",
+    "all_scene_edits_use_anchor",
+    "character_appearance_maintained_by_reference",
+    "scenes_aligned_to_story",
+    "editorial_visual_review_status"
+  ],
+  "replace_and_delete": {
+    "corrected_videos_new_versioned_ids": true,
+    "old_ids_allowlist_required": true,
+    "preserve_old_during_regeneration": true,
+    "delete_old_only_after_new_id_on_correct_channel_and_public_and_processing_succeeded_and_thumbnail_acknowledged": true,
+    "never_delete_unlisted_video": true
+  }
+}
