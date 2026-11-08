@@ -1,0 +1,17 @@
+{
+  "schema": "autoeditorvideo/read-only-ten-video-audit-launch/v1",
+  "requested_at": "2026-11-08",
+  "objective": "Verify if existing AutoEditorVideo uploads were made public, without duplicate uploads or unauthorized edits",
+  "source_runs": [
+    42481839933,
+    42492098994
+  ],
+  "channels": [
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "video_count": 10,
+  "read_only": true,
+  "never_log_secrets": true
+}
