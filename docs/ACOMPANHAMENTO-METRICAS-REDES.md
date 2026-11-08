@@ -2,15 +2,16 @@
 
 ## Estado em 08/11/2026
 
-Histórico manual iniciado com três capturas fornecidas pelo proprietário.
-O snapshot bruto está em [dados/metricas-redes/2026-11-08-capturas-manuais.json](../dados/metricas-redes/2026-11-08-capturas-manuais.json).
+Histórico manual iniciado em 08/11/2026 com quatro capturas fornecidas pelo proprietário.
+Os snapshots brutos estão em [Instagram e painel Meta](../dados/metricas-redes/2026-11-08-capturas-manuais.json) e [Kwai](../dados/metricas-redes/2026-11-08-kwai-captura-manual.json).
 
 | Origem da tela | Itens distintos visíveis | Visualizações somadas somente nesses itens | Curtidas visíveis |
 | --- | ---: | ---: | ---: |
 | Grade de Reels do Instagram | 12 | 1.541 | não mostradas |
 | Painel de conteúdo da Meta (plataforma não confirmada) | 12 | 658 | 34 |
+| Grade de vídeos do Kwai (plataforma informada pelo proprietário) | 8 | aproximadamente 5.467 | não mostradas |
 
-**Não somar os totais das duas linhas:** não há comprovação de que representam
+**Não somar os totais das plataformas/linhas:** não há comprovação de que representam
 contas, métricas ou publicações equivalentes. Os números são contagens que
 apareceram na captura, **não total de views da conta**, nem views no dia.
 
@@ -18,6 +19,7 @@ apareceram na captura, **não total de views da conta**, nem views no dia.
 
 - **Instagram:** "MUDAR O PASSADO" (318), "CORRIDA MORTAL" (187) e "SEM MAGIA?!" (173).
 - **Painel Meta:** vídeo sobre Maomao (418 views, 24 curtidas) e vídeo sobre um caderno capaz de matar (237 views, 9 curtidas).
+- **Kwai:** vídeo de personagem castanho acompanhado de criatura sombria (mostra `1,1 mil`, aproximadamente 1.100 reproduções) e vídeo de personagem castanho lendo um caderno preto (944 reproduções).
 - O vídeo "Kira achava que ninguém poderia encontrá-lo..." tem 2 views e 1 curtida no painel Meta.
 - Vários vídeos no painel exibem **0**; esses zeros são dados observados, não inferidos.
 
@@ -34,7 +36,9 @@ apareceram na captura, **não total de views da conta**, nem views no dia.
 ## Limites desta coleta
 
 - Primeira imagem: grade de Reels do Instagram. Exibe contagens de visualizações, mas não curtidas, comentários, data de publicação nem IDs.
-- Segunda e terceira imagens: tabela `Conteúdo` da Meta, com privacidade `Todos`, views, curtidas e comentários. O aplicativo/plataforma específica não é comprovado pela captura.
+- Segunda e terceira imagens: tabela `Conteúdo` da Meta, com privacidade `Todos`, views, curtidas e comentários.
+- Quarta imagem: grade Kwai, com sete contagens exatas somando 4.367, mais um contador arredondado exibido como `1,1 mil`; o total dos oito é aproximadamente 5.467, não exato. O cartão `Memórias 10` foi excluído por não exibir contador de vídeo.
+- A conta Kwai não está conectada à API; nenhum ID, data de postagem, título ou interação é verificável nesta imagem. O aplicativo/plataforma específica não é comprovado pela captura.
 - Os vídeos de Kira e Ryuk reaparecem na segunda e na terceira imagens: foram registrados **uma única vez**.
 - Os títulos da tabela são truncados na interface; sua transcrição não deve ser tratada como o título completo.
 - A captura informa dados históricos em 03, 04 e 05/11/2026; o registro foi feito em 08/11/2026.
