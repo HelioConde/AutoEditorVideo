@@ -1,0 +1,33 @@
+{
+  "schema": "autoeditorvideo/alchemy-direct-public-launch/v1",
+  "requested_at": "2026-11-08",
+  "creator_approved_public": true,
+  "user_intent": "gerar vídeo enviar pelo autoeditor como publico",
+  "target_channel": "alchemy",
+  "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+  "episode_id": "alchemy-107-automacao-publicou-duplicado",
+  "title": "Sua automação publicou o MESMO vídeo 2 vezes? 🤖",
+  "new_upload_visibility": "public",
+  "new_upload_not_reupload": true,
+  "never_touch_existing_private_videos": true,
+  "production_engine": "AutoEditorVideo via GitHub Actions",
+  "render_preconditions": [
+    "original_script_and_8_unique_scenes",
+    "technical_qa_passed",
+    "1080x1920_vertical",
+    "90_to_120_seconds",
+    "real_audio_and_synced_captions",
+    "original_cover"
+  ],
+  "upload_preconditions": [
+    "exact_channel_oauth",
+    "read_only_existing_video_scan",
+    "sha256_original_media",
+    "privacy_public_at_videos_insert",
+    "read_back_public_status",
+    "no_retry_if_ambiguous"
+  ],
+  "max_image_calls": 8,
+  "metadata_visibility_override": "Only this unique new video is authorized for direct-public upload; does not change registry defaults or previous uploads.",
+  "launch_count": 1
+}
