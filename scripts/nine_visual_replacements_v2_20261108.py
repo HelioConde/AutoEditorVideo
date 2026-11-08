@@ -30,6 +30,7 @@ OUTPUT_ROOT=ROOT/"cloud-nine-visual-replacements-v2-20261108"
 OWNER="all_channels_visual_replacement_v2_20261108"
 WORKFLOW="AutoEditorVideo - nine image-corrected replacements EN Gamer Alchemy"
 RETRY_WORKFLOW="AutoEditorVideo - retry Gamer-only V2 after exact failed original render"
+HTTP400_WORKFLOW="AutoEditorVideo - Gamer V2 fix HTTP400 and private upload"
 CHANNELS=("en","games","alchemy")
 CALLS={"en":29,"games":27,"alchemy":27}
 IDS={
@@ -134,13 +135,22 @@ def guard(channel:str):
                     and e.get("REPLACEMENTS_RETRY_APPROVED")=="yes"
                     and e.get("MAX_IMAGE_CALLS")=="33"
                     and _retry_source_confirmed(e))
+    http400_recovery=(
+        channel=="games"
+        and e.get("GITHUB_EVENT_NAME")=="push"
+        and e.get("GITHUB_WORKFLOW")==HTTP400_WORKFLOW
+        and e.get("REPLACEMENTS_HTTP400_FIX_APPROVED")=="yes"
+        and e.get("MAX_IMAGE_CALLS")=="33"
+        and e.get("GITHUB_REF")=="refs/heads/main"
+        and e.get("GITHUB_RUN_ATTEMPT")=="1"
+    )
     if (e.get("GITHUB_REPOSITORY")!="HelioConde/AutoEditorVideo"
             or e.get("GITHUB_REF")!="refs/heads/main"
             or e.get("GITHUB_RUN_ATTEMPT")!="1"
             or e.get("V2_REPLACEMENTS_RENDER_APPROVED")!="yes"
             or e.get("REPLACEMENTS_CHANNEL")!=channel
             or e.get("IMAGE_MODEL")!="gpt-image-2"
-            or not (standard or games_recovery)):
+            or not (standard or games_recovery or http400_recovery)):
         raise ReplacementBlocked("EXACT_MAIN_OR_FAILED_GAMER_RECOVERY_ONE_SHOT_REQUIRED")
     if any(e.get(k) for k in ("YOUTUBE_CLIENT_JSON","YOUTUBE_CHANNEL_TOKEN_JSON",
                              "YOUTUBE_KIDS_TOKEN_JSON","YOUTUBE_BR_TOKEN_JSON",
@@ -186,17 +196,22 @@ def render(channel:str):
                     time.sleep(30)
             raise ReplacementBlocked("UNREACHABLE_IMAGE_RETRY_EXIT")
         scene_engine.request_edit=retry_if_transient
+    http400_mode=(channel=="games" and os.environ.get("GITHUB_WORKFLOW")==HTTP400_WORKFLOW)
+    shared_gamer_extra_budget=[6]
     report={
         "schema":"autoeditorvideo/nine-visual-replacements-rendered/v2",
         "owner":OWNER,"channel":channel,"channel_id":KNOWN_IDS[channel],
         "privacy":"not_uploaded_visual_review_pending",
         "publisher":"separate_qa_gated_only",
         "image_process":"character_anchor_then_images_edits_for_every_scene",
-        "max_image_calls":CALLS[channel],
+        "max_image_calls":33 if http400_mode else CALLS[channel],
         "count":3,"videos":[]
     }
     for row,folder,audio,sec,words in prepared:
-        frames,identity=br_v2.generate_anchored_art(row,folder,key)
+        frames,identity=br_v2.generate_anchored_art(
+            row,folder,key,gamer_http400_repair=http400_mode,
+            extra_edit_budget=shared_gamer_extra_budget if http400_mode else None
+        )
         # Same original Remotion, canonical subtitles and thumbnails, no mesh warp.
         result=editor.render_one(row,folder,audio,sec,words,frames,channel)
         meta_path=folder/"metadata.json"
