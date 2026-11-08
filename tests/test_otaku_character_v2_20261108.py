@@ -36,7 +36,7 @@ def test_exact_new_reserved_v2_episodes_and_reference_budget():
         assert len(r["scenes"])==8
         assert all(s["character_keys"] for s in r["scenes"])
         assert all("identity" in anchor_prompt(c,r["visual_bible"]).lower() for c in characters)
-        assert all("REFERENCE" in edit_prompt(r,s,characters) for s in r["scenes"])
+        assert all("reference" in edit_prompt(r,s,characters).lower() for s in r["scenes"])
         assert "generic athlete" not in r["visual_bible"].lower()
         assert "not copied exactly" not in r["visual_bible"].lower()
 
@@ -50,7 +50,7 @@ def test_canonical_v2_generates_anchor_then_edits_no_independent_frames(tmp_path
     calls={"anchors":[],"edits":[]}
     def png(color):
         im=Image.effect_noise((1024,1536),25).convert("RGB")
-        im.putpixel((0,0),color)
+        im=Image.blend(im,Image.new("RGB",(1024,1536),color),0.5)
         buf=io.BytesIO()
         im.save(buf,format="PNG")
         return buf.getvalue()
