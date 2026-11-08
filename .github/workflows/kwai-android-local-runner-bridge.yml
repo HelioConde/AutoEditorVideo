@@ -90,6 +90,7 @@ jobs:
 
   gate-artifact-and-owner:
     if: >-
+      github.event.repository.private == true &&
       github.event_name == 'workflow_dispatch' &&
       github.actor == 'HelioConde'
     needs: offline-tests
@@ -113,6 +114,7 @@ jobs:
 
   local-samsung-via-adb-wifi:
     if: >-
+      github.event.repository.private == true &&
       github.event_name == 'workflow_dispatch' &&
       github.actor == 'HelioConde'
     needs: gate-artifact-and-owner
