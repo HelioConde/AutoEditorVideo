@@ -19,7 +19,7 @@
     "upload_only_after_render_qa_and_exact_youtube_id_check": true,
     "publication_to_public_not_approved_by_this_manifest": true
   },
-  "status": "editorial_drafts_in_progress_not_rendered_not_uploaded",
+  "status": "all_15_original_narrations_drafted_not_rendered_not_uploaded",
   "episodes": [
     {
       "id": "5015-jujutsu-kaisen-dominio",
@@ -768,7 +768,8 @@
         "jogos",
         "curiosidades games",
         "design de jogos",
-        "Hélio Conde"
+        "Hélio Conde",
+        "Terraria"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -782,48 +783,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Terraria pode parecer um mundo de blocos cheio de possibilidades, mas a primeira noite já cria um desafio importante. Antes de explorar tudo, é preciso pensar onde ficar e o que fazer quando a luz do dia diminuir.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O valor de preparar um abrigo; ação: Terraria pode parecer um mundo de blocos cheio de possibilidades, mas a primeira noite já cria um desafio importante. Antes de exp"
+          "editorial_beat": "Em Terraria, a primeira noite parece simples quando o mundo ainda está sendo descoberto. Mas a mudança do dia para a escuridão transforma pequenas decisões em estratégia. Preparação pode valer mais do que pressa.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O valor de preparar um abrigo"
         },
         {
           "number": 2,
-          "editorial_beat": "Um abrigo simples pode ser mais útil do que uma construção enorme feita às pressas. A ideia é criar um espaço organizado e protegido, usando os recursos que você realmente consegue reunir no começo da jornada.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Recursos limitados e prioridades; ação: Um abrigo simples pode ser mais útil do que uma construção enorme feita às pressas. A ideia é criar um espaço organizado e protegi"
+          "editorial_beat": "Um abrigo básico serve como ponto de referência. Não é preciso pensar numa construção perfeita logo de início; importa entender o que é necessário para ter um espaço organizado e diminuir riscos durante a exploração.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Recursos limitados e prioridades"
         },
         {
           "number": 3,
-          "editorial_beat": "Explorar abre novas oportunidades, mas também traz riscos inesperados. Se você se afasta sem observar o caminho de volta, o tempo pode acabar antes de concluir seu plano. Por isso, curiosidade e cuidado precisam andar juntos.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Exploração traz oportunidade e risco; ação: Explorar abre novas oportunidades, mas também traz riscos inesperados. Se você se afasta sem observar o caminho de volta, o tempo "
+          "editorial_beat": "Recursos também exigem prioridades. Madeira, materiais simples e ferramentas têm funções diferentes, e o tempo disponível é limitado. Gastar tudo sem um objetivo claro pode deixar escolhas importantes para o pior momento.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Exploração traz oportunidade e risco"
         },
         {
           "number": 4,
-          "editorial_beat": "A iluminação também merece atenção. Tochas e pontos de referência ajudam a reconhecer o terreno e a organizar o espaço. Esse detalhe transforma um ambiente desconhecido em um lugar que começa a fazer sentido.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Iluminação como ferramenta de orientação; ação: A iluminação também merece atenção. Tochas e pontos de referência ajudam a reconhecer o terreno e a organizar o espaço. Esse detal"
+          "editorial_beat": "Explorar cedo é tentador, porque a curiosidade faz parte da graça do jogo. Só que cada caminhada aumenta a distância do local conhecido. A boa estratégia considera não apenas para onde ir, mas quando voltar.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Iluminação como ferramenta de orientação"
         },
         {
           "number": 5,
-          "editorial_beat": "Ferramentas básicas podem parecer pouco impressionantes, mas cada uma resolve um problema específico. Entender o que uma ferramenta permite construir ajuda mais do que tentar reunir materiais aleatórios sem um objetivo definido.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Ferramentas simples ganham valor; ação: Ferramentas básicas podem parecer pouco impressionantes, mas cada uma resolve um problema específico. Entender o que uma ferrament"
+          "editorial_beat": "A iluminação ajuda a orientar o caminho e perceber melhor o ambiente. Num mundo cheio de descobertas, enxergar o terreno faz diferença. Essa necessidade transforma objetos comuns em partes importantes do planejamento.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Ferramentas simples ganham valor"
         },
         {
           "number": 6,
-          "editorial_beat": "O relógio da aventura não espera que tudo esteja perfeito. Em algum momento, você precisa escolher: continuar coletando, voltar para casa ou ajustar o projeto. Esse tipo de decisão cria consequências interessantes para a próxima etapa.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Escolhas de tempo criam consequência; ação: O relógio da aventura não espera que tudo esteja perfeito. Em algum momento, você precisa escolher: continuar coletando, voltar pa"
+          "editorial_beat": "Com ferramentas simples, pequenas melhorias já mudam as possibilidades. O aprendizado acontece por comparação: o que funcionou antes, o que faltou e qual recurso faria diferença numa nova tentativa. Não precisamos fingir uma partida para perceber isso.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Escolhas de tempo criam consequência"
         },
         {
           "number": 7,
-          "editorial_beat": "Errar no primeiro dia não significa perder a aventura. Cada tentativa ensina alguma coisa sobre distâncias, recursos e preparação. O interessante é usar essas descobertas para tornar a próxima decisão mais inteligente.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; A descoberta ensina pelas tentativas; ação: Errar no primeiro dia não significa perder a aventura. Cada tentativa ensina alguma coisa sobre distâncias, recursos e preparação."
+          "editorial_beat": "A passagem do tempo cria consequências naturais. Um minuto usado explorando não foi usado preparando o abrigo. Esse equilíbrio dá personalidade ao começo da aventura e transforma o cenário em parte ativa do desafio.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; A descoberta ensina pelas tentativas"
         },
         {
           "number": 8,
-          "editorial_beat": "No fim, a primeira noite de Terraria resume uma boa ideia de jogo: poucos recursos, muitas possibilidades e decisões que realmente importam. O desafio não é fazer tudo imediatamente, mas aprender a começar bem.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Por que o começo já parece aventura; ação: No fim, a primeira noite de Terraria resume uma boa ideia de jogo: poucos recursos, muitas possibilidades e decisões que realmente"
+          "editorial_beat": "O interessante é que a primeira noite não testa só reflexos. Ela ensina a pensar em objetivos curtos, riscos e recursos. É uma introdução compacta ao tipo de planejamento que acompanha toda a experiência.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Por que o começo já parece aventura"
         }
       ],
-      "narration_script": "Terraria pode parecer um mundo de blocos cheio de possibilidades, mas a primeira noite já cria um desafio importante. Antes de explorar tudo, é preciso pensar onde ficar e o que fazer quando a luz do dia diminuir. Um abrigo simples pode ser mais útil do que uma construção enorme feita às pressas. A ideia é criar um espaço organizado e protegido, usando os recursos que você realmente consegue reunir no começo da jornada. Explorar abre novas oportunidades, mas também traz riscos inesperados. Se você se afasta sem observar o caminho de volta, o tempo pode acabar antes de concluir seu plano. Por isso, curiosidade e cuidado precisam andar juntos. A iluminação também merece atenção. Tochas e pontos de referência ajudam a reconhecer o terreno e a organizar o espaço. Esse detalhe transforma um ambiente desconhecido em um lugar que começa a fazer sentido. Ferramentas básicas podem parecer pouco impressionantes, mas cada uma resolve um problema específico. Entender o que uma ferramenta permite construir ajuda mais do que tentar reunir materiais aleatórios sem um objetivo definido. O relógio da aventura não espera que tudo esteja perfeito. Em algum momento, você precisa escolher: continuar coletando, voltar para casa ou ajustar o projeto. Esse tipo de decisão cria consequências interessantes para a próxima etapa. Errar no primeiro dia não significa perder a aventura. Cada tentativa ensina alguma coisa sobre distâncias, recursos e preparação. O interessante é usar essas descobertas para tornar a próxima decisão mais inteligente. No fim, a primeira noite de Terraria resume uma boa ideia de jogo: poucos recursos, muitas possibilidades e decisões que realmente importam. O desafio não é fazer tudo imediatamente, mas aprender a começar bem.",
-      "narration_word_count": 278,
-      "description": "A primeira noite testa a estratégia, não apenas os reflexos.\n\nImagens ilustrativas geradas por IA; não são capturas de gameplay. Nenhuma partida real foi gravada ou testada.\n\n#Shorts"
+      "narration_script": "Em Terraria, a primeira noite parece simples quando o mundo ainda está sendo descoberto. Mas a mudança do dia para a escuridão transforma pequenas decisões em estratégia. Preparação pode valer mais do que pressa. Um abrigo básico serve como ponto de referência. Não é preciso pensar numa construção perfeita logo de início; importa entender o que é necessário para ter um espaço organizado e diminuir riscos durante a exploração. Recursos também exigem prioridades. Madeira, materiais simples e ferramentas têm funções diferentes, e o tempo disponível é limitado. Gastar tudo sem um objetivo claro pode deixar escolhas importantes para o pior momento. Explorar cedo é tentador, porque a curiosidade faz parte da graça do jogo. Só que cada caminhada aumenta a distância do local conhecido. A boa estratégia considera não apenas para onde ir, mas quando voltar. A iluminação ajuda a orientar o caminho e perceber melhor o ambiente. Num mundo cheio de descobertas, enxergar o terreno faz diferença. Essa necessidade transforma objetos comuns em partes importantes do planejamento. Com ferramentas simples, pequenas melhorias já mudam as possibilidades. O aprendizado acontece por comparação: o que funcionou antes, o que faltou e qual recurso faria diferença numa nova tentativa. Não precisamos fingir uma partida para perceber isso. A passagem do tempo cria consequências naturais. Um minuto usado explorando não foi usado preparando o abrigo. Esse equilíbrio dá personalidade ao começo da aventura e transforma o cenário em parte ativa do desafio. O interessante é que a primeira noite não testa só reflexos. Ela ensina a pensar em objetivos curtos, riscos e recursos. É uma introdução compacta ao tipo de planejamento que acompanha toda a experiência.",
+      "narration_word_count": 273,
+      "description": "A primeira noite testa a estratégia, não apenas os reflexos.\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
     },
     {
       "id": "game-105-stardew-estacoes",
@@ -882,7 +883,8 @@
         "jogos",
         "curiosidades games",
         "design de jogos",
-        "Hélio Conde"
+        "Hélio Conde",
+        "Stardew Valley"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -896,48 +898,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Em Stardew Valley, as estações não servem apenas para mudar a cor da paisagem. Elas alteram o ritmo da fazenda e exigem escolhas diferentes. Quem planeja uma semana precisa lembrar que o calendário continua andando.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O calendário altera as opções; ação: Em Stardew Valley, as estações não servem apenas para mudar a cor da paisagem. Elas alteram o ritmo da fazenda e exigem escolhas d"
+          "editorial_beat": "Em Stardew Valley, as estações fazem mais do que mudar a aparência do vale. Elas dão ritmo às decisões e lembram que o tempo também é um recurso. Planejar bem não significa fazer tudo ao mesmo tempo.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O calendário altera as opções"
         },
         {
           "number": 2,
-          "editorial_beat": "Na primavera, a sensação de começar do zero convida a experimentar. Plantar, conhecer os arredores e entender as ferramentas cria uma base. Não é necessário terminar todos os projetos antes de descobrir como a rotina funciona.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Colheitas exigem tempo; ação: Na primavera, a sensação de começar do zero convida a experimentar. Plantar, conhecer os arredores e entender as ferramentas cria "
+          "editorial_beat": "Uma escolha de plantio depende de quantos dias existem até a mudança da estação. Isso torna o calendário tão importante quanto a terra. O sistema recompensa quem observa ciclos em vez de agir apenas por impulso.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Colheitas exigem tempo"
         },
         {
           "number": 3,
-          "editorial_beat": "Quando chega o verão, algumas oportunidades mudam. O jogador pode reorganizar o espaço e observar quais atividades fazem mais sentido. O importante é perceber que a estratégia de uma estação nem sempre vale para a seguinte.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O clima cria ritmo próprio; ação: Quando chega o verão, algumas oportunidades mudam. O jogador pode reorganizar o espaço e observar quais atividades fazem mais sent"
+          "editorial_beat": "O clima ajuda a criar uma rotina própria. Alguns dias parecem convidar à organização, outros à exploração. O interesse está nas alternativas disponíveis, não em fingir que existe uma única maneira correta de jogar.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O clima cria ritmo próprio"
         },
         {
           "number": 4,
-          "editorial_beat": "O outono traz outra chance de revisar o planejamento. Recursos guardados podem ganhar novos usos, e tarefas adiadas começam a chamar atenção. Uma boa fazenda não depende só de trabalhar muito, mas de saber por quê.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Planejar também significa descansar; ação: O outono traz outra chance de revisar o planejamento. Recursos guardados podem ganhar novos usos, e tarefas adiadas começam a cham"
+          "editorial_beat": "Também há momentos em que descansar e reorganizar prioridades faz mais sentido do que começar outra tarefa. O valor de um dia depende do objetivo escolhido. Essa liberdade ajuda a transformar planejamento em expressão pessoal.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Planejar também significa descansar"
         },
         {
           "number": 5,
-          "editorial_beat": "O inverno muda as possibilidades de cultivo ao ar livre, mas não elimina a vida do vale. Explorar, minerar, pescar, cuidar dos relacionamentos e preparar melhorias continuam oferecendo caminhos para aproveitar os dias.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Atividades competem pela atenção; ação: O inverno muda as possibilidades de cultivo ao ar livre, mas não elimina a vida do vale. Explorar, minerar, pescar, cuidar dos rel"
+          "editorial_beat": "Os sistemas competem pela atenção: cuidar da fazenda, conhecer lugares e acompanhar acontecimentos. Cada atividade tem valor, mas nenhuma cabe sozinha em todos os dias. O jogador aprende a escolher conscientemente.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Atividades competem pela atenção"
         },
         {
           "number": 6,
-          "editorial_beat": "Esse ciclo ensina algo sobre administração do tempo. Um dia gasto em uma atividade é um dia que não foi usado em outra. Não existe obrigação de fazer tudo; existe a oportunidade de escolher o que importa agora.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Aprender ciclos reduz desperdício; ação: Esse ciclo ensina algo sobre administração do tempo. Um dia gasto em uma atividade é um dia que não foi usado em outra. Não existe"
+          "editorial_beat": "Com o tempo, entender os ciclos reduz desperdícios. Uma decisão que antes parecia urgente pode esperar; outra precisa ser feita enquanto ainda há oportunidade. Essa evolução vem de observar padrões e relacionar causas com resultados.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Aprender ciclos reduz desperdício"
         },
         {
           "number": 7,
-          "editorial_beat": "Também vale lembrar que Stardew Valley permite estilos diferentes. Algumas pessoas gostam de otimizar cada detalhe, enquanto outras preferem caminhar, conversar e descobrir segredos aos poucos. Ambas podem criar histórias divertidas.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; A fazenda reflete decisões de longo prazo; ação: Também vale lembrar que Stardew Valley permite estilos diferentes. Algumas pessoas gostam de otimizar cada detalhe, enquanto outra"
+          "editorial_beat": "A fazenda acaba refletindo escolhas de longo prazo. Não se trata apenas de produzir mais, e sim de descobrir qual ritmo combina com cada objetivo. O cenário muda enquanto a experiência pessoal ganha identidade.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; A fazenda reflete decisões de longo prazo"
         },
         {
           "number": 8,
-          "editorial_beat": "As estações tornam o jogo especial porque transformam rotina em planejamento. Cada mudança da paisagem é um convite para rever prioridades, aproveitar o que está disponível e preparar o próximo capítulo da fazenda.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Por que um sistema simples prende tanto; ação: As estações tornam o jogo especial porque transformam rotina em planejamento. Cada mudança da paisagem é um convite para rever pri"
+          "editorial_beat": "É por isso que quatro estações simples sustentam tantas histórias diferentes. Cada uma apresenta limites e oportunidades, e o verdadeiro desafio é encontrar equilíbrio. O calendário vira uma ferramenta criativa, não apenas uma contagem.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Por que um sistema simples prende tanto"
         }
       ],
-      "narration_script": "Em Stardew Valley, as estações não servem apenas para mudar a cor da paisagem. Elas alteram o ritmo da fazenda e exigem escolhas diferentes. Quem planeja uma semana precisa lembrar que o calendário continua andando. Na primavera, a sensação de começar do zero convida a experimentar. Plantar, conhecer os arredores e entender as ferramentas cria uma base. Não é necessário terminar todos os projetos antes de descobrir como a rotina funciona. Quando chega o verão, algumas oportunidades mudam. O jogador pode reorganizar o espaço e observar quais atividades fazem mais sentido. O importante é perceber que a estratégia de uma estação nem sempre vale para a seguinte. O outono traz outra chance de revisar o planejamento. Recursos guardados podem ganhar novos usos, e tarefas adiadas começam a chamar atenção. Uma boa fazenda não depende só de trabalhar muito, mas de saber por quê. O inverno muda as possibilidades de cultivo ao ar livre, mas não elimina a vida do vale. Explorar, minerar, pescar, cuidar dos relacionamentos e preparar melhorias continuam oferecendo caminhos para aproveitar os dias. Esse ciclo ensina algo sobre administração do tempo. Um dia gasto em uma atividade é um dia que não foi usado em outra. Não existe obrigação de fazer tudo; existe a oportunidade de escolher o que importa agora. Também vale lembrar que Stardew Valley permite estilos diferentes. Algumas pessoas gostam de otimizar cada detalhe, enquanto outras preferem caminhar, conversar e descobrir segredos aos poucos. Ambas podem criar histórias divertidas. As estações tornam o jogo especial porque transformam rotina em planejamento. Cada mudança da paisagem é um convite para rever prioridades, aproveitar o que está disponível e preparar o próximo capítulo da fazenda.",
-      "narration_word_count": 278,
-      "description": "Uma mudança de estação pode mudar todo o seu planejamento.\n\nImagens ilustrativas geradas por IA; não são capturas de gameplay. Nenhuma partida real foi gravada ou testada.\n\n#Shorts"
+      "narration_script": "Em Stardew Valley, as estações fazem mais do que mudar a aparência do vale. Elas dão ritmo às decisões e lembram que o tempo também é um recurso. Planejar bem não significa fazer tudo ao mesmo tempo. Uma escolha de plantio depende de quantos dias existem até a mudança da estação. Isso torna o calendário tão importante quanto a terra. O sistema recompensa quem observa ciclos em vez de agir apenas por impulso. O clima ajuda a criar uma rotina própria. Alguns dias parecem convidar à organização, outros à exploração. O interesse está nas alternativas disponíveis, não em fingir que existe uma única maneira correta de jogar. Também há momentos em que descansar e reorganizar prioridades faz mais sentido do que começar outra tarefa. O valor de um dia depende do objetivo escolhido. Essa liberdade ajuda a transformar planejamento em expressão pessoal. Os sistemas competem pela atenção: cuidar da fazenda, conhecer lugares e acompanhar acontecimentos. Cada atividade tem valor, mas nenhuma cabe sozinha em todos os dias. O jogador aprende a escolher conscientemente. Com o tempo, entender os ciclos reduz desperdícios. Uma decisão que antes parecia urgente pode esperar; outra precisa ser feita enquanto ainda há oportunidade. Essa evolução vem de observar padrões e relacionar causas com resultados. A fazenda acaba refletindo escolhas de longo prazo. Não se trata apenas de produzir mais, e sim de descobrir qual ritmo combina com cada objetivo. O cenário muda enquanto a experiência pessoal ganha identidade. É por isso que quatro estações simples sustentam tantas histórias diferentes. Cada uma apresenta limites e oportunidades, e o verdadeiro desafio é encontrar equilíbrio. O calendário vira uma ferramenta criativa, não apenas uma contagem.",
+      "narration_word_count": 276,
+      "description": "Uma mudança de estação pode mudar todo o seu planejamento.\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
     },
     {
       "id": "game-106-celeste-dificuldade",
@@ -996,7 +998,8 @@
         "jogos",
         "curiosidades games",
         "design de jogos",
-        "Hélio Conde"
+        "Hélio Conde",
+        "Celeste"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -1010,48 +1013,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Celeste é conhecido por desafios de plataforma que podem parecer intimidadores. Mas existe uma diferença entre um jogo difícil e um jogo que apenas pune. O que torna uma tentativa interessante é a chance de aprender algo com ela.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Controles claros deixam o desafio legível; ação: Celeste é conhecido por desafios de plataforma que podem parecer intimidadores. Mas existe uma diferença entre um jogo difícil e u"
+          "editorial_beat": "Celeste mostra como um jogo exigente pode incentivar o aprendizado em vez de apenas punir erros. Um obstáculo difícil deixa de parecer impossível quando o jogador entende o que precisa observar e praticar.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Controles claros deixam o desafio legível"
         },
         {
           "number": 2,
-          "editorial_beat": "Cada trecho apresenta um problema de movimento. Às vezes você precisa controlar o impulso, às vezes calcular o momento de um salto. Em vez de exigir sorte, o desafio convida o jogador a observar trajetórias e ritmo.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Tentativa e erro como aprendizado; ação: Cada trecho apresenta um problema de movimento. Às vezes você precisa controlar o impulso, às vezes calcular o momento de um salto"
+          "editorial_beat": "Os controles são importantes porque tornam as ações compreensíveis. Quando uma tentativa falha, existe a possibilidade de reconhecer o que aconteceu. Essa clareza ajuda a separar desafio justo de confusão sem explicação.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Tentativa e erro como aprendizado"
         },
         {
           "number": 3,
-          "editorial_beat": "Quando uma tentativa falha, o retorno rápido permite testar outra ideia. Essa repetição não apaga a dificuldade; ela transforma o erro em informação. O jogador percebe aos poucos onde começou a perder o controle.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Cada obstáculo comunica uma ideia; ação: Quando uma tentativa falha, o retorno rápido permite testar outra ideia. Essa repetição não apaga a dificuldade; ela transforma o "
+          "editorial_beat": "Cada trecho pode apresentar uma ideia pequena: tempo, movimento ou posicionamento. O desafio cresce quando essas ideias se combinam. Em vez de ensinar tudo de uma vez, o percurso transforma repetição em entendimento.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Cada obstáculo comunica uma ideia"
         },
         {
           "number": 4,
-          "editorial_beat": "Outro elemento importante é a clareza visual. Plataformas, perigos e espaços precisam ser compreensíveis, mesmo quando a ação acontece depressa. Assim, você consegue relacionar o resultado às decisões que tomou.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Recomeçar rapidamente muda a frustração; ação: Outro elemento importante é a clareza visual. Plataformas, perigos e espaços precisam ser compreensíveis, mesmo quando a ação acon"
+          "editorial_beat": "Recomeçar rapidamente muda a relação com o fracasso. Uma tentativa não precisa parecer o fim da jornada. Quanto menor a distância entre tentar e aprender, mais fácil é manter a curiosidade sobre a próxima solução.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; Recomeçar rapidamente muda a frustração"
         },
         {
           "number": 5,
-          "editorial_beat": "A narrativa de Celeste também dá significado ao esforço. A subida da montanha se conecta a sentimentos de dúvida, persistência e autoconhecimento. O desafio não existe só para provar quem tem reflexos rápidos.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O progresso depende da observação; ação: A narrativa de Celeste também dá significado ao esforço. A subida da montanha se conecta a sentimentos de dúvida, persistência e a"
+          "editorial_beat": "O progresso muitas vezes acontece antes da vitória. Perceber um padrão, chegar um pouco mais longe ou acertar o começo de uma sequência já representa aprendizado. Essas pequenas conquistas tornam o percurso mais significativo.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O progresso depende da observação"
         },
         {
           "number": 6,
-          "editorial_beat": "Há momentos em que insistir sem pensar pode cansar. Fazer uma pausa e voltar com outra perspectiva também é uma estratégia. A experiência permite descobrir que melhorar não exige acertar tudo de primeira.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; A dificuldade conversa com o tema; ação: Há momentos em que insistir sem pensar pode cansar. Fazer uma pausa e voltar com outra perspectiva também é uma estratégia. A expe"
+          "editorial_beat": "A dificuldade também conversa com a temática emocional da aventura. Persistir não significa nunca sentir medo ou frustração. Significa encontrar caminhos para continuar, respeitando o próprio ritmo e reconhecendo pequenas mudanças.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; A dificuldade conversa com o tema"
         },
         {
           "number": 7,
-          "editorial_beat": "Recursos de acessibilidade e diferentes formas de jogar podem ajudar pessoas com necessidades e objetivos distintos. Isso não diminui a jornada de ninguém. A pergunta mais útil é como cada pessoa pode aproveitar a experiência.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; A vitória pertence ao processo; ação: Recursos de acessibilidade e diferentes formas de jogar podem ajudar pessoas com necessidades e objetivos distintos. Isso não dimi"
+          "editorial_beat": "Por isso, uma vitória pode ser emocionante mesmo quando o objetivo parecia simples. O momento final reúne muitas tentativas anteriores. O jogo transforma habilidade adquirida em uma sensação concreta de avanço.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; A vitória pertence ao processo"
         },
         {
           "number": 8,
-          "editorial_beat": "No fim, Celeste mostra que uma boa dificuldade combina precisão, feedback e significado. A conquista não está apenas em chegar ao próximo ponto, mas em perceber quanto você aprendeu para conseguir chegar até lá.",
-          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O design transforma persistência em emoção; ação: No fim, Celeste mostra que uma boa dificuldade combina precisão, feedback e significado. A conquista não está apenas em chegar ao "
+          "editorial_beat": "Celeste é um bom exemplo de design que usa desafio para contar algo sobre persistência. Errar não precisa ser vergonhoso nem inútil. Quando o sistema ensina, a tentativa seguinte já começa com uma descoberta.",
+          "visual_instruction": "Original game-inspired illustrative concept, never real gameplay; O design transforma persistência em emoção"
         }
       ],
-      "narration_script": "Celeste é conhecido por desafios de plataforma que podem parecer intimidadores. Mas existe uma diferença entre um jogo difícil e um jogo que apenas pune. O que torna uma tentativa interessante é a chance de aprender algo com ela. Cada trecho apresenta um problema de movimento. Às vezes você precisa controlar o impulso, às vezes calcular o momento de um salto. Em vez de exigir sorte, o desafio convida o jogador a observar trajetórias e ritmo. Quando uma tentativa falha, o retorno rápido permite testar outra ideia. Essa repetição não apaga a dificuldade; ela transforma o erro em informação. O jogador percebe aos poucos onde começou a perder o controle. Outro elemento importante é a clareza visual. Plataformas, perigos e espaços precisam ser compreensíveis, mesmo quando a ação acontece depressa. Assim, você consegue relacionar o resultado às decisões que tomou. A narrativa de Celeste também dá significado ao esforço. A subida da montanha se conecta a sentimentos de dúvida, persistência e autoconhecimento. O desafio não existe só para provar quem tem reflexos rápidos. Há momentos em que insistir sem pensar pode cansar. Fazer uma pausa e voltar com outra perspectiva também é uma estratégia. A experiência permite descobrir que melhorar não exige acertar tudo de primeira. Recursos de acessibilidade e diferentes formas de jogar podem ajudar pessoas com necessidades e objetivos distintos. Isso não diminui a jornada de ninguém. A pergunta mais útil é como cada pessoa pode aproveitar a experiência. No fim, Celeste mostra que uma boa dificuldade combina precisão, feedback e significado. A conquista não está apenas em chegar ao próximo ponto, mas em perceber quanto você aprendeu para conseguir chegar até lá.",
-      "narration_word_count": 275,
-      "description": "Um desafio difícil pode ser acolhedor quando ensina.\n\nImagens ilustrativas geradas por IA; não são capturas de gameplay. Nenhuma partida real foi gravada ou testada.\n\n#Shorts"
+      "narration_script": "Celeste mostra como um jogo exigente pode incentivar o aprendizado em vez de apenas punir erros. Um obstáculo difícil deixa de parecer impossível quando o jogador entende o que precisa observar e praticar. Os controles são importantes porque tornam as ações compreensíveis. Quando uma tentativa falha, existe a possibilidade de reconhecer o que aconteceu. Essa clareza ajuda a separar desafio justo de confusão sem explicação. Cada trecho pode apresentar uma ideia pequena: tempo, movimento ou posicionamento. O desafio cresce quando essas ideias se combinam. Em vez de ensinar tudo de uma vez, o percurso transforma repetição em entendimento. Recomeçar rapidamente muda a relação com o fracasso. Uma tentativa não precisa parecer o fim da jornada. Quanto menor a distância entre tentar e aprender, mais fácil é manter a curiosidade sobre a próxima solução. O progresso muitas vezes acontece antes da vitória. Perceber um padrão, chegar um pouco mais longe ou acertar o começo de uma sequência já representa aprendizado. Essas pequenas conquistas tornam o percurso mais significativo. A dificuldade também conversa com a temática emocional da aventura. Persistir não significa nunca sentir medo ou frustração. Significa encontrar caminhos para continuar, respeitando o próprio ritmo e reconhecendo pequenas mudanças. Por isso, uma vitória pode ser emocionante mesmo quando o objetivo parecia simples. O momento final reúne muitas tentativas anteriores. O jogo transforma habilidade adquirida em uma sensação concreta de avanço. Celeste é um bom exemplo de design que usa desafio para contar algo sobre persistência. Errar não precisa ser vergonhoso nem inútil. Quando o sistema ensina, a tentativa seguinte já começa com uma descoberta.",
+      "narration_word_count": 263,
+      "description": "Um desafio difícil pode ser acolhedor quando ensina.\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
     },
     {
       "id": "kids-104-abelhinha-e-as-cores",
@@ -1110,7 +1113,8 @@
         "história infantil",
         "desenho infantil",
         "aprender brincando",
-        "Emanuelly Kids"
+        "Emanuelly Kids",
+        "A Abelhinha que Descobriu as Cores 🐝🌈"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -1124,48 +1128,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Em um jardim alegre, uma abelhinha acordou com o primeiro raio de sol. Ela abriu as asinhas e percebeu uma novidade: as flores pareciam ter pintado o mundo durante a noite. Que lindo jardim colorido!",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma manhã no jardim; ação: Em um jardim alegre, uma abelhinha acordou com o primeiro raio de sol. Ela abriu as asinhas e percebeu uma novidade: as flores par"
+          "editorial_beat": "Era uma manhã tranquila no jardim. Uma abelhinha bem curiosa abriu suas asinhas e olhou ao redor. As flores estavam acordando devagar. Hoje ela queria conhecer as cores escondidas em cada cantinho.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma manhã no jardim"
         },
         {
           "number": 2,
-          "editorial_beat": "Ela voou devagar até uma flor vermelha, redondinha e sorridente. Vermelho lembrava uma maçã madura e um coração desenhado. A abelhinha observou a cor sem arrancar nenhuma pétala, porque as flores também precisavam de cuidado.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma flor vermelha muito alegre; ação: Ela voou devagar até uma flor vermelha, redondinha e sorridente. Vermelho lembrava uma maçã madura e um coração desenhado. A abelh"
+          "editorial_beat": "Primeiro, encontrou uma flor vermelha. Vermelho como um coração desenhado com carinho. A abelhinha chegou pertinho, sem machucar as pétalas, e observou o brilho alegre daquela cor. Que bonita descoberta!",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma flor vermelha muito alegre"
         },
         {
           "number": 3,
-          "editorial_beat": "Mais adiante, uma flor amarela brilhava perto do caminho. A abelhinha pensou no sol quentinho e em uma estrela de papel. Amarelo parecia uma cor muito feliz, e a pequena visitante fez uma dança no ar.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma flor amarela iluminada pelo sol; ação: Mais adiante, uma flor amarela brilhava perto do caminho. A abelhinha pensou no sol quentinho e em uma estrela de papel. Amarelo p"
+          "editorial_beat": "Mais adiante, uma flor amarela balançava suavemente. Amarelo como a luz quentinha do sol. A abelhinha ficou olhando enquanto a brisa passava. As pétalas pareciam fazer uma dança pequenina.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma flor amarela iluminada pelo sol"
         },
         {
           "number": 4,
-          "editorial_beat": "Perto de uma poça limpinha, havia uma flor azul. A abelhinha olhou para a flor e depois para o céu. Os dois eram diferentes, mas tinham tons parecidos. Ela descobriu que uma cor pode aparecer em muitos lugares.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma flor azul perto da água; ação: Perto de uma poça limpinha, havia uma flor azul. A abelhinha olhou para a flor e depois para o céu. Os dois eram diferentes, mas t"
+          "editorial_beat": "Perto de uma poça de água limpa havia uma flor azul. Azul como um pedacinho do céu refletido. A abelhinha parou por um instante, admirando aquela cor calma. Tudo parecia tão sossegado!",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma flor azul perto da água"
         },
         {
           "number": 5,
-          "editorial_beat": "Uma folha verde fez sombra para um besourinho que descansava. A abelhinha percebeu que o verde também estava na grama e nas árvores. Cada cantinho do jardim tinha alguma coisa nova para observar com calma.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma folha verde bem grande; ação: Uma folha verde fez sombra para um besourinho que descansava. A abelhinha percebeu que o verde também estava na grama e nas árvore"
+          "editorial_beat": "Depois, pousou perto de uma folha bem grande e verde. Verde como a grama macia do jardim. A folha fazia uma sombrinha gostosa. Ali, nossa amiga descansou suas asinhas por alguns segundos.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma folha verde bem grande"
         },
         {
           "number": 6,
-          "editorial_beat": "Quando o vento soprou, as flores se mexeram juntas como se estivessem dançando. Vermelho, amarelo, azul e verde formavam uma bela mistura. A abelhinha entendeu que as cores não precisavam disputar qual era a mais bonita.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; As cores que podem viver juntas; ação: Quando o vento soprou, as flores se mexeram juntas como se estivessem dançando. Vermelho, amarelo, azul e verde formavam uma bela "
+          "editorial_beat": "Quando olhou outra vez, viu todas as cores juntas: vermelho, amarelo, azul e verde. Nenhuma precisava ser igual à outra. Cada cor ajudava o jardim a ficar ainda mais alegre e bonito.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; As cores que podem viver juntas"
         },
         {
           "number": 7,
-          "editorial_beat": "Ela visitou suas amigas flores mais uma vez e contou o que havia aprendido. A flor vermelha sorriu, a amarela brilhou e a azul balançou. O besourinho também participou, escondido debaixo da folha verde.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A abelhinha visita suas amigas flores; ação: Ela visitou suas amigas flores mais uma vez e contou o que havia aprendido. A flor vermelha sorriu, a amarela brilhou e a azul bal"
+          "editorial_beat": "A abelhinha voltou a visitar as flores, uma por uma. Primeiro a vermelha, depois a amarela, a azul e a folha verde. Ela percebeu que aprender pode ser uma aventura suave e divertida.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A abelhinha visita suas amigas flores"
         },
         {
           "number": 8,
-          "editorial_beat": "Quando a tarde chegou, a abelhinha voltou para casa bem contente. Fechou os olhinhos e imaginou o jardim cheio de cores. Amanhã haveria novas descobertas, mas hoje já tinha sido um dia especial.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Um jardim colorido para recordar; ação: Quando a tarde chegou, a abelhinha voltou para casa bem contente. Fechou os olhinhos e imaginou o jardim cheio de cores. Amanhã ha"
+          "editorial_beat": "Quando a tarde chegou, a abelhinha guardou suas descobertas na memória. O jardim continuava colorido e tranquilo. E todas as flores balançavam devagar, como se dissessem: até amanhã, pequena amiga!",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Um jardim colorido para recordar"
         }
       ],
-      "narration_script": "Em um jardim alegre, uma abelhinha acordou com o primeiro raio de sol. Ela abriu as asinhas e percebeu uma novidade: as flores pareciam ter pintado o mundo durante a noite. Que lindo jardim colorido! Ela voou devagar até uma flor vermelha, redondinha e sorridente. Vermelho lembrava uma maçã madura e um coração desenhado. A abelhinha observou a cor sem arrancar nenhuma pétala, porque as flores também precisavam de cuidado. Mais adiante, uma flor amarela brilhava perto do caminho. A abelhinha pensou no sol quentinho e em uma estrela de papel. Amarelo parecia uma cor muito feliz, e a pequena visitante fez uma dança no ar. Perto de uma poça limpinha, havia uma flor azul. A abelhinha olhou para a flor e depois para o céu. Os dois eram diferentes, mas tinham tons parecidos. Ela descobriu que uma cor pode aparecer em muitos lugares. Uma folha verde fez sombra para um besourinho que descansava. A abelhinha percebeu que o verde também estava na grama e nas árvores. Cada cantinho do jardim tinha alguma coisa nova para observar com calma. Quando o vento soprou, as flores se mexeram juntas como se estivessem dançando. Vermelho, amarelo, azul e verde formavam uma bela mistura. A abelhinha entendeu que as cores não precisavam disputar qual era a mais bonita. Ela visitou suas amigas flores mais uma vez e contou o que havia aprendido. A flor vermelha sorriu, a amarela brilhou e a azul balançou. O besourinho também participou, escondido debaixo da folha verde. Quando a tarde chegou, a abelhinha voltou para casa bem contente. Fechou os olhinhos e imaginou o jardim cheio de cores. Amanhã haveria novas descobertas, mas hoje já tinha sido um dia especial.",
-      "narration_word_count": 282,
-      "description": "Uma abelhinha curiosa descobre um jardim cheio de surpresas.\n\nHistória infantil original; imagens ilustrativas geradas por IA.\n\n#Shorts"
+      "narration_script": "Era uma manhã tranquila no jardim. Uma abelhinha bem curiosa abriu suas asinhas e olhou ao redor. As flores estavam acordando devagar. Hoje ela queria conhecer as cores escondidas em cada cantinho. Primeiro, encontrou uma flor vermelha. Vermelho como um coração desenhado com carinho. A abelhinha chegou pertinho, sem machucar as pétalas, e observou o brilho alegre daquela cor. Que bonita descoberta! Mais adiante, uma flor amarela balançava suavemente. Amarelo como a luz quentinha do sol. A abelhinha ficou olhando enquanto a brisa passava. As pétalas pareciam fazer uma dança pequenina. Perto de uma poça de água limpa havia uma flor azul. Azul como um pedacinho do céu refletido. A abelhinha parou por um instante, admirando aquela cor calma. Tudo parecia tão sossegado! Depois, pousou perto de uma folha bem grande e verde. Verde como a grama macia do jardim. A folha fazia uma sombrinha gostosa. Ali, nossa amiga descansou suas asinhas por alguns segundos. Quando olhou outra vez, viu todas as cores juntas: vermelho, amarelo, azul e verde. Nenhuma precisava ser igual à outra. Cada cor ajudava o jardim a ficar ainda mais alegre e bonito. A abelhinha voltou a visitar as flores, uma por uma. Primeiro a vermelha, depois a amarela, a azul e a folha verde. Ela percebeu que aprender pode ser uma aventura suave e divertida. Quando a tarde chegou, a abelhinha guardou suas descobertas na memória. O jardim continuava colorido e tranquilo. E todas as flores balançavam devagar, como se dissessem: até amanhã, pequena amiga!",
+      "narration_word_count": 250,
+      "description": "Uma abelhinha curiosa descobre um jardim cheio de surpresas.\n\nHistória original infantil com ilustrações geradas por IA. Conteúdo destinado a crianças."
     },
     {
       "id": "kids-105-tartaruguinha-e-a-chuva",
@@ -1224,7 +1228,8 @@
         "história infantil",
         "desenho infantil",
         "aprender brincando",
-        "Emanuelly Kids"
+        "Emanuelly Kids",
+        "A Tartaruguinha e a Primeira Chuva 🐢☔"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -1238,48 +1243,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Uma tartaruguinha caminhava por uma trilha perto do lago quando uma nuvem fofinha apareceu no céu. A nuvem estava cinza-clara e parecia carregar um cobertor de gotinhas. Será que a chuva estava chegando?",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma nuvem aparece no céu; ação: Uma tartaruguinha caminhava por uma trilha perto do lago quando uma nuvem fofinha apareceu no céu. A nuvem estava cinza-clara e pa"
+          "editorial_beat": "Uma tartaruguinha passeava devagar perto de um jardim muito bonito. O céu estava claro, mas uma nuvem fofinha apareceu ao longe. Ela levantou a cabecinha e ficou curiosa com aquela visitante.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma nuvem aparece no céu"
         },
         {
           "number": 2,
-          "editorial_beat": "A tartaruguinha ouviu um barulhinho suave: plim, plim, plim. As primeiras gotas caíram nas folhas e fizeram pequenos círculos na água. Ela parou um instante para escutar aquela música diferente.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; As primeiras gotas fazem toc toc; ação: A tartaruguinha ouviu um barulhinho suave: plim, plim, plim. As primeiras gotas caíram nas folhas e fizeram pequenos círculos na á"
+          "editorial_beat": "De repente, caiu uma gotinha: toc! Depois outra: toc, toc! A tartaruguinha ouviu o som da chuva começando. Não havia pressa. Ela ficou quietinha para perceber a música suave das gotas.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; As primeiras gotas fazem toc toc"
         },
         {
           "number": 3,
-          "editorial_beat": "Um sapinho apareceu em uma pedra e deu um bom-dia animado. Ele gostava da água e pulava com cuidado perto do lago. A tartaruguinha sorriu, mas preferiu ficar em um lugar seguro, sem correr.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A tartaruguinha encontra uma folha grande; ação: Um sapinho apareceu em uma pedra e deu um bom-dia animado. Ele gostava da água e pulava com cuidado perto do lago. A tartaruguinha"
+          "editorial_beat": "Uma folha grande estava logo ali. A tartaruguinha caminhou até perto dela e encontrou um lugar tranquilo. A folha balançava com a água, fazendo um barulhinho delicado sobre a terra.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A tartaruguinha encontra uma folha grande"
         },
         {
           "number": 4,
-          "editorial_beat": "Mais adiante, uma florzinha inclinou a cabeça para receber a chuva. A tartaruguinha percebeu que as plantas precisam de água para crescer. Quando a terra fica molhadinha, as raízes podem encontrar o que procuram.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Os pássaros procuram abrigo; ação: Mais adiante, uma florzinha inclinou a cabeça para receber a chuva. A tartaruguinha percebeu que as plantas precisam de água para "
+          "editorial_beat": "Alguns passarinhos também procuraram abrigo entre os galhos. A tartaruguinha olhou para cima e percebeu que todos estavam cuidando de si. Cada um encontrou seu cantinho sem empurrar ninguém.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Os pássaros procuram abrigo"
         },
         {
           "number": 5,
-          "editorial_beat": "O vento ficou um pouco mais forte, e os amigos decidiram procurar abrigo debaixo de uma árvore grande. Eles observaram a chuva de longe, sem entrar em poças fundas nem se aproximar de lugares perigosos.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A água ajuda as plantas; ação: O vento ficou um pouco mais forte, e os amigos decidiram procurar abrigo debaixo de uma árvore grande. Eles observaram a chuva de "
+          "editorial_beat": "A chuva molhou as flores e deixou as folhas brilhantes. Pequenas gotas escorriam devagar pelos caminhos do jardim. A tartaruguinha observou como a água pode ajudar as plantas a crescer.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A água ajuda as plantas"
         },
         {
           "number": 6,
-          "editorial_beat": "O sapinho contou que, depois de chover, o jardim pode ficar cheio de cheiros e cores diferentes. A tartaruguinha imaginou as folhas brilhando e os caminhos fresquinhos. Havia beleza mesmo em um dia nublado.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A chuva passa devagar; ação: O sapinho contou que, depois de chover, o jardim pode ficar cheio de cheiros e cores diferentes. A tartaruguinha imaginou as folha"
+          "editorial_beat": "Aos poucos, a nuvem começou a seguir viagem. O som da chuva ficou mais baixinho até parar. A tartaruguinha esperou um pouco antes de sair, sem necessidade de correr ou se apressar.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A chuva passa devagar"
         },
         {
           "number": 7,
-          "editorial_beat": "Quando as nuvens começaram a se abrir, um raio de sol apareceu entre os galhos. A tartaruguinha e o sapinho viram gotinhas nas pétalas, parecendo pequenas pedrinhas de cristal. Tudo estava calminho outra vez.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Um arco-íris ilumina o horizonte; ação: Quando as nuvens começaram a se abrir, um raio de sol apareceu entre os galhos. A tartaruguinha e o sapinho viram gotinhas nas pét"
+          "editorial_beat": "Então surgiu no céu um arco-íris cheio de cores suaves. A tartaruguinha olhou admirada e abriu um sorriso. Depois da chuva, o jardim parecia ter ganhado uma pintura nova e luminosa.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Um arco-íris ilumina o horizonte"
         },
         {
           "number": 8,
-          "editorial_beat": "A tartaruguinha voltou para o lago com uma história para contar. Aprendeu que a chuva ajuda muitas plantas e animais, e que observar a natureza com cuidado pode transformar um dia comum numa aventura.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Um passeio com calma e alegria; ação: A tartaruguinha voltou para o lago com uma história para contar. Aprendeu que a chuva ajuda muitas plantas e animais, e que observ"
+          "editorial_beat": "Ela voltou a passear, ouvindo os últimos pingos nas folhas. Aprendeu que muitas novidades podem ser conhecidas com calma. E foi para casa contente, levando a lembrança de uma chuva amiga.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Um passeio com calma e alegria"
         }
       ],
-      "narration_script": "Uma tartaruguinha caminhava por uma trilha perto do lago quando uma nuvem fofinha apareceu no céu. A nuvem estava cinza-clara e parecia carregar um cobertor de gotinhas. Será que a chuva estava chegando? A tartaruguinha ouviu um barulhinho suave: plim, plim, plim. As primeiras gotas caíram nas folhas e fizeram pequenos círculos na água. Ela parou um instante para escutar aquela música diferente. Um sapinho apareceu em uma pedra e deu um bom-dia animado. Ele gostava da água e pulava com cuidado perto do lago. A tartaruguinha sorriu, mas preferiu ficar em um lugar seguro, sem correr. Mais adiante, uma florzinha inclinou a cabeça para receber a chuva. A tartaruguinha percebeu que as plantas precisam de água para crescer. Quando a terra fica molhadinha, as raízes podem encontrar o que procuram. O vento ficou um pouco mais forte, e os amigos decidiram procurar abrigo debaixo de uma árvore grande. Eles observaram a chuva de longe, sem entrar em poças fundas nem se aproximar de lugares perigosos. O sapinho contou que, depois de chover, o jardim pode ficar cheio de cheiros e cores diferentes. A tartaruguinha imaginou as folhas brilhando e os caminhos fresquinhos. Havia beleza mesmo em um dia nublado. Quando as nuvens começaram a se abrir, um raio de sol apareceu entre os galhos. A tartaruguinha e o sapinho viram gotinhas nas pétalas, parecendo pequenas pedrinhas de cristal. Tudo estava calminho outra vez. A tartaruguinha voltou para o lago com uma história para contar. Aprendeu que a chuva ajuda muitas plantas e animais, e que observar a natureza com cuidado pode transformar um dia comum numa aventura.",
-      "narration_word_count": 268,
-      "description": "Uma tartaruguinha aprende a escutar os sons da chuva.\n\nHistória infantil original; imagens ilustrativas geradas por IA.\n\n#Shorts"
+      "narration_script": "Uma tartaruguinha passeava devagar perto de um jardim muito bonito. O céu estava claro, mas uma nuvem fofinha apareceu ao longe. Ela levantou a cabecinha e ficou curiosa com aquela visitante. De repente, caiu uma gotinha: toc! Depois outra: toc, toc! A tartaruguinha ouviu o som da chuva começando. Não havia pressa. Ela ficou quietinha para perceber a música suave das gotas. Uma folha grande estava logo ali. A tartaruguinha caminhou até perto dela e encontrou um lugar tranquilo. A folha balançava com a água, fazendo um barulhinho delicado sobre a terra. Alguns passarinhos também procuraram abrigo entre os galhos. A tartaruguinha olhou para cima e percebeu que todos estavam cuidando de si. Cada um encontrou seu cantinho sem empurrar ninguém. A chuva molhou as flores e deixou as folhas brilhantes. Pequenas gotas escorriam devagar pelos caminhos do jardim. A tartaruguinha observou como a água pode ajudar as plantas a crescer. Aos poucos, a nuvem começou a seguir viagem. O som da chuva ficou mais baixinho até parar. A tartaruguinha esperou um pouco antes de sair, sem necessidade de correr ou se apressar. Então surgiu no céu um arco-íris cheio de cores suaves. A tartaruguinha olhou admirada e abriu um sorriso. Depois da chuva, o jardim parecia ter ganhado uma pintura nova e luminosa. Ela voltou a passear, ouvindo os últimos pingos nas folhas. Aprendeu que muitas novidades podem ser conhecidas com calma. E foi para casa contente, levando a lembrança de uma chuva amiga.",
+      "narration_word_count": 245,
+      "description": "Uma tartaruguinha aprende a escutar os sons da chuva.\n\nHistória original infantil com ilustrações geradas por IA. Conteúdo destinado a crianças."
     },
     {
       "id": "kids-106-estrelinhas-contam",
@@ -1338,7 +1343,8 @@
         "história infantil",
         "desenho infantil",
         "aprender brincando",
-        "Emanuelly Kids"
+        "Emanuelly Kids",
+        "Cinco Estrelinhas no Céu ⭐ | Aprendendo a Contar"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -1352,48 +1358,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Era uma noite tranquila, e três estrelinhas brilhavam sobre uma colina azulada. A primeira piscava devagar, a segunda parecia dançar e a terceira fazia uma luz bem delicada. Todas gostavam de observar o mundo em silêncio.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma estrela chega ao céu; ação: Era uma noite tranquila, e três estrelinhas brilhavam sobre uma colina azulada. A primeira piscava devagar, a segunda parecia danç"
+          "editorial_beat": "Num céu azul bem escuro, apareceu uma estrelinha pequenina. Ela brilhava com uma luz suave, sem pressa nenhuma. Vamos observar com calma. Olhe só: uma estrela iluminando a noite tranquila.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma estrela chega ao céu"
         },
         {
           "number": 2,
-          "editorial_beat": "A primeira estrelinha teve uma ideia: brincar de contar coisas bonitas. Ela olhou para o céu e encontrou uma lua redondinha. Uma lua! As outras amigas repetiram o número com muita alegria.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A segunda estrela aparece ao lado; ação: A primeira estrelinha teve uma ideia: brincar de contar coisas bonitas. Ela olhou para o céu e encontrou uma lua redondinha. Uma l"
+          "editorial_beat": "Pouquinho depois, outra estrelinha chegou para fazer companhia. Agora eram duas luzinhas brilhantes. Uma estava de um lado e a outra do outro. As duas pareciam sorrir para o céu inteiro.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A segunda estrela aparece ao lado"
         },
         {
           "number": 3,
-          "editorial_beat": "Depois, a segunda estrelinha viu duas nuvens pequenas passando devagar. Uma nuvem e mais uma nuvem: duas nuvens! Elas pareciam barcos fofinhos navegando no céu escuro da imaginação.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A terceira estrela dança lentamente; ação: Depois, a segunda estrelinha viu duas nuvens pequenas passando devagar. Uma nuvem e mais uma nuvem: duas nuvens! Elas pareciam bar"
+          "editorial_beat": "Uma terceira estrelinha surgiu e começou a balançar devagar. O grupo estava crescendo. Podemos contar olhando cada brilho: uma, duas, três. As estrelas dançavam juntas sem fazer barulho.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A terceira estrela dança lentamente"
         },
         {
           "number": 4,
-          "editorial_beat": "A terceira estrelinha encontrou três florzinhas na colina. Uma, duas, três! As flores estavam fechadinhas, descansando depois de um dia de sol. As amigas falaram baixinho para não atrapalhar o sono delas.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A quarta estrela brilha bem suave; ação: A terceira estrelinha encontrou três florzinhas na colina. Uma, duas, três! As flores estavam fechadinhas, descansando depois de u"
+          "editorial_beat": "A noite recebeu mais uma visitante. Era a quarta estrelinha, muito delicada. Agora havia quatro luzes no céu. Cada uma tinha seu lugar e deixava a paisagem ainda mais bonita.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A quarta estrela brilha bem suave"
         },
         {
           "number": 5,
-          "editorial_beat": "Uma corujinha apareceu em um galho e ouviu a brincadeira. Ela também queria participar, mas lembrou que contar é mais fácil quando apontamos uma coisa de cada vez, sem pular nenhuma.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A quinta estrela completa o grupo; ação: Uma corujinha apareceu em um galho e ouviu a brincadeira. Ela também queria participar, mas lembrou que contar é mais fácil quando"
+          "editorial_beat": "Por fim, chegou a quinta estrelinha. Ela encontrou suas amigas e brilhou de alegria. Com cinco estrelas, o céu parecia uma pequena festa silenciosa. Todas estavam bem juntinhas e felizes.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; A quinta estrela completa o grupo"
         },
         {
           "number": 6,
-          "editorial_beat": "As estrelinhas tentaram contar quatro folhinhas de uma árvore. Uma, duas, três, quatro. A corujinha bateu as asas contente. Aprender devagar e conferir a contagem deixava a brincadeira ainda mais divertida.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Todas se alinham para contar; ação: As estrelinhas tentaram contar quatro folhinhas de uma árvore. Uma, duas, três, quatro. A corujinha bateu as asas contente. Aprend"
+          "editorial_beat": "Vamos olhar novamente, bem devagar. Uma estrela, duas estrelas, três estrelas, quatro estrelas e cinco estrelas. Contar fica mais fácil quando observamos uma de cada vez, com atenção e tranquilidade.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Todas se alinham para contar"
         },
         {
           "number": 7,
-          "editorial_beat": "Quando chegou a hora de descansar, a lua iluminou a colina com uma luz suave. As estrelinhas repetiram os números que haviam encontrado: um, dois, três e quatro. Cada número guardava uma pequena lembrança.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; O céu mostra um desenho brilhante; ação: Quando chegou a hora de descansar, a lua iluminou a colina com uma luz suave. As estrelinhas repetiram os números que haviam encon"
+          "editorial_beat": "As cinco estrelinhas formaram um desenho luminoso lá em cima. O vento passou de leve pelas nuvens, mas as luzinhas continuaram brilhando. Era uma noite perfeita para aprender brincando.",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; O céu mostra um desenho brilhante"
         },
         {
           "number": 8,
-          "editorial_beat": "A noite terminou com um céu cheio de calma e carinho. As estrelinhas fecharam os olhinhos imaginários e sorriram. Amanhã poderiam contar novas coisas, mas agora era hora de sonhar com aventuras brilhantes.",
-          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma despedida calma com os cinco números; ação: A noite terminou com um céu cheio de calma e carinho. As estrelinhas fecharam os olhinhos imaginários e sorriram. Amanhã poderiam "
+          "editorial_beat": "Chegou a hora de descansar. As estrelinhas ficaram no céu, cuidando da noite com seu brilho macio. Uma, duas, três, quatro, cinco. Bons sonhos, pequena pessoa que gosta de descobrir!",
+          "visual_instruction": "Original soft 2D preschool illustration, cozy safe colors; Uma despedida calma com os cinco números"
         }
       ],
-      "narration_script": "Era uma noite tranquila, e três estrelinhas brilhavam sobre uma colina azulada. A primeira piscava devagar, a segunda parecia dançar e a terceira fazia uma luz bem delicada. Todas gostavam de observar o mundo em silêncio. A primeira estrelinha teve uma ideia: brincar de contar coisas bonitas. Ela olhou para o céu e encontrou uma lua redondinha. Uma lua! As outras amigas repetiram o número com muita alegria. Depois, a segunda estrelinha viu duas nuvens pequenas passando devagar. Uma nuvem e mais uma nuvem: duas nuvens! Elas pareciam barcos fofinhos navegando no céu escuro da imaginação. A terceira estrelinha encontrou três florzinhas na colina. Uma, duas, três! As flores estavam fechadinhas, descansando depois de um dia de sol. As amigas falaram baixinho para não atrapalhar o sono delas. Uma corujinha apareceu em um galho e ouviu a brincadeira. Ela também queria participar, mas lembrou que contar é mais fácil quando apontamos uma coisa de cada vez, sem pular nenhuma. As estrelinhas tentaram contar quatro folhinhas de uma árvore. Uma, duas, três, quatro. A corujinha bateu as asas contente. Aprender devagar e conferir a contagem deixava a brincadeira ainda mais divertida. Quando chegou a hora de descansar, a lua iluminou a colina com uma luz suave. As estrelinhas repetiram os números que haviam encontrado: um, dois, três e quatro. Cada número guardava uma pequena lembrança. A noite terminou com um céu cheio de calma e carinho. As estrelinhas fecharam os olhinhos imaginários e sorriram. Amanhã poderiam contar novas coisas, mas agora era hora de sonhar com aventuras brilhantes.",
-      "narration_word_count": 257,
-      "description": "Uma viagem tranquila para contar de um até cinco.\n\nHistória infantil original; imagens ilustrativas geradas por IA.\n\n#Shorts"
+      "narration_script": "Num céu azul bem escuro, apareceu uma estrelinha pequenina. Ela brilhava com uma luz suave, sem pressa nenhuma. Vamos observar com calma. Olhe só: uma estrela iluminando a noite tranquila. Pouquinho depois, outra estrelinha chegou para fazer companhia. Agora eram duas luzinhas brilhantes. Uma estava de um lado e a outra do outro. As duas pareciam sorrir para o céu inteiro. Uma terceira estrelinha surgiu e começou a balançar devagar. O grupo estava crescendo. Podemos contar olhando cada brilho: uma, duas, três. As estrelas dançavam juntas sem fazer barulho. A noite recebeu mais uma visitante. Era a quarta estrelinha, muito delicada. Agora havia quatro luzes no céu. Cada uma tinha seu lugar e deixava a paisagem ainda mais bonita. Por fim, chegou a quinta estrelinha. Ela encontrou suas amigas e brilhou de alegria. Com cinco estrelas, o céu parecia uma pequena festa silenciosa. Todas estavam bem juntinhas e felizes. Vamos olhar novamente, bem devagar. Uma estrela, duas estrelas, três estrelas, quatro estrelas e cinco estrelas. Contar fica mais fácil quando observamos uma de cada vez, com atenção e tranquilidade. As cinco estrelinhas formaram um desenho luminoso lá em cima. O vento passou de leve pelas nuvens, mas as luzinhas continuaram brilhando. Era uma noite perfeita para aprender brincando. Chegou a hora de descansar. As estrelinhas ficaram no céu, cuidando da noite com seu brilho macio. Uma, duas, três, quatro, cinco. Bons sonhos, pequena pessoa que gosta de descobrir!",
+      "narration_word_count": 238,
+      "description": "Uma viagem tranquila para contar de um até cinco.\n\nHistória original infantil com ilustrações geradas por IA. Conteúdo destinado a crianças."
     },
     {
       "id": "alchemy-104-automacao-gatilhos",
@@ -1452,7 +1458,8 @@
         "inteligência artificial",
         "automação",
         "tecnologia",
-        "Alchemy Lab"
+        "Alchemy Lab",
+        "Automação"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -1466,48 +1473,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Toda automação começa com alguma condição que diz quando agir. Essa condição costuma ser chamada de gatilho. Sem ela, um sistema não sabe em que momento iniciar a sequência de tarefas planejadas.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Definição simples de evento e gatilho; ação: Toda automação começa com alguma condição que diz quando agir. Essa condição costuma ser chamada de gatilho. Sem ela, um sistema n"
+          "editorial_beat": "Uma automação começa antes de executar qualquer ação. Primeiro, algo precisa acontecer. Chamamos esse acontecimento de gatilho. Entender essa ideia ajuda a construir rotinas úteis sem imaginar que o computador adivinha nossas intenções.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Definição simples de evento e gatilho"
         },
         {
           "number": 2,
-          "editorial_beat": "Imagine uma pasta recebendo um arquivo novo. O evento de chegada pode iniciar uma rotina que organiza o documento ou avisa alguém. Esse é um exemplo conceitual, não uma demonstração de serviço executado.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Diferença entre ação manual e automática; ação: Imagine uma pasta recebendo um arquivo novo. O evento de chegada pode iniciar uma rotina que organiza o documento ou avisa alguém."
+          "editorial_beat": "Pense na diferença entre abrir manualmente um arquivo e reagir quando um arquivo novo chega a uma pasta. No segundo caso, o evento pode iniciar uma tarefa. Mas isso só funciona quando a condição foi definida.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Diferença entre ação manual e automática"
         },
         {
           "number": 3,
-          "editorial_beat": "A diferença para uma ação manual está no início do processo. Em vez de uma pessoa clicar a mesma sequência toda vez, uma regra observa um evento e decide se o fluxo deve começar.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Exemplo conceitual de arquivo novo; ação: A diferença para uma ação manual está no início do processo. Em vez de uma pessoa clicar a mesma sequência toda vez, uma regra obs"
+          "editorial_beat": "Num exemplo conceitual, um sistema observa uma pasta autorizada. Quando surge um documento, ele pode organizar o nome ou avisar a pessoa responsável. Isso é um fluxo planejado, não um teste real apresentado como resultado.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Exemplo conceitual de arquivo novo"
         },
         {
           "number": 4,
-          "editorial_beat": "Mas iniciar tudo sem verificar condições pode criar problemas. Se uma mensagem chega duas vezes, o sistema pode repetir a mesma operação. Por isso filtros e verificações ajudam a definir o que realmente merece atenção.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Condições evitam processos indevidos; ação: Mas iniciar tudo sem verificar condições pode criar problemas. Se uma mensagem chega duas vezes, o sistema pode repetir a mesma op"
+          "editorial_beat": "Condições impedem que qualquer acontecimento dispare a mesma rotina. Talvez o arquivo precise ter certo formato ou pertencer a uma pasta específica. Esses filtros tornam a automação mais previsível e reduzem trabalho desnecessário.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Condições evitam processos indevidos"
         },
         {
           "number": 5,
-          "editorial_beat": "Permissões também fazem parte do projeto. Um fluxo que lê dados não precisa necessariamente ter autorização para apagar arquivos ou enviar mensagens. Dar acesso apenas ao necessário reduz riscos e facilita auditorias.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; A importância de verificar permissões; ação: Permissões também fazem parte do projeto. Um fluxo que lê dados não precisa necessariamente ter autorização para apagar arquivos o"
+          "editorial_beat": "Permissões são tão importantes quanto gatilhos. O sistema não deveria ler pastas particulares ou alterar documentos sem autorização. Definir claramente o acesso ajuda a proteger dados e impede ações fora do objetivo original.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; A importância de verificar permissões"
         },
         {
           "number": 6,
-          "editorial_beat": "Outro ponto importante é evitar ciclos infinitos. Se uma automação modifica o mesmo arquivo que dispara seu gatilho, ela pode começar outra execução sem parar. O fluxo precisa reconhecer quando já trabalhou naquele item.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Como prevenir repetições infinitas; ação: Outro ponto importante é evitar ciclos infinitos. Se uma automação modifica o mesmo arquivo que dispara seu gatilho, ela pode come"
+          "editorial_beat": "Outra preocupação é a repetição. E se a própria tarefa criar um arquivo que aciona novamente o gatilho? Sem cuidados, um fluxo pode entrar em ciclo. Por isso, limites e verificações de duplicidade são essenciais.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Como prevenir repetições infinitas"
         },
         {
           "number": 7,
-          "editorial_beat": "Registros de execução ajudam a entender sucessos e falhas. Uma ação interrompida deve ser investigada antes de ser repetida, especialmente se envolve publicação, pagamentos ou alterações que não podem ser desfeitas.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; A necessidade de registrar falhas; ação: Registros de execução ajudam a entender sucessos e falhas. Uma ação interrompida deve ser investigada antes de ser repetida, espec"
+          "editorial_beat": "Quando algo falha, um registro permite entender o que aconteceu. Saber qual gatilho iniciou a execução e qual etapa não terminou facilita corrigir o problema. Uma automação confiável precisa ser observável, não apenas rápida.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; A necessidade de registrar falhas"
         },
         {
           "number": 8,
-          "editorial_beat": "Uma boa automação não é aquela que faz mais coisas sozinha. É a que começa no momento certo, executa apenas o permitido e deixa informações suficientes para que alguém possa verificar o resultado.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Uma automação útil precisa de controle; ação: Uma boa automação não é aquela que faz mais coisas sozinha. É a que começa no momento certo, executa apenas o permitido e deixa in"
+          "editorial_beat": "No fim, automatizar é combinar gatilho, condições, permissões e ações bem definidas. Começar pequeno é uma ótima estratégia. Um fluxo simples, controlado e verificável costuma ser mais útil do que uma sequência enorme sem supervisão.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Uma automação útil precisa de controle"
         }
       ],
-      "narration_script": "Toda automação começa com alguma condição que diz quando agir. Essa condição costuma ser chamada de gatilho. Sem ela, um sistema não sabe em que momento iniciar a sequência de tarefas planejadas. Imagine uma pasta recebendo um arquivo novo. O evento de chegada pode iniciar uma rotina que organiza o documento ou avisa alguém. Esse é um exemplo conceitual, não uma demonstração de serviço executado. A diferença para uma ação manual está no início do processo. Em vez de uma pessoa clicar a mesma sequência toda vez, uma regra observa um evento e decide se o fluxo deve começar. Mas iniciar tudo sem verificar condições pode criar problemas. Se uma mensagem chega duas vezes, o sistema pode repetir a mesma operação. Por isso filtros e verificações ajudam a definir o que realmente merece atenção. Permissões também fazem parte do projeto. Um fluxo que lê dados não precisa necessariamente ter autorização para apagar arquivos ou enviar mensagens. Dar acesso apenas ao necessário reduz riscos e facilita auditorias. Outro ponto importante é evitar ciclos infinitos. Se uma automação modifica o mesmo arquivo que dispara seu gatilho, ela pode começar outra execução sem parar. O fluxo precisa reconhecer quando já trabalhou naquele item. Registros de execução ajudam a entender sucessos e falhas. Uma ação interrompida deve ser investigada antes de ser repetida, especialmente se envolve publicação, pagamentos ou alterações que não podem ser desfeitas. Uma boa automação não é aquela que faz mais coisas sozinha. É a que começa no momento certo, executa apenas o permitido e deixa informações suficientes para que alguém possa verificar o resultado.",
-      "narration_word_count": 264,
-      "description": "Toda automação começa quando alguma condição acontece.\n\nExplicação conceitual original com imagens geradas por IA; nenhuma ferramenta ou experimento demonstrado.\n\n#Shorts"
+      "narration_script": "Uma automação começa antes de executar qualquer ação. Primeiro, algo precisa acontecer. Chamamos esse acontecimento de gatilho. Entender essa ideia ajuda a construir rotinas úteis sem imaginar que o computador adivinha nossas intenções. Pense na diferença entre abrir manualmente um arquivo e reagir quando um arquivo novo chega a uma pasta. No segundo caso, o evento pode iniciar uma tarefa. Mas isso só funciona quando a condição foi definida. Num exemplo conceitual, um sistema observa uma pasta autorizada. Quando surge um documento, ele pode organizar o nome ou avisar a pessoa responsável. Isso é um fluxo planejado, não um teste real apresentado como resultado. Condições impedem que qualquer acontecimento dispare a mesma rotina. Talvez o arquivo precise ter certo formato ou pertencer a uma pasta específica. Esses filtros tornam a automação mais previsível e reduzem trabalho desnecessário. Permissões são tão importantes quanto gatilhos. O sistema não deveria ler pastas particulares ou alterar documentos sem autorização. Definir claramente o acesso ajuda a proteger dados e impede ações fora do objetivo original. Outra preocupação é a repetição. E se a própria tarefa criar um arquivo que aciona novamente o gatilho? Sem cuidados, um fluxo pode entrar em ciclo. Por isso, limites e verificações de duplicidade são essenciais. Quando algo falha, um registro permite entender o que aconteceu. Saber qual gatilho iniciou a execução e qual etapa não terminou facilita corrigir o problema. Uma automação confiável precisa ser observável, não apenas rápida. No fim, automatizar é combinar gatilho, condições, permissões e ações bem definidas. Começar pequeno é uma ótima estratégia. Um fluxo simples, controlado e verificável costuma ser mais útil do que uma sequência enorme sem supervisão.",
+      "narration_word_count": 274,
+      "description": "Toda automação começa quando alguma condição acontece.\n\n🎨 Ilustrações conceituais geradas por IA; exemplos educativos, sem demonstrações reais falsificadas."
     },
     {
       "id": "alchemy-105-agentes-supervisao",
@@ -1566,7 +1573,8 @@
         "inteligência artificial",
         "automação",
         "tecnologia",
-        "Alchemy Lab"
+        "Alchemy Lab",
+        "Agentes de IA"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -1580,48 +1588,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Um agente de IA pode sugerir passos para resolver uma tarefa, mas isso não significa que ele deva executar qualquer ação sem limites. Quanto maior a autonomia, mais importante se torna o desenho da supervisão.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Um assistente que propõe etapas; ação: Um agente de IA pode sugerir passos para resolver uma tarefa, mas isso não significa que ele deva executar qualquer ação sem limit"
+          "editorial_beat": "Agentes de inteligência artificial podem organizar etapas de um trabalho, sugerir decisões e usar ferramentas quando autorizados. Mas autonomia não deveria significar ausência de limites. Um bom fluxo precisa deixar claro o que pode acontecer.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Um assistente que propõe etapas"
         },
         {
           "number": 2,
-          "editorial_beat": "Comece separando leitura e escrita. Consultar um documento é diferente de alterar dados ou enviar uma publicação. Um sistema pode analisar informações livremente dentro de suas permissões e ainda exigir confirmação antes de agir.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Diferença entre sugerir e executar; ação: Comece separando leitura e escrita. Consultar um documento é diferente de alterar dados ou enviar uma publicação. Um sistema pode "
+          "editorial_beat": "Há diferença entre propor e executar. Um agente pode escrever uma mensagem para revisão sem enviá-la. Enviar de verdade muda o mundo fora da conversa. Essa distinção importa em tarefas com consequências reais.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Diferença entre sugerir e executar"
         },
         {
           "number": 3,
-          "editorial_beat": "Também vale definir um objetivo pequeno e verificável. Em vez de pedir que a IA faça tudo, descreva a tarefa, as ferramentas disponíveis e o que conta como resultado correto. Essa clareza reduz decisões inesperadas.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Acesso a arquivos exige autorização; ação: Também vale definir um objetivo pequeno e verificável. Em vez de pedir que a IA faça tudo, descreva a tarefa, as ferramentas dispo"
+          "editorial_beat": "O acesso a arquivos é outro exemplo. Para resumir um documento, basta uma permissão de leitura. Para apagar, editar ou compartilhar, o risco muda. Oferecer somente as permissões necessárias reduz danos quando alguma etapa falha.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Acesso a arquivos exige autorização"
         },
         {
           "number": 4,
-          "editorial_beat": "Uma lista de ações permitidas ajuda a manter o controle. Se o agente não precisa apagar registros, ele não deve receber esse poder. Restrições técnicas são mais confiáveis do que depender apenas de uma instrução em texto.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Limites de escopo reduzem riscos; ação: Uma lista de ações permitidas ajuda a manter o controle. Se o agente não precisa apagar registros, ele não deve receber esse poder"
+          "editorial_beat": "Também convém limitar o escopo. Um agente encarregado de organizar uma pasta não precisa administrar todas as contas de uma empresa. Quanto mais claro for o objetivo, mais fácil fica perceber um comportamento inesperado.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Limites de escopo reduzem riscos"
         },
         {
           "number": 5,
-          "editorial_beat": "Quando ocorre uma falha, é importante guardar informações do que aconteceu sem registrar senhas ou segredos. Assim, alguém pode identificar o problema e decidir se deve repetir uma etapa com segurança.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Confirmação humana para ações irreversíveis; ação: Quando ocorre uma falha, é importante guardar informações do que aconteceu sem registrar senhas ou segredos. Assim, alguém pode id"
+          "editorial_beat": "Algumas decisões merecem confirmação humana, especialmente pagamentos, exclusões ou publicações externas. Essa pausa não destrói a utilidade do agente. Ela protege momentos em que um erro seria caro, difícil de reverter ou constrangedor.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Confirmação humana para ações irreversíveis"
         },
         {
           "number": 6,
-          "editorial_beat": "Em sistemas que publicam vídeos, por exemplo, uma resposta interrompida não prova que o envio falhou. O conteúdo pode ter chegado à plataforma. Antes de tentar novamente, a automação deve consultar o destino.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Logs ajudam a corrigir problemas; ação: Em sistemas que publicam vídeos, por exemplo, uma resposta interrompida não prova que o envio falhou. O conteúdo pode ter chegado "
+          "editorial_beat": "Logs e recibos ajudam a reconstruir o caminho percorrido. Registrar o que foi feito, quando e com qual autorização facilita auditorias e correções. Um resultado final sem histórico pode esconder problemas importantes.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Logs ajudam a corrigir problemas"
         },
         {
           "number": 7,
-          "editorial_beat": "Supervisão humana não precisa significar aprovar cada movimento simples. Ela deve ser proporcional ao risco. Consultas podem ser automáticas; ações irreversíveis, financeiras ou públicas podem exigir controles adicionais.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Testes em ambiente seguro vêm primeiro; ação: Supervisão humana não precisa significar aprovar cada movimento simples. Ela deve ser proporcional ao risco. Consultas podem ser a"
+          "editorial_beat": "Antes de liberar ações reais, vale experimentar em um ambiente seguro. Dados fictícios e permissões restritas permitem descobrir falhas sem afetar pessoas. Testar limites faz parte do projeto, não é sinal de desconfiança inútil.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Testes em ambiente seguro vêm primeiro"
         },
         {
           "number": 8,
-          "editorial_beat": "Por isso, o agente mais útil não é necessariamente o mais independente. É aquele que consegue explicar o que fez, respeitar seus limites e entregar um resultado que você pode conferir.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Supervisão torna a autonomia mais útil; ação: Por isso, o agente mais útil não é necessariamente o mais independente. É aquele que consegue explicar o que fez, respeitar seus l"
+          "editorial_beat": "O objetivo da supervisão é tornar a autonomia confiável. Agentes funcionam melhor quando responsabilidades, verificações e rotas de recuperação são claras. Quanto mais importante a tarefa, mais cuidadoso deve ser o controle.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Supervisão torna a autonomia mais útil"
         }
       ],
-      "narration_script": "Um agente de IA pode sugerir passos para resolver uma tarefa, mas isso não significa que ele deva executar qualquer ação sem limites. Quanto maior a autonomia, mais importante se torna o desenho da supervisão. Comece separando leitura e escrita. Consultar um documento é diferente de alterar dados ou enviar uma publicação. Um sistema pode analisar informações livremente dentro de suas permissões e ainda exigir confirmação antes de agir. Também vale definir um objetivo pequeno e verificável. Em vez de pedir que a IA faça tudo, descreva a tarefa, as ferramentas disponíveis e o que conta como resultado correto. Essa clareza reduz decisões inesperadas. Uma lista de ações permitidas ajuda a manter o controle. Se o agente não precisa apagar registros, ele não deve receber esse poder. Restrições técnicas são mais confiáveis do que depender apenas de uma instrução em texto. Quando ocorre uma falha, é importante guardar informações do que aconteceu sem registrar senhas ou segredos. Assim, alguém pode identificar o problema e decidir se deve repetir uma etapa com segurança. Em sistemas que publicam vídeos, por exemplo, uma resposta interrompida não prova que o envio falhou. O conteúdo pode ter chegado à plataforma. Antes de tentar novamente, a automação deve consultar o destino. Supervisão humana não precisa significar aprovar cada movimento simples. Ela deve ser proporcional ao risco. Consultas podem ser automáticas; ações irreversíveis, financeiras ou públicas podem exigir controles adicionais. Por isso, o agente mais útil não é necessariamente o mais independente. É aquele que consegue explicar o que fez, respeitar seus limites e entregar um resultado que você pode conferir.",
-      "narration_word_count": 264,
-      "description": "Autonomia sem limites não é automação confiável.\n\nExplicação conceitual original com imagens geradas por IA; nenhuma ferramenta ou experimento demonstrado.\n\n#Shorts"
+      "narration_script": "Agentes de inteligência artificial podem organizar etapas de um trabalho, sugerir decisões e usar ferramentas quando autorizados. Mas autonomia não deveria significar ausência de limites. Um bom fluxo precisa deixar claro o que pode acontecer. Há diferença entre propor e executar. Um agente pode escrever uma mensagem para revisão sem enviá-la. Enviar de verdade muda o mundo fora da conversa. Essa distinção importa em tarefas com consequências reais. O acesso a arquivos é outro exemplo. Para resumir um documento, basta uma permissão de leitura. Para apagar, editar ou compartilhar, o risco muda. Oferecer somente as permissões necessárias reduz danos quando alguma etapa falha. Também convém limitar o escopo. Um agente encarregado de organizar uma pasta não precisa administrar todas as contas de uma empresa. Quanto mais claro for o objetivo, mais fácil fica perceber um comportamento inesperado. Algumas decisões merecem confirmação humana, especialmente pagamentos, exclusões ou publicações externas. Essa pausa não destrói a utilidade do agente. Ela protege momentos em que um erro seria caro, difícil de reverter ou constrangedor. Logs e recibos ajudam a reconstruir o caminho percorrido. Registrar o que foi feito, quando e com qual autorização facilita auditorias e correções. Um resultado final sem histórico pode esconder problemas importantes. Antes de liberar ações reais, vale experimentar em um ambiente seguro. Dados fictícios e permissões restritas permitem descobrir falhas sem afetar pessoas. Testar limites faz parte do projeto, não é sinal de desconfiança inútil. O objetivo da supervisão é tornar a autonomia confiável. Agentes funcionam melhor quando responsabilidades, verificações e rotas de recuperação são claras. Quanto mais importante a tarefa, mais cuidadoso deve ser o controle.",
+      "narration_word_count": 268,
+      "description": "Autonomia sem limites não é automação confiável.\n\n🎨 Ilustrações conceituais geradas por IA; exemplos educativos, sem demonstrações reais falsificadas."
     },
     {
       "id": "alchemy-106-ia-checagem-fontes",
@@ -1680,7 +1688,8 @@
         "inteligência artificial",
         "automação",
         "tecnologia",
-        "Alchemy Lab"
+        "Alchemy Lab",
+        "Como conferir se uma resposta de IA está correta"
       ],
       "production_state": {
         "narration": "written_pending_editorial_preflight",
@@ -1694,48 +1703,48 @@
       "scenes": [
         {
           "number": 1,
-          "editorial_beat": "Uma resposta de IA pode soar convincente e ainda conter um erro. O texto chega organizado, com exemplos e uma conclusão segura. Mas um tom de confiança não mostra, sozinho, que os fatos foram verificados.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; O problema de afirmações sem fontes; ação: Uma resposta de IA pode soar convincente e ainda conter um erro. O texto chega organizado, com exemplos e uma conclusão segura. Ma"
+          "editorial_beat": "Uma resposta de inteligência artificial pode soar muito convincente e ainda assim estar errada. O primeiro passo para usá-la bem é separar fluência de evidência. Uma frase bonita não substitui uma informação verificável.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; O problema de afirmações sem fontes"
         },
         {
           "number": 2,
-          "editorial_beat": "O primeiro passo é separar opinião, hipótese e informação verificável. Uma sugestão criativa pode ser avaliada pelo estilo. Já uma data, uma regra ou uma estatística precisa de uma fonte confiável.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Como transformar uma frase em pergunta verificável; ação: O primeiro passo é separar opinião, hipótese e informação verificável. Uma sugestão criativa pode ser avaliada pelo estilo. Já uma"
+          "editorial_beat": "Transforme a afirmação em pergunta concreta. Em vez de perguntar se uma ferramenta é a melhor, investigue qual recurso ela oferece, em qual versão e sob quais condições. Perguntas específicas produzem verificações mais úteis.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Como transformar uma frase em pergunta verificável"
         },
         {
           "number": 3,
-          "editorial_beat": "Quando a resposta apresenta um link, vale abrir o endereço e procurar a afirmação original. Uma página real pode não dizer o que o resumo afirma. A presença de referência não é prova automática.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Consultar documentação ou dados primários; ação: Quando a resposta apresenta um link, vale abrir o endereço e procurar a afirmação original. Uma página real pode não dizer o que o"
+          "editorial_beat": "Quando possível, procure documentação oficial, estudos ou dados primários. Uma postagem repetida em vários lugares não vira prova só por ser popular. A origem da informação importa tanto quanto a facilidade de encontrá-la.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Consultar documentação ou dados primários"
         },
         {
           "number": 4,
-          "editorial_beat": "O contexto também importa. Um artigo pode estar desatualizado, uma regra pode valer apenas para outro país e um número pode representar um período diferente daquele que você está analisando.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Checar datas e versões; ação: O contexto também importa. Um artigo pode estar desatualizado, uma regra pode valer apenas para outro país e um número pode repres"
+          "editorial_beat": "Datas fazem diferença. Uma explicação correta para uma versão antiga pode não valer para a atual. Conferir quando algo foi publicado e quando o recurso mudou evita decisões baseadas em instruções desatualizadas.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Checar datas e versões"
         },
         {
           "number": 5,
-          "editorial_beat": "Para assuntos de maior impacto, como saúde, segurança ou decisões financeiras, a verificação deve ser ainda mais cuidadosa. A IA pode ajudar a organizar perguntas, mas não substitui uma confirmação adequada.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Comparar fontes independentes; ação: Para assuntos de maior impacto, como saúde, segurança ou decisões financeiras, a verificação deve ser ainda mais cuidadosa. A IA p"
+          "editorial_beat": "Comparar fontes independentes também ajuda, desde que realmente tratem do mesmo assunto. Quando dois textos discordam, procure entender por quê. Às vezes eles usam critérios diferentes, e não fatos obrigatoriamente incompatíveis.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Comparar fontes independentes"
         },
         {
           "number": 6,
-          "editorial_beat": "Uma técnica útil é pedir que a ferramenta sinalize dúvidas e descreva quais informações ainda faltam. Isso não garante que ela será perfeita, mas torna mais fácil identificar os pontos que precisam de revisão.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Distinguir fatos de hipóteses; ação: Uma técnica útil é pedir que a ferramenta sinalize dúvidas e descreva quais informações ainda faltam. Isso não garante que ela ser"
+          "editorial_beat": "É importante distinguir observação de hipótese. Dizer que uma ferramenta pode resolver um problema é diferente de comprovar que ela resolveu. Sem um teste real, a apresentação deve deixar clara essa diferença.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Distinguir fatos de hipóteses"
         },
         {
           "number": 7,
-          "editorial_beat": "Comparar fontes independentes também ajuda. Duas páginas que copiaram o mesmo texto sem indicar a origem não são duas confirmações verdadeiras. Procure evidências diferentes para as afirmações mais importantes.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Registrar dúvidas quando faltam provas; ação: Comparar fontes independentes também ajuda. Duas páginas que copiaram o mesmo texto sem indicar a origem não são duas confirmações"
+          "editorial_beat": "Quando faltam dados, o melhor caminho é registrar a dúvida. Inventar números ou preencher lacunas com confiança pode criar erros em cadeia. Uma resposta útil admite incertezas e mostra o que ainda precisa ser conferido.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; Registrar dúvidas quando faltam provas"
         },
         {
           "number": 8,
-          "editorial_beat": "A melhor forma de usar IA é aproveitar a velocidade sem abrir mão do senso crítico. Leia, confira, corrija e registre as fontes quando necessário. Uma resposta confiável precisa resistir a perguntas.",
-          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; A verificação melhora qualquer fluxo com IA; ação: A melhor forma de usar IA é aproveitar a velocidade sem abrir mão do senso crítico. Leia, confira, corrija e registre as fontes qu"
+          "editorial_beat": "Checar fontes não significa desconfiar de tudo o tempo inteiro. Significa usar um método: definir a pergunta, encontrar evidências, comparar datas e revisar conclusões. Assim, a IA vira apoio ao pensamento, não substituto da verificação.",
+          "visual_instruction": "Original educational tech illustration without fabricated app screenshots; A verificação melhora qualquer fluxo com IA"
         }
       ],
-      "narration_script": "Uma resposta de IA pode soar convincente e ainda conter um erro. O texto chega organizado, com exemplos e uma conclusão segura. Mas um tom de confiança não mostra, sozinho, que os fatos foram verificados. O primeiro passo é separar opinião, hipótese e informação verificável. Uma sugestão criativa pode ser avaliada pelo estilo. Já uma data, uma regra ou uma estatística precisa de uma fonte confiável. Quando a resposta apresenta um link, vale abrir o endereço e procurar a afirmação original. Uma página real pode não dizer o que o resumo afirma. A presença de referência não é prova automática. O contexto também importa. Um artigo pode estar desatualizado, uma regra pode valer apenas para outro país e um número pode representar um período diferente daquele que você está analisando. Para assuntos de maior impacto, como saúde, segurança ou decisões financeiras, a verificação deve ser ainda mais cuidadosa. A IA pode ajudar a organizar perguntas, mas não substitui uma confirmação adequada. Uma técnica útil é pedir que a ferramenta sinalize dúvidas e descreva quais informações ainda faltam. Isso não garante que ela será perfeita, mas torna mais fácil identificar os pontos que precisam de revisão. Comparar fontes independentes também ajuda. Duas páginas que copiaram o mesmo texto sem indicar a origem não são duas confirmações verdadeiras. Procure evidências diferentes para as afirmações mais importantes. A melhor forma de usar IA é aproveitar a velocidade sem abrir mão do senso crítico. Leia, confira, corrija e registre as fontes quando necessário. Uma resposta confiável precisa resistir a perguntas.",
-      "narration_word_count": 256,
-      "description": "Uma resposta convincente ainda precisa de verificação.\n\nExplicação conceitual original com imagens geradas por IA; nenhuma ferramenta ou experimento demonstrado.\n\n#Shorts"
+      "narration_script": "Uma resposta de inteligência artificial pode soar muito convincente e ainda assim estar errada. O primeiro passo para usá-la bem é separar fluência de evidência. Uma frase bonita não substitui uma informação verificável. Transforme a afirmação em pergunta concreta. Em vez de perguntar se uma ferramenta é a melhor, investigue qual recurso ela oferece, em qual versão e sob quais condições. Perguntas específicas produzem verificações mais úteis. Quando possível, procure documentação oficial, estudos ou dados primários. Uma postagem repetida em vários lugares não vira prova só por ser popular. A origem da informação importa tanto quanto a facilidade de encontrá-la. Datas fazem diferença. Uma explicação correta para uma versão antiga pode não valer para a atual. Conferir quando algo foi publicado e quando o recurso mudou evita decisões baseadas em instruções desatualizadas. Comparar fontes independentes também ajuda, desde que realmente tratem do mesmo assunto. Quando dois textos discordam, procure entender por quê. Às vezes eles usam critérios diferentes, e não fatos obrigatoriamente incompatíveis. É importante distinguir observação de hipótese. Dizer que uma ferramenta pode resolver um problema é diferente de comprovar que ela resolveu. Sem um teste real, a apresentação deve deixar clara essa diferença. Quando faltam dados, o melhor caminho é registrar a dúvida. Inventar números ou preencher lacunas com confiança pode criar erros em cadeia. Uma resposta útil admite incertezas e mostra o que ainda precisa ser conferido. Checar fontes não significa desconfiar de tudo o tempo inteiro. Significa usar um método: definir a pergunta, encontrar evidências, comparar datas e revisar conclusões. Assim, a IA vira apoio ao pensamento, não substituto da verificação.",
+      "narration_word_count": 265,
+      "description": "Uma resposta convincente ainda precisa de verificação.\n\n🎨 Ilustrações conceituais geradas por IA; exemplos educativos, sem demonstrações reais falsificadas."
     }
   ]
 }
