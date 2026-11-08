@@ -88,6 +88,7 @@ def inspect_episode(row: dict) -> dict:
     if not episode_id or not title or not script or not isinstance(scenes, list) or not scenes:
         raise ValueError("Roteiro sem id/titulo/narracao/cenas")
     beats = [str(scene.get("editorial_beat", "")).strip() for scene in scenes]
+    narration_matches_beats = normalize(script) == normalize(" ".join(beats))
     if any(not beat for beat in beats):
         raise ValueError(f"Cena sem narracao em {episode_id}")
 
@@ -154,10 +155,11 @@ def inspect_episode(row: dict) -> dict:
         62 + (14 if 6 <= len(beats) <= 12 else -14)
         + (12 if title_overlap else -12)
         + (12 if not duplicate_beats else -18)
+        - (25 if not narration_matches_beats else 0)
     )
     payoff_signal = bool(re.search(
         r"\b(por isso|no fim|a grande ideia|assim|consequ[eê]ncia|"
-        r"portanto|afinal|em resumo)\b", last_beat.lower()
+        r"portanto|afinal|em resumo|no fundo|em outras palavras)\b", last_beat.lower()
     ))
     generic_cta = bool(re.search(
         r"\b(inscreva.se|deixe seu like|curta o video|subscribe)\b",
@@ -210,6 +212,11 @@ def inspect_episode(row: dict) -> dict:
             "code": "CENAS_PARECIDAS",
             "action": "Verificar se cenas adjacentes acrescentam informacao nova.",
         })
+    if not narration_matches_beats:
+        warnings.append({
+            "code": "NARRACAO_CENAS_DIVERGENTES",
+            "action": "Sincronizar a narracao final com os blocos editoriais antes de produzir.",
+        })
     if not tags_ok:
         warnings.append({
             "code": "TAGS_INVALIDAS",
@@ -234,6 +241,7 @@ def inspect_episode(row: dict) -> dict:
         "script_sha256": hashlib.sha256(script.encode("utf-8")).hexdigest(),
         "narration_word_count": len(narration_words),
         "scene_count": len(beats),
+        "narration_matches_scene_beats": narration_matches_beats,
         "hook_cadastrado_presente_na_abertura": hook_in_audio,
         "hook_lexical_alignment": hook_alignment,
         "hook_lexical_coverage": round(hook_coverage, 3),
