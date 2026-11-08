@@ -1,0 +1,260 @@
+name: AutoEditorVideo - recover six BR EN batch15 originals private 20261108
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/lote-15-br-en-private-recovery-launch-20261108.json'
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: batch15-recover-six-only-private-20261108
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(batch15): launch six BR EN private recovery by original episode'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline preflight parser dependencies
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Validate exact six reserved original scripts and no reuploads
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/batch15_br_en_private_recovery_20261108.py
+          python scripts/batch15_br_en_private_recovery_20261108.py --channel br --episode 5015-jujutsu-kaisen-dominio --action validate
+          python scripts/batch15_br_en_private_recovery_20261108.py --channel br --episode 5016-dungeon-meshi-masmorra --action validate
+          python scripts/batch15_br_en_private_recovery_20261108.py --channel br --episode 5017-attack-on-titan-muralhas --action validate
+          python scripts/batch15_br_en_private_recovery_20261108.py --channel en --episode 7014-fullmetal-troca-equivalente --action validate
+          python scripts/batch15_br_en_private_recovery_20261108.py --channel en --episode 7015-one-piece-poneglyphs --action validate
+          python scripts/batch15_br_en_private_recovery_20261108.py --channel en --episode 7016-hunter-nen-restricoes --action validate
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('scripts/batch15_br_en_private_recovery_20261108.py').read_text(encoding='utf8')
+          assert 'videos().update(' not in s and 'videos().delete(' not in s
+          assert 'public' not in s.split('def insert_private')[-1].split('def main')[0] or 'privacyStatus' not in s
+          print('EXACT_SIX_BR_EN_PRIVATE_ONLY_PREFLIGHT_COMPLETE')
+          PY
+
+  verify-image-environment:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify protected main-only image environment before secrets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  verify-youtube-environment:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify protected main-only YouTube environment before secrets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/youtube_env_policy_guard.py
+
+  render:
+    needs: [preflight, verify-image-environment]
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - channel: br
+            episode: 5015-jujutsu-kaisen-dominio
+          - channel: br
+            episode: 5016-dungeon-meshi-masmorra
+          - channel: br
+            episode: 5017-attack-on-titan-muralhas
+          - channel: en
+            episode: 7014-fullmetal-troca-equivalente
+          - channel: en
+            episode: 7015-one-piece-poneglyphs
+          - channel: en
+            episode: 7016-hunter-nen-restricoes
+    runs-on: ubuntu-24.04
+    timeout-minutes: 135
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout pinned original provider proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install required media stack
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Install and validate canonical Remotion renderer
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned Go image provider
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/batch15-private-proxy" ./cmd/api
+      - name: Render only one exact episode with eight permitted image requests
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: '8'
+          RECOVERY_RENDER_AUTHORIZED: 'yes'
+          RECOVERY_CHANNEL: ${{ matrix.channel }}
+          RECOVERY_EPISODE: ${{ matrix.episode }}
+        run: |
+          set -euo pipefail
+          umask 077
+          private_dir="$RUNNER_TEMP/batch15-recovery-${RECOVERY_CHANNEL}-${RECOVERY_EPISODE}-proxy"
+          mkdir -m 700 "$private_dir"
+          pid=''
+          cleanup() {
+            if [[ -n "$pid" ]]; then kill "$pid" 2>/dev/null || true; fi
+            rm -rf -- "$private_dir"
+            rm -f -- "$RUNNER_TEMP/batch15-recovery-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$private_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$private_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/batch15-private-proxy" >"$RUNNER_TEMP/batch15-recovery-proxy.log" 2>&1 &
+          pid=$!
+          python scripts/batch15_br_en_private_recovery_20261108.py \
+            --channel "$RECOVERY_CHANNEL" --episode "$RECOVERY_EPISODE" --action render
+      - name: Preserve original complete MP4 and QA for this one episode only
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch15-recovery-media-${{ matrix.channel }}-${{ matrix.episode }}
+          path: |
+            cloud-batch15-br-en-recovery-20261108/${{ matrix.channel }}/${{ matrix.episode }}/summary.json
+            cloud-batch15-br-en-recovery-20261108/${{ matrix.channel }}/${{ matrix.episode }}/final.mp4
+            cloud-batch15-br-en-recovery-20261108/${{ matrix.channel }}/${{ matrix.episode }}/thumb.jpg
+            cloud-batch15-br-en-recovery-20261108/${{ matrix.channel }}/${{ matrix.episode }}/qa.json
+            cloud-batch15-br-en-recovery-20261108/${{ matrix.channel }}/${{ matrix.episode }}/metadata.json
+          retention-days: 7
+          if-no-files-found: error
+      - name: Preserve partial scene images on failure for future safe diagnosis only
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch15-recovery-partial-${{ matrix.channel }}-${{ matrix.episode }}
+          path: cloud-batch15-br-en-recovery-20261108/${{ matrix.channel }}/${{ matrix.episode }}/scene-*.png
+          retention-days: 7
+          if-no-files-found: ignore
+
+  upload-private:
+    needs: [preflight, verify-youtube-environment, render]
+    if: >-
+      always() &&
+      needs.preflight.result == 'success' &&
+      needs.verify-youtube-environment.result == 'success' &&
+      needs.render.result != 'cancelled'
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - channel: br
+            episode: 5015-jujutsu-kaisen-dominio
+            token_secret: YOUTUBE_BR_TOKEN_JSON
+          - channel: br
+            episode: 5016-dungeon-meshi-masmorra
+            token_secret: YOUTUBE_BR_TOKEN_JSON
+          - channel: br
+            episode: 5017-attack-on-titan-muralhas
+            token_secret: YOUTUBE_BR_TOKEN_JSON
+          - channel: en
+            episode: 7014-fullmetal-troca-equivalente
+            token_secret: YOUTUBE_EN_TOKEN_JSON
+          - channel: en
+            episode: 7015-one-piece-poneglyphs
+            token_secret: YOUTUBE_EN_TOKEN_JSON
+          - channel: en
+            episode: 7016-hunter-nen-restricoes
+            token_secret: YOUTUBE_EN_TOKEN_JSON
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube read and upload client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Download only approved exact original single episode render
+        uses: actions/download-artifact@v4
+        with:
+          name: batch15-recovery-media-${{ matrix.channel }}-${{ matrix.episode }}
+          path: cloud-batch15-br-en-recovery-20261108/${{ matrix.channel }}/${{ matrix.episode }}/
+      - name: Scan own uploads and insert only missing video with private status
+        env:
+          RECOVERY_CHANNEL: ${{ matrix.channel }}
+          RECOVERY_EPISODE: ${{ matrix.episode }}
+          RECOVERY_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_CHANNEL_TOKEN_JSON: ${{ secrets[matrix.token_secret] }}
+        run: |
+          python scripts/batch15_br_en_private_recovery_20261108.py \
+            --channel "${{ matrix.channel }}" --episode "${{ matrix.episode }}" --action upload
+      - name: Retain exact verified private YouTube ID or uncertain result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch15-recovery-youtube-receipt-${{ matrix.channel }}-${{ matrix.episode }}
+          path: cloud-batch15-br-en-recovery-20261108/${{ matrix.channel }}/${{ matrix.episode }}/youtube-private-receipt.json
+          retention-days: 7
+          if-no-files-found: ignore
