@@ -1,0 +1,42 @@
+{
+  "schema": "autoeditorvideo/kwai-br-github-oauth-readiness/v1",
+  "platform": "kwai_brazil",
+  "goal": "store_official_oauth_in_github_environment_like_youtube",
+  "oauth_supported_by_kuaishou_domestic_docs": true,
+  "kwai_brazil_content_publishing_api_verified": false,
+  "kwai_brazil_app_approval_received": false,
+  "oauth_authorization_completed": false,
+  "github_access_configured": false,
+  "publication_enabled": false,
+  "token_refresh_automatic_enabled": false,
+  "owner_consent_required": true,
+  "github_repository": "HelioConde/AutoEditorVideo",
+  "github_environment": "kwai-private-publish",
+  "branch_allowlist": [
+    "main"
+  ],
+  "planned_secret_names": [
+    "KWAI_APP_ID",
+    "KWAI_APP_SECRET",
+    "KWAI_OAUTH_TOKEN_JSON"
+  ],
+  "scopes_required": [
+    "user_video_publish"
+  ],
+  "credential_source": "official_oauth_only_not_mobile_application_password",
+  "validation_status": "blocked_until_official_kwai_brazil_developer_approval",
+  "forbid_passwords": true,
+  "forbid_sms_and_two_factor_codes": true,
+  "forbid_android_cookies_or_sessions": true,
+  "forbid_android_emulator_account_import": true,
+  "forbid_live_publishing": true,
+  "never_touch_youtube_secrets": true,
+  "require_refresh_rotation_atomic_protection": true,
+  "no_upload_without_real_account_id_and_receipt": true,
+  "reference_documentation": [
+    "https://open.kuaishou.com/platformDocs/develop/web-app.html",
+    "https://open.kuaishou.com/platform/openApi?menu=13",
+    "https://open.kuaishou.com/platformDocs/openAbility/contentManagement/createAVideo",
+    "https://github.com/HelioConde/AutoEditorVideo/blob/main/docs/KWAI-PUBLICACAO-AUTOEDITORVIDEO.md"
+  ]
+}
