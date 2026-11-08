@@ -1,0 +1,58 @@
+{
+  "schema": "autoeditorvideo/instagram-api-readiness/v1",
+  "target_platform": "instagram_reels",
+  "authentication": "instagram_login",
+  "graph_api_version": "v25.0",
+  "required_account_type": [
+    "BUSINESS",
+    "CREATOR"
+  ],
+  "required_permissions": [
+    "instagram_business_basic",
+    "instagram_business_content_publish"
+  ],
+  "github_repository": "HelioConde/AutoEditorVideo",
+  "github_environment_planned": "instagram-private-publish",
+  "github_environment_created": false,
+  "environment_branch_allowlist": [
+    "main"
+  ],
+  "secret_names_planned": [
+    "INSTAGRAM_APP_ID",
+    "INSTAGRAM_APP_SECRET",
+    "INSTAGRAM_OAUTH_TOKEN_JSON"
+  ],
+  "oauth_connected": false,
+  "meta_app_created": false,
+  "hosting_public_https_configured": false,
+  "reels_publication_enabled": false,
+  "real_upload_enabled": false,
+  "auto_publish_enabled": false,
+  "secret_transfer_enabled": false,
+  "no_instagram_token_committed": true,
+  "no_facebook_page_required_for_instagram_login": true,
+  "ensure_owner_identity_before_publish": true,
+  "require_independent_qa_before_publish": true,
+  "require_explicit_go_live_approval": true,
+  "account_routes": {
+    "br": null,
+    "en": null,
+    "games": null,
+    "kids": null,
+    "alchemy": null
+  },
+  "media_url_requirement": "public_https_mp4_reachable_by_meta",
+  "deferred_implementation": [
+    "oauth_app_registration_and_local_authorization",
+    "public_video_hosting",
+    "account_id_verification",
+    "private_token_storage_with_protected_branch_policy",
+    "container_creation",
+    "processing_polling",
+    "explicit_publish_and_idempotency_receipts"
+  ],
+  "references": [
+    "https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/",
+    "https://developers.facebook.com/docs/instagram-platform/content-publishing/"
+  ]
+}
