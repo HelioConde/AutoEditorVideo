@@ -1,0 +1,229 @@
+name: Otaku Multicena BR - three original 90s Shorts public
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/otaku-br-three-public-launch-20261107.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-multicena-br-three-original-public-20261107
+  cancel-in-progress: false
+
+jobs:
+  editorial-and-offline-safety:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(br): launch three creator-authorized public original Shorts'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate 3 reserved BR videos and one-shot uploader
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'pytest>=8,<10'
+          python -m py_compile scripts/otaku_br_three_public_20261107.py scripts/otaku_br_three_public_upload_20261107.py
+          python -m pytest -q tests/test_otaku_br_three_public_20261107.py
+          python scripts/otaku_br_three_public_20261107.py --action validate
+          python scripts/otaku_br_three_public_upload_20261107.py --action preflight
+      - name: Verify creator's exact public approval
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('conteudos/otaku-br-three-public-launch-20261107.json',encoding='utf-8'))
+          assert d == {
+            'schema':'autoeditorvideo/otaku-br-3-original-public-launch/v1',
+            'creator_authorized_at':'2026-11-07',
+            'creator_authorized_public':True,
+            'channel':'br',
+            'channel_id':'UCXGYTuBYn-0Ziqin5ajKhOw',
+            'reserved_owner':'otaku_br_3_public_20261107',
+            'manifest':'conteudos/otaku-br-three-public-20261107.json',
+            'episode_ids':['5012-solo-leveling-igris','5013-blue-lock-isagi','5014-mob-psycho-emocoes'],
+            'max_image_calls':24,
+            'image_model':'gpt-image-2',
+            'video_duration_seconds_min':90,
+            'video_duration_seconds_max':120,
+            'render':'original_AutoEditorVideo_Remotion_8_static_stills_no_warp',
+            'youtube_upload':'public_after_automated_media_QA',
+            'require_original_canonical_covers':True,
+            'require_original_word_boundary_captions':True,
+            'verify_youtube_processed_and_public':True,
+            'require_thumbnail_acknowledged':True,
+            'upload_one_by_one':True,
+            'no_blind_reupload':True,
+            'leave_50_video_queue_paused':True,
+            'do_not_touch_earlier_videos':True,
+            'exclude_other_channels':True
+          }
+          print('BR_THREE_PUBLIC_CREATOR_APPROVAL_VERIFIED')
+          PY
+
+  locked-image-generation:
+    needs: editorial-and-offline-safety
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify image generation environment restricted to main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  locked-youtube-oauth:
+    needs: editorial-and-offline-safety
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify main-only protected YouTube environment without OAuth
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/youtube_env_policy_guard.py
+
+  create-original-three-mp4-and-covers:
+    needs: [editorial-and-offline-safety, locked-image-generation]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 245
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout pinned original Go proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install canonical media tools, FFmpeg and original fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Install original Remotion and typecheck before image calls
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Build original pinned Go image proxy without secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/otaku-br-three-proxy" ./cmd/api
+      - name: Generate 3 original narrated Shorts, 8 AI stills each, captions and official covers
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: '24'
+          OTAKU_BR_THREE_RENDER_AUTHORIZED: 'yes'
+        run: |
+          set -euo pipefail
+          umask 077
+          state_dir="$RUNNER_TEMP/otaku-br-three-private-proxy-state"
+          test ! -e "$state_dir"
+          mkdir -m 700 "$state_dir"
+          proxy_pid=''
+          cleanup() {
+            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$state_dir"
+            rm -f -- "$RUNNER_TEMP/otaku-br-three-private-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$state_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/otaku-br-three-proxy" >"$RUNNER_TEMP/otaku-br-three-private-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/otaku_br_three_public_20261107.py --action render
+          echo "BR_THREE_REAL_MP4_RENDER_COMPLETE_NO_YOUTUBE_OAUTH"
+      - name: Save only 3 real MP4, original official covers, metadata, technical QA
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-br-three-original-public-ready-20261107
+          path: |
+            cloud-otaku-br-public-three-20261107/br/summary.json
+            cloud-otaku-br-public-three-20261107/br/**/final.mp4
+            cloud-otaku-br-public-three-20261107/br/**/thumb.jpg
+            cloud-otaku-br-public-three-20261107/br/**/qa.json
+            cloud-otaku-br-public-three-20261107/br/**/metadata.json
+          retention-days: 7
+          if-no-files-found: error
+
+  upload-one-by-one-public-after-qa:
+    needs: [create-original-three-mp4-and-covers, locked-youtube-oauth]
+    if: >-
+      needs.create-original-three-mp4-and-covers.result == 'success' &&
+      needs.locked-youtube-oauth.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install YouTube Google SDK, FFprobe, cover QA, no image API
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Download exact 3 original MP4 from same successful run
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-br-three-original-public-ready-20261107
+          path: cloud-otaku-br-public-three-20261107/br/
+      - name: Authenticate exact BR channel and upload public sequentially after SHA QA
+        env:
+          OTAKU_BR_THREE_PUBLIC_AUTHORIZED: 'yes'
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_CHANNEL_TOKEN_JSON: ${{ secrets.YOUTUBE_BR_TOKEN_JSON }}
+        run: python scripts/otaku_br_three_public_upload_20261107.py --action upload
+      - name: Save actual public video IDs and publication receipts even if error
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-br-three-public-youtube-receipts-20261107
+          path: cloud-otaku-br-public-three-20261107/br/br-three-public-youtube-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
