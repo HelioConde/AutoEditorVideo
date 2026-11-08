@@ -1,0 +1,11 @@
+{
+  "schema": "autoeditorvideo/kwai-local-adb-stage-queue/v1",
+  "platform": "kwai_brazil",
+  "source_repository": "HelioConde/AutoEditorVideo",
+  "stage_only_no_publish": true,
+  "requires_approved_video": true,
+  "requires_successful_main_run": true,
+  "allow_unapproved_artifacts": false,
+  "automatic_stage_queue_enabled": true,
+  "items": []
+}
