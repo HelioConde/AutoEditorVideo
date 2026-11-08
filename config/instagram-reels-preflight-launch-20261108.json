@@ -1,0 +1,19 @@
+{
+  "schema": "autoeditorvideo/instagram-reels-no-secrets-launch/v1",
+  "creator_authorized_at": "2026-11-08",
+  "repository": "HelioConde/AutoEditorVideo",
+  "platform": "instagram_reels_only",
+  "target_channels": [
+    "br",
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "no_credential_access": true,
+  "no_oauth_login": true,
+  "no_video_upload": true,
+  "no_reel_publishing": true,
+  "no_changes_to_youtube": true,
+  "only_unit_tests_and_report": true
+}
