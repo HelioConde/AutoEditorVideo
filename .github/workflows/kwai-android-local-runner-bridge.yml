@@ -1,0 +1,182 @@
+name: AutoEditorVideo - Kwai phone via local Windows runner
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/kwai-adb-github-bridge-launch-20261108.json'
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Diagnosticar celular ou copiar MP4 aprovado para o Samsung'
+        required: true
+        type: choice
+        options: [diagnose, stage]
+        default: diagnose
+      source_run_id:
+        description: 'Run ID que gerou o MP4 (somente stage)'
+        type: string
+        required: false
+      source_artifact:
+        description: 'Nome EXATO do artefato com MP4 (somente stage)'
+        type: string
+        required: false
+      relative_video:
+        description: 'Caminho do MP4 no artefato; vazio exige um unico MP4'
+        type: string
+        required: false
+      confirm_qa:
+        description: 'Confirmei revisao do MP4 e permito SOMENTE copiar ao celular'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: autoeditorvideo-kwai-one-samsung-local-adb-bridge
+  cancel-in-progress: false
+
+jobs:
+  offline-tests:
+    if: >-
+      github.repository == 'HelioConde/AutoEditorVideo' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      (
+        (github.event_name == 'push' &&
+         github.event.head_commit.message == 'test(kwai): run bridge no-network safeguards before local runner setup') ||
+        (github.event_name == 'workflow_dispatch' &&
+         github.actor == 'HelioConde')
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate Android bridge and source provenance without phone
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/kwai_adb_local_bridge.py scripts/kwai_adb_artifact_gate.py
+          python -m unittest discover -s tests -p 'test_kwai_adb_github_bridge.py' -v
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("config/kwai-adb-github-bridge-launch-20261108.json").read_text())
+          assert d == {
+              "schema":"autoeditorvideo/kwai-local-adb-bridge-safe-launch/v1",
+              "creator_authorized_at":"2026-11-08",
+              "repository":"HelioConde/AutoEditorVideo",
+              "device_model":"SM-M236B",
+              "android_connection":"paired_local_adb_wifi",
+              "local_runner_label":"kwai-android-local",
+              "read_only_diagnose":True,
+              "only_authorized_stage_after_qa":True,
+              "only_main_successful_source_run":True,
+              "remote_sha256_verification":True,
+              "no_android_login_access":True,
+              "no_publication":True,
+              "require_local_runner_setup_by_owner":True
+          }
+          print("KWAI_LOCAL_ADB_BRIDGE_TEST_SCOPE_APPROVED")
+          PY
+
+  gate-artifact-and-owner:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.actor == 'HelioConde'
+    needs: offline-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      KWAI_OPERATION: ${{ inputs.operation }}
+      KWAI_SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+      KWAI_SOURCE_ARTIFACT: ${{ inputs.source_artifact }}
+      KWAI_QA_CONFIRMED: ${{ inputs.confirm_qa }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify exact main source artifact and QA approval
+        run: python scripts/kwai_adb_artifact_gate.py
+
+  local-samsung-via-adb-wifi:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.actor == 'HelioConde'
+    needs: gate-artifact-and-owner
+    runs-on: [self-hosted, windows, x64, kwai-android-local]
+    timeout-minutes: 35
+    permissions:
+      contents: read
+      actions: read
+    env:
+      KWAI_OPERATION: ${{ inputs.operation }}
+      KWAI_RELATIVE_VIDEO: ${{ inputs.relative_video }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify local Python and ADB without showing private device ID
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          python --version
+          $adb = Get-Command adb -ErrorAction SilentlyContinue
+          if (-not $adb -and -not (Test-Path 'C:\platform-tools\adb.exe')) {
+            throw 'ADB_NOT_FOUND: configure PATH or keep C:\platform-tools\adb.exe'
+          }
+          Write-Host 'LOCAL_PYTHON_AND_ADB_PRESENT'
+      - name: Download only exact approved artifact from GitHub
+        if: inputs.operation == 'stage'
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.source_artifact }}
+          run-id: ${{ inputs.source_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: HelioConde/AutoEditorVideo
+          path: kwai-downloaded-artifact
+      - name: Diagnose Samsung and optionally transfer exactly one verified MP4
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $mode = $env:KWAI_OPERATION
+          if ($mode -eq 'diagnose') {
+            python scripts/kwai_adb_local_bridge.py --action diagnose
+          } elseif ($mode -eq 'stage') {
+            python scripts/kwai_adb_local_bridge.py --action stage --artifact-directory kwai-downloaded-artifact --relative-video "$env:KWAI_RELATIVE_VIDEO"
+          } else {
+            throw 'KWAI_OPERATION_NOT_ALLOWED'
+          }
+          if ($LASTEXITCODE -ne 0) {
+            throw 'KWAI_ADB_LOCAL_STAGE_FAILED_NO_KWAI_PUBLICATION'
+          }
+      - name: Upload only sanitized status receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kwai-local-samsung-stage-report
+          path: kwai-bridge-report/result.json
+          retention-days: 5
+          if-no-files-found: warn
+      - name: Summarize exact limitations
+        if: always()
+        shell: pwsh
+        run: |
+          @(
+            '## Kwai BR - Samsung via Windows self-hosted runner'
+            'ADB/Wi-Fi consultado; MP4 transferido apenas quando autorizado e verificado por SHA-256.'
+            'Nao houve login, selecao do MP4 no Kwai nem publicacao.'
+            'A automacao da interface Kwai exige uma validacao independente antes de publicar.'
+          ) | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
