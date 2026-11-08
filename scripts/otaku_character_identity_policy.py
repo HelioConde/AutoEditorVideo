@@ -43,7 +43,7 @@ def load_policy()->dict:
             or p.get("lock")!="requires_explicit_new_creator_authorization_to_change"
             or p.get("scope_channels")!=["br","en"]
             or any(r.get(name) is not True for name in required)
-            or not all(t in p.get("forbidden_prompt_patterns",[]) for t in BANNED[:-1])):
+            or not all(any(t in declared for declared in p.get("forbidden_prompt_patterns",[])) for t in BANNED[:-1])):
         raise IdentityBlocked("CANONICAL_ANIME_CHARACTER_POLICY_UNAUTHORIZED_CHANGE")
     return p
 
