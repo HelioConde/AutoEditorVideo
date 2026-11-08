@@ -103,12 +103,27 @@ def inspect_episode(row: dict) -> dict:
     max_sentence = max(lengths, default=0)
     opening = normalize(script[:360])
     hook_in_audio = bool(declared_hook and normalize(declared_hook) in opening)
+    # A comparacao por vocabulario nao interpreta sinonimos; seu resultado
+    # significa apenas sobreposicao lexical, nunca equivalencia semantica.
+    hook_terms = relevant_tokens(declared_hook)
+    opening_terms = relevant_tokens(first)
+    hook_common_terms = hook_terms & opening_terms
+    hook_coverage = (len(hook_common_terms) / len(hook_terms) if hook_terms else 0.0)
+    hook_lexically_related = (
+        not hook_in_audio and len(hook_common_terms) >= 2 and hook_coverage >= .45
+    )
+    hook_alignment = (
+        "literal" if hook_in_audio
+        else "vocabulario_relacionado" if hook_lexically_related
+        else "revisar_abertura" if declared_hook
+        else "sem_gancho_cadastrado"
+    )
     title_tokens = relevant_tokens(title)
     script_tokens = relevant_tokens(script[:450])
     title_overlap = len(title_tokens & script_tokens)
 
     hook = clamp(
-        53 + (19 if hook_in_audio else (-16 if declared_hook else 0))
+        53 + (19 if hook_in_audio else (8 if hook_lexically_related else (-12 if declared_hook else 0)))
         + (10 if 20 <= len(declared_hook or first) <= 130 else -8)
         + (8 if "?" in (declared_hook or first) else 0)
         + (8 if re.search(r"\b(n[aã]o|mas|e se|por que|why|but)\b",
@@ -170,10 +185,15 @@ def inspect_episode(row: dict) -> dict:
         for name, weights in PERSONAS.items()
     }
     warnings = []
-    if declared_hook and not hook_in_audio:
+    if declared_hook and hook_lexically_related:
         warnings.append({
-            "code": "HOOK_CADASTRADO_NAO_NARRADO",
-            "action": "Conferir se o gancho cadastrado deve abrir a narracao; revisar manualmente a transicao.",
+            "code": "GANCHO_REFORMULADO",
+            "action": "A abertura compartilha termos com o gancho; confirmar manualmente se preserva a mesma promessa.",
+        })
+    elif declared_hook and not hook_in_audio:
+        warnings.append({
+            "code": "GANCHO_DIFERENTE_DA_ABERTURA",
+            "action": "Comparar o gancho cadastrado com a primeira frase: pode ser uma reformulacao legitima.",
         })
     if avg_sentence > 26 or max_sentence > 35:
         warnings.append({
@@ -215,6 +235,8 @@ def inspect_episode(row: dict) -> dict:
         "narration_word_count": len(narration_words),
         "scene_count": len(beats),
         "hook_cadastrado_presente_na_abertura": hook_in_audio,
+        "hook_lexical_alignment": hook_alignment,
+        "hook_lexical_coverage": round(hook_coverage, 3),
         "indicators_0_to_100": dimensions,
         "heuristic_persona_scores_0_to_100": personas,
         "editorial_index_0_to_100": index,
@@ -267,11 +289,41 @@ def evaluate_manifest(manifest: dict, ids: tuple[str, ...], channel: str = "br")
     }
 
 
+def summarize_markdown(report: dict) -> str:
+    """Relatorio humano: indices como checklist editorial, sem previsoes."""
+    lines = [
+        "# Laboratorio de Audiencia — Piloto BR", "",
+        "**Nota:** os indices sao rubricas heuristicas, nao espectadores reais "
+        "e nao preveem visualizacoes ou retencao.", "",
+        "| Roteiro | Indice editorial | Alertas |",
+        "|---|---:|---|",
+    ]
+    for item in report["results"]:
+        title = item["title"].replace("|", "/")
+        warnings = ", ".join(w["code"] for w in item["warnings"])
+        lines.append(
+            f"| {title} | {item['editorial_index_0_to_100']}/100 | {warnings} |"
+        )
+    lines += ["", "## Verificacoes recomendadas", ""]
+    for item in report["results"]:
+        lines += [f"### {item['title']}", ""]
+        lines.append(
+            "Gancho: " + item["hook_lexical_alignment"].replace("_", " ") +
+            "; verificar se a primeira frase entrega a promessa."
+        )
+        for warning in item["warnings"]:
+            lines.append("- **" + warning["code"] + ":** " + warning["action"])
+        lines.append("")
+    lines += ["Nenhuma alteracao automatica de roteiro, video ou privacidade foi feita.", ""]
+    return "\n".join(lines)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--ids", nargs="+", default=list(DEFAULT_IDS))
     parser.add_argument("--channel", default="br")
+    parser.add_argument("--markdown-output", type=Path, default=None)
     parser.add_argument("--output", type=Path,
                         default=ROOT / "reports" / "audiencia-simulada-br-piloto.json")
     args = parser.parse_args(argv)
@@ -280,6 +332,9 @@ def main(argv: list[str] | None = None) -> int:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n",
                            encoding="utf-8")
+    if args.markdown_output is not None:
+        args.markdown_output.parent.mkdir(parents=True, exist_ok=True)
+        args.markdown_output.write_text(summarize_markdown(report), encoding="utf-8")
     print(f"[AUDIENCIA LAB] {len(report['results'])} roteiros avaliados; 0 chamadas IA; 0 uploads")
     for item in report["results"]:
         codes = ",".join(w["code"] for w in item["warnings"])
