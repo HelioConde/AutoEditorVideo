@@ -1,0 +1,49 @@
+{
+  "schema": "autoeditorvideo/otaku-br-v2-character-review-approval/v1",
+  "source_run_id": 42444319178,
+  "source_artifact": "otaku-br-three-canonical-characters-v2-review-20261108",
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "visual_review_by_assistant": true,
+  "reviewed_all_anchors_and_story_scenes": true,
+  "creator_publication_authorized": true,
+  "no_fake_approvals": true,
+  "preserve_originals_until_replacement_verified": true,
+  "review_date": "2026-11-08",
+  "review_summary": "Inspected full original-art contact sheets of four named-character anchors and 24 independently composed images/edits across the three 90-120s storyboards. Character appearance remains visually consistent and each story progression matches the narrated editorial topic. Not claiming official anime screenshots or full AI animation. SHA-256 bound to exact reviewed YouTube media artifacts.",
+  "approved_episodes": [
+    {
+      "id": "5012-solo-leveling-igris-v2",
+      "mp4_sha256": "f685745eb4feca83abc176a246230baa1c23a5c9ace55c079ee5ce879fc584ee",
+      "cover_sha256": "1bfbdcc9a6dc30ee50a77f32961f2c4cdf0d6767e1c4f38b291ff881aac0a4e1",
+      "anchors_sha256": {
+        "jinwoo": "4fba93f25fa3c1d71cd338c14e02d53683a8aaaf31ab623b38fe8ab6c03e9db3",
+        "igris": "e15797eaefeea5fa7aa87ae7e342111892b3a8da51269e01a25576f48bf00359"
+      },
+      "eight_story_scenes_visually_confirmed": true,
+      "characters_recognizable_and_consistent": true,
+      "artistic_note": "Character design stays consistent across scenes; red-plumed armored knight and dark-haired black-clothed hunter; accurate sword, dungeon and shadow-fantasy plot contexts."
+    },
+    {
+      "id": "5013-blue-lock-isagi-v2",
+      "mp4_sha256": "59aae60452c0fb6110823f880efbc318d868e1212b8b61bdb14941f154496275",
+      "cover_sha256": "772a81125589daea5e7a6bea962d934d41f55a45b06e491aa7146dde16fff033",
+      "anchors_sha256": {
+        "isagi": "64c1ff03bdc9fa96253c8759ca14815b88c3c9c5087e5fffa36096b2fb87eedf"
+      },
+      "eight_story_scenes_visually_confirmed": true,
+      "characters_recognizable_and_consistent": true,
+      "artistic_note": "Consistent dark-blue fringe, blue eyes and blue-and-black training attire; narrative football, spatial awareness and shot-action scenes clearly connected."
+    },
+    {
+      "id": "5014-mob-psycho-emocoes-v2",
+      "mp4_sha256": "53869cec88a46bf8640ce6d74edab1e9cf250ae6ef010a66a92d7eda8c769623",
+      "cover_sha256": "33c1d8d71506d14cea43d54235f0731bb5db54f6a6acfc0bee03e31f24a65849",
+      "anchors_sha256": {
+        "mob": "b43b443199a3557f941faa15c9e76503ca9be0b46424a6c1eb6f280fa10d4636"
+      },
+      "eight_story_scenes_visually_confirmed": true,
+      "characters_recognizable_and_consistent": true,
+      "artistic_note": "Black bowl cut, black school uniform, subdued expression and psychic energy remain stable in all eight story frames."
+    }
+  ]
+}
