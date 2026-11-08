@@ -1,0 +1,15 @@
+{
+  "schema": "autoeditorvideo/batch15-public-oauth-scope-check/v1",
+  "user_request": "Enviar e postar como publico",
+  "source_run_id": 42481839933,
+  "channels": [
+    "br",
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "read_only": true,
+  "never_print_secret_contents": true,
+  "inspection_date": "2026-11-08"
+}
