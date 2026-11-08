@@ -38,6 +38,21 @@ def test_en_forces_canonical_recognizable_appearance_on_every_scene():
         assert all(s["character_keys"] for s in r["scenes"])
         assert all("generic athlete" not in s["visual_instruction"].lower() for s in r["scenes"])
 
+def test_maomao_only_frames_do_not_inherit_jinshi_character_from_global_visual_bible():
+    from otaku_character_identity_policy import edit_prompt
+    rows=v2.validate("en")
+    maomao=next(r for r in rows if r["id"]=="7012-maomao-apothecary-v2")
+    characters=maomao["character_identity_bible"]
+    solo=[s for s in maomao["scenes"] if s["character_keys"]==["maomao"]]
+    duo=[s for s in maomao["scenes"] if "jinshi" in s["character_keys"]]
+    assert len(solo)>=6 and len(duo)==1
+    for scene in solo:
+        prompt=edit_prompt(maomao,scene,characters)
+        assert "Maomao" in prompt
+        assert "Jinshi" not in prompt
+        assert "canonical" in prompt.lower()
+    assert "Jinshi" in edit_prompt(maomao,duo[0],characters)
+
 def test_all_scenes_use_real_character_anchor_images_not_random_unrelated_stills():
     src=(ROOT/"scripts"/"nine_visual_replacements_v2_20261108.py").read_text()
     assert "br_v2.generate_anchored_art(" in src
