@@ -4,11 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       confirmar:
-        description: 'Publicar somente os 9 videos existentes, SEM gerar ou reenviar'
+        description: 'Digite exatamente PUBLICAR-9-SEM-DUPLICAR para alterar apenas os 9 IDs existentes'
         required: true
-        type: choice
-        options:
-          - PUBLICAR-9-SEM-DUPLICAR
+        type: string
 
 permissions:
   contents: read
