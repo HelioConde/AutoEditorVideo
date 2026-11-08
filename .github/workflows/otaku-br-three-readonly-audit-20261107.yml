@@ -1,0 +1,88 @@
+name: Otaku Multicena BR - read only status of 3 original Shorts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/otaku-br-three-public-readonly-20261107.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-br-three-20261107-owner-readonly-audit
+  cancel-in-progress: false
+
+jobs:
+  preflight:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'diagnose(br): run read-only status audit for three original Shorts'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Enforce strict read-only source
+        run: |
+          python -m py_compile scripts/otaku_br_three_readonly_audit_20261107.py
+          python - <<'PY'
+          from pathlib import Path
+          s=Path('scripts/otaku_br_three_readonly_audit_20261107.py').read_text()
+          forbidden=('videos().insert(', 'videos().update(', 'videos().delete(', 'thumbnails().set(', 'request_image(')
+          assert not any(x in s for x in forbidden)
+          print('BR_OWNER_READ_ONLY_AUDIT_CONTRACT_PASSED')
+          PY
+
+  protected-environment:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Main-only OAuth Environment confirmation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/youtube_env_policy_guard.py
+
+  read-only-youtube-status:
+    needs: [preflight, protected-environment]
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only Google YouTube SDK
+        run: python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Read owned YouTube channel video statuses without any updates
+        env:
+          OTAKU_BR_READ_ONLY_AUTHORIZED: 'yes'
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_${{ secrets.YOUTUBE_BR_TOKEN_JSON }}_JSON: ${{ secrets.YOUTUBE_BR_TOKEN_JSON }}
+        run: python scripts/otaku_br_three_readonly_audit_20261107.py
+      - name: Upload sanitized audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-br-three-owner-video-status-audit-20261107
+          path: otaku-br-three-youtube-real-status-20261107.json
+          retention-days: 7
+          if-no-files-found: ignore
