@@ -1,0 +1,244 @@
+name: AutoEditorVideo - 15 new Shorts BR EN Gamer Kids Alchemy private-first
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/lote-15-canais-launch-20261108.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lote-15-original-november-8-private-once
+  cancel-in-progress: false
+
+jobs:
+  editorial-preflight:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(batch15): launch three new original Shorts per five channels private first'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax test, validate all 15 reserved scenes and private-only destination
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'pytest>=8,<10'
+          python -m py_compile scripts/five_channel_fifteen_20261108.py scripts/five_channel_fifteen_upload_20261108.py
+          python -m pytest -q tests/test_five_channel_fifteen_20261108.py
+          for channel in br en games kids alchemy; do
+            python scripts/five_channel_fifteen_20261108.py --channel "$channel" --action validate
+            python scripts/five_channel_fifteen_upload_20261108.py --channel "$channel" --action preflight
+          done
+      - name: Verify exact user request, protected five distinct IDs and private review policy
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path("conteudos/lote-15-canais-launch-20261108.json").read_text(encoding="utf-8"))
+          assert d["schema"]=="autoeditorvideo/lote15-private-first-20261108/v1"
+          assert d["creator_authorized_date"]=="2026-11-08"
+          assert d["user_requested"]=="3 new videos for each of 5 channels, uploaded via GitHub"
+          assert d["manifest"]=="conteudos/lote-15-canais-20261108.json"
+          assert d["reservation_owner"]=="lote15_novos_20261108"
+          assert d["channels"]==["br","en","games","kids","alchemy"]
+          assert d["total_videos"]==15 and d["per_channel"]==3
+          assert d["image_budget_per_channel"]==24 and d["max_total_image_calls"]==120
+          assert d["upload_visibility"]=="private"
+          assert d["publish_public_after_visual_review"] is False
+          assert d["require_idempotent_youtube_upload"] is True
+          assert d["children_marked_made_for_kids"] is True
+          assert d["do_not_touch_previous_videos"] is True
+          print("BATCH15_USER_PRIVATE_FIRST_AUTH_CONFIRMED")
+          PY
+
+  verify-image-environment:
+    needs: editorial-preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require protected image Environment main-only before loading secrets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  verify-youtube-environment:
+    needs: editorial-preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Require protected YouTube Environment main-only before loading OAuth
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/youtube_env_policy_guard.py
+
+  render:
+    needs: [editorial-preflight, verify-image-environment]
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        channel: [br, en, games, kids, alchemy]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 245
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checkout pinned original native image provider proxy
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install original production media toolchain, caption and thumbnail engines
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Prepare canonical original Remotion MasterShort renderer
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned Go proxy BEFORE image secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/batch15-native-proxy" ./cmd/api
+      - name: Produce 3 new unique 90-120s originals with 24 maximum image calls
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: '24'
+          BATCH15_CHANNEL: ${{ matrix.channel }}
+          BATCH15_RENDER_AUTHORIZED: 'yes'
+        run: |
+          set -euo pipefail
+          umask 077
+          private_dir="$RUNNER_TEMP/batch15-${BATCH15_CHANNEL}-private-proxy"
+          mkdir -m 700 "$private_dir"
+          proxy_pid=''
+          cleanup() {
+            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$private_dir"
+            rm -f -- "$RUNNER_TEMP/batch15-${BATCH15_CHANNEL}-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$private_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$private_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/batch15-native-proxy" >"$RUNNER_TEMP/batch15-${BATCH15_CHANNEL}-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/five_channel_fifteen_20261108.py --channel "$BATCH15_CHANNEL" --action render
+          echo "BATCH15_THREE_FINISHED_QA_PRIVATE_ELIGIBLE_${BATCH15_CHANNEL}"
+      - name: Preserve 3 MP4s, official covers, QA, storyboard artwork and no secrets
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch15-three-${{ matrix.channel }}-20261108
+          path: |
+            cloud-lote-15-canais-20261108/${{ matrix.channel }}/summary.json
+            cloud-lote-15-canais-20261108/${{ matrix.channel }}/**/final.mp4
+            cloud-lote-15-canais-20261108/${{ matrix.channel }}/**/thumb.jpg
+            cloud-lote-15-canais-20261108/${{ matrix.channel }}/**/qa.json
+            cloud-lote-15-canais-20261108/${{ matrix.channel }}/**/metadata.json
+            cloud-lote-15-canais-20261108/${{ matrix.channel }}/**/scene-*.png
+          retention-days: 7
+          if-no-files-found: error
+
+  upload-private:
+    needs: [editorial-preflight, verify-youtube-environment, render]
+    if: >-
+      always() &&
+      needs.editorial-preflight.result == 'success' &&
+      needs.verify-youtube-environment.result == 'success' &&
+      needs.render.result != 'cancelled'
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - channel: br
+            token_secret: YOUTUBE_BR_TOKEN_JSON
+          - channel: en
+            token_secret: YOUTUBE_EN_TOKEN_JSON
+          - channel: games
+            token_secret: YOUTUBE_GAMES_TOKEN_JSON
+          - channel: kids
+            token_secret: YOUTUBE_KIDS_TOKEN_JSON
+          - channel: alchemy
+            token_secret: YOUTUBE_ALCHEMY_TOKEN_JSON
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube API/ffprobe libraries
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Obtain only the matching three media files created in THIS SAME run
+        uses: actions/download-artifact@v4
+        with:
+          name: batch15-three-${{ matrix.channel }}-20261108
+          path: cloud-lote-15-canais-20261108/${{ matrix.channel }}/
+      - name: Verify exact channel identity, SHA256 and privacy then upload only missing new videos
+        env:
+          BATCH15_CHANNEL: ${{ matrix.channel }}
+          BATCH15_PRIVATE_UPLOAD_AUTHORIZED: 'yes'
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_CHANNEL_TOKEN_JSON: ${{ secrets[matrix.token_secret] }}
+        run: python scripts/five_channel_fifteen_upload_20261108.py --channel ${{ matrix.channel }} --action upload
+      - name: Preserve every actual YouTube ID even on partial failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch15-${{ matrix.channel }}-private-youtube-receipts-20261108
+          path: cloud-lote-15-canais-20261108/${{ matrix.channel }}/youtube-private-receipts.json
+          retention-days: 7
+          if-no-files-found: ignore
