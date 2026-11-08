@@ -1323,6 +1323,36 @@
       "note": "Lote 12: 3 por canal, Kids primeiro. Vídeo estático 90-120s, upload privado somente após QA.",
       "publication_target": "private_first",
       "review_status": "technical_render_passed_youtube_upload_unconfirmed"
+    },
+    {
+      "channel": "br",
+      "id": "5012-solo-leveling-igris",
+      "status": "reserved",
+      "reservation_owner": "otaku_br_3_public_20261107",
+      "source": "creator_explicit_public_authorization_2026-11-07",
+      "publication_target": "public_after_automated_technical_editorial_QA",
+      "requested_by_creator_publication": true,
+      "note": "Three ORIGINAL BR anime commentary Shorts ~90-120 s, original still AI artwork and original Remotion captions, one-by-one public upload after verified channel identity and upload dedup. Do not touch paused 50 queue or earlier uploads."
+    },
+    {
+      "channel": "br",
+      "id": "5013-blue-lock-isagi",
+      "status": "reserved",
+      "reservation_owner": "otaku_br_3_public_20261107",
+      "source": "creator_explicit_public_authorization_2026-11-07",
+      "publication_target": "public_after_automated_technical_editorial_QA",
+      "requested_by_creator_publication": true,
+      "note": "Three ORIGINAL BR anime commentary Shorts ~90-120 s, original still AI artwork and original Remotion captions, one-by-one public upload after verified channel identity and upload dedup. Do not touch paused 50 queue or earlier uploads."
+    },
+    {
+      "channel": "br",
+      "id": "5014-mob-psycho-emocoes",
+      "status": "reserved",
+      "reservation_owner": "otaku_br_3_public_20261107",
+      "source": "creator_explicit_public_authorization_2026-11-07",
+      "publication_target": "public_after_automated_technical_editorial_QA",
+      "requested_by_creator_publication": true,
+      "note": "Three ORIGINAL BR anime commentary Shorts ~90-120 s, original still AI artwork and original Remotion captions, one-by-one public upload after verified channel identity and upload dedup. Do not touch paused 50 queue or earlier uploads."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
