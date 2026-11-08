@@ -1,13 +1,13 @@
 {
   "schema": "autoeditorvideo/batch15-publication-status/v1",
-  "checked_at": "2026-11-08",
+  "checked_at": "2026-11-08T15:50Z",
   "source_run_id": 42481839933,
   "source_run_url": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42481839933",
   "publication_requested": "public",
   "youtube_oauth_scope_check_run_id": 42490407876,
-  "oauth_video_update_scope_status": "not_granted_for_any_of_five_github_token_secrets",
+  "oauth_video_update_scope_status": "not_granted_for_any_of_five_github_token_secrets_at_2026-11-08T14:33Z",
   "scope_docs": "https://developers.google.com/youtube/data/reference/rest/v3/videos/update",
-  "status_note": "Do not infer public YouTube status from technical render success or private receipts. Scope upgrade requires user to authorize extra YouTube permissions; no token files saved.",
+  "status_note": "3 Kids, 3 Gamer, 3 Alchemy from original batch are PRIVATE (all owned and correctly categorized). Direct-public Alchemy pilot is PUBLIC and processed; its uploader erroneously logged failure from transient metadata readback. No reuploads were made.",
   "channels": {
     "br": {
       "name": "Otaku Multicena",
@@ -26,7 +26,7 @@
     "games": {
       "name": "Conde Games",
       "render": "3_passed",
-      "upload": "3_private_verified",
+      "upload": "3_private_youtube_verified_readonly",
       "confirmed_public": 0,
       "expected_total": 3,
       "videos": [
@@ -34,39 +34,111 @@
           "episode_id": "game-104-terraria-primeira-noite",
           "youtube_id": "HW6fvYkYKlc",
           "visibility": "private",
-          "thumbnail_acknowledged": true
+          "thumbnail_acknowledged": true,
+          "api_upload_status": "uploaded",
+          "api_processing": "processing"
         },
         {
           "episode_id": "game-105-stardew-estacoes",
           "youtube_id": "mHW5MiWY71A",
           "visibility": "private",
-          "thumbnail_acknowledged": true
+          "thumbnail_acknowledged": true,
+          "api_upload_status": "processed",
+          "api_processing": "succeeded"
         },
         {
           "episode_id": "game-106-celeste-dificuldade",
           "youtube_id": "8yrTR6qQVg4",
           "visibility": "private",
-          "thumbnail_acknowledged": true
+          "thumbnail_acknowledged": true,
+          "api_upload_status": "uploaded",
+          "api_processing": "processing"
         }
-      ]
+      ],
+      "public_count": 0
     },
     "kids": {
       "name": "Emanuelly Kids",
       "render": "3_passed",
-      "upload": "in_progress_as_of_check",
+      "upload": "3_private_youtube_verified_readonly",
       "confirmed_public": 0,
       "expected_total": 3,
-      "reviewed_storyboard_images": 24
+      "reviewed_storyboard_images": 24,
+      "public_count": 0,
+      "videos": [
+        {
+          "episode_id": "kids-104-abelhinha-e-as-cores",
+          "youtube_id": "qJXNIUjkVrI",
+          "visibility": "private",
+          "made_for_kids": true,
+          "processing": "succeeded"
+        },
+        {
+          "episode_id": "kids-105-tartaruguinha-e-a-chuva",
+          "youtube_id": "bHpcB2z6nUc",
+          "visibility": "private",
+          "made_for_kids": true,
+          "processing": "succeeded"
+        },
+        {
+          "episode_id": "kids-106-estrelinhas-contam",
+          "youtube_id": "42Woqr9-ONw",
+          "visibility": "private",
+          "made_for_kids": true,
+          "processing": "succeeded"
+        }
+      ]
     },
     "alchemy": {
       "name": "Alchemy Lab",
       "render": "3_passed",
-      "upload": "queued_as_of_check",
+      "upload": "3_private_youtube_verified_readonly",
       "confirmed_public": 0,
       "expected_total": 3,
-      "reviewed_storyboard_images": 24
+      "reviewed_storyboard_images": 24,
+      "public_count_in_original_lote": 0,
+      "videos": [
+        {
+          "episode_id": "alchemy-104-automacao-gatilhos",
+          "youtube_id": "Nn8sOSw-_V8",
+          "visibility": "private",
+          "made_for_kids": false,
+          "processing": "succeeded"
+        },
+        {
+          "episode_id": "alchemy-105-agentes-supervisao",
+          "youtube_id": "Wu7RBUWDOb8",
+          "visibility": "private",
+          "made_for_kids": false,
+          "processing": "succeeded"
+        },
+        {
+          "episode_id": "alchemy-106-ia-checagem-fontes",
+          "youtube_id": "HHoIpKGTb-0",
+          "visibility": "private",
+          "made_for_kids": false,
+          "processing": "succeeded"
+        }
+      ]
     }
   },
   "public_transition_workflow": "https://github.com/HelioConde/AutoEditorVideo/actions/workflows/batch15-publicize-reviewed-20261108.yml",
-  "planned_rule": "Only verified existing IDs change to public; never duplicate inserts; Kids made for kids."
+  "planned_rule": "Only verified existing IDs change to public; never duplicate inserts; Kids made for kids.",
+  "audit_run_id": 42496802090,
+  "audit_workflow_url": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42496802090",
+  "audit_scope": "Read-only owner-authenticated YouTube API videos.list; current status for 10 existing IDs; no video updates",
+  "pilot_public_video": {
+    "episode_id": "alchemy-107-automacao-publicou-duplicado",
+    "channel": "alchemy",
+    "youtube_id": "i-lzZrX_15w",
+    "visibility": "public",
+    "confirmed_public": true,
+    "processing": "succeeded",
+    "upload_status": "processed",
+    "source_run_id": 42492098994,
+    "read_only_audit_run_id": 42496802090,
+    "error_explanation": "Uploader falsely failed post-insert because metadata was transient. This is now confirmed public via official YouTube API, no new upload was needed."
+  },
+  "manual_release_workflow": "https://github.com/HelioConde/AutoEditorVideo/actions/workflows/batch15-public-existing-after-oauth-20261108.yml",
+  "required_next_step": "User must explicitly grant youtube.force-ssl per private channel via local browser and update channel-specific secret. Then manually dispatch public-only workflow; no automatic resubmission."
 }
