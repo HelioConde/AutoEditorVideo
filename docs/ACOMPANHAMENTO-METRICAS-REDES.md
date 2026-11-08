@@ -55,3 +55,50 @@ do Instagram **não** representa conexão ativa de métricas.
 
 As métricas do YouTube ficam em seus próprios registros; este snapshot
 não modifica `dados/metricas-youtube.json` ou qualquer fluxo de publicação.
+
+
+## YouTube via API — 08/11/2026
+
+Fonte: integração vidIQ autorizada para os canais próprios, consultando relatórios
+do YouTube Analytics, com janela **09/10 a 07/11/2026**. Dados brutos:
+[dados/metricas-redes/2026-11-08-youtube-api-vidiq.json](../dados/metricas-redes/2026-11-08-youtube-api-vidiq.json).
+
+| Canal conectado | Inscritos atuais | Views no período | Engaged views | Minutos assistidos | Curtidas | Inscritos ganhos/perdidos |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Otaku Multicena (BR) | 36 | 7.535 | 2.728 | 895 | 272 | +30 / -5 |
+| Otaku Reframe (EN) | 4 | 517 | 228 | 57 | 11 | +2 / 0 |
+
+- As estatísticas atuais dos canais são diferentes de estatísticas de período.
+- **BR:** 7.220 das 7.535 visualizações vieram do feed de Shorts (~95,8%);
+  233 vieram da pesquisa (~3,1%). Os vídeos "Light caçou Kira" (1.193)
+  e "Steel Ball Run" (1.141) lideraram a janela.
+- **EN:** 457 das 517 visualizações vieram do feed de Shorts (~88,4%);
+  56 vieram da pesquisa (~10,8%). "Who played the better game? L or Light?"
+  teve 505 visualizações da janela (~97,7%).
+- Engaged views e views **não** permitem inferir taxa de conclusão,
+  retenção média ou percentual de espectadores que deslizaram.
+- O relatório diário retornou apenas as datas 01 a 05/11 no BR e 03 a
+  05/11 no EN; os dias ausentes **não foram preenchidos com zero**.
+- O agrupamento por tipo de conteúdo apresentou 7.560 views em Shorts
+  para BR, divergindo do total geral de 7.535; preservar essa discrepância
+  entre consultas, sem alterar silenciosamente os totais.
+- O agrupamento de fontes BR soma 7.547, levemente acima das 7.535 do
+  total geral. O agrupamento de fontes EN soma 517.
+- Os canais Gamer, Kids e Alchemy **não estavam conectados ao vidIQ nesta
+  consulta**, portanto não há relatório Analytics deles neste snapshot.
+- Os créditos da integração acabaram antes de obter o agrupamento por tipo
+  do EN; os dados anteriores já haviam sido recebidos com sucesso.
+- Consulta somente leitura; não houve upload, alteração de metadados,
+  troca de privacidade ou publicação. Nenhuma credencial foi salva no GitHub.
+
+### Leituras iniciais para decisões editoriais
+
+1. Comparar ganchos e retenção por vídeo em próximas medições, usando a
+   mesma idade de publicação e `engagedViews` separadamente de `views`.
+2. Avaliar novos ângulos de Death Note no EN, sem inferir tendência
+   estatística a partir de um único vídeo vencedor.
+3. No BR, testar variações narrativas sobre Death Note, Steel Ball Run,
+   Blue Box e Maomao, buscando consistência além de poucos destaques.
+4. Antes de incluir Gamer/Kids/Alchemy, conectar e autorizar a identidade
+   correta de cada canal no provedor de análise; não reutilizar OAuth
+   de um canal para outro.
