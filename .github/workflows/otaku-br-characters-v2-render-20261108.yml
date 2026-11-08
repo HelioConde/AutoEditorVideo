@@ -1,0 +1,167 @@
+name: Otaku Multicena BR - character-faithful V2 render and visual review
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/otaku-br-characters-v2-launch-20261108.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-multicena-canonical-characters-v2-three-mp4-20261108
+  cancel-in-progress: false
+
+jobs:
+  verify-permanent-character-policy-and-user-launch:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.event_name == 'push' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(otaku): launch 3 versioned Shorts with canonical character references'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Confirm permanent recognizable character rule and image-edit-only video scenes
+        run: |
+          python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13'
+          python -m py_compile scripts/otaku_br_character_v2_20261108.py scripts/otaku_character_identity_policy.py
+          python -m pytest -q tests/test_otaku_character_v2_20261108.py
+          python scripts/otaku_br_character_v2_20261108.py --action validate
+      - name: Verify exact source policy locked, 3 reserved V2 episodes and maximum 28 image calls
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('conteudos/otaku-br-characters-v2-launch-20261108.json',encoding='utf-8'))
+          assert d == {
+            'schema':'autoeditorvideo/otaku-br-canonical-character-v2-launch/v1',
+            'creator_authorized_at':'2026-11-08',
+            'user_asked_regenerate_and_publicly_replace':True,
+            'creator_rule_locked_until_explicit_change':True,
+            'target_channel':'br',
+            'target_channel_id':'UCXGYTuBYn-0Ziqin5ajKhOw',
+            'versioned_manifest':'conteudos/otaku-br-three-character-faithful-v2-20261108.json',
+            'episode_ids':['5012-solo-leveling-igris-v2','5013-blue-lock-isagi-v2','5014-mob-psycho-emocoes-v2'],
+            'reference_image_method':'one_anchor_per_named_character_followed_by_images_edits_per_scene',
+            'image_model':'gpt-image-2',
+            'max_image_calls':28,
+            'channel_identity_and_policy':'autoeditorvideo/otaku-character-identity-policy/v1',
+            'visual_quality_review_before_public_upload':True,
+            'upload_in_this_render':False,
+            'delete_old_in_this_render':False,
+            'reuse_old_audio_if_available':False,
+            'do_not_change_other_channels_or_paused_50_queue':True
+          }
+          print('OTAKU_CANONICAL_CHARACTER_THREE_VERSIONED_LAUNCH_VERIFIED')
+          PY
+
+  verify-locked-image-environment:
+    needs: verify-permanent-character-policy-and-user-launch
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify main-only image-generation Environment before image credentials
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  create-three-character-faithful-original-mp4:
+    needs: [verify-permanent-character-policy-and-user-launch, verify-locked-image-environment]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch pinned original Go Codex Proxy before loading image secrets
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install canonical original AutoEditorVideo media dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Install original Remotion and TypeScript QA without provider secrets
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned community proxy before provider secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/otaku-character-v2-native-proxy" ./cmd/api
+      - name: Produce 4 named-character identity anchors and edit 24 real narrative scenes from those references
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: '28'
+          OTAKU_CHARACTER_V2_RENDER_AUTHORIZED: 'yes'
+        run: |
+          set -euo pipefail
+          umask 077
+          state_dir="$RUNNER_TEMP/otaku-br-v2-canonical-private-state"
+          test ! -e "$state_dir"
+          mkdir -m 700 "$state_dir"
+          proxy_pid=''
+          cleanup() {
+            if [[ -n "$proxy_pid" ]]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$state_dir"
+            rm -f -- "$RUNNER_TEMP/otaku-br-v2-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$state_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$state_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/otaku-character-v2-native-proxy" >"$RUNNER_TEMP/otaku-br-v2-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/otaku_br_character_v2_20261108.py --action render
+          echo 'OTAKU_BR_V2_CANONICAL_CHARACTERS_RENDERED_NOT_UPLOADED'
+      - name: Upload exactly 3 MP4s plus all original anchor and scene artwork for real visual review
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-br-three-canonical-characters-v2-review-20261108
+          path: |
+            cloud-otaku-br-characters-v2-20261108/br/summary.json
+            cloud-otaku-br-characters-v2-20261108/br/**/final.mp4
+            cloud-otaku-br-characters-v2-20261108/br/**/thumb.jpg
+            cloud-otaku-br-characters-v2-20261108/br/**/metadata.json
+            cloud-otaku-br-characters-v2-20261108/br/**/qa.json
+            cloud-otaku-br-characters-v2-20261108/br/**/character-identity-provenance.json
+            cloud-otaku-br-characters-v2-20261108/br/**/anchor-*.png
+            cloud-otaku-br-characters-v2-20261108/br/**/scene-*.png
+          retention-days: 7
+          if-no-files-found: error
