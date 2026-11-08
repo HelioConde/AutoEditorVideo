@@ -1,0 +1,308 @@
+{
+  "esquema": "autoeditor/metricas-redes-sociais/v1",
+  "data_observacao": "2026-11-08",
+  "fuso_horario": "America/Sao_Paulo",
+  "metodo": "Transcrição manual das três capturas enviadas pelo proprietário; nenhum dado obtido por API.",
+  "tipo_medicao": "Contagens acumuladas exibidas nos itens visíveis das telas, não métricas gerais das contas.",
+  "fontes": [
+    {
+      "id": "instagram_grade",
+      "plataforma": "Instagram",
+      "superficie": "grade de Reels do perfil",
+      "imagem_original": "image(20261108-103442).png",
+      "metrica_contagem": "ícone de reproduções/visualizações da grade",
+      "itens_visiveis": 12,
+      "total_visualizacoes_itens_visiveis": 1541,
+      "publicacoes": [
+        {
+          "posicao_na_grade": 1,
+          "titulo_na_capa": "UM FERREIRO LENDÁRIO",
+          "visualizacoes": 108,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 2,
+          "titulo_na_capa": "CASAMENTO PERIGOSO",
+          "visualizacoes": 116,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 3,
+          "titulo_na_capa": "MUDAR O PASSADO",
+          "visualizacoes": 318,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 4,
+          "titulo_na_capa": "AMOR OU ESPORTE?",
+          "visualizacoes": 120,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 5,
+          "titulo_na_capa": "MAOMAO SABIA!",
+          "visualizacoes": 125,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 6,
+          "titulo_na_capa": "CORRIDA MORTAL",
+          "visualizacoes": 187,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 7,
+          "titulo_na_capa": "O PREÇO DO PODER",
+          "visualizacoes": 88,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 8,
+          "titulo_na_capa": "SEM MAGIA?!",
+          "visualizacoes": 173,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 9,
+          "titulo_na_capa": "40 SEGUNDOS!",
+          "visualizacoes": 161,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 10,
+          "titulo_na_capa": "METADE DA SUA VIDA",
+          "visualizacoes": 22,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 11,
+          "titulo_na_capa": "KIRA CAIU NA ARMADILHA",
+          "visualizacoes": 97,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "posicao_na_grade": 12,
+          "titulo_na_capa": "O CADERNO QUE MATA",
+          "visualizacoes": 26,
+          "curtidas": null,
+          "comentarios": null,
+          "id_publicacao": null,
+          "permalink": null
+        }
+      ]
+    },
+    {
+      "id": "meta_painel_conteudo",
+      "plataforma": "Meta — não confirmada pela captura (não atribuir automaticamente ao Instagram ou Facebook)",
+      "superficie": "tabela Conteúdo com Privacidade, Visualizações, Curtidas e Comentários",
+      "imagens_originais": [
+        "image(20261108-103553).png",
+        "image(20261108-103558).png"
+      ],
+      "observacao_duplicatas": "As publicações Kira achava... e UM DEUS DA MORTE VICIADO... aparecem nas duas capturas e foram registradas só uma vez.",
+      "itens_visiveis": 12,
+      "total_visualizacoes_itens_visiveis": 658,
+      "total_curtidas_itens_visiveis": 34,
+      "total_comentarios_itens_visiveis": 0,
+      "publicacoes": [
+        {
+          "data_publicacao": "2026-11-05",
+          "horario_exibido": "07:16",
+          "duracao_exibida": "00:37",
+          "titulo_visivel": "Uma corrida onde velocidade não é suficiente! 🔥 Em JoJo's...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 0,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-04",
+          "horario_exibido": "14:16",
+          "duracao_exibida": "00:36",
+          "titulo_visivel": "Em Night City, cada melhoria cobra um preço! David Martinez...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 0,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-04",
+          "horario_exibido": "11:23",
+          "duracao_exibida": "00:39",
+          "titulo_visivel": "Maomao consegue descobrir segredos que ninguém percebe!...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 418,
+          "curtidas": 24,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "23:40",
+          "duracao_exibida": "00:39",
+          "titulo_visivel": "Asta nasceu SEM MAGIA em um mundo onde tudo depende...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 0,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "23:16",
+          "duracao_exibida": "00:49",
+          "titulo_visivel": "40 SEGUNDOS! Esse é o tempo que o Death Note precisa para...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 0,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "09:51",
+          "duracao_exibida": "00:45",
+          "titulo_visivel": "Kira achava que ninguém poderia encontrá-lo... até L...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 2,
+          "curtidas": 1,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "01:39",
+          "duracao_exibida": "00:30",
+          "titulo_visivel": "UM DEUS DA MORTE VICIADO EM MAÇÃS?! Ryuk é u...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 1,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "01:38",
+          "duracao_exibida": "00:30",
+          "titulo_visivel": "E se todo o caos de Death Note tivesse começado por puro TÉDI...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 0,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "01:38",
+          "duracao_exibida": "00:28",
+          "titulo_visivel": "O verdadeiro terror de Death Note não precisa mostrar sangue...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 0,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "01:37",
+          "duracao_exibida": "00:29",
+          "titulo_visivel": "E se existisse um SEGUNDO KIRA em Death Note?...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 0,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "01:35",
+          "duracao_exibida": "00:31",
+          "titulo_visivel": "Light vs. L: quem venceria o maior duelo de inteligência de...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 0,
+          "curtidas": 0,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        },
+        {
+          "data_publicacao": "2026-11-03",
+          "horario_exibido": "01:32",
+          "duracao_exibida": "00:46",
+          "titulo_visivel": "E se você encontrasse um caderno capaz de matar qualquer...",
+          "titulo_truncado_na_captura": true,
+          "privacidade_exibida": "Todos",
+          "visualizacoes": 237,
+          "curtidas": 9,
+          "comentarios": 0,
+          "id_publicacao": null,
+          "permalink": null
+        }
+      ]
+    }
+  ],
+  "restricoes": [
+    "As duas superfícies não estão identificadas como a mesma conta/plataforma; não somar suas visualizações.",
+    "Não há IDs ou links permanentes na imagem; títulos parecidos não garantem que sejam a mesma publicação.",
+    "Zero só quando aparece literalmente zero; ausência de métrica é null.",
+    "O conjunto inclui somente linhas visíveis, não todos os vídeos da conta.",
+    "Datas/horários de publicações são os exibidos no painel, sem inferência de fuso horário para esses horários.",
+    "As imagens originais foram fornecidas na conversa e não foram enviadas ao repositório público."
+  ]
+}
