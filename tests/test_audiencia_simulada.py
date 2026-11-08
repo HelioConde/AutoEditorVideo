@@ -96,6 +96,16 @@ class AudienceLabTests(unittest.TestCase):
         self.assertIn("nao preveem visualizacoes", markdown)
         self.assertIn("Nenhuma alteracao automatica", markdown)
 
+    def test_narration_scene_drift_is_flagged(self):
+        row = fake_episode(DEFAULT_IDS[0])
+        row["narration_script"] += " Essa frase nao consta em cena alguma."
+        result = inspect_episode(row)
+        self.assertFalse(result["narration_matches_scene_beats"])
+        self.assertIn(
+            "NARRACAO_CENAS_DIVERGENTES",
+            {warning["code"] for warning in result["warnings"]},
+        )
+
     def test_duplicate_or_wrong_channel_rejected(self):
         episode = fake_episode(DEFAULT_IDS[0])
         with self.assertRaises(ValueError):
