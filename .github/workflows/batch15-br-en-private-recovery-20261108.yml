@@ -31,10 +31,19 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install offline preflight parser dependencies
-        run: python -m pip install 'Pillow>=10,<13'
+        run: python -m pip install 'Pillow>=10,<13' 'PyYAML>=6,<7'
       - name: Validate exact six reserved original scripts and no reuploads
         run: |
           set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+          source=Path('.github/workflows/batch15-br-en-private-recovery-20261108.yml').read_text(encoding='utf8')
+          workflow=yaml.safe_load(source)
+          assert isinstance(workflow,dict) and len(workflow['jobs']['render']['strategy']['matrix']['include'])==6
+          assert len(workflow['jobs']['upload-private']['strategy']['matrix']['include'])==6
+          print('BR_EN_PRIVATE_RECOVERY_YAML_VALID')
+          PY
           python -m py_compile scripts/batch15_br_en_private_recovery_20261108.py
           python scripts/batch15_br_en_private_recovery_20261108.py --channel br --episode 5015-jujutsu-kaisen-dominio --action validate
           python scripts/batch15_br_en_private_recovery_20261108.py --channel br --episode 5016-dungeon-meshi-masmorra --action validate
