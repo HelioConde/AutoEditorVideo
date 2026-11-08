@@ -1,0 +1,174 @@
+name: AutoEditorVideo - nine image-corrected replacements EN Gamer Alchemy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'conteudos/nine-visual-replacements-v2-launch-20261108.json'
+permissions:
+  contents: read
+concurrency:
+  group: nine-new-versioned-anchor-edited-20261108
+  cancel-in-progress: false
+jobs:
+  contract-and-policy-tests:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'feat(replacements): launch nine visually revised Shorts for EN Gamer Alchemy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify nine exact reserved scripts and permanent EN canonical-character policy
+        run: |
+          python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13'
+          python -m py_compile scripts/nine_visual_replacements_v2_20261108.py
+          python -m pytest -q tests/test_nine_visual_replacements_v2_20261108.py
+          for channel in en games alchemy; do
+            python scripts/nine_visual_replacements_v2_20261108.py --channel "$channel" --action validate
+          done
+      - name: Check exact user-approved launch contract
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('conteudos/nine-visual-replacements-v2-launch-20261108.json',encoding='utf-8'))
+          assert d=={
+            'schema':'autoeditorvideo/nine-replacements-render-one-shot/v1',
+            'authorized_at':'2026-11-08',
+            'user_requested':'send all pending replacement versions across all channels',
+            'manifest':'conteudos/otaku-and-channels-nine-replacements-20261108.json',
+            'source_youtube_run_id':42407850443,
+            'old_channel_videos_preserved':True,
+            'channels':['en','games','alchemy'],
+            'image_model':'gpt-image-2',
+            'channel_budget':{'en':29,'games':27,'alchemy':27},
+            'total_max_image_calls':83,
+            'edit_every_scene_from_anchor':True,
+            'otaku_en_character_identity_locked':True,
+            'no_upload_until_qa_review':True,
+            'no_youtube_deletion':True,
+            'kids_recovery_separate_workflow':True
+          }
+          print('NINE_VISUAL_REPLACEMENT_ONE_SHOT_APPROVED')
+          PY
+  image-environment-main-only:
+    needs: contract-and-policy-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify image-generation secrets restricted to main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+  render-three-per-channel:
+    needs: [contract-and-policy-tests, image-environment-main-only]
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        include:
+          - channel: en
+            max_calls: 29
+          - channel: games
+            max_calls: 27
+          - channel: alchemy
+            max_calls: 27
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Pinned Go proxy with images/edits supported
+        uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: motion-remotion/package-lock.json
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - name: Install media dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+          python -m pip install -r requirements-master.txt 'edge-tts>=7,<9' 'Pillow>=10,<13'
+      - name: Install Remotion and typecheck before image generation
+        working-directory: motion-remotion
+        run: |
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Build Go proxy with no provider secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/nine-replacements-proxy" ./cmd/api
+      - name: Render 3 reference-corrected Shorts per channel from character anchors
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: gpt-image-2
+          MAX_IMAGE_CALLS: ${{ matrix.max_calls }}
+          V2_REPLACEMENTS_RENDER_APPROVED: 'yes'
+          REPLACEMENTS_CHANNEL: ${{ matrix.channel }}
+        run: |
+          set -euo pipefail
+          umask 077
+          channel='${{ matrix.channel }}'
+          staging="$RUNNER_TEMP/replacement-$channel-proxy-state"
+          test ! -e "$staging"
+          mkdir -m 700 "$staging"
+          pid=''
+          cleanup() {
+            if [[ -n "$pid" ]]; then kill "$pid" 2>/dev/null || true; fi
+            rm -rf -- "$staging"
+            rm -f -- "$RUNNER_TEMP/replacement-$channel-provider.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$staging"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$staging" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/nine-replacements-proxy" >"$RUNNER_TEMP/replacement-$channel-provider.log" 2>&1 &
+          pid=$!
+          python scripts/nine_visual_replacements_v2_20261108.py --channel "$channel" --action render
+          echo "NINE_REPLACEMENTS_CHANNEL_DONE"
+      - name: Preserve all 3 finished MP4s and original character artwork for visual review
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nine-replacements-visual-v2-${{ matrix.channel }}-review-20261108
+          path: |
+            cloud-nine-visual-replacements-v2-20261108/${{ matrix.channel }}/summary.json
+            cloud-nine-visual-replacements-v2-20261108/${{ matrix.channel }}/**/final.mp4
+            cloud-nine-visual-replacements-v2-20261108/${{ matrix.channel }}/**/thumb.jpg
+            cloud-nine-visual-replacements-v2-20261108/${{ matrix.channel }}/**/qa.json
+            cloud-nine-visual-replacements-v2-20261108/${{ matrix.channel }}/**/metadata.json
+            cloud-nine-visual-replacements-v2-20261108/${{ matrix.channel }}/**/character-identity-provenance.json
+            cloud-nine-visual-replacements-v2-20261108/${{ matrix.channel }}/**/anchor-*.png
+            cloud-nine-visual-replacements-v2-20261108/${{ matrix.channel }}/**/scene-*.png
+          retention-days: 7
+          if-no-files-found: error
