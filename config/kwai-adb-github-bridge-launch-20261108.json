@@ -1,15 +1,15 @@
 {
-  "schema": "autoeditorvideo/kwai-local-adb-bridge-safe-launch/v1",
-  "creator_authorized_at": "2026-11-08",
-  "repository": "HelioConde/AutoEditorVideo",
-  "device_model": "SM-M236B",
-  "android_connection": "paired_local_adb_wifi",
-  "local_runner_label": "kwai-android-local",
-  "read_only_diagnose": true,
-  "only_authorized_stage_after_qa": true,
-  "only_main_successful_source_run": true,
-  "remote_sha256_verification": true,
-  "no_android_login_access": true,
-  "no_publication": true,
-  "require_local_runner_setup_by_owner": true
+    "schema": "autoeditorvideo/kwai-local-adb-bridge-safe-launch/v1",
+    "creator_authorized_at": "2026-11-08",
+    "repository": "HelioConde/AutoEditorVideo",
+    "device_model": "SM-M236B",
+    "android_connection": "paired_local_adb_wifi",
+    "local_runner_label": "kwai-android-local",
+    "read_only_diagnose": true,
+    "only_authorized_stage_after_qa": true,
+    "only_main_successful_source_run": true,
+    "remote_sha256_verification": true,
+    "no_android_login_access": true,
+    "no_publication": true,
+    "require_local_runner_setup_by_owner": true
 }
