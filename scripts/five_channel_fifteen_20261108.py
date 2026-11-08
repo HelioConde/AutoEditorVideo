@@ -107,7 +107,7 @@ def validate(channel:str)->list[dict]:
             raise BatchBlocked("KIDS_STANDALONE_ONLY")
         if channel=="games" and "não são capturas de gameplay" not in row["description"].lower():
             raise BatchBlocked("NO_GAMEPLAY_DISCLOSURE")
-        if channel=="alchemy" and "conceitual" not in row["description"].lower():
+        if channel=="alchemy" and not any(s in row["description"].lower() for s in ("conceitual","conceituais")):
             raise BatchBlocked("NO_FABRICATED_APP_DEMONSTRATION")
     return rows
 
