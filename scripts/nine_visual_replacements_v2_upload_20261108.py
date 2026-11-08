@@ -23,7 +23,7 @@ from remaining_static_90s_upload_20261107 import (
     insert_private,verify_video
 )
 from remaining_static_90s_20261107 import probe
-from googleapiclient.http import MediaFileUpload
+
 
 WORKFLOW="AutoEditorVideo - auto stage nine corrected MP4 replacements privately"
 GAMER_RETRY_WORKFLOW="AutoEditorVideo - retry Gamer-only V2 after exact failed original render"
@@ -256,6 +256,7 @@ def upload(channel):
         if not rec["confirmed_private"]:
             raise StageBlocked("NEW_VIDEO_NOT_VERIFIED_PRIVATE_STOP_"+item["episode_id"])
         try:
+            from googleapiclient.http import MediaFileUpload
             if not reused:time.sleep(75)
             resp=api.thumbnails().set(
                 videoId=id,
