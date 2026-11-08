@@ -147,3 +147,11 @@ crescimento em um período fixo e não é uma contagem diária. A conquista tamb
 não comprova que o contador atual estivesse exatamente em 11.000; é o limiar
 alcançado. Próximo marco editorial sugerido: 15.000 views, mantendo acompanhamento
 de retenção e engajamento. Nenhum workflow ou publicação foi alterado.
+
+## Marco de 1.500 views — Otaku Reframe EN — 08/11/2026
+
+O vidIQ apresentou conquista de **1.500 visualizações acumuladas** para **Otaku Reframe**, canal de anime em inglês (`UCBoNbQjaMYdpJqPLRZAFkvQ`), no dia 08/11/2026. Este marco é **do canal EN**, separado do marco de 11.000 do Otaku Multicena BR.
+
+Registro: [dados/metricas-redes/2026-11-08-otaku-reframe-marco-1500-views.json](../dados/metricas-redes/2026-11-08-otaku-reframe-marco-1500-views.json).
+
+O snapshot Analytics do EN contém 517 views em 09/10–07/11, janela distinta das 1.500 vitalícias. Portanto, não calcular "crescimento desde a API" pela diferença desses números. Para melhorar roteiros, títulos, narração e legendas EN, exigir métricas de retenção/vídeos EN comparáveis, sem importar cegamente hipóteses do BR. Nenhum vídeo ou workflow foi alterado em decorrência desta imagem.
