@@ -33,7 +33,7 @@ def test_no_false_gameplay_or_ai_demo_claims():
         assert "não são capturas de gameplay" in r["description"].lower()
         assert "joguei" not in r["narration_script"].lower()
     for r in batch.validate("alchemy"):
-        assert "conceitual" in r["description"].lower()
+        assert any(s in r["description"].lower() for s in ("conceitual","conceituais"))
 
 
 def test_private_only_and_no_secret_names_in_render_script():
