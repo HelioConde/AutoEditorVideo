@@ -125,6 +125,29 @@ def _retry_source_confirmed(env:dict)->bool:
         and source.get("repository",{}).get("full_name")=="HelioConde/AutoEditorVideo"
     )
 
+def authorized_http400_launch()->bool:
+    path=ROOT/"conteudos"/"gamer-v2-http400-fix-launch-20261108.json"
+    if not path.is_file():return False
+    d=json.loads(path.read_text(encoding="utf-8"))
+    return d == {
+        "schema":"autoeditorvideo/gamer-http400-recovery-one-shot/v1",
+        "creator_authorized_at":"2026-11-08",
+        "target_channel":"games",
+        "target_channel_id":KNOWN_IDS["games"],
+        "original_failed_render_run":42449154499,
+        "original_failed_retry_run":42451110264,
+        "source_manifest":"conteudos/otaku-and-channels-nine-replacements-20261108.json",
+        "exact_ids":list(IDS["games"]),
+        "preserve_original_public_youtube_ids":True,
+        "use_exact_real_character_anchors_for_every_scene":True,
+        "http400_fallback":"short_distinct_prompt_same_reference",
+        "max_additional_edit_calls":6,
+        "max_total_image_calls":33,
+        "reupload_visibility":"private_only_until_visual_review",
+        "never_delete_or_modify_old_videos":True,
+        "no_other_channels":True
+    }
+
 def guard(channel:str):
     e=os.environ
     standard=(e.get("GITHUB_EVENT_NAME")=="push"
@@ -143,6 +166,7 @@ def guard(channel:str):
         and e.get("MAX_IMAGE_CALLS")=="33"
         and e.get("GITHUB_REF")=="refs/heads/main"
         and e.get("GITHUB_RUN_ATTEMPT")=="1"
+        and authorized_http400_launch()
     )
     if (e.get("GITHUB_REPOSITORY")!="HelioConde/AutoEditorVideo"
             or e.get("GITHUB_REF")!="refs/heads/main"
