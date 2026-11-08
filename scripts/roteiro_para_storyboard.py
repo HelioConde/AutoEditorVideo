@@ -46,7 +46,11 @@ def framing(episode: dict, role: str, index: int, within: int, total: int,
     elif within%3==2:
         shot='Plano-detalhe do objeto essencial à fala; perspectiva e escala física naturais.'
     elif index==0:
-        shot='Plano médio cinematográfico que estabelece a situação e o conflito.'
+        # A first-frame story ACTION, not an extra fake jump-cut or invented
+        # animation. Actual rig/character motion still requires image layers.
+        shot=('Plano cinematográfico com ação, decisão ou consequência '
+              'EXPLICITAMENTE NARRADA no gancho; sujeito reconhecível '
+              'e objeto relevante visíveis desde o primeiro quadro.')
     elif within%3==1:
         shot='Novo ângulo de reação ou close moderado do personagem; olhos e mãos legíveis.'
     else:
@@ -117,7 +121,16 @@ def build_storyboard(episode: dict, max_hold: float=6.0,
     visual_issues=storyboard_warnings(shots)
     if visual_issues:
         raise ValueError('Planejamento visual repetitivo: '+str(visual_issues))
+    # Recommendations are evidence-based editorial diagnostics. They never
+    # silently rewrite approved dialogue, change production duration or
+    # override the protected anime character-identity policy.
+    from otaku_growth_autotune import editorial_advice, load_policy
+    growth_policy = load_policy()
+    growth_advice = editorial_advice(episode, growth_policy)
     return {'schema':'arquivo-otaku/master-storyboards/v2','id':ep_id,
+            'growth_profile_applied': bool(growth_policy),
+            'growth_priority': growth_policy.get('priority') if growth_policy else None,
+            'growth_editorial_warnings': growth_advice,
             'visual_direction_version':'arquivo-otaku/visual-diversity/v1',
             'visual_diversity_qa':{'status':'planejamento_distinto',
                                    'warnings':visual_issues,'review_required':True},
