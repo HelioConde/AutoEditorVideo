@@ -32,7 +32,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Offline safety tests: 9 known private IDs, no new insert, audience flag correct
+      - name: 'Offline safety tests: 9 known private IDs, no new insert, audience flag correct'
         run: |
           python -m py_compile scripts/batch15_publicize_reviewed_20261108.py scripts/youtube_public_edit_oauth_local.py
           python - <<'PY'
