@@ -1,0 +1,34 @@
+{
+  "schema": "autoeditorvideo/batch15-br-en-private-recovery/v1",
+  "source_run_id": 42481839933,
+  "source_sha": "49bdeaf75201ce2bc363836b4ac9ee4dbc19f0b6",
+  "creator_authorized_retry": true,
+  "creator_request": "Enviar novamente somente os seis videos faltantes dos canais BR e EN como privados via GitHub",
+  "requested_visibility": "private",
+  "target_ids": {
+    "br": [
+      "5015-jujutsu-kaisen-dominio",
+      "5016-dungeon-meshi-masmorra",
+      "5017-attack-on-titan-muralhas"
+    ],
+    "en": [
+      "7014-fullmetal-troca-equivalente",
+      "7015-one-piece-poneglyphs",
+      "7016-hunter-nen-restricoes"
+    ]
+  },
+  "excluded_channels": [
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "source_privates_must_remain_untouched": true,
+  "render_each_video_separately": true,
+  "max_image_calls_per_episode": 8,
+  "maximum_new_image_requests": 48,
+  "do_not_use_old_failed_job_reruns": true,
+  "do_not_retry_ambiguous_youtube_insert": true,
+  "no_automatic_publication": true,
+  "upload_only_after_original_media_qa": true,
+  "publication_status": "not_started"
+}
