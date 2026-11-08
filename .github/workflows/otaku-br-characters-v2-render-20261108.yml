@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'conteudos/otaku-br-characters-v2-launch-20261108.json'
+      - 'conteudos/otaku-br-characters-v2-retry-launch-20261108.json'
 
 permissions:
   contents: read
@@ -19,7 +19,7 @@ jobs:
       github.ref == 'refs/heads/main' &&
       github.event_name == 'push' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'feat(otaku): launch 3 versioned Shorts with canonical character references'
+      github.event.head_commit.message == 'fix(otaku): relaunch canonical character anchored render after policy test correction'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -39,7 +39,7 @@ jobs:
         run: |
           python - <<'PY'
           import json
-          d=json.load(open('conteudos/otaku-br-characters-v2-launch-20261108.json',encoding='utf-8'))
+          d=json.load(open('conteudos/otaku-br-characters-v2-retry-launch-20261108.json',encoding='utf-8'))
           assert d == {
             'schema':'autoeditorvideo/otaku-br-canonical-character-v2-launch/v1',
             'creator_authorized_at':'2026-11-08',
