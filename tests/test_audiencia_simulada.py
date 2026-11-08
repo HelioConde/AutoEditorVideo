@@ -9,7 +9,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from audiencia_simulada import DEFAULT_IDS, evaluate_manifest, inspect_episode, main, PERSONAS
+from audiencia_simulada import DEFAULT_IDS, evaluate_manifest, inspect_episode, main, PERSONAS, summarize_markdown
 
 
 def fake_episode(episode_id: str, hook: str = "E se a masmorra fosse uma cozinha?") -> dict:
@@ -64,8 +64,37 @@ class AudienceLabTests(unittest.TestCase):
         row = fake_episode(DEFAULT_IDS[0], "Algo totalmente diferente da narracao!")
         item = inspect_episode(row)
         codes = {warning["code"] for warning in item["warnings"]}
-        self.assertIn("HOOK_CADASTRADO_NAO_NARRADO", codes)
+        self.assertIn("GANCHO_DIFERENTE_DA_ABERTURA", codes)
+        self.assertEqual(item["hook_lexical_alignment"], "revisar_abertura")
         self.assertFalse(item["hook_cadastrado_presente_na_abertura"])
+
+    def test_reformulated_hook_is_not_called_missing(self):
+        row = fake_episode(
+            DEFAULT_IDS[0],
+            "Uma Expansao de Dominio altera a luta e suas regras",
+        )
+        row["scenes"][0]["editorial_beat"] = (
+            "Um Dominio altera as regras de uma luta e muda a estrategia. "
+            "A tecnica importa porque as escolhas tambem se transformam."
+        )
+        row["narration_script"] = " ".join(
+            scene["editorial_beat"] for scene in row["scenes"]
+        )
+        result = inspect_episode(row)
+        codes = {item["code"] for item in result["warnings"]}
+        self.assertEqual(result["hook_lexical_alignment"], "vocabulario_relacionado")
+        self.assertIn("GANCHO_REFORMULADO", codes)
+        self.assertNotIn("GANCHO_DIFERENTE_DA_ABERTURA", codes)
+        self.assertFalse(result["hook_cadastrado_presente_na_abertura"])
+
+    def test_markdown_report_does_not_claim_predictions(self):
+        data = evaluate_manifest(
+            {"episodes": [fake_episode(x) for x in DEFAULT_IDS]}, DEFAULT_IDS,
+        )
+        markdown = summarize_markdown(data)
+        self.assertIn("Piloto BR", markdown)
+        self.assertIn("nao preveem visualizacoes", markdown)
+        self.assertIn("Nenhuma alteracao automatica", markdown)
 
     def test_duplicate_or_wrong_channel_rejected(self):
         episode = fake_episode(DEFAULT_IDS[0])
@@ -81,13 +110,16 @@ class AudienceLabTests(unittest.TestCase):
             base = Path(folder)
             manifest = base / "input.json"
             output = base / "report.json"
+            markdown = base / "report.md"
             manifest.write_text(json.dumps(
                 {"episodes": [fake_episode(x) for x in DEFAULT_IDS]},
                 ensure_ascii=False), encoding="utf-8")
             self.assertEqual(main([
                 "--manifest", str(manifest),
                 "--output", str(output),
+                "--markdown-output", str(markdown),
             ]), 0)
+            self.assertTrue(markdown.is_file())
             result = json.loads(output.read_text(encoding="utf-8"))
             self.assertEqual(result["analyzed_count"], 3)
             self.assertEqual(result["method"], "offline-deterministic-editorial-proxies")
