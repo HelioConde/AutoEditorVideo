@@ -1,0 +1,290 @@
+{
+  "schema": "autoeditorvideo/otaku-br-3-public-20261107/v1",
+  "production_owner": "otaku_br_3_public_20261107",
+  "channel": "br",
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "target_total": 3,
+  "requested_by_creator_publication": true,
+  "publication_target": "public_after_automated_technical_QA",
+  "excludes": [
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "unrelated_queue_50_paused_and_untouched": true,
+  "render_engine": "AutoEditorVideo original Remotion MasterShort static 1080x1920",
+  "image_model": "gpt-image-2",
+  "max_image_requests_per_short": 8,
+  "episodes": [
+    {
+      "id": "5012-solo-leveling-igris",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "public_after_automated_qa",
+      "status": "script_approved_for_launch",
+      "title": "Solo Leveling: por que IGRIS mudou a história de Jinwoo? ⚔️",
+      "cover_text": "IGRIS MUDA TUDO",
+      "description": "Igris é mais que um soldado forte em Solo Leveling: ele representa a virada na jornada de Sung Jinwoo, quando força individual começa a se transformar em estratégia. Entenda o papel do exército das sombras e por que esse encontro importa tanto.\n\n🎨 Comentário original com ilustrações conceituais geradas por IA; sem trechos oficiais do anime. Contém spoilers do início da história.\n\n#SoloLeveling #Igris #Jinwoo #AnimeExplicado #Shorts",
+      "tags": [
+        "Solo Leveling",
+        "Sung Jinwoo",
+        "Igris",
+        "exército das sombras",
+        "Solo Leveling explicado",
+        "curiosidades de anime",
+        "animes 2026",
+        "Otaku Multicena",
+        "poder de Jinwoo",
+        "anime shorts"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Igris parece apenas mais um cavaleiro poderoso. Mas, em Solo Leveling, ele marca uma mudança maior: o momento em que a história de Sung Jinwoo deixa de ser somente a de um caçador ficando mais forte. No começo, Jinwoo é conhecido como um dos caçadores mais fracos. Ele precisa sobreviver a cada missão, contando com coragem e observação. Depois de encontrar o Sistema, sua situação começa a mudar de maneira radical. Cada desafio faz seu poder crescer. Só que existe um limite nessa ideia: um herói sozinho precisa estar em todos os lugares ao mesmo tempo. Proteger, atacar e escapar viram decisões cada vez mais difíceis. É aí que a presença de Igris fica importante. Primeiro, ele representa um obstáculo que exige respeito. Depois, sua ligação com as sombras mostra que vencer um adversário pode alterar completamente as opções de combate. Com soldados sombrios, Jinwoo não precisa pensar só em quanto dano consegue causar. Ele também pode distribuir funções. Um aliado segura o avanço do inimigo enquanto outro cria uma abertura. O campo de batalha ganha novas possibilidades. Igris se destaca porque transmite disciplina e presença. Mesmo sem longos diálogos, sua postura ajuda a dar personalidade a essa nova força. Não é apenas mais um número somado à coleção de habilidades. Outro detalhe muda a percepção do público. Antes, a pergunta era se Jinwoo sobreviveria ao próximo inimigo. Com seu exército crescendo, surge outra: como ele vai usar tamanho poder sem perder o controle da situação? Esse é o peso narrativo de Igris. Ele simboliza a passagem de uma jornada de sobrevivência para uma história de comando e responsabilidade. A força de Jinwoo impressiona, mas sua capacidade de escolher como usá-la é o que sustenta a mudança.",
+      "narration_word_count": 287,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 105,
+        "maximum_seconds": 120
+      },
+      "topic_source_urls": [
+        "https://www.crunchyroll.com/pt-br/series/GDKHZEJ0K/solo-leveling",
+        "https://www.crunchyroll.com/news/features/2025/1/6/solo-leveling-episode-13-recap"
+      ],
+      "scene_policy": "8 distinct original static AI editorial illustrations, Remotion MasterShort, natural Edge voice, aligned 2-3-word captions; no puppetry or deform; no anime footage",
+      "visual_bible": "dark fantasy cobalt-black armor, crimson cape accents, spectral violet shadows, ornate dungeon architecture; original conceptual manga-style imagery, no exact copyrighted anime designs.",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Igris parece apenas mais um cavaleiro poderoso. Mas, em Solo Leveling, ele marca uma mudança maior: o momento em que a história de Sung Jinwoo deixa de ser somente a de um caçador ficando mais forte.",
+          "visual_instruction": "Um salão de masmorra de pedra com trono vazio e silhueta de um cavaleiro imponente sob luz vermelha; planos abertos, atmosfera de mistério"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "No começo, Jinwoo é conhecido como um dos caçadores mais fracos. Ele precisa sobreviver a cada missão, contando com coragem e observação. Depois de encontrar o Sistema, sua situação começa a mudar de maneira radical.",
+          "visual_instruction": "Uma pequena figura solitária diante de um portal gigante de masmorra, degraus de pedra e luz azul de interface abstrata sem letras"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Cada desafio faz seu poder crescer. Só que existe um limite nessa ideia: um herói sozinho precisa estar em todos os lugares ao mesmo tempo. Proteger, atacar e escapar viram decisões cada vez mais difíceis.",
+          "visual_instruction": "Um guerreiro solitário visto de costas diante de três corredores de masmorra que se dividem, perspectiva dramática"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "É aí que a presença de Igris fica importante. Primeiro, ele representa um obstáculo que exige respeito. Depois, sua ligação com as sombras mostra que vencer um adversário pode alterar completamente as opções de combate.",
+          "visual_instruction": "Armadura original de cavaleiro ajoelhado com espada longa em cenário de pedra; energia violeta formando sombras no piso"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Com soldados sombrios, Jinwoo não precisa pensar só em quanto dano consegue causar. Ele também pode distribuir funções. Um aliado segura o avanço do inimigo enquanto outro cria uma abertura. O campo de batalha ganha novas possibilidades.",
+          "visual_instruction": "Pequeno exército de silhuetas etéreas coordenadas em formação defensiva, sem violência explícita, tabuleiro estratégico visual"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Igris se destaca porque transmite disciplina e presença. Mesmo sem longos diálogos, sua postura ajuda a dar personalidade a essa nova força. Não é apenas mais um número somado à coleção de habilidades.",
+          "visual_instruction": "Close de luva de armadura sobre a empunhadura de espada, silhueta de cavaleiro com manto ao fundo, luz fria"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Outro detalhe muda a percepção do público. Antes, a pergunta era se Jinwoo sobreviveria ao próximo inimigo. Com seu exército crescendo, surge outra: como ele vai usar tamanho poder sem perder o controle da situação?",
+          "visual_instruction": "Sala de estratégia com sombras se projetando sobre mapa abstrato da masmorra, mãos não visíveis, clima de decisão"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Esse é o peso narrativo de Igris. Ele simboliza a passagem de uma jornada de sobrevivência para uma história de comando e responsabilidade. A força de Jinwoo impressiona, mas sua capacidade de escolher como usá-la é o que sustenta a mudança.",
+          "visual_instruction": "Cavaleiro espectral e herói solitário lado a lado, vistos de longe, amanhecer azul através de portal, resolução grandiosa"
+        }
+      ],
+      "ai_disclosure": "independent original illustration only; no official anime frames",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "frame_qa": "not_started",
+        "thumbnail": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "5013-blue-lock-isagi",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "public_after_automated_qa",
+      "status": "script_approved_for_launch",
+      "title": "Blue Lock: por que ISAGI enxerga o gol antes dos outros? 👁️",
+      "cover_text": "ISAGI VÊ ANTES",
+      "description": "Isagi não se destaca apenas pelo chute. Em Blue Lock, sua leitura do espaço, adaptação e decisões rápidas explicam por que tantas jogadas parecem começar antes de a bola chegar. Uma análise original do que torna esse atacante diferente.\n\n🎨 Ilustrações editoriais originais geradas por IA; não são cenas do anime nem imagens de partida real. Análise da história sem resultados esportivos inventados.\n\n#BlueLock #Isagi #AnimeExplicado #Futebol #Shorts",
+      "tags": [
+        "Blue Lock",
+        "Yoichi Isagi",
+        "visão espacial",
+        "futebol anime",
+        "Blue Lock explicado",
+        "tática futebol",
+        "curiosidades de anime",
+        "Otaku Multicena",
+        "metavisão",
+        "anime shorts"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Em Blue Lock, Isagi parece chegar ao lugar certo antes de todo mundo. Mas isso não significa que ele enxergue o futuro. O verdadeiro segredo está na forma como interpreta o espaço ao redor. No futebol, a bola chama atenção porque é o centro da jogada. Só que uma oportunidade de gol também depende de pessoas sem a bola. Quem está marcando? Qual corredor ficou livre? Onde o adversário vai correr? Isagi aprende a observar essas relações. Em vez de confiar apenas numa jogada de força ou numa habilidade isolada, ele procura descobrir como as posições mudam a cada segundo. Por isso, a leitura espacial vira uma arma. Um passo feito cedo demais pode entregar a intenção. Um passo feito no instante certo pode abrir o espaço necessário para finalizar. Existe ainda uma diferença entre enxergar uma abertura e conseguir aproveitá-la. Isagi precisa adaptar o corpo, a velocidade e o momento do chute àquilo que observou. Ideia boa sem execução não decide uma partida. Blue Lock transforma essa adaptação em tensão. Quando um rival aprende a bloquear sua opção favorita, Isagi precisa encontrar outra. Ele não pode repetir a mesma resposta esperando que o jogo continue igual. É justamente aí que o personagem cresce. Seu talento não está em possuir todas as respostas desde o início, mas em atualizar a estratégia enquanto o campo muda. O espaço é dinâmico, e a decisão também precisa ser. Então o que parece um poder especial é uma combinação de atenção, antecipação e coragem para agir. Isagi não precisa controlar o jogo inteiro. Precisa reconhecer o instante em que uma pequena vantagem pode virar gol.",
+      "narration_word_count": 271,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 105,
+        "maximum_seconds": 120
+      },
+      "topic_source_urls": [
+        "https://bluelock-anime-en.com/"
+      ],
+      "scene_policy": "8 distinct original static AI editorial illustrations, Remotion MasterShort, natural Edge voice, aligned 2-3-word captions; no puppetry or deform; no anime footage",
+      "visual_bible": "energetic original anime-inspired football stadium with vivid cobalt blue and neon green, dynamic pitch markings, tactical geometric shapes, original generic athlete; no uniforms copied from anime or real teams.",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Em Blue Lock, Isagi parece chegar ao lugar certo antes de todo mundo. Mas isso não significa que ele enxergue o futuro. O verdadeiro segredo está na forma como interpreta o espaço ao redor.",
+          "visual_instruction": "Estádio lotado ao entardecer, um único atleta genérico de uniforme azul olhando campo com linhas táticas luminosas abstratas"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "No futebol, a bola chama atenção porque é o centro da jogada. Só que uma oportunidade de gol também depende de pessoas sem a bola. Quem está marcando? Qual corredor ficou livre? Onde o adversário vai correr?",
+          "visual_instruction": "Vista aérea de campo de futebol fictício com pontos coloridos e corredores táticos, sem texto nem números"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Isagi aprende a observar essas relações. Em vez de confiar apenas numa jogada de força ou numa habilidade isolada, ele procura descobrir como as posições mudam a cada segundo.",
+          "visual_instruction": "Meio de campo com dois jogadores originais em perspectiva, raios de luz conectando espaços livres, movimento implícito somente em imagem fixa"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Por isso, a leitura espacial vira uma arma. Um passo feito cedo demais pode entregar a intenção. Um passo feito no instante certo pode abrir o espaço necessário para finalizar.",
+          "visual_instruction": "Chuteira ao lado da linha lateral, sombra da bola se aproximando de área vazia, foco em antecipação"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Existe ainda uma diferença entre enxergar uma abertura e conseguir aproveitá-la. Isagi precisa adaptar o corpo, a velocidade e o momento do chute àquilo que observou. Ideia boa sem execução não decide uma partida.",
+          "visual_instruction": "Atleta genérico prestes a chutar, composição angular de estádio com alvo vazio e luz da arquibancada"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Blue Lock transforma essa adaptação em tensão. Quando um rival aprende a bloquear sua opção favorita, Isagi precisa encontrar outra. Ele não pode repetir a mesma resposta esperando que o jogo continue igual.",
+          "visual_instruction": "Dois jogadores genéricos frente a frente, setas luminosas de tática ao redor sem texto, contraste azul e vermelho"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "É justamente aí que o personagem cresce. Seu talento não está em possuir todas as respostas desde o início, mas em atualizar a estratégia enquanto o campo muda. O espaço é dinâmico, e a decisão também precisa ser.",
+          "visual_instruction": "Tabuleiro de futebol abstrato ganhando novas rotas verdes entre defensores estilizados, sensação de mudança"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Então o que parece um poder especial é uma combinação de atenção, antecipação e coragem para agir. Isagi não precisa controlar o jogo inteiro. Precisa reconhecer o instante em que uma pequena vantagem pode virar gol.",
+          "visual_instruction": "Bola iluminada próxima da rede em estádio fictício, jogador de costas pequeno ao fundo, imagem épica original"
+        }
+      ],
+      "ai_disclosure": "independent original illustration only; no official anime frames",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "frame_qa": "not_started",
+        "thumbnail": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "5014-mob-psycho-emocoes",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "public_after_automated_qa",
+      "status": "script_approved_for_launch",
+      "title": "Mob Psycho 100: por que o poder de MOB chega a 100%? 💥",
+      "cover_text": "O QUE É 100%?",
+      "description": "O número 100 em Mob Psycho 100 não é só uma escala de força. A história de Shigeo Kageyama usa esse limite para falar de emoções, identidade e o risco de esconder o que sentimos. Entenda por que o contador importa.\n\n🎨 Comentário original com artes conceituais produzidas por IA, sem cenas oficiais do anime. Spoilers leves sobre o conceito da série.\n\n#MobPsycho100 #Mob #AnimeExplicado #CuriosidadesAnime #Shorts",
+      "tags": [
+        "Mob Psycho 100",
+        "Shigeo Kageyama",
+        "Mob",
+        "poder psíquico",
+        "emoções do Mob",
+        "Mob Psycho explicado",
+        "anime psicológico",
+        "Otaku Multicena",
+        "curiosidades de anime",
+        "anime shorts"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Em Mob Psycho 100, existe um número que muda completamente a tensão de uma cena: cem por cento. Mas esse contador não deve ser visto apenas como uma barra de poder de videogame. Shigeo, conhecido como Mob, possui habilidades psíquicas extraordinárias. Mesmo assim, ele tenta viver como uma pessoa comum. Sua história não começa com alguém querendo ser o mais forte, e sim com alguém tentando entender a si mesmo. O problema é que sentimentos não desaparecem só porque a pessoa evita demonstrá-los. Frustração, tristeza, ansiedade e alegria continuam existindo. E, quando são reprimidos por muito tempo, podem se acumular. Na linguagem do anime, o avanço desse contador aumenta nossa expectativa. A cada momento difícil, surge a pergunta: o que vai acontecer quando Mob chegar ao limite emocional? O mais interessante é que a série não trata a força como resposta para tudo. Poder destruir um obstáculo não ensina automaticamente a lidar com vergonha, amizade ou decisões pessoais. Esses problemas exigem outro tipo de coragem. Por isso, o contraste entre a aparência discreta de Mob e seu potencial gigantesco funciona tão bem. As cenas mais intensas não falam apenas de combate. Elas mostram o peso de sentimentos que ele ainda precisa nomear. O contador de cem por cento também muda a maneira como observamos o protagonista. Em vez de só perguntar quem ele vai derrotar, começamos a perceber os sinais de como ele está por dentro. É esse o truque emocional de Mob Psycho 100: o maior desafio de alguém tão poderoso pode ser encontrar equilíbrio. No fim, compreender o que sentimos importa mais do que simplesmente provar força.",
+      "narration_word_count": 269,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 105,
+        "maximum_seconds": 120
+      },
+      "topic_source_urls": [
+        "https://mobpsycho100.com/",
+        "https://mobpsycho100.com/story/"
+      ],
+      "scene_policy": "8 distinct original static AI editorial illustrations, Remotion MasterShort, natural Edge voice, aligned 2-3-word captions; no puppetry or deform; no anime footage",
+      "visual_bible": "original expressive supernatural anime editorial with soft lavender and lime-green psychic energy, quiet everyday Japanese city, emotional symbolism; simple shy school-age hero silhouette not copied exactly.",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Em Mob Psycho 100, existe um número que muda completamente a tensão de uma cena: cem por cento. Mas esse contador não deve ser visto apenas como uma barra de poder de videogame.",
+          "visual_instruction": "Silhueta tímida de jovem estudante genérico em uma rua japonesa, halo psíquico verde e violeta crescendo ao redor"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Shigeo, conhecido como Mob, possui habilidades psíquicas extraordinárias. Mesmo assim, ele tenta viver como uma pessoa comum. Sua história não começa com alguém querendo ser o mais forte, e sim com alguém tentando entender a si mesmo.",
+          "visual_instruction": "Sala de aula calma e vazia com mochila simples e livros, energia luminosa discreta flutuando fora da janela"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "O problema é que sentimentos não desaparecem só porque a pessoa evita demonstrá-los. Frustração, tristeza, ansiedade e alegria continuam existindo. E, quando são reprimidos por muito tempo, podem se acumular.",
+          "visual_instruction": "Pequena esfera de luz dentro de recipiente de vidro original, ondas coloridas contidas, metáfora visual de emoção"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Na linguagem do anime, o avanço desse contador aumenta nossa expectativa. A cada momento difícil, surge a pergunta: o que vai acontecer quando Mob chegar ao limite emocional?",
+          "visual_instruction": "Relógio visual abstrato circular sem números ou letras, brilho verde se expandindo em ondas pelo cenário"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "O mais interessante é que a série não trata a força como resposta para tudo. Poder destruir um obstáculo não ensina automaticamente a lidar com vergonha, amizade ou decisões pessoais. Esses problemas exigem outro tipo de coragem.",
+          "visual_instruction": "Dois caminhos de parque: de um lado explosões etéreas de energia inofensiva, do outro pessoas conversando calmamente de longe"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Por isso, o contraste entre a aparência discreta de Mob e seu potencial gigantesco funciona tão bem. As cenas mais intensas não falam apenas de combate. Elas mostram o peso de sentimentos que ele ainda precisa nomear.",
+          "visual_instruction": "Silhueta pequena sob grande arco de luz sobrenatural suave, ambiente urbano levemente surreal, nenhum ferimento"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "O contador de cem por cento também muda a maneira como observamos o protagonista. Em vez de só perguntar quem ele vai derrotar, começamos a perceber os sinais de como ele está por dentro.",
+          "visual_instruction": "Close de expressão pensativa de estudante genérico em sombra suave, luz verde refletida na parede, composição limpa"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "É esse o truque emocional de Mob Psycho 100: o maior desafio de alguém tão poderoso pode ser encontrar equilíbrio. No fim, compreender o que sentimos importa mais do que simplesmente provar força.",
+          "visual_instruction": "Jovem olhando céu de fim de tarde em campo aberto, energia psíquica se tornando pequenos pontos de luz pacífica"
+        }
+      ],
+      "ai_disclosure": "independent original illustration only; no official anime frames",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "frame_qa": "not_started",
+        "thumbnail": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    }
+  ]
+}
