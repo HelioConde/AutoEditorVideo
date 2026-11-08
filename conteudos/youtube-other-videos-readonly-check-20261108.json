@@ -1,0 +1,98 @@
+{
+  "schema": "autoeditorvideo/five-channel-other-videos-readonly/v1",
+  "source": "creator_verification_request_2026-11-08",
+  "write_actions_permitted": false,
+  "allow_video_delete": false,
+  "allow_visibility_change": false,
+  "channels": {
+    "en": {
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "videos": [
+        {
+          "id": "KamcfO3fINM",
+          "name": "Noelle original"
+        },
+        {
+          "id": "EMFjugQJdUY",
+          "name": "Maomao original"
+        },
+        {
+          "id": "gHGLvU0r50s",
+          "name": "Shizuku original"
+        }
+      ]
+    },
+    "games": {
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "videos": [
+        {
+          "id": "vxgEOrT8uQE",
+          "name": "Minecraft agua original"
+        },
+        {
+          "id": "PkixTrmD91I",
+          "name": "Roblox Obby original"
+        },
+        {
+          "id": "oO_s9sbz8m4",
+          "name": "Minecraft Creeper original"
+        }
+      ]
+    },
+    "alchemy": {
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "videos": [
+        {
+          "id": "gfG9bNDTZMU",
+          "name": "Video IA realidade original"
+        },
+        {
+          "id": "C2fE9VslFCU",
+          "name": "Agentes chatbot original"
+        },
+        {
+          "id": "QL_trwUw62c",
+          "name": "Prompt consistencia original"
+        }
+      ]
+    },
+    "br": {
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "videos": [
+        {
+          "id": "alHbSHUN0dA",
+          "name": "Solo Leveling original com arte incorreta"
+        },
+        {
+          "id": "K2kvO4wF7J8",
+          "name": "Solo Leveling v2"
+        },
+        {
+          "id": "yHxw_kTC6vA",
+          "name": "Blue Lock v2"
+        },
+        {
+          "id": "OPsWY1QuinE",
+          "name": "Mob Psycho v2"
+        }
+      ]
+    },
+    "kids": {
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "videos": [
+        {
+          "id": "d7hjFP6Ky6w",
+          "name": "Elefantinho processando"
+        },
+        {
+          "id": "ax0ude5BUhE",
+          "name": "Adivinhe animal"
+        },
+        {
+          "id": "It-7R1o9k7Q",
+          "name": "Dinossauros"
+        }
+      ]
+    }
+  }
+}
