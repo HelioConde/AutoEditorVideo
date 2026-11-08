@@ -60,3 +60,8 @@ assets/gerados/publicacao-youtube/
 
 # Props/JSON locais da previa canonica; podem conter identificadores e assinaturas.
 /motion-remotion/public/generated/fofinhos-ep01-parte01/
+
+# Relatorios importados de YouTube Studio: dados privados nunca devem ser versionados
+/dados-privados/audiencia/
+/reports/audiencia-metricas-reais*.json
+/reports/audiencia-metricas-reais*.md
