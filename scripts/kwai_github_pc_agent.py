@@ -138,8 +138,8 @@ def receipts(path:Path)->dict:
 
 def save_receipts(path:Path,seen:dict)->None:
     path.parent.mkdir(parents=True,exist_ok=True)
-    temp=path.with_suffix(".tmp")
-    with temp.open("x",encoding="utf-8") as stream:
+    temp=path.with_name(path.name+"."+str(os.getpid())+".tmp")
+    with temp.open("w",encoding="utf-8") as stream:
         json.dump(seen,stream,ensure_ascii=False,indent=2)
         stream.write("\n")
     os.replace(temp,path)
@@ -158,6 +158,8 @@ def process_once(*,dry_run:bool=False)->dict:
     approved=[x for x in items if x["status"]=="approved"]
     if dry_run:
         return {"approved_count":len(approved),"mode":"dry_run_no_download"}
+    if not approved:
+        return {"mode":"no_pending_approved_videos","newly_staged":0}
     path=app_data_path()
     done=receipts(path)
     pending=[x for x in approved
