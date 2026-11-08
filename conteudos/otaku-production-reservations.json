@@ -1494,6 +1494,141 @@
       "original_episode_id": "alchemy-103-prompt-consistencia",
       "old_youtube_id": "QL_trwUw62c",
       "note": "Versioned revised image-anchored replacements; no blind duplicate upload, no deletion of previous public versions, adhere to canonical characters policy for EN."
+    },
+    {
+      "channel": "br",
+      "id": "5015-jujutsu-kaisen-dominio",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Jujutsu Kaisen — o que torna um domínio tão perigoso?. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "br",
+      "id": "5016-dungeon-meshi-masmorra",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Dungeon Meshi — por que cozinhar muda a aventura?. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "br",
+      "id": "5017-attack-on-titan-muralhas",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Attack on Titan — o segredo narrativo das muralhas. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "en",
+      "id": "7014-fullmetal-troca-equivalente",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Fullmetal Alchemist — the real cost of equivalent exchange. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "en",
+      "id": "7015-one-piece-poneglyphs",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: One Piece — why ancient stones matter. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "en",
+      "id": "7016-hunter-nen-restricoes",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Hunter x Hunter — why Nen restrictions matter. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "games",
+      "id": "game-104-terraria-primeira-noite",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Terraria — por que a primeira noite exige estratégia. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "games",
+      "id": "game-105-stardew-estacoes",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Stardew Valley — como as estações mudam as decisões. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "games",
+      "id": "game-106-celeste-dificuldade",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Celeste — por que aprender faz parte do desafio. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-104-abelhinha-e-as-cores",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: A Abelhinha Descobre as Cores. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-105-tartaruguinha-e-a-chuva",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: A Tartaruguinha e a Chuva. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-106-estrelinhas-contam",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: As Estrelinhas Contam Até Cinco. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-104-automacao-gatilhos",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Automação: o que é um gatilho?. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-105-agentes-supervisao",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Agentes de IA precisam de supervisão. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-106-ia-checagem-fontes",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261108",
+      "source": "creator_request_three_more_for_five_channels_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "NOVO lote de 15. Tema: Como conferir respostas de IA. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
