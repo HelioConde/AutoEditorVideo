@@ -1,6 +1,6 @@
 {
   "schema": "autoeditorvideo/production-reservations/v1",
-  "updated_at": "2026-11-07",
+  "updated_at": "2026-11-08",
   "policy": "Before creating any video generation script, PowerShell or cloud workflow, reserve the exact (channel, episode_id) pair here and merge to main first. All five channels use unique channel IDs; registration never authorizes image or YouTube requests.",
   "channels": {
     "br": {
@@ -1353,6 +1353,39 @@
       "publication_target": "public_after_automated_technical_editorial_QA",
       "requested_by_creator_publication": true,
       "note": "Three ORIGINAL BR anime commentary Shorts ~90-120 s, original still AI artwork and original Remotion captions, one-by-one public upload after verified channel identity and upload dedup. Do not touch paused 50 queue or earlier uploads."
+    },
+    {
+      "channel": "br",
+      "id": "5012-solo-leveling-igris-v2",
+      "status": "reserved",
+      "reservation_owner": "otaku_br_three_character_continuity_v2_20261108",
+      "source": "creator_direct_canonical_characters_public_replace_delete_2026-11-08",
+      "publication_target": "public_after_manual_identity_review_and_technical_QA",
+      "requested_by_creator_publication": true,
+      "original_episode_id": "5012-solo-leveling-igris",
+      "note": "Versioned corrective re-render with character-accurate image anchors and edits (not generic subjects). Preserve originals until new public processed+thumbnail confirmed and delete only explicit old IDs. Does not unblock 50-short queue."
+    },
+    {
+      "channel": "br",
+      "id": "5013-blue-lock-isagi-v2",
+      "status": "reserved",
+      "reservation_owner": "otaku_br_three_character_continuity_v2_20261108",
+      "source": "creator_direct_canonical_characters_public_replace_delete_2026-11-08",
+      "publication_target": "public_after_manual_identity_review_and_technical_QA",
+      "requested_by_creator_publication": true,
+      "original_episode_id": "5013-blue-lock-isagi",
+      "note": "Versioned corrective re-render with character-accurate image anchors and edits (not generic subjects). Preserve originals until new public processed+thumbnail confirmed and delete only explicit old IDs. Does not unblock 50-short queue."
+    },
+    {
+      "channel": "br",
+      "id": "5014-mob-psycho-emocoes-v2",
+      "status": "reserved",
+      "reservation_owner": "otaku_br_three_character_continuity_v2_20261108",
+      "source": "creator_direct_canonical_characters_public_replace_delete_2026-11-08",
+      "publication_target": "public_after_manual_identity_review_and_technical_QA",
+      "requested_by_creator_publication": true,
+      "original_episode_id": "5014-mob-psycho-emocoes",
+      "note": "Versioned corrective re-render with character-accurate image anchors and edits (not generic subjects). Preserve originals until new public processed+thumbnail confirmed and delete only explicit old IDs. Does not unblock 50-short queue."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
