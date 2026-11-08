@@ -1,0 +1,23 @@
+{
+  "schema": "autoeditorvideo/otaku-br-canonical-character-v2-launch/v1",
+  "creator_authorized_at": "2026-11-08",
+  "user_asked_regenerate_and_publicly_replace": true,
+  "creator_rule_locked_until_explicit_change": true,
+  "target_channel": "br",
+  "target_channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "versioned_manifest": "conteudos/otaku-br-three-character-faithful-v2-20261108.json",
+  "episode_ids": [
+    "5012-solo-leveling-igris-v2",
+    "5013-blue-lock-isagi-v2",
+    "5014-mob-psycho-emocoes-v2"
+  ],
+  "reference_image_method": "one_anchor_per_named_character_followed_by_images_edits_per_scene",
+  "image_model": "gpt-image-2",
+  "max_image_calls": 28,
+  "channel_identity_and_policy": "autoeditorvideo/otaku-character-identity-policy/v1",
+  "visual_quality_review_before_public_upload": true,
+  "upload_in_this_render": false,
+  "delete_old_in_this_render": false,
+  "reuse_old_audio_if_available": false,
+  "do_not_change_other_channels_or_paused_50_queue": true
+}
