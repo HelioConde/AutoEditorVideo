@@ -1,6 +1,9 @@
 name: AutoEditorVideo - Laboratorio de Audiencia (piloto seguro)
 
 on:
+  schedule:
+    # Run on the default branch only after merge.
+    - cron: '23 20 * * *'
   pull_request:
     paths:
       - 'scripts/audiencia_simulada.py'
@@ -36,11 +39,14 @@ jobs:
             --manifest conteudos/lote-15-canais-20261108.json \
             --channel br \
             --ids 5015-jujutsu-kaisen-dominio 5016-dungeon-meshi-masmorra 5017-attack-on-titan-muralhas \
-            --output reports/audiencia-simulada-br-piloto.json
+            --output reports/audiencia-simulada-br-piloto.json \
+            --markdown-output reports/audiencia-simulada-br-piloto.md
       - name: Preserve review-only analysis report
         uses: actions/upload-artifact@v4
         with:
           name: audience-lab-br-pilot
-          path: reports/audiencia-simulada-br-piloto.json
+          path: |
+            reports/audiencia-simulada-br-piloto.json
+            reports/audiencia-simulada-br-piloto.md
           if-no-files-found: error
           retention-days: 14
