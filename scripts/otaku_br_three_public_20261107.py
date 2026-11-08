@@ -115,46 +115,11 @@ def guard()->None:
         raise BRBlocked("OAUTH_TOKENS_FORBIDDEN_IN_IMAGE_RENDER")
 
 def art_prompt(row:dict,scene:dict)->str:
-    return (
-        "Create ONE original premium cinematic anime-inspired editorial "
-        "STILL ILLUSTRATION in portrait 1024x1536. This is NOT an official anime "
-        "frame or screenshot, not footage and not a reproduction of any existing "
-        "copyrighted character design. Use entirely fresh fictional silhouettes, "
-        "costume designs, settings and props. No title/text, numerals, logos, "
-        "watermarks, manga panel gutters, UI or player overlays. "
-        "Keep expressive main subject inside central 65 percent height; "
-        "top and bottom must be clean for official AutoEditorVideo captions. "
-        "Natural limbs, no extra fingers, duplicated heads, mangled faces, "
-        "merged weapons, warped anatomy, or cropped key subjects. "
-        "A single frozen moment, not an animation storyboard. "
-        "Make eight distinctly composed scenes with the same episode palette. "
-        "Visual bible: "+row["visual_bible"]+
-        " This exact scene's visible story concept: "+scene["visual_instruction"]
-    )
+    """Deprecated: old unanchored generic art must never be made again."""
+    raise BRBlocked("UNANCHORED_GENERIC_OTAKU_CHARACTER_GENERATION_PERMANENTLY_DISABLED")
 
 def create_art(row:dict,folder:Path,key:str)->list[Path]:
-    from PIL import Image,ImageOps
-    from gerar_video_codex import request_image
-    result=[]
-    for n,scene in enumerate(row["scenes"],1):
-        dest=folder/("scene-%02d.png"%n)
-        if dest.exists():
-            raise BRBlocked("EXISTING_IMAGE_CACHE_NOT_AUTHORIZED")
-        raw=request_image(art_prompt(row,scene),MODEL,key,"1024x1536")
-        with Image.open(io.BytesIO(raw)) as im:
-            im.load()
-            if im.width<512 or im.height<768:
-                raise BRBlocked("GENERATED_ART_TOO_SMALL")
-            ImageOps.pad(im.convert("RGB"),(1024,1536),
-                         method=Image.Resampling.LANCZOS,
-                         color=(15,16,24)).save(dest,"PNG")
-        if dest.stat().st_size<30_000:
-            raise BRBlocked("GENERATED_ART_BLANK_OR_DAMAGED")
-        result.append(dest)
-        print("BR_THREE_ART_"+row["id"]+"_%02d_OF_08"%n,flush=True)
-    if len({renderer.digest(x) for x in result})!=8:
-        raise BRBlocked("DUPLICATED_AI_SCENES")
-    return result
+    raise BRBlocked("ANIME_STORY_FRAMES_REQUIRE_CHARACTER_ANCHORS_AND_IMAGES_EDITS")
 
 def produce()->None:
     guard()
