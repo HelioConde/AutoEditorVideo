@@ -1,0 +1,38 @@
+{
+  "schema": "autoeditorvideo/batch15-reviewed-public-20261108/v1",
+  "source_run_id": 42481839933,
+  "source_sha": "49bdeaf75201ce2bc363836b4ac9ee4dbc19f0b6",
+  "creator_publication_authorized": true,
+  "creator_request": "Enviar e postar como publico",
+  "reviewed_channels": [
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "ids": {
+    "games": [
+      "game-104-terraria-primeira-noite",
+      "game-105-stardew-estacoes",
+      "game-106-celeste-dificuldade"
+    ],
+    "kids": [
+      "kids-104-abelhinha-e-as-cores",
+      "kids-105-tartaruguinha-e-a-chuva",
+      "kids-106-estrelinhas-contam"
+    ],
+    "alchemy": [
+      "alchemy-104-automacao-gatilhos",
+      "alchemy-105-agentes-supervisao",
+      "alchemy-106-ia-checagem-fontes"
+    ]
+  },
+  "review_scope": "24 original static storyboard scenes visually checked per channel",
+  "visual_review_note": "Reviewed all 8 generated scene stills for each of 9 rendered Shorts through contact sheets. Verified coherent subjects, no glaring anatomy issues, and theme consistency. This was not a frame-by-frame video/audio listening review.",
+  "technical_quality_note": "Source Actions rendered 9 complete MP4, QA passed at 1080x1920 with synchronized word-boundary captions. Source BR+EN batches failed render and are excluded.",
+  "original_videos_untouched": true,
+  "no_blind_reupload": true,
+  "kids_made_for_kids": true,
+  "publication_rule": "Only change privacy of exact existing private YouTube IDs after checked video channel, title, description, processing, audience and authorized edit OAuth scopes. No insert, delete or blind retries.",
+  "status": "approved_for_private_to_public_transition_when_youtube_uploads_confirmed",
+  "approved_date": "2026-11-08"
+}
