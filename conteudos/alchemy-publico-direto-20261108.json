@@ -1,0 +1,96 @@
+{
+  "schema": "autoeditorvideo/single-public-original-20261108/v1",
+  "production_owner": "public_single_alchemy_20261108",
+  "requested_at": "2026-11-08",
+  "requested_behavior": "Use AutoEditorVideo on GitHub Actions to produce and upload a newly generated Short as PUBLIC",
+  "channel": "alchemy",
+  "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+  "images_budget": 8,
+  "render_engine": "AutoEditorVideo Remotion MasterShort",
+  "public_via": "YouTube Data API videos.insert using youtube.upload OAuth, not a status update to a private video",
+  "never_touch_existing_videos": true,
+  "never_blind_retry_upload": true,
+  "require_authenticated_channel_id": true,
+  "upload_only_after_technical_qa": true,
+  "publication_intent": "public",
+  "episodes": [
+    {
+      "id": "alchemy-107-automacao-publicou-duplicado",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "title": "Sua automação publicou o MESMO vídeo 2 vezes? 🤖",
+      "cover_text": "PUBLICOU 2 VEZES?",
+      "description": "Por que um upload pode ser repetido mesmo quando você clicou uma única vez? Entenda a idempotência e como evitar duplicações em automações de vídeo.\n\nImagens conceituais originais geradas por IA. Este conteúdo explica um cenário técnico; não apresenta capturas reais de execução ou demonstrações falsificadas.\n\n#Automacao #InteligenciaArtificial #YouTubeShorts #AlchemyLab",
+      "tags": [
+        "automação",
+        "idempotência",
+        "inteligência artificial",
+        "evitar duplicação",
+        "upload youtube",
+        "programação",
+        "agentes de IA",
+        "Shorts",
+        "Alchemy Lab",
+        "YouTube API"
+      ],
+      "narration_script": "Seu robô de publicação enviou o mesmo vídeo duas vezes? Isso pode acontecer mesmo quando o botão foi apertado uma vez só. O problema está na diferença entre executar uma tarefa e ter certeza de que ela terminou. Imagine que a automação envia o arquivo, mas a conexão cai antes de chegar a resposta. O YouTube pode ter recebido tudo. Para o programa, parece uma falha; para o canal, o vídeo já existe. Se o sistema tenta o upload novamente sem conferir, nasce uma duplicata. Por isso, uma boa automação precisa reconhecer quando uma operação já foi realizada, mesmo que a mensagem de confirmação tenha se perdido. Uma estratégia é dar a cada vídeo um identificador único antes de começar. Esse identificador deve acompanhar o roteiro, o arquivo, a capa e o registro de publicação, sem mudar quando a tarefa é retomada. Depois de enviar, o programa guarda o código real devolvido pelo YouTube. Se a resposta não chega, ele consulta o próprio canal e procura aquela publicação, antes de pensar em um novo envio. Essa ideia tem um nome importante: idempotência. Em termos simples, repetir uma solicitação não deveria criar resultados duplicados. O efeito desejado é ter uma publicação correta, não duas cópias competindo pelo mesmo público. Também precisamos separar os estados da operação. Gerado não significa enviado. Enviado não significa processado. E processado não significa público. Cada etapa precisa de verificação e um registro verdadeiro do resultado. Se você está criando automações com inteligência artificial, comece por essa regra: confirme antes de repetir. É assim que um fluxo deixa de apenas parecer automático e começa a ser confiável de verdade.",
+      "narration_word_count": 272,
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Seu robô de publicação enviou o mesmo vídeo duas vezes? Isso pode acontecer mesmo quando o botão foi apertado uma vez só. O problema está na diferença entre executar uma tarefa e ter certeza de que ela terminou.",
+          "visual_instruction": "Portrait vertical original editorial illustration of a friendly minimalist desktop robot editor beside a computer, looking surprised at two identical floating rectangular video cards, soft orange and teal lights, clear silhouette and clean workspace."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Imagine que a automação envia o arquivo, mas a conexão cai antes de chegar a resposta. O YouTube pode ter recebido tudo. Para o programa, parece uma falha; para o canal, o vídeo já existe.",
+          "visual_instruction": "Same small teal-and-orange robot at a workstation with a single video card traveling through a luminous cloud path; link symbol is interrupted, no text, no fake app screenshot."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Se o sistema tenta o upload novamente sem conferir, nasce uma duplicata. Por isso, uma boa automação precisa reconhecer quando uma operação já foi realizada, mesmo que a mensagem de confirmação tenha se perdido.",
+          "visual_instruction": "Same robot examining two duplicate video tiles standing side-by-side on a clean desk, duplicated shapes obvious, warm cinematic rim light, no brand logos or words."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Uma estratégia é dar a cada vídeo um identificador único antes de começar. Esse identificador deve acompanhar o roteiro, o arquivo, a capa e o registro de publicação, sem mudar quando a tarefa é retomada.",
+          "visual_instruction": "Same robot attaching one unique glowing fingerprint-shaped seal to a video tile, with matching small symbols on microphone, thumbnail and screenplay cards, no text or numbers."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Depois de enviar, o programa guarda o código real devolvido pelo YouTube. Se a resposta não chega, ele consulta o próprio canal e procura aquela publicação, antes de pensar em um novo envio.",
+          "visual_instruction": "Same robot using a magnifying glass to inspect a single completed upload tile in a cloud storage hallway while avoiding pushing a second video card, elegant abstract scene."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Essa ideia tem um nome importante: idempotência. Em termos simples, repetir uma solicitação não deveria criar resultados duplicados. O efeito desejado é ter uma publicação correta, não duas cópias competindo pelo mesmo público.",
+          "visual_instruction": "Same robot turning off a red double-copy branch and choosing one green verified pathway, original abstract technology visual metaphor, no text or real UI."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Também precisamos separar os estados da operação. Gerado não significa enviado. Enviado não significa processado. E processado não significa público. Cada etapa precisa de verificação e um registro verdadeiro do resultado.",
+          "visual_instruction": "Same robot looking at four separate editorial icons: film frame, upward arrow, gears and globe, each icon occupies a clear distinct position and no legible writing."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Se você está criando automações com inteligência artificial, comece por essa regra: confirme antes de repetir. É assim que um fluxo deixa de apenas parecer automático e começa a ser confiável de verdade.",
+          "visual_instruction": "Same robot giving a satisfied thumbs-up at a desk with just one polished vertical video card and a subtle verification check shape, bright hopeful technology studio."
+        }
+      ],
+      "visual_bible": "One adorable compact teal-orange editorial robot with single square screen face, friendly eyes, thin small arms and legs, same consistent proportions and color palette throughout eight original conceptual technology illustrations; stable desk studio with cool teal ambience and orange accents, no on-image words or brand logos.",
+      "status": "original_editorial_script_ready",
+      "production_state": {
+        "narration": "written",
+        "image_generation": "not_started",
+        "render": "not_started",
+        "visual_review": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "visibility_intent": "direct_public_on_new_upload_only_after_technical_QA",
+      "creator_explicit_publication_authorized": true
+    }
+  ]
+}
