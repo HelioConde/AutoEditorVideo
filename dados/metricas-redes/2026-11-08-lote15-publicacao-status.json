@@ -1,0 +1,72 @@
+{
+  "schema": "autoeditorvideo/batch15-publication-status/v1",
+  "checked_at": "2026-11-08",
+  "source_run_id": 42481839933,
+  "source_run_url": "https://github.com/HelioConde/AutoEditorVideo/actions/runs/42481839933",
+  "publication_requested": "public",
+  "youtube_oauth_scope_check_run_id": 42490407876,
+  "oauth_video_update_scope_status": "not_granted_for_any_of_five_github_token_secrets",
+  "scope_docs": "https://developers.google.com/youtube/data/reference/rest/v3/videos/update",
+  "status_note": "Do not infer public YouTube status from technical render success or private receipts. Scope upgrade requires user to authorize extra YouTube permissions; no token files saved.",
+  "channels": {
+    "br": {
+      "name": "Otaku Multicena",
+      "render": "failed",
+      "upload": "not_started_no_complete_media_artifact",
+      "confirmed_public": 0,
+      "expected_total": 3
+    },
+    "en": {
+      "name": "Otaku Reframe",
+      "render": "failed",
+      "upload": "not_started_no_complete_media_artifact",
+      "confirmed_public": 0,
+      "expected_total": 3
+    },
+    "games": {
+      "name": "Conde Games",
+      "render": "3_passed",
+      "upload": "3_private_verified",
+      "confirmed_public": 0,
+      "expected_total": 3,
+      "videos": [
+        {
+          "episode_id": "game-104-terraria-primeira-noite",
+          "youtube_id": "HW6fvYkYKlc",
+          "visibility": "private",
+          "thumbnail_acknowledged": true
+        },
+        {
+          "episode_id": "game-105-stardew-estacoes",
+          "youtube_id": "mHW5MiWY71A",
+          "visibility": "private",
+          "thumbnail_acknowledged": true
+        },
+        {
+          "episode_id": "game-106-celeste-dificuldade",
+          "youtube_id": "8yrTR6qQVg4",
+          "visibility": "private",
+          "thumbnail_acknowledged": true
+        }
+      ]
+    },
+    "kids": {
+      "name": "Emanuelly Kids",
+      "render": "3_passed",
+      "upload": "in_progress_as_of_check",
+      "confirmed_public": 0,
+      "expected_total": 3,
+      "reviewed_storyboard_images": 24
+    },
+    "alchemy": {
+      "name": "Alchemy Lab",
+      "render": "3_passed",
+      "upload": "queued_as_of_check",
+      "confirmed_public": 0,
+      "expected_total": 3,
+      "reviewed_storyboard_images": 24
+    }
+  },
+  "public_transition_workflow": "https://github.com/HelioConde/AutoEditorVideo/actions/workflows/batch15-publicize-reviewed-20261108.yml",
+  "planned_rule": "Only verified existing IDs change to public; never duplicate inserts; Kids made for kids."
+}
