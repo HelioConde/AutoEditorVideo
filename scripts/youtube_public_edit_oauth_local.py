@@ -75,12 +75,41 @@ def connect(channel:str)->None:
     print("YOUTUBE_PUBLIC_EDIT_SCOPE_AUTHORIZED_"+channel+"_"+verified)
     print("LOCAL_PRIVATE_TOKEN_SAVED_NOT_SENT_TO_GITHUB")
 
+def verify_saved(channel:str)->None:
+    if os.environ.get("GITHUB_ACTIONS","").lower()=="true":
+        raise LocalAuthorizationBlocked("LOCAL_VERIFICATION_NOT_ALLOWED_IN_ACTIONS")
+    path=token_path(channel)
+    if not path.is_file() or not CLIENT_FILE.is_file():
+        raise LocalAuthorizationBlocked("LOCAL_PUBLIC_EDIT_TOKEN_OR_CLIENT_MISSING")
+    try:
+        data=json.loads(path.read_text(encoding="utf-8"))
+        client=json.loads(CLIENT_FILE.read_text(encoding="utf-8"))
+        validate_token_fields(client,data)
+        recorded=data.get("scopes",[])
+        recorded=set(recorded.split()) if isinstance(recorded,str) else set(recorded)
+        if not set(SCOPES).issubset(recorded):
+            raise LocalAuthorizationBlocked("PUBLIC_PRIVACY_UPDATE_SCOPE_NOT_GRANTED")
+        from google.oauth2.credentials import Credentials
+        from google.auth.transport.requests import Request
+        from googleapiclient.discovery import build
+        creds=Credentials.from_authorized_user_info(data,scopes=list(SCOPES))
+        if not creds.valid: creds.refresh(Request())
+        api=build("youtube","v3",credentials=creds,cache_discovery=False)
+        verified=verify_channel_identity(api,channel)
+    except LocalAuthorizationBlocked:
+        raise
+    except Exception:
+        raise LocalAuthorizationBlocked("SAVED_OAUTH_REFRESH_OR_IDENTITY_FAILED") from None
+    print("YOUTUBE_PUBLIC_EDIT_LOCAL_TOKEN_VERIFIED_"+channel+"_"+verified)
+
 def main()->int:
     ap=argparse.ArgumentParser()
     ap.add_argument("--channel",choices=list(KNOWN_IDS),required=True)
+    ap.add_argument("--action",choices=("connect","verify"),default="verify")
     args=ap.parse_args()
     try:
-        connect(args.channel)
+        if args.action=="connect":connect(args.channel)
+        else:verify_saved(args.channel)
         return 0
     except LocalAuthorizationBlocked as exc:
         print("YOUTUBE_PUBLIC_EDIT_LOCAL_BLOCKED_"+str(exc),file=sys.stderr)
