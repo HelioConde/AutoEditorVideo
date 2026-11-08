@@ -9,6 +9,7 @@ on:
       - 'scripts/otaku_growth_v3.py'
       - 'scripts/roteiro_para_storyboard.py'
       - 'scripts/planejador_editorial.py'
+      - 'scripts/otaku_multicena_strategy_plan.py'
       - 'tests/test_otaku_growth_autotune.py'
       - '.github/workflows/otaku-growth-autotune.yml'
   schedule:
@@ -39,7 +40,7 @@ jobs:
         run: python -m pip install --disable-pip-version-check 'pytest>=8,<10' 'Pillow>=10,<13'
       - name: Recalculate guarded future production profile from GitHub metric snapshots
         run: |
-          python -m py_compile scripts/otaku_growth_autotune.py scripts/otaku_growth_v3.py scripts/roteiro_para_storyboard.py scripts/planejador_editorial.py
+          python -m py_compile scripts/otaku_growth_autotune.py scripts/otaku_growth_v3.py scripts/roteiro_para_storyboard.py scripts/planejador_editorial.py scripts/otaku_multicena_strategy_plan.py
           python scripts/otaku_growth_autotune.py --output config/otaku-growth-active-v1.json
           python scripts/otaku_growth_autotune.py --output config/otaku-growth-active-v1.json --check
       - name: Prove metric integrity, caption/visual safeguards and no remote publication
