@@ -1629,6 +1629,15 @@
       "source": "creator_request_three_more_for_five_channels_2026-11-08",
       "publication_target": "private_first_after_original_media_QA",
       "note": "NOVO lote de 15. Tema: Como conferir respostas de IA. Não usar materiais de lotes 7/8 Nov. Sem upload antes do render original e QA; canal OAuth próprio; nunca reupload sem conciliação."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-107-automacao-publicou-duplicado",
+      "status": "reserved",
+      "reservation_owner": "public_single_alchemy_20261108",
+      "source": "creator_request_autoeditor_generate_and_upload_public_20261108",
+      "publication_target": "direct_public_on_new_unique_upload_only",
+      "note": "Unique editorial topic on idempotence. Never reupload the 9 already-private batch15 videos or modify previous publications; automated QA and exact-channel verification required."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
