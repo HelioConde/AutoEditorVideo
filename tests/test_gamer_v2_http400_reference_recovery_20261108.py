@@ -93,6 +93,6 @@ def test_source_guard_never_uploads_public_or_deletes_old():
     assert 'HTTP400_WORKFLOW="AutoEditorVideo - Gamer V2 fix HTTP400 and private upload"' in code
     assert 'and _gamer_fix_launch()' in code
     assert '33 if channel=="games"' in code
-    assert '"privacyStatus"!="private"' in code
+    assert 'get("privacyStatus")!="private"' in code
     assert "videos().delete(" not in code
     assert "videos().update(" not in code
