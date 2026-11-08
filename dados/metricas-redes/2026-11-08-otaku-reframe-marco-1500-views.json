@@ -1,0 +1,41 @@
+{
+  "esquema": "autoeditor/youtube-milestone-manual/v1",
+  "canal": "Otaku Reframe",
+  "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+  "idioma": "en-US",
+  "tipo": "marco_de_visualizacoes_acumuladas",
+  "data_da_conquista": "2026-11-08",
+  "fuso_horario": "America/Sao_Paulo",
+  "fonte": "captura de tela de conquista do vidIQ enviada pelo proprietário em 08/11/2026",
+  "marco_exibido_views": 1500,
+  "formulacao_correta": "A captura comprova que Otaku Reframe alcançou o marco de 1.500 visualizações; não comprova o valor exato do contador atual.",
+  "tipo_contagem": "visualizacoes_acumuladas_do_canal",
+  "referencia_analytics_separada": {
+    "arquivo": "dados/metricas-redes/2026-11-08-youtube-api-vidiq.json",
+    "periodo_inicio": "2026-10-09",
+    "periodo_fim": "2026-11-07",
+    "visualizacoes_no_periodo": 517,
+    "engaged_views_no_periodo": 228,
+    "comentario": "São métricas de uma janela de cerca de 30 dias; não são comparáveis por subtração com views acumuladas do canal."
+  },
+  "marco_brasil_separado": {
+    "canal": "Otaku Multicena",
+    "arquivo": "dados/metricas-redes/2026-11-08-youtube-marco-11000-views.json",
+    "marco": 11000
+  },
+  "proxima_meta_experimental_views": 2000,
+  "sugestoes_editoriais": [
+    "Analisar títulos e hooks em inglês separadamente dos vídeos PT-BR, sem tradução literal de padrões locais.",
+    "Comparar retenção e viewed-vs-swiped no mesmo canal, janela e idade do Short antes de alterar duração ou tema.",
+    "Priorizar mistério, curiosidade e consequências apenas como hipóteses; verificar dados recentes por episódio.",
+    "Preservar regras de personagens consistentes, legenda sincronizada, narração EN e identidade própria do canal."
+  ],
+  "seguranca": "Registro manual de conquista; sem mudança em vídeos, workflow, tokens ou publicação.",
+  "limites": [
+    "1.500 é limiar de conquista exibido pelo vidIQ, não contador vitalício preciso no instante da captura.",
+    "Não atribuir 1.500 visualizações ao período de 09/10 a 07/11.",
+    "Não assumir quais vídeos causaram a conquista ou quantas views ocorreram hoje.",
+    "Não misturar dados dos canais BR e EN para escolher conteúdos.",
+    "A imagem da conquista não foi commitada no repositório público."
+  ]
+}
