@@ -20,7 +20,7 @@ from otaku_character_identity_policy import digest,EXPECTED_SCHEMA,load_policy
 from youtube_channel_registry import KNOWN_IDS
 from remaining_static_90s_upload_20261107 import (
     youtube as youtube_owner,
-    insert_private,verify_video,persist
+    insert_private,verify_video
 )
 from remaining_static_90s_20261107 import probe
 from googleapiclient.http import MediaFileUpload
@@ -196,6 +196,10 @@ def scan_owned(api,playlist,channel,item):
             matches.append(v["id"])
     if len(matches)>1:raise StageBlocked("DUPLICATE_PRIVATE_REPLACEMENTS_STOP")
     return matches
+
+def persist(folder,rows):
+    (folder/RECEIPT_NAME).write_text(
+        json.dumps(rows,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
 def upload(channel):
     rows=guard(channel)
