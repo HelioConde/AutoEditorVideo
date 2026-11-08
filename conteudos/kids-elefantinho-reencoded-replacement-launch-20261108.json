@@ -1,0 +1,20 @@
+{
+  "schema": "autoeditorvideo/kids-elefantinho-stuck-reencode-one/v1",
+  "source_render_run_id": 42393346725,
+  "source_artifact": "emanuelly-kids-static-three-mp4-20261107",
+  "original_youtube_id": "d7hjFP6Ky6w",
+  "target_channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+  "output_visibility": "public",
+  "made_for_kids": true,
+  "reencode_h264_aac_faststart": true,
+  "reupload_only_one_video": true,
+  "avoid_duplicate_by_new_version_description": true,
+  "keep_original_until_new_processed": true,
+  "untouched_successful_other_kids_video_ids": [
+    "It-7R1o9k7Q",
+    "ax0ude5BUhE"
+  ],
+  "fofinhos_series_untouched": true,
+  "no_image_generation": true,
+  "creator_authorized_at": "2026-11-08"
+}
