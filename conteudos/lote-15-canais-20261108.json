@@ -19,7 +19,7 @@
     "upload_only_after_render_qa_and_exact_youtube_id_check": true,
     "publication_to_public_not_approved_by_this_manifest": true
   },
-  "status": "reserved_editorial_briefs_only_not_rendered_not_uploaded",
+  "status": "editorial_drafts_in_progress_not_rendered_not_uploaded",
   "episodes": [
     {
       "id": "5015-jujutsu-kaisen-dominio",
@@ -78,17 +78,63 @@
         "anime",
         "curiosidades de anime",
         "análise de anime",
-        "Otaku Multicena"
+        "Otaku Multicena",
+        "Jujutsu Kaisen"
       ],
       "production_state": {
-        "narration": "not_written",
+        "narration": "written_pending_editorial_preflight",
         "image_generation": "not_started",
         "voice": "not_started",
         "render": "not_started",
         "media_qa": "not_started",
         "upload": "not_started",
         "youtube_id": null
-      }
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Em Jujutsu Kaisen, uma Expansão de Domínio não é apenas um ataque maior. Ela muda o espaço do confronto e transforma o campo de batalha numa parte decisiva da estratégia. É por isso que sua chegada provoca tanta tensão.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O risco de entrar em um território controlado"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Antes de pensar em força, é preciso entender a regra do território. Dentro de um domínio, uma técnica recebe condições especiais. Essa mudança altera o que cada combatente pode fazer e como deve reagir.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A diferença entre poder bruto e regras da técnica"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Um adversário extremamente rápido ainda pode ficar em desvantagem quando o ambiente favorece apenas um lado. A pergunta deixa de ser quem corre mais e passa a ser quem compreende melhor as regras da técnica.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Por que o espaço importa mais que a velocidade"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Também existe custo. Criar e sustentar um domínio exige capacidade e controle; não é uma solução simples para qualquer situação. Quando a história mostra limites, a técnica continua impressionante sem tornar todo conflito previsível.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O custo e a concentração exigidos"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Do outro lado, sobreviver pode exigir novas prioridades: resistir, encontrar uma brecha, adaptar recursos ou impedir a ativação completa. O domínio cria um quebra-cabeça tático, não apenas uma disputa de impactos coloridos.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Como o oponente precisa adaptar a estratégia"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "A direção das cenas costuma preparar esse instante mudando o ritmo e a percepção do espaço. A sensação de que a luta entrou em outro mundo faz o público entender a ameaça mesmo antes de qualquer explicação.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A tensão narrativa antes do confronto"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Por isso, o momento marcante nem sempre é o golpe final. Muitas vezes é a descoberta de uma condição inesperada. Quando as regras mudam, uma escolha pequena pode valer mais do que poder bruto.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O que torna essas cenas marcantes"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A grande ideia é simples: um Domínio funciona porque faz o cenário participar da luta. A técnica parece absoluta por alguns segundos, mas o interesse está em como o conflito encontra limites, respostas e consequências.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O limite de uma vantagem aparentemente absoluta"
+        }
+      ],
+      "narration_script": "Em Jujutsu Kaisen, uma Expansão de Domínio não é apenas um ataque maior. Ela muda o espaço do confronto e transforma o campo de batalha numa parte decisiva da estratégia. É por isso que sua chegada provoca tanta tensão. Antes de pensar em força, é preciso entender a regra do território. Dentro de um domínio, uma técnica recebe condições especiais. Essa mudança altera o que cada combatente pode fazer e como deve reagir. Um adversário extremamente rápido ainda pode ficar em desvantagem quando o ambiente favorece apenas um lado. A pergunta deixa de ser quem corre mais e passa a ser quem compreende melhor as regras da técnica. Também existe custo. Criar e sustentar um domínio exige capacidade e controle; não é uma solução simples para qualquer situação. Quando a história mostra limites, a técnica continua impressionante sem tornar todo conflito previsível. Do outro lado, sobreviver pode exigir novas prioridades: resistir, encontrar uma brecha, adaptar recursos ou impedir a ativação completa. O domínio cria um quebra-cabeça tático, não apenas uma disputa de impactos coloridos. A direção das cenas costuma preparar esse instante mudando o ritmo e a percepção do espaço. A sensação de que a luta entrou em outro mundo faz o público entender a ameaça mesmo antes de qualquer explicação. Por isso, o momento marcante nem sempre é o golpe final. Muitas vezes é a descoberta de uma condição inesperada. Quando as regras mudam, uma escolha pequena pode valer mais do que poder bruto. A grande ideia é simples: um Domínio funciona porque faz o cenário participar da luta. A técnica parece absoluta por alguns segundos, mas o interesse está em como o conflito encontra limites, respostas e consequências.",
+      "narration_word_count": 280,
+      "description": "O perigo de uma Expansão de Domínio vai além do tamanho do ataque.\n\nNarrativa independente com ilustrações originais geradas por IA; não inclui cenas oficiais, capturas de tela ou gameplay."
     },
     {
       "id": "5016-dungeon-meshi-masmorra",
@@ -147,17 +193,63 @@
         "anime",
         "curiosidades de anime",
         "análise de anime",
-        "Otaku Multicena"
+        "Otaku Multicena",
+        "Dungeon Meshi"
       ],
       "production_state": {
-        "narration": "not_written",
+        "narration": "written_pending_editorial_preflight",
         "image_generation": "not_started",
         "voice": "not_started",
         "render": "not_started",
         "media_qa": "not_started",
         "upload": "not_started",
         "youtube_id": null
-      }
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Em Dungeon Meshi, comida não é apenas uma pausa engraçada entre combates. A necessidade de comer muda a maneira de explorar uma masmorra. O que parecia um detalhe cotidiano vira parte central da aventura.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Sobrevivência exige energia e planejamento"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Em uma jornada longa, coragem não substitui energia. Alguém precisa pensar em recursos, tempo e preparo. Ao tratar a refeição como problema real, a história apresenta obstáculos que uma espada sozinha não resolve.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Monstros vistos também como ecossistema"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A visão dos monstros também muda. Eles não são apenas inimigos colocados no caminho; passam a fazer parte de um ambiente com relações próprias. Investigar esse ecossistema transforma perigo em conhecimento narrativo.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Conhecimento transforma medo em investigação"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Quando um alimento desconhecido precisa ser preparado, curiosidade e prudência entram em conflito. Esse contraste dá espaço a pequenas descobertas. O grupo aprende com o mundo, e o público conhece a masmorra de outro jeito.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A cozinha aproxima personalidades diferentes"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "A cozinha ainda cria conversas que talvez não acontecessem durante uma luta. Dividir tarefas e discutir escolhas revela personalidades, medos e hábitos. Assim, uma refeição pode desenvolver personagens sem interromper a história.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A logística altera o ritmo da aventura"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Há também um ritmo diferente. Explorar, buscar ingredientes, descansar e seguir em frente torna a aventura mais concreta. A masmorra deixa de ser apenas uma sequência de salas perigosas e vira um lugar que precisa ser compreendido.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Mundo fantástico ganha regras cotidianas"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "O humor funciona porque surge de uma necessidade séria. Uma situação absurda pode ser engraçada e, ao mesmo tempo, mostrar que improvisar tem consequências. O contraste entre fantasia e rotina cria a identidade da obra.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Humor e risco convivem na mesma cena"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No fundo, cozinhar muda a aventura porque torna a sobrevivência um assunto coletivo. A jornada não depende só de vencer o próximo monstro; depende de como todos aprendem a viver naquele mundo estranho.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O cotidiano aprofunda uma jornada épica"
+        }
+      ],
+      "narration_script": "Em Dungeon Meshi, comida não é apenas uma pausa engraçada entre combates. A necessidade de comer muda a maneira de explorar uma masmorra. O que parecia um detalhe cotidiano vira parte central da aventura. Em uma jornada longa, coragem não substitui energia. Alguém precisa pensar em recursos, tempo e preparo. Ao tratar a refeição como problema real, a história apresenta obstáculos que uma espada sozinha não resolve. A visão dos monstros também muda. Eles não são apenas inimigos colocados no caminho; passam a fazer parte de um ambiente com relações próprias. Investigar esse ecossistema transforma perigo em conhecimento narrativo. Quando um alimento desconhecido precisa ser preparado, curiosidade e prudência entram em conflito. Esse contraste dá espaço a pequenas descobertas. O grupo aprende com o mundo, e o público conhece a masmorra de outro jeito. A cozinha ainda cria conversas que talvez não acontecessem durante uma luta. Dividir tarefas e discutir escolhas revela personalidades, medos e hábitos. Assim, uma refeição pode desenvolver personagens sem interromper a história. Há também um ritmo diferente. Explorar, buscar ingredientes, descansar e seguir em frente torna a aventura mais concreta. A masmorra deixa de ser apenas uma sequência de salas perigosas e vira um lugar que precisa ser compreendido. O humor funciona porque surge de uma necessidade séria. Uma situação absurda pode ser engraçada e, ao mesmo tempo, mostrar que improvisar tem consequências. O contraste entre fantasia e rotina cria a identidade da obra. No fundo, cozinhar muda a aventura porque torna a sobrevivência um assunto coletivo. A jornada não depende só de vencer o próximo monstro; depende de como todos aprendem a viver naquele mundo estranho.",
+      "narration_word_count": 271,
+      "description": "E se a comida fosse tão importante quanto a espada?\n\nNarrativa independente com ilustrações originais geradas por IA; não inclui cenas oficiais, capturas de tela ou gameplay."
     },
     {
       "id": "5017-attack-on-titan-muralhas",
@@ -216,17 +308,63 @@
         "anime",
         "curiosidades de anime",
         "análise de anime",
-        "Otaku Multicena"
+        "Otaku Multicena",
+        "Attack on Titan"
       ],
       "production_state": {
-        "narration": "not_written",
+        "narration": "written_pending_editorial_preflight",
         "image_generation": "not_started",
         "voice": "not_started",
         "render": "not_started",
         "media_qa": "not_started",
         "upload": "not_started",
         "youtube_id": null
-      }
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Em Attack on Titan, as muralhas são apresentadas como uma promessa de segurança. Mas a mesma estrutura que protege também determina até onde as pessoas podem ir. Essa contradição sustenta boa parte do mistério inicial.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Muralhas como símbolo de segurança"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Viver protegido parece uma vantagem óbvia quando o exterior é associado ao perigo. Ainda assim, uma barreira física também cria distância em relação ao desconhecido. E a falta de informação aumenta o medo com o passar do tempo.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A proteção cobra um preço na liberdade"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Quando uma sociedade cresce dentro de limites fixos, suas escolhas mudam. Rotinas, expectativas e decisões coletivas passam a depender da ideia de permanecer ali. O espaço não é apenas cenário: participa da construção daquela cultura.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O desconhecido alimenta o medo coletivo"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Existe uma diferença importante entre estar seguro e compreender o perigo. Uma muralha pode impedir uma ameaça imediata, mas não responde às perguntas sobre sua origem. A dúvida continua do lado de dentro.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O espaço fechado molda as escolhas"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "É aí que a informação ganha força dramática. Quem sabe o que existe além dos limites? Quais histórias foram repetidas sem verificação? A obra constrói tensão porque o conhecimento disponível parece sempre incompleto.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Informação incompleta cria tensão"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Outro detalhe é a escala. Quanto maiores parecem as muralhas, menor pode parecer o indivíduo diante delas. A arquitetura ajuda a comunicar dependência e fragilidade antes mesmo de qualquer confronto acontecer.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Segurança e controle não são sinônimos"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Quando o mundo exterior começa a importar, o significado da proteção muda. O que parecia definitivo pode passar a ser visto como escolha, herança ou imposição. A mesma paisagem ganha outro sentido sem mudar de lugar.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O mundo exterior muda o significado do interior"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Por isso, as muralhas são tão memoráveis: elas escondem perguntas enquanto oferecem respostas fáceis. A história usa pedra, altura e distância para discutir o quanto vale a segurança quando ela custa liberdade.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; O mistério arquitetônico sustenta a narrativa"
+        }
+      ],
+      "narration_script": "Em Attack on Titan, as muralhas são apresentadas como uma promessa de segurança. Mas a mesma estrutura que protege também determina até onde as pessoas podem ir. Essa contradição sustenta boa parte do mistério inicial. Viver protegido parece uma vantagem óbvia quando o exterior é associado ao perigo. Ainda assim, uma barreira física também cria distância em relação ao desconhecido. E a falta de informação aumenta o medo com o passar do tempo. Quando uma sociedade cresce dentro de limites fixos, suas escolhas mudam. Rotinas, expectativas e decisões coletivas passam a depender da ideia de permanecer ali. O espaço não é apenas cenário: participa da construção daquela cultura. Existe uma diferença importante entre estar seguro e compreender o perigo. Uma muralha pode impedir uma ameaça imediata, mas não responde às perguntas sobre sua origem. A dúvida continua do lado de dentro. É aí que a informação ganha força dramática. Quem sabe o que existe além dos limites? Quais histórias foram repetidas sem verificação? A obra constrói tensão porque o conhecimento disponível parece sempre incompleto. Outro detalhe é a escala. Quanto maiores parecem as muralhas, menor pode parecer o indivíduo diante delas. A arquitetura ajuda a comunicar dependência e fragilidade antes mesmo de qualquer confronto acontecer. Quando o mundo exterior começa a importar, o significado da proteção muda. O que parecia definitivo pode passar a ser visto como escolha, herança ou imposição. A mesma paisagem ganha outro sentido sem mudar de lugar. Por isso, as muralhas são tão memoráveis: elas escondem perguntas enquanto oferecem respostas fáceis. A história usa pedra, altura e distância para discutir o quanto vale a segurança quando ela custa liberdade.",
+      "narration_word_count": 273,
+      "description": "Às vezes a maior prisão parece o lugar mais seguro.\n\nNarrativa independente com ilustrações originais geradas por IA; não inclui cenas oficiais, capturas de tela ou gameplay."
     },
     {
       "id": "7014-fullmetal-troca-equivalente",
@@ -285,17 +423,63 @@
         "anime explained",
         "anime analysis",
         "Otaku Reframe",
-        "anime shorts"
+        "anime shorts",
+        "Fullmetal Alchemist"
       ],
       "production_state": {
-        "narration": "not_written",
+        "narration": "written_pending_editorial_preflight",
         "image_generation": "not_started",
         "voice": "not_started",
         "render": "not_started",
         "media_qa": "not_started",
         "upload": "not_started",
         "youtube_id": null
-      }
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Fullmetal Alchemist introduces equivalent exchange as if the world could be understood through balance. Give something, receive something of comparable value. But the most interesting part of that idea begins when people try to apply it to life.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A rule that promises balance"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "A rule may describe a process without answering whether an outcome is fair. Materials can be measured, while grief, trust and responsibility resist simple calculation. That tension makes the principle more than a magical shortcut.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Why knowledge does not erase consequences"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Knowledge matters because it allows people to understand what a process demands. Yet understanding a mechanism does not erase its consequences. Sometimes knowing the price makes a decision more painful rather than easier.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; What makes a trade feel unfair"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "There is also a difference between value and meaning. Two objects may appear equal on a scale but carry very different significance to the people involved. A story becomes compelling when those meanings collide.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; The difference between value and meaning"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Limitations give the system weight. If every problem could be solved by trading something convenient, the audience would stop worrying about consequences. A convincing rule demands sacrifices that cannot always be reversed.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; How limitations create tension"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "That is why shortcuts feel tempting. A difficult journey offers no guarantee of success, while a forbidden solution may promise immediate relief. The drama comes from recognizing what impatience can hide about the actual cost.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Why shortcuts remain tempting"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Every major choice therefore asks two questions: what can be gained, and what must be surrendered? The second question often reveals more about a person's priorities. Power becomes inseparable from the ethics of using it.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; The moral weight of a choice"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Equivalent exchange remains memorable not because it turns the universe into a perfect equation, but because it exposes the limits of equations. Some costs are easy to count. Others change a life.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A principle that is more than a formula"
+        }
+      ],
+      "narration_script": "Fullmetal Alchemist introduces equivalent exchange as if the world could be understood through balance. Give something, receive something of comparable value. But the most interesting part of that idea begins when people try to apply it to life. A rule may describe a process without answering whether an outcome is fair. Materials can be measured, while grief, trust and responsibility resist simple calculation. That tension makes the principle more than a magical shortcut. Knowledge matters because it allows people to understand what a process demands. Yet understanding a mechanism does not erase its consequences. Sometimes knowing the price makes a decision more painful rather than easier. There is also a difference between value and meaning. Two objects may appear equal on a scale but carry very different significance to the people involved. A story becomes compelling when those meanings collide. Limitations give the system weight. If every problem could be solved by trading something convenient, the audience would stop worrying about consequences. A convincing rule demands sacrifices that cannot always be reversed. That is why shortcuts feel tempting. A difficult journey offers no guarantee of success, while a forbidden solution may promise immediate relief. The drama comes from recognizing what impatience can hide about the actual cost. Every major choice therefore asks two questions: what can be gained, and what must be surrendered? The second question often reveals more about a person's priorities. Power becomes inseparable from the ethics of using it. Equivalent exchange remains memorable not because it turns the universe into a perfect equation, but because it exposes the limits of equations. Some costs are easy to count. Others change a life.",
+      "narration_word_count": 274,
+      "description": "The most important exchange is not always about materials.\n\nNarrativa independente com ilustrações originais geradas por IA; não inclui cenas oficiais, capturas de tela ou gameplay.\n\nOriginal English commentary and AI-generated conceptual illustrations; no anime clips."
     },
     {
       "id": "7015-one-piece-poneglyphs",
@@ -354,17 +538,63 @@
         "anime explained",
         "anime analysis",
         "Otaku Reframe",
-        "anime shorts"
+        "anime shorts",
+        "One Piece"
       ],
       "production_state": {
-        "narration": "not_written",
+        "narration": "written_pending_editorial_preflight",
         "image_generation": "not_started",
         "voice": "not_started",
         "render": "not_started",
         "media_qa": "not_started",
         "upload": "not_started",
         "youtube_id": null
-      }
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "In One Piece, an ancient stone can matter as much as a legendary weapon. The reason is not simply that it survives the passage of time. It can preserve information that people in power would rather keep hidden.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A mystery written into stone"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "A message carved into stone creates a fascinating contrast. The object is visible, heavy and real, but its meaning may be inaccessible. Understanding it requires the right language, context and a willingness to ask uncomfortable questions.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Why language can hold power"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "One fragment rarely explains an entire past. A scattered record encourages exploration because each discovery changes how earlier clues are interpreted. The mystery grows through connections rather than one convenient answer.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; The importance of a fragmented record"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Knowledge can also become a form of resistance. When a society controls which stories are repeated, discovering an older account challenges more than a single fact. It challenges the authority to define what everyone remembers.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Knowledge as a form of resistance"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "This turns the journey into an investigation. Islands are not only places for adventure; they may hold clues about history, culture and conflicting versions of events. Curiosity becomes a reason to keep moving forward.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; How exploration becomes investigation"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "The importance of that history is not trapped in the past. What people believe today affects their choices today. A missing chapter can explain alliances, fears or rules that otherwise seem arbitrary.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Why history shapes the present"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "A good clue does not end a mystery immediately. It changes the questions. A destination that once seemed important for treasure may become important because of the truth it could reveal about the world.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A clue that changes a destination"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "That is why ancient stones work so well in a long-running story. They make discovery feel consequential, and they remind us that information can be the most dangerous treasure of all.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; What mysteries do for a long story"
+        }
+      ],
+      "narration_script": "In One Piece, an ancient stone can matter as much as a legendary weapon. The reason is not simply that it survives the passage of time. It can preserve information that people in power would rather keep hidden. A message carved into stone creates a fascinating contrast. The object is visible, heavy and real, but its meaning may be inaccessible. Understanding it requires the right language, context and a willingness to ask uncomfortable questions. One fragment rarely explains an entire past. A scattered record encourages exploration because each discovery changes how earlier clues are interpreted. The mystery grows through connections rather than one convenient answer. Knowledge can also become a form of resistance. When a society controls which stories are repeated, discovering an older account challenges more than a single fact. It challenges the authority to define what everyone remembers. This turns the journey into an investigation. Islands are not only places for adventure; they may hold clues about history, culture and conflicting versions of events. Curiosity becomes a reason to keep moving forward. The importance of that history is not trapped in the past. What people believe today affects their choices today. A missing chapter can explain alliances, fears or rules that otherwise seem arbitrary. A good clue does not end a mystery immediately. It changes the questions. A destination that once seemed important for treasure may become important because of the truth it could reveal about the world. That is why ancient stones work so well in a long-running story. They make discovery feel consequential, and they remind us that information can be the most dangerous treasure of all.",
+      "narration_word_count": 271,
+      "description": "What if the most dangerous treasure were information?\n\nNarrativa independente com ilustrações originais geradas por IA; não inclui cenas oficiais, capturas de tela ou gameplay.\n\nOriginal English commentary and AI-generated conceptual illustrations; no anime clips."
     },
     {
       "id": "7016-hunter-nen-restricoes",
@@ -423,17 +653,63 @@
         "anime explained",
         "anime analysis",
         "Otaku Reframe",
-        "anime shorts"
+        "anime shorts",
+        "Hunter x Hunter"
       ],
       "production_state": {
-        "narration": "not_written",
+        "narration": "written_pending_editorial_preflight",
         "image_generation": "not_started",
         "voice": "not_started",
         "render": "not_started",
         "media_qa": "not_started",
         "upload": "not_started",
         "youtube_id": null
-      }
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Hunter x Hunter makes a fascinating promise through Nen: a limitation can make an ability more meaningful. Instead of asking only how much power someone has, the story invites us to examine the conditions behind that power.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Power built around conditions"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "A condition matters because it changes behavior. An ability usable in every situation encourages one strategy; an ability with strict requirements forces careful timing. The restriction becomes part of the fight itself.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Why risk makes a rule meaningful"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Risk is essential to this idea. If there were no consequence for breaking a promise, that promise would have little weight. A real limitation asks its user to accept a vulnerability in exchange for potential strength.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A restriction as a strategic choice"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "This creates a strategic choice. Is the benefit worth the cost? Should the ability be saved for a particular moment? A clever opponent may learn more from the restriction than from the attack's appearance.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; How planning beats raw strength"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Raw strength therefore cannot decide every outcome. Preparation, observation and positioning can matter just as much. An unfamiliar power may look unbeatable until its exact conditions become visible through the conflict.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; The cost of relying on one method"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "The danger is relying on one solution. A highly specialized ability can be impressive under ideal circumstances and inconvenient elsewhere. That tension rewards flexible thinking instead of a simple ranking of who is strongest.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Why matchups are hard to predict"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Restrictions also make matchups unpredictable. Different goals, environments and personalities change which strategy works. This is why a confrontation can feel like a puzzle, with every small action carrying new information.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; Creative solutions under pressure"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "In the end, Nen rules tell stories about commitment. What someone chooses to sacrifice reveals what they value. The limits do not merely balance the powers; they give those powers dramatic meaning.",
+          "visual_instruction": "Original visual conceptual illustration, no actual anime frames; A system where limits tell stories"
+        }
+      ],
+      "narration_script": "Hunter x Hunter makes a fascinating promise through Nen: a limitation can make an ability more meaningful. Instead of asking only how much power someone has, the story invites us to examine the conditions behind that power. A condition matters because it changes behavior. An ability usable in every situation encourages one strategy; an ability with strict requirements forces careful timing. The restriction becomes part of the fight itself. Risk is essential to this idea. If there were no consequence for breaking a promise, that promise would have little weight. A real limitation asks its user to accept a vulnerability in exchange for potential strength. This creates a strategic choice. Is the benefit worth the cost? Should the ability be saved for a particular moment? A clever opponent may learn more from the restriction than from the attack's appearance. Raw strength therefore cannot decide every outcome. Preparation, observation and positioning can matter just as much. An unfamiliar power may look unbeatable until its exact conditions become visible through the conflict. The danger is relying on one solution. A highly specialized ability can be impressive under ideal circumstances and inconvenient elsewhere. That tension rewards flexible thinking instead of a simple ranking of who is strongest. Restrictions also make matchups unpredictable. Different goals, environments and personalities change which strategy works. This is why a confrontation can feel like a puzzle, with every small action carrying new information. In the end, Nen rules tell stories about commitment. What someone chooses to sacrifice reveals what they value. The limits do not merely balance the powers; they give those powers dramatic meaning.",
+      "narration_word_count": 267,
+      "description": "A stronger ability sometimes begins with a weakness.\n\nNarrativa independente com ilustrações originais geradas por IA; não inclui cenas oficiais, capturas de tela ou gameplay.\n\nOriginal English commentary and AI-generated conceptual illustrations; no anime clips."
     },
     {
       "id": "game-104-terraria-primeira-noite",
