@@ -1,0 +1,15 @@
+{
+  "schema": "autoeditorvideo/kwai-no-login-feasibility-launch/v1",
+  "creator_authorized_at": "2026-11-08",
+  "target": "kwai_brazil_only",
+  "official_package": "com.kwai.video",
+  "system_image": "android-34/google_apis_playstore/x86_64",
+  "open_google_play_app_listing": true,
+  "upload_synthetic_video_to_android_storage": true,
+  "no_apk_install": true,
+  "no_login": true,
+  "no_real_video_upload": true,
+  "no_publication": true,
+  "no_secret_access": true,
+  "record_test_only": true
+}
