@@ -79,6 +79,12 @@ def audit_episode(episode: dict) -> dict:
     if "arquivo otaku" in (title + " " + description).casefold():
         issues.append(_issue("old_brand", "blocking", "Referencia a marca antiga nos metadados."))
 
+    # Growth advisor uses authenticated/creator-provided archived metrics,
+    # never synthetic metrics. Advisory-only for existing episodes: do not
+    # invalidate an already approved cache or reupload published material.
+    from otaku_growth_autotune import editorial_advice
+    issues.extend(editorial_advice(episode))
+
     return {
         "id": video_id,
         "series": series,
