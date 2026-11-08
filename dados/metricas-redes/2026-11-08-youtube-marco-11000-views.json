@@ -1,0 +1,27 @@
+{
+  "esquema": "autoeditor/youtube-milestone-manual/v1",
+  "canal": "Otaku Multicena",
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "tipo": "marco_de_visualizacoes_acumuladas",
+  "data_da_conquista": "2026-11-08",
+  "fuso_horario": "America/Sao_Paulo",
+  "fonte": "captura de tela de conquista do vidIQ enviada pelo proprietário",
+  "marco_exibido_views": 11000,
+  "formulacao_correta": "vidIQ confirmou alcance do marco de 11.000 views; não confirma que o contador estivesse exatamente em 11.000 no instante da captura",
+  "tipo_contagem": "visualizacoes_acumuladas_do_canal",
+  "ultima_referencia_api": {
+    "arquivo": "dados/metricas-redes/2026-11-08-youtube-api-vidiq.json",
+    "views_vitalicias_antes": 10864,
+    "diferenca_para_marco": 136,
+    "nota": "A diferença é entre uma contagem API anterior e o limiar de conquista, não mede crescimento em período fixo nem views no dia."
+  },
+  "screenshot_nome_original": "image-1794164681694.jpg",
+  "meta_sugerida_seguinte": 15000,
+  "publico_vs_privado": "Esta captura não informa privacidade nem status de upload de nenhum vídeo.",
+  "limites": [
+    "A conquista não representa 11.000 views da semana, do dia ou de um único Short.",
+    "Screenshot de marco arredondado, não novo snapshot API preciso.",
+    "Arquivo de imagem original não foi enviado ao repositório público.",
+    "Não foi realizada publicação, alteração de privacidade ou configuração do YouTube neste registro."
+  ]
+}
