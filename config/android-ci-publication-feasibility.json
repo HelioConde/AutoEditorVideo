@@ -1,0 +1,17 @@
+{
+  "schema": "autoeditorvideo/android-emulator-safe-test/v1",
+  "authorized_at": "2026-11-08",
+  "android_api": 34,
+  "architecture": "x86_64",
+  "test_mode": "safe_no_login_no_publishing",
+  "sample_media": "synthetic_only_2s_360x640",
+  "test_adb_video_push": true,
+  "test_android_sha256": true,
+  "test_home_screenshot": true,
+  "install_third_party_apks": false,
+  "login_to_tiktok_or_kwai": false,
+  "upload_real_video": false,
+  "post_any_content": false,
+  "save_social_credentials": false,
+  "require_creator_approval_before_live_upload": true
+}
