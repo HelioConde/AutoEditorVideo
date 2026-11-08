@@ -40,7 +40,9 @@ def test_en_forces_canonical_recognizable_appearance_on_every_scene():
 
 def test_all_scenes_use_real_character_anchor_images_not_random_unrelated_stills():
     src=(ROOT/"scripts"/"nine_visual_replacements_v2_20261108.py").read_text()
-    assert "br_v2.generate_anchored_art(row,folder,key)" in src
+    assert "br_v2.generate_anchored_art(" in src
+    assert "row,folder,key,gamer_http400_repair=http400_mode" in src
+    assert "extra_edit_budget=shared_gamer_extra_budget" in src
     assert "editor.render_one(row,folder,audio,sec,words,frames,channel)" in src
     assert '"editorial_visual_review_status":"pending"' in src
     assert '"privacyStatus":"private"' in src
