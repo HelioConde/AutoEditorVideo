@@ -1,3 +1,34 @@
+# REGRA PRIORITÁRIA E PERMANENTE — PERSONAGENS RECONHECÍVEIS NOS CANAIS OTAKU (08/11/2026)
+
+**Autorização expressa do criador.** Esta política NÃO pode ser revertida, enfraquecida,
+ignorada nem substituída por personagens genéricos sem nova instrução explícita
+do criador. Prioridade sobre antigos prompts genéricos de vídeos de anime.
+Contrato: `config/otaku-character-identity-policy.json`.
+
+- Otaku Multicena BR e Otaku Reframe EN: se o roteiro nomear um personagem
+  de anime, retratá-lo com aparência reconhecível do anime, preservando cabelo,
+  rosto, olhos, roupas, acessórios, paleta, proporções e silhueta.
+  A ação da cena deve corresponder à história narrada.
+- Proibido usar generic athlete, generic student, fictional silhouette,
+  fresh fictional character, avoid brand-specific costume, not copied exactly
+  ou outras instruções que descaracterizem personagens nomeados de anime.
+  Isso NÃO altera as regras dos canais Gamer, Kids e IA.
+- Cada vídeo anime deve criar imagens âncora para os personagens e usar
+  essas imagens como REFERÊNCIAS REAIS em images/edits em todas as cenas,
+  evitando imagens independentes apenas a partir de texto.
+- QA: registrar SHA-256 de cada âncora, referência de cada cena, fidelidade
+  da história e avaliação real da continuidade visual. Hash e resolução
+  NÃO são garantia de semelhança facial: não alegar revisão artística
+  automática que não ocorreu. Bloquear publicação sem revisão visual.
+- Versionar os vídeos corrigidos. Publicar publicamente somente após QA,
+  confirmação exata do canal, status público, processamento e capa.
+  Excluir SOMENTE IDs antigos expressamente autorizados, APÓS confirmação
+  da substituição; sem exclusão ampla e sem reupload cego em erros de rede.
+- Testes de regressão devem bloquear retorno de prompts genéricos;
+  mudança da regra requer autorização explícita posterior do criador.
+
+---
+
 # Arquivo Otaku — orientações para agentes
 
 ## REGRA PERMANENTE — TAGS DE SEO NÃO SÃO IDENTIFICADORES TÉCNICOS (05/11/2026)
