@@ -1,0 +1,126 @@
+name: AutoEditorVideo - Kwai Brazil Android Play Store feasibility
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/kwai-android-playstore-launch-20261108.json'
+  workflow_dispatch:
+    inputs:
+      confirm_no_login_or_publication:
+        description: 'Somente diagnosticar Google Play/Kwai sem instalar APK, login nem publicar'
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autoeditorvideo-kwai-android-playstore-no-login-20261108
+  cancel-in-progress: false
+
+jobs:
+  exact-scope-and-offline-tests:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      (
+        (github.event_name == 'push' &&
+         github.event.head_commit.message == 'test(kwai): run Google Play listing probe without installing or publishing') ||
+        (github.event_name == 'workflow_dispatch' &&
+         inputs.confirm_no_login_or_publication == true)
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Prove no APK download, login, publish or account token enters Android
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/kwai_android_playstore_probe_20261108.py
+          python -m unittest discover -s tests -p 'test_kwai_android_playstore_probe_20261108.py' -v
+          python scripts/kwai_android_playstore_probe_20261108.py --action preflight
+          python - <<'PY'
+          import json
+          d=json.load(open("config/kwai-android-playstore-launch-20261108.json",encoding="utf-8"))
+          assert d == {
+            "schema":"autoeditorvideo/kwai-no-login-feasibility-launch/v1",
+            "creator_authorized_at":"2026-11-08",
+            "target":"kwai_brazil_only",
+            "official_package":"com.kwai.video",
+            "system_image":"android-34/google_apis_playstore/x86_64",
+            "open_google_play_app_listing":True,
+            "upload_synthetic_video_to_android_storage":True,
+            "no_apk_install":True,
+            "no_login":True,
+            "no_real_video_upload":True,
+            "no_publication":True,
+            "no_secret_access":True,
+            "record_test_only":True
+          }
+          print("KWAI_BR_ONLY_SAFE_LAUNCH_APPROVED")
+          PY
+
+  android-14-google-play-kwai-listing:
+    needs: exact-scope-and-offline-tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    env:
+      KWAI_READ_ONLY_EMULATOR_TEST: 'yes'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install ffmpeg only for a harmless synthetic MP4
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Enable and verify KVM
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -e /dev/kvm || { echo "KVM_UNAVAILABLE"; exit 1; }
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Boot official Android 14 with Google Play and inspect Kwai listing without logging in
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis_playstore
+          arch: x86_64
+          profile: pixel_6
+          emulator-boot-timeout: 600
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -camera-back none -camera-front none
+          disable-animations: true
+          script: python3 scripts/kwai_android_playstore_probe_20261108.py --action probe
+      - name: Save clean no-account Kwai Play Store screenshot and feasibility report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kwai-brazil-android-google-play-feasibility-20261108
+          path: kwai-android-feasibility-results/
+          retention-days: 5
+          if-no-files-found: warn
+      - name: Describe test scope accurately
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Kwai Brasil — teste Google Play em Android"
+            echo "Abre somente a ficha oficial com.kwai.video."
+            echo "MP4 sintético com SHA-256, sem APK instalado, login ou publicação."
+            echo "A capacidade de publicar pelo aplicativo ainda NÃO está validada."
+          } >> "$GITHUB_STEP_SUMMARY"
