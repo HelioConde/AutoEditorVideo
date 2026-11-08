@@ -1,0 +1,131 @@
+name: AutoEditorVideo - Android 14 emulator safe smoke test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'config/android-ci-smoke-launch-20261108.json'
+  workflow_dispatch:
+    inputs:
+      confirm_no_publication:
+        description: 'Confirmar: somente testar Android, ADB, MP4 sintético e screenshot (nenhum upload real)'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autoeditorvideo-android-14-safe-emulator-smoke
+  cancel-in-progress: false
+
+jobs:
+  offline-safety-contract:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      (
+        (github.event_name == 'push' &&
+         github.event.head_commit.message == 'test(android): start no-login Android 14 emulator smoke test') ||
+        (github.event_name == 'workflow_dispatch' &&
+         inputs.confirm_no_publication == true)
+      )
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate no-platform-login and no-live-upload guard
+        run: |
+          set -euo pipefail
+          python -m py_compile scripts/android_emulator_safe_smoke.py
+          python -m unittest discover -s tests -p 'test_android_emulator_safe_smoke.py' -v
+          python scripts/android_emulator_safe_smoke.py --action preflight
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('config/android-ci-smoke-launch-20261108.json').read_text())
+          assert d=={
+             'schema':'autoeditorvideo/android-safe-smoke-launch/v1',
+             'creator_authorized_at':'2026-11-08',
+             'repository':'HelioConde/AutoEditorVideo',
+             'device':'android-14-api-34-google_apis-x86_64',
+             'no_account_credentials':True,
+             'no_external_apks':True,
+             'no_tiktok_or_kwai_login':True,
+             'no_real_video_upload':True,
+             'no_publication':True,
+             'sample':'generated_2_second_mp4_only',
+             'artifacts':['android-status.json','android-home.png','autoeditorvideo-ci-test-only.mp4'],
+             'goal':'assess_android_emulator_for_future_official_tiktok_kwai_workflows'
+          }
+          print('ANDROID_LAUNCH_CREATOR_AND_EXACT_SAFE_SCOPE_VERIFIED')
+          PY
+
+  android-14-adb-media-screenshot:
+    needs: offline-safety-contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    env:
+      ANDROID_SMOKE_NO_PUBLICATION: 'yes'
+      ANDROID_EMULATOR_TEST_ONLY: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install FFmpeg for a local synthetic video only
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          command -v ffmpeg
+      - name: Enable KVM acceleration for Android emulator
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -e /dev/kvm ]; then
+            echo 'ANDROID_KVM_UNAVAILABLE_ON_THIS_RUNNER'
+            exit 1
+          fi
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls -l /dev/kvm
+      - name: Boot actual Android 14 emulator and test ADB media transfer + screenshot
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          emulator-boot-timeout: 600
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -no-snapshot -camera-back none -camera-front none
+          disable-animations: true
+          script: python3 scripts/android_emulator_safe_smoke.py --action run
+      - name: Store only synthetic video, redacted status and Android home screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-14-safe-emulator-smoke-test-result
+          path: android-emulator-smoke-results/
+          retention-days: 5
+          if-no-files-found: warn
+      - name: Explain scope in job summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## Android 14 | AutoEditorVideo'
+            echo 'Este job testa somente o Android, ADB, um MP4 sintético, SHA-256 e screenshot.'
+            echo 'Nenhuma conta TikTok/Kwai foi conectada, nenhum APK social foi instalado e nenhum vídeo real foi publicado.'
+            echo 'A compatibilidade de publicação dos aplicativos NÃO é demonstrada por este teste.'
+          } >> "$GITHUB_STEP_SUMMARY"
