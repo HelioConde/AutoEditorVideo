@@ -1,0 +1,168 @@
+{
+  "schema": "autoeditorvideo/otaku-growth-active/v1",
+  "channel": "br",
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "mode": "auto_adaptive_editorial_guards_not_video_mutation",
+  "inputs": {
+    "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+    "api_period": [
+      "2026-10-09",
+      "2026-11-07"
+    ],
+    "recap_week": [
+      "2026-10-26",
+      "2026-11-01"
+    ],
+    "rolling_28d_exact_dates": null,
+    "views_analytics_api_period": 7535,
+    "engaged_views_api_period": 2728,
+    "views_vs_swiped_28d_percent": 34.8,
+    "ignored_28d_percent": 65.2,
+    "recap_week_likes": 58,
+    "recap_week_subscribers_gained": 3,
+    "top_five_from_separate_28d_window": [
+      "Light caçou Kira SEM SABER que ...",
+      "Steel Ball Run: A corrida que mud...",
+      "Zenitsu luta melhor DORMINDO?! ⚡",
+      "Por que os olhos de Kurapika ficam ...",
+      "Killua queria uma vida longe dos ASS..."
+    ],
+    "source_files": [
+      "dados/metricas-redes/2026-11-08-youtube-api-vidiq.json",
+      "dados/metricas-redes/2026-11-08-youtube-recap-26out-01nov.json"
+    ]
+  },
+  "hypothesis_not_proven": true,
+  "priority": "test_hook_first_3s",
+  "viewed_rate_aspirational_target_percent": 40,
+  "production_rules": {
+    "hook": {
+      "first_seconds": 3,
+      "suggested_max_words": 12,
+      "styles_to_test": [
+        "misterio_contradicao",
+        "escolha_consequencia",
+        "curiosidade_de_habilidade"
+      ],
+      "no_generic_intro": true,
+      "promised_fact_must_be_grounded": true,
+      "show_narrated_action_in_first_frame": true
+    },
+    "title": {
+      "preferred_characters": [
+        12,
+        70
+      ],
+      "max_uppercase_emphasis_words": 2,
+      "must_be_specific_to_story": true,
+      "no_unverified_clickbait": true,
+      "allow_title_variation_only_before_upload": true
+    },
+    "script": {
+      "clear_question_or_conflict": true,
+      "payoff_before_end": true,
+      "no_filler": true,
+      "no_spoken_channel_name": true,
+      "default_ending": "deliver_story_result_without_generic_cta",
+      "do_not_change_published_narration": true
+    },
+    "narration": {
+      "engine": "edge-tts",
+      "style": "natural_ptbr_with_story_specific_emphasis",
+      "verify_character_names_and_pronunciation": true,
+      "sync_from_actual_audio": true,
+      "no_unverified_synthetic_word_timing": true
+    },
+    "captions": {
+      "max_words_per_phrase": 3,
+      "timestamps_source": "real_word_boundaries_or_verified_asr",
+      "high_contrast": true,
+      "avoid_faces_and_hands": true,
+      "mobile_safe_zone_required": true
+    },
+    "thumbnail": {
+      "aspect_ratio": "9:16",
+      "format": "original_render_thumbnail",
+      "preferred_words": [
+        2,
+        5
+      ],
+      "readable_mobile": true,
+      "recognizable_story_subject": true,
+      "verify_hash_before_upload": true,
+      "do_not_replace_with_youtube_auto_frame": true
+    },
+    "visual": {
+      "first_scene_narrative_action": true,
+      "preserve_named_character_identity_anchors": true,
+      "prefer_independent_layers_for_real_motion": true,
+      "camera_zoom_is_not_character_animation": true,
+      "avoid_jump_cut_flicker": true,
+      "smooth_camera_zoom_max_percent": 4,
+      "no_fake_gameplay": true
+    },
+    "duration": {
+      "baseline_experiment_seconds": [
+        30,
+        45
+      ],
+      "extended_experiment_seconds": [
+        87,
+        93
+      ],
+      "extended_max_share_of_new_tests_percent": 25,
+      "actual_duration_from_tts_and_ffprobe": true,
+      "do_not_force_a_global_duration_from_one_snapshot": true
+    },
+    "content": {
+      "experiments": [
+        {
+          "key": "misterio_contradicao",
+          "example": "Death Note",
+          "question": "Gancho contraditorio entrega a revelacao?"
+        },
+        {
+          "key": "escolha_consequencia",
+          "example": "Steel Ball Run ou dilemas emocionais",
+          "question": "Conflito com custo claro incentiva continuar?"
+        },
+        {
+          "key": "curiosidade_de_habilidade",
+          "example": "Zenitsu, Kurapika ou Killua",
+          "question": "Habilidade com pergunta verificavel desperta curiosidade?"
+        }
+      ],
+      "avoid_all_topics_same_franchise": true,
+      "never_duplicate_existing_video": true,
+      "no_unverified_news_or_canon": true
+    }
+  },
+  "measurement_protocol": {
+    "age_hours": [
+      1,
+      6,
+      24,
+      72,
+      168
+    ],
+    "primary": "viewed_vs_swiped_percent",
+    "secondary": [
+      "engaged_views",
+      "average_view_percentage",
+      "subscribers_per_1000_views",
+      "views_at_same_age"
+    ],
+    "compare_same_channel_window_and_video_age": true,
+    "minimum_completed_per_variant_before_promotion": 5,
+    "automatic_promotion_without_comparable_evidence": false
+  },
+  "protected_guards": {
+    "do_not_edit_existing_public_videos": true,
+    "no_render_or_upload_by_autotune": true,
+    "no_image_api_calls": true,
+    "no_secrets_or_private_images": true,
+    "keep_creator_pause_and_reservation_registry": true,
+    "human_canon_rights_review_where_required": true,
+    "private_review_or_explicit_public_upload_authorization": true
+  }
+}
