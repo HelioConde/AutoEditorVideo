@@ -25,5 +25,8 @@
   "no_fabricated_software_demonstrations": true,
   "technical_qa_required": true,
   "visual_review_status": "pending",
-  "launch_source": "creator_request_2026-11-08"
+  "launch_source": "creator_request_2026-11-08",
+  "retry_of_preflight_only_run_id": 42481722596,
+  "retry_reason": "Preflight had failed tests; no image renders or Youtube uploads were started. Kids final story and conceituais literal were corrected.",
+  "launch_sequence": 2
 }
