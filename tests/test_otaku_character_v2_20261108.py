@@ -49,7 +49,8 @@ def test_previous_unanchored_br_workflow_is_permanently_blocked():
 def test_canonical_v2_generates_anchor_then_edits_no_independent_frames(tmp_path,monkeypatch):
     calls={"anchors":[],"edits":[]}
     def png(color):
-        im=Image.new("RGB",(1024,1536),color)
+        im=Image.effect_noise((1024,1536),25).convert("RGB")
+        im.putpixel((0,0),color)
         buf=io.BytesIO()
         im.save(buf,format="PNG")
         return buf.getvalue()
