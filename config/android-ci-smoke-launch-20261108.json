@@ -1,0 +1,18 @@
+{
+  "schema": "autoeditorvideo/android-safe-smoke-launch/v1",
+  "creator_authorized_at": "2026-11-08",
+  "repository": "HelioConde/AutoEditorVideo",
+  "device": "android-14-api-34-google_apis-x86_64",
+  "no_account_credentials": true,
+  "no_external_apks": true,
+  "no_tiktok_or_kwai_login": true,
+  "no_real_video_upload": true,
+  "no_publication": true,
+  "sample": "generated_2_second_mp4_only",
+  "artifacts": [
+    "android-status.json",
+    "android-home.png",
+    "autoeditorvideo-ci-test-only.mp4"
+  ],
+  "goal": "assess_android_emulator_for_future_official_tiktok_kwai_workflows"
+}
