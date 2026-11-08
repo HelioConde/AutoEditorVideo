@@ -191,7 +191,24 @@ def publish(channel:str)->None:
     records=[]
     for ep,rec in zip(rows,receipts):
         vid=rec["youtube_id"]
-        original=inspect(api,vid,ep,channel)
+        try:
+            original=inspect(api,vid,ep,channel)
+        except PublishBlocked as err:
+            # Some Shorts can remain in YouTube's processing queue even after
+            # their uploads have succeeded. Record the pending state and keep
+            # handling the other verified episodes. Never modify pending media.
+            if str(err).startswith(("YOUTUBE_VIDEO_NOT_PROCESSED_",
+                                    "YOUTUBE_PROCESSING_NOT_DONE_")):
+                records.append({"channel":channel,"episode_id":ep["id"],
+                    "youtube_id":vid,"channel_id":KNOWN_IDS[channel],
+                    "expected_made_for_kids":channel=="kids",
+                    "privacy_before":"not_checked_until_processing_done",
+                    "public_verified":False,
+                    "transition_state":"youtube_processing_pending_no_mutation"})
+                save(output,records)
+                print("BATCH15_PROCESSING_PENDING_"+channel+"_"+ep["id"],flush=True)
+                continue
+            raise
         stat=original["status"]
         item={"channel":channel,"episode_id":ep["id"],"youtube_id":vid,
               "channel_id":KNOWN_IDS[channel],"expected_made_for_kids":channel=="kids",
