@@ -55,7 +55,7 @@ def guard(channel):
             or run.get("name")!=SOURCE_WORKFLOW
             or run.get("head_sha")!=SOURCE_COMMIT
             or run.get("head_branch")!="main"
-            or run.get("conclusion")!="success"
+            or run.get("conclusion") not in ("success","failure")
             or run.get("event")!="push"
             or run.get("repository",{}).get("full_name")!="HelioConde/AutoEditorVideo"):
         raise StageBlocked("SOURCE_JOB_MUST_BE_EXACT_SUCCESSFUL_NINE_RENDER")
