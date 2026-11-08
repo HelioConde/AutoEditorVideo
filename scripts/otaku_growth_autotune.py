@@ -36,7 +36,44 @@ def _normalize(value: str) -> str:
 def _whole_words(text: str) -> list[str]:
     return re.findall(r"[\wÀ-ÿ]+", str(text))
 
-def evidence(api: dict, recap: dict) -> dict:
+def latest_sources() -> tuple[Path, Path]:
+    """Escolhe a ultima captura com mesmo schema verificavel, sem inferir data."""
+    def select(pattern: str, baseline: Path, schema: str, date_key: str) -> Path:
+        candidates = [baseline]
+        candidates.extend(p for p in baseline.parent.glob(pattern)
+                          if p.is_file() and p != baseline)
+        valid = []
+        for path in candidates:
+            try:
+                doc = read(path)
+                if doc.get("esquema") != schema:
+                    continue
+                recorded = date.fromisoformat(str(doc[date_key]))
+                if recorded > date.today():
+                    # Data futura de uma captura nao pode ser usada para
+                    # mudar politicas antes do evento real.
+                    continue
+                if schema.endswith("manual-recap/v1") and doc.get("canal_id") != CHANNEL_ID:
+                    continue
+                if schema.endswith("api-snapshot/v1") and not any(
+                    c.get("channel_id") == CHANNEL_ID for c in doc.get("canais", [])
+                ):
+                    continue
+                valid.append((recorded, path.name, path))
+            except (OSError, ValueError, TypeError, KeyError):
+                continue
+        if not valid:
+            raise EvidenceBlocked("NO_TRUSTED_EDITORIAL_SNAPSHOT_"+schema)
+        return max(valid)[2]
+    return (
+        select("*youtube-api-vidiq*.json", API_SOURCE,
+               "autoeditor/youtube-analytics-api-snapshot/v1", "coleta_em"),
+        select("*youtube-recap*.json", RECAP_SOURCE,
+               "autoeditor/youtube-studio-manual-recap/v1", "data_registro")
+    )
+
+def evidence(api: dict, recap: dict, *, api_source: Path = API_SOURCE,
+             recap_source: Path = RECAP_SOURCE) -> dict:
     if api.get("esquema") != "autoeditor/youtube-analytics-api-snapshot/v1":
         raise EvidenceBlocked("UNKNOWN_ANALYTICS_SOURCE_SCHEMA")
     if recap.get("esquema") != "autoeditor/youtube-studio-manual-recap/v1":
@@ -57,10 +94,14 @@ def evidence(api: dict, recap: dict) -> dict:
     if any(isinstance(n, bool) or not isinstance(n, (int, float)) or not 0 <= n <= 100
            for n in (viewed, ignored)) or abs(viewed + ignored - 100) > 0.11:
         raise EvidenceBlocked("VIEWED_VS_SWIPED_TOTAL_INVALID")
-    if period.get("inicio") != "2026-10-09" or period.get("fim") != "2026-11-07":
-        raise EvidenceBlocked("API_BASELINE_PERIOD_CHANGED_USE_NEW_SCHEMA")
-    if week.get("inicio") != "2026-10-26" or week.get("fim") != "2026-11-01":
-        raise EvidenceBlocked("WEEKLY_PERIOD_CHANGED_USE_NEW_SCHEMA")
+    for label, obj in (("API", period), ("RECAP", week)):
+        try:
+            first = date.fromisoformat(obj["inicio"])
+            last = date.fromisoformat(obj["fim"])
+        except (KeyError, ValueError, TypeError):
+            raise EvidenceBlocked("INVALID_"+label+"_WINDOW") from None
+        if first > last or (last-first).days > 90:
+            raise EvidenceBlocked("IMPOSSIBLE_"+label+"_WINDOW")
     if not isinstance(metrics.get("views"), int) or metrics["views"] < 0:
         raise EvidenceBlocked("INVALID_ANALYTICS_VIEWS")
     top = rolling.get("top_5_shorts_por_visualizacoes", [])
@@ -79,12 +120,13 @@ def evidence(api: dict, recap: dict) -> dict:
         "recap_week_likes": week.get("curtidas_recebidas"),
         "recap_week_subscribers_gained": week.get("inscritos_ganhos"),
         "top_five_from_separate_28d_window": titles,
-        "source_files": [str(API_SOURCE.relative_to(ROOT)),
-                         str(RECAP_SOURCE.relative_to(ROOT))],
+        "source_files": [str(api_source.relative_to(ROOT)),
+                         str(recap_source.relative_to(ROOT))],
     }
 
-def build_policy(api: dict, recap: dict) -> dict:
-    data = evidence(api, recap)
+def build_policy(api: dict, recap: dict, *, api_source: Path = API_SOURCE,
+                 recap_source: Path = RECAP_SOURCE) -> dict:
+    data = evidence(api, recap, api_source=api_source, recap_source=recap_source)
     viewed = data["views_vs_swiped_28d_percent"]
     # Apenas uma medicao de viewed-vs-swiped -> piloto, nao auto-trocar a
     # duracao de todos os videos nem atribuir causalidade a um titulo.
@@ -199,7 +241,11 @@ def build_policy(api: dict, recap: dict) -> dict:
 
 def load_policy(path: Path = ACTIVE) -> dict | None:
     if not Path(path).is_file():
-        return None
+        if Path(path) != ACTIVE or not API_SOURCE.is_file() or not RECAP_SOURCE.is_file():
+            return None
+        api_source, recap_source = latest_sources()
+        return build_policy(read(api_source), read(recap_source),
+                            api_source=api_source, recap_source=recap_source)
     value = read(path)
     if (value.get("schema") != "autoeditorvideo/otaku-growth-active/v1"
         or value.get("channel_id") != CHANNEL_ID
@@ -252,7 +298,9 @@ def cli(argv: list[str] | None = None) -> int:
     p.add_argument("--check", action="store_true",
                    help="Exigir politica atual consistente com fontes; nao salvar")
     args = p.parse_args(argv)
-    profile = build_policy(read(API_SOURCE),read(RECAP_SOURCE))
+    api_source, recap_source = latest_sources()
+    profile = build_policy(read(api_source), read(recap_source),
+                           api_source=api_source, recap_source=recap_source)
     data = json.dumps(profile, ensure_ascii=False, indent=2) + "\n"
     if args.check:
         current = args.output.read_text(encoding="utf-8") if args.output.is_file() else ""
