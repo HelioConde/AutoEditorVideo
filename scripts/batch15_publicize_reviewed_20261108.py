@@ -92,12 +92,18 @@ def github_guard(channel:str)->None:
     if (v.get("GITHUB_REPOSITORY")!="HelioConde/AutoEditorVideo"
         or v.get("GITHUB_REF")!="refs/heads/main"
         or v.get("GITHUB_RUN_ATTEMPT")!="1"
-        or v.get("GITHUB_EVENT_NAME")!="workflow_run"
-        or v.get("GITHUB_WORKFLOW")!=WORKFLOW
         or v.get("BATCH15_PUBLIC_CHANNEL")!=channel
         or v.get("BATCH15_PUBLIC_AUTHORIZED")!="yes"):
         raise PublishBlocked("WRONG_GITHUB_ONE_SHOT_PUBLIC_WORKFLOW")
     event=read_json(Path(v["GITHUB_EVENT_PATH"]))
+    if v.get("GITHUB_EVENT_NAME")=="workflow_dispatch":
+        if (v.get("GITHUB_WORKFLOW")!="AutoEditorVideo - publish nine existing Shorts after new OAuth"
+            or v.get("BATCH15_MANUAL_PUBLIC_CONFIRM")!="PUBLICAR-9-SEM-DUPLICAR"
+            or event.get("inputs",{}).get("confirmar")!="PUBLICAR-9-SEM-DUPLICAR"):
+            raise PublishBlocked("MANUAL_DISPATCH_CONFIRMATION_MISSING")
+        return
+    if v.get("GITHUB_EVENT_NAME")!="workflow_run" or v.get("GITHUB_WORKFLOW")!=WORKFLOW:
+        raise PublishBlocked("WRONG_SOURCE_WORKFLOW")
     src=event.get("workflow_run",{})
     if (src.get("id")!=SRC_RUN or src.get("head_sha")!=SRC_SHA
         or src.get("head_branch")!="main"
