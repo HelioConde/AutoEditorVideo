@@ -170,12 +170,18 @@ def verify(api,video_id:str,meta:dict)->tuple[bool,str|None,str|None]:
         return False,None,None
     snip=videos[0].get("snippet",{})
     status=videos[0].get("status",{})
-    if (snip.get("channelId")!=KNOWN_IDS[CHANNEL]
-        or snip.get("title")!=meta["title"]
-        or snip.get("description")!=meta["description"]
-        or status.get("madeForKids") is not False):
-        raise PublishBlocked("YOUTUBE_CHANNEL_TITLE_DESCRIPTION_OR_AUDIENCE_MISMATCH")
-    return status.get("privacyStatus")=="public",status.get("privacyStatus"),status.get("uploadStatus")
+    if snip.get("channelId")!=KNOWN_IDS[CHANNEL]:
+        raise PublishBlocked("YOUTUBE_VIDEO_OWNER_MISMATCH_DO_NOT_REUPLOAD")
+    # Immediately after upload YouTube may temporarily omit/normalize metadata.
+    # Return pending and retry READ-ONLY instead of declaring the insert failed.
+    # Do not consider a video public-confirmed unless title, description and
+    # creator's kids setting have all been read back in a stable response.
+    metadata_ready=(snip.get("title")==meta["title"]
+        and snip.get("description")==meta["description"]
+        and status.get("madeForKids") is False
+        and status.get("selfDeclaredMadeForKids") is False)
+    return (metadata_ready and status.get("privacyStatus")=="public",
+            status.get("privacyStatus"),status.get("uploadStatus"))
 
 def upload()->None:
     guard()
@@ -218,12 +224,13 @@ def upload()->None:
     record["youtube_id"]=video_id
     record["state"]="youtube_id_received"
     save(record)
-    for delay in (0,12,25,40):
+    for delay in (0,12,25,40,60):
         if delay:time.sleep(delay)
         public,visibility,upload_status=verify(api,video_id,meta)
         record["observed_visibility"]=visibility
         record["observed_upload_status"]=upload_status
         record["publication_confirmed"]=bool(public)
+        record["state"]="public_verified" if public else "readback_pending_no_new_upload"
         save(record)
         if public:break
     if not record["publication_confirmed"]:
