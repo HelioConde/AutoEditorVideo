@@ -27,19 +27,49 @@ from remaining_static_90s_20261107 import probe
 
 WORKFLOW="AutoEditorVideo - auto stage nine corrected MP4 replacements privately"
 GAMER_RETRY_WORKFLOW="AutoEditorVideo - retry Gamer-only V2 after exact failed original render"
+HTTP400_WORKFLOW="AutoEditorVideo - Gamer V2 fix HTTP400 and private upload"
 SOURCE_WORKFLOW="AutoEditorVideo - nine image-corrected replacements EN Gamer Alchemy"
 SOURCE_RUN_ID=42449154499
 SOURCE_COMMIT="0841f7523e5a50bb48ab4f6399cd95350a82a36a"
 RECEIPT_NAME="youtube-v2-private-upload-receipts.json"
 class StageBlocked(ValueError): pass
 
+def _gamer_fix_launch():
+    launch=Path("conteudos/gamer-v2-http400-fix-launch-20261108.json")
+    if not launch.is_file():return False
+    d=json.loads(launch.read_text(encoding="utf-8"))
+    return d == {
+        "schema":"autoeditorvideo/gamer-http400-recovery-one-shot/v1",
+        "creator_authorized_at":"2026-11-08",
+        "target_channel":"games",
+        "target_channel_id":KNOWN_IDS["games"],
+        "original_failed_render_run":42449154499,
+        "original_failed_retry_run":42451110264,
+        "source_manifest":"conteudos/otaku-and-channels-nine-replacements-20261108.json",
+        "exact_ids":list(visual.IDS["games"]),
+        "preserve_original_public_youtube_ids":True,
+        "use_exact_real_character_anchors_for_every_scene":True,
+        "http400_fallback":"short_distinct_prompt_same_reference",
+        "max_additional_edit_calls":6,
+        "max_total_image_calls":33,
+        "reupload_visibility":"private_only_until_visual_review",
+        "never_delete_or_modify_old_videos":True,
+        "no_other_channels":True
+    }
+
 def guard(channel):
     e=os.environ
+    original_stage=(e.get("GITHUB_EVENT_NAME")=="workflow_run"
+                    and e.get("GITHUB_WORKFLOW") in (WORKFLOW,GAMER_RETRY_WORKFLOW))
+    gamer_fix=(channel=="games"
+               and e.get("GITHUB_EVENT_NAME")=="push"
+               and e.get("GITHUB_WORKFLOW")==HTTP400_WORKFLOW
+               and e.get("REPLACEMENTS_HTTP400_FIX_APPROVED")=="yes"
+               and _gamer_fix_launch())
     if (e.get("GITHUB_REPOSITORY")!="HelioConde/AutoEditorVideo"
             or e.get("GITHUB_REF")!="refs/heads/main"
-            or e.get("GITHUB_EVENT_NAME")!="workflow_run"
             or e.get("GITHUB_RUN_ATTEMPT")!="1"
-            or e.get("GITHUB_WORKFLOW") not in (WORKFLOW,GAMER_RETRY_WORKFLOW)
+            or not (original_stage or gamer_fix)
             or (e.get("GITHUB_WORKFLOW")==GAMER_RETRY_WORKFLOW
                 and (channel!="games" or e.get("REPLACEMENTS_RETRY_APPROVED")!="yes"))
             or e.get("REPLACEMENTS_PRIVATE_STAGE_APPROVED")!="yes"
@@ -49,19 +79,20 @@ def guard(channel):
             or any(e.get(k) for k in (
                 "YOUTUBE_BR_TOKEN_JSON","YOUTUBE_KIDS_TOKEN_JSON",
                 "YOUTUBE_BR_DELETE_TOKEN_JSON","PROXY_API_KEY","PROXY_ACCOUNTS_JSON"))):
-        raise StageBlocked("EXACT_APPROVED_NO_CROSS_CHANNEL_WORKFLOW_RUN_OAUTH_REQUIRED")
-    p=Path(e.get("GITHUB_EVENT_PATH",""))
-    if not p.is_file():raise StageBlocked("GITHUB_WORKFLOW_RUN_EVENT_REQUIRED")
-    event=json.loads(p.read_text(encoding="utf-8"))
-    run=event.get("workflow_run",{})
-    if (run.get("id")!=SOURCE_RUN_ID
-            or run.get("name")!=SOURCE_WORKFLOW
-            or run.get("head_sha")!=SOURCE_COMMIT
-            or run.get("head_branch")!="main"
-            or run.get("conclusion") not in ("success","failure")
-            or run.get("event")!="push"
-            or run.get("repository",{}).get("full_name")!="HelioConde/AutoEditorVideo"):
-        raise StageBlocked("SOURCE_JOB_MUST_BE_EXACT_SUCCESSFUL_NINE_RENDER")
+        raise StageBlocked("EXACT_APPROVED_NO_CROSS_CHANNEL_PRIVATE_OAUTH_REQUIRED")
+    if not gamer_fix:
+        p=Path(e.get("GITHUB_EVENT_PATH",""))
+        if not p.is_file():raise StageBlocked("GITHUB_WORKFLOW_RUN_EVENT_REQUIRED")
+        event=json.loads(p.read_text(encoding="utf-8"))
+        run=event.get("workflow_run",{})
+        if (run.get("id")!=SOURCE_RUN_ID
+                or run.get("name")!=SOURCE_WORKFLOW
+                or run.get("head_sha")!=SOURCE_COMMIT
+                or run.get("head_branch")!="main"
+                or run.get("conclusion") not in ("success","failure")
+                or run.get("event")!="push"
+                or run.get("repository",{}).get("full_name")!="HelioConde/AutoEditorVideo"):
+            raise StageBlocked("SOURCE_JOB_MUST_BE_EXACT_SUCCESSFUL_NINE_RENDER")
     load_policy()
     out=visual.output(channel)
     if (out/RECEIPT_NAME).exists():
@@ -81,7 +112,9 @@ def prepare(channel):
             or doc.get("channel_id")!=KNOWN_IDS[channel]
             or doc.get("privacy")!="not_uploaded_visual_review_pending"
             or doc.get("count")!=3
-            or doc.get("max_image_calls")!=visual.CALLS[channel]
+            or doc.get("max_image_calls")!=(
+                33 if channel=="games" and os.environ.get("GITHUB_WORKFLOW")==HTTP400_WORKFLOW
+                else visual.CALLS[channel])
             or doc.get("image_process")!="character_anchor_then_images_edits_for_every_scene"
             or [x.get("id") for x in doc.get("videos",[])]!=list(visual.IDS[channel])):
         raise StageBlocked("SOURCE_RENDER_REPORT_OR_EXPECTED_VIDEO_IDS_MISMATCH")
@@ -218,7 +251,7 @@ def upload(channel):
             "episode_id":item["episode_id"],"channel":channel,
             "channel_id":KNOWN_IDS[channel],"old_video_id":item["old_youtube_id"],
             "new_private_youtube_id":None,"video_sha256":item["sha256"],
-            "duration_seconds":item["seconds"],"source_render_run":SOURCE_RUN_ID,
+            "duration_seconds":item["seconds"],"source_render_run":int(os.environ.get("GITHUB_RUN_ID",SOURCE_RUN_ID)) if os.environ.get("GITHUB_WORKFLOW")==HTTP400_WORKFLOW else SOURCE_RUN_ID,
             "source_character_anchors_verified":True,"source_all_scene_edits_verified":True,
             "review_status":"private_visual_review_pending",
             "old_public_video_unchanged":True,
