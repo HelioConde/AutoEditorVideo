@@ -107,6 +107,19 @@ def edit_prompt(row:dict,scene:dict,chars:list[dict])->str:
     for i,c in enumerate(selected,1):
         lines.append("IDENTITY "+str(i)+": "+c["name"]+" from "+c["franchise"]+
                      ". Must preserve: "+c["canonical_appearance"])
+    # The episode visual bible may list supporting characters who MUST NOT
+    # appear in every scene. Only characters explicitly assigned to THIS
+    # storyboard frame belong in its prompt; avoid identity leakage (e.g.
+    # Jinshi appearing in Maomao-only scenes).
+    if row.get("channel") in ("br","en"):
+        names=", ".join(c["franchise"] for c in selected)
+        style=("Original premium detailed Japanese anime editorial illustration, "
+               "visually faithful to "+names+
+               " in lighting and story settings; only the named protagonists "
+               "listed in IDENTITY above, unless scene action explicitly "
+               "introduces a different story background figure.")
+    else:
+        style=row["visual_bible"]
     lines.extend(["STORY ACTION/FRAME THAT MUST BE ILLUSTRATED: "+
                   scene["visual_instruction"]+".",
                   "Corresponding narration: "+scene["editorial_beat"]+".",
@@ -116,7 +129,7 @@ def edit_prompt(row:dict,scene:dict,chars:list[dict])->str:
                   "watermarks, logos, artificial subtitles or title card. "
                   "Natural consistent anatomical proportions and distinct "
                   "unbroken heads, hands and feet; keep faces legible.",
-                  "Visual treatment: "+row["visual_bible"]])
+                  "Visual treatment: "+style])
     return " ".join(lines)
 
 def save_image(blob:bytes,target:Path)->None:
