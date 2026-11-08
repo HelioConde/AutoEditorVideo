@@ -102,3 +102,35 @@ do YouTube Analytics, com janela **09/10 a 07/11/2026**. Dados brutos:
 4. Antes de incluir Gamer/Kids/Alchemy, conectar e autorizar a identidade
    correta de cada canal no provedor de análise; não reutilizar OAuth
    de um canal para outro.
+
+## YouTube Studio — recap 26/10 a 01/11/2026 e janela de 28 dias
+
+Snapshot manual das oito capturas do proprietário:
+[dados/metricas-redes/2026-11-08-youtube-recap-26out-01nov.json](../dados/metricas-redes/2026-11-08-youtube-recap-26out-01nov.json).
+
+**Recap semanal, 26 de outubro a 1º de novembro de 2026 (Otaku Multicena):**
+2 Shorts publicados, 363 pessoas que sintonizaram no canal, +3 inscritos,
+58 curtidas e 1 comentário. Principais origens **em ordem, sem percentuais
+informados:** feed de Shorts, pesquisa do YouTube e outros recursos.
+Dois Shorts destacados: "Light caçou Kira SEM SABER..." e
+"Por que Death Note prende tanto SEM LUTAS?".
+O mais curtido na semana foi "Light caçou Kira".
+
+**Cartão separado, últimos 28 dias (datas exatas não disponíveis na captura):**
+34,8% continuaram assistindo e 65,2% ignoraram o Short. **Não confundir
+essa taxa de decisão inicial de assistir com a retenção até o fim.**
+Top 5 com contagens exibidas: Light caçou Kira (`1,1 mil`, arredondado),
+Steel Ball Run (`1,1 mil`, arredondado), Zenitsu (998),
+Kurapika (927), Killua (696). A identificação estável por ID foi usada
+somente para Light e Steel Ball Run, já verificados no snapshot da API;
+outros IDs permanecem desconhecidos.
+
+**Próximos testes editoriais:** variar os primeiros 1–3 segundos com
+mistério, conflito ou consequência clara; dar movimento narrativo de
+personagem e elementos de cena (não só zoom); testar durações diferentes
+comparando vídeos pela mesma idade. Preservar rigorosamente a distinção
+entre visualizações, pessoas, engaged views, decisão de continuar assistindo
+e retenção. **Não somar ou comparar diretamente os números semanais com
+os de 28 dias ou com o relatório API 09/10–07/11.**
+
+Nenhuma postagem, configuração do YouTube, segredo ou automação foi alterada.
