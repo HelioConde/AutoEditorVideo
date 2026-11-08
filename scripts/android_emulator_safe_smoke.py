@@ -68,7 +68,7 @@ def guard()->None:
     e=os.environ
     if (e.get("GITHUB_REPOSITORY")!="HelioConde/AutoEditorVideo"
             or e.get("GITHUB_REF")!="refs/heads/main"
-            or e.get("GITHUB_EVENT_NAME")!="push"
+            or e.get("GITHUB_EVENT_NAME") not in ("push","workflow_dispatch")
             or e.get("GITHUB_RUN_ATTEMPT")!="1"
             or e.get("GITHUB_WORKFLOW")!=WORKFLOW
             or e.get("ANDROID_SMOKE_NO_PUBLICATION")!="yes"
