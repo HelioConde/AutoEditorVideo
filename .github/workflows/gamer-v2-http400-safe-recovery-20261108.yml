@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'conteudos/gamer-v2-http400-fix-launch-20261108.json'
+      - 'conteudos/gamer-v2-http400-fix-retry-launch-20261108.json'
 
 permissions:
   contents: read
@@ -19,7 +19,7 @@ jobs:
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'fix(gamer): launch bounded same-reference HTTP400 recovery and private upload'
+      github.event.head_commit.message == 'fix(gamer): rerun same-reference repair after corrected regression tests'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
