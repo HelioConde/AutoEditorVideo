@@ -1,0 +1,25 @@
+{
+  "schema": "autoeditorvideo/nine-replacements-render-one-shot/v1",
+  "authorized_at": "2026-11-08",
+  "user_requested": "send all pending replacement versions across all channels",
+  "manifest": "conteudos/otaku-and-channels-nine-replacements-20261108.json",
+  "source_youtube_run_id": 42407850443,
+  "old_channel_videos_preserved": true,
+  "channels": [
+    "en",
+    "games",
+    "alchemy"
+  ],
+  "image_model": "gpt-image-2",
+  "channel_budget": {
+    "en": 29,
+    "games": 27,
+    "alchemy": 27
+  },
+  "total_max_image_calls": 83,
+  "edit_every_scene_from_anchor": true,
+  "otaku_en_character_identity_locked": true,
+  "no_upload_until_qa_review": true,
+  "no_youtube_deletion": true,
+  "kids_recovery_separate_workflow": true
+}
