@@ -1,0 +1,1380 @@
+{
+  "schema": "autoeditorvideo/nine-cross-channel-visual-corrected-v2/v1",
+  "created_at": "2026-11-08",
+  "production_owner": "all_channels_visual_replacement_v2_20261108",
+  "source_manifest": "conteudos/lote-12-estatico-90s-20261107.json",
+  "channel_order": [
+    "en",
+    "games",
+    "alchemy"
+  ],
+  "channels": [
+    "en",
+    "games",
+    "alchemy"
+  ],
+  "target_total": 9,
+  "privacy_after_qa": "private_first_until_visual_review",
+  "made_for_kids": false,
+  "story_unchanged": true,
+  "source_originals_preserved": true,
+  "never_remove_original_on_upload_error": true,
+  "episode_count_per_channel": 3,
+  "visual_review_required_before_public": true,
+  "source_user_authorization": "2026-11-08_send_all_pending_versions",
+  "image_model": "gpt-image-2",
+  "max_image_calls": {
+    "en": 29,
+    "games": 27,
+    "alchemy": 27
+  },
+  "total_max_image_calls": 83,
+  "episodes": [
+    {
+      "id": "7011-noelle-black-clover-v2",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "language": "en-US",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "Black Clover: Why Noelle’s New Form Changes Everything",
+      "cover_text": "NOELLE'S NEW FORM",
+      "description": "Black Clover's latest Noelle reveal puts her partnership with Undine and her clash with Vanica in focus. Here is what the new form means for her character and the battle—not a claim about unreleased episodes. Spoilers for the latest episode.\n\nOriginal English commentary and AI-generated editorial illustrations; no anime footage used.\n\n#BlackClover #NoelleSilva #AnimeExplained #OtakuReframe\n\nRevised edition: new character-faithful illustrated scenes with consistent identities and accurate story context.",
+      "hashtags": [
+        "#BlackClover",
+        "#NoelleSilva",
+        "#AnimeExplained",
+        "#OtakuReframe"
+      ],
+      "tags": [
+        "Black Clover",
+        "Noelle Silva",
+        "Saint Valkyrie Dress",
+        "Black Clover Season 2",
+        "Noelle power explained",
+        "Undine",
+        "Vanica",
+        "anime explained",
+        "Otaku Reframe",
+        "anime shorts"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Noelle Silva has one of the most satisfying developments in Black Clover, and her newest battle form shows why. This is not simply a flashy costume change or an excuse to make a fight look bigger. It reflects how far her control and resolve have come. At the beginning, Noelle is surrounded by expectations because of her royal family, but she struggles to control her own magic. That contrast matters. Having great potential does not automatically give a person confidence, skill, or a place where they feel accepted. Her progress comes through practice, friendship, and battles that force her to adapt. She stops defining herself by what others say about her and begins using water magic as something she can direct with purpose, instead of something that escapes her control. The new official battle visual highlights her cooperation with Undine and a form associated with Saint Stage. In the current confrontation involving Vanica, the emphasis is not only on raw power. It is on timing, compatibility, and what Noelle is trying to protect. That distinction is important when people compare magical transformations. Stronger magic is impressive, but a transformation becomes memorable when it answers a character's earlier weakness. Noelle's journey began with control problems; this battle places her discipline at the center. Notice also how the imagery presents the conflict from her opponent's perspective. Noelle faces forward, with determination rather than hesitation. The composition tells the audience who is taking the initiative, before a single explanation of combat mechanics is needed. Fans may debate which version of Noelle is strongest, but the emotional payoff is clearer. She did not become compelling because someone declared that she had always been powerful. She became compelling because she learned what to do with that power. So the reason this new form matters is not just the magic itself. It is the reversal of her original struggle: the girl once dismissed for losing control now enters a decisive confrontation with control, courage, and a purpose of her own.",
+      "narration_word_count": 334,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [
+        "https://www.bclover.jp/news/detail.php?id=1137054"
+      ],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Noelle Silva has one of the most satisfying developments in Black Clover, and her newest battle form shows why. This is not simply a flashy costume change or an excuse to make a fight look bigger. It reflects how far her control and resolve have come.",
+          "visual_instruction": "Noelle Silva recognizable with silver twin-styled hair and magenta eyes, wearing canonical Black Bulls robe and silver water magic, inside a watery ceremonial battle arena, frontal cinematic hook.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "noelle"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "At the beginning, Noelle is surrounded by expectations because of her royal family, but she struggles to control her own magic. That contrast matters. Having great potential does not automatically give a person confidence, skill, or a place where they feel accepted.",
+          "visual_instruction": "Noelle Silva recognizable silver-haired mage standing uneasily in royal Clover household corridor, unstable blue water swirls near her hands and ornate family decorations.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "noelle"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Her progress comes through practice, friendship, and battles that force her to adapt. She stops defining herself by what others say about her and begins using water magic as something she can direct with purpose, instead of something that escapes her control.",
+          "visual_instruction": "Noelle Silva in her signature Black Bulls attire mastering streams of water into organized shields as friends watch from an academy training yard.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "noelle"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "The new official battle visual highlights her cooperation with Undine and a form associated with Saint Stage. In the current confrontation involving Vanica, the emphasis is not only on raw power. It is on timing, compatibility, and what Noelle is trying to protect.",
+          "visual_instruction": "Noelle Silva visibly wearing blue-and-silver Saint Valkyrie Dress with water armor and lance, Undine's distinct flowing blue water spirit beside her; both canonical faces recognizable, battlefield against distant ominous red magic.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "noelle",
+            "undine"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "That distinction is important when people compare magical transformations. Stronger magic is impressive, but a transformation becomes memorable when it answers a character's earlier weakness. Noelle's journey began with control problems; this battle places her discipline at the center.",
+          "visual_instruction": "Noelle Silva in identifiable Valkyrie water armor calmly shaping lance and defensive streams into precise geometry, floating droplets and azure crystalline light.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "noelle"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Notice also how the imagery presents the conflict from her opponent's perspective. Noelle faces forward, with determination rather than hesitation. The composition tells the audience who is taking the initiative, before a single explanation of combat mechanics is needed.",
+          "visual_instruction": "Determined close-up of the same silver-haired Noelle Silva with magenta eyes in water armor, looking straight at an approaching adversary, no anonymous stand-in.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "noelle"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Fans may debate which version of Noelle is strongest, but the emotional payoff is clearer. She did not become compelling because someone declared that she had always been powerful. She became compelling because she learned what to do with that power.",
+          "visual_instruction": "Noelle Silva with canonical silver-white hairstyle and Black Bulls identity framed against the dramatic water magic progress she has made, focused proud smile.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "noelle"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "So the reason this new form matters is not just the magic itself. It is the reversal of her original struggle: the girl once dismissed for losing control now enters a decisive confrontation with control, courage, and a purpose of her own.",
+          "visual_instruction": "Noelle Silva and distinct flowing water spirit Undine triumphantly holding controlled crystalline water magic after a magical battle, victory and composure.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "noelle",
+            "undine"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "7011-noelle-black-clover",
+      "old_youtube_id": "KamcfO3fINM",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "autoeditorvideo/otaku-character-identity-policy/v1",
+      "character_identity_bible": [
+        {
+          "key": "noelle",
+          "name": "Noelle Silva",
+          "franchise": "Black Clover",
+          "canonical_appearance": "Noelle Silva from Black Clover anime: a recognizable pale-skinned teenage royal mage, long lustrous silver-white hair typically tied in two low side sections, soft fringe, expressive magenta-pink eyes, distinctive Black Bulls dark robe with the Bull emblem over white-and-purple mage attire; in battle her signature silver-and-blue water-based Valkyrie armor, water lance and cool cobalt aura; elegant, proud but determined face."
+        },
+        {
+          "key": "undine",
+          "name": "Undine",
+          "franchise": "Black Clover",
+          "canonical_appearance": "Undine, the water spirit from Black Clover anime: a recognizable elegant feminine blue aquatic elemental spirit, translucent flowing body formed from shimmering cerulean water, long cascading water-like hair, delicate ethereal face, calm graceful expression, bright crystalline blue watery aura, distinctive crown-like flowing water ornamentation. NOT a generic human woman or random mermaid."
+        }
+      ],
+      "visual_bible": "Recognizable named anime character faithful to their actual original series. Noelle Silva from Black Clover anime: a recognizable pale-skinned teenage royal mage, long lustrous silver-white hair typically tied in two low side sections, soft fringe, expressive magenta-pink eyes, distinctive Black Bulls dark robe with the Bull emblem over white-and-purple mage attire; in battle her signature silver-and-blue water-based Valkyrie armor, water lance and cool cobalt aura; elegant, proud but determined face. Undine, the water spirit from Black Clover anime: a recognizable elegant feminine blue aquatic elemental spirit, translucent flowing body formed from shimmering cerulean water, long cascading water-like hair, delicate ethereal face, calm graceful expression, bright crystalline blue watery aura, distinctive crown-like flowing water ornamentation. NOT a generic human woman or random mermaid. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    },
+    {
+      "id": "7012-maomao-apothecary-v2",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "language": "en-US",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "The Apothecary Diaries: Why Maomao Solves the Impossible",
+      "cover_text": "MAOMAO SEES MORE",
+      "description": "Why does Maomao catch clues that the entire palace overlooks? A spoiler-light look at observation, curiosity and medical knowledge in The Apothecary Diaries, which returned for a new anime season in October 2026.\n\nIndependent narration and AI-generated conceptual art, not original anime clips.\n\n#TheApothecaryDiaries #Maomao #AnimeExplained #OtakuReframe\n\nRevised edition: new character-faithful illustrated scenes with consistent identities and accurate story context.",
+      "hashtags": [
+        "#TheApothecaryDiaries",
+        "#Maomao",
+        "#AnimeExplained",
+        "#OtakuReframe"
+      ],
+      "tags": [
+        "The Apothecary Diaries",
+        "Maomao",
+        "Jinshi",
+        "anime explained",
+        "Kusuriya no Hitorigoto",
+        "palace mystery",
+        "anime analysis",
+        "season 3",
+        "Otaku Reframe",
+        "anime shorts"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Why is Maomao so good at solving mysteries in The Apothecary Diaries? It is tempting to call her a genius and stop there. But that misses the most interesting part of her character: she pays attention to things that everyone else has learned to ignore. Maomao enters the inner palace as a low-ranking servant, not as a celebrated detective. Her background as an apothecary gives her practical knowledge about medicines, bodies, symptoms, and poisons. Those details become useful in a place full of secrets and appearances. When someone talks about a curse, Maomao asks a different question. What changed in the environment? Who handled the objects? What did the person eat or touch? She moves from a dramatic explanation toward observations that might actually be checked. This way of thinking is not magic. It is a habit of separating a rumor from a fact. A powerful person can repeat the same story a hundred times, but repetition cannot explain a physical symptom better than careful evidence. Another important detail is risk. The palace has its own hierarchy, and being right does not guarantee safety. Maomao often knows that revealing too much could draw attention she would rather avoid. Her intelligence also includes understanding when and how to speak. Then there is Jinshi, whose interest in Maomao repeatedly pulls her toward situations she did not choose. Their contrasting personalities create tension, but the mysteries work because Maomao has a point of view independent from his status. That is why her cases remain satisfying even when the audience guesses the answer early. The pleasure comes from seeing the chain of reasoning: a small clue, an alternative explanation, another clue, and finally a conclusion that fits what was visible. Maomao's real strength is not knowing every answer in advance. It is refusing to let a dramatic story replace evidence. In a palace where appearances carry enormous weight, that kind of curiosity becomes an unexpectedly powerful tool.",
+      "narration_word_count": 323,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [
+        "https://www.ntv.co.jp/english/pc/2023/10/The-Apothecary-Diaries.html",
+        "https://www.viz.com/apothecary-diaries"
+      ],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Why is Maomao so good at solving mysteries in The Apothecary Diaries? It is tempting to call her a genius and stop there. But that misses the most interesting part of her character: she pays attention to things that everyone else has learned to ignore.",
+          "visual_instruction": "Maomao unmistakable teal-green hair two side buns, small facial freckles and green robe, studying a strange medicine bottle under an illuminated imperial palace lantern.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "maomao"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Maomao enters the inner palace as a low-ranking servant, not as a celebrated detective. Her background as an apothecary gives her practical knowledge about medicines, bodies, symptoms, and poisons. Those details become useful in a place full of secrets and appearances.",
+          "visual_instruction": "Maomao recognizable green-haired apothecary in inner palace herb room examining medical herbs, jars and carefully arranged remedies with analytical expression.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "maomao"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "When someone talks about a curse, Maomao asks a different question. What changed in the environment? Who handled the objects? What did the person eat or touch? She moves from a dramatic explanation toward observations that might actually be checked.",
+          "visual_instruction": "Maomao in same red hairpins and green robe examining a tea cup, fabric and a flower as physical evidence of a mysterious palace illness.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "maomao"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "This way of thinking is not magic. It is a habit of separating a rumor from a fact. A powerful person can repeat the same story a hundred times, but repetition cannot explain a physical symptom better than careful evidence.",
+          "visual_instruction": "Maomao calmly comparing evidence of a real allergic reaction against ghost rumors in a candlelit palace room, green eyes intent.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "maomao"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Another important detail is risk. The palace has its own hierarchy, and being right does not guarantee safety. Maomao often knows that revealing too much could draw attention she would rather avoid. Her intelligence also includes understanding when and how to speak.",
+          "visual_instruction": "Maomao the low-ranked servant in her signature green palace clothes maintaining a low profile between high-ranking court attendants in richly carved corridor.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "maomao"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Then there is Jinshi, whose interest in Maomao repeatedly pulls her toward situations she did not choose. Their contrasting personalities create tension, but the mysteries work because Maomao has a point of view independent from his status.",
+          "visual_instruction": "Maomao's recognizably freckled teal-haired face across the table from Jinshi with unmistakable long dark indigo hair, violet eyes and elaborate royal robes; both authentic appearances.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "maomao",
+            "jinshi"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "That is why her cases remain satisfying even when the audience guesses the answer early. The pleasure comes from seeing the chain of reasoning: a small clue, an alternative explanation, another clue, and finally a conclusion that fits what was visible.",
+          "visual_instruction": "Maomao in the same outfit linking observations from several pottery vessels and medicinal herbs in a palace workshop, quiet moment of reasoning.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "maomao"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Maomao's real strength is not knowing every answer in advance. It is refusing to let a dramatic story replace evidence. In a palace where appearances carry enormous weight, that kind of curiosity becomes an unexpectedly powerful tool.",
+          "visual_instruction": "Maomao with twin teal hair buns and red ornament turning toward sunrise in the imperial palace herb garden with decisive curiosity and evidence in hand.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "maomao"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "7012-maomao-apothecary",
+      "old_youtube_id": "EMFjugQJdUY",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "autoeditorvideo/otaku-character-identity-policy/v1",
+      "character_identity_bible": [
+        {
+          "key": "maomao",
+          "name": "Maomao",
+          "franchise": "The Apothecary Diaries",
+          "canonical_appearance": "Maomao from The Apothecary Diaries anime: petite observant young apothecary with dark blue-green/teal hair tied in two rounded compact bun-like hair arrangements with long side locks, distinctive wide expressive greenish-blue eyes, small facial freckles, red decorative hair ornaments, typical muted green outer robe over layered orange-red inner palace attire, clever reserved expression, historical Chinese imperial palace costume; keep face and hair unmistakably Maomao."
+        },
+        {
+          "key": "jinshi",
+          "name": "Jinshi",
+          "franchise": "The Apothecary Diaries",
+          "canonical_appearance": "Jinshi from The Apothecary Diaries anime: beautiful refined young nobleman of the imperial palace with long flowing very dark blue-purple hair mostly tied neatly back, striking violet-blue eyes, graceful refined face, deep blue/purple and white embroidered high-status Chinese-inspired robes, distinctive elaborate hair ornament or crown; composed and observant, clearly recognizable Jinshi alongside Maomao."
+        }
+      ],
+      "visual_bible": "Recognizable named anime character faithful to their actual original series. Maomao from The Apothecary Diaries anime: petite observant young apothecary with dark blue-green/teal hair tied in two rounded compact bun-like hair arrangements with long side locks, distinctive wide expressive greenish-blue eyes, small facial freckles, red decorative hair ornaments, typical muted green outer robe over layered orange-red inner palace attire, clever reserved expression, historical Chinese imperial palace costume; keep face and hair unmistakably Maomao. Jinshi from The Apothecary Diaries anime: beautiful refined young nobleman of the imperial palace with long flowing very dark blue-purple hair mostly tied neatly back, striking violet-blue eyes, graceful refined face, deep blue/purple and white embroidered high-status Chinese-inspired robes, distinctive elaborate hair ornament or crown; composed and observant, clearly recognizable Jinshi alongside Maomao. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    },
+    {
+      "id": "7013-shizuku-hunter-v2",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "language": "en-US",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "Hunter x Hunter: The Terrifying Rule Behind Shizuku’s Vacuum",
+      "cover_text": "BLINKY'S ONE RULE",
+      "description": "Shizuku's conjured vacuum, Blinky, looks ordinary until you consider how its rules work. This original Hunter x Hunter analysis explains why an unusual limitation can make a Nen ability more interesting.\n\nOriginal commentary and AI-generated conceptual illustrations. Contains story spoilers.\n\n#HunterxHunter #Shizuku #Nen #AnimeExplained\n\nRevised edition: new character-faithful illustrated scenes with consistent identities and accurate story context.",
+      "hashtags": [
+        "#HunterxHunter",
+        "#Shizuku",
+        "#Nen",
+        "#AnimeExplained"
+      ],
+      "tags": [
+        "Hunter x Hunter",
+        "Shizuku",
+        "Shizuku Murasaki",
+        "Blinky",
+        "Phantom Troupe",
+        "Nen abilities",
+        "Conjuration",
+        "Hunter x Hunter explained",
+        "anime shorts",
+        "Otaku Reframe"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "An ordinary-looking vacuum cleaner might be one of the strangest weapons in Hunter x Hunter. Shizuku of the Phantom Troupe uses a conjured vacuum called Blinky. At first glance it seems almost comical, but the ability becomes disturbing once you understand how its rules shape a fight. Shizuku is a Nen user associated with conjuration. Instead of summoning an oversized blade or explosive power, she creates a tool with a familiar everyday shape. That contrast makes the viewer underestimate it, which is exactly why the visual idea works. Blinky can draw in many things that are not living, but the restrictions are important. The ability is not a universal answer to every opponent. It cannot simply remove whatever Shizuku wishes from the world without a limit or consequence. In Hunter x Hunter, the most memorable Nen powers often behave like personal systems rather than general magic. Their strengths are tied to conditions, habits, and tactical choices. Understanding the rule matters just as much as knowing what the technique looks like. Imagine confronting someone who carries what appears to be cleaning equipment. If you assume the tool is harmless, you waste your chance to recognize the threat. By the time the fight reveals its function, the strange weapon has already changed your decisions. Shizuku's calm expression reinforces the mismatch. The Phantom Troupe is dangerous, yet she can appear detached from the chaos around her. The vacuum is an extension of that unsettling calm: efficient, precise, and emotionally difficult to read. Still, explaining this ability as limitless would make it less interesting. The restrictions create tension. The audience can understand when a plan might work, when it might fail, and why an opponent needs more than raw strength to deal with the technique. That is the real genius of Blinky as a fictional power. A simple object, a clear limitation, and a character whose behavior fits the idea. Hunter x Hunter turns those ingredients into a tool that is far more intimidating than its appearance suggests.",
+      "narration_word_count": 334,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [
+        "https://hunterhunter-ni.bushiroad.com/en/character/shizuku/",
+        "https://www.viz.com/hunter-x-hunter"
+      ],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "An ordinary-looking vacuum cleaner might be one of the strangest weapons in Hunter x Hunter. Shizuku of the Phantom Troupe uses a conjured vacuum called Blinky. At first glance it seems almost comical, but the ability becomes disturbing once you understand how its rules shape a fight.",
+          "visual_instruction": "Shizuku Murasaki recognizable short dark bob hair, big round glasses, cross necklace, purple-dark dress, holding her strange fish-mouthed vacuum Blinky in ominous Phantom Troupe hideout.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "shizuku"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Shizuku is a Nen user associated with conjuration. Instead of summoning an oversized blade or explosive power, she creates a tool with a familiar everyday shape. That contrast makes the viewer underestimate it, which is exactly why the visual idea works.",
+          "visual_instruction": "Shizuku recognizable dark bob hair and round glasses presenting Blinky's toothy fish-mouth vacuum in a dim warehouse, clearly powered Nen conjuration.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "shizuku"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Blinky can draw in many things that are not living, but the restrictions are important. The ability is not a universal answer to every opponent. It cannot simply remove whatever Shizuku wishes from the world without a limit or consequence.",
+          "visual_instruction": "Shizuku in recognizable dark dress, glasses and cross necklace carefully activating her distinctive vacuum Blinky near scattered inanimate objects in a courtyard.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "shizuku"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "In Hunter x Hunter, the most memorable Nen powers often behave like personal systems rather than general magic. Their strengths are tied to conditions, habits, and tactical choices. Understanding the rule matters just as much as knowing what the technique looks like.",
+          "visual_instruction": "Shizuku calm with canonical glasses and short black bob, standing in a purple Nen aura circle while Blinky's fish-mouth vacuum collects nonliving objects.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "shizuku"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Imagine confronting someone who carries what appears to be cleaning equipment. If you assume the tool is harmless, you waste your chance to recognize the threat. By the time the fight reveals its function, the strange weapon has already changed your decisions.",
+          "visual_instruction": "Shizuku in full canonical Phantom Troupe look with Blinky against a shocked foe in a warehouse; her vacuum appears unexpectedly dangerous.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "shizuku"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Shizuku's calm expression reinforces the mismatch. The Phantom Troupe is dangerous, yet she can appear detached from the chaos around her. The vacuum is an extension of that unsettling calm: efficient, precise, and emotionally difficult to read.",
+          "visual_instruction": "Close portrait of Shizuku's unmistakable round glasses, dark bob hair and faintly indifferent expression, black-purple outfit and cross pendant.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "shizuku"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Still, explaining this ability as limitless would make it less interesting. The restrictions create tension. The audience can understand when a plan might work, when it might fail, and why an opponent needs more than raw strength to deal with the technique.",
+          "visual_instruction": "Shizuku and Blinky on workshop floor showing the limits of her vacuum by visual contrast between ordinary debris and a living flower untouched.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "shizuku"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "That is the real genius of Blinky as a fictional power. A simple object, a clear limitation, and a character whose behavior fits the idea. Hunter x Hunter turns those ingredients into a tool that is far more intimidating than its appearance suggests.",
+          "visual_instruction": "Shizuku visibly consistent with her round glasses and short bob, carrying Blinky vacuum down a dark corridor, eerie calm final image.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "shizuku"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "7013-shizuku-hunter",
+      "old_youtube_id": "gHGLvU0r50s",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "autoeditorvideo/otaku-character-identity-policy/v1",
+      "character_identity_bible": [
+        {
+          "key": "shizuku",
+          "name": "Shizuku Murasaki",
+          "franchise": "Hunter x Hunter",
+          "canonical_appearance": "Shizuku Murasaki from Hunter x Hunter anime: distinctive slim pale woman with short straight dark-purple black bob haircut and blunt forehead fringe, large clear round glasses with thin frames, calm absentminded dark eyes, prominent small upside-down cross necklace, dark purple or black short-sleeved dress with signature spider-themed styling, holding her living vacuum cleaner Blinky featuring a fishlike toothed mouth at the end. Preserve Shizuku's glasses, bob hair, simple black outfit and odd vacuum."
+        }
+      ],
+      "visual_bible": "Recognizable named anime character faithful to their actual original series. Shizuku Murasaki from Hunter x Hunter anime: distinctive slim pale woman with short straight dark-purple black bob haircut and blunt forehead fringe, large clear round glasses with thin frames, calm absentminded dark eyes, prominent small upside-down cross necklace, dark purple or black short-sleeved dress with signature spider-themed styling, holding her living vacuum cleaner Blinky featuring a fishlike toothed mouth at the end. Preserve Shizuku's glasses, bob hair, simple black outfit and odd vacuum. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    },
+    {
+      "id": "game-101-minecraft-agua-v2",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "language": "pt-BR",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "Minecraft: por que a água pode transformar uma construção?",
+      "cover_text": "ÁGUA MUDA TUDO",
+      "description": "Minecraft está em alta, e a água é um detalhe que muda a sensação de uma construção. Entenda como pensar em movimento, altura e função no planejamento de rios, quedas d'água e bases — sem fingir que testamos um mundo real.\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #MinecraftBrasil #CuriosidadesGamer #Shorts\n\nVersão revisada: novas imagens consistentes em todas as cenas, correspondentes ao conteúdo narrado. Não são gravações de gameplay.",
+      "hashtags": [
+        "#Minecraft",
+        "#MinecraftBrasil",
+        "#CuriosidadesGamer",
+        "#Shorts"
+      ],
+      "tags": [
+        "Minecraft",
+        "Minecraft Brasil",
+        "água no Minecraft",
+        "construções Minecraft",
+        "Minecraft curiosidades",
+        "Minecraft construção",
+        "redstone",
+        "games",
+        "Hélio Conde",
+        "Shorts gamer"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Você já reparou como uma construção simples no Minecraft pode parecer completamente diferente depois que a água aparece? Nem sempre são os blocos mais raros que chamam atenção. Às vezes, o segredo está em fazer o cenário contar uma história. Imagine duas bases construídas com os mesmos materiais. Uma fica cercada por terreno plano; a outra tem uma ponte, um pequeno riacho e uma queda d'água ao lado. Os recursos podem ser parecidos, mas a segunda ganha profundidade visual. A água ajuda a criar contraste com pedra, madeira e vegetação. Ela também sugere direção. Quando o olhar acompanha o caminho de um rio, o jogador encontra naturalmente uma ponte, uma entrada ou um ponto importante do cenário. Existe ainda a diferença entre beleza e função. Em um projeto planejado, um canal pode servir como parte de uma fazenda, de um sistema de transporte de itens ou apenas como elemento decorativo. Não são objetivos iguais, e cada um exige decisões próprias. Por isso, antes de começar uma construção, vale imaginar qual sensação ela deve passar. É uma vila acolhedora? Uma fortaleza isolada? Um laboratório escondido? A posição da água pode reforçar cada uma dessas ideias sem precisar lotar tudo de detalhes. Outro erro comum em projetos conceituais é colocar elementos só porque eles parecem bonitos individualmente. Uma cachoeira enorme no lugar errado pode desviar a atenção da casa principal. Um riacho discreto pode ser mais eficiente para organizar a composição. O mesmo princípio aparece em outras formas de criação: escolher um ponto de destaque e usar o restante do ambiente para conduzir a atenção. Minecraft funciona como uma caixa de ferramentas de arquitetura, mesmo quando pensamos apenas em uma ilustração. A conclusão é simples: água não melhora automaticamente uma base. Ela melhora uma construção quando tem um propósito visual ou funcional. O projeto fica mais interessante quando todos os elementos colaboram para a mesma ideia.",
+      "narration_word_count": 314,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [
+        "https://www.youtube.com/watch?v=yZb8O3orojI",
+        "https://www.youtube.com/watch?v=clKJN9L8ans"
+      ],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Você já reparou como uma construção simples no Minecraft pode parecer completamente diferente depois que a água aparece? Nem sempre são os blocos mais raros que chamam atenção. Às vezes, o segredo está em fazer o cenário contar uma história.",
+          "visual_instruction": "Minecraft Builder (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Original voxel village split dry and watery scenery. Make an authentic original still editorial illustration matching this exact narration: Você já reparou como uma construção simples no Minecraft pode parecer completamente diferente depois que a água aparece? Nem sempre são os blocos mais raros que chamam atenção. Às vezes, o segredo está em fazer o cenário contar uma história.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "builder"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Imagine duas bases construídas com os mesmos materiais. Uma fica cercada por terreno plano; a outra tem uma ponte, um pequeno riacho e uma queda d'água ao lado. Os recursos podem ser parecidos, mas a segunda ganha profundidade visual.",
+          "visual_instruction": "Minecraft Builder (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Parallel conceptual bases, one with river, no HUD. Make an authentic original still editorial illustration matching this exact narration: Imagine duas bases construídas com os mesmos materiais. Uma fica cercada por terreno plano; a outra tem uma ponte, um pequeno riacho e uma queda d'água ao lado. Os recursos podem ser parecidos, mas a segunda ganha profundidade visual.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "builder"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A água ajuda a criar contraste com pedra, madeira e vegetação. Ela também sugere direção. Quando o olhar acompanha o caminho de um rio, o jogador encontra naturalmente uma ponte, uma entrada ou um ponto importante do cenário.",
+          "visual_instruction": "Minecraft Builder (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Top down graphic composition lines along stream. Make an authentic original still editorial illustration matching this exact narration: A água ajuda a criar contraste com pedra, madeira e vegetação. Ela também sugere direção. Quando o olhar acompanha o caminho de um rio, o jogador encontra naturalmente uma ponte, uma entrada ou um ponto importante do cenário.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "builder"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Existe ainda a diferença entre beleza e função. Em um projeto planejado, um canal pode servir como parte de uma fazenda, de um sistema de transporte de itens ou apenas como elemento decorativo. Não são objetivos iguais, e cada um exige decisões próprias.",
+          "visual_instruction": "Minecraft Builder (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Decorative canal compared with functional farm icon. Make an authentic original still editorial illustration matching this exact narration: Existe ainda a diferença entre beleza e função. Em um projeto planejado, um canal pode servir como parte de uma fazenda, de um sistema de transporte de itens ou apenas como elemento decorativo. Não são objetivos iguais, e cada um exige decisões próprias.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "builder"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Por isso, antes de começar uma construção, vale imaginar qual sensação ela deve passar. É uma vila acolhedora? Uma fortaleza isolada? Um laboratório escondido? A posição da água pode reforçar cada uma dessas ideias sem precisar lotar tudo de detalhes.",
+          "visual_instruction": "Minecraft Builder (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Three small villages: cozy, fortress, laboratory. Make an authentic original still editorial illustration matching this exact narration: Por isso, antes de começar uma construção, vale imaginar qual sensação ela deve passar. É uma vila acolhedora? Uma fortaleza isolada? Um laboratório escondido? A posição da água pode reforçar cada uma dessas ideias sem precisar lotar tudo de detalhes.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "builder"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Outro erro comum em projetos conceituais é colocar elementos só porque eles parecem bonitos individualmente. Uma cachoeira enorme no lugar errado pode desviar a atenção da casa principal. Um riacho discreto pode ser mais eficiente para organizar a composição.",
+          "visual_instruction": "Minecraft Builder (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Overlarge waterfall versus delicate rivulet. Make an authentic original still editorial illustration matching this exact narration: Outro erro comum em projetos conceituais é colocar elementos só porque eles parecem bonitos individualmente. Uma cachoeira enorme no lugar errado pode desviar a atenção da casa principal. Um riacho discreto pode ser mais eficiente para organizar a composição.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "builder"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "O mesmo princípio aparece em outras formas de criação: escolher um ponto de destaque e usar o restante do ambiente para conduzir a atenção. Minecraft funciona como uma caixa de ferramentas de arquitetura, mesmo quando pensamos apenas em uma ilustração.",
+          "visual_instruction": "Minecraft Builder (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Architectural layout diagram with focal point. Make an authentic original still editorial illustration matching this exact narration: O mesmo princípio aparece em outras formas de criação: escolher um ponto de destaque e usar o restante do ambiente para conduzir a atenção. Minecraft funciona como uma caixa de ferramentas de arquitetura, mesmo quando pensamos apenas em uma ilustração.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "builder"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A conclusão é simples: água não melhora automaticamente uma base. Ela melhora uma construção quando tem um propósito visual ou funcional. O projeto fica mais interessante quando todos os elementos colaboram para a mesma ideia.",
+          "visual_instruction": "Minecraft Builder (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Original blocky cabin reflected in calm water. Make an authentic original still editorial illustration matching this exact narration: A conclusão é simples: água não melhora automaticamente uma base. Ela melhora uma construção quando tem um propósito visual ou funcional. O projeto fica mais interessante quando todos os elementos colaboram para a mesma ideia.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "builder"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "game-101-minecraft-agua",
+      "old_youtube_id": "vxgEOrT8uQE",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "editorial_anchor_continuity-v1",
+      "character_identity_bible": [
+        {
+          "key": "builder",
+          "name": "Minecraft Builder",
+          "franchise": "Minecraft",
+          "canonical_appearance": "Consistent Minecraft-style block-based adult builder with square head, simple turquoise shirt, indigo blue square trousers, sturdy square arms and pixelated face, carrying a block-shaped water bucket. Story environment exclusively recognizable Minecraft cubic voxel building blocks, green grass, brown dirt, gray stone, oak planks and square blue flowing water; no photorealistic round humans or generic buildings, only bright blocky voxel illustration."
+        }
+      ],
+      "visual_bible": "Stable brand coherent named mascot/element and faithful game or education context. Consistent Minecraft-style block-based adult builder with square head, simple turquoise shirt, indigo blue square trousers, sturdy square arms and pixelated face, carrying a block-shaped water bucket. Story environment exclusively recognizable Minecraft cubic voxel building blocks, green grass, brown dirt, gray stone, oak planks and square blue flowing water; no photorealistic round humans or generic buildings, only bright blocky voxel illustration. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    },
+    {
+      "id": "game-102-roblox-obby-v2",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "language": "pt-BR",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "Roblox: por que os obbys mais simples são tão difíceis?",
+      "cover_text": "ESSE SALTO ENGANA",
+      "description": "Por que um salto de Roblox pode parecer fácil e virar uma sequência de erros? Entenda o papel da câmera, da antecipação e do ritmo nos obbys — uma análise de design, não um vídeo de gameplay.\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Roblox #Obby #GamesBrasil #Shorts\n\nVersão revisada: novas imagens consistentes em todas as cenas, correspondentes ao conteúdo narrado. Não são gravações de gameplay.",
+      "hashtags": [
+        "#Roblox",
+        "#Obby",
+        "#GamesBrasil",
+        "#Shorts"
+      ],
+      "tags": [
+        "Roblox",
+        "Roblox Brasil",
+        "Roblox obby",
+        "obby",
+        "parkour Roblox",
+        "desafios de plataforma",
+        "jogos em alta",
+        "psicologia dos jogos",
+        "Hélio Conde",
+        "games shorts"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Por que um circuito de plataformas no Roblox parece tão fácil até chegar a sua vez? Você vê um bloco, depois outro, e uma linha de chegada aparentemente próxima. O desafio verdadeiro não está apenas na distância entre eles. Um obby, nome que costuma aparecer em mapas de obstáculos, usa regras visuais simples para criar expectativas. O jogador olha para um salto e imagina o movimento antes de executar. Só que a câmera pode mudar completamente essa percepção. Se a plataforma está inclinada, distante ou parcialmente escondida, o cérebro precisa estimar profundidade e tempo. O que parecia uma linha reta se transforma em uma decisão: correr agora, esperar ou ajustar a direção primeiro? Alguns criadores tornam isso mais interessante com ritmo. Um trecho lento prepara o jogador, depois vem uma sequência de obstáculos mais rápida. O contraste faz o momento difícil parecer ainda mais intenso, mesmo que os controles continuem iguais. Também existe a sensação de progresso. Quando um obstáculo é superado, a próxima plataforma promete uma recompensa visual: uma cor nova, um caminho diferente, uma vista mais ampla. Pequenas mudanças ajudam o mapa a não parecer repetitivo. Mas existe um limite. Se a dificuldade aumenta sem ensinar algo novo, a frustração pode substituir a curiosidade. Bons desafios deixam o jogador entender por que falhou e imaginar uma estratégia melhor, em vez de depender apenas de sorte. Por isso, um obby envolvente não precisa ter centenas de efeitos. Precisa apresentar uma regra, variar essa regra de forma justa e dar tempo para que o jogador aprenda. A clareza do obstáculo é parte do próprio design. No fim, aquele salto aparentemente impossível ensina uma ideia útil sobre jogos. Dificuldade não é simplesmente fazer alguém errar mais vezes. É criar um problema que pareça complicado, mas cuja solução faça sentido quando finalmente é compreendida.",
+      "narration_word_count": 302,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [
+        "https://www.youtube.com/watch?v=ASeHEZq1T-s"
+      ],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Por que um circuito de plataformas no Roblox parece tão fácil até chegar a sua vez? Você vê um bloco, depois outro, e uma linha de chegada aparentemente próxima. O desafio verdadeiro não está apenas na distância entre eles.",
+          "visual_instruction": "Roblox Obby Runner (Roblox) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Stylized original obstacle platforms in cloudy sky. Make an authentic original still editorial illustration matching this exact narration: Por que um circuito de plataformas no Roblox parece tão fácil até chegar a sua vez? Você vê um bloco, depois outro, e uma linha de chegada aparentemente próxima. O desafio verdadeiro não está apenas na distância entre eles.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "runner"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Um obby, nome que costuma aparecer em mapas de obstáculos, usa regras visuais simples para criar expectativas. O jogador olha para um salto e imagina o movimento antes de executar. Só que a câmera pode mudar completamente essa percepção.",
+          "visual_instruction": "Roblox Obby Runner (Roblox) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Simple geometric platform course and direction arrows. Make an authentic original still editorial illustration matching this exact narration: Um obby, nome que costuma aparecer em mapas de obstáculos, usa regras visuais simples para criar expectativas. O jogador olha para um salto e imagina o movimento antes de executar. Só que a câmera pode mudar completamente essa percepção.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "runner"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Se a plataforma está inclinada, distante ou parcialmente escondida, o cérebro precisa estimar profundidade e tempo. O que parecia uma linha reta se transforma em uma decisão: correr agora, esperar ou ajustar a direção primeiro?",
+          "visual_instruction": "Roblox Obby Runner (Roblox) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Perspective diagram with hidden platform edge. Make an authentic original still editorial illustration matching this exact narration: Se a plataforma está inclinada, distante ou parcialmente escondida, o cérebro precisa estimar profundidade e tempo. O que parecia uma linha reta se transforma em uma decisão: correr agora, esperar ou ajustar a direção primeiro?. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "runner"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Alguns criadores tornam isso mais interessante com ritmo. Um trecho lento prepara o jogador, depois vem uma sequência de obstáculos mais rápida. O contraste faz o momento difícil parecer ainda mais intenso, mesmo que os controles continuem iguais.",
+          "visual_instruction": "Roblox Obby Runner (Roblox) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Slow section to fast obstacles comparison. Make an authentic original still editorial illustration matching this exact narration: Alguns criadores tornam isso mais interessante com ritmo. Um trecho lento prepara o jogador, depois vem uma sequência de obstáculos mais rápida. O contraste faz o momento difícil parecer ainda mais intenso, mesmo que os controles continuem iguais.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "runner"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Também existe a sensação de progresso. Quando um obstáculo é superado, a próxima plataforma promete uma recompensa visual: uma cor nova, um caminho diferente, uma vista mais ampla. Pequenas mudanças ajudam o mapa a não parecer repetitivo.",
+          "visual_instruction": "Roblox Obby Runner (Roblox) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Gradient of obstacle colors indicating progress. Make an authentic original still editorial illustration matching this exact narration: Também existe a sensação de progresso. Quando um obstáculo é superado, a próxima plataforma promete uma recompensa visual: uma cor nova, um caminho diferente, uma vista mais ampla. Pequenas mudanças ajudam o mapa a não parecer repetitivo.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "runner"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Mas existe um limite. Se a dificuldade aumenta sem ensinar algo novo, a frustração pode substituir a curiosidade. Bons desafios deixam o jogador entender por que falhou e imaginar uma estratégia melhor, em vez de depender apenas de sorte.",
+          "visual_instruction": "Roblox Obby Runner (Roblox) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Confusing trap versus clear taught obstacle. Make an authentic original still editorial illustration matching this exact narration: Mas existe um limite. Se a dificuldade aumenta sem ensinar algo novo, a frustração pode substituir a curiosidade. Bons desafios deixam o jogador entender por que falhou e imaginar uma estratégia melhor, em vez de depender apenas de sorte.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "runner"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Por isso, um obby envolvente não precisa ter centenas de efeitos. Precisa apresentar uma regra, variar essa regra de forma justa e dar tempo para que o jogador aprenda. A clareza do obstáculo é parte do próprio design.",
+          "visual_instruction": "Roblox Obby Runner (Roblox) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Minimal rule variation infographic. Make an authentic original still editorial illustration matching this exact narration: Por isso, um obby envolvente não precisa ter centenas de efeitos. Precisa apresentar uma regra, variar essa regra de forma justa e dar tempo para que o jogador aprenda. A clareza do obstáculo é parte do próprio design.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "runner"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No fim, aquele salto aparentemente impossível ensina uma ideia útil sobre jogos. Dificuldade não é simplesmente fazer alguém errar mais vezes. É criar um problema que pareça complicado, mas cuja solução faça sentido quando finalmente é compreendida.",
+          "visual_instruction": "Roblox Obby Runner (Roblox) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Single challenging jump with visible landing. Make an authentic original still editorial illustration matching this exact narration: No fim, aquele salto aparentemente impossível ensina uma ideia útil sobre jogos. Dificuldade não é simplesmente fazer alguém errar mais vezes. É criar um problema que pareça complicado, mas cuja solução faça sentido quando finalmente é compreendida.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "runner"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "game-102-roblox-obby",
+      "old_youtube_id": "PkixTrmD91I",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "editorial_anchor_continuity-v1",
+      "character_identity_bible": [
+        {
+          "key": "runner",
+          "name": "Roblox Obby Runner",
+          "franchise": "Roblox",
+          "canonical_appearance": "Consistent recognizable Roblox-style blocky toy-like player avatar, yellow cylindrical head with friendly simple face, blue rectangular torso, red rectangular arms, navy rectangular legs, clean broad plastic-like geometric toy joints. Original creator obstacle course of colored square floating platforms, neon checkpoints and simple parkour geometry. The same avatar remains recognizable in every new scene. No real recorded gameplay."
+        }
+      ],
+      "visual_bible": "Stable brand coherent named mascot/element and faithful game or education context. Consistent recognizable Roblox-style blocky toy-like player avatar, yellow cylindrical head with friendly simple face, blue rectangular torso, red rectangular arms, navy rectangular legs, clean broad plastic-like geometric toy joints. Original creator obstacle course of colored square floating platforms, neon checkpoints and simple parkour geometry. The same avatar remains recognizable in every new scene. No real recorded gameplay. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    },
+    {
+      "id": "game-103-minecraft-creeper-v2",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "language": "pt-BR",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "Minecraft: por que o Creeper continua assustando jogadores?",
+      "cover_text": "MEDO DO CREEPER",
+      "description": "O Creeper virou um símbolo de Minecraft porque cria uma decisão em segundos: ficar, fugir ou proteger a construção. Veja como surpresa, áudio e consequência fazem uma ameaça simples funcionar no design de jogos.\n\n🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay.\n\n#Minecraft #Creeper #NostalgiaGamer #Shorts\n\nVersão revisada: novas imagens consistentes em todas as cenas, correspondentes ao conteúdo narrado. Não são gravações de gameplay.",
+      "hashtags": [
+        "#Minecraft",
+        "#Creeper",
+        "#NostalgiaGamer",
+        "#Shorts"
+      ],
+      "tags": [
+        "Minecraft",
+        "Creeper",
+        "Minecraft nostalgia",
+        "Minecraft Brasil",
+        "sobrevivência Minecraft",
+        "curiosidades Minecraft",
+        "som do creeper",
+        "Minecraft shorts",
+        "Hélio Conde",
+        "jogos"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "O Creeper é uma das criaturas mais reconhecíveis do Minecraft. Mas por que esse inimigo continua assustando até jogadores experientes? A resposta não depende apenas de quanto dano ele causa. Depende de onde, quando e como a ameaça aparece. Em muitos jogos, o perigo surge na sua frente com música dramática e avisos claros. O Creeper funciona de outro jeito. O jogador pode estar construindo, explorando ou organizando itens quando precisa reagir a um problema inesperado. A ameaça é especialmente forte porque envolve o ambiente. Você não pensa apenas na própria sobrevivência. Pensa também na parede que levou tempo para construir, no caminho de acesso e nos materiais que podem se perder. Esse detalhe transforma uma criatura relativamente simples em uma decisão. Você enfrenta o inimigo, tenta ganhar distância ou protege primeiro uma parte importante da base? A tensão nasce porque não dá para fazer tudo ao mesmo tempo. O som também tem papel importante. Um sinal curto, reconhecível, pode mudar imediatamente o estado emocional do jogador. O cérebro associa aquele aviso à possibilidade de uma consequência, mesmo antes de ver exatamente o que está acontecendo. Isso ajuda a explicar a força da nostalgia. Quando alguém menciona um Creeper atrás de uma construção, muitas pessoas lembram não de uma batalha grandiosa, mas de uma surpresa que interrompeu uma tarefa tranquila. O design funciona porque o perigo se conecta ao que o jogador valoriza. Quanto mais tempo você dedicou à construção, mais importante parece a ameaça de perdê-la. É uma forma de tensão que nasce do próprio progresso. Por isso, o Creeper não precisa ser o inimigo mais poderoso de Minecraft para ser memorável. Ele representa algo muito específico: o risco de que um segundo de distração mude uma história que o jogador estava criando.",
+      "narration_word_count": 294,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [
+        "https://www.minecraft.net/"
+      ],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "O Creeper é uma das criaturas mais reconhecíveis do Minecraft. Mas por que esse inimigo continua assustando até jogadores experientes? A resposta não depende apenas de quanto dano ele causa. Depende de onde, quando e como a ameaça aparece.",
+          "visual_instruction": "Minecraft Creeper (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Original pixel inspired green monster silhouette near a cabin. Make an authentic original still editorial illustration matching this exact narration: O Creeper é uma das criaturas mais reconhecíveis do Minecraft. Mas por que esse inimigo continua assustando até jogadores experientes? A resposta não depende apenas de quanto dano ele causa. Depende de onde, quando e como a ameaça aparece.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "creeper"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Em muitos jogos, o perigo surge na sua frente com música dramática e avisos claros. O Creeper funciona de outro jeito. O jogador pode estar construindo, explorando ou organizando itens quando precisa reagir a um problema inesperado.",
+          "visual_instruction": "Minecraft Creeper (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Quiet voxel workshop at dusk. Make an authentic original still editorial illustration matching this exact narration: Em muitos jogos, o perigo surge na sua frente com música dramática e avisos claros. O Creeper funciona de outro jeito. O jogador pode estar construindo, explorando ou organizando itens quando precisa reagir a um problema inesperado.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "creeper"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A ameaça é especialmente forte porque envolve o ambiente. Você não pensa apenas na própria sobrevivência. Pensa também na parede que levou tempo para construir, no caminho de acesso e nos materiais que podem se perder.",
+          "visual_instruction": "Minecraft Creeper (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Protective wall and carefully built garden. Make an authentic original still editorial illustration matching this exact narration: A ameaça é especialmente forte porque envolve o ambiente. Você não pensa apenas na própria sobrevivência. Pensa também na parede que levou tempo para construir, no caminho de acesso e nos materiais que podem se perder.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "creeper"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Esse detalhe transforma uma criatura relativamente simples em uma decisão. Você enfrenta o inimigo, tenta ganhar distância ou protege primeiro uma parte importante da base? A tensão nasce porque não dá para fazer tudo ao mesmo tempo.",
+          "visual_instruction": "Minecraft Creeper (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Three route choices on a map. Make an authentic original still editorial illustration matching this exact narration: Esse detalhe transforma uma criatura relativamente simples em uma decisão. Você enfrenta o inimigo, tenta ganhar distância ou protege primeiro uma parte importante da base? A tensão nasce porque não dá para fazer tudo ao mesmo tempo.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "creeper"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "O som também tem papel importante. Um sinal curto, reconhecível, pode mudar imediatamente o estado emocional do jogador. O cérebro associa aquele aviso à possibilidade de uma consequência, mesmo antes de ver exatamente o que está acontecendo.",
+          "visual_instruction": "Minecraft Creeper (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Sound wave warning around shadow. Make an authentic original still editorial illustration matching this exact narration: O som também tem papel importante. Um sinal curto, reconhecível, pode mudar imediatamente o estado emocional do jogador. O cérebro associa aquele aviso à possibilidade de uma consequência, mesmo antes de ver exatamente o que está acontecendo.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "creeper"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Isso ajuda a explicar a força da nostalgia. Quando alguém menciona um Creeper atrás de uma construção, muitas pessoas lembram não de uma batalha grandiosa, mas de uma surpresa que interrompeu uma tarefa tranquila.",
+          "visual_instruction": "Minecraft Creeper (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Memory montage of small voxel houses. Make an authentic original still editorial illustration matching this exact narration: Isso ajuda a explicar a força da nostalgia. Quando alguém menciona um Creeper atrás de uma construção, muitas pessoas lembram não de uma batalha grandiosa, mas de uma surpresa que interrompeu uma tarefa tranquila.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "creeper"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "O design funciona porque o perigo se conecta ao que o jogador valoriza. Quanto mais tempo você dedicou à construção, mais importante parece a ameaça de perdê-la. É uma forma de tensão que nasce do próprio progresso.",
+          "visual_instruction": "Minecraft Creeper (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Close-up of carefully arranged blocks in danger. Make an authentic original still editorial illustration matching this exact narration: O design funciona porque o perigo se conecta ao que o jogador valoriza. Quanto mais tempo você dedicou à construção, mais importante parece a ameaça de perdê-la. É uma forma de tensão que nasce do próprio progresso.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "creeper"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Por isso, o Creeper não precisa ser o inimigo mais poderoso de Minecraft para ser memorável. Ele representa algo muito específico: o risco de que um segundo de distração mude uma história que o jogador estava criando.",
+          "visual_instruction": "Minecraft Creeper (Minecraft) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Peaceful repaired village sunrise. Make an authentic original still editorial illustration matching this exact narration: Por isso, o Creeper não precisa ser o inimigo mais poderoso de Minecraft para ser memorável. Ele representa algo muito específico: o risco de que um segundo de distração mude uma história que o jogador estava criando.. Visual context: true blocky game-accurate Minecraft/Roblox world, no recorded gameplay.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "creeper"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "game-103-minecraft-creeper",
+      "old_youtube_id": "oO_s9sbz8m4",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "editorial_anchor_continuity-v1",
+      "character_identity_bible": [
+        {
+          "key": "creeper",
+          "name": "Minecraft Creeper",
+          "franchise": "Minecraft",
+          "canonical_appearance": "Recognizable iconic Minecraft Creeper: tall armless green rectangular pixelated monster, four small block-like green legs, dark pixelated mournful face with two square eyes and long dark frowning mouth, mottled bright and dark-green pixel texture. Original Minecraft game-art voxel environment, cube-shaped blocks, wooden homes, glass windows, fences. Never replace with generic fantasy reptile, horror clown, human or monster."
+        }
+      ],
+      "visual_bible": "Stable brand coherent named mascot/element and faithful game or education context. Recognizable iconic Minecraft Creeper: tall armless green rectangular pixelated monster, four small block-like green legs, dark pixelated mournful face with two square eyes and long dark frowning mouth, mottled bright and dark-green pixel texture. Original Minecraft game-art voxel environment, cube-shaped blocks, wooden homes, glass windows, fences. Never replace with generic fantasy reptile, horror clown, human or monster. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    },
+    {
+      "id": "alchemy-101-video-ia-realidade-v2",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "language": "pt-BR",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "Vídeo feito por IA: o que observar antes de acreditar?",
+      "cover_text": "PARECE REAL?",
+      "description": "Vídeos gerados por IA podem ser convincentes. Em vez de prometer um detector infalível, explicamos maneiras de investigar origem, contexto e evidências antes de compartilhar imagens surpreendentes.\n\n🎨 Ilustrações geradas por IA para fins educativos; não demonstram casos reais.\n\n#InteligenciaArtificial #VideoIA #EducacaoDigital #Shorts\n\nVersão revisada: novas imagens consistentes em todas as cenas, correspondentes ao conteúdo narrado. Não são gravações de gameplay.",
+      "hashtags": [
+        "#InteligenciaArtificial",
+        "#VideoIA",
+        "#EducacaoDigital",
+        "#Shorts"
+      ],
+      "tags": [
+        "inteligência artificial",
+        "vídeo gerado por IA",
+        "IA generativa",
+        "deepfake",
+        "checagem de fatos",
+        "educação digital",
+        "sinais de IA",
+        "vídeo sintético",
+        "Alchemy Flames",
+        "AI video"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Você viu um vídeo impressionante nas redes sociais e ficou na dúvida se aquilo aconteceu de verdade? Com a evolução dos geradores de vídeo por inteligência artificial, algumas cenas podem parecer muito convincentes. Mas aparência realista não é a mesma coisa que prova. Um erro comum é procurar apenas defeitos visuais, como mãos estranhas ou objetos que mudam de forma. Esses detalhes podem levantar suspeitas, mas não são um teste confiável. Um vídeo autêntico também pode ter compressão, cortes e baixa qualidade. Uma pergunta melhor vem antes: de onde esse arquivo surgiu? Foi publicado por uma fonte que identifica local, data e contexto? Existe uma versão anterior? Alguém mostra o acontecimento por outro ângulo, sem copiar a mesma postagem? Depois, observe a narrativa. Um vídeo pode ser verdadeiro e ainda assim trazer legenda falsa, voz adicionada ou uma explicação que não combina com o que aparece. Verificar conteúdo significa analisar imagem e contexto, não apenas procurar sinais de edição. Também vale desconfiar de urgências artificiais. Mensagens que exigem compartilhamento imediato, afirmam que ninguém quer revelar a verdade ou escondem a origem do material merecem checagem adicional, especialmente quando provocam medo ou indignação. Ferramentas automáticas de detecção podem oferecer pistas, mas seus resultados variam. Elas não devem ser tratadas como sentença. A decisão fica mais forte quando várias evidências independentes apontam para a mesma conclusão. Se a origem continuar incerta, existe uma escolha simples e útil: não compartilhar como fato. Você pode guardar o link, procurar a fonte primária e esperar informações adicionais. Isso evita transformar uma dúvida em desinformação. A lição não é acreditar em tudo nem desconfiar de tudo. É aprender a pedir evidências proporcionais à afirmação. Quanto mais extraordinária a cena, mais importante é saber sua origem antes de tomar uma imagem convincente como realidade.",
+      "narration_word_count": 297,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [
+        "https://www.youtube.com/watch?v=lxlnG6nN_4Y"
+      ],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Você viu um vídeo impressionante nas redes sociais e ficou na dúvida se aquilo aconteceu de verdade? Com a evolução dos geradores de vídeo por inteligência artificial, algumas cenas podem parecer muito convincentes. Mas aparência realista não é a mesma coisa que prova.",
+          "visual_instruction": "Digital Video Analyst (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Fictional screen of ambiguous cinematic scene, no real persons. Make an authentic original still editorial illustration matching this exact narration: Você viu um vídeo impressionante nas redes sociais e ficou na dúvida se aquilo aconteceu de verdade? Com a evolução dos geradores de vídeo por inteligência artificial, algumas cenas podem parecer muito convincentes. Mas aparência realista não é a mesma coisa que prova.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "analyst"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Um erro comum é procurar apenas defeitos visuais, como mãos estranhas ou objetos que mudam de forma. Esses detalhes podem levantar suspeitas, mas não são um teste confiável. Um vídeo autêntico também pode ter compressão, cortes e baixa qualidade.",
+          "visual_instruction": "Digital Video Analyst (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Side-by-side authentic-style compression and synthetic artifact diagrams. Make an authentic original still editorial illustration matching this exact narration: Um erro comum é procurar apenas defeitos visuais, como mãos estranhas ou objetos que mudam de forma. Esses detalhes podem levantar suspeitas, mas não são um teste confiável. Um vídeo autêntico também pode ter compressão, cortes e baixa qualidade.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "analyst"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Uma pergunta melhor vem antes: de onde esse arquivo surgiu? Foi publicado por uma fonte que identifica local, data e contexto? Existe uma versão anterior? Alguém mostra o acontecimento por outro ângulo, sem copiar a mesma postagem?",
+          "visual_instruction": "Digital Video Analyst (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Source origin flowchart with dates. Make an authentic original still editorial illustration matching this exact narration: Uma pergunta melhor vem antes: de onde esse arquivo surgiu? Foi publicado por uma fonte que identifica local, data e contexto? Existe uma versão anterior? Alguém mostra o acontecimento por outro ângulo, sem copiar a mesma postagem?. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "analyst"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Depois, observe a narrativa. Um vídeo pode ser verdadeiro e ainda assim trazer legenda falsa, voz adicionada ou uma explicação que não combina com o que aparece. Verificar conteúdo significa analisar imagem e contexto, não apenas procurar sinais de edição.",
+          "visual_instruction": "Digital Video Analyst (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Caption and scene context represented as separate layers. Make an authentic original still editorial illustration matching this exact narration: Depois, observe a narrativa. Um vídeo pode ser verdadeiro e ainda assim trazer legenda falsa, voz adicionada ou uma explicação que não combina com o que aparece. Verificar conteúdo significa analisar imagem e contexto, não apenas procurar sinais de edição.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "analyst"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Também vale desconfiar de urgências artificiais. Mensagens que exigem compartilhamento imediato, afirmam que ninguém quer revelar a verdade ou escondem a origem do material merecem checagem adicional, especialmente quando provocam medo ou indignação.",
+          "visual_instruction": "Digital Video Analyst (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Urgent share notification crossed out. Make an authentic original still editorial illustration matching this exact narration: Também vale desconfiar de urgências artificiais. Mensagens que exigem compartilhamento imediato, afirmam que ninguém quer revelar a verdade ou escondem a origem do material merecem checagem adicional, especialmente quando provocam medo ou indignação.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "analyst"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Ferramentas automáticas de detecção podem oferecer pistas, mas seus resultados variam. Elas não devem ser tratadas como sentença. A decisão fica mais forte quando várias evidências independentes apontam para a mesma conclusão.",
+          "visual_instruction": "Digital Video Analyst (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Multiple evidence cards converging. Make an authentic original still editorial illustration matching this exact narration: Ferramentas automáticas de detecção podem oferecer pistas, mas seus resultados variam. Elas não devem ser tratadas como sentença. A decisão fica mais forte quando várias evidências independentes apontam para a mesma conclusão.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "analyst"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Se a origem continuar incerta, existe uma escolha simples e útil: não compartilhar como fato. Você pode guardar o link, procurar a fonte primária e esperar informações adicionais. Isso evita transformar uma dúvida em desinformação.",
+          "visual_instruction": "Digital Video Analyst (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Pause icon above share button. Make an authentic original still editorial illustration matching this exact narration: Se a origem continuar incerta, existe uma escolha simples e útil: não compartilhar como fato. Você pode guardar o link, procurar a fonte primária e esperar informações adicionais. Isso evita transformar uma dúvida em desinformação.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "analyst"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A lição não é acreditar em tudo nem desconfiar de tudo. É aprender a pedir evidências proporcionais à afirmação. Quanto mais extraordinária a cena, mais importante é saber sua origem antes de tomar uma imagem convincente como realidade.",
+          "visual_instruction": "Digital Video Analyst (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Magnifying glass over provenance chain. Make an authentic original still editorial illustration matching this exact narration: A lição não é acreditar em tudo nem desconfiar de tudo. É aprender a pedir evidências proporcionais à afirmação. Quanto mais extraordinária a cena, mais importante é saber sua origem antes de tomar uma imagem convincente como realidade.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "analyst"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "alchemy-101-video-ia-realidade",
+      "old_youtube_id": "gfG9bNDTZMU",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "editorial_anchor_continuity-v1",
+      "character_identity_bible": [
+        {
+          "key": "analyst",
+          "name": "Digital Video Analyst",
+          "franchise": "Alchemy Lab",
+          "canonical_appearance": "Consistent original Alchemy Lab educational host: cute simple friendly silver-white desktop robot with a small monitor face displaying two subtle expressive cyan eyes, dark navy rounded computer casing, one light-blue status ring, small compact articulated white hands, sitting beside a desktop monitor. Professional clean cyan-purple tech education studio and simple geometric screens. Same computer-face mascot in every educational illustration, no human face or flask."
+        }
+      ],
+      "visual_bible": "Stable brand coherent named mascot/element and faithful game or education context. Consistent original Alchemy Lab educational host: cute simple friendly silver-white desktop robot with a small monitor face displaying two subtle expressive cyan eyes, dark navy rounded computer casing, one light-blue status ring, small compact articulated white hands, sitting beside a desktop monitor. Professional clean cyan-purple tech education studio and simple geometric screens. Same computer-face mascot in every educational illustration, no human face or flask. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    },
+    {
+      "id": "alchemy-102-agentes-chatbot-v2",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "language": "pt-BR",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "Agente de IA ou chatbot: qual é a diferença de verdade?",
+      "cover_text": "AGENTE OU CHATBOT?",
+      "description": "Chatbot e agente de IA não são sinônimos. Entenda a diferença entre responder mensagens e executar etapas de um fluxo, incluindo permissões, ferramentas e conferência humana.\n\n🎨 Visuais conceituais gerados por IA, sem alegar execução de softwares ou testes.\n\n#AgentesDeIA #Automacao #InteligenciaArtificial #Shorts\n\nVersão revisada: novas imagens consistentes em todas as cenas, correspondentes ao conteúdo narrado. Não são gravações de gameplay.",
+      "hashtags": [
+        "#AgentesDeIA",
+        "#Automacao",
+        "#InteligenciaArtificial",
+        "#Shorts"
+      ],
+      "tags": [
+        "agentes de IA",
+        "chatbot",
+        "automação com IA",
+        "inteligência artificial",
+        "AI agents",
+        "agente autônomo",
+        "produtividade IA",
+        "fluxo de trabalho",
+        "Alchemy Flames",
+        "tecnologia"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Todo agente de inteligência artificial é apenas um chatbot com outro nome? Não exatamente. Os dois podem conversar em linguagem natural, mas a diferença mais importante aparece quando perguntamos o que o sistema consegue fazer depois de entender a solicitação. Um chatbot tradicional responde perguntas, produz textos e ajuda a organizar ideias. Isso já pode economizar bastante tempo. Porém, a resposta normalmente termina na conversa, sem executar uma sequência de tarefas em serviços externos. Um sistema com comportamento de agente pode receber um objetivo e utilizar ferramentas autorizadas para cumprir etapas. Por exemplo, pesquisar registros permitidos, comparar informações, preencher uma planilha e apresentar um resultado para revisão. Mas atenção: ter ferramentas não significa agir sem limites. Cada conexão precisa de permissões. Uma tarefa que envolve apagar dados, publicar informações ou gastar dinheiro exige controles diferentes de uma simples consulta. Outra diferença é a capacidade de acompanhar estados. Um fluxo pode incluir decisões: se um arquivo está ausente, parar; se os dados estão incompletos, pedir confirmação; se tudo foi validado, continuar para a próxima etapa. É por isso que muitos projetos falham quando tentam automatizar tudo de uma vez. O sistema parece inteligente na demonstração, mas uma falha pequena em uma etapa pode se multiplicar se não houver registros, verificações e limites claros. Na prática, o caminho mais seguro é começar com uma tarefa de baixo risco, definir o resultado esperado e registrar o que aconteceu. Só depois vale aumentar o nível de autonomia ou conectar sistemas mais sensíveis. Então, a pergunta não é qual nome parece mais moderno. É qual processo precisa ser resolvido. Para explicar um assunto, um chatbot pode bastar. Para executar etapas controladas, um agente bem projetado pode ser mais adequado.",
+      "narration_word_count": 284,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Todo agente de inteligência artificial é apenas um chatbot com outro nome? Não exatamente. Os dois podem conversar em linguagem natural, mas a diferença mais importante aparece quando perguntamos o que o sistema consegue fazer depois de entender a solicitação.",
+          "visual_instruction": "AI Agent Assistant (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Two labeled symbolic panels: conversation versus workflow. Make an authentic original still editorial illustration matching this exact narration: Todo agente de inteligência artificial é apenas um chatbot com outro nome? Não exatamente. Os dois podem conversar em linguagem natural, mas a diferença mais importante aparece quando perguntamos o que o sistema consegue fazer depois de entender a solicitação.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "assistant"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Um chatbot tradicional responde perguntas, produz textos e ajuda a organizar ideias. Isso já pode economizar bastante tempo. Porém, a resposta normalmente termina na conversa, sem executar uma sequência de tarefas em serviços externos.",
+          "visual_instruction": "AI Agent Assistant (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Speech bubble and document. Make an authentic original still editorial illustration matching this exact narration: Um chatbot tradicional responde perguntas, produz textos e ajuda a organizar ideias. Isso já pode economizar bastante tempo. Porém, a resposta normalmente termina na conversa, sem executar uma sequência de tarefas em serviços externos.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "assistant"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Um sistema com comportamento de agente pode receber um objetivo e utilizar ferramentas autorizadas para cumprir etapas. Por exemplo, pesquisar registros permitidos, comparar informações, preencher uma planilha e apresentar um resultado para revisão.",
+          "visual_instruction": "AI Agent Assistant (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Flowchart connecting search, sheet and report. Make an authentic original still editorial illustration matching this exact narration: Um sistema com comportamento de agente pode receber um objetivo e utilizar ferramentas autorizadas para cumprir etapas. Por exemplo, pesquisar registros permitidos, comparar informações, preencher uma planilha e apresentar um resultado para revisão.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "assistant"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Mas atenção: ter ferramentas não significa agir sem limites. Cada conexão precisa de permissões. Uma tarefa que envolve apagar dados, publicar informações ou gastar dinheiro exige controles diferentes de uma simples consulta.",
+          "visual_instruction": "AI Agent Assistant (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Permission lock symbols on task steps. Make an authentic original still editorial illustration matching this exact narration: Mas atenção: ter ferramentas não significa agir sem limites. Cada conexão precisa de permissões. Uma tarefa que envolve apagar dados, publicar informações ou gastar dinheiro exige controles diferentes de uma simples consulta.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "assistant"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Outra diferença é a capacidade de acompanhar estados. Um fluxo pode incluir decisões: se um arquivo está ausente, parar; se os dados estão incompletos, pedir confirmação; se tudo foi validado, continuar para a próxima etapa.",
+          "visual_instruction": "AI Agent Assistant (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Decision diamond with retry and stop. Make an authentic original still editorial illustration matching this exact narration: Outra diferença é a capacidade de acompanhar estados. Um fluxo pode incluir decisões: se um arquivo está ausente, parar; se os dados estão incompletos, pedir confirmação; se tudo foi validado, continuar para a próxima etapa.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "assistant"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "É por isso que muitos projetos falham quando tentam automatizar tudo de uma vez. O sistema parece inteligente na demonstração, mas uma falha pequena em uma etapa pode se multiplicar se não houver registros, verificações e limites claros.",
+          "visual_instruction": "AI Agent Assistant (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Error propagation diagram and checklist. Make an authentic original still editorial illustration matching this exact narration: É por isso que muitos projetos falham quando tentam automatizar tudo de uma vez. O sistema parece inteligente na demonstração, mas uma falha pequena em uma etapa pode se multiplicar se não houver registros, verificações e limites claros.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "assistant"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Na prática, o caminho mais seguro é começar com uma tarefa de baixo risco, definir o resultado esperado e registrar o que aconteceu. Só depois vale aumentar o nível de autonomia ou conectar sistemas mais sensíveis.",
+          "visual_instruction": "AI Agent Assistant (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Small audited workflow with green checks. Make an authentic original still editorial illustration matching this exact narration: Na prática, o caminho mais seguro é começar com uma tarefa de baixo risco, definir o resultado esperado e registrar o que aconteceu. Só depois vale aumentar o nível de autonomia ou conectar sistemas mais sensíveis.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "assistant"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Então, a pergunta não é qual nome parece mais moderno. É qual processo precisa ser resolvido. Para explicar um assunto, um chatbot pode bastar. Para executar etapas controladas, um agente bem projetado pode ser mais adequado.",
+          "visual_instruction": "AI Agent Assistant (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Final side-by-side matching needs to tools. Make an authentic original still editorial illustration matching this exact narration: Então, a pergunta não é qual nome parece mais moderno. É qual processo precisa ser resolvido. Para explicar um assunto, um chatbot pode bastar. Para executar etapas controladas, um agente bem projetado pode ser mais adequado.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "assistant"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "alchemy-102-agentes-chatbot",
+      "old_youtube_id": "C2fE9VslFCU",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "editorial_anchor_continuity-v1",
+      "character_identity_bible": [
+        {
+          "key": "assistant",
+          "name": "AI Agent Assistant",
+          "franchise": "Alchemy Lab",
+          "canonical_appearance": "Consistent simple approachable computer-face robot mascot in Alchemy Lab branding, white and navy round-edged desktop computer body, large small blue display with two expressive cyan dot eyes, compact articulated arms, one circular cyan badge and blue-purple tech laboratory backdrop. A distinct digital workstation with panels and arrows showing tools, task lists and permissions; no printed text, no generic human chatbot, no flask."
+        }
+      ],
+      "visual_bible": "Stable brand coherent named mascot/element and faithful game or education context. Consistent simple approachable computer-face robot mascot in Alchemy Lab branding, white and navy round-edged desktop computer body, large small blue display with two expressive cyan dot eyes, compact articulated arms, one circular cyan badge and blue-purple tech laboratory backdrop. A distinct digital workstation with panels and arrows showing tools, task lists and permissions; no printed text, no generic human chatbot, no flask. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    },
+    {
+      "id": "alchemy-103-prompt-consistencia-v2",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "language": "pt-BR",
+      "visibility_intent": "private_after_verified_QA",
+      "status": "script_draft_not_rendered",
+      "made_for_kids": false,
+      "title": "Prompt de IA: 3 detalhes que melhoram a consistência",
+      "cover_text": "PROMPT MAIS CLARO",
+      "description": "Se uma imagem gerada por IA muda de aparência entre cenas, o problema pode estar nas instruções. Veja três princípios práticos: identidade fixa, composição e revisão. Conceitos ilustrados, sem resultados experimentais inventados.\n\n🎨 Imagens ilustrativas geradas por IA, sem captura de interfaces de ferramentas.\n\n#PromptIA #ImagemIA #DicasDeIA #Shorts\n\nVersão revisada: novas imagens consistentes em todas as cenas, correspondentes ao conteúdo narrado. Não são gravações de gameplay.",
+      "hashtags": [
+        "#PromptIA",
+        "#ImagemIA",
+        "#DicasDeIA",
+        "#Shorts"
+      ],
+      "tags": [
+        "prompt de IA",
+        "prompt engineering",
+        "geração de imagens IA",
+        "consistência de personagens",
+        "IA na prática",
+        "inteligência artificial",
+        "prompts de imagem",
+        "personagem consistente",
+        "Alchemy Flames",
+        "tutorial IA"
+      ],
+      "voice_style": "conversacional_informativa",
+      "narration_script": "Você descreveu o mesmo personagem em três prompts e recebeu três pessoas completamente diferentes? Esse problema aparece bastante quando tentamos criar uma série de imagens. Um texto curto pode servir para uma cena isolada, mas nem sempre preserva identidade entre várias gerações. O primeiro princípio é separar características permanentes das mudanças de cada cena. Cor do cabelo, roupa principal, proporções e acessórios reconhecíveis devem formar uma descrição de identidade. O local e a ação podem mudar sem reescrever essa base. O segundo princípio é deixar a composição explícita. Dizer apenas que alguém está em um jardim pode produzir qualquer enquadramento. Especificar plano aberto ou médio, distância da câmera, iluminação e espaço livre para legendas ajuda a orientar o resultado. O terceiro princípio é revisar comparando com uma referência aprovada. Quando for permitido pela ferramenta e pelos direitos da imagem, usar uma referência pode ajudar. Ainda assim, é necessário verificar olhos, mãos, roupas e detalhes recorrentes antes de aprovar. Outro cuidado é evitar instruções que se contradizem. Pedir um close extremamente próximo e ao mesmo tempo mostrar o corpo inteiro cria tensão na composição. Uma instrução clara costuma funcionar melhor do que uma pilha de adjetivos incompatíveis. Também é útil dividir o trabalho por cenas. Primeiro, defina a aparência principal. Depois, escreva o ambiente e a ação de cada quadro. Por fim, revise todos como se fossem páginas de uma mesma história. Isso não garante que qualquer modelo acertará sempre. Sistemas de geração de imagens possuem limites, e repetir um prompt não obriga o resultado a ser idêntico. O objetivo é reduzir ambiguidades e facilitar a identificação de erros. O resumo é este: identidade fixa, composição objetiva e revisão por comparação. São três hábitos simples que ajudam a transformar imagens soltas em uma sequência visual mais coerente, sem depender de truques milagrosos.",
+      "narration_word_count": 301,
+      "duration": {
+        "minimum_seconds": 90,
+        "target_seconds": 100,
+        "maximum_seconds": 120,
+        "measured_tts_seconds": null,
+        "verified": false
+      },
+      "topic_source_urls": [],
+      "scene_policy": "8 original static illustrations (or approved series frames), clean cuts only; no deform/rig/warp/tremble; no character animation, minimal typographic timed captions",
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Você descreveu o mesmo personagem em três prompts e recebeu três pessoas completamente diferentes? Esse problema aparece bastante quando tentamos criar uma série de imagens. Um texto curto pode servir para uma cena isolada, mas nem sempre preserva identidade entre várias gerações.",
+          "visual_instruction": "Prompt Design Mascot (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Three inconsistent fictional character silhouettes. Make an authentic original still editorial illustration matching this exact narration: Você descreveu o mesmo personagem em três prompts e recebeu três pessoas completamente diferentes? Esse problema aparece bastante quando tentamos criar uma série de imagens. Um texto curto pode servir para uma cena isolada, mas nem sempre preserva identidade entre várias gerações.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "mascot"
+          ]
+        },
+        {
+          "number": 2,
+          "editorial_beat": "O primeiro princípio é separar características permanentes das mudanças de cada cena. Cor do cabelo, roupa principal, proporções e acessórios reconhecíveis devem formar uma descrição de identidade. O local e a ação podem mudar sem reescrever essa base.",
+          "visual_instruction": "Prompt Design Mascot (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Stable character design sheet with traits. Make an authentic original still editorial illustration matching this exact narration: O primeiro princípio é separar características permanentes das mudanças de cada cena. Cor do cabelo, roupa principal, proporções e acessórios reconhecíveis devem formar uma descrição de identidade. O local e a ação podem mudar sem reescrever essa base.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "mascot"
+          ]
+        },
+        {
+          "number": 3,
+          "editorial_beat": "O segundo princípio é deixar a composição explícita. Dizer apenas que alguém está em um jardim pode produzir qualquer enquadramento. Especificar plano aberto ou médio, distância da câmera, iluminação e espaço livre para legendas ajuda a orientar o resultado.",
+          "visual_instruction": "Prompt Design Mascot (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Composition guides showing medium and wide shots. Make an authentic original still editorial illustration matching this exact narration: O segundo princípio é deixar a composição explícita. Dizer apenas que alguém está em um jardim pode produzir qualquer enquadramento. Especificar plano aberto ou médio, distância da câmera, iluminação e espaço livre para legendas ajuda a orientar o resultado.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "mascot"
+          ]
+        },
+        {
+          "number": 4,
+          "editorial_beat": "O terceiro princípio é revisar comparando com uma referência aprovada. Quando for permitido pela ferramenta e pelos direitos da imagem, usar uma referência pode ajudar. Ainda assim, é necessário verificar olhos, mãos, roupas e detalhes recorrentes antes de aprovar.",
+          "visual_instruction": "Prompt Design Mascot (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Approved original reference with detail check icons. Make an authentic original still editorial illustration matching this exact narration: O terceiro princípio é revisar comparando com uma referência aprovada. Quando for permitido pela ferramenta e pelos direitos da imagem, usar uma referência pode ajudar. Ainda assim, é necessário verificar olhos, mãos, roupas e detalhes recorrentes antes de aprovar.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "mascot"
+          ]
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Outro cuidado é evitar instruções que se contradizem. Pedir um close extremamente próximo e ao mesmo tempo mostrar o corpo inteiro cria tensão na composição. Uma instrução clara costuma funcionar melhor do que uma pilha de adjetivos incompatíveis.",
+          "visual_instruction": "Prompt Design Mascot (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Contradictory camera framing illustrated. Make an authentic original still editorial illustration matching this exact narration: Outro cuidado é evitar instruções que se contradizem. Pedir um close extremamente próximo e ao mesmo tempo mostrar o corpo inteiro cria tensão na composição. Uma instrução clara costuma funcionar melhor do que uma pilha de adjetivos incompatíveis.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "mascot"
+          ]
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Também é útil dividir o trabalho por cenas. Primeiro, defina a aparência principal. Depois, escreva o ambiente e a ação de cada quadro. Por fim, revise todos como se fossem páginas de uma mesma história.",
+          "visual_instruction": "Prompt Design Mascot (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Storyboard cards from same setting. Make an authentic original still editorial illustration matching this exact narration: Também é útil dividir o trabalho por cenas. Primeiro, defina a aparência principal. Depois, escreva o ambiente e a ação de cada quadro. Por fim, revise todos como se fossem páginas de uma mesma história.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "mascot"
+          ]
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Isso não garante que qualquer modelo acertará sempre. Sistemas de geração de imagens possuem limites, e repetir um prompt não obriga o resultado a ser idêntico. O objetivo é reduzir ambiguidades e facilitar a identificação de erros.",
+          "visual_instruction": "Prompt Design Mascot (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Model output variance shown as branching tree. Make an authentic original still editorial illustration matching this exact narration: Isso não garante que qualquer modelo acertará sempre. Sistemas de geração de imagens possuem limites, e repetir um prompt não obriga o resultado a ser idêntico. O objetivo é reduzir ambiguidades e facilitar a identificação de erros.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "mascot"
+          ]
+        },
+        {
+          "number": 8,
+          "editorial_beat": "O resumo é este: identidade fixa, composição objetiva e revisão por comparação. São três hábitos simples que ajudam a transformar imagens soltas em uma sequência visual mais coerente, sem depender de truques milagrosos.",
+          "visual_instruction": "Prompt Design Mascot (Alchemy Lab) MUST remain identically recognizable with its established hair, body, colors, costume, screen-face or voxel model. Three principles illustrated in neat layout. Make an authentic original still editorial illustration matching this exact narration: O resumo é este: identidade fixa, composição objetiva e revisão por comparação. São três hábitos simples que ajudam a transformar imagens soltas em uma sequência visual mais coerente, sem depender de truques milagrosos.. Visual context: clean AI science illustration with consistent computer-face mascot, accurate educational technical symbolism and no text.",
+          "generated_asset_ready": false,
+          "reference_rights_verified": false,
+          "character_keys": [
+            "mascot"
+          ]
+        }
+      ],
+      "ai_disclosure": "original AI illustration; not real recording/gameplay/screenshots",
+      "production_state": {
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "visual_qa": "pending",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "original_episode_id": "alchemy-103-prompt-consistencia",
+      "old_youtube_id": "QL_trwUw62c",
+      "render_version": "anchor-edit-20261108-v2",
+      "character_identity_policy": "editorial_anchor_continuity-v1",
+      "character_identity_bible": [
+        {
+          "key": "mascot",
+          "name": "Prompt Design Mascot",
+          "franchise": "Alchemy Lab",
+          "canonical_appearance": "Consistent friendly little desktop computer-face mascot for Alchemy Lab, white-and-dark-navy plastic casing, luminous cyan-blue screen with smiling eyes, one cyan ring on the left side, tiny articulated arms and white keyboard in front. Clean educational purple-blue desk setting, reusable cyan and orange image reference cards and panels, visual examples of unchanged character design, no flask or stock businessman."
+        }
+      ],
+      "visual_bible": "Stable brand coherent named mascot/element and faithful game or education context. Consistent friendly little desktop computer-face mascot for Alchemy Lab, white-and-dark-navy plastic casing, luminous cyan-blue screen with smiling eyes, one cyan ring on the left side, tiny articulated arms and white keyboard in front. Clean educational purple-blue desk setting, reusable cyan and orange image reference cards and panels, visual examples of unchanged character design, no flask or stock businessman. Original standalone editorial images; not anime screenshots nor recorded gameplay; no written text or logos."
+    }
+  ]
+}
