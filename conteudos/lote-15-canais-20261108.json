@@ -1,0 +1,1060 @@
+{
+  "schema": "autoeditorvideo/new-15-five-channels-editorial-v1",
+  "date": "2026-11-08",
+  "production_owner": "lote15_novos_20261108",
+  "requested_total": 15,
+  "channels": [
+    "br",
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "per_channel": 3,
+  "default_visibility": "private",
+  "content_strategy": "15 new original 90-120-second videos, separate channel and OAuth, no existing MP4 reuse",
+  "reservations_path": "conteudos/otaku-production-reservations.json",
+  "approval": {
+    "creator_requested_upload": true,
+    "upload_only_after_render_qa_and_exact_youtube_id_check": true,
+    "publication_to_public_not_approved_by_this_manifest": true
+  },
+  "status": "reserved_editorial_briefs_only_not_rendered_not_uploaded",
+  "episodes": [
+    {
+      "id": "5015-jujutsu-kaisen-dominio",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Jujutsu Kaisen: por que um Domínio muda toda a luta?",
+      "cover_text": "O PODER DO DOMÍNIO",
+      "hook": "O perigo de uma Expansão de Domínio vai além do tamanho do ataque.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "O risco de entrar em um território controlado",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O risco de entrar em um território controlado"
+        },
+        {
+          "number": 2,
+          "goal": "A diferença entre poder bruto e regras da técnica",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A diferença entre poder bruto e regras da técnica"
+        },
+        {
+          "number": 3,
+          "goal": "Por que o espaço importa mais que a velocidade",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Por que o espaço importa mais que a velocidade"
+        },
+        {
+          "number": 4,
+          "goal": "O custo e a concentração exigidos",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O custo e a concentração exigidos"
+        },
+        {
+          "number": 5,
+          "goal": "Como o oponente precisa adaptar a estratégia",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Como o oponente precisa adaptar a estratégia"
+        },
+        {
+          "number": 6,
+          "goal": "A tensão narrativa antes do confronto",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A tensão narrativa antes do confronto"
+        },
+        {
+          "number": 7,
+          "goal": "O que torna essas cenas marcantes",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O que torna essas cenas marcantes"
+        },
+        {
+          "number": 8,
+          "goal": "O limite de uma vantagem aparentemente absoluta",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O limite de uma vantagem aparentemente absoluta"
+        }
+      ],
+      "tags": [
+        "anime",
+        "curiosidades de anime",
+        "análise de anime",
+        "Otaku Multicena"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "5016-dungeon-meshi-masmorra",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Dungeon Meshi: por que cozinhar muda a masmorra?",
+      "cover_text": "COMIDA É ESTRATÉGIA",
+      "hook": "E se a comida fosse tão importante quanto a espada?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Sobrevivência exige energia e planejamento",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Sobrevivência exige energia e planejamento"
+        },
+        {
+          "number": 2,
+          "goal": "Monstros vistos também como ecossistema",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Monstros vistos também como ecossistema"
+        },
+        {
+          "number": 3,
+          "goal": "Conhecimento transforma medo em investigação",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Conhecimento transforma medo em investigação"
+        },
+        {
+          "number": 4,
+          "goal": "A cozinha aproxima personalidades diferentes",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A cozinha aproxima personalidades diferentes"
+        },
+        {
+          "number": 5,
+          "goal": "A logística altera o ritmo da aventura",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A logística altera o ritmo da aventura"
+        },
+        {
+          "number": 6,
+          "goal": "Mundo fantástico ganha regras cotidianas",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Mundo fantástico ganha regras cotidianas"
+        },
+        {
+          "number": 7,
+          "goal": "Humor e risco convivem na mesma cena",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Humor e risco convivem na mesma cena"
+        },
+        {
+          "number": 8,
+          "goal": "O cotidiano aprofunda uma jornada épica",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O cotidiano aprofunda uma jornada épica"
+        }
+      ],
+      "tags": [
+        "anime",
+        "curiosidades de anime",
+        "análise de anime",
+        "Otaku Multicena"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "5017-attack-on-titan-muralhas",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Attack on Titan: o que as muralhas escondem?",
+      "cover_text": "ALÉM DAS MURALHAS",
+      "hook": "Às vezes a maior prisão parece o lugar mais seguro.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Muralhas como símbolo de segurança",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Muralhas como símbolo de segurança"
+        },
+        {
+          "number": 2,
+          "goal": "A proteção cobra um preço na liberdade",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A proteção cobra um preço na liberdade"
+        },
+        {
+          "number": 3,
+          "goal": "O desconhecido alimenta o medo coletivo",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O desconhecido alimenta o medo coletivo"
+        },
+        {
+          "number": 4,
+          "goal": "O espaço fechado molda as escolhas",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O espaço fechado molda as escolhas"
+        },
+        {
+          "number": 5,
+          "goal": "Informação incompleta cria tensão",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Informação incompleta cria tensão"
+        },
+        {
+          "number": 6,
+          "goal": "Segurança e controle não são sinônimos",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Segurança e controle não são sinônimos"
+        },
+        {
+          "number": 7,
+          "goal": "O mundo exterior muda o significado do interior",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O mundo exterior muda o significado do interior"
+        },
+        {
+          "number": 8,
+          "goal": "O mistério arquitetônico sustenta a narrativa",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; O mistério arquitetônico sustenta a narrativa"
+        }
+      ],
+      "tags": [
+        "anime",
+        "curiosidades de anime",
+        "análise de anime",
+        "Otaku Multicena"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "7014-fullmetal-troca-equivalente",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Fullmetal Alchemist: The Price of Equivalent Exchange",
+      "cover_text": "EVERY CHOICE COSTS",
+      "hook": "The most important exchange is not always about materials.",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "A rule that promises balance",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A rule that promises balance"
+        },
+        {
+          "number": 2,
+          "goal": "Why knowledge does not erase consequences",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Why knowledge does not erase consequences"
+        },
+        {
+          "number": 3,
+          "goal": "What makes a trade feel unfair",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; What makes a trade feel unfair"
+        },
+        {
+          "number": 4,
+          "goal": "The difference between value and meaning",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; The difference between value and meaning"
+        },
+        {
+          "number": 5,
+          "goal": "How limitations create tension",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; How limitations create tension"
+        },
+        {
+          "number": 6,
+          "goal": "Why shortcuts remain tempting",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Why shortcuts remain tempting"
+        },
+        {
+          "number": 7,
+          "goal": "The moral weight of a choice",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; The moral weight of a choice"
+        },
+        {
+          "number": 8,
+          "goal": "A principle that is more than a formula",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A principle that is more than a formula"
+        }
+      ],
+      "tags": [
+        "anime explained",
+        "anime analysis",
+        "Otaku Reframe",
+        "anime shorts"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "7015-one-piece-poneglyphs",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "One Piece: Why the Ancient Stones Matter",
+      "cover_text": "STONES HOLD SECRETS",
+      "hook": "What if the most dangerous treasure were information?",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "A mystery written into stone",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A mystery written into stone"
+        },
+        {
+          "number": 2,
+          "goal": "Why language can hold power",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Why language can hold power"
+        },
+        {
+          "number": 3,
+          "goal": "The importance of a fragmented record",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; The importance of a fragmented record"
+        },
+        {
+          "number": 4,
+          "goal": "Knowledge as a form of resistance",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Knowledge as a form of resistance"
+        },
+        {
+          "number": 5,
+          "goal": "How exploration becomes investigation",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; How exploration becomes investigation"
+        },
+        {
+          "number": 6,
+          "goal": "Why history shapes the present",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Why history shapes the present"
+        },
+        {
+          "number": 7,
+          "goal": "A clue that changes a destination",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A clue that changes a destination"
+        },
+        {
+          "number": 8,
+          "goal": "What mysteries do for a long story",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; What mysteries do for a long story"
+        }
+      ],
+      "tags": [
+        "anime explained",
+        "anime analysis",
+        "Otaku Reframe",
+        "anime shorts"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "7016-hunter-nen-restricoes",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Hunter x Hunter: Why Nen Restrictions Matter",
+      "cover_text": "LIMITS CREATE POWER",
+      "hook": "A stronger ability sometimes begins with a weakness.",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Power built around conditions",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Power built around conditions"
+        },
+        {
+          "number": 2,
+          "goal": "Why risk makes a rule meaningful",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Why risk makes a rule meaningful"
+        },
+        {
+          "number": 3,
+          "goal": "A restriction as a strategic choice",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A restriction as a strategic choice"
+        },
+        {
+          "number": 4,
+          "goal": "How planning beats raw strength",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; How planning beats raw strength"
+        },
+        {
+          "number": 5,
+          "goal": "The cost of relying on one method",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; The cost of relying on one method"
+        },
+        {
+          "number": 6,
+          "goal": "Why matchups are hard to predict",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Why matchups are hard to predict"
+        },
+        {
+          "number": 7,
+          "goal": "Creative solutions under pressure",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; Creative solutions under pressure"
+        },
+        {
+          "number": 8,
+          "goal": "A system where limits tell stories",
+          "visual_brief": "Original visual conceptual illustration, no actual anime frames; A system where limits tell stories"
+        }
+      ],
+      "tags": [
+        "anime explained",
+        "anime analysis",
+        "Otaku Reframe",
+        "anime shorts"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "game-104-terraria-primeira-noite",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Terraria: por que a primeira noite exige planejamento?",
+      "cover_text": "ANTES DO ANOITECER",
+      "hook": "A primeira noite testa a estratégia, não apenas os reflexos.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "O valor de preparar um abrigo",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; O valor de preparar um abrigo"
+        },
+        {
+          "number": 2,
+          "goal": "Recursos limitados e prioridades",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Recursos limitados e prioridades"
+        },
+        {
+          "number": 3,
+          "goal": "Exploração traz oportunidade e risco",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Exploração traz oportunidade e risco"
+        },
+        {
+          "number": 4,
+          "goal": "Iluminação como ferramenta de orientação",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Iluminação como ferramenta de orientação"
+        },
+        {
+          "number": 5,
+          "goal": "Ferramentas simples ganham valor",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Ferramentas simples ganham valor"
+        },
+        {
+          "number": 6,
+          "goal": "Escolhas de tempo criam consequência",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Escolhas de tempo criam consequência"
+        },
+        {
+          "number": 7,
+          "goal": "A descoberta ensina pelas tentativas",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; A descoberta ensina pelas tentativas"
+        },
+        {
+          "number": 8,
+          "goal": "Por que o começo já parece aventura",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Por que o começo já parece aventura"
+        }
+      ],
+      "tags": [
+        "jogos",
+        "curiosidades games",
+        "design de jogos",
+        "Hélio Conde"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "game-105-stardew-estacoes",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Stardew Valley: o segredo das quatro estações",
+      "cover_text": "AS ESTAÇÕES MUDAM TUDO",
+      "hook": "Uma mudança de estação pode mudar todo o seu planejamento.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "O calendário altera as opções",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; O calendário altera as opções"
+        },
+        {
+          "number": 2,
+          "goal": "Colheitas exigem tempo",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Colheitas exigem tempo"
+        },
+        {
+          "number": 3,
+          "goal": "O clima cria ritmo próprio",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; O clima cria ritmo próprio"
+        },
+        {
+          "number": 4,
+          "goal": "Planejar também significa descansar",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Planejar também significa descansar"
+        },
+        {
+          "number": 5,
+          "goal": "Atividades competem pela atenção",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Atividades competem pela atenção"
+        },
+        {
+          "number": 6,
+          "goal": "Aprender ciclos reduz desperdício",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Aprender ciclos reduz desperdício"
+        },
+        {
+          "number": 7,
+          "goal": "A fazenda reflete decisões de longo prazo",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; A fazenda reflete decisões de longo prazo"
+        },
+        {
+          "number": 8,
+          "goal": "Por que um sistema simples prende tanto",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Por que um sistema simples prende tanto"
+        }
+      ],
+      "tags": [
+        "jogos",
+        "curiosidades games",
+        "design de jogos",
+        "Hélio Conde"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "game-106-celeste-dificuldade",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Celeste: por que errar faz parte da experiência?",
+      "cover_text": "ERRAR TAMBÉM ENSINA",
+      "hook": "Um desafio difícil pode ser acolhedor quando ensina.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Controles claros deixam o desafio legível",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Controles claros deixam o desafio legível"
+        },
+        {
+          "number": 2,
+          "goal": "Tentativa e erro como aprendizado",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Tentativa e erro como aprendizado"
+        },
+        {
+          "number": 3,
+          "goal": "Cada obstáculo comunica uma ideia",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Cada obstáculo comunica uma ideia"
+        },
+        {
+          "number": 4,
+          "goal": "Recomeçar rapidamente muda a frustração",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; Recomeçar rapidamente muda a frustração"
+        },
+        {
+          "number": 5,
+          "goal": "O progresso depende da observação",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; O progresso depende da observação"
+        },
+        {
+          "number": 6,
+          "goal": "A dificuldade conversa com o tema",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; A dificuldade conversa com o tema"
+        },
+        {
+          "number": 7,
+          "goal": "A vitória pertence ao processo",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; A vitória pertence ao processo"
+        },
+        {
+          "number": 8,
+          "goal": "O design transforma persistência em emoção",
+          "visual_brief": "Original game-inspired illustrative concept, never real gameplay; O design transforma persistência em emoção"
+        }
+      ],
+      "tags": [
+        "jogos",
+        "curiosidades games",
+        "design de jogos",
+        "Hélio Conde"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "kids-104-abelhinha-e-as-cores",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "A Abelhinha que Descobriu as Cores 🐝🌈",
+      "cover_text": "AS CORES DO JARDIM",
+      "hook": "Uma abelhinha curiosa descobre um jardim cheio de surpresas.",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma manhã no jardim",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Uma manhã no jardim"
+        },
+        {
+          "number": 2,
+          "goal": "Uma flor vermelha muito alegre",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Uma flor vermelha muito alegre"
+        },
+        {
+          "number": 3,
+          "goal": "Uma flor amarela iluminada pelo sol",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Uma flor amarela iluminada pelo sol"
+        },
+        {
+          "number": 4,
+          "goal": "Uma flor azul perto da água",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Uma flor azul perto da água"
+        },
+        {
+          "number": 5,
+          "goal": "Uma folha verde bem grande",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Uma folha verde bem grande"
+        },
+        {
+          "number": 6,
+          "goal": "As cores que podem viver juntas",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; As cores que podem viver juntas"
+        },
+        {
+          "number": 7,
+          "goal": "A abelhinha visita suas amigas flores",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; A abelhinha visita suas amigas flores"
+        },
+        {
+          "number": 8,
+          "goal": "Um jardim colorido para recordar",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Um jardim colorido para recordar"
+        }
+      ],
+      "tags": [
+        "história infantil",
+        "desenho infantil",
+        "aprender brincando",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "kids-105-tartaruguinha-e-a-chuva",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "A Tartaruguinha e a Primeira Chuva 🐢☔",
+      "cover_text": "A CHUVA CHEGOU",
+      "hook": "Uma tartaruguinha aprende a escutar os sons da chuva.",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma nuvem aparece no céu",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Uma nuvem aparece no céu"
+        },
+        {
+          "number": 2,
+          "goal": "As primeiras gotas fazem toc toc",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; As primeiras gotas fazem toc toc"
+        },
+        {
+          "number": 3,
+          "goal": "A tartaruguinha encontra uma folha grande",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; A tartaruguinha encontra uma folha grande"
+        },
+        {
+          "number": 4,
+          "goal": "Os pássaros procuram abrigo",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Os pássaros procuram abrigo"
+        },
+        {
+          "number": 5,
+          "goal": "A água ajuda as plantas",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; A água ajuda as plantas"
+        },
+        {
+          "number": 6,
+          "goal": "A chuva passa devagar",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; A chuva passa devagar"
+        },
+        {
+          "number": 7,
+          "goal": "Um arco-íris ilumina o horizonte",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Um arco-íris ilumina o horizonte"
+        },
+        {
+          "number": 8,
+          "goal": "Um passeio com calma e alegria",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Um passeio com calma e alegria"
+        }
+      ],
+      "tags": [
+        "história infantil",
+        "desenho infantil",
+        "aprender brincando",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "kids-106-estrelinhas-contam",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "Cinco Estrelinhas no Céu ⭐ | Aprendendo a Contar",
+      "cover_text": "VAMOS CONTAR!",
+      "hook": "Uma viagem tranquila para contar de um até cinco.",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma estrela chega ao céu",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Uma estrela chega ao céu"
+        },
+        {
+          "number": 2,
+          "goal": "A segunda estrela aparece ao lado",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; A segunda estrela aparece ao lado"
+        },
+        {
+          "number": 3,
+          "goal": "A terceira estrela dança lentamente",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; A terceira estrela dança lentamente"
+        },
+        {
+          "number": 4,
+          "goal": "A quarta estrela brilha bem suave",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; A quarta estrela brilha bem suave"
+        },
+        {
+          "number": 5,
+          "goal": "A quinta estrela completa o grupo",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; A quinta estrela completa o grupo"
+        },
+        {
+          "number": 6,
+          "goal": "Todas se alinham para contar",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Todas se alinham para contar"
+        },
+        {
+          "number": 7,
+          "goal": "O céu mostra um desenho brilhante",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; O céu mostra um desenho brilhante"
+        },
+        {
+          "number": 8,
+          "goal": "Uma despedida calma com os cinco números",
+          "visual_brief": "Original soft 2D preschool illustration, cozy safe colors; Uma despedida calma com os cinco números"
+        }
+      ],
+      "tags": [
+        "história infantil",
+        "desenho infantil",
+        "aprender brincando",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "alchemy-104-automacao-gatilhos",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Automação: o que é um gatilho?",
+      "cover_text": "TUDO COMEÇA AQUI",
+      "hook": "Toda automação começa quando alguma condição acontece.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Definição simples de evento e gatilho",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Definição simples de evento e gatilho"
+        },
+        {
+          "number": 2,
+          "goal": "Diferença entre ação manual e automática",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Diferença entre ação manual e automática"
+        },
+        {
+          "number": 3,
+          "goal": "Exemplo conceitual de arquivo novo",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Exemplo conceitual de arquivo novo"
+        },
+        {
+          "number": 4,
+          "goal": "Condições evitam processos indevidos",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Condições evitam processos indevidos"
+        },
+        {
+          "number": 5,
+          "goal": "A importância de verificar permissões",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; A importância de verificar permissões"
+        },
+        {
+          "number": 6,
+          "goal": "Como prevenir repetições infinitas",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Como prevenir repetições infinitas"
+        },
+        {
+          "number": 7,
+          "goal": "A necessidade de registrar falhas",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; A necessidade de registrar falhas"
+        },
+        {
+          "number": 8,
+          "goal": "Uma automação útil precisa de controle",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Uma automação útil precisa de controle"
+        }
+      ],
+      "tags": [
+        "inteligência artificial",
+        "automação",
+        "tecnologia",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "alchemy-105-agentes-supervisao",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Agentes de IA: por que precisam de supervisão?",
+      "cover_text": "IA COM CONTROLE",
+      "hook": "Autonomia sem limites não é automação confiável.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Um assistente que propõe etapas",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Um assistente que propõe etapas"
+        },
+        {
+          "number": 2,
+          "goal": "Diferença entre sugerir e executar",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Diferença entre sugerir e executar"
+        },
+        {
+          "number": 3,
+          "goal": "Acesso a arquivos exige autorização",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Acesso a arquivos exige autorização"
+        },
+        {
+          "number": 4,
+          "goal": "Limites de escopo reduzem riscos",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Limites de escopo reduzem riscos"
+        },
+        {
+          "number": 5,
+          "goal": "Confirmação humana para ações irreversíveis",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Confirmação humana para ações irreversíveis"
+        },
+        {
+          "number": 6,
+          "goal": "Logs ajudam a corrigir problemas",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Logs ajudam a corrigir problemas"
+        },
+        {
+          "number": 7,
+          "goal": "Testes em ambiente seguro vêm primeiro",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Testes em ambiente seguro vêm primeiro"
+        },
+        {
+          "number": 8,
+          "goal": "Supervisão torna a autonomia mais útil",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Supervisão torna a autonomia mais útil"
+        }
+      ],
+      "tags": [
+        "inteligência artificial",
+        "automação",
+        "tecnologia",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    },
+    {
+      "id": "alchemy-106-ia-checagem-fontes",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Como conferir se uma resposta de IA está correta",
+      "cover_text": "NÃO CONFIE NO CHUTE",
+      "hook": "Uma resposta convincente ainda precisa de verificação.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "O problema de afirmações sem fontes",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; O problema de afirmações sem fontes"
+        },
+        {
+          "number": 2,
+          "goal": "Como transformar uma frase em pergunta verificável",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Como transformar uma frase em pergunta verificável"
+        },
+        {
+          "number": 3,
+          "goal": "Consultar documentação ou dados primários",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Consultar documentação ou dados primários"
+        },
+        {
+          "number": 4,
+          "goal": "Checar datas e versões",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Checar datas e versões"
+        },
+        {
+          "number": 5,
+          "goal": "Comparar fontes independentes",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Comparar fontes independentes"
+        },
+        {
+          "number": 6,
+          "goal": "Distinguir fatos de hipóteses",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Distinguir fatos de hipóteses"
+        },
+        {
+          "number": 7,
+          "goal": "Registrar dúvidas quando faltam provas",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; Registrar dúvidas quando faltam provas"
+        },
+        {
+          "number": 8,
+          "goal": "A verificação melhora qualquer fluxo com IA",
+          "visual_brief": "Original educational tech illustration without fabricated app screenshots; A verificação melhora qualquer fluxo com IA"
+        }
+      ],
+      "tags": [
+        "inteligência artificial",
+        "automação",
+        "tecnologia",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "not_written",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      }
+    }
+  ]
+}
