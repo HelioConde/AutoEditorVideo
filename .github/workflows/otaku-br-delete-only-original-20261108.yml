@@ -1,0 +1,93 @@
+name: Otaku Multicena BR - delete only verified obsolete Solo Leveling original
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: otaku-br-delete-only-alHbSHUN0dA-after-new-v2-public
+  cancel-in-progress: false
+
+jobs:
+  verify-delete-contract-offline:
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Assert SINGLE explicitly approved obsolete ID, exact 3 public replacements, no other writes
+        run: |
+          python -m pip install 'Pillow>=10,<13'
+          python -m py_compile scripts/otaku_br_delete_obsolete_one_20261108.py scripts/autorizar_exclusao_otaku_br.py
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          code=Path('scripts/otaku_br_delete_obsolete_one_20261108.py').read_text()
+          assert 'OLD_ID="alHbSHUN0dA"' in code
+          assert 'NEW_IDS=("K2kvO4wF7J8","yHxw_kTC6vA","OPsWY1QuinE")' in code
+          assert code.count('.videos().delete(')==1
+          assert 'num_retries=0' in code
+          assert 'SCOPE="https://www.googleapis.com/auth/youtube.force-ssl"' in code
+          assert '.videos().insert(' not in code
+          assert '.videos().update(' not in code
+          assert '.thumbnails().set(' not in code
+          print('BR_SAFE_DELETE_SINGLE_OLD_ID_AND_THREE_REPLACEMENTS_CONTRACT_OK')
+          PY
+      - name: Ensure main-branch-only protected OAuth Environment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/youtube_env_policy_guard.py
+
+  delete-only-original-after-public-replacement:
+    needs: verify-delete-contract-offline
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: youtube-private-upload
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install official YouTube Data API client, no image or video creation tools
+        run: |
+          python -m pip install -r requirements-publicacao.txt 'Pillow>=10,<13'
+      - name: Read-only download of exact three new publication receipts from original successful GitHub run
+        uses: actions/download-artifact@v4
+        with:
+          name: otaku-br-three-canonical-v2-public-youtube-receipts-20261108
+          run-id: 42446568286
+          github-token: ${{ github.token }}
+          path: br-original-v2-publish-receipts
+      - name: Via owner OAuth verify all three current public replacements and DELETE only alHbSHUN0dA
+        env:
+          OTAKU_BR_DELETE_EXACT_OBSOLETE_ID_AUTHORIZED: 'yes'
+          OTAKU_BR_DELETE_EXPECTED_ID: alHbSHUN0dA
+          YOUTUBE_CLIENT_JSON: ${{ secrets.YOUTUBE_CLIENT_JSON }}
+          YOUTUBE_BR_DELETE_TOKEN_JSON: ${{ secrets.YOUTUBE_BR_DELETE_TOKEN_JSON }}
+        run: python scripts/otaku_br_delete_obsolete_one_20261108.py
+      - name: Preserve exact deletion result without OAuth tokens, even if API fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: otaku-br-only-old-solo-leveling-delete-result-20261108
+          path: otaku-br-original-cleanup-result-20261108.json
+          retention-days: 14
+          if-no-files-found: ignore
