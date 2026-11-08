@@ -95,3 +95,19 @@ A etapa de conexão real deve continuar BLOQUEADA até confirmação da
 plataforma e concessão explícita de credenciais oficiais de aplicativo.
 Depois, implementar a autenticação autorizada, verificação de conta, rotação
 atômica de refresh_token e publicação com reconciliação de IDs e status.
+
+
+## Integracao GitHub -> Samsung via ADB Wi-Fi (08/11/2026)
+
+O Samsung SM-M236B ja foi conectado ao PC Windows por ADB Wi-Fi e scrcpy pelo criador.
+Para executar transferencias sem repetir comandos foi adicionado um monitor local
+que consulta a fila aprovada do GitHub e verifica o SHA-256 de cada MP4 no Android.
+
+Guia: docs/KWAI-GITHUB-CELULAR-AUTOMATICO.md.
+
+**Seguranca:** AutoEditorVideo e PUBLICO. O workflow de self-hosted runner foi
+bloqueado nesse repositorio e nao deve receber o runner do PC. A alternativa
+segura e um agente leitor local, agendado no Windows, sem acesso de entrada.
+A fila ainda esta vazia: nenhum video foi autorizado para transferir ou publicar.
+A transferencia automatica e diferente de PUBLICACAO automatica no aplicativo,
+que ainda exige teste com o Kwai real e verificacao de suas regras.
