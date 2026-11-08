@@ -16,7 +16,10 @@ def audit_plan(plan:dict)->dict:
     issues=[]
     if len(hook.split())>18:issues.append('Gancho possivelmente longo: tente ate 18 palavras')
     if not script.lower().startswith(hook[:22].lower()): issues.append('Gancho do plano diferente da abertura do roteiro')
-    if not script.strip().endswith('?'):issues.append('Considere um encerramento com pergunta relevante')
+    # A pergunta generica final foi removida dos testes editoriais atuais:
+    # a audiencia pediu a resposta da historia sem CTA mecanico.
+    if script.strip().endswith('?'):
+        issues.append('Testar fechamento que entrega o resultado sem pergunta generica ou CTA')
     if not scenes:issues.append('Falta propor cenas visuais com base nos acontecimentos do roteiro')
     if word_count>150:issues.append('Roteiro longo: ajuste com uma narracao de teste antes de publicar')
     if word_count<55:issues.append('Roteiro possivelmente curto: verificar se entrega uma ideia completa')
@@ -25,7 +28,25 @@ def audit_plan(plan:dict)->dict:
         issues.append('Especifique a tese interpretativa original do episodio e um exemplo da obra')
     if any(x in script.lower() for x in ['vazou oficialmente','foi confirmado oficialmente','acaba de ser anunciado']):
         issues.append('Declaracao de novidade exige fonte verificavel antes da publicacao')
+    from otaku_growth_autotune import editorial_advice, load_policy
+    profile=load_policy()
+    reviewed={
+        'hook':hook, 'title':plan.get('titulo',''), 'script':script,
+        'cover_text':plan.get('texto_capa') or plan.get('capa_texto',''),
+        'storyboard':scenes
+    }
+    growth_recommendations=editorial_advice(reviewed,profile)
     return {'serie':plan.get('serie'),'palavras':word_count,
+        'growth_priority':profile.get('priority') if profile else None,
+        'growth_quality_advisories':growth_recommendations,
+        'production_experiment_settings':({
+            'short_duration_test_seconds':profile['production_rules']['duration']['baseline_experiment_seconds'],
+            'extended_duration_test_seconds':profile['production_rules']['duration']['extended_experiment_seconds'],
+            'max_caption_words':profile['production_rules']['captions']['max_words_per_phrase'],
+            'thumbnail_words':profile['production_rules']['thumbnail']['preferred_words'],
+            'narration_engine':profile['production_rules']['narration']['engine'],
+            'thumbnail_source':'original AutoEditorVideo render; no automatic YouTube frame'
+        } if profile else None),
         'duracao_estimada_segundos':duration_range,
         'titulo_atual':plan.get('titulo'),
         'ganchos_para_testar':[
