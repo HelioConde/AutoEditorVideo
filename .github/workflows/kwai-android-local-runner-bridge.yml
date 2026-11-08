@@ -64,8 +64,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python -m py_compile scripts/kwai_adb_local_bridge.py scripts/kwai_adb_artifact_gate.py
+          python -m py_compile scripts/kwai_adb_local_bridge.py scripts/kwai_adb_artifact_gate.py scripts/kwai_github_pc_agent.py
           python -m unittest discover -s tests -p 'test_kwai_adb_github_bridge.py' -v
+          python -m unittest discover -s tests -p 'test_kwai_github_pc_agent.py' -v
           python - <<'PY'
           import json
           from pathlib import Path
