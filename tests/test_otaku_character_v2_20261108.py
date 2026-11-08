@@ -59,7 +59,7 @@ def test_canonical_v2_generates_anchor_then_edits_no_independent_frames(tmp_path
         return png((25,80+10*len(calls["anchors"]),110))
     def fake_edit(master,prompt,model,key,*,transparent):
         calls["edits"].append((master,prompt))
-        assert "REFERENCE" in prompt
+        assert "reference" in prompt.lower()
         assert model=="gpt-image-2" and transparent is False
         return png((110+len(calls["edits"]),60,170))
     monkeypatch.setitem(sys.modules,"gerar_video_codex",
