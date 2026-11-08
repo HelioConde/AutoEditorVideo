@@ -1,0 +1,600 @@
+{
+  "esquema": "autoeditor/youtube-analytics-api-snapshot/v1",
+  "coleta_em": "2026-11-08",
+  "periodo_relatorio": {
+    "inicio": "2026-10-09",
+    "fim": "2026-11-07",
+    "completude": "Relatórios solicitados até 07/11, mas a série diária entregue só contém dias até 05/11. Não preencher ausências com zero."
+  },
+  "fontes": [
+    "vidIQ conectado, relatórios do YouTube Analytics para canais próprios",
+    "vidIQ conectado, YouTube metadata e estatísticas públicas atuais de vídeos e canais"
+  ],
+  "formato_metrica": "Contadores do intervalo não são contadores vitalícios. Visualizações engajadas não representam percentual de retenção. Horas = minutos estimados/60.",
+  "canais": [
+    {
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "name": "Otaku Multicena",
+      "sigla": "BR",
+      "snapshot_canal_atual": {
+        "subscribers": 36,
+        "views_vitalicios": 10864,
+        "public_video_count": 72
+      },
+      "metricas_periodo": {
+        "views": 7535,
+        "engaged_views": 2728,
+        "estimated_minutes_watched": 895,
+        "subscribers_gained": 30,
+        "subscribers_lost": 5,
+        "likes": 272,
+        "comments": 6,
+        "shares": 2
+      },
+      "ranking_videos": [
+        {
+          "video_id": "mP34eFfMIRI",
+          "title": "Light caçou Kira SEM SABER que era ele mesmo! 🤯 #Shorts",
+          "views": 1193,
+          "engaged_views": 505,
+          "estimated_minutes_watched": 254,
+          "subscribers_gained": 6,
+          "likes": 61,
+          "comments": 2
+        },
+        {
+          "video_id": "78ICmUFT--Q",
+          "title": "Steel Ball Run: A corrida que muda tudo 🏁 #Shorts",
+          "views": 1141,
+          "engaged_views": 520,
+          "estimated_minutes_watched": 137,
+          "subscribers_gained": 1,
+          "likes": 36,
+          "comments": 1
+        },
+        {
+          "video_id": "MEX24eZCNp4",
+          "title": "Blue Box: AMOR OU ESPORTE 👀 #Shorts",
+          "views": 641,
+          "engaged_views": 255,
+          "estimated_minutes_watched": 60,
+          "subscribers_gained": 6,
+          "likes": 16,
+          "comments": 0
+        },
+        {
+          "video_id": "ZKkfQejnYaA",
+          "title": "Light vs. L: quem venceria esse xadrez mortal? ♟️",
+          "views": 610,
+          "engaged_views": 120,
+          "estimated_minutes_watched": 35,
+          "subscribers_gained": 0,
+          "likes": 12,
+          "comments": 0
+        },
+        {
+          "video_id": "Zu87-dVMmkg",
+          "title": "O custo real de ser uma lenda em Night City 🦾 #CyberpunkEdgerunners #Anime #Shorts",
+          "views": 600,
+          "engaged_views": 305,
+          "estimated_minutes_watched": 76,
+          "subscribers_gained": 0,
+          "likes": 14,
+          "comments": 0
+        },
+        {
+          "video_id": "wbxMcCPWXIM",
+          "title": "The Apothecary Diaries: O método genial da Maomao 🧪 #Shorts",
+          "views": 597,
+          "engaged_views": 194,
+          "estimated_minutes_watched": 64,
+          "subscribers_gained": 5,
+          "likes": 34,
+          "comments": 0
+        },
+        {
+          "video_id": "Zg2mSwipw3I",
+          "title": "Light virou o mal tentando fazer justiça? 🩸 | Death Note",
+          "views": 555,
+          "engaged_views": 120,
+          "estimated_minutes_watched": 42,
+          "subscribers_gained": 1,
+          "likes": 14,
+          "comments": 1
+        },
+        {
+          "video_id": "VfliGg3N4rU",
+          "title": "Por que Death Note prende tanto SEM LUTAS? 🧠 #Shorts",
+          "views": 478,
+          "engaged_views": 131,
+          "estimated_minutes_watched": 33,
+          "subscribers_gained": 2,
+          "likes": 25,
+          "comments": 1
+        },
+        {
+          "video_id": "B8KCPSDL7kg",
+          "title": "Black Clover: SEM MAGIA?! O segredo do Asta ⚔️ #Shorts",
+          "views": 328,
+          "engaged_views": 87,
+          "estimated_minutes_watched": 32,
+          "subscribers_gained": 2,
+          "likes": 11,
+          "comments": 0
+        },
+        {
+          "video_id": "9NutbHQ3X9k",
+          "title": "Firefly Wedding: CASAMENTO PERIGOSO 👀 #Shorts",
+          "views": 324,
+          "engaged_views": 138,
+          "estimated_minutes_watched": 38,
+          "subscribers_gained": 3,
+          "likes": 15,
+          "comments": 0
+        },
+        {
+          "video_id": "h5ZcSCQuldk",
+          "title": "Death Note: por que 40 SEGUNDOS mudam tudo? ⏱️ #Shorts",
+          "views": 282,
+          "engaged_views": 109,
+          "estimated_minutes_watched": 46,
+          "subscribers_gained": 2,
+          "likes": 10,
+          "comments": 1
+        },
+        {
+          "video_id": "yTAyi97LKoI",
+          "title": null,
+          "views": 189,
+          "engaged_views": 41,
+          "estimated_minutes_watched": 10,
+          "subscribers_gained": 0,
+          "likes": 5,
+          "comments": 0
+        },
+        {
+          "video_id": "7XQh5vGsxd0",
+          "title": null,
+          "views": 177,
+          "engaged_views": 49,
+          "estimated_minutes_watched": 15,
+          "subscribers_gained": 0,
+          "likes": 4,
+          "comments": 0
+        },
+        {
+          "video_id": "N1PgQ3pqgsY",
+          "title": null,
+          "views": 100,
+          "engaged_views": 32,
+          "estimated_minutes_watched": 6,
+          "subscribers_gained": 1,
+          "likes": 3,
+          "comments": 0
+        },
+        {
+          "video_id": "JIz_woaE_58",
+          "title": null,
+          "views": 90,
+          "engaged_views": 34,
+          "estimated_minutes_watched": 9,
+          "subscribers_gained": 0,
+          "likes": 4,
+          "comments": 0
+        },
+        {
+          "video_id": "m28-KzLSh1k",
+          "title": null,
+          "views": 62,
+          "engaged_views": 27,
+          "estimated_minutes_watched": 12,
+          "subscribers_gained": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "video_id": "onPMOtF1EfA",
+          "title": null,
+          "views": 51,
+          "engaged_views": 13,
+          "estimated_minutes_watched": 4,
+          "subscribers_gained": 1,
+          "likes": 4,
+          "comments": 0
+        },
+        {
+          "video_id": "zwyLeTzeCn4",
+          "title": null,
+          "views": 35,
+          "engaged_views": 15,
+          "estimated_minutes_watched": 4,
+          "subscribers_gained": 0,
+          "likes": 1,
+          "comments": 0
+        },
+        {
+          "video_id": "aazx0nhTDpc",
+          "title": null,
+          "views": 22,
+          "engaged_views": 9,
+          "estimated_minutes_watched": 1,
+          "subscribers_gained": 0,
+          "likes": 1,
+          "comments": 0
+        },
+        {
+          "video_id": "wZ0Kx0UyB0s",
+          "title": null,
+          "views": 18,
+          "engaged_views": 11,
+          "estimated_minutes_watched": 2,
+          "subscribers_gained": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "video_id": "En5M9Nsdet4",
+          "title": null,
+          "views": 16,
+          "engaged_views": 4,
+          "estimated_minutes_watched": 0,
+          "subscribers_gained": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "video_id": "NNOK0WDy6T0",
+          "title": null,
+          "views": 13,
+          "engaged_views": 4,
+          "estimated_minutes_watched": 0,
+          "subscribers_gained": 0,
+          "likes": 1,
+          "comments": 0
+        },
+        {
+          "video_id": "w6eSdUGk6aE",
+          "title": null,
+          "views": 7,
+          "engaged_views": 3,
+          "estimated_minutes_watched": 1,
+          "subscribers_gained": 0,
+          "likes": 1,
+          "comments": 0
+        },
+        {
+          "video_id": "Jwd_BUp9Y98",
+          "title": null,
+          "views": 6,
+          "engaged_views": 2,
+          "estimated_minutes_watched": 0,
+          "subscribers_gained": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      ],
+      "serie_diaria_retornada": [
+        {
+          "date": "2026-11-01",
+          "views": 1109,
+          "engaged_views": 388,
+          "estimated_minutes_watched": 160,
+          "subscribers_gained": 5,
+          "likes": 58
+        },
+        {
+          "date": "2026-11-02",
+          "views": 1172,
+          "engaged_views": 353,
+          "estimated_minutes_watched": 117,
+          "subscribers_gained": 3,
+          "likes": 43
+        },
+        {
+          "date": "2026-11-03",
+          "views": 1544,
+          "engaged_views": 426,
+          "estimated_minutes_watched": 194,
+          "subscribers_gained": 6,
+          "likes": 48
+        },
+        {
+          "date": "2026-11-04",
+          "views": 417,
+          "engaged_views": 139,
+          "estimated_minutes_watched": 46,
+          "subscribers_gained": 2,
+          "likes": 12
+        },
+        {
+          "date": "2026-11-05",
+          "views": 3293,
+          "engaged_views": 1422,
+          "estimated_minutes_watched": 375,
+          "subscribers_gained": 14,
+          "likes": 111
+        }
+      ],
+      "origem_trafego": [
+        {
+          "codigo": "YT_CHANNEL",
+          "views": 16,
+          "engaged_views": 9,
+          "estimated_minutes_watched": 2,
+          "average_view_duration_seconds": 13,
+          "average_view_percentage": 34.21
+        },
+        {
+          "codigo": "SUBSCRIBER",
+          "views": 19,
+          "engaged_views": 16,
+          "estimated_minutes_watched": 6,
+          "average_view_duration_seconds": 24,
+          "average_view_percentage": 68.44
+        },
+        {
+          "codigo": "YT_OTHER_PAGE",
+          "views": 53,
+          "engaged_views": 31,
+          "estimated_minutes_watched": 10,
+          "average_view_duration_seconds": 19,
+          "average_view_percentage": 50.87
+        },
+        {
+          "codigo": "EXT_URL",
+          "views": 4,
+          "engaged_views": 2,
+          "estimated_minutes_watched": 1,
+          "average_view_duration_seconds": 42,
+          "average_view_percentage": 100.71
+        },
+        {
+          "codigo": "SHORTS",
+          "views": 7220,
+          "engaged_views": 2588,
+          "estimated_minutes_watched": 848,
+          "average_view_duration_seconds": 17,
+          "average_view_percentage": 45.14
+        },
+        {
+          "codigo": "NO_LINK_OTHER",
+          "views": 2,
+          "engaged_views": 2,
+          "estimated_minutes_watched": 1,
+          "average_view_duration_seconds": 46,
+          "average_view_percentage": 116.97
+        },
+        {
+          "codigo": "YT_SEARCH",
+          "views": 233,
+          "engaged_views": 85,
+          "estimated_minutes_watched": 25,
+          "average_view_duration_seconds": 15,
+          "average_view_percentage": 40.64
+        }
+      ],
+      "corte_tipo_conteudo": {
+        "shorts_views": 7560,
+        "shorts_engaged_views": 2728,
+        "shorts_minutes_watched": 895,
+        "nota": "O valor por tipo de conteúdo (7.560) difere do total geral (7.535), reportado por consultas distintas; não usar como substituto do total."
+      }
+    },
+    {
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "name": "Otaku Reframe",
+      "sigla": "EN",
+      "snapshot_canal_atual": {
+        "subscribers": 4,
+        "views_vitalicios": 587,
+        "public_video_count": 13
+      },
+      "metricas_periodo": {
+        "views": 517,
+        "engaged_views": 228,
+        "estimated_minutes_watched": 57,
+        "subscribers_gained": 2,
+        "subscribers_lost": 0,
+        "likes": 11,
+        "comments": 0,
+        "shares": 0
+      },
+      "ranking_videos": [
+        {
+          "video_id": "J0C0zWmpB90",
+          "title": "Who played the better game? L or Light? ♟️🧐 #deathnote #llawliet #kira #anime",
+          "views": 505,
+          "engaged_views": 224,
+          "estimated_minutes_watched": 56,
+          "subscribers_gained": 1,
+          "likes": 11,
+          "comments": 0
+        },
+        {
+          "video_id": "gZt7V7L5L9c",
+          "title": "Did You Know? The Death Note Needs MORE Than Your Name 📓 #Shorts",
+          "views": 6,
+          "engaged_views": 2,
+          "estimated_minutes_watched": 0,
+          "subscribers_gained": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "video_id": "AQG1GjRDgUY",
+          "title": null,
+          "views": 3,
+          "engaged_views": 2,
+          "estimated_minutes_watched": 0,
+          "subscribers_gained": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "video_id": "crR9PFmBlOg",
+          "title": null,
+          "views": 2,
+          "engaged_views": 0,
+          "estimated_minutes_watched": 0,
+          "subscribers_gained": 0,
+          "likes": 0,
+          "comments": 0
+        },
+        {
+          "video_id": "VZhqsUjt8i4",
+          "title": null,
+          "views": 1,
+          "engaged_views": 0,
+          "estimated_minutes_watched": 0,
+          "subscribers_gained": 0,
+          "likes": 0,
+          "comments": 0
+        }
+      ],
+      "serie_diaria_retornada": [
+        {
+          "date": "2026-11-03",
+          "views": 4,
+          "engaged_views": 2,
+          "estimated_minutes_watched": 0,
+          "subscribers_gained": 0,
+          "likes": 0
+        },
+        {
+          "date": "2026-11-04",
+          "views": 306,
+          "engaged_views": 129,
+          "estimated_minutes_watched": 30,
+          "subscribers_gained": 1,
+          "likes": 8
+        },
+        {
+          "date": "2026-11-05",
+          "views": 207,
+          "engaged_views": 97,
+          "estimated_minutes_watched": 26,
+          "subscribers_gained": 1,
+          "likes": 3
+        }
+      ],
+      "origem_trafego": [
+        {
+          "codigo": "YT_OTHER_PAGE",
+          "views": 4,
+          "engaged_views": 2,
+          "estimated_minutes_watched": 0,
+          "average_view_duration_seconds": 17,
+          "average_view_percentage": 58.02
+        },
+        {
+          "codigo": "SHORTS",
+          "views": 457,
+          "engaged_views": 204,
+          "estimated_minutes_watched": 49,
+          "average_view_duration_seconds": 12,
+          "average_view_percentage": 42.91
+        },
+        {
+          "codigo": "NO_LINK_OTHER",
+          "views": 0,
+          "engaged_views": 0,
+          "estimated_minutes_watched": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0
+        },
+        {
+          "codigo": "YT_SEARCH",
+          "views": 56,
+          "engaged_views": 22,
+          "estimated_minutes_watched": 7,
+          "average_view_duration_seconds": 18,
+          "average_view_percentage": 56.06
+        }
+      ],
+      "corte_tipo_conteudo": null
+    }
+  ],
+  "diagnostico": [
+    "BR concentra cerca de 95,8% das views no feed Shorts (7220/7535); EN cerca de 88,4% (457/517).",
+    "No BR, os vídeos Light caçou Kira e Steel Ball Run somam 2334 views no período, ~31,0% do total.",
+    "No EN, vídeo Who played the better game? teve 505 das 517 views, ~97,7% do canal no período.",
+    "BR tem 2728 engagedViews de 7535 views; EN tem 228 de 517. Esta razão não equivale à retenção média nem a uma taxa de conclusão.",
+    "Não comparar desempenho apenas por total de views sem normalizar idade de publicação.",
+    "Existe pequena discrepância de contabilização em alguns relatórios por agrupamento. Preservar cada valor original e a dimensão usada."
+  ],
+  "restricoes": [
+    "Somente os canais BR e EN estavam conectados e autorizados na ferramenta no momento da consulta.",
+    "Games, Kids e Alchemy não foram analisados pela API nesta medição.",
+    "Créditos da integração vidIQ esgotaram durante a coleta; a consulta EN por tipo de conteúdo não foi concluída.",
+    "Nenhum token, e-mail de autenticação ou segredo foi salvo.",
+    "Não houve uploads nem mudanças em canais.",
+    "Contadores atuais de vídeos consultados separadamente da janela analítica podem ser maiores que os do ranking histórico."
+  ],
+  "videos_metadados_atuais": [
+    {
+      "video_id": "J0C0zWmpB90",
+      "views_at_lookup": 545,
+      "likes_at_lookup": 12
+    },
+    {
+      "video_id": "mP34eFfMIRI",
+      "views_at_lookup": 1194,
+      "likes_at_lookup": 61
+    },
+    {
+      "video_id": "MEX24eZCNp4",
+      "views_at_lookup": 646,
+      "likes_at_lookup": 16
+    },
+    {
+      "video_id": "9NutbHQ3X9k",
+      "views_at_lookup": 337,
+      "likes_at_lookup": 16
+    },
+    {
+      "video_id": "gZt7V7L5L9c",
+      "views_at_lookup": 6,
+      "likes_at_lookup": 0
+    },
+    {
+      "video_id": "wbxMcCPWXIM",
+      "views_at_lookup": 604,
+      "likes_at_lookup": 35
+    },
+    {
+      "video_id": "78ICmUFT--Q",
+      "views_at_lookup": 1144,
+      "likes_at_lookup": 36
+    },
+    {
+      "video_id": "ZKkfQejnYaA",
+      "views_at_lookup": 610,
+      "likes_at_lookup": 12
+    },
+    {
+      "video_id": "h5ZcSCQuldk",
+      "views_at_lookup": 282,
+      "likes_at_lookup": 10
+    },
+    {
+      "video_id": "B8KCPSDL7kg",
+      "views_at_lookup": 333,
+      "likes_at_lookup": 12
+    },
+    {
+      "video_id": "Zu87-dVMmkg",
+      "views_at_lookup": 600,
+      "likes_at_lookup": 14
+    },
+    {
+      "video_id": "Zg2mSwipw3I",
+      "views_at_lookup": 555,
+      "likes_at_lookup": 14
+    },
+    {
+      "video_id": "VfliGg3N4rU",
+      "views_at_lookup": 478,
+      "likes_at_lookup": 25
+    }
+  ]
+}
