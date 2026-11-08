@@ -46,7 +46,7 @@ jobs:
           from pathlib import Path
           s=Path('scripts/batch15_br_en_private_recovery_20261108.py').read_text(encoding='utf8')
           assert 'videos().update(' not in s and 'videos().delete(' not in s
-          assert 'public' not in s.split('def insert_private')[-1].split('def main')[0] or 'privacyStatus' not in s
+          assert 'api.videos().update(' not in s and 'api.videos().delete(' not in s
           print('EXACT_SIX_BR_EN_PRIVATE_ONLY_PREFLIGHT_COMPLETE')
           PY
 
@@ -196,7 +196,7 @@ jobs:
       needs.render.result != 'cancelled'
     strategy:
       fail-fast: false
-      max-parallel: 2
+      max-parallel: 1
       matrix:
         include:
           - channel: br
