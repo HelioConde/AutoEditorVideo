@@ -1,0 +1,18 @@
+{
+  "schema": "autoeditorvideo/trending-private-launch/v1",
+  "date": "2026-11-09",
+  "creator_authorized": true,
+  "channels": [
+    "br",
+    "en"
+  ],
+  "episode_ids": [
+    "5021-one-piece-chapeus-palha-equipe",
+    "7020-jojo-part-7-op-spin-kroi"
+  ],
+  "visibility": "private",
+  "public_release_requires_visual_review": true,
+  "no_duplicate_uploads": true,
+  "no_original_copyright_music_or_clips": true,
+  "main_branch_only": true
+}
