@@ -1,0 +1,1720 @@
+{
+  "schema": "autoeditorvideo/new-15-five-channels-editorial-v1",
+  "date": "2026-11-08",
+  "production_owner": "janela21_novos_20261108",
+  "requested_total": 15,
+  "channels": [
+    "br",
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "per_channel": 3,
+  "default_visibility": "private",
+  "content_strategy": "15 new original episodes, exact private fallback for passed 21h window; no public release",
+  "reservations_path": "conteudos/otaku-production-reservations.json",
+  "approval": {
+    "creator_requested_upload": true,
+    "upload_only_after_render_qa_and_exact_youtube_id_check": true,
+    "publication_to_public_not_approved_by_this_manifest": true
+  },
+  "status": "new_original_narrations_pending_render",
+  "episodes": [
+    {
+      "id": "5018-blue-box-silencios",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Blue Box: o poder do silêncio",
+      "cover_text": "O SILÊNCIO MUDA TUDO",
+      "hook": "Treinos e encontros comuns revelam sentimentos que não são fáceis de explicar.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Treinos e encontros comuns revelam sentimentos que não são fáceis de explicar",
+          "visual_brief": "Original illustrative concept of Blue Box: Treinos e encontros comuns revelam sentimentos que não são fáceis de explicar"
+        },
+        {
+          "number": 2,
+          "goal": "Uma quadra movimentada pode esconder uma conversa que nunca aconteceu",
+          "visual_brief": "Original illustrative concept of Blue Box: Uma quadra movimentada pode esconder uma conversa que nunca aconteceu"
+        },
+        {
+          "number": 3,
+          "goal": "O esporte tem placar, mas as relações não têm respostas claras",
+          "visual_brief": "Original illustrative concept of Blue Box: O esporte tem placar, mas as relações não têm respostas claras"
+        },
+        {
+          "number": 4,
+          "goal": "Uma hesitação no corredor muda o significado de um encontro",
+          "visual_brief": "Original illustrative concept of Blue Box: Uma hesitação no corredor muda o significado de um encontro"
+        },
+        {
+          "number": 5,
+          "goal": "Competir e gostar de alguém exigem tipos diferentes de coragem",
+          "visual_brief": "Original illustrative concept of Blue Box: Competir e gostar de alguém exigem tipos diferentes de coragem"
+        },
+        {
+          "number": 6,
+          "goal": "Um gesto discreto pode valer mais do que uma declaração",
+          "visual_brief": "Original illustrative concept of Blue Box: Um gesto discreto pode valer mais do que uma declaração"
+        },
+        {
+          "number": 7,
+          "goal": "A rotina une encontros e decisões que amadurecem com o tempo",
+          "visual_brief": "Original illustrative concept of Blue Box: A rotina une encontros e decisões que amadurecem com o tempo"
+        },
+        {
+          "number": 8,
+          "goal": "O encanto acompanha esporte e afeto crescendo em paralelo",
+          "visual_brief": "Original illustrative concept of Blue Box: O encanto acompanha esporte e afeto crescendo em paralelo"
+        }
+      ],
+      "tags": [
+        "Blue Box",
+        "análise de anime",
+        "Otaku Multicena"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Treinos e encontros comuns revelam sentimentos que não são fáceis de explicar. Essa abertura parece simples, mas cria uma pergunta que só ganha sentido quando observamos as consequências da história. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Blue Box: Treinos e encontros comuns revelam sentimentos que não são fáceis de explicar; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Uma quadra movimentada pode esconder uma conversa que nunca aconteceu. O detalhe passa quase despercebido, porque o foco está em compreender o que as pessoas conseguem fazer naquela situação. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Blue Box: Uma quadra movimentada pode esconder uma conversa que nunca aconteceu; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "O esporte tem placar, mas as relações não têm respostas claras. Quando a narrativa revela as regras, uma decisão comum pode parecer muito mais importante do que antes.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Blue Box: O esporte tem placar, mas as relações não têm respostas claras; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Uma hesitação no corredor muda o significado de um encontro. O cenário participa da tensão: aquilo que parecia apenas decoração muda a forma como enxergamos a cena.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Blue Box: Uma hesitação no corredor muda o significado de um encontro; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Competir e gostar de alguém exigem tipos diferentes de coragem. Há uma diferença entre o que o público sabe e o que os envolvidos conseguem perceber naquele momento.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Blue Box: Competir e gostar de alguém exigem tipos diferentes de coragem; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Um gesto discreto pode valer mais do que uma declaração. Por isso vale observar as escolhas com calma, sem presumir que o maior efeito visual oferece a melhor explicação.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Blue Box: Um gesto discreto pode valer mais do que uma declaração; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "A rotina une encontros e decisões que amadurecem com o tempo. Ao juntar as pistas anteriores, o resultado parece mais coerente e também mais interessante.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Blue Box: A rotina une encontros e decisões que amadurecem com o tempo; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "O encanto acompanha esporte e afeto crescendo em paralelo. Essa relação entre escolhas e consequências é o que faz a história permanecer na memória depois do episódio.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Blue Box: O encanto acompanha esporte e afeto crescendo em paralelo; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Treinos e encontros comuns revelam sentimentos que não são fáceis de explicar. Essa abertura parece simples, mas cria uma pergunta que só ganha sentido quando observamos as consequências da história. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma quadra movimentada pode esconder uma conversa que nunca aconteceu. O detalhe passa quase despercebido, porque o foco está em compreender o que as pessoas conseguem fazer naquela situação. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. O esporte tem placar, mas as relações não têm respostas claras. Quando a narrativa revela as regras, uma decisão comum pode parecer muito mais importante do que antes. Uma hesitação no corredor muda o significado de um encontro. O cenário participa da tensão: aquilo que parecia apenas decoração muda a forma como enxergamos a cena. Competir e gostar de alguém exigem tipos diferentes de coragem. Há uma diferença entre o que o público sabe e o que os envolvidos conseguem perceber naquele momento. Um gesto discreto pode valer mais do que uma declaração. Por isso vale observar as escolhas com calma, sem presumir que o maior efeito visual oferece a melhor explicação. A rotina une encontros e decisões que amadurecem com o tempo. Ao juntar as pistas anteriores, o resultado parece mais coerente e também mais interessante. O encanto acompanha esporte e afeto crescendo em paralelo. Essa relação entre escolhas e consequências é o que faz a história permanecer na memória depois do episódio.",
+      "narration_word_count": 265,
+      "description": "Blue Box: o poder do silêncio. Análise independente com ilustrações originais de IA, sem cenas oficiais."
+    },
+    {
+      "id": "5019-apothecary-pistas",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Diários de uma Apotecária: pistas no palácio",
+      "cover_text": "A PISTA ESTAVA AQUI",
+      "hook": "Um mistério pode começar com um detalhe ignorado por todos.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Um mistério pode começar com um detalhe ignorado por todos",
+          "visual_brief": "Original illustrative concept of The Apothecary Diaries: Um mistério pode começar com um detalhe ignorado por todos"
+        },
+        {
+          "number": 2,
+          "goal": "Uma planta ou um perfume às vezes revela uma pista importante",
+          "visual_brief": "Original illustrative concept of The Apothecary Diaries: Uma planta ou um perfume às vezes revela uma pista importante"
+        },
+        {
+          "number": 3,
+          "goal": "Conhecer substâncias exige também comparar sintomas e circunstâncias",
+          "visual_brief": "Original illustrative concept of The Apothecary Diaries: Conhecer substâncias exige também comparar sintomas e circunstâncias"
+        },
+        {
+          "number": 4,
+          "goal": "As hierarquias do palácio podem esconder informações relevantes",
+          "visual_brief": "Original illustrative concept of The Apothecary Diaries: As hierarquias do palácio podem esconder informações relevantes"
+        },
+        {
+          "number": 5,
+          "goal": "Uma suspeita precisa resistir às perguntas antes da resposta",
+          "visual_brief": "Original illustrative concept of The Apothecary Diaries: Uma suspeita precisa resistir às perguntas antes da resposta"
+        },
+        {
+          "number": 6,
+          "goal": "A investigação cuidadosa evita acusações sem provas",
+          "visual_brief": "Original illustrative concept of The Apothecary Diaries: A investigação cuidadosa evita acusações sem provas"
+        },
+        {
+          "number": 7,
+          "goal": "Uma descoberta final modifica o significado das pistas anteriores",
+          "visual_brief": "Original illustrative concept of The Apothecary Diaries: Uma descoberta final modifica o significado das pistas anteriores"
+        },
+        {
+          "number": 8,
+          "goal": "A história recompensa quem observa e revisa hipóteses",
+          "visual_brief": "Original illustrative concept of The Apothecary Diaries: A história recompensa quem observa e revisa hipóteses"
+        }
+      ],
+      "tags": [
+        "The Apothecary Diaries",
+        "análise de anime",
+        "Otaku Multicena"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Um mistério pode começar com um detalhe ignorado por todos. Essa abertura parece simples, mas cria uma pergunta que só ganha sentido quando observamos as consequências da história. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. The Apothecary Diaries: Um mistério pode começar com um detalhe ignorado por todos; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Uma planta ou um perfume às vezes revela uma pista importante. O detalhe passa quase despercebido, porque o foco está em compreender o que as pessoas conseguem fazer naquela situação. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. The Apothecary Diaries: Uma planta ou um perfume às vezes revela uma pista importante; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Conhecer substâncias exige também comparar sintomas e circunstâncias. Quando a narrativa revela as regras, uma decisão comum pode parecer muito mais importante do que antes.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. The Apothecary Diaries: Conhecer substâncias exige também comparar sintomas e circunstâncias; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "As hierarquias do palácio podem esconder informações relevantes. O cenário participa da tensão: aquilo que parecia apenas decoração muda a forma como enxergamos a cena.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. The Apothecary Diaries: As hierarquias do palácio podem esconder informações relevantes; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma suspeita precisa resistir às perguntas antes da resposta. Há uma diferença entre o que o público sabe e o que os envolvidos conseguem perceber naquele momento.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. The Apothecary Diaries: Uma suspeita precisa resistir às perguntas antes da resposta; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "A investigação cuidadosa evita acusações sem provas. Por isso vale observar as escolhas com calma, sem presumir que o maior efeito visual oferece a melhor explicação.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. The Apothecary Diaries: A investigação cuidadosa evita acusações sem provas; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Uma descoberta final modifica o significado das pistas anteriores. Ao juntar as pistas anteriores, o resultado parece mais coerente e também mais interessante.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. The Apothecary Diaries: Uma descoberta final modifica o significado das pistas anteriores; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A história recompensa quem observa e revisa hipóteses. Essa relação entre escolhas e consequências é o que faz a história permanecer na memória depois do episódio.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. The Apothecary Diaries: A história recompensa quem observa e revisa hipóteses; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Um mistério pode começar com um detalhe ignorado por todos. Essa abertura parece simples, mas cria uma pergunta que só ganha sentido quando observamos as consequências da história. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma planta ou um perfume às vezes revela uma pista importante. O detalhe passa quase despercebido, porque o foco está em compreender o que as pessoas conseguem fazer naquela situação. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Conhecer substâncias exige também comparar sintomas e circunstâncias. Quando a narrativa revela as regras, uma decisão comum pode parecer muito mais importante do que antes. As hierarquias do palácio podem esconder informações relevantes. O cenário participa da tensão: aquilo que parecia apenas decoração muda a forma como enxergamos a cena. Uma suspeita precisa resistir às perguntas antes da resposta. Há uma diferença entre o que o público sabe e o que os envolvidos conseguem perceber naquele momento. A investigação cuidadosa evita acusações sem provas. Por isso vale observar as escolhas com calma, sem presumir que o maior efeito visual oferece a melhor explicação. Uma descoberta final modifica o significado das pistas anteriores. Ao juntar as pistas anteriores, o resultado parece mais coerente e também mais interessante. A história recompensa quem observa e revisa hipóteses. Essa relação entre escolhas e consequências é o que faz a história permanecer na memória depois do episódio.",
+      "narration_word_count": 252,
+      "description": "Diários de uma Apotecária: pistas no palácio. Análise independente com ilustrações originais de IA, sem cenas oficiais."
+    },
+    {
+      "id": "5020-cyberpunk-implantes",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Cyberpunk Edgerunners: o preço dos implantes",
+      "cover_text": "FORÇA TEM UM PREÇO",
+      "hook": "Melhorar o corpo não resolve todas as fragilidades humanas.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Melhorar o corpo não resolve todas as fragilidades humanas",
+          "visual_brief": "Original illustrative concept of Cyberpunk Edgerunners: Melhorar o corpo não resolve todas as fragilidades humanas"
+        },
+        {
+          "number": 2,
+          "goal": "Implantes ampliam velocidade mas podem trazer novas dependências",
+          "visual_brief": "Original illustrative concept of Cyberpunk Edgerunners: Implantes ampliam velocidade mas podem trazer novas dependências"
+        },
+        {
+          "number": 3,
+          "goal": "Uma cidade perigosa transforma riscos em rotina",
+          "visual_brief": "Original illustrative concept of Cyberpunk Edgerunners: Uma cidade perigosa transforma riscos em rotina"
+        },
+        {
+          "number": 4,
+          "goal": "Equipamentos não garantem estabilidade emocional ou liberdade",
+          "visual_brief": "Original illustrative concept of Cyberpunk Edgerunners: Equipamentos não garantem estabilidade emocional ou liberdade"
+        },
+        {
+          "number": 5,
+          "goal": "Laços de amizade sofrem quando sobreviver vira prioridade",
+          "visual_brief": "Original illustrative concept of Cyberpunk Edgerunners: Laços de amizade sofrem quando sobreviver vira prioridade"
+        },
+        {
+          "number": 6,
+          "goal": "As promessas da cidade não oferecem segurança real",
+          "visual_brief": "Original illustrative concept of Cyberpunk Edgerunners: As promessas da cidade não oferecem segurança real"
+        },
+        {
+          "number": 7,
+          "goal": "Consequências acumuladas distinguem potência de controle",
+          "visual_brief": "Original illustrative concept of Cyberpunk Edgerunners: Consequências acumuladas distinguem potência de controle"
+        },
+        {
+          "number": 8,
+          "goal": "A força pode se tornar uma obrigação que limita escolhas",
+          "visual_brief": "Original illustrative concept of Cyberpunk Edgerunners: A força pode se tornar uma obrigação que limita escolhas"
+        }
+      ],
+      "tags": [
+        "Cyberpunk Edgerunners",
+        "análise de anime",
+        "Otaku Multicena"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Melhorar o corpo não resolve todas as fragilidades humanas. Essa abertura parece simples, mas cria uma pergunta que só ganha sentido quando observamos as consequências da história. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Cyberpunk Edgerunners: Melhorar o corpo não resolve todas as fragilidades humanas; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Implantes ampliam velocidade mas podem trazer novas dependências. O detalhe passa quase despercebido, porque o foco está em compreender o que as pessoas conseguem fazer naquela situação. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Cyberpunk Edgerunners: Implantes ampliam velocidade mas podem trazer novas dependências; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Uma cidade perigosa transforma riscos em rotina. Quando a narrativa revela as regras, uma decisão comum pode parecer muito mais importante do que antes. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Cyberpunk Edgerunners: Uma cidade perigosa transforma riscos em rotina; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Equipamentos não garantem estabilidade emocional ou liberdade. O cenário participa da tensão: aquilo que parecia apenas decoração muda a forma como enxergamos a cena.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Cyberpunk Edgerunners: Equipamentos não garantem estabilidade emocional ou liberdade; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Laços de amizade sofrem quando sobreviver vira prioridade. Há uma diferença entre o que o público sabe e o que os envolvidos conseguem perceber naquele momento.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Cyberpunk Edgerunners: Laços de amizade sofrem quando sobreviver vira prioridade; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "As promessas da cidade não oferecem segurança real. Por isso vale observar as escolhas com calma, sem presumir que o maior efeito visual oferece a melhor explicação.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Cyberpunk Edgerunners: As promessas da cidade não oferecem segurança real; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Consequências acumuladas distinguem potência de controle. Ao juntar as pistas anteriores, o resultado parece mais coerente e também mais interessante.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Cyberpunk Edgerunners: Consequências acumuladas distinguem potência de controle; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A força pode se tornar uma obrigação que limita escolhas. Essa relação entre escolhas e consequências é o que faz a história permanecer na memória depois do episódio.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Cyberpunk Edgerunners: A força pode se tornar uma obrigação que limita escolhas; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Melhorar o corpo não resolve todas as fragilidades humanas. Essa abertura parece simples, mas cria uma pergunta que só ganha sentido quando observamos as consequências da história. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Implantes ampliam velocidade mas podem trazer novas dependências. O detalhe passa quase despercebido, porque o foco está em compreender o que as pessoas conseguem fazer naquela situação. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma cidade perigosa transforma riscos em rotina. Quando a narrativa revela as regras, uma decisão comum pode parecer muito mais importante do que antes. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Equipamentos não garantem estabilidade emocional ou liberdade. O cenário participa da tensão: aquilo que parecia apenas decoração muda a forma como enxergamos a cena. Laços de amizade sofrem quando sobreviver vira prioridade. Há uma diferença entre o que o público sabe e o que os envolvidos conseguem perceber naquele momento. As promessas da cidade não oferecem segurança real. Por isso vale observar as escolhas com calma, sem presumir que o maior efeito visual oferece a melhor explicação. Consequências acumuladas distinguem potência de controle. Ao juntar as pistas anteriores, o resultado parece mais coerente e também mais interessante. A força pode se tornar uma obrigação que limita escolhas. Essa relação entre escolhas e consequências é o que faz a história permanecer na memória depois do episódio.",
+      "narration_word_count": 266,
+      "description": "Cyberpunk Edgerunners: o preço dos implantes. Análise independente com ilustrações originais de IA, sem cenas oficiais."
+    },
+    {
+      "id": "7017-death-note-memories",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Death Note: The Memory Rule",
+      "cover_text": "MEMORIES HAVE RULES",
+      "hook": "Memory is part of the notebook's supernatural ownership system.",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Memory is part of the notebook's supernatural ownership system",
+          "visual_brief": "Original illustrative concept of Death Note: Memory is part of the notebook's supernatural ownership system"
+        },
+        {
+          "number": 2,
+          "goal": "Giving up ownership can erase memories associated with its use",
+          "visual_brief": "Original illustrative concept of Death Note: Giving up ownership can erase memories associated with its use"
+        },
+        {
+          "number": 3,
+          "goal": "A person might genuinely forget important past actions",
+          "visual_brief": "Original illustrative concept of Death Note: A person might genuinely forget important past actions"
+        },
+        {
+          "number": 4,
+          "goal": "Possession and touching the notebook can have different effects",
+          "visual_brief": "Original illustrative concept of Death Note: Possession and touching the notebook can have different effects"
+        },
+        {
+          "number": 5,
+          "goal": "Timing controls what each investigator knows at a given moment",
+          "visual_brief": "Original illustrative concept of Death Note: Timing controls what each investigator knows at a given moment"
+        },
+        {
+          "number": 6,
+          "goal": "A gap in memory does not erase earlier consequences",
+          "visual_brief": "Original illustrative concept of Death Note: A gap in memory does not erase earlier consequences"
+        },
+        {
+          "number": 7,
+          "goal": "Different fragments of knowledge make the mystery difficult to solve",
+          "visual_brief": "Original illustrative concept of Death Note: Different fragments of knowledge make the mystery difficult to solve"
+        },
+        {
+          "number": 8,
+          "goal": "Information becomes both a weapon and a vulnerability",
+          "visual_brief": "Original illustrative concept of Death Note: Information becomes both a weapon and a vulnerability"
+        }
+      ],
+      "tags": [
+        "Death Note",
+        "anime analysis",
+        "Otaku Reframe"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Memory is part of the notebook's supernatural ownership system. The opening seems simple, but its consequences become important once we understand the story's underlying conditions. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Death Note: Memory is part of the notebook's supernatural ownership system; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Giving up ownership can erase memories associated with its use. A small detail changes what the audience expects, even before the characters understand what is happening. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Death Note: Giving up ownership can erase memories associated with its use; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A person might genuinely forget important past actions. Understanding the system explains the stakes better than focusing only on the biggest visual effect. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Death Note: A person might genuinely forget important past actions; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Possession and touching the notebook can have different effects. The setting gives this decision a meaning that would change completely under different circumstances.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Death Note: Possession and touching the notebook can have different effects; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Timing controls what each investigator knows at a given moment. What makes the conflict memorable is the gap between available information and the choices people must make.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Death Note: Timing controls what each investigator knows at a given moment; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "A gap in memory does not erase earlier consequences. That uncertainty creates tension because an ordinary move can carry consequences nobody predicted.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Death Note: A gap in memory does not erase earlier consequences; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Different fragments of knowledge make the mystery difficult to solve. Looking back at earlier clues helps explain why this development is not just a random surprise.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Death Note: Different fragments of knowledge make the mystery difficult to solve; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Information becomes both a weapon and a vulnerability. The strongest storytelling often comes from consistent rules, meaningful choices, and consequences that cannot be ignored.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Death Note: Information becomes both a weapon and a vulnerability; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Memory is part of the notebook's supernatural ownership system. The opening seems simple, but its consequences become important once we understand the story's underlying conditions. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. Giving up ownership can erase memories associated with its use. A small detail changes what the audience expects, even before the characters understand what is happening. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. A person might genuinely forget important past actions. Understanding the system explains the stakes better than focusing only on the biggest visual effect. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. Possession and touching the notebook can have different effects. The setting gives this decision a meaning that would change completely under different circumstances. Timing controls what each investigator knows at a given moment. What makes the conflict memorable is the gap between available information and the choices people must make. A gap in memory does not erase earlier consequences. That uncertainty creates tension because an ordinary move can carry consequences nobody predicted. Different fragments of knowledge make the mystery difficult to solve. Looking back at earlier clues helps explain why this development is not just a random surprise. Information becomes both a weapon and a vulnerability. The strongest storytelling often comes from consistent rules, meaningful choices, and consequences that cannot be ignored.",
+      "narration_word_count": 256,
+      "description": "Death Note: The Memory Rule. Independent original anime commentary with conceptual AI art, no official footage."
+    },
+    {
+      "id": "7018-bleach-bankai",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Bleach: Why Bankai Has a Cost",
+      "cover_text": "BANKAI HAS A COST",
+      "hook": "Bankai represents more than an increase in attack strength.",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Bankai represents more than an increase in attack strength",
+          "visual_brief": "Original illustrative concept of Bleach: Bankai represents more than an increase in attack strength"
+        },
+        {
+          "number": 2,
+          "goal": "The relationship with a Zanpakuto shapes how power develops",
+          "visual_brief": "Original illustrative concept of Bleach: The relationship with a Zanpakuto shapes how power develops"
+        },
+        {
+          "number": 3,
+          "goal": "Training and facing the spirit are important stages of mastery",
+          "visual_brief": "Original illustrative concept of Bleach: Training and facing the spirit are important stages of mastery"
+        },
+        {
+          "number": 4,
+          "goal": "Revealing an ability also gives opponents information",
+          "visual_brief": "Original illustrative concept of Bleach: Revealing an ability also gives opponents information"
+        },
+        {
+          "number": 5,
+          "goal": "Timing and stamina matter alongside destructive potential",
+          "visual_brief": "Original illustrative concept of Bleach: Timing and stamina matter alongside destructive potential"
+        },
+        {
+          "number": 6,
+          "goal": "A technique can reflect the wielder's self-understanding",
+          "visual_brief": "Original illustrative concept of Bleach: A technique can reflect the wielder's self-understanding"
+        },
+        {
+          "number": 7,
+          "goal": "Emotional stakes make battles meaningful beyond their effects",
+          "visual_brief": "Original illustrative concept of Bleach: Emotional stakes make battles meaningful beyond their effects"
+        },
+        {
+          "number": 8,
+          "goal": "Bankai shows learning, commitment, and the risks being taken",
+          "visual_brief": "Original illustrative concept of Bleach: Bankai shows learning, commitment, and the risks being taken"
+        }
+      ],
+      "tags": [
+        "Bleach",
+        "anime analysis",
+        "Otaku Reframe"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Bankai represents more than an increase in attack strength. The opening seems simple, but its consequences become important once we understand the story's underlying conditions. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Bleach: Bankai represents more than an increase in attack strength; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "The relationship with a Zanpakuto shapes how power develops. A small detail changes what the audience expects, even before the characters understand what is happening. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Bleach: The relationship with a Zanpakuto shapes how power develops; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Training and facing the spirit are important stages of mastery. Understanding the system explains the stakes better than focusing only on the biggest visual effect. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Bleach: Training and facing the spirit are important stages of mastery; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Revealing an ability also gives opponents information. The setting gives this decision a meaning that would change completely under different circumstances. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Bleach: Revealing an ability also gives opponents information; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Timing and stamina matter alongside destructive potential. What makes the conflict memorable is the gap between available information and the choices people must make.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Bleach: Timing and stamina matter alongside destructive potential; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "A technique can reflect the wielder's self-understanding. That uncertainty creates tension because an ordinary move can carry consequences nobody predicted.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Bleach: A technique can reflect the wielder's self-understanding; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Emotional stakes make battles meaningful beyond their effects. Looking back at earlier clues helps explain why this development is not just a random surprise.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Bleach: Emotional stakes make battles meaningful beyond their effects; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Bankai shows learning, commitment, and the risks being taken. The strongest storytelling often comes from consistent rules, meaningful choices, and consequences that cannot be ignored.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. Bleach: Bankai shows learning, commitment, and the risks being taken; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Bankai represents more than an increase in attack strength. The opening seems simple, but its consequences become important once we understand the story's underlying conditions. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. The relationship with a Zanpakuto shapes how power develops. A small detail changes what the audience expects, even before the characters understand what is happening. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. Training and facing the spirit are important stages of mastery. Understanding the system explains the stakes better than focusing only on the biggest visual effect. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. Revealing an ability also gives opponents information. The setting gives this decision a meaning that would change completely under different circumstances. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. Timing and stamina matter alongside destructive potential. What makes the conflict memorable is the gap between available information and the choices people must make. A technique can reflect the wielder's self-understanding. That uncertainty creates tension because an ordinary move can carry consequences nobody predicted. Emotional stakes make battles meaningful beyond their effects. Looking back at earlier clues helps explain why this development is not just a random surprise. Bankai shows learning, commitment, and the risks being taken. The strongest storytelling often comes from consistent rules, meaningful choices, and consequences that cannot be ignored.",
+      "narration_word_count": 269,
+      "description": "Bleach: Why Bankai Has a Cost. Independent original anime commentary with conceptual AI art, no official footage."
+    },
+    {
+      "id": "7019-steel-ball-run-spin",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Steel Ball Run: The Secret of Spin",
+      "cover_text": "THE POWER OF SPIN",
+      "hook": "Rotation becomes an important strategy during the race.",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Rotation becomes an important strategy during the race",
+          "visual_brief": "Original illustrative concept of JoJo Steel Ball Run: Rotation becomes an important strategy during the race"
+        },
+        {
+          "number": 2,
+          "goal": "A spinning steel ball depends on angle and contact",
+          "visual_brief": "Original illustrative concept of JoJo Steel Ball Run: A spinning steel ball depends on angle and contact"
+        },
+        {
+          "number": 3,
+          "goal": "Precision can matter more than throwing with extra force",
+          "visual_brief": "Original illustrative concept of JoJo Steel Ball Run: Precision can matter more than throwing with extra force"
+        },
+        {
+          "number": 4,
+          "goal": "Horse races add terrain, distance, and changing conditions",
+          "visual_brief": "Original illustrative concept of JoJo Steel Ball Run: Horse races add terrain, distance, and changing conditions"
+        },
+        {
+          "number": 5,
+          "goal": "Geometric proportions give Spin an unusual visual identity",
+          "visual_brief": "Original illustrative concept of JoJo Steel Ball Run: Geometric proportions give Spin an unusual visual identity"
+        },
+        {
+          "number": 6,
+          "goal": "Small mistakes can ruin a complex technique under pressure",
+          "visual_brief": "Original illustrative concept of JoJo Steel Ball Run: Small mistakes can ruin a complex technique under pressure"
+        },
+        {
+          "number": 7,
+          "goal": "Mastery develops through trial and a demanding journey",
+          "visual_brief": "Original illustrative concept of JoJo Steel Ball Run: Mastery develops through trial and a demanding journey"
+        },
+        {
+          "number": 8,
+          "goal": "Learning a rule changes what becomes possible",
+          "visual_brief": "Original illustrative concept of JoJo Steel Ball Run: Learning a rule changes what becomes possible"
+        }
+      ],
+      "tags": [
+        "JoJo Steel Ball Run",
+        "anime analysis",
+        "Otaku Reframe"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Rotation becomes an important strategy during the race. The opening seems simple, but its consequences become important once we understand the story's underlying conditions. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. JoJo Steel Ball Run: Rotation becomes an important strategy during the race; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "A spinning steel ball depends on angle and contact. A small detail changes what the audience expects, even before the characters understand what is happening. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. JoJo Steel Ball Run: A spinning steel ball depends on angle and contact; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Precision can matter more than throwing with extra force. Understanding the system explains the stakes better than focusing only on the biggest visual effect. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. JoJo Steel Ball Run: Precision can matter more than throwing with extra force; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Horse races add terrain, distance, and changing conditions. The setting gives this decision a meaning that would change completely under different circumstances. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. JoJo Steel Ball Run: Horse races add terrain, distance, and changing conditions; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Geometric proportions give Spin an unusual visual identity. What makes the conflict memorable is the gap between available information and the choices people must make.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. JoJo Steel Ball Run: Geometric proportions give Spin an unusual visual identity; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Small mistakes can ruin a complex technique under pressure. That uncertainty creates tension because an ordinary move can carry consequences nobody predicted.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. JoJo Steel Ball Run: Small mistakes can ruin a complex technique under pressure; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Mastery develops through trial and a demanding journey. Looking back at earlier clues helps explain why this development is not just a random surprise.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. JoJo Steel Ball Run: Mastery develops through trial and a demanding journey; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Learning a rule changes what becomes possible. The strongest storytelling often comes from consistent rules, meaningful choices, and consequences that cannot be ignored.",
+          "visual_instruction": "Original independent anime commentary illustration, no official frames or named character. JoJo Steel Ball Run: Learning a rule changes what becomes possible; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Rotation becomes an important strategy during the race. The opening seems simple, but its consequences become important once we understand the story's underlying conditions. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. A spinning steel ball depends on angle and contact. A small detail changes what the audience expects, even before the characters understand what is happening. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. Precision can matter more than throwing with extra force. Understanding the system explains the stakes better than focusing only on the biggest visual effect. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. Horse races add terrain, distance, and changing conditions. The setting gives this decision a meaning that would change completely under different circumstances. This perspective helps connect the clues with the next important choice, without pretending a guess is already an established fact. Geometric proportions give Spin an unusual visual identity. What makes the conflict memorable is the gap between available information and the choices people must make. Small mistakes can ruin a complex technique under pressure. That uncertainty creates tension because an ordinary move can carry consequences nobody predicted. Mastery develops through trial and a demanding journey. Looking back at earlier clues helps explain why this development is not just a random surprise. Learning a rule changes what becomes possible. The strongest storytelling often comes from consistent rules, meaningful choices, and consequences that cannot be ignored.",
+      "narration_word_count": 269,
+      "description": "Steel Ball Run: The Secret of Spin. Independent original anime commentary with conceptual AI art, no official footage."
+    },
+    {
+      "id": "game-107-hollow-knight-mapa",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Hollow Knight: por que se perder faz parte?",
+      "cover_text": "PERDIDO NO MAPA",
+      "hook": "Explorar cavernas desconhecidas traz curiosidade e receio.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Explorar cavernas desconhecidas traz curiosidade e receio",
+          "visual_brief": "Original illustrative concept of Hollow Knight: Explorar cavernas desconhecidas traz curiosidade e receio"
+        },
+        {
+          "number": 2,
+          "goal": "O mundo não revela todos os caminhos de uma vez",
+          "visual_brief": "Original illustrative concept of Hollow Knight: O mundo não revela todos os caminhos de uma vez"
+        },
+        {
+          "number": 3,
+          "goal": "Encontrar um mapa ajuda mas não substitui a orientação",
+          "visual_brief": "Original illustrative concept of Hollow Knight: Encontrar um mapa ajuda mas não substitui a orientação"
+        },
+        {
+          "number": 4,
+          "goal": "Bancos de descanso mudam a segurança da exploração",
+          "visual_brief": "Original illustrative concept of Hollow Knight: Bancos de descanso mudam a segurança da exploração"
+        },
+        {
+          "number": 5,
+          "goal": "Novas habilidades revelam passagens antigas inacessíveis",
+          "visual_brief": "Original illustrative concept of Hollow Knight: Novas habilidades revelam passagens antigas inacessíveis"
+        },
+        {
+          "number": 6,
+          "goal": "Ruínas e sons distantes criam uma atmosfera especial",
+          "visual_brief": "Original illustrative concept of Hollow Knight: Ruínas e sons distantes criam uma atmosfera especial"
+        },
+        {
+          "number": 7,
+          "goal": "Perder a direção pode ensinar novos atalhos",
+          "visual_brief": "Original illustrative concept of Hollow Knight: Perder a direção pode ensinar novos atalhos"
+        },
+        {
+          "number": 8,
+          "goal": "O mapa final vale mais porque foi conquistado",
+          "visual_brief": "Original illustrative concept of Hollow Knight: O mapa final vale mais porque foi conquistado"
+        }
+      ],
+      "tags": [
+        "Hollow Knight",
+        "jogos",
+        "Hélio Conde"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Explorar cavernas desconhecidas traz curiosidade e receio. Essa ideia inicial mostra que o desafio não se resume a apertar botões na hora certa, mas também envolve entender o sistema. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hollow Knight: Explorar cavernas desconhecidas traz curiosidade e receio; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "O mundo não revela todos os caminhos de uma vez. Uma escolha pode parecer pequena, porém seus efeitos se acumulam e modificam as possibilidades da próxima etapa. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hollow Knight: O mundo não revela todos os caminhos de uma vez; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Encontrar um mapa ajuda mas não substitui a orientação. Observar o ambiente é uma forma de aprender sem precisar repetir exatamente o mesmo erro diversas vezes. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hollow Knight: Encontrar um mapa ajuda mas não substitui a orientação; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Bancos de descanso mudam a segurança da exploração. As regras criam relações de causa e efeito que permitem planejar e experimentar outras formas de resolver problemas.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hollow Knight: Bancos de descanso mudam a segurança da exploração; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Novas habilidades revelam passagens antigas inacessíveis. Tempo e recursos costumam ser limitados; por isso vale comparar o benefício imediato com o custo que aparece depois.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hollow Knight: Novas habilidades revelam passagens antigas inacessíveis; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Ruínas e sons distantes criam uma atmosfera especial. O planejamento não elimina imprevistos, mas aumenta as chances de encontrar uma alternativa quando algo dá errado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hollow Knight: Ruínas e sons distantes criam uma atmosfera especial; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Perder a direção pode ensinar novos atalhos. Quando os padrões ficam claros, cada nova tentativa se torna mais informada e menos dependente de sorte.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hollow Knight: Perder a direção pode ensinar novos atalhos; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "O mapa final vale mais porque foi conquistado. Essa combinação de exploração, estratégia e aprendizado explica por que a experiência continua envolvente por tanto tempo.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hollow Knight: O mapa final vale mais porque foi conquistado; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Explorar cavernas desconhecidas traz curiosidade e receio. Essa ideia inicial mostra que o desafio não se resume a apertar botões na hora certa, mas também envolve entender o sistema. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. O mundo não revela todos os caminhos de uma vez. Uma escolha pode parecer pequena, porém seus efeitos se acumulam e modificam as possibilidades da próxima etapa. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Encontrar um mapa ajuda mas não substitui a orientação. Observar o ambiente é uma forma de aprender sem precisar repetir exatamente o mesmo erro diversas vezes. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Bancos de descanso mudam a segurança da exploração. As regras criam relações de causa e efeito que permitem planejar e experimentar outras formas de resolver problemas. Novas habilidades revelam passagens antigas inacessíveis. Tempo e recursos costumam ser limitados; por isso vale comparar o benefício imediato com o custo que aparece depois. Ruínas e sons distantes criam uma atmosfera especial. O planejamento não elimina imprevistos, mas aumenta as chances de encontrar uma alternativa quando algo dá errado. Perder a direção pode ensinar novos atalhos. Quando os padrões ficam claros, cada nova tentativa se torna mais informada e menos dependente de sorte. O mapa final vale mais porque foi conquistado. Essa combinação de exploração, estratégia e aprendizado explica por que a experiência continua envolvente por tanto tempo.",
+      "narration_word_count": 270,
+      "description": "Hollow Knight: por que se perder faz parte?. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+    },
+    {
+      "id": "game-108-hades-escolhas",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Hades: perder também é progredir",
+      "cover_text": "PERDER É PROGREDIR",
+      "hook": "Recomeçar não apaga o conhecimento da tentativa anterior.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Recomeçar não apaga o conhecimento da tentativa anterior",
+          "visual_brief": "Original illustrative concept of Hades: Recomeçar não apaga o conhecimento da tentativa anterior"
+        },
+        {
+          "number": 2,
+          "goal": "Bênçãos alteram o estilo de combate a cada jornada",
+          "visual_brief": "Original illustrative concept of Hades: Bênçãos alteram o estilo de combate a cada jornada"
+        },
+        {
+          "number": 3,
+          "goal": "Algumas combinações favorecem dano e outras defesa",
+          "visual_brief": "Original illustrative concept of Hades: Algumas combinações favorecem dano e outras defesa"
+        },
+        {
+          "number": 4,
+          "goal": "Reconhecer padrões melhora decisões durante encontros difíceis",
+          "visual_brief": "Original illustrative concept of Hades: Reconhecer padrões melhora decisões durante encontros difíceis"
+        },
+        {
+          "number": 5,
+          "goal": "Uma estratégia antiga pode não servir na nova corrida",
+          "visual_brief": "Original illustrative concept of Hades: Uma estratégia antiga pode não servir na nova corrida"
+        },
+        {
+          "number": 6,
+          "goal": "Melhorias e diálogos conectam tentativas diferentes",
+          "visual_brief": "Original illustrative concept of Hades: Melhorias e diálogos conectam tentativas diferentes"
+        },
+        {
+          "number": 7,
+          "goal": "Falhas podem revelar escolhas que precisam de revisão",
+          "visual_brief": "Original illustrative concept of Hades: Falhas podem revelar escolhas que precisam de revisão"
+        },
+        {
+          "number": 8,
+          "goal": "O progresso nasce de descobertas e não apenas vitórias",
+          "visual_brief": "Original illustrative concept of Hades: O progresso nasce de descobertas e não apenas vitórias"
+        }
+      ],
+      "tags": [
+        "Hades",
+        "jogos",
+        "Hélio Conde"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Recomeçar não apaga o conhecimento da tentativa anterior. Essa ideia inicial mostra que o desafio não se resume a apertar botões na hora certa, mas também envolve entender o sistema. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hades: Recomeçar não apaga o conhecimento da tentativa anterior; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Bênçãos alteram o estilo de combate a cada jornada. Uma escolha pode parecer pequena, porém seus efeitos se acumulam e modificam as possibilidades da próxima etapa. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hades: Bênçãos alteram o estilo de combate a cada jornada; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Algumas combinações favorecem dano e outras defesa. Observar o ambiente é uma forma de aprender sem precisar repetir exatamente o mesmo erro diversas vezes. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hades: Algumas combinações favorecem dano e outras defesa; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Reconhecer padrões melhora decisões durante encontros difíceis. As regras criam relações de causa e efeito que permitem planejar e experimentar outras formas de resolver problemas.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hades: Reconhecer padrões melhora decisões durante encontros difíceis; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma estratégia antiga pode não servir na nova corrida. Tempo e recursos costumam ser limitados; por isso vale comparar o benefício imediato com o custo que aparece depois.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hades: Uma estratégia antiga pode não servir na nova corrida; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Melhorias e diálogos conectam tentativas diferentes. O planejamento não elimina imprevistos, mas aumenta as chances de encontrar uma alternativa quando algo dá errado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hades: Melhorias e diálogos conectam tentativas diferentes; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Falhas podem revelar escolhas que precisam de revisão. Quando os padrões ficam claros, cada nova tentativa se torna mais informada e menos dependente de sorte.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hades: Falhas podem revelar escolhas que precisam de revisão; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "O progresso nasce de descobertas e não apenas vitórias. Essa combinação de exploração, estratégia e aprendizado explica por que a experiência continua envolvente por tanto tempo.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Hades: O progresso nasce de descobertas e não apenas vitórias; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Recomeçar não apaga o conhecimento da tentativa anterior. Essa ideia inicial mostra que o desafio não se resume a apertar botões na hora certa, mas também envolve entender o sistema. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Bênçãos alteram o estilo de combate a cada jornada. Uma escolha pode parecer pequena, porém seus efeitos se acumulam e modificam as possibilidades da próxima etapa. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Algumas combinações favorecem dano e outras defesa. Observar o ambiente é uma forma de aprender sem precisar repetir exatamente o mesmo erro diversas vezes. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Reconhecer padrões melhora decisões durante encontros difíceis. As regras criam relações de causa e efeito que permitem planejar e experimentar outras formas de resolver problemas. Uma estratégia antiga pode não servir na nova corrida. Tempo e recursos costumam ser limitados; por isso vale comparar o benefício imediato com o custo que aparece depois. Melhorias e diálogos conectam tentativas diferentes. O planejamento não elimina imprevistos, mas aumenta as chances de encontrar uma alternativa quando algo dá errado. Falhas podem revelar escolhas que precisam de revisão. Quando os padrões ficam claros, cada nova tentativa se torna mais informada e menos dependente de sorte. O progresso nasce de descobertas e não apenas vitórias. Essa combinação de exploração, estratégia e aprendizado explica por que a experiência continua envolvente por tanto tempo.",
+      "narration_word_count": 270,
+      "description": "Hades: perder também é progredir. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+    },
+    {
+      "id": "game-109-oxygen-not-included-calor",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Oxygen Not Included: a armadilha do calor",
+      "cover_text": "O CALOR É INIMIGO",
+      "hook": "Cada máquina altera as condições da colônia subterrânea.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Cada máquina altera as condições da colônia subterrânea",
+          "visual_brief": "Original illustrative concept of Oxygen Not Included: Cada máquina altera as condições da colônia subterrânea"
+        },
+        {
+          "number": 2,
+          "goal": "Produzir energia também gera calor acumulado",
+          "visual_brief": "Original illustrative concept of Oxygen Not Included: Produzir energia também gera calor acumulado"
+        },
+        {
+          "number": 3,
+          "goal": "Plantas e alimentos dependem de temperaturas adequadas",
+          "visual_brief": "Original illustrative concept of Oxygen Not Included: Plantas e alimentos dependem de temperaturas adequadas"
+        },
+        {
+          "number": 4,
+          "goal": "Gases e tubulações transportam calor por caminhos inesperados",
+          "visual_brief": "Original illustrative concept of Oxygen Not Included: Gases e tubulações transportam calor por caminhos inesperados"
+        },
+        {
+          "number": 5,
+          "goal": "Isolar setores cedo pode impedir crises futuras",
+          "visual_brief": "Original illustrative concept of Oxygen Not Included: Isolar setores cedo pode impedir crises futuras"
+        },
+        {
+          "number": 6,
+          "goal": "Resfriar uma base exige energia e materiais",
+          "visual_brief": "Original illustrative concept of Oxygen Not Included: Resfriar uma base exige energia e materiais"
+        },
+        {
+          "number": 7,
+          "goal": "Observar tendências ajuda mais do que esperar emergências",
+          "visual_brief": "Original illustrative concept of Oxygen Not Included: Observar tendências ajuda mais do que esperar emergências"
+        },
+        {
+          "number": 8,
+          "goal": "Uma colônia precisa equilibrar todos os sistemas",
+          "visual_brief": "Original illustrative concept of Oxygen Not Included: Uma colônia precisa equilibrar todos os sistemas"
+        }
+      ],
+      "tags": [
+        "Oxygen Not Included",
+        "jogos",
+        "Hélio Conde"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Cada máquina altera as condições da colônia subterrânea. Essa ideia inicial mostra que o desafio não se resume a apertar botões na hora certa, mas também envolve entender o sistema. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Oxygen Not Included: Cada máquina altera as condições da colônia subterrânea; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Produzir energia também gera calor acumulado. Uma escolha pode parecer pequena, porém seus efeitos se acumulam e modificam as possibilidades da próxima etapa. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Oxygen Not Included: Produzir energia também gera calor acumulado; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Plantas e alimentos dependem de temperaturas adequadas. Observar o ambiente é uma forma de aprender sem precisar repetir exatamente o mesmo erro diversas vezes. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Oxygen Not Included: Plantas e alimentos dependem de temperaturas adequadas; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Gases e tubulações transportam calor por caminhos inesperados. As regras criam relações de causa e efeito que permitem planejar e experimentar outras formas de resolver problemas.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Oxygen Not Included: Gases e tubulações transportam calor por caminhos inesperados; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Isolar setores cedo pode impedir crises futuras. Tempo e recursos costumam ser limitados; por isso vale comparar o benefício imediato com o custo que aparece depois.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Oxygen Not Included: Isolar setores cedo pode impedir crises futuras; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Resfriar uma base exige energia e materiais. O planejamento não elimina imprevistos, mas aumenta as chances de encontrar uma alternativa quando algo dá errado.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Oxygen Not Included: Resfriar uma base exige energia e materiais; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Observar tendências ajuda mais do que esperar emergências. Quando os padrões ficam claros, cada nova tentativa se torna mais informada e menos dependente de sorte.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Oxygen Not Included: Observar tendências ajuda mais do que esperar emergências; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Uma colônia precisa equilibrar todos os sistemas. Essa combinação de exploração, estratégia e aprendizado explica por que a experiência continua envolvente por tanto tempo.",
+          "visual_instruction": "Original game-inspired illustration, not real gameplay. Oxygen Not Included: Uma colônia precisa equilibrar todos os sistemas; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Cada máquina altera as condições da colônia subterrânea. Essa ideia inicial mostra que o desafio não se resume a apertar botões na hora certa, mas também envolve entender o sistema. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Produzir energia também gera calor acumulado. Uma escolha pode parecer pequena, porém seus efeitos se acumulam e modificam as possibilidades da próxima etapa. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Plantas e alimentos dependem de temperaturas adequadas. Observar o ambiente é uma forma de aprender sem precisar repetir exatamente o mesmo erro diversas vezes. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Gases e tubulações transportam calor por caminhos inesperados. As regras criam relações de causa e efeito que permitem planejar e experimentar outras formas de resolver problemas. Isolar setores cedo pode impedir crises futuras. Tempo e recursos costumam ser limitados; por isso vale comparar o benefício imediato com o custo que aparece depois. Resfriar uma base exige energia e materiais. O planejamento não elimina imprevistos, mas aumenta as chances de encontrar uma alternativa quando algo dá errado. Observar tendências ajuda mais do que esperar emergências. Quando os padrões ficam claros, cada nova tentativa se torna mais informada e menos dependente de sorte. Uma colônia precisa equilibrar todos os sistemas. Essa combinação de exploração, estratégia e aprendizado explica por que a experiência continua envolvente por tanto tempo.",
+      "narration_word_count": 265,
+      "description": "Oxygen Not Included: a armadilha do calor. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+    },
+    {
+      "id": "kids-107-passarinhos-ninho",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "O Passarinho e Seu Ninho Quentinho 🐦",
+      "cover_text": "UM NINHO ESPECIAL",
+      "hook": "Um passarinho amarelo quis construir um ninho macio.",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Um passarinho amarelo quis construir um ninho macio",
+          "visual_brief": "Original illustrative concept of Passarinho: Um passarinho amarelo quis construir um ninho macio"
+        },
+        {
+          "number": 2,
+          "goal": "Encontrou uma folha verde caída perto das flores",
+          "visual_brief": "Original illustrative concept of Passarinho: Encontrou uma folha verde caída perto das flores"
+        },
+        {
+          "number": 3,
+          "goal": "Escolheu um galho protegido da chuva e do vento",
+          "visual_brief": "Original illustrative concept of Passarinho: Escolheu um galho protegido da chuva e do vento"
+        },
+        {
+          "number": 4,
+          "goal": "A primeira folha escorregou e ele tentou novamente",
+          "visual_brief": "Original illustrative concept of Passarinho: A primeira folha escorregou e ele tentou novamente"
+        },
+        {
+          "number": 5,
+          "goal": "Uma borboleta mostrou onde havia raminhos leves",
+          "visual_brief": "Original illustrative concept of Passarinho: Uma borboleta mostrou onde havia raminhos leves"
+        },
+        {
+          "number": 6,
+          "goal": "Com paciência, ele criou uma pequena caminha redonda",
+          "visual_brief": "Original illustrative concept of Passarinho: Com paciência, ele criou uma pequena caminha redonda"
+        },
+        {
+          "number": 7,
+          "goal": "Uma brisa passou e o ninho ficou firme",
+          "visual_brief": "Original illustrative concept of Passarinho: Uma brisa passou e o ninho ficou firme"
+        },
+        {
+          "number": 8,
+          "goal": "O passarinho cantou feliz e descansou tranquilo",
+          "visual_brief": "Original illustrative concept of Passarinho: O passarinho cantou feliz e descansou tranquilo"
+        }
+      ],
+      "tags": [
+        "Passarinho",
+        "desenho infantil",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Um passarinho amarelo quis construir um ninho macio. Naquele dia tranquilo, o jardim estava cheio de cores bonitas e o vento passava bem devagar. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Passarinho: Um passarinho amarelo quis construir um ninho macio; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Encontrou uma folha verde caída perto das flores. O pequeno amiguinho observou com carinho, descobrindo que as coisas têm seu próprio tempo para acontecer. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Passarinho: Encontrou uma folha verde caída perto das flores; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Escolheu um galho protegido da chuva e do vento. Ninguém precisava correr, pois aprender com calma também podia ser uma surpresa especial e muito divertida. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Passarinho: Escolheu um galho protegido da chuva e do vento; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "A primeira folha escorregou e ele tentou novamente. Quando algo não funcionou logo de primeira, tentar mais uma vez parecia uma boa ideia. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Passarinho: A primeira folha escorregou e ele tentou novamente; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma borboleta mostrou onde havia raminhos leves. Os amigos da natureza gostavam de ajudar sem assustar nem machucar ninguém, sempre com gentileza.",
+          "visual_instruction": "Gentle original 2D preschool art. Passarinho: Uma borboleta mostrou onde havia raminhos leves; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Com paciência, ele criou uma pequena caminha redonda. Cada descoberta trazia um sorriso novo, e os sons suaves deixavam aquela aventura ainda mais bonita.",
+          "visual_instruction": "Gentle original 2D preschool art. Passarinho: Com paciência, ele criou uma pequena caminha redonda; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Uma brisa passou e o ninho ficou firme. Todos aproveitaram o momento com paciência enquanto a luz iluminava as folhas e a água.",
+          "visual_instruction": "Gentle original 2D preschool art. Passarinho: Uma brisa passou e o ninho ficou firme; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "O passarinho cantou feliz e descansou tranquilo. E assim terminou uma história tranquila, cheia de amizade, cuidado e descobertas para guardar no coração.",
+          "visual_instruction": "Gentle original 2D preschool art. Passarinho: O passarinho cantou feliz e descansou tranquilo; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Um passarinho amarelo quis construir um ninho macio. Naquele dia tranquilo, o jardim estava cheio de cores bonitas e o vento passava bem devagar. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Encontrou uma folha verde caída perto das flores. O pequeno amiguinho observou com carinho, descobrindo que as coisas têm seu próprio tempo para acontecer. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Escolheu um galho protegido da chuva e do vento. Ninguém precisava correr, pois aprender com calma também podia ser uma surpresa especial e muito divertida. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. A primeira folha escorregou e ele tentou novamente. Quando algo não funcionou logo de primeira, tentar mais uma vez parecia uma boa ideia. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma borboleta mostrou onde havia raminhos leves. Os amigos da natureza gostavam de ajudar sem assustar nem machucar ninguém, sempre com gentileza. Com paciência, ele criou uma pequena caminha redonda. Cada descoberta trazia um sorriso novo, e os sons suaves deixavam aquela aventura ainda mais bonita. Uma brisa passou e o ninho ficou firme. Todos aproveitaram o momento com paciência enquanto a luz iluminava as folhas e a água. O passarinho cantou feliz e descansou tranquilo. E assim terminou uma história tranquila, cheia de amizade, cuidado e descobertas para guardar no coração.",
+      "narration_word_count": 272,
+      "description": "O Passarinho e Seu Ninho Quentinho 🐦. História original infantil com ilustrações de IA. Conteúdo destinado a crianças."
+    },
+    {
+      "id": "kids-108-sementinha-jardim",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "A Sementinha e a Primeira Folha 🌱",
+      "cover_text": "NASCE UMA FOLHINHA",
+      "hook": "Uma sementinha dormia debaixo da terra macia.",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma sementinha dormia debaixo da terra macia",
+          "visual_brief": "Original illustrative concept of Sementinha: Uma sementinha dormia debaixo da terra macia"
+        },
+        {
+          "number": 2,
+          "goal": "A chuva chegou e deixou o solo bem úmido",
+          "visual_brief": "Original illustrative concept of Sementinha: A chuva chegou e deixou o solo bem úmido"
+        },
+        {
+          "number": 3,
+          "goal": "Uma raiz pequenina começou a crescer lentamente",
+          "visual_brief": "Original illustrative concept of Sementinha: Uma raiz pequenina começou a crescer lentamente"
+        },
+        {
+          "number": 4,
+          "goal": "Um broto verde procurou a luz do dia",
+          "visual_brief": "Original illustrative concept of Sementinha: Um broto verde procurou a luz do dia"
+        },
+        {
+          "number": 5,
+          "goal": "Uma minhoca simpática deixou a terra fofinha",
+          "visual_brief": "Original illustrative concept of Sementinha: Uma minhoca simpática deixou a terra fofinha"
+        },
+        {
+          "number": 6,
+          "goal": "Uma primeira folha se abriu sob o sol",
+          "visual_brief": "Original illustrative concept of Sementinha: Uma primeira folha se abriu sob o sol"
+        },
+        {
+          "number": 7,
+          "goal": "Água e descanso ajudaram a planta a crescer",
+          "visual_brief": "Original illustrative concept of Sementinha: Água e descanso ajudaram a planta a crescer"
+        },
+        {
+          "number": 8,
+          "goal": "O jardim ganhou um novo cantinho verde",
+          "visual_brief": "Original illustrative concept of Sementinha: O jardim ganhou um novo cantinho verde"
+        }
+      ],
+      "tags": [
+        "Sementinha",
+        "desenho infantil",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Uma sementinha dormia debaixo da terra macia. Naquele dia tranquilo, o jardim estava cheio de cores bonitas e o vento passava bem devagar. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Sementinha: Uma sementinha dormia debaixo da terra macia; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "A chuva chegou e deixou o solo bem úmido. O pequeno amiguinho observou com carinho, descobrindo que as coisas têm seu próprio tempo para acontecer. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Sementinha: A chuva chegou e deixou o solo bem úmido; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Uma raiz pequenina começou a crescer lentamente. Ninguém precisava correr, pois aprender com calma também podia ser uma surpresa especial e muito divertida. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Sementinha: Uma raiz pequenina começou a crescer lentamente; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Um broto verde procurou a luz do dia. Quando algo não funcionou logo de primeira, tentar mais uma vez parecia uma boa ideia. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Sementinha: Um broto verde procurou a luz do dia; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma minhoca simpática deixou a terra fofinha. Os amigos da natureza gostavam de ajudar sem assustar nem machucar ninguém, sempre com gentileza.",
+          "visual_instruction": "Gentle original 2D preschool art. Sementinha: Uma minhoca simpática deixou a terra fofinha; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Uma primeira folha se abriu sob o sol. Cada descoberta trazia um sorriso novo, e os sons suaves deixavam aquela aventura ainda mais bonita.",
+          "visual_instruction": "Gentle original 2D preschool art. Sementinha: Uma primeira folha se abriu sob o sol; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Água e descanso ajudaram a planta a crescer. Todos aproveitaram o momento com paciência enquanto a luz iluminava as folhas e a água.",
+          "visual_instruction": "Gentle original 2D preschool art. Sementinha: Água e descanso ajudaram a planta a crescer; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "O jardim ganhou um novo cantinho verde. E assim terminou uma história tranquila, cheia de amizade, cuidado e descobertas para guardar no coração.",
+          "visual_instruction": "Gentle original 2D preschool art. Sementinha: O jardim ganhou um novo cantinho verde; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Uma sementinha dormia debaixo da terra macia. Naquele dia tranquilo, o jardim estava cheio de cores bonitas e o vento passava bem devagar. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. A chuva chegou e deixou o solo bem úmido. O pequeno amiguinho observou com carinho, descobrindo que as coisas têm seu próprio tempo para acontecer. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma raiz pequenina começou a crescer lentamente. Ninguém precisava correr, pois aprender com calma também podia ser uma surpresa especial e muito divertida. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Um broto verde procurou a luz do dia. Quando algo não funcionou logo de primeira, tentar mais uma vez parecia uma boa ideia. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma minhoca simpática deixou a terra fofinha. Os amigos da natureza gostavam de ajudar sem assustar nem machucar ninguém, sempre com gentileza. Uma primeira folha se abriu sob o sol. Cada descoberta trazia um sorriso novo, e os sons suaves deixavam aquela aventura ainda mais bonita. Água e descanso ajudaram a planta a crescer. Todos aproveitaram o momento com paciência enquanto a luz iluminava as folhas e a água. O jardim ganhou um novo cantinho verde. E assim terminou uma história tranquila, cheia de amizade, cuidado e descobertas para guardar no coração.",
+      "narration_word_count": 270,
+      "description": "A Sementinha e a Primeira Folha 🌱. História original infantil com ilustrações de IA. Conteúdo destinado a crianças."
+    },
+    {
+      "id": "kids-109-peixinho-coragem",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "O Peixinho que Descobriu a Coragem 🐟",
+      "cover_text": "CORAGEM NO RIO",
+      "hook": "Um peixinho azul observava as pedras do riacho.",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Um peixinho azul observava as pedras do riacho",
+          "visual_brief": "Original illustrative concept of Peixinho: Um peixinho azul observava as pedras do riacho"
+        },
+        {
+          "number": 2,
+          "goal": "Uma folha dourada foi parar num lugar desconhecido",
+          "visual_brief": "Original illustrative concept of Peixinho: Uma folha dourada foi parar num lugar desconhecido"
+        },
+        {
+          "number": 3,
+          "goal": "Uma tartaruga amiga indicou um caminho seguro",
+          "visual_brief": "Original illustrative concept of Peixinho: Uma tartaruga amiga indicou um caminho seguro"
+        },
+        {
+          "number": 4,
+          "goal": "Os dois seguiram bolhas e contornaram pedras",
+          "visual_brief": "Original illustrative concept of Peixinho: Os dois seguiram bolhas e contornaram pedras"
+        },
+        {
+          "number": 5,
+          "goal": "Uma sombra apareceu mas era somente uma nuvem",
+          "visual_brief": "Original illustrative concept of Peixinho: Uma sombra apareceu mas era somente uma nuvem"
+        },
+        {
+          "number": 6,
+          "goal": "O peixinho aprendeu que pedir ajuda é corajoso",
+          "visual_brief": "Original illustrative concept of Peixinho: O peixinho aprendeu que pedir ajuda é corajoso"
+        },
+        {
+          "number": 7,
+          "goal": "Uma flor rosada apareceu perto da margem",
+          "visual_brief": "Original illustrative concept of Peixinho: Uma flor rosada apareceu perto da margem"
+        },
+        {
+          "number": 8,
+          "goal": "Ele voltou feliz com a nova descoberta",
+          "visual_brief": "Original illustrative concept of Peixinho: Ele voltou feliz com a nova descoberta"
+        }
+      ],
+      "tags": [
+        "Peixinho",
+        "desenho infantil",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Um peixinho azul observava as pedras do riacho. Naquele dia tranquilo, o jardim estava cheio de cores bonitas e o vento passava bem devagar. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Peixinho: Um peixinho azul observava as pedras do riacho; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Uma folha dourada foi parar num lugar desconhecido. O pequeno amiguinho observou com carinho, descobrindo que as coisas têm seu próprio tempo para acontecer. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Peixinho: Uma folha dourada foi parar num lugar desconhecido; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Uma tartaruga amiga indicou um caminho seguro. Ninguém precisava correr, pois aprender com calma também podia ser uma surpresa especial e muito divertida. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Peixinho: Uma tartaruga amiga indicou um caminho seguro; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Os dois seguiram bolhas e contornaram pedras. Quando algo não funcionou logo de primeira, tentar mais uma vez parecia uma boa ideia. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Gentle original 2D preschool art. Peixinho: Os dois seguiram bolhas e contornaram pedras; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma sombra apareceu mas era somente uma nuvem. Os amigos da natureza gostavam de ajudar sem assustar nem machucar ninguém, sempre com gentileza.",
+          "visual_instruction": "Gentle original 2D preschool art. Peixinho: Uma sombra apareceu mas era somente uma nuvem; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "O peixinho aprendeu que pedir ajuda é corajoso. Cada descoberta trazia um sorriso novo, e os sons suaves deixavam aquela aventura ainda mais bonita.",
+          "visual_instruction": "Gentle original 2D preschool art. Peixinho: O peixinho aprendeu que pedir ajuda é corajoso; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Uma flor rosada apareceu perto da margem. Todos aproveitaram o momento com paciência enquanto a luz iluminava as folhas e a água.",
+          "visual_instruction": "Gentle original 2D preschool art. Peixinho: Uma flor rosada apareceu perto da margem; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Ele voltou feliz com a nova descoberta. E assim terminou uma história tranquila, cheia de amizade, cuidado e descobertas para guardar no coração.",
+          "visual_instruction": "Gentle original 2D preschool art. Peixinho: Ele voltou feliz com a nova descoberta; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Um peixinho azul observava as pedras do riacho. Naquele dia tranquilo, o jardim estava cheio de cores bonitas e o vento passava bem devagar. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma folha dourada foi parar num lugar desconhecido. O pequeno amiguinho observou com carinho, descobrindo que as coisas têm seu próprio tempo para acontecer. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma tartaruga amiga indicou um caminho seguro. Ninguém precisava correr, pois aprender com calma também podia ser uma surpresa especial e muito divertida. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Os dois seguiram bolhas e contornaram pedras. Quando algo não funcionou logo de primeira, tentar mais uma vez parecia uma boa ideia. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Uma sombra apareceu mas era somente uma nuvem. Os amigos da natureza gostavam de ajudar sem assustar nem machucar ninguém, sempre com gentileza. O peixinho aprendeu que pedir ajuda é corajoso. Cada descoberta trazia um sorriso novo, e os sons suaves deixavam aquela aventura ainda mais bonita. Uma flor rosada apareceu perto da margem. Todos aproveitaram o momento com paciência enquanto a luz iluminava as folhas e a água. Ele voltou feliz com a nova descoberta. E assim terminou uma história tranquila, cheia de amizade, cuidado e descobertas para guardar no coração.",
+      "narration_word_count": 269,
+      "description": "O Peixinho que Descobriu a Coragem 🐟. História original infantil com ilustrações de IA. Conteúdo destinado a crianças."
+    },
+    {
+      "id": "alchemy-108-aprovacao-humana",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "IA automática: quando pedir aprovação humana?",
+      "cover_text": "PARE ANTES DE ENVIAR",
+      "hook": "Uma automação pode preparar mensagens sem enviá-las sozinha.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma automação pode preparar mensagens sem enviá-las sozinha",
+          "visual_brief": "Original illustrative concept of Aprovação humana: Uma automação pode preparar mensagens sem enviá-las sozinha"
+        },
+        {
+          "number": 2,
+          "goal": "Um rascunho é diferente de uma ação irreversível",
+          "visual_brief": "Original illustrative concept of Aprovação humana: Um rascunho é diferente de uma ação irreversível"
+        },
+        {
+          "number": 3,
+          "goal": "Um fluxo seguro oferece uma prévia para revisão",
+          "visual_brief": "Original illustrative concept of Aprovação humana: Um fluxo seguro oferece uma prévia para revisão"
+        },
+        {
+          "number": 4,
+          "goal": "Conferir destinatários evita erros públicos importantes",
+          "visual_brief": "Original illustrative concept of Aprovação humana: Conferir destinatários evita erros públicos importantes"
+        },
+        {
+          "number": 5,
+          "goal": "Quem aprova precisa ver a versão exata do conteúdo",
+          "visual_brief": "Original illustrative concept of Aprovação humana: Quem aprova precisa ver a versão exata do conteúdo"
+        },
+        {
+          "number": 6,
+          "goal": "Registrar decisões permite revisar o processo depois",
+          "visual_brief": "Original illustrative concept of Aprovação humana: Registrar decisões permite revisar o processo depois"
+        },
+        {
+          "number": 7,
+          "goal": "Após falha de rede é preciso evitar envios duplicados",
+          "visual_brief": "Original illustrative concept of Aprovação humana: Após falha de rede é preciso evitar envios duplicados"
+        },
+        {
+          "number": 8,
+          "goal": "Automatizar bem significa preservar o controle humano",
+          "visual_brief": "Original illustrative concept of Aprovação humana: Automatizar bem significa preservar o controle humano"
+        }
+      ],
+      "tags": [
+        "Aprovação humana",
+        "IA",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Uma automação pode preparar mensagens sem enviá-las sozinha. Esse é um exemplo educativo e conceitual, não o resultado real de um experimento que foi executado aqui. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Aprovação humana: Uma automação pode preparar mensagens sem enviá-las sozinha; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Um rascunho é diferente de uma ação irreversível. Antes de automatizar, é útil anotar entradas, regras e o resultado esperado para evitar confusões mais tarde. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Aprovação humana: Um rascunho é diferente de uma ação irreversível; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Um fluxo seguro oferece uma prévia para revisão. Sem contexto, uma resposta aparentemente correta pode esconder uma hipótese errada ou uma informação importante ausente. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Aprovação humana: Um fluxo seguro oferece uma prévia para revisão; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Conferir destinatários evita erros públicos importantes. Uma etapa de revisão simples pode impedir que o problema se espalhe para outras tarefas e arquivos.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Aprovação humana: Conferir destinatários evita erros públicos importantes; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Quem aprova precisa ver a versão exata do conteúdo. Uma interface bonita não serve como prova; precisamos saber como a conclusão foi obtida e conferida.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Aprovação humana: Quem aprova precisa ver a versão exata do conteúdo; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Registrar decisões permite revisar o processo depois. Quando existe incerteza, o sistema deve registrar a dúvida e pedir confirmação em vez de inventar uma resposta.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Aprovação humana: Registrar decisões permite revisar o processo depois; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Após falha de rede é preciso evitar envios duplicados. Guardar o histórico das decisões permite comparar alternativas e corrigir erros sem refazer todo o trabalho.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Aprovação humana: Após falha de rede é preciso evitar envios duplicados; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Automatizar bem significa preservar o controle humano. O objetivo é usar ferramentas de forma útil e verificável, mantendo pessoas responsáveis pelas escolhas importantes.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Aprovação humana: Automatizar bem significa preservar o controle humano; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Uma automação pode preparar mensagens sem enviá-las sozinha. Esse é um exemplo educativo e conceitual, não o resultado real de um experimento que foi executado aqui. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Um rascunho é diferente de uma ação irreversível. Antes de automatizar, é útil anotar entradas, regras e o resultado esperado para evitar confusões mais tarde. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Um fluxo seguro oferece uma prévia para revisão. Sem contexto, uma resposta aparentemente correta pode esconder uma hipótese errada ou uma informação importante ausente. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Conferir destinatários evita erros públicos importantes. Uma etapa de revisão simples pode impedir que o problema se espalhe para outras tarefas e arquivos. Quem aprova precisa ver a versão exata do conteúdo. Uma interface bonita não serve como prova; precisamos saber como a conclusão foi obtida e conferida. Registrar decisões permite revisar o processo depois. Quando existe incerteza, o sistema deve registrar a dúvida e pedir confirmação em vez de inventar uma resposta. Após falha de rede é preciso evitar envios duplicados. Guardar o histórico das decisões permite comparar alternativas e corrigir erros sem refazer todo o trabalho. Automatizar bem significa preservar o controle humano. O objetivo é usar ferramentas de forma útil e verificável, mantendo pessoas responsáveis pelas escolhas importantes.",
+      "narration_word_count": 259,
+      "description": "IA automática: quando pedir aprovação humana?. 🎨 Ilustrações conceituais de IA; sem demonstrações reais falsificadas."
+    },
+    {
+      "id": "alchemy-109-contexto-ia",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Por que a IA perde o contexto da conversa?",
+      "cover_text": "CADÊ O CONTEXTO?",
+      "hook": "Um modelo recebe informações dentro de uma janela de contexto.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Um modelo recebe informações dentro de uma janela de contexto",
+          "visual_brief": "Original illustrative concept of Contexto em IA: Um modelo recebe informações dentro de uma janela de contexto"
+        },
+        {
+          "number": 2,
+          "goal": "Isso não equivale à memória perfeita de todas as conversas",
+          "visual_brief": "Original illustrative concept of Contexto em IA: Isso não equivale à memória perfeita de todas as conversas"
+        },
+        {
+          "number": 3,
+          "goal": "Informações antigas podem ser resumidas ou omitidas",
+          "visual_brief": "Original illustrative concept of Contexto em IA: Informações antigas podem ser resumidas ou omitidas"
+        },
+        {
+          "number": 4,
+          "goal": "Repetir uma restrição relevante às vezes evita confusões",
+          "visual_brief": "Original illustrative concept of Contexto em IA: Repetir uma restrição relevante às vezes evita confusões"
+        },
+        {
+          "number": 5,
+          "goal": "Projetos longos precisam de decisões registradas em arquivos",
+          "visual_brief": "Original illustrative concept of Contexto em IA: Projetos longos precisam de decisões registradas em arquivos"
+        },
+        {
+          "number": 6,
+          "goal": "Mesmo um contexto extenso ainda pode ser mal interpretado",
+          "visual_brief": "Original illustrative concept of Contexto em IA: Mesmo um contexto extenso ainda pode ser mal interpretado"
+        },
+        {
+          "number": 7,
+          "goal": "Separar regras permanentes de tarefas ajuda a organização",
+          "visual_brief": "Original illustrative concept of Contexto em IA: Separar regras permanentes de tarefas ajuda a organização"
+        },
+        {
+          "number": 8,
+          "goal": "Incluir detalhes relevantes melhora a qualidade dos pedidos",
+          "visual_brief": "Original illustrative concept of Contexto em IA: Incluir detalhes relevantes melhora a qualidade dos pedidos"
+        }
+      ],
+      "tags": [
+        "Contexto em IA",
+        "IA",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Um modelo recebe informações dentro de uma janela de contexto. Esse é um exemplo educativo e conceitual, não o resultado real de um experimento que foi executado aqui. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Contexto em IA: Um modelo recebe informações dentro de uma janela de contexto; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Isso não equivale à memória perfeita de todas as conversas. Antes de automatizar, é útil anotar entradas, regras e o resultado esperado para evitar confusões mais tarde. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Contexto em IA: Isso não equivale à memória perfeita de todas as conversas; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Informações antigas podem ser resumidas ou omitidas. Sem contexto, uma resposta aparentemente correta pode esconder uma hipótese errada ou uma informação importante ausente. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Contexto em IA: Informações antigas podem ser resumidas ou omitidas; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Repetir uma restrição relevante às vezes evita confusões. Uma etapa de revisão simples pode impedir que o problema se espalhe para outras tarefas e arquivos.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Contexto em IA: Repetir uma restrição relevante às vezes evita confusões; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Projetos longos precisam de decisões registradas em arquivos. Uma interface bonita não serve como prova; precisamos saber como a conclusão foi obtida e conferida.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Contexto em IA: Projetos longos precisam de decisões registradas em arquivos; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Mesmo um contexto extenso ainda pode ser mal interpretado. Quando existe incerteza, o sistema deve registrar a dúvida e pedir confirmação em vez de inventar uma resposta.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Contexto em IA: Mesmo um contexto extenso ainda pode ser mal interpretado; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Separar regras permanentes de tarefas ajuda a organização. Guardar o histórico das decisões permite comparar alternativas e corrigir erros sem refazer todo o trabalho.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Contexto em IA: Separar regras permanentes de tarefas ajuda a organização; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Incluir detalhes relevantes melhora a qualidade dos pedidos. O objetivo é usar ferramentas de forma útil e verificável, mantendo pessoas responsáveis pelas escolhas importantes.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Contexto em IA: Incluir detalhes relevantes melhora a qualidade dos pedidos; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Um modelo recebe informações dentro de uma janela de contexto. Esse é um exemplo educativo e conceitual, não o resultado real de um experimento que foi executado aqui. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Isso não equivale à memória perfeita de todas as conversas. Antes de automatizar, é útil anotar entradas, regras e o resultado esperado para evitar confusões mais tarde. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Informações antigas podem ser resumidas ou omitidas. Sem contexto, uma resposta aparentemente correta pode esconder uma hipótese errada ou uma informação importante ausente. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Repetir uma restrição relevante às vezes evita confusões. Uma etapa de revisão simples pode impedir que o problema se espalhe para outras tarefas e arquivos. Projetos longos precisam de decisões registradas em arquivos. Uma interface bonita não serve como prova; precisamos saber como a conclusão foi obtida e conferida. Mesmo um contexto extenso ainda pode ser mal interpretado. Quando existe incerteza, o sistema deve registrar a dúvida e pedir confirmação em vez de inventar uma resposta. Separar regras permanentes de tarefas ajuda a organização. Guardar o histórico das decisões permite comparar alternativas e corrigir erros sem refazer todo o trabalho. Incluir detalhes relevantes melhora a qualidade dos pedidos. O objetivo é usar ferramentas de forma útil e verificável, mantendo pessoas responsáveis pelas escolhas importantes.",
+      "narration_word_count": 265,
+      "description": "Por que a IA perde o contexto da conversa?. 🎨 Ilustrações conceituais de IA; sem demonstrações reais falsificadas."
+    },
+    {
+      "id": "alchemy-110-fontes-confiaveis",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Como verificar as fontes de uma resposta de IA?",
+      "cover_text": "CONFIRA A FONTE",
+      "hook": "Uma resposta convincente ainda pode estar errada.",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma resposta convincente ainda pode estar errada",
+          "visual_brief": "Original illustrative concept of Verificação de fontes: Uma resposta convincente ainda pode estar errada"
+        },
+        {
+          "number": 2,
+          "goal": "Consultar a fonte original diferencia evidência de repetição",
+          "visual_brief": "Original illustrative concept of Verificação de fontes: Consultar a fonte original diferencia evidência de repetição"
+        },
+        {
+          "number": 3,
+          "goal": "Datas importam para preços, versões e novas regras",
+          "visual_brief": "Original illustrative concept of Verificação de fontes: Datas importam para preços, versões e novas regras"
+        },
+        {
+          "number": 4,
+          "goal": "Fontes discordantes exigem comparação de métodos e contexto",
+          "visual_brief": "Original illustrative concept of Verificação de fontes: Fontes discordantes exigem comparação de métodos e contexto"
+        },
+        {
+          "number": 5,
+          "goal": "Uma opinião não tem o mesmo peso de um estudo",
+          "visual_brief": "Original illustrative concept of Verificação de fontes: Uma opinião não tem o mesmo peso de um estudo"
+        },
+        {
+          "number": 6,
+          "goal": "Números precisam de período e unidade para fazer sentido",
+          "visual_brief": "Original illustrative concept of Verificação de fontes: Números precisam de período e unidade para fazer sentido"
+        },
+        {
+          "number": 7,
+          "goal": "Guardar links facilita revisar conclusões depois",
+          "visual_brief": "Original illustrative concept of Verificação de fontes: Guardar links facilita revisar conclusões depois"
+        },
+        {
+          "number": 8,
+          "goal": "Reconhecer dúvidas faz parte do uso responsável de IA",
+          "visual_brief": "Original illustrative concept of Verificação de fontes: Reconhecer dúvidas faz parte do uso responsável de IA"
+        }
+      ],
+      "tags": [
+        "Verificação de fontes",
+        "IA",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Uma resposta convincente ainda pode estar errada. Esse é um exemplo educativo e conceitual, não o resultado real de um experimento que foi executado aqui. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Verificação de fontes: Uma resposta convincente ainda pode estar errada; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Consultar a fonte original diferencia evidência de repetição. Antes de automatizar, é útil anotar entradas, regras e o resultado esperado para evitar confusões mais tarde. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Verificação de fontes: Consultar a fonte original diferencia evidência de repetição; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Datas importam para preços, versões e novas regras. Sem contexto, uma resposta aparentemente correta pode esconder uma hipótese errada ou uma informação importante ausente. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Verificação de fontes: Datas importam para preços, versões e novas regras; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Fontes discordantes exigem comparação de métodos e contexto. Uma etapa de revisão simples pode impedir que o problema se espalhe para outras tarefas e arquivos.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Verificação de fontes: Fontes discordantes exigem comparação de métodos e contexto; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma opinião não tem o mesmo peso de um estudo. Uma interface bonita não serve como prova; precisamos saber como a conclusão foi obtida e conferida.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Verificação de fontes: Uma opinião não tem o mesmo peso de um estudo; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Números precisam de período e unidade para fazer sentido. Quando existe incerteza, o sistema deve registrar a dúvida e pedir confirmação em vez de inventar uma resposta.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Verificação de fontes: Números precisam de período e unidade para fazer sentido; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Guardar links facilita revisar conclusões depois. Guardar o histórico das decisões permite comparar alternativas e corrigir erros sem refazer todo o trabalho.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Verificação de fontes: Guardar links facilita revisar conclusões depois; clear original foreground scene, no watermarks or lettering."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Reconhecer dúvidas faz parte do uso responsável de IA. O objetivo é usar ferramentas de forma útil e verificável, mantendo pessoas responsáveis pelas escolhas importantes.",
+          "visual_instruction": "Original technology concept art, no fake software screenshot. Verificação de fontes: Reconhecer dúvidas faz parte do uso responsável de IA; clear original foreground scene, no watermarks or lettering."
+        }
+      ],
+      "narration_script": "Uma resposta convincente ainda pode estar errada. Esse é um exemplo educativo e conceitual, não o resultado real de um experimento que foi executado aqui. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Consultar a fonte original diferencia evidência de repetição. Antes de automatizar, é útil anotar entradas, regras e o resultado esperado para evitar confusões mais tarde. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Datas importam para preços, versões e novas regras. Sem contexto, uma resposta aparentemente correta pode esconder uma hipótese errada ou uma informação importante ausente. Esse ponto ajuda a ligar as pistas com a próxima decisão, sem transformar uma hipótese em certeza nem inventar um resultado. Fontes discordantes exigem comparação de métodos e contexto. Uma etapa de revisão simples pode impedir que o problema se espalhe para outras tarefas e arquivos. Uma opinião não tem o mesmo peso de um estudo. Uma interface bonita não serve como prova; precisamos saber como a conclusão foi obtida e conferida. Números precisam de período e unidade para fazer sentido. Quando existe incerteza, o sistema deve registrar a dúvida e pedir confirmação em vez de inventar uma resposta. Guardar links facilita revisar conclusões depois. Guardar o histórico das decisões permite comparar alternativas e corrigir erros sem refazer todo o trabalho. Reconhecer dúvidas faz parte do uso responsável de IA. O objetivo é usar ferramentas de forma útil e verificável, mantendo pessoas responsáveis pelas escolhas importantes.",
+      "narration_word_count": 262,
+      "description": "Como verificar as fontes de uma resposta de IA?. 🎨 Ilustrações conceituais de IA; sem demonstrações reais falsificadas."
+    }
+  ]
+}
