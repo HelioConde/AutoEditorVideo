@@ -128,13 +128,13 @@ jobs:
       - name: Compile pinned Go proxy BEFORE image secrets
         working-directory: pinned-native-go-proxy
         run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/batch15-native-proxy" ./cmd/api
-      - name: Produce 3 new unique 90-120s originals with 24 maximum image calls
+      - name: Produce three original Shorts without editorial image-call ceiling
         shell: bash
         env:
           PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
           PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
           IMAGE_MODEL: gpt-image-2
-                    BATCH15_CHANNEL: ${{ matrix.channel }}
+          BATCH15_CHANNEL: ${{ matrix.channel }}
           BATCH15_RENDER_AUTHORIZED: 'yes'
         run: |
           set -euo pipefail
