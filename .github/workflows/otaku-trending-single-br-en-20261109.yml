@@ -163,11 +163,13 @@ jobs:
         with:
           name: trending-br-en-media-${{ matrix.channel }}-20261108
           path: |
-            cloud-trending-br-en-20261109/${{ matrix.channel }}/summary.json
+            cloud-trending-br-en-20261109/${{ matrix.channel }}/**/summary.json
             cloud-trending-br-en-20261109/${{ matrix.channel }}/**/final.mp4
             cloud-trending-br-en-20261109/${{ matrix.channel }}/**/thumb.jpg
             cloud-trending-br-en-20261109/${{ matrix.channel }}/**/qa.json
             cloud-trending-br-en-20261109/${{ matrix.channel }}/**/metadata.json
+            cloud-trending-br-en-20261109/${{ matrix.channel }}/**/character-identity-provenance.json
+            cloud-trending-br-en-20261109/${{ matrix.channel }}/**/anchor-*.png
             cloud-trending-br-en-20261109/${{ matrix.channel }}/**/scene-*.png
           retention-days: 7
           if-no-files-found: error
