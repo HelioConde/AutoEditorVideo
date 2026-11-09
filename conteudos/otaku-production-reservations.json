@@ -1638,6 +1638,141 @@
       "source": "creator_request_autoeditor_generate_and_upload_public_20261108",
       "publication_target": "direct_public_on_new_unique_upload_only",
       "note": "Unique editorial topic on idempotence. Never reupload the 9 already-private batch15 videos or modify previous publications; automated QA and exact-channel verification required."
+    },
+    {
+      "channel": "br",
+      "id": "5018-blue-box-silencios",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "br",
+      "id": "5019-apothecary-pistas",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "br",
+      "id": "5020-cyberpunk-implantes",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "en",
+      "id": "7017-death-note-memories",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "en",
+      "id": "7018-bleach-bankai",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "en",
+      "id": "7019-steel-ball-run-spin",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "games",
+      "id": "game-107-hollow-knight-mapa",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "games",
+      "id": "game-108-hades-escolhas",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "games",
+      "id": "game-109-oxygen-not-included-calor",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-107-passarinhos-ninho",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-108-sementinha-jardim",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-109-peixinho-coragem",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-108-aprovacao-humana",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-109-contexto-ia",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-110-fontes-confiaveis",
+      "status": "reserved",
+      "reservation_owner": "janela21_novos_20261108",
+      "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
+      "publication_target": "private_first_after_original_media_QA",
+      "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
