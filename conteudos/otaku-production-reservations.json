@@ -1,6 +1,6 @@
 {
   "schema": "autoeditorvideo/production-reservations/v1",
-  "updated_at": "2026-11-08",
+  "updated_at": "2026-11-09",
   "policy": "Before creating any video generation script, PowerShell or cloud workflow, reserve the exact (channel, episode_id) pair here and merge to main first. All five channels use unique channel IDs; registration never authorizes image or YouTube requests.",
   "channels": {
     "br": {
@@ -1791,6 +1791,141 @@
       "source": "creator_direct_trending_keywords_20261109",
       "publication_target": "private_first_after_canonical_character_qa",
       "note": "Exactly one fresh Short. Primary SEO keyword jojo part 7 op. Original anchored anime scene illustrations, official music/footage forbidden, max60s, channel-specific verified private upload only. No duplicate videos.insert."
+    },
+    {
+      "channel": "br",
+      "id": "5022-vinland-saga-vinganca",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Vinland Saga: por que a vingança cobra um preço?. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "br",
+      "id": "5023-frieren-memorias",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Frieren: por que as memórias mudam com o tempo?. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "br",
+      "id": "5024-pluto-humanidade",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Pluto: o que torna alguém humano?. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "en",
+      "id": "7021-dandadan-misterios",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Dandadan: Why Two Kinds of Mystery Collide. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "en",
+      "id": "7022-made-in-abyss-descida",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Made in Abyss: The Hidden Cost of Going Deeper. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "en",
+      "id": "7023-spy-family-segredos",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Spy x Family: How Secrets Can Build Trust. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "games",
+      "id": "game-110-factorio-gargalos",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Factorio: o erro que trava sua fábrica. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "games",
+      "id": "game-111-dead-cells-escolhas",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Dead Cells: por que cada escolha muda a tentativa?. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "games",
+      "id": "game-112-slime-rancher-equilibrio",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Slime Rancher: como uma fazenda vira estratégia. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-110-coruja-sons",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: A Corujinha que Aprendeu a Escutar. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-111-caracol-arcoiris",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: O Caracol e o Caminho do Arco-Íris. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-112-nuvem-vento",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: A Nuvem Pequena e o Vento Gentil. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-111-prompt-exemplos",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Prompts com exemplos: por que funcionam?. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-112-rag-documentos",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: RAG: como uma IA encontra informações nos documentos. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-113-legenda-sincronizada",
+      "status": "reserved",
+      "reservation_owner": "lote15_novos_20261109",
+      "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
+      "publication_target": "private_first_after_original_render_and_QA",
+      "note": "Tema inédito: Como sincronizar legendas com cada palavra. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
