@@ -1,0 +1,13 @@
+{
+  "schema": "autoeditorvideo/new-window21-private-once/v1",
+  "date": "2026-11-08",
+  "time_local": "21:00",
+  "timezone": "America/Sao_Paulo",
+  "creator_authorized": true,
+  "intent": "new_15_videos_five_channels_private_fallback_after_21h",
+  "production_owner": "janela21_novos_20261108",
+  "no_public_publish": true,
+  "no_duplicate_episodes": true,
+  "no_editorial_image_call_cap": true,
+  "requires_channel_id_verification": true
+}
