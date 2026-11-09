@@ -1,0 +1,2 @@
+# Optional async transport for the loopback Codex Proxy.
+httpx>=0.28,<0.29

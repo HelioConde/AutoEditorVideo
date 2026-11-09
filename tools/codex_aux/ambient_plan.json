@@ -1,0 +1,30 @@
+{
+  "tasks": [
+    {
+      "id": "scripted-density",
+      "kind": "review",
+      "public": true,
+      "files": [
+        {
+          "path": "scripts/fofinhos_ep01_render.py",
+          "start": 48,
+          "end": 91
+        }
+      ],
+      "question": "Identify the six canonically planned particle counts in scenes 1 and 14 and the inclusive maximum density allowed by the Python validator. List counts in clouds, butterflies, petals, pollen, eggSparkles, motes order, and cite lines."
+    },
+    {
+      "id": "renderer-guards",
+      "kind": "review",
+      "public": true,
+      "files": [
+        {
+          "path": "motion-remotion/src/fofinhos-ambient-effects.tsx",
+          "start": 23,
+          "end": 47
+        }
+      ],
+      "question": "Identify renderer safeguards for a night scene with egg hidden and every count 99, opacity at local frames 0, 12, 24, and the pixel anchor at eggX=-0.25 and eggY=1.1. Give the counts in clouds, butterflies, petals, pollen, eggSparkles, motes order. Cite lines."
+    }
+  ]
+}
