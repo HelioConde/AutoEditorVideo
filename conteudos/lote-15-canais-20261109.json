@@ -1,0 +1,1763 @@
+{
+  "schema": "autoeditorvideo/new-15-five-channels-editorial-v1",
+  "date": "2026-11-09",
+  "production_owner": "lote15_novos_20261109",
+  "requested_total": 15,
+  "channels": [
+    "br",
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "per_channel": 3,
+  "default_visibility": "private",
+  "content_strategy": "15 original evergreen episodes; render full original audio and art with AutoEditorVideo, initial private uploads only after technical QA; no public release",
+  "reservations_path": "conteudos/otaku-production-reservations.json",
+  "approval": {
+    "creator_requested_generation": true,
+    "upload_only_after_render_qa_and_exact_youtube_id_check": true,
+    "publication_to_public_not_approved_by_this_manifest": true
+  },
+  "status": "new_original_narrations_pending_render",
+  "episodes": [
+    {
+      "id": "5022-vinland-saga-vinganca",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Vinland Saga: por que a vingança cobra um preço?",
+      "cover_text": "O PREÇO DA VINGANÇA",
+      "hook": "Vencer uma batalha também pode significar perder algo?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma história sobre guerreiros pode começar com uma pergunta difícil: o que sobra depois de uma vitória movida apenas pela vingança? Em Vinland Saga, força e propósito não significam necessariamente a mesma coisa",
+          "visual_brief": "Scene 1 of 8. espada solitária cravada na terra ao amanhecer. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Quando toda decisão gira em torno de um inimigo, o futuro fica preso ao passado",
+          "visual_brief": "Scene 2 of 8. barco viking em mar frio e horizonte vazio. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "O cenário dos conflitos mostra como a violência se espalha além de quem empunha a espada",
+          "visual_brief": "Scene 3 of 8. aldeia costeira vista após tempestade, sem violência gráfica. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Existe uma diferença entre ter coragem para enfrentar alguém e ter coragem para interromper um ciclo",
+          "visual_brief": "Scene 4 of 8. dois caminhos entre penhasco escuro e vale iluminado. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Por isso o silêncio depois do combate importa tanto quanto o combate",
+          "visual_brief": "Scene 5 of 8. escudo abandonado ao lado de fogueira apagada. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "A busca por sentido também muda a maneira de olhar para os outros",
+          "visual_brief": "Scene 6 of 8. duas mãos oferecendo pão numa cabana nórdica. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "O contraste entre terras devastadas e campos tranquilos funciona como uma escolha visual",
+          "visual_brief": "Scene 7 of 8. contraste entre campo de trigo dourado e ruínas distantes. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "A grande consequência não é simplesmente descobrir quem ganha",
+          "visual_brief": "Scene 8 of 8. figura anônima sem traços identificáveis caminhando rumo à paz. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Vinland Saga",
+        "anime",
+        "vingança",
+        "história",
+        "Otaku Multicena",
+        "análise de anime"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Uma história sobre guerreiros pode começar com uma pergunta difícil: o que sobra depois de uma vitória movida apenas pela vingança? Em Vinland Saga, força e propósito não significam necessariamente a mesma coisa. O contraste aparece menos nas explicações e mais na maneira como cada escolha muda a cena.",
+          "visual_instruction": "Scene 1 of 8. espada solitária cravada na terra ao amanhecer. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Quando toda decisão gira em torno de um inimigo, o futuro fica preso ao passado. A luta parece oferecer direção, mas também limita as possibilidades de enxergar novas pessoas e novos caminhos.",
+          "visual_instruction": "Scene 2 of 8. barco viking em mar frio e horizonte vazio. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "O cenário dos conflitos mostra como a violência se espalha além de quem empunha a espada. Famílias, aldeias e relações continuam carregando consequências mesmo quando uma batalha finalmente chega ao fim.",
+          "visual_instruction": "Scene 3 of 8. aldeia costeira vista após tempestade, sem violência gráfica. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Existe uma diferença entre ter coragem para enfrentar alguém e ter coragem para interromper um ciclo. A segunda escolha pode parecer menos espetacular, mas exige uma transformação muito mais profunda.",
+          "visual_instruction": "Scene 4 of 8. dois caminhos entre penhasco escuro e vale iluminado. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Por isso o silêncio depois do combate importa tanto quanto o combate. Sem o barulho da guerra, surge uma pergunta que nenhum golpe resolve: que tipo de vida vale a pena construir?",
+          "visual_instruction": "Scene 5 of 8. escudo abandonado ao lado de fogueira apagada. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "A busca por sentido também muda a maneira de olhar para os outros. Quem antes parecia apenas obstáculo pode passar a ser visto como pessoa, com medos, sonhos e sua própria história.",
+          "visual_instruction": "Scene 6 of 8. duas mãos oferecendo pão numa cabana nórdica. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "O contraste entre terras devastadas e campos tranquilos funciona como uma escolha visual. Um lugar pode representar repetição da dor; outro, a possibilidade de cuidar em vez de destruir.",
+          "visual_instruction": "Scene 7 of 8. contraste entre campo de trigo dourado e ruínas distantes. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A grande consequência não é simplesmente descobrir quem ganha. É perceber que abandonar a vingança pode ser o gesto mais difícil de toda a jornada. Qual mudança dessa história mais marcou você?",
+          "visual_instruction": "Scene 8 of 8. figura anônima sem traços identificáveis caminhando rumo à paz. Visual bible: melancolia nórdica, paisagens costeiras, neve, madeira, campos de trigo, luz cinematográfica. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Uma história sobre guerreiros pode começar com uma pergunta difícil: o que sobra depois de uma vitória movida apenas pela vingança? Em Vinland Saga, força e propósito não significam necessariamente a mesma coisa. O contraste aparece menos nas explicações e mais na maneira como cada escolha muda a cena. Quando toda decisão gira em torno de um inimigo, o futuro fica preso ao passado. A luta parece oferecer direção, mas também limita as possibilidades de enxergar novas pessoas e novos caminhos. O cenário dos conflitos mostra como a violência se espalha além de quem empunha a espada. Famílias, aldeias e relações continuam carregando consequências mesmo quando uma batalha finalmente chega ao fim. Existe uma diferença entre ter coragem para enfrentar alguém e ter coragem para interromper um ciclo. A segunda escolha pode parecer menos espetacular, mas exige uma transformação muito mais profunda. Por isso o silêncio depois do combate importa tanto quanto o combate. Sem o barulho da guerra, surge uma pergunta que nenhum golpe resolve: que tipo de vida vale a pena construir? A busca por sentido também muda a maneira de olhar para os outros. Quem antes parecia apenas obstáculo pode passar a ser visto como pessoa, com medos, sonhos e sua própria história. O contraste entre terras devastadas e campos tranquilos funciona como uma escolha visual. Um lugar pode representar repetição da dor; outro, a possibilidade de cuidar em vez de destruir. A grande consequência não é simplesmente descobrir quem ganha. É perceber que abandonar a vingança pode ser o gesto mais difícil de toda a jornada. Qual mudança dessa história mais marcou você?",
+      "narration_word_count": 267,
+      "description": "Vinland Saga: por que a vingança cobra um preço?. Análise narrativa original, com interpretação dos temas sem cenas oficiais. 🎨 Imagens ilustrativas geradas por IA; não são quadros do anime."
+    },
+    {
+      "id": "5023-frieren-memorias",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Frieren: por que as memórias mudam com o tempo?",
+      "cover_text": "O TEMPO MUDA TUDO",
+      "hook": "E se uma despedida só fizesse sentido anos depois?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Por que algumas lembranças parecem pequenas no momento em que acontecem, mas se tornam enormes muitos anos depois? Essa é uma das perguntas emocionais que tornam a jornada de Frieren tão diferente",
+          "visual_brief": "Scene 1 of 8. relógio de areia em janela de torre antiga. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Para alguém que percebe o tempo de outra maneira, um encontro breve pode parecer apenas uma pausa",
+          "visual_brief": "Scene 2 of 8. dois calendários de estações sobre estrada de fantasia. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Uma flor encontrada no caminho não precisa ter poder mágico para ser importante",
+          "visual_brief": "Scene 3 of 8. flor azul brilhando junto a trilha de pedra. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "É por isso que a viagem funciona como uma coleção de reencontros indiretos",
+          "visual_brief": "Scene 4 of 8. vila medieval passando por quatro estações. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "A aventura não precisa depender sempre de um inimigo maior",
+          "visual_brief": "Scene 5 of 8. banco de madeira vazio ao pôr do sol. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "Cada parada oferece a chance de observar melhor os outros",
+          "visual_brief": "Scene 6 of 8. viajantes genéricos de costas observando feira de vila. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "Mesmo quando uma lembrança traz tristeza, ela também guarda gratidão",
+          "visual_brief": "Scene 7 of 8. lanterna e lembranças representadas por pétalas no ar. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "No fim, a pergunta não é quantos anos uma jornada dura",
+          "visual_brief": "Scene 8 of 8. caminho montanhoso ao nascer do sol, atmosfera esperançosa. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Frieren",
+        "Sousou no Frieren",
+        "memórias",
+        "anime",
+        "fantasia",
+        "Otaku Multicena"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Por que algumas lembranças parecem pequenas no momento em que acontecem, mas se tornam enormes muitos anos depois? Essa é uma das perguntas emocionais que tornam a jornada de Frieren tão diferente. O contraste aparece menos nas explicações e mais na maneira como cada escolha muda a cena.",
+          "visual_instruction": "Scene 1 of 8. relógio de areia em janela de torre antiga. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Para alguém que percebe o tempo de outra maneira, um encontro breve pode parecer apenas uma pausa. Para quem vive menos, aquele mesmo encontro talvez represente um capítulo inteiro de vida.",
+          "visual_instruction": "Scene 2 of 8. dois calendários de estações sobre estrada de fantasia. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Uma flor encontrada no caminho não precisa ter poder mágico para ser importante. Ela pode lembrar uma conversa, um gesto gentil ou uma promessa cujo significado só aparece muito depois.",
+          "visual_instruction": "Scene 3 of 8. flor azul brilhando junto a trilha de pedra. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "É por isso que a viagem funciona como uma coleção de reencontros indiretos. Lugares conhecidos mudam, as estações retornam e as pessoas deixam marcas que não cabem numa simples linha do tempo.",
+          "visual_instruction": "Scene 4 of 8. vila medieval passando por quatro estações. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "A aventura não precisa depender sempre de um inimigo maior. Às vezes o conflito é entender tarde demais o valor de alguém que estava presente quando parecia haver tempo de sobra.",
+          "visual_instruction": "Scene 5 of 8. banco de madeira vazio ao pôr do sol. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Cada parada oferece a chance de observar melhor os outros. Escutar uma história local, aprender um costume ou notar um detalhe transforma a passagem do tempo em algo vivido de verdade.",
+          "visual_instruction": "Scene 6 of 8. viajantes genéricos de costas observando feira de vila. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Mesmo quando uma lembrança traz tristeza, ela também guarda gratidão. O passado não pode ser refeito, mas sua interpretação muda conforme surgem novas experiências e novas pessoas no caminho.",
+          "visual_instruction": "Scene 7 of 8. lanterna e lembranças representadas por pétalas no ar. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No fim, a pergunta não é quantos anos uma jornada dura. É quantos momentos conseguimos reconhecer enquanto acontecem. Você já redescobriu a importância de uma lembrança antiga?",
+          "visual_instruction": "Scene 8 of 8. caminho montanhoso ao nascer do sol, atmosfera esperançosa. Visual bible: fantasia contemplativa, flores sazonais, estradas antigas, lanternas e passagem do tempo. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Por que algumas lembranças parecem pequenas no momento em que acontecem, mas se tornam enormes muitos anos depois? Essa é uma das perguntas emocionais que tornam a jornada de Frieren tão diferente. O contraste aparece menos nas explicações e mais na maneira como cada escolha muda a cena. Para alguém que percebe o tempo de outra maneira, um encontro breve pode parecer apenas uma pausa. Para quem vive menos, aquele mesmo encontro talvez represente um capítulo inteiro de vida. Uma flor encontrada no caminho não precisa ter poder mágico para ser importante. Ela pode lembrar uma conversa, um gesto gentil ou uma promessa cujo significado só aparece muito depois. É por isso que a viagem funciona como uma coleção de reencontros indiretos. Lugares conhecidos mudam, as estações retornam e as pessoas deixam marcas que não cabem numa simples linha do tempo. A aventura não precisa depender sempre de um inimigo maior. Às vezes o conflito é entender tarde demais o valor de alguém que estava presente quando parecia haver tempo de sobra. Cada parada oferece a chance de observar melhor os outros. Escutar uma história local, aprender um costume ou notar um detalhe transforma a passagem do tempo em algo vivido de verdade. Mesmo quando uma lembrança traz tristeza, ela também guarda gratidão. O passado não pode ser refeito, mas sua interpretação muda conforme surgem novas experiências e novas pessoas no caminho. No fim, a pergunta não é quantos anos uma jornada dura. É quantos momentos conseguimos reconhecer enquanto acontecem. Você já redescobriu a importância de uma lembrança antiga?",
+      "narration_word_count": 259,
+      "description": "Frieren: por que as memórias mudam com o tempo?. Análise narrativa original, com interpretação dos temas sem cenas oficiais. 🎨 Imagens ilustrativas geradas por IA; não são quadros do anime."
+    },
+    {
+      "id": "5024-pluto-humanidade",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Pluto: o que torna alguém humano?",
+      "cover_text": "O QUE É SER HUMANO?",
+      "hook": "Uma máquina pode despertar mais empatia que uma pessoa?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Quando uma história apresenta robôs capazes de agir com cuidado, surge uma dúvida incômoda: o que realmente usamos para reconhecer humanidade? Pluto transforma essa pergunta em tensão e mistério",
+          "visual_brief": "Scene 1 of 8. robô anônimo olhando chuva em vidro de estação. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Uma investigação pode buscar pistas em rastros materiais, mas as decisões mais difíceis envolvem intenções",
+          "visual_brief": "Scene 2 of 8. pistas luminosas e arquivo de investigação futurista. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "A fronteira entre ferramenta e indivíduo fica menos óbvia quando uma máquina demonstra compromisso com outros seres",
+          "visual_brief": "Scene 3 of 8. mão mecânica protegendo pequena planta verde. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Em uma cidade cheia de sistemas, nem tudo que pode ser medido consegue ser entendido",
+          "visual_brief": "Scene 4 of 8. cidade de néon com multidão distante. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Também existe um risco de enxergar apenas rótulos",
+          "visual_brief": "Scene 5 of 8. duas silhuetas anônimas separadas por vitrine. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "O suspense funciona porque cada descoberta altera a pergunta inicial",
+          "visual_brief": "Scene 6 of 8. painel de investigação com linhas abstratas sem textos. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "Visualmente, luzes frias e espaços vazios contrastam com pequenos gestos de proteção",
+          "visual_brief": "Scene 7 of 8. robô simples protegendo criança representada apenas como sombra distante. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "A questão final não pede uma resposta simples sobre metal ou carne",
+          "visual_brief": "Scene 8 of 8. amanhecer refletido em rosto mecânico abstrato. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Pluto",
+        "anime",
+        "ficção científica",
+        "robôs",
+        "misterio",
+        "Otaku Multicena"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Quando uma história apresenta robôs capazes de agir com cuidado, surge uma dúvida incômoda: o que realmente usamos para reconhecer humanidade? Pluto transforma essa pergunta em tensão e mistério. O contraste aparece menos nas explicações e mais na maneira como cada escolha muda a cena.",
+          "visual_instruction": "Scene 1 of 8. robô anônimo olhando chuva em vidro de estação. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Uma investigação pode buscar pistas em rastros materiais, mas as decisões mais difíceis envolvem intenções. O que parece um defeito técnico pode esconder medo, lealdade ou uma consequência moral.",
+          "visual_instruction": "Scene 2 of 8. pistas luminosas e arquivo de investigação futurista. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A fronteira entre ferramenta e indivíduo fica menos óbvia quando uma máquina demonstra compromisso com outros seres. A tecnologia deixa de ser cenário e passa a desafiar nossos critérios.",
+          "visual_instruction": "Scene 3 of 8. mão mecânica protegendo pequena planta verde. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Em uma cidade cheia de sistemas, nem tudo que pode ser medido consegue ser entendido. Uma resposta lógica talvez explique o funcionamento de um ato sem esclarecer por que ele comove.",
+          "visual_instruction": "Scene 4 of 8. cidade de néon com multidão distante. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Também existe um risco de enxergar apenas rótulos. Quando alguém é chamado de máquina, inimigo ou ameaça, fica mais fácil ignorar suas experiências e as consequências das nossas escolhas.",
+          "visual_instruction": "Scene 5 of 8. duas silhuetas anônimas separadas por vitrine. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "O suspense funciona porque cada descoberta altera a pergunta inicial. Em vez de apenas procurar culpados, a história obriga o público a pensar em memória, sofrimento e responsabilidade compartilhada.",
+          "visual_instruction": "Scene 6 of 8. painel de investigação com linhas abstratas sem textos. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Visualmente, luzes frias e espaços vazios contrastam com pequenos gestos de proteção. Esse contraste lembra que empatia não depende do tamanho de uma cidade ou da complexidade de seus circuitos.",
+          "visual_instruction": "Scene 7 of 8. robô simples protegendo criança representada apenas como sombra distante. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A questão final não pede uma resposta simples sobre metal ou carne. Ela pergunta o que fazemos diante da fragilidade alheia. Para você, a humanidade aparece nas emoções ou nas ações?",
+          "visual_instruction": "Scene 8 of 8. amanhecer refletido em rosto mecânico abstrato. Visual bible: ficção científica noir, cidade chuvosa, robótica ética e investigação misteriosa. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Quando uma história apresenta robôs capazes de agir com cuidado, surge uma dúvida incômoda: o que realmente usamos para reconhecer humanidade? Pluto transforma essa pergunta em tensão e mistério. O contraste aparece menos nas explicações e mais na maneira como cada escolha muda a cena. Uma investigação pode buscar pistas em rastros materiais, mas as decisões mais difíceis envolvem intenções. O que parece um defeito técnico pode esconder medo, lealdade ou uma consequência moral. A fronteira entre ferramenta e indivíduo fica menos óbvia quando uma máquina demonstra compromisso com outros seres. A tecnologia deixa de ser cenário e passa a desafiar nossos critérios. Em uma cidade cheia de sistemas, nem tudo que pode ser medido consegue ser entendido. Uma resposta lógica talvez explique o funcionamento de um ato sem esclarecer por que ele comove. Também existe um risco de enxergar apenas rótulos. Quando alguém é chamado de máquina, inimigo ou ameaça, fica mais fácil ignorar suas experiências e as consequências das nossas escolhas. O suspense funciona porque cada descoberta altera a pergunta inicial. Em vez de apenas procurar culpados, a história obriga o público a pensar em memória, sofrimento e responsabilidade compartilhada. Visualmente, luzes frias e espaços vazios contrastam com pequenos gestos de proteção. Esse contraste lembra que empatia não depende do tamanho de uma cidade ou da complexidade de seus circuitos. A questão final não pede uma resposta simples sobre metal ou carne. Ela pergunta o que fazemos diante da fragilidade alheia. Para você, a humanidade aparece nas emoções ou nas ações?",
+      "narration_word_count": 253,
+      "description": "Pluto: o que torna alguém humano?. Análise narrativa original, com interpretação dos temas sem cenas oficiais. 🎨 Imagens ilustrativas geradas por IA; não são quadros do anime."
+    },
+    {
+      "id": "7021-dandadan-misterios",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Dandadan: Why Two Kinds of Mystery Collide",
+      "cover_text": "TWO WORLDS COLLIDE",
+      "hook": "What happens when two impossible explanations both feel real?",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "What happens when a mystery seems to demand two completely different explanations? Dandadan makes that collision exciting by mixing the fear of the unknown with the awkward energy of everyday life",
+          "visual_brief": "Scene 1 of 8. night street beneath one mysterious bright object. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Stories about aliens often look toward the sky, distant lights, and technology nobody understands",
+          "visual_brief": "Scene 2 of 8. old shrine with wind-blown charms and distant mist. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "When those two traditions share one world, neither side can dismiss the other so easily",
+          "visual_brief": "Scene 3 of 8. cosmic light above a folklore lantern. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "The comedy matters because constant danger would become exhausting",
+          "visual_brief": "Scene 4 of 8. comical shadows falling across a school corridor. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Look at the contrast between ordinary neighborhoods and impossible events",
+          "visual_brief": "Scene 5 of 8. ordinary suburban street morphing into abstract supernatural glow. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "The human reactions are just as important as the paranormal spectacle",
+          "visual_brief": "Scene 6 of 8. two unidentifiable silhouettes hesitating at crossroads. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "That mixture also creates two kinds of suspense",
+          "visual_brief": "Scene 7 of 8. split environment with starlight and ancient trees. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "So the appeal is not simply aliens versus ghosts",
+          "visual_brief": "Scene 8 of 8. calm dawn after strange storm of lights. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Dandadan",
+        "anime",
+        "aliens",
+        "ghosts",
+        "supernatural anime",
+        "Otaku Reframe"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "What happens when a mystery seems to demand two completely different explanations? Dandadan makes that collision exciting by mixing the fear of the unknown with the awkward energy of everyday life. The visual contrast makes that idea easier to notice without inventing a new plot event.",
+          "visual_instruction": "Scene 1 of 8. night street beneath one mysterious bright object. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Stories about aliens often look toward the sky, distant lights, and technology nobody understands. Stories about spirits look toward old places, strange noises, and the things people refuse to forget.",
+          "visual_instruction": "Scene 2 of 8. old shrine with wind-blown charms and distant mist. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "When those two traditions share one world, neither side can dismiss the other so easily. Every new clue makes yesterday's certainty feel smaller, and that uncertainty becomes part of the fun.",
+          "visual_instruction": "Scene 3 of 8. cosmic light above a folklore lantern. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "The comedy matters because constant danger would become exhausting. An embarrassing misunderstanding can briefly release the tension, making the next strange encounter feel even more sudden and surprising.",
+          "visual_instruction": "Scene 4 of 8. comical shadows falling across a school corridor. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Look at the contrast between ordinary neighborhoods and impossible events. A quiet street becomes memorable when the environment stays familiar while the rules of the moment completely change.",
+          "visual_instruction": "Scene 5 of 8. ordinary suburban street morphing into abstract supernatural glow. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "The human reactions are just as important as the paranormal spectacle. Fear, pride, curiosity, and friendship can shape a decision long before anyone fully understands what is happening around them.",
+          "visual_instruction": "Scene 6 of 8. two unidentifiable silhouettes hesitating at crossroads. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "That mixture also creates two kinds of suspense. We want to know what the phenomenon is, but we also wonder whether the people involved will trust each other when explanations fail.",
+          "visual_instruction": "Scene 7 of 8. split environment with starlight and ancient trees. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "So the appeal is not simply aliens versus ghosts. It is the thrill of watching different beliefs collide without losing the characters' emotional stakes. Which mystery would you investigate first?",
+          "visual_instruction": "Scene 8 of 8. calm dawn after strange storm of lights. Visual bible: high energy supernatural comedy, neon cosmic phenomena, folklore atmospheres, original metaphoric imagery. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "What happens when a mystery seems to demand two completely different explanations? Dandadan makes that collision exciting by mixing the fear of the unknown with the awkward energy of everyday life. The visual contrast makes that idea easier to notice without inventing a new plot event. Stories about aliens often look toward the sky, distant lights, and technology nobody understands. Stories about spirits look toward old places, strange noises, and the things people refuse to forget. When those two traditions share one world, neither side can dismiss the other so easily. Every new clue makes yesterday's certainty feel smaller, and that uncertainty becomes part of the fun. The comedy matters because constant danger would become exhausting. An embarrassing misunderstanding can briefly release the tension, making the next strange encounter feel even more sudden and surprising. Look at the contrast between ordinary neighborhoods and impossible events. A quiet street becomes memorable when the environment stays familiar while the rules of the moment completely change. The human reactions are just as important as the paranormal spectacle. Fear, pride, curiosity, and friendship can shape a decision long before anyone fully understands what is happening around them. That mixture also creates two kinds of suspense. We want to know what the phenomenon is, but we also wonder whether the people involved will trust each other when explanations fail. So the appeal is not simply aliens versus ghosts. It is the thrill of watching different beliefs collide without losing the characters' emotional stakes. Which mystery would you investigate first?",
+      "narration_word_count": 254,
+      "description": "An original short-form anime commentary about Dandadan: Why Two Kinds of Mystery Collide. Explore the core theme and visual symbolism without reproducing official footage. 🎨 Illustrative AI-generated scenes, not official anime frames."
+    },
+    {
+      "id": "7022-made-in-abyss-descida",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Made in Abyss: The Hidden Cost of Going Deeper",
+      "cover_text": "THE COST OF DESCENT",
+      "hook": "What if every step down made returning harder?",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Why does exploring a beautiful place sometimes feel more frightening than entering a battlefield? Made in Abyss builds tension through a simple direction: the deeper the journey goes, the greater its cost",
+          "visual_brief": "Scene 1 of 8. towering vertical sinkhole opening through clouds. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "The setting is more than a background",
+          "visual_brief": "Scene 2 of 8. layered biomes around huge rock shaft. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "At the surface, a map can make an expedition look manageable",
+          "visual_brief": "Scene 3 of 8. hand-drawn unlettered climbing map and expedition pack. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "That tension changes how we interpret discovery",
+          "visual_brief": "Scene 4 of 8. luminous giant plants beside delicate hanging bridges. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Vertical worldbuilding is unusually powerful because progress has a clear visual direction",
+          "visual_brief": "Scene 5 of 8. dramatic view straight down from cliff edge. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "Small objects such as ropes, lanterns, and notebooks become emotionally important",
+          "visual_brief": "Scene 6 of 8. rope lantern compass and notebook on rock ledge. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "The most compelling question is not only what waits at the bottom",
+          "visual_brief": "Scene 7 of 8. tiny explorers as dots dwarfed by vast chasm. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "The story turns curiosity into a difficult moral choice without removing the beauty of discovery",
+          "visual_brief": "Scene 8 of 8. sunlight reaching only first ledge of descent. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Made in Abyss",
+        "anime",
+        "worldbuilding",
+        "mystery",
+        "adventure anime",
+        "Otaku Reframe"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Why does exploring a beautiful place sometimes feel more frightening than entering a battlefield? Made in Abyss builds tension through a simple direction: the deeper the journey goes, the greater its cost. The visual contrast makes that idea easier to notice without inventing a new plot event.",
+          "visual_instruction": "Scene 1 of 8. towering vertical sinkhole opening through clouds. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "The setting is more than a background. Every layer promises new wonders, but also introduces unfamiliar hazards, forcing explorers to weigh curiosity against the danger of pushing forward.",
+          "visual_instruction": "Scene 2 of 8. layered biomes around huge rock shaft. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "At the surface, a map can make an expedition look manageable. Far below, distance is no longer the only problem; preparation and understanding become just as important as courage.",
+          "visual_instruction": "Scene 3 of 8. hand-drawn unlettered climbing map and expedition pack. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "That tension changes how we interpret discovery. A dazzling plant or an impossible creature can inspire awe while reminding us that beauty does not guarantee safety or easy answers.",
+          "visual_instruction": "Scene 4 of 8. luminous giant plants beside delicate hanging bridges. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Vertical worldbuilding is unusually powerful because progress has a clear visual direction. Moving downward looks like achievement, yet it can also make the idea of returning home feel farther away.",
+          "visual_instruction": "Scene 5 of 8. dramatic view straight down from cliff edge. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Small objects such as ropes, lanterns, and notebooks become emotionally important. They represent the ordinary tools people carry into situations that are far beyond anything ordinary experience could predict.",
+          "visual_instruction": "Scene 6 of 8. rope lantern compass and notebook on rock ledge. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "The most compelling question is not only what waits at the bottom. It is what an explorer is willing to risk, and which promises still matter when there is no simple way back.",
+          "visual_instruction": "Scene 7 of 8. tiny explorers as dots dwarfed by vast chasm. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "The story turns curiosity into a difficult moral choice without removing the beauty of discovery. Before taking one more step, what would you need to know about the return journey?",
+          "visual_instruction": "Scene 8 of 8. sunlight reaching only first ledge of descent. Visual bible: vast mysterious vertical chasm, exotic biomes, expedition supplies, mysterious light, no graphic content. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Why does exploring a beautiful place sometimes feel more frightening than entering a battlefield? Made in Abyss builds tension through a simple direction: the deeper the journey goes, the greater its cost. The visual contrast makes that idea easier to notice without inventing a new plot event. The setting is more than a background. Every layer promises new wonders, but also introduces unfamiliar hazards, forcing explorers to weigh curiosity against the danger of pushing forward. At the surface, a map can make an expedition look manageable. Far below, distance is no longer the only problem; preparation and understanding become just as important as courage. That tension changes how we interpret discovery. A dazzling plant or an impossible creature can inspire awe while reminding us that beauty does not guarantee safety or easy answers. Vertical worldbuilding is unusually powerful because progress has a clear visual direction. Moving downward looks like achievement, yet it can also make the idea of returning home feel farther away. Small objects such as ropes, lanterns, and notebooks become emotionally important. They represent the ordinary tools people carry into situations that are far beyond anything ordinary experience could predict. The most compelling question is not only what waits at the bottom. It is what an explorer is willing to risk, and which promises still matter when there is no simple way back. The story turns curiosity into a difficult moral choice without removing the beauty of discovery. Before taking one more step, what would you need to know about the return journey?",
+      "narration_word_count": 255,
+      "description": "An original short-form anime commentary about Made in Abyss: The Hidden Cost of Going Deeper. Explore the core theme and visual symbolism without reproducing official footage. 🎨 Illustrative AI-generated scenes, not official anime frames."
+    },
+    {
+      "id": "7023-spy-family-segredos",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Spy x Family: How Secrets Can Build Trust",
+      "cover_text": "SECRETS AND TRUST",
+      "hook": "Can a family feel real when everyone hides something?",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Can a family become emotionally real even when its beginning is built on secrets? Spy x Family uses that contradiction to turn ordinary domestic moments into surprisingly suspenseful scenes",
+          "visual_brief": "Scene 1 of 8. retro apartment dining table set for three anonymous figures. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "At first, hiding information seems like a practical way to keep everyone safe",
+          "visual_brief": "Scene 2 of 8. sealed envelope tucked beside family photo frame. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "A family breakfast can carry two stories at once",
+          "visual_brief": "Scene 3 of 8. breakfast dishes with steam and closed briefcase. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "That double meaning makes everyday comedy unusually effective",
+          "visual_brief": "Scene 4 of 8. school hallway beside gently comic domestic props. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Trust does not always begin with perfect honesty",
+          "visual_brief": "Scene 5 of 8. three pairs of shoes aligned at entryway. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "The city around the family adds another contrast",
+          "visual_brief": "Scene 6 of 8. retro city street at dusk and warm lit apartment. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "What makes the premise memorable is the gap between what the audience knows and what each person believes",
+          "visual_brief": "Scene 7 of 8. two layered shadows crossing sunny living room. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "In the end, the most important question is not whether a secret will be revealed",
+          "visual_brief": "Scene 8 of 8. three chairs close together beside window in sunset. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Spy x Family",
+        "anime",
+        "found family",
+        "secrets",
+        "comedy anime",
+        "Otaku Reframe"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Can a family become emotionally real even when its beginning is built on secrets? Spy x Family uses that contradiction to turn ordinary domestic moments into surprisingly suspenseful scenes. The visual contrast makes that idea easier to notice without inventing a new plot event.",
+          "visual_instruction": "Scene 1 of 8. retro apartment dining table set for three anonymous figures. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "At first, hiding information seems like a practical way to keep everyone safe. But the more shared routines grow, the more complicated it becomes to separate a role from genuine affection.",
+          "visual_instruction": "Scene 2 of 8. sealed envelope tucked beside family photo frame. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A family breakfast can carry two stories at once. On the surface, people are choosing what to eat; underneath, each small reaction can reveal what they are afraid of losing.",
+          "visual_instruction": "Scene 3 of 8. breakfast dishes with steam and closed briefcase. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "That double meaning makes everyday comedy unusually effective. A misunderstanding at school or home can feel as tense as an elaborate mission, even without dramatic action or a dramatic soundtrack.",
+          "visual_instruction": "Scene 4 of 8. school hallway beside gently comic domestic props. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Trust does not always begin with perfect honesty. Sometimes it grows through reliability: showing up, listening carefully, and caring about someone even when you do not know their whole story.",
+          "visual_instruction": "Scene 5 of 8. three pairs of shoes aligned at entryway. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "The city around the family adds another contrast. Busy streets, secret documents, and quiet living rooms create different kinds of pressure, but the decisions inside the home remain personal.",
+          "visual_instruction": "Scene 6 of 8. retro city street at dusk and warm lit apartment. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "What makes the premise memorable is the gap between what the audience knows and what each person believes. That gap creates both humor and genuine concern for their fragile connection.",
+          "visual_instruction": "Scene 7 of 8. two layered shadows crossing sunny living room. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "In the end, the most important question is not whether a secret will be revealed. It is whether the care already given can survive the truth. What would you protect first?",
+          "visual_instruction": "Scene 8 of 8. three chairs close together beside window in sunset. Visual bible: warm retro urban comedy, tea cups, family meals, secret envelopes, domestic contrast, no named characters. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Can a family become emotionally real even when its beginning is built on secrets? Spy x Family uses that contradiction to turn ordinary domestic moments into surprisingly suspenseful scenes. The visual contrast makes that idea easier to notice without inventing a new plot event. At first, hiding information seems like a practical way to keep everyone safe. But the more shared routines grow, the more complicated it becomes to separate a role from genuine affection. A family breakfast can carry two stories at once. On the surface, people are choosing what to eat; underneath, each small reaction can reveal what they are afraid of losing. That double meaning makes everyday comedy unusually effective. A misunderstanding at school or home can feel as tense as an elaborate mission, even without dramatic action or a dramatic soundtrack. Trust does not always begin with perfect honesty. Sometimes it grows through reliability: showing up, listening carefully, and caring about someone even when you do not know their whole story. The city around the family adds another contrast. Busy streets, secret documents, and quiet living rooms create different kinds of pressure, but the decisions inside the home remain personal. What makes the premise memorable is the gap between what the audience knows and what each person believes. That gap creates both humor and genuine concern for their fragile connection. In the end, the most important question is not whether a secret will be revealed. It is whether the care already given can survive the truth. What would you protect first?",
+      "narration_word_count": 255,
+      "description": "An original short-form anime commentary about Spy x Family: How Secrets Can Build Trust. Explore the core theme and visual symbolism without reproducing official footage. 🎨 Illustrative AI-generated scenes, not official anime frames."
+    },
+    {
+      "id": "game-110-factorio-gargalos",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Factorio: o erro que trava sua fábrica",
+      "cover_text": "O GARGALO INVISÍVEL",
+      "hook": "Sua fábrica cresce e, de repente, tudo desacelera?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Você constrói uma linha de produção, amplia máquinas e espera que tudo fique mais rápido",
+          "visual_brief": "Scene 1 of 8. isometric fictional factory with one narrow conveyor. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Imagine minério chegando por uma esteira estreita enquanto várias máquinas esperam por material",
+          "visual_brief": "Scene 2 of 8. ore bottleneck beside idle industrial machines. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Agora pense no efeito contrário",
+          "visual_brief": "Scene 3 of 8. blocked output conveyor with overflowing boxes. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "O desafio interessante é aprender a observar o fluxo completo, não apenas uma máquina isolada",
+          "visual_brief": "Scene 4 of 8. aerial view with empty and crowded fictional belts. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Distribuição também faz diferença",
+          "visual_brief": "Scene 5 of 8. splitter system distributing two resource colors. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "Antes de construir mais, vale perguntar onde o material realmente espera",
+          "visual_brief": "Scene 6 of 8. engineer notebook with abstract flowchart, no text. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "Esse raciocínio lembra problemas reais de logística e programação",
+          "visual_brief": "Scene 7 of 8. factory logistics metaphor like city traffic. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "A graça da automação é transformar confusão em um circuito compreensível",
+          "visual_brief": "Scene 8 of 8. tidy efficient fictional conveyor network. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Factorio",
+        "jogos de estratégia",
+        "automação",
+        "fábricas",
+        "logística",
+        "Conde Games"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Você constrói uma linha de produção, amplia máquinas e espera que tudo fique mais rápido. Mas existe um problema clássico em Factorio: aumentar uma parte da fábrica não resolve um gargalo escondido. Essa diferença pode mudar a próxima decisão sem exigir que você já conheça todas as estratégias.",
+          "visual_instruction": "Scene 1 of 8. isometric fictional factory with one narrow conveyor. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Imagine minério chegando por uma esteira estreita enquanto várias máquinas esperam por material. Não importa quantas máquinas novas apareçam depois: a entrada continua definindo o ritmo de toda a cadeia. O interessante é entender a causa antes de tirar conclusões sobre o melhor caminho.",
+          "visual_instruction": "Scene 2 of 8. ore bottleneck beside idle industrial machines. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Agora pense no efeito contrário. Se a saída fica lotada, produtos prontos bloqueiam a produção anterior. Um sistema pode parecer parado mesmo quando há energia, recursos e capacidade suficientes.",
+          "visual_instruction": "Scene 3 of 8. blocked output conveyor with overflowing boxes. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "O desafio interessante é aprender a observar o fluxo completo, não apenas uma máquina isolada. Uma esteira vazia e outra congestionada contam histórias diferentes sobre o mesmo problema.",
+          "visual_instruction": "Scene 4 of 8. aerial view with empty and crowded fictional belts. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Distribuição também faz diferença. Duas linhas podem parecer equilibradas no desenho, mas receber quantidades desiguais. Pequenas decisões de organização mudam a eficiência e a facilidade de expansão.",
+          "visual_instruction": "Scene 5 of 8. splitter system distributing two resource colors. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Antes de construir mais, vale perguntar onde o material realmente espera. Essa investigação simples pode evitar um labirinto de peças extras que apenas torna o erro mais difícil de encontrar.",
+          "visual_instruction": "Scene 6 of 8. engineer notebook with abstract flowchart, no text. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Esse raciocínio lembra problemas reais de logística e programação. Otimizar um ponto sem medir o sistema inteiro pode deslocar a lentidão para outro lugar, em vez de eliminá-la.",
+          "visual_instruction": "Scene 7 of 8. factory logistics metaphor like city traffic. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A graça da automação é transformar confusão em um circuito compreensível. O próximo avanço talvez não seja uma máquina nova, mas uma esteira melhor posicionada. Qual gargalo mais irrita você?",
+          "visual_instruction": "Scene 8 of 8. tidy efficient fictional conveyor network. Visual bible: fábrica 2D isométrica fictícia, esteiras, engrenagens, cobre e ferro, sem gameplay, sem interface. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Você constrói uma linha de produção, amplia máquinas e espera que tudo fique mais rápido. Mas existe um problema clássico em Factorio: aumentar uma parte da fábrica não resolve um gargalo escondido. Essa diferença pode mudar a próxima decisão sem exigir que você já conheça todas as estratégias. Imagine minério chegando por uma esteira estreita enquanto várias máquinas esperam por material. Não importa quantas máquinas novas apareçam depois: a entrada continua definindo o ritmo de toda a cadeia. O interessante é entender a causa antes de tirar conclusões sobre o melhor caminho. Agora pense no efeito contrário. Se a saída fica lotada, produtos prontos bloqueiam a produção anterior. Um sistema pode parecer parado mesmo quando há energia, recursos e capacidade suficientes. O desafio interessante é aprender a observar o fluxo completo, não apenas uma máquina isolada. Uma esteira vazia e outra congestionada contam histórias diferentes sobre o mesmo problema. Distribuição também faz diferença. Duas linhas podem parecer equilibradas no desenho, mas receber quantidades desiguais. Pequenas decisões de organização mudam a eficiência e a facilidade de expansão. Antes de construir mais, vale perguntar onde o material realmente espera. Essa investigação simples pode evitar um labirinto de peças extras que apenas torna o erro mais difícil de encontrar. Esse raciocínio lembra problemas reais de logística e programação. Otimizar um ponto sem medir o sistema inteiro pode deslocar a lentidão para outro lugar, em vez de eliminá-la. A graça da automação é transformar confusão em um circuito compreensível. O próximo avanço talvez não seja uma máquina nova, mas uma esteira melhor posicionada. Qual gargalo mais irrita você?",
+      "narration_word_count": 264,
+      "description": "Factorio: o erro que trava sua fábrica. Curiosidade de design e estratégias gerais. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay. Não afirmamos teste real ou experiência própria."
+    },
+    {
+      "id": "game-111-dead-cells-escolhas",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Dead Cells: por que cada escolha muda a tentativa?",
+      "cover_text": "CADA ESCOLHA CONTA",
+      "hook": "Por que uma partida diferente pode nascer da mesma fase?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Por que repetir um caminho pode continuar interessante depois de tantas tentativas? Em Dead Cells, o segredo está nas escolhas que mudam a maneira como cada jornada se desenrola",
+          "visual_brief": "Scene 1 of 8. original dark castle corridors with glowing route forks. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Uma arma encontrada cedo pode incentivar aproximação, enquanto outra favorece distância e paciência",
+          "visual_brief": "Scene 2 of 8. two distinct fantasy weapons on stone table. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Rotas diferentes também significam riscos diferentes",
+          "visual_brief": "Scene 3 of 8. two castle doors one safe glowing one mysterious. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Quando a tentativa termina, é tentador resumir tudo como fracasso",
+          "visual_brief": "Scene 4 of 8. fallen torch and broken shield, no gore. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Esse formato transforma o aprendizado em parte da recompensa",
+          "visual_brief": "Scene 5 of 8. training target with movement pattern illustrated abstractly. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "O ritmo também depende da combinação escolhida",
+          "visual_brief": "Scene 6 of 8. swift light streak contrasted with cautious footprints. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "É por isso que uma sequência de derrotas não precisa parecer exatamente igual",
+          "visual_brief": "Scene 7 of 8. notebook showing route branches without lettering. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "No fundo, a pergunta mais útil não é quantas vezes alguém perdeu, mas o que mudou entre uma tentativa e outra",
+          "visual_brief": "Scene 8 of 8. sunlit exit beyond mysterious castle corridor. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Dead Cells",
+        "roguelite",
+        "jogos",
+        "estratégia",
+        "desafio",
+        "Conde Games"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Por que repetir um caminho pode continuar interessante depois de tantas tentativas? Em Dead Cells, o segredo está nas escolhas que mudam a maneira como cada jornada se desenrola. Essa diferença pode mudar a próxima decisão sem exigir que você já conheça todas as estratégias.",
+          "visual_instruction": "Scene 1 of 8. original dark castle corridors with glowing route forks. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Uma arma encontrada cedo pode incentivar aproximação, enquanto outra favorece distância e paciência. O ambiente parece familiar, mas o jeito de enfrentar cada obstáculo já não é o mesmo. O interessante é entender a causa antes de tirar conclusões sobre o melhor caminho.",
+          "visual_instruction": "Scene 2 of 8. two distinct fantasy weapons on stone table. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Rotas diferentes também significam riscos diferentes. Uma opção pode oferecer segurança imediata, enquanto outra recompensa quem aceita passar por desafios mais exigentes antes da próxima etapa.",
+          "visual_instruction": "Scene 3 of 8. two castle doors one safe glowing one mysterious. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Quando a tentativa termina, é tentador resumir tudo como fracasso. Mas cada decisão anterior deixa uma pista sobre o que funcionou, o que faltou e o que merece ser repensado.",
+          "visual_instruction": "Scene 4 of 8. fallen torch and broken shield, no gore. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Esse formato transforma o aprendizado em parte da recompensa. Reconhecer um padrão, planejar uma rota ou entender o alcance de uma arma muda a experiência mesmo sem uma vitória final.",
+          "visual_instruction": "Scene 5 of 8. training target with movement pattern illustrated abstractly. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "O ritmo também depende da combinação escolhida. Em alguns momentos, velocidade ajuda; em outros, um passo precipitado custa mais caro do que observar uma abertura.",
+          "visual_instruction": "Scene 6 of 8. swift light streak contrasted with cautious footprints. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "É por isso que uma sequência de derrotas não precisa parecer exatamente igual. Quando o jogador revisa suas decisões, a repetição vira uma experiência de comparação e descoberta.",
+          "visual_instruction": "Scene 7 of 8. notebook showing route branches without lettering. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No fundo, a pergunta mais útil não é quantas vezes alguém perdeu, mas o que mudou entre uma tentativa e outra. Você costuma arriscar mais ou prefere uma rota segura?",
+          "visual_instruction": "Scene 8 of 8. sunlit exit beyond mysterious castle corridor. Visual bible: fantasia de ação roguelite, castelo subterrâneo, armas inventadas, portas e rotas, sem interface ou gameplay. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Por que repetir um caminho pode continuar interessante depois de tantas tentativas? Em Dead Cells, o segredo está nas escolhas que mudam a maneira como cada jornada se desenrola. Essa diferença pode mudar a próxima decisão sem exigir que você já conheça todas as estratégias. Uma arma encontrada cedo pode incentivar aproximação, enquanto outra favorece distância e paciência. O ambiente parece familiar, mas o jeito de enfrentar cada obstáculo já não é o mesmo. O interessante é entender a causa antes de tirar conclusões sobre o melhor caminho. Rotas diferentes também significam riscos diferentes. Uma opção pode oferecer segurança imediata, enquanto outra recompensa quem aceita passar por desafios mais exigentes antes da próxima etapa. Quando a tentativa termina, é tentador resumir tudo como fracasso. Mas cada decisão anterior deixa uma pista sobre o que funcionou, o que faltou e o que merece ser repensado. Esse formato transforma o aprendizado em parte da recompensa. Reconhecer um padrão, planejar uma rota ou entender o alcance de uma arma muda a experiência mesmo sem uma vitória final. O ritmo também depende da combinação escolhida. Em alguns momentos, velocidade ajuda; em outros, um passo precipitado custa mais caro do que observar uma abertura. É por isso que uma sequência de derrotas não precisa parecer exatamente igual. Quando o jogador revisa suas decisões, a repetição vira uma experiência de comparação e descoberta. No fundo, a pergunta mais útil não é quantas vezes alguém perdeu, mas o que mudou entre uma tentativa e outra. Você costuma arriscar mais ou prefere uma rota segura?",
+      "narration_word_count": 257,
+      "description": "Dead Cells: por que cada escolha muda a tentativa?. Curiosidade de design e estratégias gerais. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay. Não afirmamos teste real ou experiência própria."
+    },
+    {
+      "id": "game-112-slime-rancher-equilibrio",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Slime Rancher: como uma fazenda vira estratégia",
+      "cover_text": "FAZENDA OU ESTRATÉGIA?",
+      "hook": "Cuidar de criaturas fofas pode virar um quebra-cabeça?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma fazenda cheia de criaturas coloridas parece apenas relaxante, mas Slime Rancher também coloca uma questão de estratégia: como cuidar de tudo sem transformar a rotina em confusão? Essa diferença pode mudar a próxima decisão sem exigir que você já conheça todas as estratégias",
+          "visual_brief": "Scene 1 of 8. peaceful colorful imaginary alien farm panorama. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Cada espaço da fazenda tem uma função",
+          "visual_brief": "Scene 2 of 8. simple path network between cute creature pens. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "A alimentação cria outro desafio",
+          "visual_brief": "Scene 3 of 8. fruit baskets and garden watering morning light. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Organizar currais e trajetos permite enxergar prioridades",
+          "visual_brief": "Scene 4 of 8. organized corrals viewed from above. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Há uma diferença entre expansão e equilíbrio",
+          "visual_brief": "Scene 5 of 8. farm expansion blueprints as purely abstract shapes. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "O lado acolhedor do jogo ajuda a esconder uma lição familiar em simuladores",
+          "visual_brief": "Scene 6 of 8. hourglass watering can and fruit in clean still-life. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "Explorar o ambiente amplia as possibilidades, mas também introduz novas tarefas",
+          "visual_brief": "Scene 7 of 8. alien meadow with cave entrance and returning cart. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "No final, eficiência não precisa significar pressa",
+          "visual_brief": "Scene 8 of 8. cozy farm sunset with balanced garden beds. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "Slime Rancher",
+        "jogo de fazenda",
+        "estratégia",
+        "gestão de recursos",
+        "Conde Games"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Uma fazenda cheia de criaturas coloridas parece apenas relaxante, mas Slime Rancher também coloca uma questão de estratégia: como cuidar de tudo sem transformar a rotina em confusão? Essa diferença pode mudar a próxima decisão sem exigir que você já conheça todas as estratégias.",
+          "visual_instruction": "Scene 1 of 8. peaceful colorful imaginary alien farm panorama. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Cada espaço da fazenda tem uma função. Quando os recursos ficam distantes das tarefas mais frequentes, até um passeio simples pode consumir o tempo que faria falta em outra atividade. O interessante é entender a causa antes de tirar conclusões sobre o melhor caminho.",
+          "visual_instruction": "Scene 2 of 8. simple path network between cute creature pens. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A alimentação cria outro desafio. Recolher ingredientes é fácil de esquecer quando há tantas coisas interessantes para explorar, mas a rotina depende de uma fonte estável de recursos.",
+          "visual_instruction": "Scene 3 of 8. fruit baskets and garden watering morning light. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Organizar currais e trajetos permite enxergar prioridades. O objetivo não é encher cada canto com o maior número possível de criaturas, e sim manter um sistema que você consiga acompanhar.",
+          "visual_instruction": "Scene 4 of 8. organized corrals viewed from above. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Há uma diferença entre expansão e equilíbrio. Ganhar espaço demais antes de cuidar do básico pode tornar a manutenção menos divertida e deixar decisões importantes para a última hora.",
+          "visual_instruction": "Scene 5 of 8. farm expansion blueprints as purely abstract shapes. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "O lado acolhedor do jogo ajuda a esconder uma lição familiar em simuladores. Toda escolha de produção ocupa espaço, tempo e atenção, três recursos que nunca são infinitos.",
+          "visual_instruction": "Scene 6 of 8. hourglass watering can and fruit in clean still-life. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Explorar o ambiente amplia as possibilidades, mas também introduz novas tarefas. Voltar para organizar os estoques pode parecer menos emocionante do que descobrir uma região, porém sustenta a próxima viagem.",
+          "visual_instruction": "Scene 7 of 8. alien meadow with cave entrance and returning cart. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No final, eficiência não precisa significar pressa. Uma fazenda bem planejada deixa mais espaço para explorar e aproveitar a paisagem. Você prefere construir tudo organizado ou improvisar aos poucos?",
+          "visual_instruction": "Scene 8 of 8. cozy farm sunset with balanced garden beds. Visual bible: fazenda alienígena colorida, criaturas gelatinosas originais, currais e frutas, sem copiar personagens oficiais. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Uma fazenda cheia de criaturas coloridas parece apenas relaxante, mas Slime Rancher também coloca uma questão de estratégia: como cuidar de tudo sem transformar a rotina em confusão? Essa diferença pode mudar a próxima decisão sem exigir que você já conheça todas as estratégias. Cada espaço da fazenda tem uma função. Quando os recursos ficam distantes das tarefas mais frequentes, até um passeio simples pode consumir o tempo que faria falta em outra atividade. O interessante é entender a causa antes de tirar conclusões sobre o melhor caminho. A alimentação cria outro desafio. Recolher ingredientes é fácil de esquecer quando há tantas coisas interessantes para explorar, mas a rotina depende de uma fonte estável de recursos. Organizar currais e trajetos permite enxergar prioridades. O objetivo não é encher cada canto com o maior número possível de criaturas, e sim manter um sistema que você consiga acompanhar. Há uma diferença entre expansão e equilíbrio. Ganhar espaço demais antes de cuidar do básico pode tornar a manutenção menos divertida e deixar decisões importantes para a última hora. O lado acolhedor do jogo ajuda a esconder uma lição familiar em simuladores. Toda escolha de produção ocupa espaço, tempo e atenção, três recursos que nunca são infinitos. Explorar o ambiente amplia as possibilidades, mas também introduz novas tarefas. Voltar para organizar os estoques pode parecer menos emocionante do que descobrir uma região, porém sustenta a próxima viagem. No final, eficiência não precisa significar pressa. Uma fazenda bem planejada deixa mais espaço para explorar e aproveitar a paisagem. Você prefere construir tudo organizado ou improvisar aos poucos?",
+      "narration_word_count": 262,
+      "description": "Slime Rancher: como uma fazenda vira estratégia. Curiosidade de design e estratégias gerais. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay. Não afirmamos teste real ou experiência própria."
+    },
+    {
+      "id": "kids-110-coruja-sons",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "A Corujinha que Aprendeu a Escutar",
+      "cover_text": "OS SONS DA FLORESTA",
+      "hook": "Que barulhinho será esse atrás da árvore?",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Na floresta morava uma corujinha de olhos bem atentos",
+          "visual_brief": "Scene 1 of 8. small brown owl green scarf on tree branch in afternoon. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Primeiro ela pensou que fosse o vento cantando perto da árvore",
+          "visual_brief": "Scene 2 of 8. owl closing amber eyes beside swaying leaves. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Depois a corujinha viu um riacho brilhando entre as pedras",
+          "visual_brief": "Scene 3 of 8. sparkling stream flowing between smooth stones. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Mais adiante encontrou um coelhinho sentado perto de um tronco",
+          "visual_brief": "Scene 4 of 8. owl talking with small friendly white rabbit. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Os dois ficaram tão silenciosos que conseguiram ouvir as próprias respirações",
+          "visual_brief": "Scene 5 of 8. owl and rabbit sitting silently under tree. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "O som vinha de uma sementinha caindo do alto e batendo numa casca vazia",
+          "visual_brief": "Scene 6 of 8. seed touching dry seed pod with gentle tap. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "A corujinha sorriu e decidiu escutar mais um pouco",
+          "visual_brief": "Scene 7 of 8. woodland panorama with birds river breeze. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "Quando a noite chegou, ela voltou contente para seu ninho",
+          "visual_brief": "Scene 8 of 8. owl in cozy tree nest beneath peaceful moon. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "história infantil",
+        "corujinha",
+        "sons da floresta",
+        "educativo",
+        "desenho infantil",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Na floresta morava uma corujinha de olhos bem atentos. Numa tarde tranquila, ela ouviu um som diferente vindo das folhas. Era baixinho, parecia um sussurro. A corujinha inclinou a cabeça para descobrir.",
+          "visual_instruction": "Scene 1 of 8. small brown owl green scarf on tree branch in afternoon. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Primeiro ela pensou que fosse o vento cantando perto da árvore. Fechou os olhos e ficou quietinha por um instante. As folhas fizeram chuá, chuá, mas aquele som misterioso apareceu outra vez.",
+          "visual_instruction": "Scene 2 of 8. owl closing amber eyes beside swaying leaves. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Depois a corujinha viu um riacho brilhando entre as pedras. A água fazia plim, plim, plim, como pequenas notas musicais. Ela gostou do som, mas percebeu que ainda não era aquilo que procurava.",
+          "visual_instruction": "Scene 3 of 8. sparkling stream flowing between smooth stones. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Mais adiante encontrou um coelhinho sentado perto de um tronco. Ele perguntou o que havia acontecido. A corujinha contou sobre o barulho e convidou o novo amigo para escutar junto com ela.",
+          "visual_instruction": "Scene 4 of 8. owl talking with small friendly white rabbit. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Os dois ficaram tão silenciosos que conseguiram ouvir as próprias respirações. Então veio um toc, toc, toc bem fraquinho. Eles olharam em volta com curiosidade, sem correr e sem assustar ninguém.",
+          "visual_instruction": "Scene 5 of 8. owl and rabbit sitting silently under tree. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "O som vinha de uma sementinha caindo do alto e batendo numa casca vazia. Não era um monstro nem um grande segredo. Era a floresta mostrando como até as coisas pequenas fazem música.",
+          "visual_instruction": "Scene 6 of 8. seed touching dry seed pod with gentle tap. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "A corujinha sorriu e decidiu escutar mais um pouco. Ouviu o vento, a água, os passinhos do coelho e os passarinhos longe. Cada som era diferente, mas todos podiam viver juntos em harmonia.",
+          "visual_instruction": "Scene 7 of 8. woodland panorama with birds river breeze. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Quando a noite chegou, ela voltou contente para seu ninho. Aprendeu que escutar com calma ajuda a conhecer o mundo. Você consegue imaginar qual som faria uma folha ao cair devagar?",
+          "visual_instruction": "Scene 8 of 8. owl in cozy tree nest beneath peaceful moon. Visual bible: livro infantil delicado, mesma corujinha marrom pequena com olhos âmbar e cachecol verde em todas as cenas, floresta alegre. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Na floresta morava uma corujinha de olhos bem atentos. Numa tarde tranquila, ela ouviu um som diferente vindo das folhas. Era baixinho, parecia um sussurro. A corujinha inclinou a cabeça para descobrir. Primeiro ela pensou que fosse o vento cantando perto da árvore. Fechou os olhos e ficou quietinha por um instante. As folhas fizeram chuá, chuá, mas aquele som misterioso apareceu outra vez. Depois a corujinha viu um riacho brilhando entre as pedras. A água fazia plim, plim, plim, como pequenas notas musicais. Ela gostou do som, mas percebeu que ainda não era aquilo que procurava. Mais adiante encontrou um coelhinho sentado perto de um tronco. Ele perguntou o que havia acontecido. A corujinha contou sobre o barulho e convidou o novo amigo para escutar junto com ela. Os dois ficaram tão silenciosos que conseguiram ouvir as próprias respirações. Então veio um toc, toc, toc bem fraquinho. Eles olharam em volta com curiosidade, sem correr e sem assustar ninguém. O som vinha de uma sementinha caindo do alto e batendo numa casca vazia. Não era um monstro nem um grande segredo. Era a floresta mostrando como até as coisas pequenas fazem música. A corujinha sorriu e decidiu escutar mais um pouco. Ouviu o vento, a água, os passinhos do coelho e os passarinhos longe. Cada som era diferente, mas todos podiam viver juntos em harmonia. Quando a noite chegou, ela voltou contente para seu ninho. Aprendeu que escutar com calma ajuda a conhecer o mundo. Você consegue imaginar qual som faria uma folha ao cair devagar?",
+      "narration_word_count": 257,
+      "description": "A Corujinha que Aprendeu a Escutar. Uma história infantil original e acolhedora, independente da série Fofinhos, com linguagem apropriada para crianças. Ilustrações produzidas pelo AutoEditorVideo."
+    },
+    {
+      "id": "kids-111-caracol-arcoiris",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "O Caracol e o Caminho do Arco-Íris",
+      "cover_text": "UM CAMINHO COLORIDO",
+      "hook": "Será que um caracol pode chegar até o arco-íris?",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Depois de uma chuva curtinha, um caracol lilás abriu os olhinhos no jardim",
+          "visual_brief": "Scene 1 of 8. lilac snail cream spiral shell looking up at rainbow. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "O caracol começou a viagem devagar, deixando uma trilha brilhante entre as flores",
+          "visual_brief": "Scene 2 of 8. same snail beside bright flowers and flying ladybug. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Logo encontrou uma poça d'água que refletia as cores do céu",
+          "visual_brief": "Scene 3 of 8. snail reflection in little rainbow-colored puddle. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Uma borboleta pousou perto dele e explicou que a luz pode criar cores muito bonitas depois da chuva",
+          "visual_brief": "Scene 4 of 8. delicate butterfly beside snail and sunlight prism. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Ele continuou observando o jardim",
+          "visual_brief": "Scene 5 of 8. close-up yellow flowers green leaves blue pebbles. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "Quando uma nuvem cobriu o sol, o arco-íris começou a desaparecer",
+          "visual_brief": "Scene 6 of 8. cloud moving across fading rainbow; snail gentle emotion. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "O caracol respirou fundo e escolheu guardar aquela tarde na memória",
+          "visual_brief": "Scene 7 of 8. snail and butterfly smiling in fresh rain-washed garden. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "Ele voltou para casa tranquilamente, seguindo sua trilha brilhante",
+          "visual_brief": "Scene 8 of 8. snail arriving at small leafy shelter near colorful flower bed. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "história infantil",
+        "caracol",
+        "arco-íris",
+        "paciência",
+        "desenho infantil",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Depois de uma chuva curtinha, um caracol lilás abriu os olhinhos no jardim. Lá no alto apareceu um arco-íris cheio de cores. Ele ficou encantado e decidiu caminhar para vê-lo um pouquinho mais perto. Ela olhou ao redor com muita atenção e percebeu um detalhe bonito no caminho.",
+          "visual_instruction": "Scene 1 of 8. lilac snail cream spiral shell looking up at rainbow. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "O caracol começou a viagem devagar, deixando uma trilha brilhante entre as flores. Uma joaninha passou voando e perguntou por que ele estava tão apressado. Ele riu, porque achava que andava bem devagar.",
+          "visual_instruction": "Scene 2 of 8. same snail beside bright flowers and flying ladybug. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Logo encontrou uma poça d'água que refletia as cores do céu. Pensou que o arco-íris havia descido para visitá-lo. Quando tocou a poça, viu círculos se formando e ficou curioso com aquela surpresa.",
+          "visual_instruction": "Scene 3 of 8. snail reflection in little rainbow-colored puddle. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Uma borboleta pousou perto dele e explicou que a luz pode criar cores muito bonitas depois da chuva. O caracol não precisava alcançar o céu para admirar aquela mistura brilhante.",
+          "visual_instruction": "Scene 4 of 8. delicate butterfly beside snail and sunlight prism. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Ele continuou observando o jardim. Viu flores amarelas, folhas verdes e pedrinhas azuis. Percebeu que existiam pequenas cores por todo o caminho, mesmo nos lugares que conhecia desde sempre.",
+          "visual_instruction": "Scene 5 of 8. close-up yellow flowers green leaves blue pebbles. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Quando uma nuvem cobriu o sol, o arco-íris começou a desaparecer. O caracol ficou triste por um instante. A borboleta lembrou que coisas bonitas podem mudar sem deixar de ter sido especiais.",
+          "visual_instruction": "Scene 6 of 8. cloud moving across fading rainbow; snail gentle emotion. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "O caracol respirou fundo e escolheu guardar aquela tarde na memória. A chuva tinha deixado água para as plantas e uma chance de olhar o jardim com olhos mais curiosos.",
+          "visual_instruction": "Scene 7 of 8. snail and butterfly smiling in fresh rain-washed garden. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Ele voltou para casa tranquilamente, seguindo sua trilha brilhante. Não encontrou o fim do arco-íris, mas descobriu muitas cores pertinho de si. Que cor você procuraria primeiro no jardim?",
+          "visual_instruction": "Scene 8 of 8. snail arriving at small leafy shelter near colorful flower bed. Visual bible: livro infantil aquarela, mesmo caracol lilás com concha creme em espiral e olhos azuis, jardim após chuva, cores suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Depois de uma chuva curtinha, um caracol lilás abriu os olhinhos no jardim. Lá no alto apareceu um arco-íris cheio de cores. Ele ficou encantado e decidiu caminhar para vê-lo um pouquinho mais perto. Ela olhou ao redor com muita atenção e percebeu um detalhe bonito no caminho. O caracol começou a viagem devagar, deixando uma trilha brilhante entre as flores. Uma joaninha passou voando e perguntou por que ele estava tão apressado. Ele riu, porque achava que andava bem devagar. Logo encontrou uma poça d'água que refletia as cores do céu. Pensou que o arco-íris havia descido para visitá-lo. Quando tocou a poça, viu círculos se formando e ficou curioso com aquela surpresa. Uma borboleta pousou perto dele e explicou que a luz pode criar cores muito bonitas depois da chuva. O caracol não precisava alcançar o céu para admirar aquela mistura brilhante. Ele continuou observando o jardim. Viu flores amarelas, folhas verdes e pedrinhas azuis. Percebeu que existiam pequenas cores por todo o caminho, mesmo nos lugares que conhecia desde sempre. Quando uma nuvem cobriu o sol, o arco-íris começou a desaparecer. O caracol ficou triste por um instante. A borboleta lembrou que coisas bonitas podem mudar sem deixar de ter sido especiais. O caracol respirou fundo e escolheu guardar aquela tarde na memória. A chuva tinha deixado água para as plantas e uma chance de olhar o jardim com olhos mais curiosos. Ele voltou para casa tranquilamente, seguindo sua trilha brilhante. Não encontrou o fim do arco-íris, mas descobriu muitas cores pertinho de si. Que cor você procuraria primeiro no jardim?",
+      "narration_word_count": 264,
+      "description": "O Caracol e o Caminho do Arco-Íris. Uma história infantil original e acolhedora, independente da série Fofinhos, com linguagem apropriada para crianças. Ilustrações produzidas pelo AutoEditorVideo."
+    },
+    {
+      "id": "kids-112-nuvem-vento",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "A Nuvem Pequena e o Vento Gentil",
+      "cover_text": "UMA NUVEM CORAJOSA",
+      "hook": "Para onde o vento vai levar uma nuvenzinha?",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Bem acima das árvores vivia uma nuvem pequena e fofinha",
+          "visual_brief": "Scene 1 of 8. small smiling round white cloud pink cheeks above green trees. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "A nuvenzinha respondeu que preferia ficar perto da montanha conhecida",
+          "visual_brief": "Scene 2 of 8. cloud hesitating near familiar mountain, gentle wind ribbons. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Os dois seguiram lentamente sobre um campo verde",
+          "visual_brief": "Scene 3 of 8. cloud over green meadow with swaying flowers. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Mais adiante havia um lago que refletia o céu",
+          "visual_brief": "Scene 4 of 8. round cloud reflection on calm lake. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Uma corrente de ar mais rápida passou perto deles",
+          "visual_brief": "Scene 5 of 8. cloud sheltering near larger cloud while wind ribbons shift. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "Quando a calma voltou, o vento contou que todos aprendem em ritmos diferentes",
+          "visual_brief": "Scene 6 of 8. soft empty sky with wind and cloud moving slowly. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "Juntos eles chegaram até uma colina iluminada",
+          "visual_brief": "Scene 7 of 8. gentle rain drops from cloud watering hillside flowers. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "No fim da tarde, a nuvem olhou para a montanha distante e sorriu",
+          "visual_brief": "Scene 8 of 8. sunset over mountains and content small cloud. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "nuvem",
+        "vento",
+        "história infantil",
+        "amizade",
+        "céu",
+        "Emanuelly Kids"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Bem acima das árvores vivia uma nuvem pequena e fofinha. Ela adorava olhar o mundo lá embaixo, mas tinha medo de viajar sozinha. Um vento gentil apareceu e perguntou se podia acompanhá-la pelo céu.",
+          "visual_instruction": "Scene 1 of 8. small smiling round white cloud pink cheeks above green trees. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "A nuvenzinha respondeu que preferia ficar perto da montanha conhecida. O vento não a empurrou. Apenas mostrou uma trilha de ar bem suave e disse que ela podia escolher quando começar.",
+          "visual_instruction": "Scene 2 of 8. cloud hesitating near familiar mountain, gentle wind ribbons. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Os dois seguiram lentamente sobre um campo verde. A nuvem viu flores balançando como se estivessem dando bom-dia. A cada movimento, percebeu que viajar também podia ser calmo e divertido.",
+          "visual_instruction": "Scene 3 of 8. cloud over green meadow with swaying flowers. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Mais adiante havia um lago que refletia o céu. A nuvenzinha viu sua forma redonda na água e soltou uma risadinha. Nunca tinha imaginado que pudesse observar a si mesma lá de cima.",
+          "visual_instruction": "Scene 4 of 8. round cloud reflection on calm lake. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma corrente de ar mais rápida passou perto deles. A nuvem se assustou e ficou atrás de outra nuvem maior. O vento gentil diminuiu o passo e esperou até ela se sentir pronta novamente.",
+          "visual_instruction": "Scene 5 of 8. cloud sheltering near larger cloud while wind ribbons shift. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Quando a calma voltou, o vento contou que todos aprendem em ritmos diferentes. O importante era respeitar o medo e continuar com cuidado, sem comparar a própria viagem com a de ninguém.",
+          "visual_instruction": "Scene 6 of 8. soft empty sky with wind and cloud moving slowly. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Juntos eles chegaram até uma colina iluminada. A nuvenzinha ofereceu uma chuva bem fininha às flores que estavam com sede. Ficou feliz ao perceber que sua viagem também podia ajudar.",
+          "visual_instruction": "Scene 7 of 8. gentle rain drops from cloud watering hillside flowers. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No fim da tarde, a nuvem olhou para a montanha distante e sorriu. Já não precisava ficar sempre no mesmo lugar para se sentir segura. Que paisagem você gostaria de ver do céu?",
+          "visual_instruction": "Scene 8 of 8. sunset over mountains and content small cloud. Visual bible: ilustração infantil de céu azul, mesma nuvem pequena redonda branca com bochechas rosadas e sorriso discreto, vento representado por fitas suaves. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Bem acima das árvores vivia uma nuvem pequena e fofinha. Ela adorava olhar o mundo lá embaixo, mas tinha medo de viajar sozinha. Um vento gentil apareceu e perguntou se podia acompanhá-la pelo céu. A nuvenzinha respondeu que preferia ficar perto da montanha conhecida. O vento não a empurrou. Apenas mostrou uma trilha de ar bem suave e disse que ela podia escolher quando começar. Os dois seguiram lentamente sobre um campo verde. A nuvem viu flores balançando como se estivessem dando bom-dia. A cada movimento, percebeu que viajar também podia ser calmo e divertido. Mais adiante havia um lago que refletia o céu. A nuvenzinha viu sua forma redonda na água e soltou uma risadinha. Nunca tinha imaginado que pudesse observar a si mesma lá de cima. Uma corrente de ar mais rápida passou perto deles. A nuvem se assustou e ficou atrás de outra nuvem maior. O vento gentil diminuiu o passo e esperou até ela se sentir pronta novamente. Quando a calma voltou, o vento contou que todos aprendem em ritmos diferentes. O importante era respeitar o medo e continuar com cuidado, sem comparar a própria viagem com a de ninguém. Juntos eles chegaram até uma colina iluminada. A nuvenzinha ofereceu uma chuva bem fininha às flores que estavam com sede. Ficou feliz ao perceber que sua viagem também podia ajudar. No fim da tarde, a nuvem olhou para a montanha distante e sorriu. Já não precisava ficar sempre no mesmo lugar para se sentir segura. Que paisagem você gostaria de ver do céu?",
+      "narration_word_count": 257,
+      "description": "A Nuvem Pequena e o Vento Gentil. Uma história infantil original e acolhedora, independente da série Fofinhos, com linguagem apropriada para crianças. Ilustrações produzidas pelo AutoEditorVideo."
+    },
+    {
+      "id": "alchemy-111-prompt-exemplos",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Prompts com exemplos: por que funcionam?",
+      "cover_text": "EXEMPLOS MUDAM TUDO",
+      "hook": "Por que mostrar um exemplo pode valer mais que dez instruções?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Você já pediu uma resposta para uma inteligência artificial e recebeu algo completamente diferente do que imaginava? Às vezes o problema não é a pergunta, mas o formato que ficou aberto a interpretações",
+          "visual_brief": "Scene 1 of 8. ambiguous speech bubbles becoming different shapes. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Uma instrução como faça um resumo curto deixa várias possibilidades",
+          "visual_brief": "Scene 2 of 8. one abstract request branching into three response formats. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Essa abordagem é conhecida como aprendizado com exemplos dentro do próprio prompt, muitas vezes chamado de few-shot prompting",
+          "visual_brief": "Scene 3 of 8. pair of clear sample input and output cards without words. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Imagine que você deseja transformar anotações em títulos",
+          "visual_brief": "Scene 4 of 8. two parallel visual transformation arrows with simple icons. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Os exemplos funcionam melhor quando são claros e representam situações reais",
+          "visual_brief": "Scene 5 of 8. contradictory cards causing messy fragmented patterns. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "Também é importante não esconder as regras essenciais",
+          "visual_brief": "Scene 6 of 8. single goal block connected to context limits sample. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "Para avaliar o resultado, compare diferentes entradas que não apareceram nos exemplos",
+          "visual_brief": "Scene 7 of 8. multiple unseen blank cards tested against format. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "Na próxima vez que um pedido gerar respostas inconsistentes, experimente adicionar um exemplo de entrada e saída",
+          "visual_brief": "Scene 8 of 8. clean organized response cards compared with messy cards. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "prompt engineering",
+        "IA generativa",
+        "few-shot",
+        "exemplos de prompt",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Você já pediu uma resposta para uma inteligência artificial e recebeu algo completamente diferente do que imaginava? Às vezes o problema não é a pergunta, mas o formato que ficou aberto a interpretações. Esse é um conceito geral e não uma demonstração de ferramenta executada neste vídeo.",
+          "visual_instruction": "Scene 1 of 8. ambiguous speech bubbles becoming different shapes. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Uma instrução como faça um resumo curto deixa várias possibilidades. Curto pode significar duas linhas, cinco tópicos ou um parágrafo. Mostrar uma amostra ajuda a deixar a expectativa mais concreta.",
+          "visual_instruction": "Scene 2 of 8. one abstract request branching into three response formats. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Essa abordagem é conhecida como aprendizado com exemplos dentro do próprio prompt, muitas vezes chamado de few-shot prompting. Não significa treinar um novo modelo; significa fornecer referências temporárias para orientar a resposta.",
+          "visual_instruction": "Scene 3 of 8. pair of clear sample input and output cards without words. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Imagine que você deseja transformar anotações em títulos. Em vez de explicar cada regra separadamente, pode mostrar duas entradas e suas respectivas saídas com o estilo que procura reproduzir.",
+          "visual_instruction": "Scene 4 of 8. two parallel visual transformation arrows with simple icons. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Os exemplos funcionam melhor quando são claros e representam situações reais. Se eles tiverem formatos contraditórios, a resposta pode herdar essa confusão e variar mais do que você gostaria.",
+          "visual_instruction": "Scene 5 of 8. contradictory cards causing messy fragmented patterns. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Também é importante não esconder as regras essenciais. Um bom prompt combina objetivo, contexto, limites e alguns exemplos úteis, sem depender de dezenas de demonstrações repetidas.",
+          "visual_instruction": "Scene 6 of 8. single goal block connected to context limits sample. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Para avaliar o resultado, compare diferentes entradas que não apareceram nos exemplos. Assim você observa se a estrutura foi compreendida ou se a IA simplesmente imitou detalhes muito específicos.",
+          "visual_instruction": "Scene 7 of 8. multiple unseen blank cards tested against format. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Na próxima vez que um pedido gerar respostas inconsistentes, experimente adicionar um exemplo de entrada e saída. A melhoria deve ser conferida no resultado, não presumida antes do teste. Você já usa exemplos?",
+          "visual_instruction": "Scene 8 of 8. clean organized response cards compared with messy cards. Visual bible: arte tecnológica didática com blocos abstratos, exemplos de formatos e cartões sem texto. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Você já pediu uma resposta para uma inteligência artificial e recebeu algo completamente diferente do que imaginava? Às vezes o problema não é a pergunta, mas o formato que ficou aberto a interpretações. Esse é um conceito geral e não uma demonstração de ferramenta executada neste vídeo. Uma instrução como faça um resumo curto deixa várias possibilidades. Curto pode significar duas linhas, cinco tópicos ou um parágrafo. Mostrar uma amostra ajuda a deixar a expectativa mais concreta. Essa abordagem é conhecida como aprendizado com exemplos dentro do próprio prompt, muitas vezes chamado de few-shot prompting. Não significa treinar um novo modelo; significa fornecer referências temporárias para orientar a resposta. Imagine que você deseja transformar anotações em títulos. Em vez de explicar cada regra separadamente, pode mostrar duas entradas e suas respectivas saídas com o estilo que procura reproduzir. Os exemplos funcionam melhor quando são claros e representam situações reais. Se eles tiverem formatos contraditórios, a resposta pode herdar essa confusão e variar mais do que você gostaria. Também é importante não esconder as regras essenciais. Um bom prompt combina objetivo, contexto, limites e alguns exemplos úteis, sem depender de dezenas de demonstrações repetidas. Para avaliar o resultado, compare diferentes entradas que não apareceram nos exemplos. Assim você observa se a estrutura foi compreendida ou se a IA simplesmente imitou detalhes muito específicos. Na próxima vez que um pedido gerar respostas inconsistentes, experimente adicionar um exemplo de entrada e saída. A melhoria deve ser conferida no resultado, não presumida antes do teste. Você já usa exemplos?",
+      "narration_word_count": 255,
+      "description": "Prompts com exemplos: por que funcionam?. Explicação conceitual e educativa sobre IA e automação; não é demonstração de aplicativo executado ou resultado de teste. 🎨 Imagens ilustrativas geradas por IA."
+    },
+    {
+      "id": "alchemy-112-rag-documentos",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "RAG: como uma IA encontra informações nos documentos",
+      "cover_text": "IA QUE CONSULTA FONTES",
+      "hook": "Uma IA precisa decorar seus documentos para responder?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma inteligência artificial precisa decorar todos os documentos de uma empresa para responder perguntas sobre eles? Não necessariamente",
+          "visual_brief": "Scene 1 of 8. question mark connected to orderly library of abstract documents. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "Primeiro, os documentos precisam estar disponíveis em uma fonte autorizada",
+          "visual_brief": "Scene 2 of 8. document pages divided into small colored blocks. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Quando alguém faz uma pergunta, um mecanismo tenta localizar trechos relevantes",
+          "visual_brief": "Scene 3 of 8. magnifying glass looking across meaningful abstract tiles. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Depois, apenas os trechos selecionados são oferecidos como contexto para o modelo responder",
+          "visual_brief": "Scene 4 of 8. selected document fragments delivered to luminous model brain. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Mas recuperação não é prova automática de verdade",
+          "visual_brief": "Scene 5 of 8. outdated and current pages contrasted without text. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "Uma busca ruim também prejudica a resposta",
+          "visual_brief": "Scene 6 of 8. missing puzzle piece in search result chain. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "Em projetos reais, permissões contam tanto quanto relevância",
+          "visual_brief": "Scene 7 of 8. locked document cabinet and permission key icon. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "RAG é, portanto, um jeito de conectar perguntas a materiais consultáveis, não uma garantia mágica de acerto",
+          "visual_brief": "Scene 8 of 8. verified citation trails connecting question to documents. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "RAG",
+        "inteligência artificial",
+        "busca semântica",
+        "documentos",
+        "IA prática",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Uma inteligência artificial precisa decorar todos os documentos de uma empresa para responder perguntas sobre eles? Não necessariamente. Existe uma arquitetura chamada RAG que combina recuperação de informações e geração de texto. Esse é um conceito geral e não uma demonstração de ferramenta executada neste vídeo.",
+          "visual_instruction": "Scene 1 of 8. question mark connected to orderly library of abstract documents. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Primeiro, os documentos precisam estar disponíveis em uma fonte autorizada. Eles podem ser divididos em trechos menores para facilitar a busca, preservando informações de origem e regras de acesso.",
+          "visual_instruction": "Scene 2 of 8. document pages divided into small colored blocks. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Quando alguém faz uma pergunta, um mecanismo tenta localizar trechos relevantes. Isso pode envolver palavras-chave ou representações numéricas do significado, conforme a ferramenta e o tipo de conteúdo.",
+          "visual_instruction": "Scene 3 of 8. magnifying glass looking across meaningful abstract tiles. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Depois, apenas os trechos selecionados são oferecidos como contexto para o modelo responder. A IA não precisa ter incorporado permanentemente cada arquivo aos seus parâmetros para utilizar aquela informação.",
+          "visual_instruction": "Scene 4 of 8. selected document fragments delivered to luminous model brain. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Mas recuperação não é prova automática de verdade. Um trecho pode estar desatualizado, incompleto ou fora de contexto. Por isso é importante mostrar referências e verificar dados antes de tomar decisões.",
+          "visual_instruction": "Scene 5 of 8. outdated and current pages contrasted without text. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Uma busca ruim também prejudica a resposta. Se os trechos mais úteis não forem encontrados, até um modelo capaz pode responder de modo impreciso ou admitir que falta informação.",
+          "visual_instruction": "Scene 6 of 8. missing puzzle piece in search result chain. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Em projetos reais, permissões contam tanto quanto relevância. O sistema não deve revelar documentos privados apenas porque a pergunta parece combinar com o conteúdo. Segurança começa na seleção da fonte.",
+          "visual_instruction": "Scene 7 of 8. locked document cabinet and permission key icon. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "RAG é, portanto, um jeito de conectar perguntas a materiais consultáveis, não uma garantia mágica de acerto. A melhor resposta permite conferir de onde cada informação veio. Onde você usaria isso?",
+          "visual_instruction": "Scene 8 of 8. verified citation trails connecting question to documents. Visual bible: arte educativa conceptual de pesquisa sem simular interfaces, documentos abstratos, busca e fontes confiáveis. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Uma inteligência artificial precisa decorar todos os documentos de uma empresa para responder perguntas sobre eles? Não necessariamente. Existe uma arquitetura chamada RAG que combina recuperação de informações e geração de texto. Esse é um conceito geral e não uma demonstração de ferramenta executada neste vídeo. Primeiro, os documentos precisam estar disponíveis em uma fonte autorizada. Eles podem ser divididos em trechos menores para facilitar a busca, preservando informações de origem e regras de acesso. Quando alguém faz uma pergunta, um mecanismo tenta localizar trechos relevantes. Isso pode envolver palavras-chave ou representações numéricas do significado, conforme a ferramenta e o tipo de conteúdo. Depois, apenas os trechos selecionados são oferecidos como contexto para o modelo responder. A IA não precisa ter incorporado permanentemente cada arquivo aos seus parâmetros para utilizar aquela informação. Mas recuperação não é prova automática de verdade. Um trecho pode estar desatualizado, incompleto ou fora de contexto. Por isso é importante mostrar referências e verificar dados antes de tomar decisões. Uma busca ruim também prejudica a resposta. Se os trechos mais úteis não forem encontrados, até um modelo capaz pode responder de modo impreciso ou admitir que falta informação. Em projetos reais, permissões contam tanto quanto relevância. O sistema não deve revelar documentos privados apenas porque a pergunta parece combinar com o conteúdo. Segurança começa na seleção da fonte. RAG é, portanto, um jeito de conectar perguntas a materiais consultáveis, não uma garantia mágica de acerto. A melhor resposta permite conferir de onde cada informação veio. Onde você usaria isso?",
+      "narration_word_count": 253,
+      "description": "RAG: como uma IA encontra informações nos documentos. Explicação conceitual e educativa sobre IA e automação; não é demonstração de aplicativo executado ou resultado de teste. 🎨 Imagens ilustrativas geradas por IA."
+    },
+    {
+      "id": "alchemy-113-legenda-sincronizada",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Como sincronizar legendas com cada palavra",
+      "cover_text": "LEGENDAS NO TEMPO",
+      "hook": "Por que algumas legendas parecem sempre atrasadas?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Você já viu um vídeo em que a legenda aparece depois da palavra ser falada? Mesmo com uma boa narração, esse atraso distrai e pode prejudicar a compreensão da história",
+          "visual_brief": "Scene 1 of 8. audio waveform and disconnected subtitle tiles. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "goal": "O primeiro passo é tratar voz e texto como partes da mesma produção",
+          "visual_brief": "Scene 2 of 8. script page and voice wave side by side. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "goal": "Alguns mecanismos de síntese de voz fornecem marcações temporais de palavras, conhecidas como WordBoundary",
+          "visual_brief": "Scene 3 of 8. word timestamp dots precisely spaced on audio wave. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "goal": "Com esses tempos, o editor pode agrupar duas ou três palavras por vez",
+          "visual_brief": "Scene 4 of 8. three-word abstract caption shapes inside safe frame. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "goal": "Depois, a linha do tempo transforma os segundos em quadros de vídeo",
+          "visual_brief": "Scene 5 of 8. thirty small frame marks alongside audio spectrum. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "goal": "É comum realçar a palavra que está sendo pronunciada enquanto as outras permanecem legíveis",
+          "visual_brief": "Scene 6 of 8. one bright highlight tile within group of neutral tiles. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "goal": "Antes de publicar, vale revisar o começo, o meio e o final do vídeo",
+          "visual_brief": "Scene 7 of 8. quality inspector checking start middle end of timeline. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "goal": "Legendas precisas não nascem de uma animação chamativa, mas de uma boa referência temporal e testes cuidadosos",
+          "visual_brief": "Scene 8 of 8. clean completed cinematic frame with clear subtitle bars. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "tags": [
+        "legendas automáticas",
+        "TTS",
+        "WordBoundary",
+        "vídeos",
+        "automação",
+        "Alchemy Lab"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Você já viu um vídeo em que a legenda aparece depois da palavra ser falada? Mesmo com uma boa narração, esse atraso distrai e pode prejudicar a compreensão da história. Esse é um conceito geral e não uma demonstração de ferramenta executada neste vídeo.",
+          "visual_instruction": "Scene 1 of 8. audio waveform and disconnected subtitle tiles. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "O primeiro passo é tratar voz e texto como partes da mesma produção. Escrever uma frase e estimar sua duração não garante que cada palavra apareça no momento certo. A diferença deve ser comprovada com um teste quando o resultado real for importante.",
+          "visual_instruction": "Scene 2 of 8. script page and voice wave side by side. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Alguns mecanismos de síntese de voz fornecem marcações temporais de palavras, conhecidas como WordBoundary. Elas indicam onde cada palavra começa e ajudam a construir legendas mais alinhadas.",
+          "visual_instruction": "Scene 3 of 8. word timestamp dots precisely spaced on audio wave. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Com esses tempos, o editor pode agrupar duas ou três palavras por vez. Esse agrupamento precisa respeitar pausas naturais e manter espaço seguro para não cortar letras nas bordas da tela.",
+          "visual_instruction": "Scene 4 of 8. three-word abstract caption shapes inside safe frame. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Depois, a linha do tempo transforma os segundos em quadros de vídeo. Em uma composição de trinta quadros por segundo, pequenas diferenças de tempo podem mudar o instante do destaque.",
+          "visual_instruction": "Scene 5 of 8. thirty small frame marks alongside audio spectrum. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "É comum realçar a palavra que está sendo pronunciada enquanto as outras permanecem legíveis. O efeito só ajuda quando a cor acompanha a voz, sem piscar demais ou ocultar a imagem principal.",
+          "visual_instruction": "Scene 6 of 8. one bright highlight tile within group of neutral tiles. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Antes de publicar, vale revisar o começo, o meio e o final do vídeo. Nomes próprios, pausas longas e alterações no áudio são pontos especialmente importantes para conferir visualmente.",
+          "visual_instruction": "Scene 7 of 8. quality inspector checking start middle end of timeline. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Legendas precisas não nascem de uma animação chamativa, mas de uma boa referência temporal e testes cuidadosos. Você prefere destaque palavra por palavra ou frases inteiras na tela?",
+          "visual_instruction": "Scene 8 of 8. clean completed cinematic frame with clear subtitle bars. Visual bible: arte de produção audiovisual conceitual, ondas sonoras, timeline abstrata, quadros cinematográficos sem texto legível. Vertical 9:16 original editorial illustration; consistent atmosphere and subject; no readable text or official frames."
+        }
+      ],
+      "narration_script": "Você já viu um vídeo em que a legenda aparece depois da palavra ser falada? Mesmo com uma boa narração, esse atraso distrai e pode prejudicar a compreensão da história. Esse é um conceito geral e não uma demonstração de ferramenta executada neste vídeo. O primeiro passo é tratar voz e texto como partes da mesma produção. Escrever uma frase e estimar sua duração não garante que cada palavra apareça no momento certo. A diferença deve ser comprovada com um teste quando o resultado real for importante. Alguns mecanismos de síntese de voz fornecem marcações temporais de palavras, conhecidas como WordBoundary. Elas indicam onde cada palavra começa e ajudam a construir legendas mais alinhadas. Com esses tempos, o editor pode agrupar duas ou três palavras por vez. Esse agrupamento precisa respeitar pausas naturais e manter espaço seguro para não cortar letras nas bordas da tela. Depois, a linha do tempo transforma os segundos em quadros de vídeo. Em uma composição de trinta quadros por segundo, pequenas diferenças de tempo podem mudar o instante do destaque. É comum realçar a palavra que está sendo pronunciada enquanto as outras permanecem legíveis. O efeito só ajuda quando a cor acompanha a voz, sem piscar demais ou ocultar a imagem principal. Antes de publicar, vale revisar o começo, o meio e o final do vídeo. Nomes próprios, pausas longas e alterações no áudio são pontos especialmente importantes para conferir visualmente. Legendas precisas não nascem de uma animação chamativa, mas de uma boa referência temporal e testes cuidadosos. Você prefere destaque palavra por palavra ou frases inteiras na tela?",
+      "narration_word_count": 264,
+      "description": "Como sincronizar legendas com cada palavra. Explicação conceitual e educativa sobre IA e automação; não é demonstração de aplicativo executado ou resultado de teste. 🎨 Imagens ilustrativas geradas por IA."
+    }
+  ]
+}
