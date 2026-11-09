@@ -1,0 +1,11 @@
+{
+  "schema": "autoeditorvideo/new-15-private-launch-20261109/v1",
+  "date": "2026-11-09",
+  "creator_requested": "generate three new videos for each of five YouTube channels via GitHub",
+  "owner": "lote15_novos_20261109",
+  "private_first": true,
+  "allow_public_publishing": false,
+  "require_exact_channel_oauth": true,
+  "require_no_duplicate_insert": true,
+  "allow_reuse_of_old_videos": false
+}
