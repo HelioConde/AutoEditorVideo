@@ -1773,6 +1773,24 @@
       "source": "creator_explicit_generate_upload_new_21h_videos_2026-11-08",
       "publication_target": "private_first_after_original_media_QA",
       "note": "Original new topic. Private YouTube upload only for passed 21h window; validate target OAuth and prevent duplicate inserts. Public release requires separate QA and authorization."
+    },
+    {
+      "channel": "br",
+      "id": "5021-one-piece-chapeus-palha-equipe",
+      "status": "reserved",
+      "reservation_owner": "trending_single_br_en_20261109",
+      "source": "creator_direct_trending_keywords_20261109",
+      "publication_target": "private_first_after_canonical_character_qa",
+      "note": "Exactly one fresh Short. Primary SEO keyword chapeus de palha. Original anchored anime scene illustrations, official music/footage forbidden, max60s, channel-specific verified private upload only. No duplicate videos.insert."
+    },
+    {
+      "channel": "en",
+      "id": "7020-jojo-part-7-op-spin-kroi",
+      "status": "reserved",
+      "reservation_owner": "trending_single_br_en_20261109",
+      "source": "creator_direct_trending_keywords_20261109",
+      "publication_target": "private_first_after_canonical_character_qa",
+      "note": "Exactly one fresh Short. Primary SEO keyword jojo part 7 op. Original anchored anime scene illustrations, official music/footage forbidden, max60s, channel-specific verified private upload only. No duplicate videos.insert."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
