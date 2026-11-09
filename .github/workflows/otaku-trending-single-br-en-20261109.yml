@@ -45,7 +45,7 @@ jobs:
           assert manifest['episodes'][0]['tags'][0]=='chapeus de palha'
           assert manifest['episodes'][1]['tags'][0]=='jojo part 7 op'
           assert all(r['character_identity_bible'] and len(r['scenes'])==8 for r in manifest['episodes'])
-          from shorts_duration import MAX_SECONDS
+          from scripts.shorts_duration import MAX_SECONDS
           assert MAX_SECONDS==60
           print('BR_EN_TRENDS_UNIQUE_PRIVATE_CANONICAL_60S_PREFLIGHT_PASSED')
           PY
@@ -161,7 +161,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: trending-br-en-media-${{ matrix.channel }}-20261108
+          name: trending-br-en-media-${{ matrix.channel }}-20261109
           path: |
             cloud-trending-br-en-20261109/${{ matrix.channel }}/**/summary.json
             cloud-trending-br-en-20261109/${{ matrix.channel }}/**/final.mp4
@@ -210,7 +210,7 @@ jobs:
       - name: Obtain only the matching three media files created in THIS SAME run
         uses: actions/download-artifact@v4
         with:
-          name: trending-br-en-media-${{ matrix.channel }}-20261108
+          name: trending-br-en-media-${{ matrix.channel }}-20261109
           path: cloud-trending-br-en-20261109/${{ matrix.channel }}/
       - name: Verify exact channel identity, SHA256 and privacy then upload only missing new videos
         env:
@@ -223,7 +223,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: trending-br-en-private-youtube-receipts-${{ matrix.channel }}-20261108
+          name: trending-br-en-private-youtube-receipts-${{ matrix.channel }}-20261109
           path: cloud-trending-br-en-20261109/${{ matrix.channel }}/**/youtube-private-receipt.json
           retention-days: 7
           if-no-files-found: ignore
