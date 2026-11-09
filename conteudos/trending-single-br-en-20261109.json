@@ -1,0 +1,309 @@
+{
+  "schema": "autoeditorvideo/trending-single-br-en-20261109/v1",
+  "date": "2026-11-09",
+  "production_owner": "trending_single_br_en_20261109",
+  "target_total": 2,
+  "channels": [
+    "br",
+    "en"
+  ],
+  "privacy": "private_first",
+  "private_only": true,
+  "public_release_requires_visual_review": true,
+  "no_duplicates": true,
+  "never_upload_other_channels": true,
+  "episodes": [
+    {
+      "id": "5021-one-piece-chapeus-palha-equipe",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "title": "Chapéus de Palha: o verdadeiro poder da tripulação do Luffy | One Piece",
+      "cover_text": "O SEGREDO DO BANDO",
+      "description": "chapeus de palha: por que a tripulação do Luffy é tão especial em One Piece? Veja o papel de Zoro, Nami e Sanji e entenda o verdadeiro poder do bando.\n\nIlustrações originais geradas por IA para análise independente; sem cenas oficiais.\n\n#ChapeusDePalha #OnePiece #Luffy #OtakuMulticena #Shorts",
+      "tags": [
+        "chapeus de palha",
+        "chapéus de palha",
+        "one piece",
+        "luffy",
+        "monkey d luffy",
+        "zoro",
+        "nami",
+        "sanji",
+        "tripulação do luffy",
+        "bando dos chapéus de palha",
+        "otaku multicena"
+      ],
+      "primary_keyword": "chapeus de palha",
+      "narration_script": "Você acha que os Chapéus de Palha são fortes só porque Luffy reúne monstros? O segredo é outro. Em One Piece, Luffy escolhe companheiros com sonhos próprios, mesmo quando parecem improváveis para uma tripulação pirata. Zoro quer ser o maior espadachim. Sua lealdade nasce de um objetivo que continua vivo ao lado do capitão. Nami entende o mar e encontra rotas seguras. Sem ela, força bruta não impediria a tripulação de se perder. Sanji prepara comida e cuida dos amigos. Uma grande aventura ainda depende de necessidades bastante humanas. Cada função protege o sonho de outra pessoa. Ninguém precisa apagar a própria identidade para ser um Chapéu de Palha. Por isso os conflitos importam: Luffy não quer apenas vencer. Ele quer que seus amigos continuem livres. Talvez o maior poder dos Chapéus de Palha seja este: sonhos diferentes navegando juntos, sem deixar ninguém para trás.",
+      "narration_word_count": 145,
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Você acha que os Chapéus de Palha são fortes só porque Luffy reúne monstros? O segredo é outro.",
+          "character_keys": [
+            "luffy"
+          ],
+          "visual_instruction": "Luffy gesticulating with confident grin on Thousand Sunny ship deck; straw hat, bright tropical sea, lively wind"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Em One Piece, Luffy escolhe companheiros com sonhos próprios, mesmo quando parecem improváveis para uma tripulação pirata.",
+          "character_keys": [
+            "luffy",
+            "zoro"
+          ],
+          "visual_instruction": "Luffy extending an inviting hand toward Zoro on Sunny deck, friendly dynamic composition with sea"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Zoro quer ser o maior espadachim. Sua lealdade nasce de um objetivo que continua vivo ao lado do capitão.",
+          "character_keys": [
+            "zoro"
+          ],
+          "visual_instruction": "Zoro practicing sword stances with three swords at sunrise on ship deck, green hair and scar visible"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Nami entende o mar e encontra rotas seguras. Sem ela, força bruta não impediria a tripulação de se perder.",
+          "character_keys": [
+            "nami"
+          ],
+          "visual_instruction": "Nami carefully studying navigational chart on Sunny deck, orange hair and Clima-Tact visible, sea horizon"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Sanji prepara comida e cuida dos amigos. Uma grande aventura ainda depende de necessidades bastante humanas.",
+          "character_keys": [
+            "sanji"
+          ],
+          "visual_instruction": "Sanji preparing dinner in Thousand Sunny galley, blond hair covering one eye, black suit, warm atmosphere"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Cada função protege o sonho de outra pessoa. Ninguém precisa apagar a própria identidade para ser um Chapéu de Palha.",
+          "character_keys": [
+            "luffy",
+            "nami"
+          ],
+          "visual_instruction": "Luffy and Nami working together with ship sails and compass, supportive expression, ocean background"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Por isso os conflitos importam: Luffy não quer apenas vencer. Ele quer que seus amigos continuem livres.",
+          "character_keys": [
+            "luffy",
+            "zoro"
+          ],
+          "visual_instruction": "Luffy and Zoro together at bow facing a stormy horizon, expressive determined faces, iconic clothing"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Talvez o maior poder dos Chapéus de Palha seja este: sonhos diferentes navegando juntos, sem deixar ninguém para trás.",
+          "character_keys": [
+            "luffy",
+            "sanji"
+          ],
+          "visual_instruction": "Luffy and Sanji standing on sunny deck at golden sunset, waving farewell with positive friendship"
+        }
+      ],
+      "visual_bible": "Recognizable Luffy, Zoro, Nami, and Sanji from One Piece, authentic Straw Hat outfits and Thousand Sunny; beautiful independently created 9:16 anime editorial illustrations, warm expressive friendship, no frames copied, no distorted faces.",
+      "character_identity_bible": [
+        {
+          "key": "luffy",
+          "name": "Monkey D. Luffy",
+          "franchise": "One Piece",
+          "canonical_appearance": "Young lean tan pirate with tousled short black hair, large expressive dark eyes, distinctive small scar beneath his left eye, natural rubbery athletic posture, iconic wide-brimmed yellow straw hat with a red band, open red sleeveless vest or jacket, blue knee-length shorts, sandals, energetic broad grin, consistent face proportions and familiar One Piece anime silhouette."
+        },
+        {
+          "key": "zoro",
+          "name": "Roronoa Zoro",
+          "franchise": "One Piece",
+          "canonical_appearance": "Muscular young adult swordsman with vivid short moss-green hair, one closed left eye with vertical scar in post-timeskip appearance, three swords with distinctive hilts, dark green waist haramaki, open green robe or dark long coat, serious focused expression, strong broad-shouldered anime proportions, consistent recognizable One Piece canonical face and costume palette."
+        },
+        {
+          "key": "nami",
+          "name": "Nami",
+          "franchise": "One Piece",
+          "canonical_appearance": "Confident slender adult female navigator with long flowing orange hair, large expressive brown eyes, identifiable blue spiral shoulder tattoo, original Two Piece style face proportions, fashionable but modest maritime adventure clothing in turquoise blue and white, signature segmented Clima-Tact weather staff, expressive alert gaze, recognizable One Piece canonical design in all frames."
+        },
+        {
+          "key": "sanji",
+          "name": "Sanji",
+          "franchise": "One Piece",
+          "canonical_appearance": "Tall lean athletic adult chef with straight golden blond hair swept across one eye, recognizable curled eyebrow, sharp blue eyes, formal fitted black double-breasted suit with colored dress shirt and tie, polished shoes, long-legged posture, distinctive confident compassionate One Piece anime facial proportions and clean costume silhouette."
+        }
+      ],
+      "character_identity_policy": "autoeditorvideo/otaku-character-identity-policy/v1",
+      "trend_signal": {
+        "source": "creator_supplied_vidiq_screen",
+        "claimed_searches": 105000,
+        "claimed_change_percent": 191,
+        "claimed_keyword_score": 60,
+        "verified_independently": false
+      },
+      "source_urls": [
+        "https://one-piece.com/strawhatpirates/index.html"
+      ],
+      "production_state": {
+        "narration": "approved_for_auto_generation",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "youtube_visibility_intent": "private_first_manual_visual_review",
+      "copyright_policy": {
+        "only_original_editorial_illustrations": true,
+        "no_official_footage": true,
+        "no_original_song_audio": true
+      },
+      "video_duration_target_seconds": [
+        50,
+        60
+      ]
+    },
+    {
+      "id": "7020-jojo-part-7-op-spin-kroi",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "language": "en-US",
+      "made_for_kids": false,
+      "title": "JoJo Part 7 OP: Why SPIN Fits Steel Ball Run",
+      "cover_text": "WHY SPIN FITS JOJO",
+      "description": "jojo part 7 op: why does the official Steel Ball Run opening song SPIN by Kroi fit Johnny Joestar and Gyro Zeppeli so well? A quick original English breakdown of western-inspired sound, genre mixing and the race.\n\nEditorial commentary only: no official footage or use of the original song recording.\n\nOfficial announcement: https://jojo-portal.com/en/news/anime/642/\n\n#JoJoPart7 #SteelBallRun #JoJoOP #SPIN #OtakuReframe",
+      "tags": [
+        "jojo part 7 op",
+        "steel ball run op",
+        "jojo opening",
+        "jojo part 7 opening",
+        "spin kroi",
+        "steel ball run",
+        "johnny joestar",
+        "gyro zeppeli",
+        "jojos bizarre adventure",
+        "otaku reframe"
+      ],
+      "primary_keyword": "jojo part 7 op",
+      "narration_script": "The JoJo Part 7 OP isn't just another anime opening. Its hook is how the music matches the race. Steel Ball Run has an official opening called SPIN, performed by the Japanese band Kroi. The band described mixing Western-inspired sounds with funk, soul, and hip-hop for this track. That mix fits a story about crossing America on horseback, where every mile brings another unpredictable challenge. Johnny Joestar carries a personal reason to race, while Gyro Zeppeli brings an unusual skill and ambition. Their journey isn't only about speed. It's about learning, changing, and dealing with the cost of each choice. That is why a restless, genre-mixing song fits Part Seven better than a predictable heroic anthem. The opening has a clear identity: movement, risk, and a race that keeps pushing its characters forward.",
+      "narration_word_count": 133,
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "The JoJo Part 7 OP isn't just another anime opening. Its hook is how the music matches the race.",
+          "character_keys": [
+            "johnny"
+          ],
+          "visual_instruction": "Johnny Joestar at beginning of Steel Ball Run journey beside his horse against desert sunrise"
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Steel Ball Run has an official opening called SPIN, performed by the Japanese band Kroi.",
+          "character_keys": [
+            "gyro"
+          ],
+          "visual_instruction": "Gyro Zeppeli riding horse across wide Southwestern racing landscape, dramatic golden desert dust"
+        },
+        {
+          "number": 3,
+          "editorial_beat": "The band described mixing Western-inspired sounds with funk, soul, and hip-hop for this track.",
+          "character_keys": [
+            "gyro"
+          ],
+          "visual_instruction": "Gyro Zeppeli twirling a steel ball with controlled Spin technique, rocky American canyon at dusk"
+        },
+        {
+          "number": 4,
+          "editorial_beat": "That mix fits a story about crossing America on horseback, where every mile brings another unpredictable challenge.",
+          "character_keys": [
+            "johnny",
+            "gyro"
+          ],
+          "visual_instruction": "Johnny Joestar and Gyro Zeppeli racing horses side by side through red rocky desert, motion and dust"
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Johnny Joestar carries a personal reason to race, while Gyro Zeppeli brings an unusual skill and ambition.",
+          "character_keys": [
+            "johnny",
+            "gyro"
+          ],
+          "visual_instruction": "Johnny Joestar and Gyro Zeppeli speaking during stop near campfire, faithful outfits and facial details"
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Their journey isn't only about speed. It's about learning, changing, and dealing with the cost of each choice.",
+          "character_keys": [
+            "johnny"
+          ],
+          "visual_instruction": "Johnny Joestar focused on a steel ball's spiral path on desert sand, determined gaze, dynamic illustration"
+        },
+        {
+          "number": 7,
+          "editorial_beat": "That is why a restless, genre-mixing song fits Part Seven better than a predictable heroic anthem.",
+          "character_keys": [
+            "gyro"
+          ],
+          "visual_instruction": "Gyro Zeppeli spinning steel ball in stylized original diagonal action composition, horse and race trail"
+        },
+        {
+          "number": 8,
+          "editorial_beat": "The opening has a clear identity: movement, risk, and a race that keeps pushing its characters forward.",
+          "character_keys": [
+            "johnny",
+            "gyro"
+          ],
+          "visual_instruction": "Johnny Joestar and Gyro Zeppeli riding toward sunset on an immense American prairie, strong cinematic closure"
+        }
+      ],
+      "visual_bible": "Recognizable Johnny Joestar and Gyro Zeppeli from Steel Ball Run in authentic canonical western race costumes, horses, American terrain, Spin technique, beautiful independent 9:16 anime editorial illustrations; NEVER use official OP frames or copyrighted track audio.",
+      "character_identity_bible": [
+        {
+          "key": "johnny",
+          "name": "Johnny Joestar",
+          "franchise": "JoJo's Bizarre Adventure: Steel Ball Run",
+          "canonical_appearance": "Young adult male former jockey with slim build, long blond hair peeking from pale blue cap adorned with horseshoe-like decorations and small star emblem, expressive blue eyes, identifiable light blue outfit with star accents and gloves, characteristic Steel Ball Run Part 7 Araki-inspired proportions, consistent recognizable Johnny Joestar canonical face and costume, depicted respectfully in riding and seated poses."
+        },
+        {
+          "key": "gyro",
+          "name": "Gyro Zeppeli",
+          "franchise": "JoJo's Bizarre Adventure: Steel Ball Run",
+          "canonical_appearance": "Tall athletic adult man with long blond hair, green eyes, distinctive patterned teeth that may show a GO! GO! ZEPPELI inscription if very close but do not generate text, wide-brim western-style hat with goggles, recognizable leather vest and colorful western riding clothing with signature belt details, steel balls of Spin technique, confident smirk and recognizable Steel Ball Run anime facial proportions."
+        }
+      ],
+      "character_identity_policy": "autoeditorvideo/otaku-character-identity-policy/v1",
+      "trend_signal": {
+        "source": "creator_supplied_vidiq_screen",
+        "claimed_searches": 26000,
+        "claimed_change_percent": 329,
+        "claimed_keyword_score": 67,
+        "verified_independently": false
+      },
+      "source_urls": [
+        "https://jojo-portal.com/en/news/anime/642/"
+      ],
+      "production_state": {
+        "narration": "approved_for_auto_generation",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "youtube_visibility_intent": "private_first_manual_visual_review",
+      "copyright_policy": {
+        "only_original_editorial_illustrations": true,
+        "no_official_footage": true,
+        "no_original_song_audio": true
+      },
+      "video_duration_target_seconds": [
+        50,
+        60
+      ]
+    }
+  ]
+}
