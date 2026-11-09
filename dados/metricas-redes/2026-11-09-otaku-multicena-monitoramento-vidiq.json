@@ -1,0 +1,359 @@
+{
+  "schema": "autoeditorvideo/monitoramento-canal-parcial/v1",
+  "coleta_em": "2026-11-09",
+  "canal": "Otaku Multicena",
+  "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+  "fonte": "vidIQ conectado: estatísticas públicas de canal e YouTube Studio Analytics autorizado",
+  "canal_publico_observado": {
+    "views_vitalicias": 11321,
+    "inscritos": 36,
+    "numero_videos": 75,
+    "ultimo_dia_disponivel_na_serie_publica": "2026-11-08",
+    "referencia_anterior_2026_11_08": {
+      "views_vitalicias": 10864,
+      "inscritos": 36,
+      "numero_videos": 72
+    },
+    "diferenca_contadores_observados": {
+      "views": 457,
+      "inscritos": 0,
+      "videos": 3
+    },
+    "nota": "Contadores observados em coletas distintas; diferença não é a soma de views de um dia ou janela de 7 dias."
+  },
+  "analytics": {
+    "solicitado_7d": [
+      "2026-11-02",
+      "2026-11-08"
+    ],
+    "solicitado_28d": [
+      "2026-10-12",
+      "2026-11-08"
+    ],
+    "ultima_data_retornada": "2026-11-06",
+    "primeira_data_retornada": "2026-11-01",
+    "colunas_diarias": [
+      "dia",
+      "views",
+      "engagedViews",
+      "estimatedMinutesWatched",
+      "subscribersGained",
+      "subscribersLost",
+      "likes",
+      "comments",
+      "shares"
+    ],
+    "serie_diaria_retornada": [
+      [
+        "2026-11-01",
+        1109,
+        388,
+        160,
+        5,
+        2,
+        58,
+        1,
+        0
+      ],
+      [
+        "2026-11-02",
+        1172,
+        353,
+        117,
+        3,
+        0,
+        43,
+        2,
+        0
+      ],
+      [
+        "2026-11-03",
+        1544,
+        426,
+        194,
+        6,
+        0,
+        48,
+        2,
+        0
+      ],
+      [
+        "2026-11-04",
+        415,
+        139,
+        46,
+        2,
+        0,
+        12,
+        0,
+        0
+      ],
+      [
+        "2026-11-05",
+        3293,
+        1422,
+        375,
+        14,
+        3,
+        111,
+        1,
+        2
+      ],
+      [
+        "2026-11-06",
+        2588,
+        920,
+        268,
+        9,
+        1,
+        107,
+        0,
+        0
+      ]
+    ],
+    "parcial_7d_02_a_06_11": {
+      "colunas": [
+        "views",
+        "engagedViews",
+        "estimatedMinutesWatched",
+        "subscribersGained",
+        "subscribersLost",
+        "likes",
+        "comments",
+        "shares"
+      ],
+      "valores": [
+        9012,
+        3260,
+        1000,
+        34,
+        4,
+        321,
+        5,
+        2
+      ]
+    },
+    "parcial_28d_01_a_06_11": {
+      "colunas": [
+        "views",
+        "engagedViews",
+        "estimatedMinutesWatched",
+        "subscribersGained",
+        "subscribersLost",
+        "likes",
+        "comments",
+        "shares"
+      ],
+      "valores": [
+        10121,
+        3648,
+        1160,
+        39,
+        6,
+        379,
+        6,
+        2
+      ]
+    },
+    "limite": "API omitiu dias 07 e 08/11, e na janela de 28 dias omitiu 12–31/10; totais parciais NÃO equivalem às janelas completas. A ausência de linhas não significa zero.",
+    "traffic_sources": {
+      "intervalo_solicitado": [
+        "2026-10-12",
+        "2026-11-08"
+      ],
+      "rows": [
+        [
+          "SHORTS",
+          9520,
+          3385
+        ],
+        [
+          "YT_SEARCH",
+          491,
+          195
+        ],
+        [
+          "YT_OTHER_PAGE",
+          66,
+          35
+        ],
+        [
+          "YT_CHANNEL",
+          25,
+          15
+        ],
+        [
+          "SUBSCRIBER",
+          21,
+          18
+        ],
+        [
+          "EXT_URL",
+          7,
+          3
+        ],
+        [
+          "NO_LINK_OTHER",
+          2,
+          2
+        ]
+      ],
+      "colunas": [
+        "source",
+        "views",
+        "engagedViews"
+      ],
+      "nota": "Soma de fontes=10132, diferente da soma de dias disponíveis=10121; não reconciliar sem dados completos."
+    },
+    "top_videos": {
+      "intervalo_solicitado": [
+        "2026-10-12",
+        "2026-11-08"
+      ],
+      "colunas": [
+        "video_id",
+        "views",
+        "engagedViews",
+        "averageViewDuration_seconds",
+        "averageViewPercentage",
+        "subscribersGained",
+        "likes",
+        "comments"
+      ],
+      "primeiros_10": [
+        [
+          "mP34eFfMIRI",
+          1193,
+          505,
+          28,
+          69.72,
+          6,
+          61,
+          2
+        ],
+        [
+          "78ICmUFT--Q",
+          1144,
+          521,
+          14,
+          36.98,
+          1,
+          36,
+          1
+        ],
+        [
+          "ZYHN-6LXRis",
+          955,
+          337,
+          16,
+          62.37,
+          4,
+          32,
+          0
+        ],
+        [
+          "MEX24eZCNp4",
+          646,
+          257,
+          11,
+          32.35,
+          6,
+          16,
+          0
+        ],
+        [
+          "ZKkfQejnYaA",
+          610,
+          120,
+          12,
+          40.27,
+          0,
+          12,
+          0
+        ],
+        [
+          "wbxMcCPWXIM",
+          603,
+          196,
+          16,
+          41.34,
+          5,
+          34,
+          0
+        ],
+        [
+          "Zu87-dVMmkg",
+          600,
+          305,
+          13,
+          35.85,
+          0,
+          14,
+          0
+        ],
+        [
+          "Zg2mSwipw3I",
+          555,
+          120,
+          16,
+          58.43,
+          1,
+          14,
+          1
+        ],
+        [
+          "VfliGg3N4rU",
+          478,
+          131,
+          12,
+          42.47,
+          2,
+          25,
+          1
+        ],
+        [
+          "HqGNpKkv41Y",
+          463,
+          180,
+          17,
+          74.82,
+          1,
+          18,
+          0
+        ]
+      ],
+      "nota": "A API retornou 65 IDs; snapshot conserva os dez líderes confirmados, não representa lista completa."
+    }
+  },
+  "retencao": {
+    "viewed_vs_swiped_atual": null,
+    "referencia_historica_28d_sem_datas_exatas_percentual": 34.8,
+    "retencao_de_cada_video": "averageViewPercentage disponível no ranking; não confundir com viewed-vs-swiped."
+  },
+  "comparacoes_validas": [
+    {
+      "video_id": "78ICmUFT--Q",
+      "antes": 1141,
+      "agora": 1144,
+      "delta": 3,
+      "metrica": "views de ranking",
+      "ressalva": "janelas solicitadas com datas iniciais diferentes; delta não é crescimento líquido rigorosamente comparável"
+    },
+    {
+      "video_id": "mP34eFfMIRI",
+      "antes": 1193,
+      "agora": 1193,
+      "delta": 0,
+      "metrica": "views de ranking",
+      "ressalva": "janelas solicitadas com datas iniciais diferentes; não interpretar como estagnação comprovada"
+    }
+  ],
+  "marcos": {
+    "atingido_11000": true,
+    "atingido_15000": false,
+    "proximo_15000_faltam": 3679
+  },
+  "proposta_editorial": "Piloto offline de ganchos de mistério/consequência nos primeiros 3 segundos, comparando 5 vídeos por variante em idades iguais; não alterar duração global.",
+  "alteracoes_de_video_ou_publicacao": false,
+  "imagem_gerada": false
+}
