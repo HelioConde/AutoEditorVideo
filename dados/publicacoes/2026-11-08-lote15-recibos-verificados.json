@@ -1,0 +1,169 @@
+{
+  "schema": "autoeditorvideo/youtube-private-job-reconciliation/v1",
+  "record_date": "2026-11-08",
+  "verified_from": "GitHub Actions job logs and artifact listings; not an authenticated live YouTube privacy recheck",
+  "channels": [
+    "br",
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "requested_daily_videos_per_channel": 6,
+  "requested_slots_per_channel": {
+    "07:00": 3,
+    "21:00": 3
+  },
+  "timezone": "America/Sao_Paulo",
+  "source_runs": [
+    42481839933,
+    42513907118
+  ],
+  "confirmed_private_at_upload": 15,
+  "current_youtube_privacy": "unknown_without_live_api_recheck",
+  "current_publish_at": "unknown_without_live_api_recheck",
+  "manual_qa_notes": "Original nine have an approval manifest limited to games/kids/alchemy; BR/EN recovery marks visual_review_status=pending and publication_allowed=false. Do not change to scheduled/public without editorial and OAuth verification.",
+  "safety": {
+    "no_reupload_for_confirmed_episode_ids": true,
+    "never_infer_scheduled_from_private": true,
+    "do_not_force_public_or_override_existing_schedule": true,
+    "keep_private_when_publishAt_unavailable": true
+  },
+  "videos": [
+    {
+      "channel": "br",
+      "episode_id": "5015-jujutsu-kaisen-dominio",
+      "youtube_id": "kPPve9JjVNM",
+      "source_run_id": 42513907118,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=kPPve9JjVNM"
+    },
+    {
+      "channel": "br",
+      "episode_id": "5016-dungeon-meshi-masmorra",
+      "youtube_id": "2RD6HKwsu_8",
+      "source_run_id": 42513907118,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=2RD6HKwsu_8"
+    },
+    {
+      "channel": "br",
+      "episode_id": "5017-attack-on-titan-muralhas",
+      "youtube_id": "ly6qIXV1D50",
+      "source_run_id": 42513907118,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=ly6qIXV1D50"
+    },
+    {
+      "channel": "en",
+      "episode_id": "7014-fullmetal-troca-equivalente",
+      "youtube_id": "1260IqMZ8oY",
+      "source_run_id": 42513907118,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=1260IqMZ8oY"
+    },
+    {
+      "channel": "en",
+      "episode_id": "7015-one-piece-poneglyphs",
+      "youtube_id": "mS6S0ns_7zo",
+      "source_run_id": 42513907118,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=mS6S0ns_7zo"
+    },
+    {
+      "channel": "en",
+      "episode_id": "7016-hunter-nen-restricoes",
+      "youtube_id": "garvLlbYWW0",
+      "source_run_id": 42513907118,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=garvLlbYWW0"
+    },
+    {
+      "channel": "games",
+      "episode_id": "game-104-terraria-primeira-noite",
+      "youtube_id": "HW6fvYkYKlc",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=HW6fvYkYKlc"
+    },
+    {
+      "channel": "games",
+      "episode_id": "game-105-stardew-estacoes",
+      "youtube_id": "mHW5MiWY71A",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=mHW5MiWY71A"
+    },
+    {
+      "channel": "games",
+      "episode_id": "game-106-celeste-dificuldade",
+      "youtube_id": "8yrTR6qQVg4",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=8yrTR6qQVg4"
+    },
+    {
+      "channel": "kids",
+      "episode_id": "kids-104-abelhinha-e-as-cores",
+      "youtube_id": "qJXNIUjkVrI",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=qJXNIUjkVrI"
+    },
+    {
+      "channel": "kids",
+      "episode_id": "kids-105-tartaruguinha-e-a-chuva",
+      "youtube_id": "bHpcB2z6nUc",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=bHpcB2z6nUc"
+    },
+    {
+      "channel": "kids",
+      "episode_id": "kids-106-estrelinhas-contam",
+      "youtube_id": "42Woqr9-ONw",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=42Woqr9-ONw"
+    },
+    {
+      "channel": "alchemy",
+      "episode_id": "alchemy-104-automacao-gatilhos",
+      "youtube_id": "Nn8sOSw-_V8",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=Nn8sOSw-_V8"
+    },
+    {
+      "channel": "alchemy",
+      "episode_id": "alchemy-105-agentes-supervisao",
+      "youtube_id": "Wu7RBUWDOb8",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=Wu7RBUWDOb8"
+    },
+    {
+      "channel": "alchemy",
+      "episode_id": "alchemy-106-ia-checagem-fontes",
+      "youtube_id": "HHoIpKGTb-0",
+      "source_run_id": 42481839933,
+      "job_log_at_upload": "REMAINING_PRIVATE_VERIFIED or BATCH15_RECOVERY_PRIVATE_VERIFIED",
+      "privacy_at_upload": "private",
+      "youtube_url": "https://www.youtube.com/watch?v=HHoIpKGTb-0"
+    }
+  ]
+}
