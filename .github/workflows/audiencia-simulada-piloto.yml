@@ -1,0 +1,72 @@
+name: AutoEditorVideo - Laboratorio de Audiencia (piloto seguro)
+
+on:
+  schedule:
+    # Run on the default branch only after merge.
+    - cron: '23 20 * * *'
+  pull_request:
+    paths:
+      - 'scripts/audiencia_simulada.py'
+      - 'scripts/audiencia_metricas_reais.py'
+      - 'tests/test_audiencia_simulada.py'
+      - 'tests/test_audiencia_metricas_reais.py'
+      - 'docs/AUDIENCIA-SIMULADA-PILOTO.md'
+      - '.github/workflows/audiencia-simulada-piloto.yml'
+      - 'conteudos/lote-15-canais-20261108.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  editorial-lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout only repository files
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Python standard library only
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Unit tests, no media or upload
+        run: |
+          python -m compileall -q scripts/audiencia_simulada.py scripts/audiencia_metricas_reais.py tests/test_audiencia_simulada.py tests/test_audiencia_metricas_reais.py
+          python -m unittest discover -s tests -p 'test_audiencia*.py' -v
+      - name: Evaluate three BR editorial scripts offline
+        run: |
+          python scripts/audiencia_simulada.py \
+            --manifest conteudos/lote-15-canais-20261108.json \
+            --channel br \
+            --ids 5015-jujutsu-kaisen-dominio 5016-dungeon-meshi-masmorra 5017-attack-on-titan-muralhas \
+            --output reports/audiencia-simulada-br-piloto.json \
+            --markdown-output reports/audiencia-simulada-br-piloto.md
+      - name: Validate comparison without actual user metrics or secrets
+        run: |
+          python scripts/audiencia_metricas_reais.py \
+            --editorial-report reports/audiencia-simulada-br-piloto.json \
+            --as-of 2026-11-08 \
+            --output reports/audiencia-metricas-sem-dados.json \
+            --markdown-output reports/audiencia-metricas-sem-dados.md
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("reports/audiencia-metricas-sem-dados.json").read_text())
+          assert r["mature_matched_samples"] == 0
+          assert r["spearman_editorial_vs_engaged_views"] is None
+          assert all(x["status"] == "sem_mapeamento" for x in r["records"])
+          print("AUDIENCE_COMPARISON_NO_DATA_SAFE")
+          PY
+      - name: Preserve review-only analysis report
+        uses: actions/upload-artifact@v4
+        with:
+          name: audience-lab-br-pilot
+          path: |
+            reports/audiencia-simulada-br-piloto.json
+            reports/audiencia-simulada-br-piloto.md
+            reports/audiencia-metricas-sem-dados.json
+            reports/audiencia-metricas-sem-dados.md
+          if-no-files-found: error
+          retention-days: 14
