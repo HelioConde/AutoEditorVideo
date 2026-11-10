@@ -1,0 +1,12 @@
+{
+  "schema": "autoeditorvideo/channel-content-index/v1",
+  "channel": "games",
+  "name": "Canal Gamer",
+  "language": "pt-BR",
+  "role": "read_only_navigation",
+  "canonical_manifest_paths": [
+    "conteudos/gamer-v2-http400-fix-launch-20261108.json"
+  ],
+  "production_manifests_moved": false,
+  "upload_authorized": false
+}

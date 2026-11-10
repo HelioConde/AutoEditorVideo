@@ -1,0 +1,12 @@
+{
+  "schema": "autoeditorvideo/channel-content-index/v1",
+  "channel": "br",
+  "name": "Otaku Multicena",
+  "language": "pt-BR",
+  "role": "read_only_navigation",
+  "canonical_manifest_paths": [
+    "conteudos/otaku-multicena-br-50-inéditos-reverso-20261106.json"
+  ],
+  "production_manifests_moved": false,
+  "upload_authorized": false
+}

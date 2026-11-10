@@ -1,0 +1,12 @@
+{
+  "schema": "autoeditorvideo/channel-content-index/v1",
+  "channel": "alchemy",
+  "name": "Alchemy Lab",
+  "language": "pt-BR",
+  "role": "read_only_navigation",
+  "canonical_manifest_paths": [
+    "conteudos/alchemy-lab-piloto-3-nichos-9-videos-20261109.json"
+  ],
+  "production_manifests_moved": false,
+  "upload_authorized": false
+}
