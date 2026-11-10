@@ -1,0 +1,113 @@
+name: Alchemy Dorama - primeiro vídeo original (somente prévia)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/alchemy-dorama-primeiro-video-20261110.yml'
+
+# Explicit creator request: ONE test video from original anime story.
+# No schedule, no workflow_dispatch, no YouTube access or upload.
+permissions:
+  contents: read
+
+concurrency:
+  group: alchemy-original-anime-episode-1-once-20261110
+  cancel-in-progress: false
+
+jobs:
+  verify-protected-environment:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'run(alchemy-dorama): first original anime pilot one-shot'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify the image-generation Environment is protected and main only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+      - name: Validate episode reservation, 16 scenes and channel without API
+        run: |
+          python -m py_compile scripts/alchemy_dorama_cloud_pilot.py
+          python -m pytest -q tests/test_alchemy_dorama_original.py
+
+  generate-original-anime-preview:
+    needs: verify-protected-environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated preview dependencies, no YouTube SDK
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'requests>=2.31,<3' 'edge-tts>=6,<8'
+          cd motion-remotion
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned native proxy before using secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/alchemy-original-proxy" ./cmd/api
+      - name: Create original image anchors, voice and 175s MP4 locally (NO UPLOAD)
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
+          MAX_IMAGE_CALLS: '19'
+        run: |
+          set -euo pipefail
+          umask 077
+          data_dir="$RUNNER_TEMP/alchemy-dorama-private-proxy"
+          mkdir -m 700 "$data_dir"
+          cleanup() {
+            if [ -n "${proxy_pid:-}" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$data_dir"
+            rm -f -- "$RUNNER_TEMP/alchemy-dorama-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$data_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$data_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080             "$RUNNER_TEMP/alchemy-original-proxy" >"$RUNNER_TEMP/alchemy-dorama-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/alchemy_dorama_cloud_pilot.py
+          echo "[SAFE] One editorial preview only; no YouTube permissions, no channel changes."
+      - name: Preserve original anime preview and its visual anchors for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: alchemy-princesa-ep01-preview-and-references
+          path: |
+            assets/gerados/alchemy-dorama-original/ep01/preview-para-revisao.mp4
+            assets/gerados/alchemy-dorama-original/ep01/qa-preview.json
+            assets/gerados/alchemy-dorama-original/referencias/*.png
+          if-no-files-found: ignore
+          retention-days: 7
