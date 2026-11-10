@@ -40,6 +40,14 @@ function Invoke-Internal([string]$File, [hashtable]$Params) {
   if(-not $?){throw "Falha no motor $File"}
 }
 $action=$Acao.ToLowerInvariant()
+if($action -eq 'planejamentos') {
+  $folders=@{br='otaku-br';en='otaku-en';gamer='gamer';kids='manu-kids';fofinhos='manu-kids';alchemy='alchemy-lab'}
+  if(-not $folders.ContainsKey($Canal)){throw 'Informe -Canal br, en, gamer, kids, fofinhos ou alchemy.'}
+  $index=Join-Path $root ("canais\{0}\planejamentos\indice.json" -f $folders[$Canal])
+  if(-not(Test-Path -LiteralPath $index -PathType Leaf)){throw "Indice de planejamentos ausente: $index"}
+  Get-Content -LiteralPath $index -Raw -Encoding UTF8 | Write-Output
+  return
+}
 switch($Canal) {
   'ajuda' {Show-Help; break}
   'diagnostico' {
