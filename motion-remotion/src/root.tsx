@@ -5,6 +5,7 @@ import {MasterShort,MasterProps} from './master-short';
 import {PilotShort,PilotProps} from './pilot-short';
 import {EmanuellyShort,EmanuellyProps} from './emanuelly-short';
 import {AlchemyDoramaShort,AlchemyDoramaProps} from './alchemy-dorama-short';
+import {AlchemyDoramaMaster10s,AlchemyMaster10Props} from './alchemy-dorama-master-10s';
 
 const legacy:ShortProps={
  id:'exemplo',durationFrames:90,background:'',layers:[],audio:'',captions:[],
@@ -17,6 +18,12 @@ const emanu:EmanuellyProps={episodeId:'kids-emanuelly-ep01-p01-ovo-azul',title:'
 const alchemyDorama:AlchemyDoramaProps={
   episodeId:'alchemy-114-conquiste-princesa-ep01',title:'O Fracassado Condenado',
   durationFrames:5250,scenes:[],captions:[],audio:''
+};
+
+const alchemyMaster10:AlchemyMaster10Props={
+  pilotId:'alchemy-dorama-master-layer-10s-v1',durationFrames:300,
+  master:'',background:'',ren:'',king:'',elara:'',sword:'',audio:'',
+  frameReferenceSha:'',noNarration:true,noYouTubeUpload:true
 };
 
 export const Root:React.FC=()=> <>
@@ -41,4 +48,8 @@ export const Root:React.FC=()=> <>
    durationInFrames={5250} fps={30} width={1080} height={1920}
    defaultProps={alchemyDorama}
    calculateMetadata={({props})=>({durationInFrames:Math.max(4500,Math.min(5400,props.durationFrames||5250))})}/>
+ <Composition id="AlchemyDoramaMaster10s" component={AlchemyDoramaMaster10s}
+   durationInFrames={300} fps={30} width={1080} height={1920}
+   defaultProps={alchemyMaster10}
+   calculateMetadata={({props})=>({durationInFrames:300})}/>
 </>;
