@@ -5,8 +5,9 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/alchemy-dorama-master-10s-test.yml'
+      - 'canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/referencia-aprovada-20261110.png'
 
-# One-shot test of one master generation + five anchored image edits.
+# One-shot test of EXACT creator-pinned PNG plus five anchored image edits.
 # Regression test fixture fixed; run after tests pass, never before.
 # No schedule, dispatch, YouTube token, or change to Fofinho pipelines.
 permissions:
@@ -41,7 +42,7 @@ jobs:
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'run(alchemy): 10s one master plus transparent character layers'
+      github.event.head_commit.message == 'run(alchemy): 10s creator-approved pinned reference only'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
@@ -96,16 +97,19 @@ jobs:
           cd motion-remotion
           npm ci --no-audit --no-fund
           npm run typecheck
+      - name: Validate exact creator image before proxy or API calls
+        run: |
+          python -c 'import sys; sys.path.insert(0,"scripts"); from alchemy_dorama_master_10s import prepare_pinned_master; master,original=prepare_pinned_master(); print("[PINNED SOURCE VERIFIED] "+original[:16])'
       - name: Compile pinned Go proxy without secrets
         working-directory: pinned-native-go-proxy
         run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/alchemy-master10-proxy" ./cmd/api
-      - name: Generate master and SAME-SOURCE derived RGBA PNGs; render 10s local preview
+      - name: Use pinned image, create SAME-SOURCE derived RGBA PNGs, render 10s preview
         shell: bash
         env:
           PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
           PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
           IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
-          MAX_IMAGE_CALLS: '6'
+          MAX_IMAGE_CALLS: '5'
         run: |
           set -euo pipefail
           umask 077
@@ -125,7 +129,7 @@ jobs:
             "$RUNNER_TEMP/alchemy-master10-proxy" > "$RUNNER_TEMP/alchemy-master10-proxy.log" 2>&1 &
           proxy_pid=$!
           python scripts/alchemy_dorama_master_10s.py --acao gerar
-          echo '[ALCHEMY] local MP4 only; no image uploads and no YouTube publication'
+          echo '[ALCHEMY] creator-pinned PNG and 5 edits only; no YouTube upload'
       - name: Save the source image, all layers, QA comparison and MP4
         if: always()
         uses: actions/upload-artifact@v4
