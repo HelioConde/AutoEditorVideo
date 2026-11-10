@@ -321,7 +321,8 @@ def ensure_images(reuse: bool) -> dict:
                                "\n").encode("utf-8"))
         print("[MASTER10] "+label+": derived from PINNED creator reference="+
               source_hash[:12], flush=True)
-        old = result
+        # Keep the ORIGINAL cached manifest immutable during this invocation.
+        # Mutating old here would drop later cached layer entries on reuse.
     if calls > MAX_CALLS:
         raise StageError("IMAGE_LIMIT_EXCEEDED")
     result["image_calls_this_run"] = calls
