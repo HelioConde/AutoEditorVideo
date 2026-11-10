@@ -1,6 +1,6 @@
 {
   "schema": "autoeditorvideo/production-reservations/v1",
-  "updated_at": "2026-11-09",
+  "updated_at": "2026-11-10",
   "policy": "Before creating any video generation script, PowerShell or cloud workflow, reserve the exact (channel, episode_id) pair here and merge to main first. All five channels use unique channel IDs; registration never authorizes image or YouTube requests.",
   "channels": {
     "br": {
@@ -1926,6 +1926,39 @@
       "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
       "publication_target": "private_first_after_original_render_and_QA",
       "note": "Tema inédito: Como sincronizar legendas com cada palavra. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "br",
+      "id": "6025-mensagem-do-futuro",
+      "status": "reserved",
+      "reservation_owner": "piloto_dorama_original_br_20261110",
+      "source": "creator_request_2026-11-10_dorama_and_original_stories_test",
+      "publication_target": "private_only_after_human_visual_QA_and_explicit_upload_approval",
+      "requested_by_creator_publication": false,
+      "content_type": "original_fiction_dorama_pilot",
+      "note": "Piloto editorial: Dorama original: A Mensagem do Futuro. 100% roteiro/personagens originais; apenas Otaku Multicena BR. Sem geracao de imagens, sem render, sem upload ate QA e aprovacao especifica; nao alterar a fila anime ou a rotina de 15 videos."
+    },
+    {
+      "channel": "br",
+      "id": "6026-namorado-sete-minutos",
+      "status": "reserved",
+      "reservation_owner": "piloto_dorama_original_br_20261110",
+      "source": "creator_request_2026-11-10_dorama_and_original_stories_test",
+      "publication_target": "private_only_after_human_visual_QA_and_explicit_upload_approval",
+      "requested_by_creator_publication": false,
+      "content_type": "original_fiction_dorama_pilot",
+      "note": "Piloto editorial: Dorama original: Meu Namorado por Sete Minutos. 100% roteiro/personagens originais; apenas Otaku Multicena BR. Sem geracao de imagens, sem render, sem upload ate QA e aprovacao especifica; nao alterar a fila anime ou a rotina de 15 videos."
+    },
+    {
+      "channel": "br",
+      "id": "6027-andar-que-nao-existia",
+      "status": "reserved",
+      "reservation_owner": "piloto_dorama_original_br_20261110",
+      "source": "creator_request_2026-11-10_dorama_and_original_stories_test",
+      "publication_target": "private_only_after_human_visual_QA_and_explicit_upload_approval",
+      "requested_by_creator_publication": false,
+      "content_type": "original_fiction_dorama_pilot",
+      "note": "Piloto editorial: Suspense original: O Andar Que Não Existia. 100% roteiro/personagens originais; apenas Otaku Multicena BR. Sem geracao de imagens, sem render, sem upload ate QA e aprovacao especifica; nao alterar a fila anime ou a rotina de 15 videos."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
