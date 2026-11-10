@@ -1,0 +1,12 @@
+{
+  "schema": "autoeditorvideo/channel-content-index/v1",
+  "channel": "en",
+  "name": "Otaku Reframe",
+  "language": "en-US",
+  "role": "read_only_navigation",
+  "canonical_manifest_paths": [
+    "conteudos/testes-animados-5-en.json"
+  ],
+  "production_manifests_moved": false,
+  "upload_authorized": false
+}
