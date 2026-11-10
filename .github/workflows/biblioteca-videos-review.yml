@@ -40,7 +40,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install local technical QA dependencies
-        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'numpy>=1.24,<3' 'requests>=2.31,<3'
+        run: python -m pip install 'pytest>=8,<10' -r requirements-master.txt
       - name: Four channels and non-destructive storage
         run: python -m pytest -q tests/test_organizar_videos_por_canal.py
       - name: No pre-render approval clicks, but keep technical blockers

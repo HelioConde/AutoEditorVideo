@@ -21,6 +21,7 @@ from PIL import Image, ImageOps, ImageStat
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/"scripts"))
+from adaptive_performance import prepare_scene_art
 from otaku_multicena_editorial_score_v5 import audit as editorial_audit
 from otaku_multicena_duration_90 import load,PLAN,PAUSE
 from narracao_shorts import ensure_voice, _spoken_words
@@ -239,6 +240,7 @@ def render(row:dict,audio:Path,duration:float,captions:list[dict],images:list[Pa
        "animationMode":"cinematica","characterPreset":"equilibrado",
        "visualProfile":"original","editorialProfile":"otaku-v5-real-90s-review-only",
        "soundCues":[]}
+    prepare_scene_art(scenes, MOTION / "public")
     prop_file=WORK/"remotion-props.json"
     prop_file.write_text(json.dumps(props,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     mp4=WORK/"Otaku_Multicena_AutoEditorVideo_Death_Note_90s_PREVIEW.mp4"

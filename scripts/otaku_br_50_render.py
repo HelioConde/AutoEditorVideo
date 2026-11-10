@@ -18,6 +18,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+from adaptive_performance import prepare_scene_art
 from otaku_br_50_reverso import OUTPUT, validate
 from narracao_shorts import ensure_voice
 from legendas_precisas import captions_from_markers
@@ -151,6 +152,7 @@ def render_one(row: dict, *, force: bool = False) -> dict:
         "characterPreset": "equilibrado", "visualProfile": "original",
         "editorialProfile": "otaku-br-experimento-50"
     }
+    prepare_scene_art(scenes, MOTION / "public")
     prop_file = folder / "props.json"
     prop_file.write_text(json.dumps(props, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     video = folder / "preview-unreviewed.mp4"

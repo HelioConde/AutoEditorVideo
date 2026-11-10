@@ -21,6 +21,7 @@ MOTION=ROOT/'motion-remotion'
 OUT=ROOT/'assets'/'gerados'/'shorts-animados'
 FPS=30
 sys.path.insert(0,str(ROOT/'scripts'))
+from adaptive_performance import prepare_scene_art
 from master_scenes import read_storyboard,scene_dir,validate_image,production_storyboard
 from roteiro_para_storyboard import select_episode, save_plan
 from narracao_shorts import ensure_voice
@@ -272,6 +273,15 @@ def build_props(ep:dict,voice:Path,captions:list[dict],seconds:float,
                        'transitionStyle':scene.get('transition_style','crossfade'),
                        'beatRole':scene.get('beat_role',''),
                        'headline':scene.get('headline','')})
+    if animation_mode == 'cinematica':
+        eligible = [shot for shot, entry in zip(scenes, entries)
+                    if not master_static_for_chess_action(entry['scene'])]
+        prepare_scene_art(eligible, public or MOTION/'public')
+        for shot in eligible:
+            if shot['motionCapability']=='camera-only' and (
+                    shot.get('foregroundPerformance') or shot.get('backgroundPerformance')
+                    or any(layer.get('performance') for layer in shot['layers'])):
+                shot['motionCapability']='face-performance'
     shutil.copy2(voice,target/'voz.mp3')
     parent=select_episode(ep['id'])
     if animation_mode not in ('cinematica','desligada','esqueleto2d'):
@@ -431,8 +441,7 @@ def main(argv:list[str]|None=None)->int:
                       character_preset=args.perfil_personagens)
     camera_only=sum(s.get('motionCapability')=='camera-only' for s in props['scenes'])
     print(f'[MOVIMENTO] {len(props["scenes"])-camera_only} cenas com movimento '
-          f'de camada de personagem; {camera_only} apenas com zoom suave. '
-          'A arte plana nao cria gestos reais.',flush=True)
+          f'de personagem; {camera_only} apenas com camera.',flush=True)
     propfile=args.motor/f"props-master-{ep['id']}.json"
     propfile.write_text(json.dumps(props,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(f"[PREPARADO] {len(props['scenes'])} planos, {seconds:.1f}s e {len(captions)} legendas: {propfile}")

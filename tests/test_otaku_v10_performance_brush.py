@@ -81,3 +81,45 @@ def test_no_moving_anchor_jump_or_ghost_pose_crossfade():
     assert '\"MAX_IMAGE_CALLS\":\"0\"' in src
     assert "youtube.videos().insert" not in src
     assert "request_image(" not in src
+
+def test_lid_moves_down_before_covering_lower_iris():
+    rig = PerformanceBrush2D()
+    art = np.full((HEIGHT, WIDTH, 4), [200, 140, 100, 255], np.uint8)
+    art[422:441, 445:458, :3] = [20, 35, 40]
+    half_closed = rig._blink(art, 1.49)
+    assert not np.array_equal(half_closed[426, 452], art[426, 452])
+    assert np.array_equal(half_closed[437, 452], art[437, 452])
+    assert np.array_equal(half_closed[:, :, 3], art[:, :, 3])
+    assert blink_envelope(1.54 + .07) > blink_envelope(1.54 - .07)
+
+def test_crown_turns_with_face_instead_of_sliding_over_it():
+    rig = PerformanceBrush2D()
+    # Outer tuft, crown and fringe landmarks on the calibrated pose.
+    ys = np.array([300, 240, 400])
+    xs = np.array([359, 439, 624])
+    for second in (2.4, 3.2, 5.5):
+        dx, dy = rig.displacement(second)
+        # A rigid turn has the same horizontal slope from eyes to crown.
+        slope = (dx[420, 500] - dx[440, 500]) / 20
+        expected_x = dx[420, 500] + (420 - ys) * slope
+        expected_y = dy[420, 500] + (xs - 500) * slope
+        np.testing.assert_allclose(dx[ys, xs], expected_x, atol=.03)
+        np.testing.assert_allclose(dy[ys, xs], expected_y, atol=.03)
+
+def test_eyes_acquire_target_together_before_head_turn():
+    rig = PerformanceBrush2D()
+    art = np.full((HEIGHT, WIDTH, 4), 255, dtype=np.uint8)
+    pupils = [(453, 431), (546, 426)]
+    for x, y in pupils:
+        art[y-1:y+2, x-1:x+2, :3] = 0
+    # A short dark line on each upper lid should stay attached to the face.
+    art[422, 448:456, :3] = 0
+    art[419, 545:551, :3] = 0
+    look = rig.warp(art, 1.98)
+    for x, y in pupils:
+        row = look[y, x-5:x+9, 0]
+        center = np.average(np.arange(-5, 9), weights=255 - row)
+        assert 3 <= center <= 4
+    assert np.array_equal(look[422, 448:456], art[422, 448:456])
+    assert np.array_equal(look[419, 545:551], art[419, 545:551])
+    assert np.array_equal(rig._gaze(art, 3.8), art)
