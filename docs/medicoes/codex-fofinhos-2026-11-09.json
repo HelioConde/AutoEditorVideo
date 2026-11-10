@@ -1,0 +1,120 @@
+{
+  "date": "2026-11-09",
+  "codex_cli": "0.166.0",
+  "experiment": "Fofinhos EP01 ambient effects",
+  "runs_per_completed_arm": 1,
+  "arms": [
+    {
+      "arm": "A",
+      "model": "gpt-6-astra",
+      "effort": "ultra",
+      "source_commit": "48533df17fcb8c09e66cfb6b11d5cb16d33278b1",
+      "prompt_bytes": 32203,
+      "prompt_sha256": "b0b41199f00023762862b055210d9a8e3356d332b79305223486bfb42fad3284",
+      "root_bytes": 57360,
+      "root_sha256": "490aea51b370668e5a71ad145d7761d04c7c3705b2d3b50d8d950cfbbfd3c050",
+      "elapsed_ms": 9306,
+      "status": "completed",
+      "astra_turns": 1,
+      "proxy_calls": 0,
+      "astra_usage": {
+        "input_tokens": 30452,
+        "cached_input_tokens": 0,
+        "output_tokens": 180
+      },
+      "proxy_usage": null,
+      "usage": {
+        "input_tokens": 30452,
+        "cached_input_tokens": 0,
+        "output_tokens": 180
+      },
+      "total_tokens": 30632,
+      "checks": {
+        "scene1": true,
+        "scene14": true,
+        "hidden_at_night": true,
+        "opacity": true,
+        "anchor": true,
+        "valid_density_max": true
+      }
+    },
+    {
+      "arm": "B",
+      "model": "gpt-6-astra",
+      "effort": "ultra",
+      "source_commit": "48533df17fcb8c09e66cfb6b11d5cb16d33278b1",
+      "prompt_bytes": 40396,
+      "prompt_sha256": "6716bd53ddb8c720436a4f3da006bddd3a2a6e2038b35f42fb3b21493e95d560",
+      "root_bytes": 4140,
+      "root_sha256": "e826874ff12b9033ad4f1c6a8b6961acdc3380d4cf03e8946b71f9b6a1670e4a",
+      "elapsed_ms": 9881,
+      "status": "completed",
+      "astra_turns": 1,
+      "proxy_calls": 0,
+      "astra_usage": {
+        "input_tokens": 25003,
+        "cached_input_tokens": 0,
+        "output_tokens": 188
+      },
+      "proxy_usage": null,
+      "usage": {
+        "input_tokens": 25003,
+        "cached_input_tokens": 0,
+        "output_tokens": 188
+      },
+      "total_tokens": 25191,
+      "checks": {
+        "scene1": true,
+        "scene14": true,
+        "hidden_at_night": true,
+        "opacity": true,
+        "anchor": true,
+        "valid_density_max": true
+      }
+    },
+    {
+      "arm": "C",
+      "model": "gpt-6-astra",
+      "effort": "ultra",
+      "source_commit": "48533df17fcb8c09e66cfb6b11d5cb16d33278b1",
+      "status": "unavailable",
+      "reason": "no_measured_proxy_evidence"
+    }
+  ],
+  "input_tokens_include_cached_input": true,
+  "delta_total_tokens_B_minus_A": -5441,
+  "delta_cli_ms_B_minus_A": 575,
+  "end_to_end_ms_for_initial_AB": null,
+  "checks_passed": [
+    6,
+    6
+  ],
+  "visual_probe": {
+    "synthetic": true,
+    "frames": 12,
+    "scenes": [
+      "garden",
+      "night-egg",
+      "night-hidden"
+    ],
+    "local_frames": [
+      0,
+      12,
+      24,
+      48
+    ]
+  },
+  "proxy": {
+    "live_probe": "offline",
+    "verified_live_text_models": [],
+    "inference_posts": 0,
+    "simulated_peak_posts": 2
+  },
+  "policy_bytes_git_LF": {
+    "before": 56489,
+    "after": 4106
+  },
+  "quality_scope": "overlay only",
+  "price": null,
+  "subscription_allowance": null
+}

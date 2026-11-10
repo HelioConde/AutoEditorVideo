@@ -1,0 +1,23 @@
+name: Codex - contexto e proxy simulado
+on:
+  pull_request:
+    paths:
+      - 'AGENTS.md'
+      - '**/AGENTS.md'
+      - 'docs/politicas/**'
+      - 'tools/codex_aux/**'
+      - 'tests/test_codex_*.py'
+      - '.github/workflows/codex-context-tests.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install pytest -r tools/codex_aux/requirements.txt
+      - run: python -m pytest -q tests/test_codex_aux_engine.py tests/test_codex_aux_proxy.py tests/test_codex_policy_integrity.py tests/test_codex_aux_benchmark.py
