@@ -8,7 +8,7 @@
   "implementation": "scripts/alchemy_dorama_original.py + motion-remotion/src/alchemy-dorama-short.tsx",
   "status": "pending_original_assets_no_media_generated",
   "asset_directory": "assets/gerados/alchemy-dorama-original/referencias",
-  "note": "This is a public metadata manifest only. Do not commit private reference PNGs or tokens. Generate and approve original images locally; record actual SHA-256 and approved true. One fixed reference per identity and setting, all shots reuse it. Add derived pose variants only by explicit anchored edits with documented lineage.",
+  "note": "Original characters/backgrounds and approved transparent pose variants are required as in Fofinho EP1 Part3. Derived pose files must be gpt-image-2 edits from the specified source_id and store source_sha256 equal to the approved parent SHA. All references are pending; no media was generated.",
   "entries": [
     {
       "id": "REN-01",
@@ -103,6 +103,86 @@
       "kind": "objeto",
       "description": "Execution sword",
       "file": "assets/gerados/alchemy-dorama-original/referencias/PROP-03.png",
+      "sha256": null,
+      "approved": false
+    },
+    {
+      "id": "REN-01-ajoelhado",
+      "kind": "pose_derivada",
+      "source_id": "REN-01",
+      "source_sha256": null,
+      "description": "Ren kneeling with same outfit, face, scar",
+      "file": "assets/gerados/alchemy-dorama-original/referencias/REN-01-ajoelhado.png",
+      "sha256": null,
+      "approved": false
+    },
+    {
+      "id": "REN-01-treinando",
+      "kind": "pose_derivada",
+      "source_id": "REN-01",
+      "source_sha256": null,
+      "description": "Ren standing and holding a training sword with canonical outfit",
+      "file": "assets/gerados/alchemy-dorama-original/referencias/REN-01-treinando.png",
+      "sha256": null,
+      "approved": false
+    },
+    {
+      "id": "REN-01-trabalhando",
+      "kind": "pose_derivada",
+      "source_id": "REN-01",
+      "source_sha256": null,
+      "description": "Ren upright working with the royal seal; no altered face",
+      "file": "assets/gerados/alchemy-dorama-original/referencias/REN-01-trabalhando.png",
+      "sha256": null,
+      "approved": false
+    },
+    {
+      "id": "REN-01-assustado",
+      "kind": "pose_derivada",
+      "source_id": "REN-01",
+      "source_sha256": null,
+      "description": "Ren shocked at the system, same identity",
+      "file": "assets/gerados/alchemy-dorama-original/referencias/REN-01-assustado.png",
+      "sha256": null,
+      "approved": false
+    },
+    {
+      "id": "REN-01-apontando",
+      "kind": "pose_derivada",
+      "source_id": "REN-01",
+      "source_sha256": null,
+      "description": "Ren pointing toward the royal seal",
+      "file": "assets/gerados/alchemy-dorama-original/referencias/REN-01-apontando.png",
+      "sha256": null,
+      "approved": false
+    },
+    {
+      "id": "ELARA-01-observando",
+      "kind": "pose_derivada",
+      "source_id": "ELARA-01",
+      "source_sha256": null,
+      "description": "Princess observing king's judgment, same dress and crown",
+      "file": "assets/gerados/alchemy-dorama-original/referencias/ELARA-01-observando.png",
+      "sha256": null,
+      "approved": false
+    },
+    {
+      "id": "ELARA-01-firme",
+      "kind": "pose_derivada",
+      "source_id": "ELARA-01",
+      "source_sha256": null,
+      "description": "Princess making a firm gesture to stop execution",
+      "file": "assets/gerados/alchemy-dorama-original/referencias/ELARA-01-firme.png",
+      "sha256": null,
+      "approved": false
+    },
+    {
+      "id": "VALDREN-01-julgando",
+      "kind": "pose_derivada",
+      "source_id": "VALDREN-01",
+      "source_sha256": null,
+      "description": "King pointing outward issuing the sentence",
+      "file": "assets/gerados/alchemy-dorama-original/referencias/VALDREN-01-julgando.png",
       "sha256": null,
       "approved": false
     }
