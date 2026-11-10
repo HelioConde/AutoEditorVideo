@@ -182,12 +182,17 @@ def check_normalize(blob: bytes, *, transparent:bool) -> bytes:
 
 
 def image_stage():
-    if os.environ.get("MAX_IMAGE_CALLS") != str(MAX_REQUESTS):
-        raise PilotError("IMAGE_REQUEST_BUDGET_MISMATCH")
-    if os.environ.get("IMAGE_MODEL") != MODEL:
-        raise PilotError("IMAGE_MODEL_NOT_APPROVED")
-    key = os.environ.get("PROXY_API_KEY","")
-    if len(key)<15:
+    reuse_only = os.environ.get("ALCH_DORAMA_REUSE_ONLY") == "1"
+    if reuse_only:
+        if os.environ.get("MAX_IMAGE_CALLS") != "0":
+            raise PilotError("REUSE_MUST_HAVE_ZERO_IMAGE_BUDGET")
+    else:
+        if os.environ.get("MAX_IMAGE_CALLS") != str(MAX_REQUESTS):
+            raise PilotError("IMAGE_REQUEST_BUDGET_MISMATCH")
+        if os.environ.get("IMAGE_MODEL") != MODEL:
+            raise PilotError("IMAGE_MODEL_NOT_APPROVED")
+    key = "" if reuse_only else os.environ.get("PROXY_API_KEY","")
+    if not reuse_only and len(key)<15:
         raise PilotError("IMAGE_PROXY_KEY_NOT_PRESENT")
     reference_doc = dorama.read_json(dorama.MANIFEST)
     storyboard = dorama.read_json(dorama.BOARD)
@@ -216,19 +221,32 @@ def image_stage():
         transparent=entry["kind"]!="cenario"
         raw_file=ART/(id+".raw.png")
         normalized=ART/(id+".png")
-        if raw_file.exists() and normalized.exists():
-            continue
-        binary=safe_request(key,prompt,transparent,parent)
-        # Save PAID bytes before checking. Never print provider payload.
-        raw_file.write_bytes(binary)
-        normalized.write_bytes(check_normalize(binary,transparent=transparent))
+        if normalized.exists():
+            try:
+                image_bytes = normalized.read_bytes()
+                with Image.open(io.BytesIO(image_bytes)) as img:
+                    img.load()
+                    if img.format != "PNG" or img.size != TARGET:
+                        raise PilotError("CACHE_INVALID_PNG_"+id)
+                    if transparent and (img.mode != "RGBA" or img.getchannel("A").getextrema()[0] > 25):
+                        raise PilotError("CACHE_MISSING_ALPHA_"+id)
+                if src_id and not parent.exists():
+                    raise PilotError("CACHE_PARENT_MISSING_"+id)
+            except (OSError,ValueError):
+                raise PilotError("CACHE_PNG_CORRUPTED_"+id) from None
+        else:
+            if reuse_only:
+                raise PilotError("REUSE_ASSET_MISSING_"+id)
+            binary=safe_request(key,prompt,transparent,parent)
+            raw_file.write_bytes(binary)  # retain paid source before validation
+            normalized.write_bytes(check_normalize(binary,transparent=transparent))
         proofs[id]={
             "sha256":sha256(normalized.read_bytes()).hexdigest(),
             "parent_id":src_id,
             "parent_sha256":sha256(parent.read_bytes()).hexdigest() if parent else None,
             "quality_review":"pending_visual_human_review",
         }
-        print("[IMAGEM] "+str(i)+"/"+str(len(ordered))+" -> "+id+" verified bytes, artistic QA pending",flush=True)
+        print("[REF] "+str(i)+"/"+str(len(ordered))+" -> "+id+(" reused" if reuse_only else " available")+", artistic QA pending",flush=True)
     return proofs
 
 
@@ -406,9 +424,15 @@ def main():
     except PilotError as exc:
         print("[PILOTO BLOQUEADO] "+str(exc),file=sys.stderr)
         return 1
-    except Exception:
-        # No provider bodies, tokens or exact secret paths in public logs.
-        print("[PILOTO BLOQUEADO] INTERNAL_STAGE_FAILED",file=sys.stderr)
+    except FileNotFoundError:
+        print("[PILOTO BLOQUEADO] MISSING_REQUIRED_FILE_OR_EXECUTABLE",file=sys.stderr)
+        return 1
+    except subprocess.CalledProcessError:
+        print("[PILOTO BLOQUEADO] MEDIA_COMMAND_FAILED",file=sys.stderr)
+        return 1
+    except Exception as exc:
+        # Keep provider secrets, exact filenames and foreign exception bodies out of logs.
+        print("[PILOTO BLOQUEADO] INTERNAL_STAGE_FAILED_TYPE_"+type(exc).__name__,file=sys.stderr)
         return 1
 
 if __name__=="__main__":
