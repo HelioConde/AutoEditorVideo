@@ -1,0 +1,85 @@
+name: Alchemy Dorama - EP01 MP4 com voz offline e imagens do cache
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/alchemy-dorama-retomar-voz-offline-20261110.yml'
+
+# One-shot creator-authorized test render. No new AI images, protected tokens,
+# automatic YouTube upload, scheduling, or reuse of Fofinho characters.
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: alchemy-episode-1-offline-voice-preview-20261110
+  cancel-in-progress: false
+
+jobs:
+  generate-preview:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'run(alchemy-dorama): complete EP01 offline voice preview from cache'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install free reliable Brazilian Portuguese voice and video tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg espeak-ng
+          command -v ffmpeg
+          command -v ffprobe
+          command -v espeak-ng
+      - name: Prepare Remotion, TTS and offline validation
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'requests>=2.31,<3' 'edge-tts>=6,<8' 'pytest>=8,<10'
+          python -m py_compile scripts/alchemy_dorama_cloud_pilot.py
+          python -m pytest -q tests/test_alchemy_dorama_original.py
+          cd motion-remotion
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Restore the original 19 images from the FIRST successful image generation
+        uses: actions/download-artifact@v4
+        with:
+          name: alchemy-princesa-ep01-preview-and-references
+          run-id: 42773709627
+          github-token: ${{ github.token }}
+          path: assets/gerados/alchemy-dorama-original/
+      - name: Verify no new image request is needed
+        run: |
+          set -euo pipefail
+          test -f assets/gerados/alchemy-dorama-original/referencias/REN-01.png
+          test -f assets/gerados/alchemy-dorama-original/referencias/REN-01-ajoelhado.png
+          test -f assets/gerados/alchemy-dorama-original/referencias/ELARA-01.png
+          test -f assets/gerados/alchemy-dorama-original/referencias/VALDREN-01.png
+          echo "[REUSE] ORIGINAL_19_IMAGE_LIBRARY_RESTORED_NO_GENERATION"
+      - name: Produce 175s MP4 using existing images and PT-BR narration
+        env:
+          ALCH_DORAMA_REUSE_ONLY: '1'
+          MAX_IMAGE_CALLS: '0'
+        run: python scripts/alchemy_dorama_cloud_pilot.py
+      - name: Save the actual MP4, QA report and all assets for visual review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: alchemy-princesa-ep01-video-primeira-previa
+          path: |
+            assets/gerados/alchemy-dorama-original/ep01/preview-para-revisao.mp4
+            assets/gerados/alchemy-dorama-original/ep01/qa-preview.json
+            assets/gerados/alchemy-dorama-original/ep01/narracao.mp3
+            assets/gerados/alchemy-dorama-original/ep01/voice_segments/*.mp3
+            assets/gerados/alchemy-dorama-original/referencias/*.png
+          if-no-files-found: warn
+          retention-days: 7
