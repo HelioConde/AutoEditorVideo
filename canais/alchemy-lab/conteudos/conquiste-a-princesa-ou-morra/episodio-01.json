@@ -577,5 +577,24 @@
     "script_ready_for_story_review": true,
     "video_generation_not_started": true,
     "public_upload_not_authorized": true
+  },
+  "animation_pipeline": {
+    "source": "Fofinho EP1 Parte 3 — scripts/kids_emanuelly_todos_videos_v2.py & motion-remotion/src/emanuelly-layer-stage.tsx",
+    "implementation": "scripts/alchemy_dorama_original.py & motion-remotion/src/alchemy-dorama-short.tsx",
+    "renderer_composition": "AlchemyDoramaOriginal",
+    "strategy": "fixed approved background PNGs and transparent sprites on independently animated Remotion 2D layers",
+    "image_asset_manifest": "canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/referencias-v1.json",
+    "native_character_rigging": false,
+    "pose_changes_require_real_approved_variants": true,
+    "strict_visual_consistency": true,
+    "unique_menu_component": true,
+    "flashback_reuses_same_character_and_background_anchors": true,
+    "video_seconds_min": 150,
+    "video_seconds_max": 180,
+    "stage": "integrated_code_not_rendered",
+    "requires_real_approved_anchor_sha256": true,
+    "requires_real_narration_and_timestamps": true,
+    "uses_kids_assets_or_music": false,
+    "automatically_uploads": false
   }
 }
