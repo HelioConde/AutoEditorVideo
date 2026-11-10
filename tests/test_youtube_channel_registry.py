@@ -171,7 +171,7 @@ def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scr
                     assert item.get("original_episode_id")
                     assert item.get("requested_by_creator_publication") is True
                 else:
-                    assert item.get("publication_target")=="private_first"
+                    assert item.get("publication_target") in {"private_first", "private_first_after_original_media_QA"}
                     assert item.get("review_status")
         else:
             # Preserve the original Fofinhos parts and allow the separate

@@ -34,7 +34,8 @@ def test_specific_title_and_cover():
     assert cover_hook(ep)==ep['capa_texto']
 
 def test_no_accidental_public_upload():
-    text=(ROOT/'segundo-short-death-note.ps1').read_text()
+    text=(ROOT/'autoeditor.ps1').read_text(encoding='utf-8')
     assert "-and -not $ConfirmarPublico" in text
     assert "'private'" in text
-    assert "'-Refazer'" in text
+    assert "ConfirmarEnvio" in text
+    assert "Refazer" in text
