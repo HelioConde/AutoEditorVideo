@@ -42,7 +42,7 @@ jobs:
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'run(alchemy): 10s creator-approved pinned reference only'
+      (contains(join(github.event.head_commit.added, ','), 'referencia-aprovada-20261110.png') || contains(join(github.event.head_commit.modified, ','), 'referencia-aprovada-20261110.png'))
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
