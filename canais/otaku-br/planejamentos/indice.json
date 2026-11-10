@@ -1,0 +1,162 @@
+{
+  "schema": "autoeditorvideo/planejamentos-index/v1",
+  "channel": "otaku-br",
+  "mode": "compatibility_index",
+  "description": "Inventario de planejamentos e manifests existentes; caminhos de producao originais preservados ate migracao e testes.",
+  "planos": [
+    {
+      "id": "001-death-note-direcao",
+      "path": "conteudos/001-death-note-direcao.json"
+    },
+    {
+      "id": "001-death-note",
+      "path": "conteudos/001-death-note.json"
+    },
+    {
+      "id": "002-death-note-memoria-direcao",
+      "path": "conteudos/002-death-note-memoria-direcao.json"
+    },
+    {
+      "id": "002-hunter-x-hunter",
+      "path": "conteudos/002-hunter-x-hunter.json"
+    },
+    {
+      "id": "003-fullmetal",
+      "path": "conteudos/003-fullmetal.json"
+    },
+    {
+      "id": "death-note-formatos-60s",
+      "path": "conteudos/death-note-formatos-60s.json"
+    },
+    {
+      "id": "death-note-recaps-60s",
+      "path": "conteudos/death-note-recaps-60s.json"
+    },
+    {
+      "id": "jujutsu-kaisen-recaps-60s",
+      "path": "conteudos/jujutsu-kaisen-recaps-60s.json"
+    },
+    {
+      "id": "otaku-and-channels-nine-replacements-20261108",
+      "path": "conteudos/otaku-and-channels-nine-replacements-20261108.json"
+    },
+    {
+      "id": "otaku-br-5-parallel-test-20261106",
+      "path": "conteudos/otaku-br-5-parallel-test-20261106.json"
+    },
+    {
+      "id": "otaku-br-50-cancel-retry-20261106",
+      "path": "conteudos/otaku-br-50-cancel-retry-20261106.json"
+    },
+    {
+      "id": "otaku-br-50-serial-launch-20261106",
+      "path": "conteudos/otaku-br-50-serial-launch-20261106.json"
+    },
+    {
+      "id": "otaku-br-character-v2-public-approval-20261108",
+      "path": "conteudos/otaku-br-character-v2-public-approval-20261108.json"
+    },
+    {
+      "id": "otaku-br-characters-v2-launch-20261108",
+      "path": "conteudos/otaku-br-characters-v2-launch-20261108.json"
+    },
+    {
+      "id": "otaku-br-publicados-snapshot-20261104",
+      "path": "conteudos/otaku-br-publicados-snapshot-20261104.json"
+    },
+    {
+      "id": "otaku-br-three-character-faithful-v2-20261108",
+      "path": "conteudos/otaku-br-three-character-faithful-v2-20261108.json"
+    },
+    {
+      "id": "otaku-br-three-public-20261107",
+      "path": "conteudos/otaku-br-three-public-20261107.json"
+    },
+    {
+      "id": "otaku-br-three-public-launch-20261107",
+      "path": "conteudos/otaku-br-three-public-launch-20261107.json"
+    },
+    {
+      "id": "otaku-br-three-public-readonly-20261107",
+      "path": "conteudos/otaku-br-three-public-readonly-20261107.json"
+    },
+    {
+      "id": "otaku-multicena-animes-50-curadoria-v4",
+      "path": "conteudos/otaku-multicena-animes-50-curadoria-v4.json"
+    },
+    {
+      "id": "otaku-multicena-br-50-inéditos-reverso-20261106",
+      "path": "conteudos/otaku-multicena-br-50-inéditos-reverso-20261106.json"
+    },
+    {
+      "id": "otaku-multicena-grade-50-a",
+      "path": "conteudos/otaku-multicena-grade-50-a.json"
+    },
+    {
+      "id": "otaku-multicena-grade-50-b",
+      "path": "conteudos/otaku-multicena-grade-50-b.json"
+    },
+    {
+      "id": "otaku-multicena-insights-editor-v2",
+      "path": "conteudos/otaku-multicena-insights-editor-v2.json"
+    },
+    {
+      "id": "otaku-multicena-teste-90s-v1",
+      "path": "conteudos/otaku-multicena-teste-90s-v1.json"
+    },
+    {
+      "id": "otaku-production-reservations",
+      "path": "conteudos/otaku-production-reservations.json"
+    },
+    {
+      "id": "death-note",
+      "path": "canais/otaku-br/planejamentos/death-note/death-note.json"
+    },
+    {
+      "id": "plano-death-note-original",
+      "path": "canais/otaku-br/planejamentos/death-note/plano-death-note-original.json"
+    }
+  ],
+  "shared_manifest_paths": [
+    "conteudos/games-alchemy-gamer-resume-20261105.json",
+    "conteudos/games-alchemy-native-v3-resume-20261105.json",
+    "conteudos/games-alchemy-native-v3-run-20261105.json",
+    "conteudos/games-alchemy-native-v3-upload-20261105.json",
+    "conteudos/games-alchemy-private-upload-20261105.json",
+    "conteudos/games-alchemy-reference-v4-private-upload-result-20261105.json",
+    "conteudos/games-alchemy-reference-v4-run-20261105.json",
+    "conteudos/games-alchemy-six-clean-internal-tags-20261105.json",
+    "conteudos/games-alchemy-six-private-upload-result-20261105.json",
+    "conteudos/games-alchemy-six-recut-v2-run-20261105.json",
+    "conteudos/games-alchemy-six-recut-v2-upload-20261105.json",
+    "conteudos/games-alchemy-six-thumbnail-retry-20261105.json",
+    "conteudos/games-alchemy-v3-audit-20261105.json",
+    "conteudos/games-alchemy-v3-six-private-result-20261105.json",
+    "conteudos/games-alchemy-youtube-processing-audit-20261105.json",
+    "conteudos/lote-12-estatico-90s-20261107.json",
+    "conteudos/lote-15-br-en-private-recovery-launch-20261108.json",
+    "conteudos/lote-15-canais-20261108.json",
+    "conteudos/lote-15-canais-20261109-launch.json",
+    "conteudos/lote-15-canais-20261109.json",
+    "conteudos/lote-15-canais-launch-20261108.json",
+    "conteudos/lote-15-janela21-20261108-launch.json",
+    "conteudos/lote-15-janela21-20261108.json",
+    "conteudos/lote-15-public-approval-20261108.json",
+    "conteudos/lote-15-public-scope-check-launch-20261108.json",
+    "conteudos/lote-24-shorts.json",
+    "conteudos/lote-6-games-alchemy-execucao-20261105.json",
+    "conteudos/lote-6-games-alchemy-producao-v1.json",
+    "conteudos/lote-6-games-alchemy-recut-v2.json",
+    "conteudos/nine-visual-replacements-v2-launch-20261108.json",
+    "conteudos/remaining-nine-static90-launch-20261107.json",
+    "conteudos/remaining-nine-static90-recovery-launch-20261107.json",
+    "conteudos/remaining-nine-static90-upload-recovery-20261107.json",
+    "conteudos/seo-tag-privacy-check-20261105.json",
+    "conteudos/testes-animados-5-en.json",
+    "conteudos/testes-animados-5.json",
+    "conteudos/trending-single-br-en-20261109.json",
+    "conteudos/trending-single-br-en-launch-20261109.json",
+    "conteudos/youtube-other-videos-readonly-check-20261108.json",
+    "conteudos/youtube-visibility-audit-launch-20261108.json"
+  ]
+}
