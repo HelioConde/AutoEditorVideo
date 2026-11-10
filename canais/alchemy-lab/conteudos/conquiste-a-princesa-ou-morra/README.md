@@ -98,3 +98,18 @@ Para gerar localmente com proxy de imagem devidamente configurado:
     .\autoeditor.ps1 -Canal alchemy -Acao dorama-teste10-gerar -Id alchemy-114-conquiste-princesa-ep01
 
 IMPORTANTE: gerar personagem isolado não proporciona por si só animação real de mãos/cabeça/boca. Se este teste de 10s não parecer convincente, criar partes/poses derivadas da imagem-mestra, validar a identidade e aplicar rigging individual ANTES de produzir novo episódio longo.
+
+
+## Referência canônica do criador — substituição da arte-mestra (10/11/2026)
+
+**Criador rejeitou o teste anterior de 10 segundos**, porque o motor gerou um quadro-mestre novo por prompt sem utilizar literalmente a imagem aprovada. A referência válida passa a ser EXATAMENTE o PNG de 941×1672 exibido no chat com Ren ajoelhado à esquerda, Valdren no trono, Elara à direita, o menu de missões, a espada em primeiro plano e pequeno flashback no alto. Para a cena reconstruída, remover as sobreposições/flashback pela edição do fundo, manter os personagens e compor a UI separadamente; nunca gerar outro quadro-mestre.
+
+**Caminho obrigatório de origem no repositório:** `canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/referencia-aprovada-20261110.png`.
+
+**SHA-256 exato do PNG enviado pelo criador:** `4b3f9ebf534537b1fb862d8df0167ca5730007b485ae04d40e3ce055a518c0b2`.
+
+O arquivo binário original **precisa ser colocado neste caminho**, pois não deve ser reconstruído, recomprimido, renomeado erroneamente nem substituído por imagem semelhante. O script `scripts/alchemy_dorama_master_10s.py` verifica este SHA antes de usar qualquer chamada ao proxy, converte o mesmo PNG em canvas 1024×1536 por padding lateral para preservar a composição e somente então extrai `background`, `ren`, `king`, `elara` e `sword` por cinco edições reais da MESMA referência. Se faltar o original, a execução BLOQUEIA sem consumir imagens. **Não mais chamar `/v1/images/generations` para criar a arte-mestra.** Limite da retomada: 5 edições; não 6.
+
+**Status da referência:** aprovação editorial da aparência feita pelo criador; a inclusão dos bytes originais no GitHub deve ser verificada antes de rodar o workflow. A arte antiga do run 42781369081 fica como arquivo histórico rejeitado e NÃO substitui este PNG. O MP4 antigo não é reutilizado.
+
+**Comando após incluir o arquivo na pasta:** `python scripts/alchemy_dorama_master_10s.py --acao gerar` (com proxy de imagens ativo e `MAX_IMAGE_CALLS=5`, `IMAGE_MODEL=gpt-image-2`). O workflow `alchemy-dorama-master-10s-test.yml` só produz a nova prévia na main sob o commit `run(alchemy): 10s creator-approved pinned reference only`; não publica vídeos no YouTube.
