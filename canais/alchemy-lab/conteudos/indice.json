@@ -5,8 +5,12 @@
   "language": "pt-BR",
   "role": "read_only_navigation",
   "canonical_manifest_paths": [
-    "conteudos/alchemy-lab-piloto-3-nichos-9-videos-20261109.json"
+    "conteudos/alchemy-lab-piloto-3-nichos-9-videos-20261109.json",
+    "canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/episodio-01.json"
   ],
   "production_manifests_moved": false,
-  "upload_authorized": false
+  "upload_authorized": false,
+  "notes": {
+    "anime_dorama_pilot": "Isolated experimental original fiction series; content file is editorial only, no new workflow and no auto-upload. Canon reference at canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/README.md."
+  }
 }
