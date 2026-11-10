@@ -8,6 +8,7 @@ on:
       - 'canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/referencia-aprovada-20261110.png'
 
 # One-shot test of EXACT creator-pinned PNG plus five anchored image edits.
+# CI regression of immutable layer-cache snapshot fix; image calls remain gated.
 # Regression test fixture fixed; run after tests pass, never before.
 # No schedule, dispatch, YouTube token, or change to Fofinho pipelines.
 permissions:
