@@ -2,7 +2,7 @@
 """Alchemy Lab: one original master scene -> edits from THE SAME master -> 10s Remotion.
 
 Deliberately independent of the 175s episode and Kids renderer.
-One text-to-image request and five image-edits, ALL from master.png.
+One creator-approved, SHA-pinned source image and five image-edits, ALL from master.png.
 No YouTube SDK, no upload, no paid voice, no secrets written to artifacts.
 This only produces an unreviewed LOCAL preview and its visual evidence.
 """
@@ -37,8 +37,13 @@ SIZE = (1024, 1536)
 FRAMES = 300
 FPS = 30
 EPISODE = "alchemy-114-conquiste-princesa-ep01"
-MAX_CALLS = 6
+MAX_CALLS = 5
 ASSETS = ("master", "background", "ren", "king", "elara", "sword")
+# EXACT SHA-256 of the creator's approved 941x1672 PNG shown on 2026-11-10.
+# No text-to-image master generation allowed: use the actual source bytes.
+REFERENCE_PATH = ROOT / "canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/referencia-aprovada-20261110.png"
+REFERENCE_SHA256 = "4b3f9ebf534537b1fb862d8df0167ca5730007b485ae04d40e3ce055a518c0b2"
+REFERENCE_SIZE = (941, 1672)
 
 MASTER_PROMPT = (
     "Create exactly ONE original complete cinematic Japanese anime fantasy "
@@ -223,47 +228,84 @@ def atomic_file(path: Path, data: bytes) -> None:
     tmp.replace(path)
 
 
+def prepare_pinned_master() -> tuple[bytes, str]:
+    """Use the creator's EXACT approved original, never regenerate a master.
+
+    Fit the 9:16 user image inside the proxy's 2:3 reference canvas with
+    side padding; Remotion's center-crop restores the original composition.
+    The original is 941x1672 RGB; padding adds no newly invented imagery.
+    """
+    if not REFERENCE_PATH.is_file():
+        raise StageError("APPROVED_REFERENCE_NOT_ON_GITHUB_UPLOAD_ORIGINAL_PNG_FIRST")
+    original_bytes = REFERENCE_PATH.read_bytes()
+    original_sha = digest(original_bytes)
+    if original_sha != REFERENCE_SHA256:
+        raise StageError("REFERENCE_SHA256_MISMATCH_DO_NOT_SUBSTITUTE")
+    try:
+        with Image.open(io.BytesIO(original_bytes)) as image:
+            image.load()
+            if image.format != "PNG" or image.size != REFERENCE_SIZE:
+                raise StageError("APPROVED_REFERENCE_FORMAT_OR_SIZE_CHANGED")
+            final = ImageOps.pad(image.convert("RGB"), SIZE,
+                                 method=Image.Resampling.LANCZOS,
+                                 color=(15, 16, 27), centering=(.5, .5))
+            output = io.BytesIO()
+            final.save(output, format="PNG")
+    except (OSError, ValueError):
+        raise StageError("APPROVED_REFERENCE_INVALID_PNG") from None
+    return output.getvalue(), original_sha
+
+
 def ensure_images(reuse: bool) -> dict:
+    # Validate reference authenticity even if cached assets already exist.
+    master_png, source_hash = prepare_pinned_master()
+    expected_hash = digest(master_png)
     PROJECT.mkdir(parents=True, exist_ok=True)
     expected = PROJECT / "master.png"
     secret = "" if reuse else os.environ.get("PROXY_API_KEY", "")
-    if not reuse and len(secret) < 15:
-        raise StageError("PROXY_API_KEY_NOT_CONFIGURED")
     metadata = PROJECT / "manifest-master-layers.json"
     old = json.loads(metadata.read_text(encoding="utf-8")) if metadata.exists() else {}
     calls = 0
-    result = {"schema": "alchemy-dorama/master-to-layers-10s/v1",
+    result = {"schema": "alchemy-dorama/master-to-layers-10s/v2",
               "channel": "alchemy", "episode": EPISODE,
-              "source_strategy": "ONE_GENERATION_THEN_EDITS_OF_SAME_MASTER",
+              "source_strategy": "CREATOR_APPROVED_PINNED_IMAGE_THEN_SAME_SOURCE_EDITS",
+              "original_sha256": source_hash,
               "size": list(SIZE), "assets": {}, "image_calls_this_run": 0,
               "visual_review": "PENDING", "publication": "DISABLED"}
     if not expected.exists():
         if reuse:
-            raise StageError("SOURCE_MASTER_NOT_CACHED")
-        raw = call_image(secret, MASTER_PROMPT, None, False)
-        calls += 1
-        png, probe = validate_png(raw, False, "master")
-        atomic_file(expected, png)
-    else:
-        _, probe = validate_png(expected.read_bytes(), False, "master")
+            raise StageError("PREPARED_MASTER_MISSING_REUSE_BLOCKED")
+        atomic_file(expected, master_png)
+    elif sha_file(expected) != expected_hash:
+        raise StageError("CACHE_MASTER_DIFFERS_FROM_APPROVED_IMAGE")
+    _, probe = validate_png(expected.read_bytes(), False, "master")
     master_hash = sha_file(expected)
-    if old and old.get("master_sha256") != master_hash:
-        raise StageError("CACHE_WRONG_MASTER_SHA256")
+    if old and (old.get("master_sha256") != master_hash or
+                old.get("original_sha256") != source_hash):
+        raise StageError("CACHE_WRONG_CREATOR_REFERENCE_SHA256")
     result["master_sha256"] = master_hash
     result["assets"]["master"] = {"path": str(expected.relative_to(ROOT)),
                                   "sha256": master_hash, **probe,
-                                  "source": "images/generations"}
+                                  "source": "creator_approved_original_png"}
+    # Persist the canonical SHA before costly /images/edits; only the
+    # anchored source can seed layer-cache reuse, not independent prompts.
+    if not old:
+        atomic_file(metadata, (json.dumps(result, ensure_ascii=False, indent=2) +
+                               "\n").encode("utf-8"))
     for label, prompt in EDIT_PROMPTS.items():
         location = PROJECT / (label + ".png")
         previous = old.get("assets", {}).get(label, {})
         if location.exists():
-            if not previous or previous.get("master_sha256") != master_hash or (
+            if (not previous or previous.get("master_sha256") != master_hash or
                     previous.get("sha256") != sha_file(location)):
                 raise StageError("CACHED_LAYER_WITHOUT_MATCHING_SOURCE_" + label)
             png, probe = validate_png(location.read_bytes(), label != "background", label)
         else:
             if reuse:
                 raise StageError("LAYER_MISSING_IN_REUSE_MODE_" + label)
+            if len(secret) < 15:
+                raise StageError("PROXY_API_KEY_NOT_CONFIGURED")
+            # All five API calls are edits of the same approved image.
             raw = call_image(secret, prompt, expected, label != "background")
             calls += 1
             png, probe = validate_png(raw, label != "background", label)
@@ -274,12 +316,12 @@ def ensure_images(reuse: bool) -> dict:
             "source": "images/edits", **probe,
             "approved": False,
         }
-        # Persist paid bytes and chain of custody between API calls.
         result["image_calls_this_run"] = calls
         atomic_file(metadata, (json.dumps(result, ensure_ascii=False, indent=2) +
                                "\n").encode("utf-8"))
-        print("[MASTER10] "+label+": derived from SAME master sha256="+master_hash[:12],
-              flush=True)
+        print("[MASTER10] "+label+": derived from PINNED creator reference="+
+              source_hash[:12], flush=True)
+        old = result
     if calls > MAX_CALLS:
         raise StageError("IMAGE_LIMIT_EXCEEDED")
     result["image_calls_this_run"] = calls
@@ -410,12 +452,14 @@ def main() -> int:
     cfg = args.parse_args()
     if cfg.acao == "planejar":
         print(json.dumps({
-            "strategy": "one complete image + five same-master reference edits",
+            "strategy": "exact creator-approved image (SHA-256 pinned) + five same-source edits",
             "master": "master.png",
             "transparent_layers": ["ren.png", "king.png", "elara.png", "sword.png"],
             "opaque_background": "background.png",
             "all_edits_use_master_sha256": True,
             "image_call_limit": MAX_CALLS,
+            "approved_source_file": str(REFERENCE_PATH.relative_to(ROOT)),
+            "approved_source_sha256": REFERENCE_SHA256,
             "duration_seconds": 10, "render_composition": "AlchemyDoramaMaster10s",
             "no_youtube_upload": True,
         }, ensure_ascii=False, indent=2))
