@@ -1,0 +1,55 @@
+name: Alchemy Dorama — animação camadas offline
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/alchemy_dorama_original.py'
+      - 'autoeditor.ps1'
+      - 'canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/**'
+      - 'motion-remotion/src/alchemy-dorama-short.tsx'
+      - 'motion-remotion/src/root.tsx'
+      - 'motion-remotion/package.json'
+      - 'tests/test_alchemy_dorama_original.py'
+      - '.github/workflows/alchemy-dorama-offline.yml'
+  pull_request:
+    paths:
+      - 'scripts/alchemy_dorama_original.py'
+      - 'autoeditor.ps1'
+      - 'canais/alchemy-lab/conteudos/conquiste-a-princesa-ou-morra/**'
+      - 'motion-remotion/src/alchemy-dorama-short.tsx'
+      - 'motion-remotion/src/root.tsx'
+      - 'motion-remotion/package.json'
+      - 'tests/test_alchemy_dorama_original.py'
+      - '.github/workflows/alchemy-dorama-offline.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  offline-python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install test tools (no media/API requests)
+        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13'
+      - name: Validate 16 scenes, references, channel and fail-closed render
+        run: python -m pytest -q tests/test_alchemy_dorama_original.py
+      - name: List missing original image/audio anchors without generating
+        run: python scripts/alchemy_dorama_original.py --acao planejar
+  typescript:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - working-directory: motion-remotion
+        run: npm install --no-audit --no-fund
+      - working-directory: motion-remotion
+        run: npm run typecheck
