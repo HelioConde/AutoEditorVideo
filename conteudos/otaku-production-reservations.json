@@ -1926,6 +1926,19 @@
       "source": "creator_requested_three_new_videos_each_of_five_channels_2026-11-09",
       "publication_target": "private_first_after_original_render_and_QA",
       "note": "Tema inédito: Como sincronizar legendas com cada palavra. Geração canônica AutoEditorVideo; conferir reservas, mídia, personagens, direitos e ID OAuth correto. Não alterar ou reenviar vídeos anteriores. Sem publicação pública automática."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-114-conquiste-princesa-ep01",
+      "status": "reserved",
+      "reservation_owner": "alchemy_dorama_original_20261110",
+      "source": "creator_request_2026-11-10_original_dorama_alchemy_lab",
+      "publication_target": "none_editorial_and_storyboard_draft_only",
+      "requested_by_creator_publication": false,
+      "experiment_id": "alchemy-dorama-original-20261110",
+      "story_title": "Conquiste a Princesa ou Morra!",
+      "episode_number": 1,
+      "note": "Teste editorial isolado de ficcao anime com sistema de missoes, flashbacks, 150-180 s e continuidade visual tipo Fofinhos. Sem geracao de imagem nem video, sem upload, sem alterar fila/automações dos cinco canais. Validar roteiro, direitos e referencias antes da producao."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
