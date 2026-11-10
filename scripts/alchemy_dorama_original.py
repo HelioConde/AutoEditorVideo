@@ -72,6 +72,47 @@ MOTIONS = {
     (15, "ELARA-01"): "walk",
     (16, "ELARA-01"): "look",
 }
+# Same Fofinho Part-3 strategy: different approved pose PNGs for each action.
+# All derived images must prove lineage to a fixed canonical character SHA.
+POSES_BY_SCENE = {
+    "REN-01": {
+        1:"REN-01-ajoelhado", 2:"REN-01-ajoelhado",
+        3:"REN-01-treinando", 4:"REN-01-treinando",
+        5:"REN-01-ajoelhado",
+        6:"REN-01-trabalhando", 7:"REN-01-trabalhando", 8:"REN-01-trabalhando",
+        9:"REN-01-ajoelhado", 10:"REN-01-assustado", 11:"REN-01-assustado",
+        12:"REN-01-apontando", 13:"REN-01-apontando",
+        14:"REN-01-ajoelhado", 15:"REN-01-ajoelhado", 16:"REN-01-assustado",
+    },
+    "ELARA-01": {
+        2:"ELARA-01-observando", 9:"ELARA-01-observando",
+        11:"ELARA-01-observando", 12:"ELARA-01-observando",
+        14:"ELARA-01-observando", 15:"ELARA-01-firme", 16:"ELARA-01-firme",
+    },
+    "VALDREN-01": {
+        1:"VALDREN-01-julgando", 2:"VALDREN-01-julgando",
+        5:"VALDREN-01-julgando", 9:"VALDREN-01-julgando",
+        12:"VALDREN-01-julgando", 15:"VALDREN-01-julgando",
+    },
+}
+
+
+def selected_asset(number: int, anchor: str) -> str:
+    return POSES_BY_SCENE.get(anchor, {}).get(number, anchor)
+
+
+def needed_keys(board: dict) -> set[str]:
+    needed: set[str] = set()
+    for shot in board["scenes"]:
+        needed.add(shot["background_anchor"])
+        originals = shot["character_anchors"] + [
+            x for x in shot["item_anchors"] if x not in {"UI-01", "UI-02"}]
+        for anchor in originals:
+            needed.add(anchor)
+            needed.add(selected_asset(shot["number"], anchor))
+    return needed
+
+
 CAMERAS = {
     1: "slow-push", 3: "drift-right", 4: "slow-push",
     6: "slow-push", 7: "slow-push", 9: "slow-push",
@@ -140,11 +181,7 @@ def anchor_map(data: dict) -> dict:
 
 
 def inspect_assets(board: dict, refs: dict, ui: dict) -> list[str]:
-    required = set()
-    for shot in board["scenes"]:
-        required.add(shot["background_anchor"])
-        required.update(shot["character_anchors"])
-        required.update(x for x in shot["item_anchors"] if x not in {"UI-01", "UI-02"})
+    required = needed_keys(board)
     missing = []
     for key in sorted(required):
         item = refs.get(key)
@@ -162,6 +199,13 @@ def inspect_assets(board: dict, refs: dict, ui: dict) -> list[str]:
         if not location.is_file() or sha256(location) != digest:
             missing.append(key + ":missing_or_hash_mismatch")
             continue
+        parent_id = item.get("source_id")
+        if parent_id:
+            parent = refs.get(parent_id)
+            if (not parent or item.get("source_sha256") != parent.get("sha256")
+                    or not parent.get("approved")):
+                missing.append(key + ":parent_hash_or_approval_mismatch")
+                continue
         if key not in BACKGROUND:
             try:
                 from PIL import Image
@@ -237,11 +281,7 @@ def prepare() -> dict:
         raise ValueError("CAPTIONS_OUTSIDE_REAL_AUDIO")
 
     PUBLIC.mkdir(parents=True, exist_ok=True)
-    required = set()
-    for scene in board["scenes"]:
-        required.add(scene["background_anchor"])
-        required.update(scene["character_anchors"])
-        required.update(a for a in scene["item_anchors"] if a not in ("UI-01", "UI-02"))
+    required = needed_keys(board)
     for key in sorted(required):
         source = ROOT / refs[key]["file"]
         destination = PUBLIC / (key + ".png")
@@ -263,13 +303,14 @@ def prepare() -> dict:
             v for v in scene["item_anchors"] if v not in ("UI-01", "UI-02")]
         for key in ids:
             # Every sprite uses the ORIGINAL asset, never a newly invented face.
-            if key not in refs:
-                raise ValueError("MISSING_REFERENCE: " + key)
+            pose_key = selected_asset(number, key)
+            if key not in refs or pose_key not in refs:
+                raise ValueError("MISSING_REFERENCE_OR_POSE: " + key)
             if key not in POSITIONS.get(background, {}):
                 raise ValueError("MISSING_LAYOUT_FOR_" + background + "_" + key)
             x, y, width, z = POSITIONS[background][key]
             sprites.append({
-                "anchorId": key, "image": uri(key),
+                "anchorId": key, "poseAssetId": pose_key, "image": uri(pose_key),
                 "x": x, "y": y, "width": width, "zIndex": z,
                 "motion": MOTIONS.get((number, key), "still"),
             })
