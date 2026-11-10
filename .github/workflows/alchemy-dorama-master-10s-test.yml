@@ -1,0 +1,140 @@
+name: Alchemy Dorama - teste 10s imagem mestra e personagens separados
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/alchemy-dorama-master-10s-test.yml'
+
+# One-shot test of one master generation + five anchored image edits.
+# No schedule, dispatch, YouTube token, or change to Fofinho pipelines.
+permissions:
+  contents: read
+
+concurrency:
+  group: alchemy-dorama-single-master-10s-20261110
+  cancel-in-progress: false
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install offline test requirements
+        run: python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13' 'requests>=2.31,<3'
+      - name: Validate master SHA, transparent layers, time and no upload
+        run: |
+          python -m py_compile scripts/alchemy_dorama_master_10s.py
+          python -m pytest -q tests/test_alchemy_dorama_master_10s.py
+          python scripts/alchemy_dorama_master_10s.py --acao planejar
+
+  validate-environment:
+    needs: offline-tests
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'run(alchemy): 10s one master plus transparent character layers'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check protected image generation only available on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/image_env_policy_guard.py
+
+  generate-master-and-render-10s:
+    needs: [offline-tests, validate-environment]
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'run(alchemy): 10s one master plus transparent character layers'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    environment: image-generation
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: 10/chatgpt-codex-proxy
+          ref: 1da5476e46ef62830d7016de2a931b0b8270a6c4
+          path: pinned-native-go-proxy
+          persist-credentials: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: pinned-native-go-proxy/go.mod
+          cache: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install tools and TypeScript
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'requests>=2.31,<3'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          cd motion-remotion
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Compile pinned Go proxy without secrets
+        working-directory: pinned-native-go-proxy
+        run: CGO_ENABLED=0 go build -trimpath -o "$RUNNER_TEMP/alchemy-master10-proxy" ./cmd/api
+      - name: Generate master and SAME-SOURCE derived RGBA PNGs; render 10s local preview
+        shell: bash
+        env:
+          PROXY_ACCOUNTS_JSON: ${{ secrets.PROXY_ACCOUNTS_JSON }}
+          PROXY_API_KEY: ${{ secrets.PROXY_API_KEY }}
+          IMAGE_MODEL: ${{ vars.IMAGE_MODEL }}
+          MAX_IMAGE_CALLS: '6'
+        run: |
+          set -euo pipefail
+          umask 077
+          data_dir="$RUNNER_TEMP/alchemy-master10-private-proxy"
+          test ! -e "$data_dir"
+          mkdir -m 700 "$data_dir"
+          proxy_pid=''
+          cleanup() {
+            if [ -n "$proxy_pid" ]; then kill "$proxy_pid" 2>/dev/null || true; fi
+            rm -rf -- "$data_dir"
+            rm -f -- "$RUNNER_TEMP/alchemy-master10-proxy.log"
+          }
+          trap cleanup EXIT
+          python scripts/proxy_accounts_private_stage.py "$data_dir"
+          unset PROXY_ACCOUNTS_JSON
+          DATA_DIR="$data_dir" DEBUG_LOG_PAYLOADS=false GIN_MODE=release PORT=8080 \
+            "$RUNNER_TEMP/alchemy-master10-proxy" > "$RUNNER_TEMP/alchemy-master10-proxy.log" 2>&1 &
+          proxy_pid=$!
+          python scripts/alchemy_dorama_master_10s.py --acao gerar
+          echo '[ALCHEMY] local MP4 only; no image uploads and no YouTube publication'
+      - name: Save the source image, all layers, QA comparison and MP4
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: alchemy-dorama-10s-imagem-mestra-camadas
+          path: |
+            assets/gerados/alchemy-dorama-original/teste10/*.png
+            assets/gerados/alchemy-dorama-original/teste10/*.jpg
+            assets/gerados/alchemy-dorama-original/teste10/*.json
+            assets/gerados/alchemy-dorama-original/teste10/*.mp4
+            assets/gerados/alchemy-dorama-original/teste10/*.wav
+          if-no-files-found: warn
+          retention-days: 7
