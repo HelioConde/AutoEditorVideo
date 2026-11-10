@@ -113,6 +113,7 @@ VOICE = {"NARRADOR":"pt-BR-AntonioNeural","REN":"pt-BR-FabioNeural",
          "OREN":"pt-BR-DonatoNeural","INSTRUTOR":"pt-BR-HumbertoNeural",
          "SISTEMA":"pt-BR-BrendaNeural"}
 FRAME_RATE = 30
+VOICE_ENGINES_USED: set[str] = set()
 OUTPUT = ROOT / "assets/gerados/alchemy-dorama-original/ep01"
 ART = ROOT / "assets/gerados/alchemy-dorama-original/referencias"
 PUBLIC = ROOT / "motion-remotion/public/generated/alchemy-dorama-original/ep01"
@@ -251,24 +252,63 @@ def image_stage():
 
 
 async def create_voice(lines: list[dict], path: Path):
-    if path.exists():
+    """Edge TTS when available, deterministic offline Portuguese fallback.
+
+    This offline lane is for an editorial test preview: eSpeak NG voice is
+    provisional. Never turn TTS service failure into a silent/unvoiced video.
+    """
+    if path.exists() and path.stat().st_size > 1000:
         return
-    path.parent.mkdir(parents=True,exist_ok=True)
-    # Microsoft Edge TTS is a separate free TTS network dependency; no Google/YouTube tokens.
-    for attempt, rate in enumerate(("", "+8%")):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    speaker = lines[0]["speaker"]
+    spoken = " ".join(item["text"] for item in lines).strip()
+    if not spoken:
+        raise PilotError("TTS_EMPTY_SCRIPT")
+    voice = VOICE.get(speaker, VOICE["NARRADOR"])
+    # The API expects signed rates: the previous empty rate was invalid.
+    for rate in ("+0%", "+8%"):
         try:
-            speaker = lines[0]["speaker"]
-            voice = VOICE.get(speaker,VOICE["NARRADOR"])
-            communic = edge_tts.Communicate(" ".join(item["text"] for item in lines),
-                                           voice=voice,rate=rate)
-            await communic.save(str(path))
+            communicate = edge_tts.Communicate(spoken, voice=voice, rate=rate)
+            await communicate.save(str(path))
             if path.stat().st_size < 1000:
-                raise PilotError("TTS_EMPTY_AUDIO")
+                raise ValueError("Empty generated audio")
+            VOICE_ENGINES_USED.add("edge-tts")
             return
         except Exception:
             path.unlink(missing_ok=True)
-            if attempt == 1:
-                raise PilotError("TTS_SERVICE_UNAVAILABLE") from None
+
+    # GitHub-hosted runner can block Microsoft's voice endpoint. Keep the
+    # original images and the episode alive with a fully offline renderer.
+    binary = shutil.which("espeak-ng")
+    if not binary:
+        raise PilotError("TTS_EDGE_OFFLINE_FALLBACK_NOT_INSTALLED")
+    pitches = {
+        "NARRADOR": 48, "REN": 57, "VALDREN": 28, "ELARA": 67,
+        "OREN": 39, "INSTRUTOR": 35, "SISTEMA": 75
+    }
+    offline_wav = path.with_suffix(".offline.wav")
+    try:
+        subprocess.run(
+            [binary, "-v", "pt-br", "-s", "165", "-p",
+             str(pitches.get(speaker, 48)), "-w", str(offline_wav), spoken],
+            check=True, timeout=120, stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        subprocess.run(
+            ["ffmpeg", "-y", "-v", "error", "-i", str(offline_wav),
+             "-codec:a", "libmp3lame", "-qscale:a", "3", str(path)],
+            check=True, timeout=120, stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        if not path.exists() or path.stat().st_size < 1000:
+            raise PilotError("OFFLINE_TTS_OUTPUT_INVALID")
+        VOICE_ENGINES_USED.add("espeak-ng-pt-br-provisional")
+        print("[VOZ] Segmento "+path.stem+" gerado em portugues (motor offline provisório)",flush=True)
+    except (OSError, subprocess.SubprocessError):
+        path.unlink(missing_ok=True)
+        raise PilotError("TTS_EDGE_AND_OFFLINE_ENGINE_FAILED") from None
+    finally:
+        offline_wav.unlink(missing_ok=True)
 
 
 def clip_pcm(path:Path) -> bytes:
@@ -401,6 +441,9 @@ def render(props:Path,proofs:dict, dur:list[float]) -> dict:
             "duration_seconds":round(d,2),"shots":16,
             "video_sha256":sha256(PREVIEW.read_bytes()).hexdigest(),
             "reference_sha256":proofs,"voice_segment_duration_seconds":dur,
+            "voice_engines_used":sorted(VOICE_ENGINES_USED),
+            "voice_quality":"provisional_review_required" if
+                any(v.startswith("espeak") for v in VOICE_ENGINES_USED) else "review_required",
             "status":"real_ai_original_art_unreviewed_preview",
             "artistic_human_review":"PENDING",
             "music":"none","youtube_uploads":0,
