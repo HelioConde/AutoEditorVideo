@@ -1,0 +1,12 @@
+{
+  "schema": "autoeditorvideo/channel-content-index/v1",
+  "channel": "kids",
+  "name": "Emanuelly Kids / Manu Kids",
+  "language": "pt-BR",
+  "role": "read_only_navigation",
+  "canonical_manifest_paths": [
+    "conteudos/kids-experimento-12-nichos-20261109.json"
+  ],
+  "production_manifests_moved": false,
+  "upload_authorized": false
+}
