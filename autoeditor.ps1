@@ -33,7 +33,7 @@ function Show-Help {
 }
 
 function Invoke-Internal([string]$File, [hashtable]$Params) {
-  $path=Join-Path $root $File
+  $path=Join-Path (Join-Path $root 'scripts\powershell') $File
   if(-not (Test-Path -LiteralPath $path -PathType Leaf)){throw "Motor ausente: $File"}
   Write-Host "[AUTOEDITOR] $File" -ForegroundColor Cyan
   & $path @Params
@@ -45,7 +45,7 @@ switch($Canal) {
   'diagnostico' {
     Write-Host 'Verificando entradas principais:'
     foreach($file in @('criar-publicar-short.ps1','canal-ingles.ps1','canal-gamer.ps1','gerar-historia-kids.ps1','fofinhos-ep01.ps1')) {
-      Write-Host ("{0}: {1}" -f $file, $(if(Test-Path (Join-Path $root $file)){'OK'}else{'AUSENTE'}))
+      Write-Host ("{0}: {1}" -f $file, $(if(Test-Path (Join-Path (Join-Path $root 'scripts\powershell') $file)){'OK'}else{'AUSENTE'}))
     }
     break
   }
