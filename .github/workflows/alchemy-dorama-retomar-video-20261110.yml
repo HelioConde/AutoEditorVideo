@@ -1,0 +1,86 @@
+name: Alchemy Dorama - retomar EP01 do cache (zero imagens novas)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/alchemy-dorama-retomar-video-20261110.yml'
+
+# Specific approved creator request: resume first Alchemy pilot video from
+# pre-existing original art. NO new image requests, NO YouTube upload.
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: alchemy-princesa-ep01-resume-existing-art-once-20261110
+  cancel-in-progress: false
+
+jobs:
+  resume-preview:
+    if: >-
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main' &&
+      github.run_attempt == 1 &&
+      github.event.head_commit.message == 'run(alchemy-dorama): resume episode 1 from archived images'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install free audio/video tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Install TTS, PNG validation and Remotion tools
+        run: |
+          python -m pip install 'Pillow>=10,<13' 'requests>=2.31,<3' 'edge-tts>=6,<8' 'pytest>=8,<10'
+          cd motion-remotion
+          npm ci --no-audit --no-fund
+          npm run typecheck
+      - name: Verify storyline/reservation before using cached assets
+        run: |
+          python -m py_compile scripts/alchemy_dorama_cloud_pilot.py
+          python -m pytest -q tests/test_alchemy_dorama_original.py
+      - name: Download original 19 reference assets (existing artifact, no new AI)
+        uses: actions/download-artifact@v4
+        with:
+          name: alchemy-princesa-ep01-preview-and-references
+          run-id: 42773709627
+          github-token: ${{ github.token }}
+          path: assets/gerados/alchemy-dorama-original/
+      - name: Ensure original references are present and zero image calls
+        run: |
+          set -euo pipefail
+          test -f assets/gerados/alchemy-dorama-original/referencias/REN-01.png
+          test -f assets/gerados/alchemy-dorama-original/referencias/ELARA-01.png
+          test -f assets/gerados/alchemy-dorama-original/referencias/VALDREN-01-julgando.png
+          echo '[CACHE] EXISTING_ORIGINAL_REFERENCES_PRESENT'
+          echo '[CACHE] NO_IMAGE_API_AND_NO_NEW_IMAGE_GENERATION'
+      - name: Generate narration and render original 175s anime video from cache
+        env:
+          ALCH_DORAMA_REUSE_ONLY: '1'
+          MAX_IMAGE_CALLS: '0'
+        run: python scripts/alchemy_dorama_cloud_pilot.py
+      - name: Retain MP4, QA, source narration and original references for revisions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: alchemy-princesa-ep01-mp4-resume-no-new-images
+          path: |
+            assets/gerados/alchemy-dorama-original/ep01/preview-para-revisao.mp4
+            assets/gerados/alchemy-dorama-original/ep01/qa-preview.json
+            assets/gerados/alchemy-dorama-original/ep01/narracao.mp3
+            assets/gerados/alchemy-dorama-original/ep01/voice_segments/*.mp3
+            assets/gerados/alchemy-dorama-original/referencias/*.png
+          if-no-files-found: warn
+          retention-days: 7
