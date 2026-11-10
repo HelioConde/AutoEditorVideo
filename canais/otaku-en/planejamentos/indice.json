@@ -1,0 +1,66 @@
+{
+  "schema": "autoeditorvideo/planejamentos-index/v1",
+  "channel": "otaku-en",
+  "mode": "compatibility_index",
+  "description": "Inventario de planejamentos e manifests existentes; caminhos de producao originais preservados ate migracao e testes.",
+  "planos": [
+    {
+      "id": "otaku-br-publicados-en-curadoria-v3",
+      "path": "conteudos/otaku-br-publicados-en-curadoria-v3.json"
+    },
+    {
+      "id": "otaku-reframe-5011-gachiakuta-en",
+      "path": "conteudos/otaku-reframe-5011-gachiakuta-en.json"
+    },
+    {
+      "id": "otaku-reframe-did-you-know-201-en",
+      "path": "conteudos/otaku-reframe-did-you-know-201-en.json"
+    },
+    {
+      "id": "otaku-reframe-ep01-en",
+      "path": "conteudos/otaku-reframe-ep01-en.json"
+    }
+  ],
+  "shared_manifest_paths": [
+    "conteudos/games-alchemy-gamer-resume-20261105.json",
+    "conteudos/games-alchemy-native-v3-resume-20261105.json",
+    "conteudos/games-alchemy-native-v3-run-20261105.json",
+    "conteudos/games-alchemy-native-v3-upload-20261105.json",
+    "conteudos/games-alchemy-private-upload-20261105.json",
+    "conteudos/games-alchemy-reference-v4-private-upload-result-20261105.json",
+    "conteudos/games-alchemy-reference-v4-run-20261105.json",
+    "conteudos/games-alchemy-six-clean-internal-tags-20261105.json",
+    "conteudos/games-alchemy-six-private-upload-result-20261105.json",
+    "conteudos/games-alchemy-six-recut-v2-run-20261105.json",
+    "conteudos/games-alchemy-six-recut-v2-upload-20261105.json",
+    "conteudos/games-alchemy-six-thumbnail-retry-20261105.json",
+    "conteudos/games-alchemy-v3-audit-20261105.json",
+    "conteudos/games-alchemy-v3-six-private-result-20261105.json",
+    "conteudos/games-alchemy-youtube-processing-audit-20261105.json",
+    "conteudos/lote-12-estatico-90s-20261107.json",
+    "conteudos/lote-15-br-en-private-recovery-launch-20261108.json",
+    "conteudos/lote-15-canais-20261108.json",
+    "conteudos/lote-15-canais-20261109-launch.json",
+    "conteudos/lote-15-canais-20261109.json",
+    "conteudos/lote-15-canais-launch-20261108.json",
+    "conteudos/lote-15-janela21-20261108-launch.json",
+    "conteudos/lote-15-janela21-20261108.json",
+    "conteudos/lote-15-public-approval-20261108.json",
+    "conteudos/lote-15-public-scope-check-launch-20261108.json",
+    "conteudos/lote-24-shorts.json",
+    "conteudos/lote-6-games-alchemy-execucao-20261105.json",
+    "conteudos/lote-6-games-alchemy-producao-v1.json",
+    "conteudos/lote-6-games-alchemy-recut-v2.json",
+    "conteudos/nine-visual-replacements-v2-launch-20261108.json",
+    "conteudos/remaining-nine-static90-launch-20261107.json",
+    "conteudos/remaining-nine-static90-recovery-launch-20261107.json",
+    "conteudos/remaining-nine-static90-upload-recovery-20261107.json",
+    "conteudos/seo-tag-privacy-check-20261105.json",
+    "conteudos/testes-animados-5-en.json",
+    "conteudos/testes-animados-5.json",
+    "conteudos/trending-single-br-en-20261109.json",
+    "conteudos/trending-single-br-en-launch-20261109.json",
+    "conteudos/youtube-other-videos-readonly-check-20261108.json",
+    "conteudos/youtube-visibility-audit-launch-20261108.json"
+  ]
+}
