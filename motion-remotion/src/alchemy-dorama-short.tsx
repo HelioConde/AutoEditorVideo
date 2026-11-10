@@ -53,10 +53,10 @@ const Sprite:React.FC<{item:DoramaSprite;local:number;duration:number}>=
   const dx=item.dx??0;
   const dy=item.dy??0;
   const slide=item.motion==='walk'?(-0.035+.07*t):
-    item.motion==='reach'?.03*t:
-    item.motion==='point'?.018*t:
+    item.motion==='reach'? .03*t:
+    item.motion==='point'? .018*t:
     dx*t;
-  const rise=item.motion==='kneel'?.055*t:
+  const rise=item.motion==='kneel'? .055*t:
     item.motion==='raise'?-.055*t:dy*t;
   const bob=item.motion==='walk'?Math.sin(local*.31)*4:
     item.motion==='react'?Math.sin(local*.25)*3:
@@ -78,6 +78,11 @@ const MissionPanel:React.FC<{panel:DoramaSystemPanel;local:number}>=({panel,loca
   const danger=panel.kind==='anomaly';
   const glow=danger?'#ff5264':'#48dcff';
   const intro=ease(local/10);
+  const remaining=panel.kind==='emergency'&&panel.counter==='01:30'
+    ?Math.max(0,90-Math.floor(local/30)):null;
+  const displayCounter=remaining===null?panel.counter:
+    String(Math.floor(remaining/60)).padStart(2,'0')+':'+
+    String(remaining%60).padStart(2,'0');
   return <div style={{
     position:'absolute',left:'9%',right:'9%',top:'18%',zIndex:100,
     border:'3px solid '+glow,borderRadius:20,
@@ -96,8 +101,8 @@ const MissionPanel:React.FC<{panel:DoramaSystemPanel;local:number}>=({panel,loca
     <div style={{fontSize:33,lineHeight:1.30,marginTop:16}}>
       {panel.message}
     </div>
-    {panel.counter&&<div style={{fontSize:35,fontWeight:900,marginTop:20,color:glow}}>
-      {panel.counter}
+    {displayCounter&&<div style={{fontSize:35,fontWeight:900,marginTop:20,color:glow}}>
+      {displayCounter}
     </div>}
   </div>;
 };
@@ -132,11 +137,11 @@ export const AlchemyDoramaShort:React.FC<AlchemyDoramaProps>=(props)=>{
       background:'rgba(152,99,38,.16)',pointerEvents:'none',
       boxShadow:'inset 0 0 210px 50px rgba(76,44,25,.23)',
     }}/>}
-    {flashback&&local<48&&<div style={{
+    {flashback&&Boolean(scene.flashbackLabel)&&local<48&&<div style={{
       position:'absolute',top:75,right:58,zIndex:70,fontSize:27,
       color:'#ffe1ae',fontFamily:'Arial,sans-serif',fontWeight:800,
       textShadow:'0 2px 8px #000',
-    }}>{scene.flashbackLabel||'FLASHBACK'}</div>}
+    }}>{scene.flashbackLabel}</div>}
     {scene.systemPanel&&<MissionPanel panel={scene.systemPanel} local={local}/>}
     {caption&&<div style={{
       position:'absolute',zIndex:120,bottom:190,left:70,right:70,
