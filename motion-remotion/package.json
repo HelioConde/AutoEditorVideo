@@ -14,7 +14,8 @@
     "test:qa": "node --test tests/character-idle.test.cjs tests/shorts-pacing.test.cjs tests/pose-timeline.test.cjs tests/mesh-timeline.test.cjs",
     "typecheck": "tsc --noEmit",
     "render:fofinhos": "remotion render src/index.ts FofinhosEP01Canonico",
-    "render:alchemy-dorama": "remotion render src/index.ts AlchemyDoramaOriginal"
+    "render:alchemy-dorama": "remotion render src/index.ts AlchemyDoramaOriginal",
+    "render:alchemy-master10": "remotion render src/index.ts AlchemyDoramaMaster10s"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
