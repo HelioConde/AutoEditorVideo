@@ -37,6 +37,7 @@ jobs:
         run: python scripts/image_env_policy_guard.py
       - name: Validate episode reservation, 16 scenes and channel without API
         run: |
+          python -m pip install 'pytest>=8,<10' 'Pillow>=10,<13'
           python -m py_compile scripts/alchemy_dorama_cloud_pilot.py
           python -m pytest -q tests/test_alchemy_dorama_original.py
 
