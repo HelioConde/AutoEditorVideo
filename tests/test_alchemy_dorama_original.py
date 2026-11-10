@@ -58,11 +58,7 @@ def test_prepared_props_reuse_canonical_hashes_and_2d_independent_layers(
         tmp_path, monkeypatch):
     board = dorama.read_json(dorama.BOARD)
     doc = dorama.read_json(dorama.MANIFEST)
-    needed = set()
-    for shot in board["scenes"]:
-        needed.add(shot["background_anchor"])
-        needed.update(shot["character_anchors"])
-        needed.update(a for a in shot["item_anchors"] if a not in {"UI-01", "UI-02"})
+    needed = dorama.needed_keys(board)
     root = tmp_path
     for item in doc["entries"]:
         if item["id"] not in needed:
@@ -77,6 +73,10 @@ def test_prepared_props_reuse_canonical_hashes_and_2d_independent_layers(
         image.save(target)
         item["sha256"] = dorama.sha256(target)
         item["approved"] = True
+    canonical = {item["id"]: item for item in doc["entries"]}
+    for item in doc["entries"]:
+        if item.get("source_id") and item["id"] in needed:
+            item["source_sha256"] = canonical[item["source_id"]]["sha256"]
     doc["ui"]["UI-01"]["approved_visual"] = True
     doc["ui"]["UI-02"]["approved_visual"] = True
     manifest = root / "references.json"
@@ -108,6 +108,15 @@ def test_prepared_props_reuse_canonical_hashes_and_2d_independent_layers(
     assert len(props["scenes"]) == 16
     assert props["scenes"][0]["backgroundAnchor"] == "TRONO-01"
     assert any(s["anchorId"] == "REN-01" for s in props["scenes"][0]["sprites"])
+    assert any(s["anchorId"] == "REN-01" and
+               s["poseAssetId"] == "REN-01-ajoelhado"
+               for s in props["scenes"][0]["sprites"])
+    assert any(s["anchorId"] == "REN-01" and
+               s["poseAssetId"] == "REN-01-treinando"
+               for s in props["scenes"][2]["sprites"])
+    assert any(s["anchorId"] == "REN-01" and
+               s["poseAssetId"] == "REN-01-assustado"
+               for s in props["scenes"][9]["sprites"])
     assert props["scenes"][2]["flashbackLabel"] == "7 DIAS ANTES"
     assert props["scenes"][3]["flashbackLabel"] == ""
     assert props["scenes"][5]["flashbackLabel"] == "NAQUELA NOITE"
