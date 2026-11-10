@@ -42,6 +42,7 @@ def test_10_seconds_fixed_and_not_the_long_175s_workflow():
 
 
 def test_exactly_one_master_and_five_real_edits_from_same_file(tmp_path,monkeypatch):
+    monkeypatch.setattr(pilot,"ROOT",tmp_path)
     monkeypatch.setattr(pilot,"PROJECT",tmp_path/"test10")
     called=[]
     def fake(secret,prompt,master,transparent):
