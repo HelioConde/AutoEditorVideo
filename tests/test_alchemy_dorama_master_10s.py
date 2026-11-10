@@ -31,7 +31,7 @@ def tiny_png(transparent:bool) -> bytes:
 def test_10_seconds_fixed_and_not_the_long_175s_workflow():
     assert pilot.FRAMES==300
     assert pilot.FPS==30
-    assert pilot.MAX_CALLS==6
+    assert pilot.MAX_CALLS==5
     assert pilot.MODEL=="gpt-image-2"
     assert set(pilot.EDIT_PROMPTS)=={"background","ren","king","elara","sword"}
     src=(ROOT/"motion-remotion/src/root.tsx").read_text(encoding="utf-8")
@@ -41,27 +41,36 @@ def test_10_seconds_fixed_and_not_the_long_175s_workflow():
     assert "FofinhosEP01Canonico" in src
 
 
-def test_exactly_one_master_and_five_real_edits_from_same_file(tmp_path,monkeypatch):
+def bind_original_reference(tmp_path,monkeypatch):
     monkeypatch.setattr(pilot,"ROOT",tmp_path)
     monkeypatch.setattr(pilot,"PROJECT",tmp_path/"test10")
+    ref=tmp_path/"approved.png"
+    ref_image=Image.new("RGB",(941,1672),(80,68,88))
+    ref_image.save(ref)
+    monkeypatch.setattr(pilot,"REFERENCE_PATH",ref)
+    monkeypatch.setattr(pilot,"REFERENCE_SHA256",pilot.sha_file(ref))
+    return ref
+
+
+def test_creator_approved_master_and_five_edits_only_from_same_png(tmp_path,monkeypatch):
+    original=bind_original_reference(tmp_path,monkeypatch)
     called=[]
     def fake(secret,prompt,master,transparent):
         assert secret=="test-key-of-sufficient-length"
+        assert master is not None, "Text-to-image is now prohibited"
+        assert master.name=="master.png"
+        assert master.is_file()
         called.append((master,transparent,prompt))
-        if master is not None:
-            assert master.name=="master.png"
-            assert master.is_file()
         return tiny_png(transparent)
     monkeypatch.setattr(pilot,"call_image",fake)
     monkeypatch.setenv("PROXY_API_KEY","test-key-of-sufficient-length")
     manifest=pilot.ensure_images(reuse=False)
-    assert len(called)==6
-    assert called[0][0] is None
-    assert not called[0][1]
-    assert all(call[0]==pilot.PROJECT/"master.png" for call in called[1:])
-    assert [x[1] for x in called[1:]]==[False,True,True,True,True]
-    assert manifest["image_calls_this_run"]==6
-    assert manifest["source_strategy"]=="ONE_GENERATION_THEN_EDITS_OF_SAME_MASTER"
+    assert len(called)==5
+    assert all(call[0]==pilot.PROJECT/"master.png" for call in called)
+    assert [x[1] for x in called]==[False,True,True,True,True]
+    assert manifest["image_calls_this_run"]==5
+    assert manifest["source_strategy"]=="CREATOR_APPROVED_PINNED_IMAGE_THEN_SAME_SOURCE_EDITS"
+    assert manifest["original_sha256"]==pilot.sha_file(original)
     assert manifest["visual_review"]=="PENDING"
     assert manifest["publication"]=="DISABLED"
     master_hash=manifest["master_sha256"]
@@ -72,29 +81,35 @@ def test_exactly_one_master_and_five_real_edits_from_same_file(tmp_path,monkeypa
             assert entry["master_sha256"]==master_hash
             assert entry["source"]=="images/edits"
             assert entry["approved"] is False
-    # Second execution is true cache reuse, never a regeneration.
     def forbidden(*args):
-        raise AssertionError("Unexpected new paid image call")
+        raise AssertionError("Unexpected image API call")
     monkeypatch.setattr(pilot,"call_image",forbidden)
     second=pilot.ensure_images(reuse=True)
     assert second["image_calls_this_run"]==0
     assert second["master_sha256"]==master_hash
+    assert second["original_sha256"]==pilot.sha_file(original)
 
 
-def test_missing_layer_in_reuse_mode_never_generates(tmp_path,monkeypatch):
-    monkeypatch.setattr(pilot,"PROJECT",tmp_path/"empty")
-    with pytest.raises(pilot.StageError,match="SOURCE_MASTER_NOT_CACHED"):
-        pilot.ensure_images(reuse=True)
+def test_reference_not_found_or_wrong_hash_blocks_before_generation(tmp_path,monkeypatch):
+    monkeypatch.setattr(pilot,"ROOT",tmp_path)
+    monkeypatch.setattr(pilot,"PROJECT",tmp_path/"test10")
+    monkeypatch.setattr(pilot,"REFERENCE_PATH",tmp_path/"missing-source.png")
+    with pytest.raises(pilot.StageError,match="APPROVED_REFERENCE_NOT_ON_GITHUB"):
+        pilot.ensure_images(reuse=False)
+    real=bind_original_reference(tmp_path,monkeypatch)
+    monkeypatch.setattr(pilot,"REFERENCE_SHA256","0"*64)
+    with pytest.raises(pilot.StageError,match="REFERENCE_SHA256_MISMATCH"):
+        pilot.ensure_images(reuse=False)
 
 
 def test_budget_and_model_fail_closed():
     with pytest.raises(pilot.StageError):
         pilot.approved_budget(False,"0","gpt-image-2")
     with pytest.raises(pilot.StageError):
-        pilot.approved_budget(False,"6","gpt-image-1.5")
+        pilot.approved_budget(False,"5","gpt-image-1.5")
     with pytest.raises(pilot.StageError):
-        pilot.approved_budget(True,"6","gpt-image-2")
-    pilot.approved_budget(False,"6","gpt-image-2")
+        pilot.approved_budget(True,"5","gpt-image-2")
+    pilot.approved_budget(False,"5","gpt-image-2")
     pilot.approved_budget(True,"0","")
 
 
@@ -119,6 +134,8 @@ def test_script_contains_no_youtube_calls_and_labels_visual_review():
     assert "RENDERED_UNREVIEWED" in s
     assert '"visual_review_required": True' in s
     assert "ffprobe" in s
+    assert "REFERENCE_SHA256" in s
+    assert "prepare_pinned_master" in s
     assert "10" in s
 
 
