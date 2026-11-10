@@ -7,6 +7,7 @@ on:
       - '.github/workflows/alchemy-dorama-master-10s-test.yml'
 
 # One-shot test of one master generation + five anchored image edits.
+# Regression test fixture fixed; run after tests pass, never before.
 # No schedule, dispatch, YouTube token, or change to Fofinho pipelines.
 permissions:
   contents: read
