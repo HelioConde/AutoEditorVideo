@@ -29,7 +29,8 @@ function Show-Help {
   Write-Host '.\autoeditor.ps1 -Canal diagnostico'
   Write-Host 'EN enviar exige -Id -ConfirmarEnvio; publico tambem exige -ConfirmarPublico.'
   Write-Host 'BR produzir nao publica; BR enviar exige -ConfirmarEnvio e usa private por padrao.'
-  Write-Host 'Alchemy: apenas indice editorial por enquanto; sem motor local canonico confirmado.'
+  Write-Host '.\autoeditor.ps1 -Canal alchemy -Acao dorama-planejar -Id alchemy-114-conquiste-princesa-ep01'
+  Write-Host 'Alchemy dorama: planejar, preparar e renderizar (camadas 2D, sem imagem IA/upload).'
 }
 
 function Invoke-Internal([string]$File, [hashtable]$Params) {
@@ -106,7 +107,33 @@ switch($Canal) {
     break
   }
   'alchemy' {
-    if($action -and $action -ne 'planejar'){throw 'Alchemy ainda nao possui entrada canonica validada neste comando. Use -Acao planejar.'}
+    if($action -in @('dorama-planejar','dorama-preparar','dorama-renderizar')){
+      $episodio='alchemy-114-conquiste-princesa-ep01'
+      if($Id -and $Id -ne $episodio){throw "Piloto Dorama: ID inesperado. Use $episodio."}
+      if($Refazer -or $ConfirmarEnvio -or $ConfirmarPublico){
+        throw 'Piloto Dorama: sem refazer, publicar ou enviar pela entrada de teste.'
+      }
+      $script=Join-Path $root 'scripts\alchemy_dorama_original.py'
+      if(-not(Test-Path -LiteralPath $script -PathType Leaf)){
+        throw 'Motor Dorama nao instalado. Atualize a branch main.'
+      }
+      $python=Join-Path $root '.venv\Scripts\python.exe'
+      if(-not(Test-Path -LiteralPath $python -PathType Leaf)){
+        $cmd=Get-Command python -ErrorAction SilentlyContinue
+        if(-not $cmd){throw 'Python nao encontrado.'}
+        $python=$cmd.Source
+      }
+      $sub=@{
+        'dorama-planejar'='planejar';
+        'dorama-preparar'='preparar';
+        'dorama-renderizar'='renderizar'
+      }[$action]
+      Write-Host "[ALCHEMY DORAMA] $sub | Fofinho Parte 3 engine adapted | sem upload" -ForegroundColor Cyan
+      & $python $script --acao $sub
+      if($LASTEXITCODE -ne 0){throw 'Alchemy Dorama: etapa bloqueada pelo preflight.'}
+      break
+    }
+    if($action -and $action -ne 'planejar'){throw 'Alchemy aceita planejar, dorama-planejar, dorama-preparar e dorama-renderizar.'}
     $index=Join-Path $root 'canais\alchemy-lab\conteudos\indice.json'
     if(-not(Test-Path -LiteralPath $index)){throw 'Indice Alchemy ausente.'}
     Get-Content -LiteralPath $index -Raw -Encoding UTF8 | Write-Output
