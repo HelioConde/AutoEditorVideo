@@ -31,6 +31,8 @@ function Show-Help {
   Write-Host 'BR produzir nao publica; BR enviar exige -ConfirmarEnvio e usa private por padrao.'
   Write-Host '.\autoeditor.ps1 -Canal alchemy -Acao dorama-planejar -Id alchemy-114-conquiste-princesa-ep01'
   Write-Host 'Alchemy dorama: planejar, preparar e renderizar (camadas 2D, sem imagem IA/upload).'
+  Write-Host '.\autoeditor.ps1 -Canal alchemy -Acao dorama-teste10-planejar -Id alchemy-114-conquiste-princesa-ep01'
+  Write-Host 'Alchemy novo 10s: imagem-mestra, PNGs editados do MESMO quadro e animacao independente; sem upload.'
 }
 
 function Invoke-Internal([string]$File, [hashtable]$Params) {
@@ -107,6 +109,26 @@ switch($Canal) {
     break
   }
   'alchemy' {
+    if($action -in @('dorama-teste10-planejar','dorama-teste10-gerar')){
+      $episodio='alchemy-114-conquiste-princesa-ep01'
+      if($Id -and $Id -ne $episodio){throw "Teste 10s: ID nao esperado. Use $episodio."}
+      if($Refazer -or $ConfirmarEnvio -or $ConfirmarPublico){
+        throw 'Teste 10s: proibido refazer, enviar ou publicar desta entrada.'
+      }
+      $script=Join-Path $root 'scripts\alchemy_dorama_master_10s.py'
+      if(-not(Test-Path -LiteralPath $script -PathType Leaf)){throw 'Script de imagem-mestra nao encontrado.'}
+      $python=Join-Path $root '.venv\Scripts\python.exe'
+      if(-not(Test-Path -LiteralPath $python -PathType Leaf)){
+        $cmd=Get-Command python -ErrorAction SilentlyContinue
+        if(-not $cmd){throw 'Python nao encontrado.'}
+        $python=$cmd.Source
+      }
+      $sub=if($action -eq 'dorama-teste10-planejar'){'planejar'}else{'gerar'}
+      Write-Host "[ALCHEMY 10s] $sub | imagem-mestra unica > camadas PNG > Remotion | SEM UPLOAD" -ForegroundColor Cyan
+      & $python $script --acao $sub
+      if($LASTEXITCODE -ne 0){throw 'Teste 10s: preflight ou geracao bloqueou a etapa.'}
+      break
+    }
     if($action -in @('dorama-planejar','dorama-preparar','dorama-renderizar')){
       $episodio='alchemy-114-conquiste-princesa-ep01'
       if($Id -and $Id -ne $episodio){throw "Piloto Dorama: ID inesperado. Use $episodio."}
@@ -133,7 +155,7 @@ switch($Canal) {
       if($LASTEXITCODE -ne 0){throw 'Alchemy Dorama: etapa bloqueada pelo preflight.'}
       break
     }
-    if($action -and $action -ne 'planejar'){throw 'Alchemy aceita planejar, dorama-planejar, dorama-preparar e dorama-renderizar.'}
+    if($action -and $action -ne 'planejar'){throw 'Alchemy aceita planejar, dorama-planejar, dorama-preparar, dorama-renderizar, dorama-teste10-planejar e dorama-teste10-gerar.'}
     $index=Join-Path $root 'canais\alchemy-lab\conteudos\indice.json'
     if(-not(Test-Path -LiteralPath $index)){throw 'Indice Alchemy ausente.'}
     Get-Content -LiteralPath $index -Raw -Encoding UTF8 | Write-Output
