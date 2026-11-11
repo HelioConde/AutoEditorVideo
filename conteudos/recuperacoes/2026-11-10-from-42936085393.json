@@ -1,0 +1,19 @@
+{
+  "schema": "autoeditorvideo/private-recovery/v1",
+  "batch_date": "2026-11-10",
+  "source_run_id": 42936085393,
+  "source_commit_sha": "d888999d798c1ca769f3b9f49ccce5b8379a0007",
+  "reuse_successful_artifacts": [
+    "en",
+    "games",
+    "alchemy"
+  ],
+  "render_missing_artifacts": [
+    "br",
+    "kids"
+  ],
+  "upload_visibility": "private",
+  "kids_made_for_kids": true,
+  "public_publication_approved": false,
+  "creator_authorized_recovery": true
+}
