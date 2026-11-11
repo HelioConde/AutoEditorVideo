@@ -170,6 +170,20 @@ def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scr
                     assert item.get("old_youtube_id")
                     assert item.get("original_episode_id")
                     assert item.get("requested_by_creator_publication") is True
+                elif owner=="public_single_alchemy_20261108":
+                    # Historical single-video authorization is NOT a general
+                    # permission to publish later Alchemy or Kids batches.
+                    assert slug=="alchemy"
+                    assert item["id"]=="alchemy-107-automacao-publicou-duplicado"
+                    assert item["status"]=="reserved"
+                    assert item["publication_target"]=="direct_public_on_new_unique_upload_only"
+                elif owner=="alchemy_dorama_original_20261110":
+                    # Draft storyboard only: no media generation or YouTube upload.
+                    assert slug=="alchemy"
+                    assert item["id"]=="alchemy-114-conquiste-princesa-ep01"
+                    assert item["status"]=="reserved"
+                    assert item["publication_target"]=="none_editorial_and_storyboard_draft_only"
+                    assert item.get("requested_by_creator_publication") is False
                 else:
                     assert item.get("publication_target") in {"private_first", "private_first_after_original_media_QA", "private_first_after_original_render_and_QA", "private_first_after_technical_qa"}
                     # A reserva nova ainda nao passou por revisao; nao inventar status.
