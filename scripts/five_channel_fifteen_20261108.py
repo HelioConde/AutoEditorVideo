@@ -148,6 +148,20 @@ def art_prompt(row:dict,scene:dict,channel:str)->str:
             "numbers, lettering, symbols or interface; no split composition. "
             "The full team must fit inside the center of the portrait frame."
         )
+    if (channel=="br" and row["id"]=="5103-haikyuu-time"
+            and scene["number"]==8):
+        return (
+            "One original high-quality cinematic editorial illustration, "
+            "portrait 1024x1536. An indoor volleyball court after a friendly "
+            "practice match, warm overhead lighting and polished wood floor. "
+            "A group of adult fictional volleyball athletes in coherent "
+            "navy and orange sportswear gathers happily by the net, smiling "
+            "and celebrating their team cooperation. Expressive but natural "
+            "poses, balanced perspective, pleasing color composition, clear "
+            "separated faces and hands, realistic anatomy. "
+            "No logos, text, numbers, existing fictional characters or brands. "
+            "Keep the group within the central frame."
+        )
     title=row["title"]
     original_theme=STYLES[channel]
     # All frames are independent illustrations. No claim of animation,
@@ -245,7 +259,7 @@ def produce(channel:str)->None:
     rows=validate(channel)
     out=output(channel)
     recovering=(channel=="br" and
-                os.environ.get("BATCH15_BR_SCENE_CACHE_FROM_42957295592")=="yes")
+                os.environ.get("BATCH15_BR_SCENE_CACHE_FROM_42959933980")=="yes")
     if recovering:
         if not out.is_dir() or out.is_symlink():
             raise BatchBlocked("VERIFIED_BR_RECOVERY_CACHE_REQUIRED")
@@ -256,7 +270,7 @@ def produce(channel:str)->None:
         # stories have full image sets and QA; Haikyuu lacks scenes 7 and 8.
         for idx,row in enumerate(rows):
             folder=out/row["id"]
-            expected_count=(8,8,6)[idx]
+            expected_count=(8,8,7)[idx]
             if not folder.is_dir() or len(list(folder.glob("scene-*.png")))!=expected_count:
                 raise BatchBlocked("RECOVERY_CACHE_SCENE_COUNT_MISMATCH_"+row["id"])
             if (folder/"qa.json").is_file() is not (idx<2):
