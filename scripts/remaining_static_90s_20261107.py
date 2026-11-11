@@ -175,7 +175,7 @@ def images(row:dict,folder:Path,key:str,channel:str, *,
     expected={folder/("scene-%02d.png"%n) for n in range(1,9)}
     if reuse_verified_cache:
         # Only the BR recovery workflow may request cache reuse.
-        if os.environ.get("BATCH15_BR_SCENE_CACHE_FROM_42957295592")!="yes" or channel!="br":
+        if os.environ.get("BATCH15_BR_SCENE_CACHE_FROM_42959933980")!="yes" or channel!="br":
             raise RemainingBlocked("UNAUTHORIZED_SCENE_CACHE_REUSE")
         if any(p not in expected for p in folder.glob("scene-*.png")):
             raise RemainingBlocked("UNEXPECTED_CACHED_SCENE_NAME")
@@ -222,20 +222,30 @@ def images(row:dict,folder:Path,key:str,channel:str, *,
             except Exception as exc:
                 code_400="HTTP 400" in str(exc)
                 if (code_400 and channel=="br" and row["id"]=="5103-haikyuu-time"
-                        and n==7 and not fallback_used):
+                        and n in (7,8) and not fallback_used):
                     fallback_used=True
                     # A second, independent minimal request, never the
                     # original title/series/long context that failed twice.
-                    request_prompt=(
-                        "Portrait illustration 1024x1536. Beautiful warmly lit "
-                        "indoor volleyball gym, varnished wooden court with net. "
-                        "A small team of original fictional athletes in orange "
-                        "and navy blue uniforms stands at separate positions "
-                        "and watches an airborne volleyball. Express teamwork "
-                        "using gesture and spacing. Clean coherent illustrative "
-                        "composition, no words, symbols or logos."
-                    )
-                    print("REMAINING_HAIKYUU_SCENE07_SAFE_REPHRASE_AFTER_HTTP400",flush=True)
+                    if n==7:
+                        request_prompt=(
+                            "Portrait illustration 1024x1536. Beautiful warmly lit "
+                            "indoor volleyball gym, varnished wooden court with net. "
+                            "A small team of adult original fictional athletes in "
+                            "orange and navy blue uniforms stands at separate "
+                            "positions and watches an airborne volleyball. "
+                            "Express teamwork using gesture and spacing. "
+                            "No words, symbols or logos."
+                        )
+                    else:
+                        request_prompt=(
+                            "Portrait illustration 1024x1536 of a volleyball gym "
+                            "with warm lighting. Original adult athletes wearing "
+                            "orange and blue sports shirts smile and celebrate "
+                            "together after a friendly match. Wooden volleyball "
+                            "court and net, clean painterly cinematic composition, "
+                            "no labels, numbers, logos or branded characters."
+                        )
+                    print("REMAINING_HAIKYUU_SCENE%02d_SAFE_REPHRASE_AFTER_HTTP400"%n,flush=True)
                     continue
                 transient=(any("HTTP "+str(code) in str(exc)
                                for code in (408,429,500,502,503,504,520,521,522,523,524))
