@@ -9,6 +9,7 @@ on:
       - 'conteudos/recuperacoes/2026-11-10-br-only-from-42948724879.json'
       - 'conteudos/recuperacoes/2026-11-10-br-scene-cache-from-42954205755.json'
       - 'conteudos/recuperacoes/2026-11-10-br-final-resume-from-42957295592.json'
+      - 'conteudos/recuperacoes/2026-11-10-br-scene8-from-42959933980.json'
 
 permissions:
   contents: read
@@ -815,7 +816,7 @@ jobs:
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main' &&
       github.run_attempt == 1 &&
-      github.event.head_commit.message == 'fix(batch15): finalize only BR privately using verified media from 42957295592'
+      github.event.head_commit.message == 'fix(batch15): recover only Haikyuu scene 8 and upload private BR'
     outputs:
       batch_date: ${{ steps.confirm.outputs.batch_date }}
     runs-on: ubuntu-latest
@@ -838,18 +839,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          marker=conteudos/recuperacoes/2026-11-10-br-final-resume-from-42957295592.json
+          marker=conteudos/recuperacoes/2026-11-10-br-scene8-from-42959933980.json
           test "$(git diff --name-status HEAD^ HEAD)" = "$(printf 'A\t%s' "$marker")" || { echo "SINGLE_NEW_BR_RECOVERY_MARKER_REQUIRED"; exit 1; }
           python - <<'PY'
           import json
           from pathlib import Path
-          p=Path("conteudos/recuperacoes/2026-11-10-br-final-resume-from-42957295592.json")
+          p=Path("conteudos/recuperacoes/2026-11-10-br-scene8-from-42959933980.json")
           record=json.loads(p.read_text(encoding="utf-8"))
           expected={
-              "schema":"autoeditorvideo/br-final-resume/v1",
+              "schema":"autoeditorvideo/br-scene8-final/v1",
               "batch_date":"2026-11-10",
-              "source_run_id":42957295592,
-              "source_commit_sha":"f85a95865a51f55894cd7e8254c58f4784b48d14",
+              "source_run_id":42959933980,
+              "source_commit_sha":"ed4e774ca39579d26293ea8a45a0e435af02a981",
               "target_channel":"br",
               "target_episode_ids":["5101-mob-psycho-emocoes","5102-chainsaw-man-contratos","5103-haikyuu-time"],
               "reuse_trusted_scene_artifact":"br-scene-cache-2026-11-10-incomplete-not-for-upload-br",
@@ -861,9 +862,9 @@ jobs:
           }
           assert record==expected,"BR_ONLY_RECOVERY_CONTRACT_CHANGED"
           PY
-          old="$(gh api repos/HelioConde/AutoEditorVideo/actions/runs/42957295592 --jq '.status + " " + .conclusion + " " + .head_sha')"
-          test "$old" = "completed failure f85a95865a51f55894cd7e8254c58f4784b48d14" || { echo "PREVIOUS_BR_RUN_MUST_BE_FAILED"; exit 1; }
-          old_files="$(gh api 'repos/HelioConde/AutoEditorVideo/actions/runs/42957295592/artifacts?per_page=100' --jq '.artifacts[] | select(.expired == false) | .name')"
+          old="$(gh api repos/HelioConde/AutoEditorVideo/actions/runs/42959933980 --jq '.status + " " + .conclusion + " " + .head_sha')"
+          test "$old" = "completed failure ed4e774ca39579d26293ea8a45a0e435af02a981" || { echo "PREVIOUS_BR_RUN_MUST_BE_FAILED"; exit 1; }
+          old_files="$(gh api 'repos/HelioConde/AutoEditorVideo/actions/runs/42959933980/artifacts?per_page=100' --jq '.artifacts[] | select(.expired == false) | .name')"
           printf '%s\n' "$old_files" | grep -Fqx "br-scene-cache-2026-11-10-incomplete-not-for-upload-br" || { echo "VERIFIED_BR_SCENE_ARTIFACT_UNAVAILABLE"; exit 1; }
           sent_files="$(gh api 'repos/HelioConde/AutoEditorVideo/actions/runs/42948724879/artifacts?per_page=100' --jq '.artifacts[] | select(.expired == false) | .name')"
           for ch in en games alchemy kids; do
@@ -966,7 +967,7 @@ jobs:
       - name: Download source-run unfinished BR illustrations and validated QA only
         uses: actions/download-artifact@v4
         with:
-          run-id: 42957295592
+          run-id: 42959933980
           github-token: ${{ github.token }}
           name: br-scene-cache-2026-11-10-incomplete-not-for-upload-br
           path: cloud-lote-15-diario-2026-11-10/br/
@@ -978,7 +979,7 @@ jobs:
           IMAGE_MODEL: gpt-image-2
           BATCH15_CHANNEL: ${{ matrix.channel }}
           BATCH15_RENDER_AUTHORIZED: 'yes'
-          BATCH15_BR_SCENE_CACHE_FROM_42957295592: 'yes'
+          BATCH15_BR_SCENE_CACHE_FROM_42959933980: 'yes'
         run: |
           set -euo pipefail
           umask 077
