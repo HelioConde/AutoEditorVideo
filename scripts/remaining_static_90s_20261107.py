@@ -183,7 +183,7 @@ def images(row:dict,folder:Path,key:str,channel:str)->list[Path]:
                 break
             except Exception as exc:
                 transient=(any("HTTP "+str(code) in str(exc)
-                               for code in (429,500,502,503,504))
+                               for code in (408,429,500,502,503,504,520,521,522,523,524))
                            or type(exc).__name__ in
                            ("Timeout","ConnectTimeout","ReadTimeout","ConnectionError"))
                 if not transient or attempt==2:
