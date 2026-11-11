@@ -188,16 +188,26 @@ def test_production_reservations_are_channel_scoped_and_new_channels_have_no_scr
                 "kids-102-quiz-sombras-animais",
                 "kids-103-dinos-segredos-incriveis",
             }
-            assert {item["id"] for item in entries} == canonical | approved_standalone
+            # Existing Kids episodes remain protected. Later creator-reserved
+            # private-first batches may add episodes without weakening audience
+            # and upload authorization constraints.
+            assert canonical | approved_standalone <= {item["id"] for item in entries}
             for item in entries:
                 assert item["status"] == "reserved"
                 assert item.get("reservation_owner")
                 if item["id"] in canonical:
                     assert not item.get("publication_target")
-                else:
+                elif item["id"] in approved_standalone:
                     assert item["publication_target"] == "private_first"
                     assert item["reservation_owner"] == "lote12_static_original_20261107"
                     assert item.get("review_status")
+                else:
+                    assert item["id"].startswith("kids-")
+                    assert item.get("publication_target") in {
+                        "private_first_after_original_media_QA",
+                        "private_first_after_original_render_and_QA",
+                        "private_first_after_technical_qa",
+                    }
     with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
         queue.assert_reserved("games","game-001-minecraft-um-coracao","any_worker")
     with pytest.raises(ValueError,match="NOT_RESERVED_IN_GITHUB"):
