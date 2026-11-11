@@ -1,0 +1,1750 @@
+{
+  "schema": "autoeditorvideo/new-15-five-channels-editorial-v1",
+  "date": "2026-11-10",
+  "production_owner": "lote15_diario_20261110",
+  "requested_total": 15,
+  "channels": [
+    "br",
+    "en",
+    "games",
+    "kids",
+    "alchemy"
+  ],
+  "per_channel": 3,
+  "default_visibility": "private",
+  "content_strategy": "15 distinct editorial stories, original 8-scene audio/art and Remotion render; private upload after technical QA, never public without review.",
+  "reservations_path": "conteudos/otaku-production-reservations.json",
+  "approval": {
+    "creator_requested_generation": true,
+    "upload_only_after_render_qa_and_exact_youtube_id_check": true,
+    "publication_to_public_not_approved_by_this_manifest": true
+  },
+  "status": "new_original_narrations_pending_render",
+  "episodes": [
+    {
+      "id": "5101-mob-psycho-emocoes",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Mob Psycho 100: por que controlar emoções é tão difícil?",
+      "cover_text": "PODER E EMOÇÃO",
+      "hook": "Como o poder muda quando as emoções transbordam?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Em Mob Psycho 100, o sobrenatural impressiona, mas a pergunta mais interessante não é sobre força. É sobre o que acontece quando alguém tenta esconder sentimentos importantes até e",
+          "visual_brief": "Scene 1 of 8. prédio urbano sob céu azul. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Quando a pressão cresce, tarefas pequenas parecem grandes desafios. O roteiro transforma o exagero visual numa maneira de mostrar ansiedade, insegurança e a vontade de agradar, sem",
+          "visual_brief": "Scene 2 of 8. estudante em silhueta olhando janela. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "A comédia funciona porque muda o ritmo de repente. Um corredor tranquilo pode dar lugar a uma tempestade de energia, lembrando que o mundo interior nem sempre combina com a express",
+          "visual_brief": "Scene 3 of 8. formas luminosas abstratas no céu. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Também existe valor em aprender tarefas normais, pedir ajuda e aceitar limites. Nem toda conquista depende de um momento extraordinário; às vezes, avançar significa conversar com a",
+          "visual_brief": "Scene 4 of 8. caderno simples e mãos pedindo ajuda. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "O contraste entre uma cidade comum e acontecimentos absurdos reforça essa ideia. O ambiente permanece familiar, enquanto a percepção dos personagens muda conforme suas escolhas e s",
+          "visual_brief": "Scene 5 of 8. rua cotidiana com detalhes fantásticos. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Uma situação difícil não precisa ser enfrentada com explosões. Escutar, respirar e entender a origem de um conflito pode ser mais importante do que vencer uma disputa de poder.",
+          "visual_brief": "Scene 6 of 8. duas figuras conversando em banco público. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "O visual colorido pode ser lido como metáfora, não como solução mágica. Emoções exigem cuidado, tempo e relações, e ninguém vira outra pessoa apenas por superar uma cena de ação.",
+          "visual_brief": "Scene 7 of 8. cores suaves em contraste com energia. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "No fim, a história convida a observar crescimento de um jeito diferente: ter muito poder não elimina a necessidade de aprender a viver com outras pessoas. Qual contraste da série m",
+          "visual_brief": "Scene 8 of 8. amanhecer urbano e figuras caminhando. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "anime",
+        "análise narrativa",
+        "Otaku Multicena",
+        "Mob Psycho 100",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Em Mob Psycho 100, o sobrenatural impressiona, mas a pergunta mais interessante não é sobre força. É sobre o que acontece quando alguém tenta esconder sentimentos importantes até eles se tornarem impossíveis de ignorar.",
+          "visual_instruction": "Scene 1 of 8. prédio urbano sob céu azul. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Quando a pressão cresce, tarefas pequenas parecem grandes desafios. O roteiro transforma o exagero visual numa maneira de mostrar ansiedade, insegurança e a vontade de agradar, sem dizer que essas emoções são simples de resolver.",
+          "visual_instruction": "Scene 2 of 8. estudante em silhueta olhando janela. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A comédia funciona porque muda o ritmo de repente. Um corredor tranquilo pode dar lugar a uma tempestade de energia, lembrando que o mundo interior nem sempre combina com a expressão que vemos por fora.",
+          "visual_instruction": "Scene 3 of 8. formas luminosas abstratas no céu. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Também existe valor em aprender tarefas normais, pedir ajuda e aceitar limites. Nem toda conquista depende de um momento extraordinário; às vezes, avançar significa conversar com alguém e admitir uma dúvida.",
+          "visual_instruction": "Scene 4 of 8. caderno simples e mãos pedindo ajuda. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "O contraste entre uma cidade comum e acontecimentos absurdos reforça essa ideia. O ambiente permanece familiar, enquanto a percepção dos personagens muda conforme suas escolhas e seus medos.",
+          "visual_instruction": "Scene 5 of 8. rua cotidiana com detalhes fantásticos. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Uma situação difícil não precisa ser enfrentada com explosões. Escutar, respirar e entender a origem de um conflito pode ser mais importante do que vencer uma disputa de poder.",
+          "visual_instruction": "Scene 6 of 8. duas figuras conversando em banco público. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "O visual colorido pode ser lido como metáfora, não como solução mágica. Emoções exigem cuidado, tempo e relações, e ninguém vira outra pessoa apenas por superar uma cena de ação.",
+          "visual_instruction": "Scene 7 of 8. cores suaves em contraste com energia. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No fim, a história convida a observar crescimento de um jeito diferente: ter muito poder não elimina a necessidade de aprender a viver com outras pessoas. Qual contraste da série mais marcou você?",
+          "visual_instruction": "Scene 8 of 8. amanhecer urbano e figuras caminhando. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Em Mob Psycho 100, o sobrenatural impressiona, mas a pergunta mais interessante não é sobre força. É sobre o que acontece quando alguém tenta esconder sentimentos importantes até eles se tornarem impossíveis de ignorar. Quando a pressão cresce, tarefas pequenas parecem grandes desafios. O roteiro transforma o exagero visual numa maneira de mostrar ansiedade, insegurança e a vontade de agradar, sem dizer que essas emoções são simples de resolver. A comédia funciona porque muda o ritmo de repente. Um corredor tranquilo pode dar lugar a uma tempestade de energia, lembrando que o mundo interior nem sempre combina com a expressão que vemos por fora. Também existe valor em aprender tarefas normais, pedir ajuda e aceitar limites. Nem toda conquista depende de um momento extraordinário; às vezes, avançar significa conversar com alguém e admitir uma dúvida. O contraste entre uma cidade comum e acontecimentos absurdos reforça essa ideia. O ambiente permanece familiar, enquanto a percepção dos personagens muda conforme suas escolhas e seus medos. Uma situação difícil não precisa ser enfrentada com explosões. Escutar, respirar e entender a origem de um conflito pode ser mais importante do que vencer uma disputa de poder. O visual colorido pode ser lido como metáfora, não como solução mágica. Emoções exigem cuidado, tempo e relações, e ninguém vira outra pessoa apenas por superar uma cena de ação. No fim, a história convida a observar crescimento de um jeito diferente: ter muito poder não elimina a necessidade de aprender a viver com outras pessoas. Qual contraste da série mais marcou você?",
+      "narration_word_count": 255,
+      "description": "Mob Psycho 100: por que controlar emoções é tão difícil?. Análise narrativa independente, com ilustrações geradas por IA; sem cenas oficiais ou associação com os criadores da obra."
+    },
+    {
+      "id": "5102-chainsaw-man-contratos",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Chainsaw Man: o preço de aceitar qualquer contrato",
+      "cover_text": "O PREÇO DO CONTRATO",
+      "hook": "Toda promessa tem uma consequência?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Em Chainsaw Man, a ideia de contrato torna o perigo mais interessante do que uma luta direta. Cada acordo oferece alguma possibilidade, mas também levanta uma pergunta: o que se en",
+          "visual_brief": "Scene 1 of 8. contrato simbólico sobre mesa escura. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Numa história marcada por desejos urgentes, uma promessa pode parecer saída rápida. O problema aparece quando o preço não é medido apenas em dinheiro ou esforço, mas em oportunidad",
+          "visual_brief": "Scene 2 of 8. moeda diante de uma porta entreaberta. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "Por isso, uma porta fechada pode ser tão expressiva quanto uma batalha. Ela sugere escolhas que ainda não foram feitas e consequências que continuam existindo depois do entusiasmo ",
+          "visual_brief": "Scene 3 of 8. longa porta de metal em corredor. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Os conflitos misturam medo e necessidade de pertencimento. Quando alguém está sozinho, qualquer oferta de proteção pode soar irresistível, mesmo que ninguém explique completamente ",
+          "visual_brief": "Scene 4 of 8. silhueta solitária sob teto industrial. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "A estética industrial ajuda nessa sensação. Corredores frios, luzes de emergência e objetos cotidianos colocados fora do lugar criam um mundo onde a segurança parece temporária.",
+          "visual_brief": "Scene 5 of 8. escadaria metálica e luz fria. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Mas existe diferença entre confiar e simplesmente obedecer. Uma boa decisão pede tempo, perguntas e compreensão de limites, principalmente quando a promessa parece resolver tudo de",
+          "visual_brief": "Scene 6 of 8. duas mãos separadas por vidro fosco. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "As imagens fortes da obra também abrem espaço para uma leitura emocional. Às vezes o verdadeiro conflito não está no monstro imaginado, e sim na dificuldade de reconhecer o próprio",
+          "visual_brief": "Scene 7 of 8. reflexos abstratos e sombras profundas. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "Assim, o contrato funciona como símbolo de escolhas impulsivas e expectativas. Antes de aceitar uma oferta perfeita, vale perguntar quem ganha, quem perde e o que permanece quando ",
+          "visual_brief": "Scene 8 of 8. papel dobrado diante de horizonte urbano. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "anime",
+        "análise narrativa",
+        "Otaku Multicena",
+        "Chainsaw Man",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Em Chainsaw Man, a ideia de contrato torna o perigo mais interessante do que uma luta direta. Cada acordo oferece alguma possibilidade, mas também levanta uma pergunta: o que se entrega para conseguir aquilo? Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. contrato simbólico sobre mesa escura. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Numa história marcada por desejos urgentes, uma promessa pode parecer saída rápida. O problema aparece quando o preço não é medido apenas em dinheiro ou esforço, mas em oportunidades futuras.",
+          "visual_instruction": "Scene 2 of 8. moeda diante de uma porta entreaberta. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Por isso, uma porta fechada pode ser tão expressiva quanto uma batalha. Ela sugere escolhas que ainda não foram feitas e consequências que continuam existindo depois do entusiasmo inicial.",
+          "visual_instruction": "Scene 3 of 8. longa porta de metal em corredor. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Os conflitos misturam medo e necessidade de pertencimento. Quando alguém está sozinho, qualquer oferta de proteção pode soar irresistível, mesmo que ninguém explique completamente suas condições.",
+          "visual_instruction": "Scene 4 of 8. silhueta solitária sob teto industrial. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "A estética industrial ajuda nessa sensação. Corredores frios, luzes de emergência e objetos cotidianos colocados fora do lugar criam um mundo onde a segurança parece temporária.",
+          "visual_instruction": "Scene 5 of 8. escadaria metálica e luz fria. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Mas existe diferença entre confiar e simplesmente obedecer. Uma boa decisão pede tempo, perguntas e compreensão de limites, principalmente quando a promessa parece resolver tudo de uma vez.",
+          "visual_instruction": "Scene 6 of 8. duas mãos separadas por vidro fosco. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "As imagens fortes da obra também abrem espaço para uma leitura emocional. Às vezes o verdadeiro conflito não está no monstro imaginado, e sim na dificuldade de reconhecer o próprio desejo.",
+          "visual_instruction": "Scene 7 of 8. reflexos abstratos e sombras profundas. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Assim, o contrato funciona como símbolo de escolhas impulsivas e expectativas. Antes de aceitar uma oferta perfeita, vale perguntar quem ganha, quem perde e o que permanece quando a promessa termina.",
+          "visual_instruction": "Scene 8 of 8. papel dobrado diante de horizonte urbano. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Em Chainsaw Man, a ideia de contrato torna o perigo mais interessante do que uma luta direta. Cada acordo oferece alguma possibilidade, mas também levanta uma pergunta: o que se entrega para conseguir aquilo? Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Numa história marcada por desejos urgentes, uma promessa pode parecer saída rápida. O problema aparece quando o preço não é medido apenas em dinheiro ou esforço, mas em oportunidades futuras. Por isso, uma porta fechada pode ser tão expressiva quanto uma batalha. Ela sugere escolhas que ainda não foram feitas e consequências que continuam existindo depois do entusiasmo inicial. Os conflitos misturam medo e necessidade de pertencimento. Quando alguém está sozinho, qualquer oferta de proteção pode soar irresistível, mesmo que ninguém explique completamente suas condições. A estética industrial ajuda nessa sensação. Corredores frios, luzes de emergência e objetos cotidianos colocados fora do lugar criam um mundo onde a segurança parece temporária. Mas existe diferença entre confiar e simplesmente obedecer. Uma boa decisão pede tempo, perguntas e compreensão de limites, principalmente quando a promessa parece resolver tudo de uma vez. As imagens fortes da obra também abrem espaço para uma leitura emocional. Às vezes o verdadeiro conflito não está no monstro imaginado, e sim na dificuldade de reconhecer o próprio desejo. Assim, o contrato funciona como símbolo de escolhas impulsivas e expectativas. Antes de aceitar uma oferta perfeita, vale perguntar quem ganha, quem perde e o que permanece quando a promessa termina.",
+      "narration_word_count": 257,
+      "description": "Chainsaw Man: o preço de aceitar qualquer contrato. Análise narrativa independente, com ilustrações geradas por IA; sem cenas oficiais ou associação com os criadores da obra."
+    },
+    {
+      "id": "5103-haikyuu-time",
+      "channel": "br",
+      "channel_id": "UCXGYTuBYn-0Ziqin5ajKhOw",
+      "title": "Haikyuu: por que um time evolui junto?",
+      "cover_text": "NINGUÉM VENCE SÓ",
+      "hook": "O talento basta para vencer em equipe?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Haikyuu mostra como um esporte coletivo pode contar histórias sobre confiança. A quadra parece pequena, mas cada movimento depende de decisões que outras pessoas precisam entender ",
+          "visual_brief": "Scene 1 of 8. quadra vazia ao amanhecer. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Um saque inicia uma sequência, não uma jogada isolada. Recepção, levantamento e ataque se conectam, e a qualidade de uma ação pode transformar completamente a oportunidade da próxi",
+          "visual_brief": "Scene 2 of 8. bola de vôlei passando acima da rede. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "Nem sempre a pessoa que marca o ponto fez o trabalho mais difícil. Às vezes a defesa silenciosa permitiu que a equipe continuasse viva durante uma troca longa e imprevisível.",
+          "visual_brief": "Scene 3 of 8. defesa coletiva em perspectiva distante. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Por isso os treinos são tão importantes para a narrativa. Repetir fundamentos pode soar pouco heroico, mas é a prática que permite agir com clareza quando a pressão sobe.",
+          "visual_brief": "Scene 4 of 8. ginásio com cones de treinamento. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Uma falha também revela relações. É fácil incentivar depois de uma jogada perfeita; difícil é manter confiança quando alguém erra e o placar ainda está apertado.",
+          "visual_brief": "Scene 5 of 8. equipe reunida após erro sem rostos definidos. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "O ritmo visual de uma partida oferece ótimas metáforas. A bola sobe, o tempo parece desacelerar e várias pessoas se reposicionam antes de uma decisão que dura apenas um instante.",
+          "visual_brief": "Scene 6 of 8. bola suspensa em luz dramática. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "Há espaço para estilos diferentes dentro do mesmo grupo. Velocidade, precisão, observação e persistência não se anulam: podem se combinar quando existe comunicação e respeito entre",
+          "visual_brief": "Scene 7 of 8. posições marcadas na quadra sem texto. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "No final, acompanhar a evolução de um time é acompanhar mudanças de atitude. O destaque de uma vitória é bom, mas a verdadeira transformação aparece quando todos aprendem a melhora",
+          "visual_brief": "Scene 8 of 8. quadra iluminada e grupo comemorando. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "anime",
+        "análise narrativa",
+        "Otaku Multicena",
+        "Haikyuu",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Haikyuu mostra como um esporte coletivo pode contar histórias sobre confiança. A quadra parece pequena, mas cada movimento depende de decisões que outras pessoas precisam entender em poucos segundos. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. quadra vazia ao amanhecer. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Um saque inicia uma sequência, não uma jogada isolada. Recepção, levantamento e ataque se conectam, e a qualidade de uma ação pode transformar completamente a oportunidade da próxima.",
+          "visual_instruction": "Scene 2 of 8. bola de vôlei passando acima da rede. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Nem sempre a pessoa que marca o ponto fez o trabalho mais difícil. Às vezes a defesa silenciosa permitiu que a equipe continuasse viva durante uma troca longa e imprevisível.",
+          "visual_instruction": "Scene 3 of 8. defesa coletiva em perspectiva distante. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Por isso os treinos são tão importantes para a narrativa. Repetir fundamentos pode soar pouco heroico, mas é a prática que permite agir com clareza quando a pressão sobe.",
+          "visual_instruction": "Scene 4 of 8. ginásio com cones de treinamento. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma falha também revela relações. É fácil incentivar depois de uma jogada perfeita; difícil é manter confiança quando alguém erra e o placar ainda está apertado.",
+          "visual_instruction": "Scene 5 of 8. equipe reunida após erro sem rostos definidos. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "O ritmo visual de uma partida oferece ótimas metáforas. A bola sobe, o tempo parece desacelerar e várias pessoas se reposicionam antes de uma decisão que dura apenas um instante.",
+          "visual_instruction": "Scene 6 of 8. bola suspensa em luz dramática. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Há espaço para estilos diferentes dentro do mesmo grupo. Velocidade, precisão, observação e persistência não se anulam: podem se combinar quando existe comunicação e respeito entre os jogadores.",
+          "visual_instruction": "Scene 7 of 8. posições marcadas na quadra sem texto. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No final, acompanhar a evolução de um time é acompanhar mudanças de atitude. O destaque de uma vitória é bom, mas a verdadeira transformação aparece quando todos aprendem a melhorar juntos.",
+          "visual_instruction": "Scene 8 of 8. quadra iluminada e grupo comemorando. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Haikyuu mostra como um esporte coletivo pode contar histórias sobre confiança. A quadra parece pequena, mas cada movimento depende de decisões que outras pessoas precisam entender em poucos segundos. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Um saque inicia uma sequência, não uma jogada isolada. Recepção, levantamento e ataque se conectam, e a qualidade de uma ação pode transformar completamente a oportunidade da próxima. Nem sempre a pessoa que marca o ponto fez o trabalho mais difícil. Às vezes a defesa silenciosa permitiu que a equipe continuasse viva durante uma troca longa e imprevisível. Por isso os treinos são tão importantes para a narrativa. Repetir fundamentos pode soar pouco heroico, mas é a prática que permite agir com clareza quando a pressão sobe. Uma falha também revela relações. É fácil incentivar depois de uma jogada perfeita; difícil é manter confiança quando alguém erra e o placar ainda está apertado. O ritmo visual de uma partida oferece ótimas metáforas. A bola sobe, o tempo parece desacelerar e várias pessoas se reposicionam antes de uma decisão que dura apenas um instante. Há espaço para estilos diferentes dentro do mesmo grupo. Velocidade, precisão, observação e persistência não se anulam: podem se combinar quando existe comunicação e respeito entre os jogadores. No final, acompanhar a evolução de um time é acompanhar mudanças de atitude. O destaque de uma vitória é bom, mas a verdadeira transformação aparece quando todos aprendem a melhorar juntos.",
+      "narration_word_count": 253,
+      "description": "Haikyuu: por que um time evolui junto?. Análise narrativa independente, com ilustrações geradas por IA; sem cenas oficiais ou associação com os criadores da obra."
+    },
+    {
+      "id": "7101-dr-stone-ciencia",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Dr. Stone: rebuilding knowledge one discovery at a time",
+      "cover_text": "SCIENCE BUILDS",
+      "hook": "What would you rebuild first?",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Dr. Stone turns a dramatic premise into a question about knowledge. If everyday technology disappeared, which discovery would matter first, and how could a group rebuild the steps ",
+          "visual_brief": "Scene 1 of 8. stone-age landscape with distant settlement. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "A simple flame becomes more than a source of heat. It represents controlled energy, observation, and the need to make the same result happen safely more than once.",
+          "visual_brief": "Scene 2 of 8. controlled campfire beneath stars. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "Materials matter just as much as ideas. Stone, clay, wood, and metal have different properties, so building something useful requires choosing them for the right purpose.",
+          "visual_brief": "Scene 3 of 8. clay pots wood and raw metal on table. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Every experiment begins with uncertainty. A guess can guide a test, but observing what actually happens is more valuable than defending a plan because it sounded convincing.",
+          "visual_brief": "Scene 4 of 8. simple experiment with unmarked containers. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "The story also makes cooperation essential. One person may notice a pattern, another may craft a tool, and someone else may organize the work so the discovery can help everyone.",
+          "visual_brief": "Scene 5 of 8. small workshop team silhouettes. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Progress is not a straight line. A broken prototype offers information when the team records what failed and changes one variable instead of pretending the problem never happened.",
+          "visual_brief": "Scene 6 of 8. broken wooden prototype beside notes without text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "Even familiar objects hide many layers of invention. Clean containers, reliable measurements, and repeatable processes often come before the impressive device that audiences rememb",
+          "visual_brief": "Scene 7 of 8. neatly arranged instruments without labels. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "The deeper appeal is not that science produces instant miracles. It is that curiosity, patience, shared knowledge, and careful testing can turn a difficult challenge into a sequenc",
+          "visual_brief": "Scene 8 of 8. sunrise over village workshop. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "anime",
+        "anime analysis",
+        "Otaku Reframe",
+        "Dr. Stone",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Dr. Stone turns a dramatic premise into a question about knowledge. If everyday technology disappeared, which discovery would matter first, and how could a group rebuild the steps that made modern life possible? Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. stone-age landscape with distant settlement. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "A simple flame becomes more than a source of heat. It represents controlled energy, observation, and the need to make the same result happen safely more than once.",
+          "visual_instruction": "Scene 2 of 8. controlled campfire beneath stars. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Materials matter just as much as ideas. Stone, clay, wood, and metal have different properties, so building something useful requires choosing them for the right purpose.",
+          "visual_instruction": "Scene 3 of 8. clay pots wood and raw metal on table. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Every experiment begins with uncertainty. A guess can guide a test, but observing what actually happens is more valuable than defending a plan because it sounded convincing.",
+          "visual_instruction": "Scene 4 of 8. simple experiment with unmarked containers. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "The story also makes cooperation essential. One person may notice a pattern, another may craft a tool, and someone else may organize the work so the discovery can help everyone.",
+          "visual_instruction": "Scene 5 of 8. small workshop team silhouettes. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Progress is not a straight line. A broken prototype offers information when the team records what failed and changes one variable instead of pretending the problem never happened.",
+          "visual_instruction": "Scene 6 of 8. broken wooden prototype beside notes without text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Even familiar objects hide many layers of invention. Clean containers, reliable measurements, and repeatable processes often come before the impressive device that audiences remember.",
+          "visual_instruction": "Scene 7 of 8. neatly arranged instruments without labels. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "The deeper appeal is not that science produces instant miracles. It is that curiosity, patience, shared knowledge, and careful testing can turn a difficult challenge into a sequence of possible steps.",
+          "visual_instruction": "Scene 8 of 8. sunrise over village workshop. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Dr. Stone turns a dramatic premise into a question about knowledge. If everyday technology disappeared, which discovery would matter first, and how could a group rebuild the steps that made modern life possible? Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. A simple flame becomes more than a source of heat. It represents controlled energy, observation, and the need to make the same result happen safely more than once. Materials matter just as much as ideas. Stone, clay, wood, and metal have different properties, so building something useful requires choosing them for the right purpose. Every experiment begins with uncertainty. A guess can guide a test, but observing what actually happens is more valuable than defending a plan because it sounded convincing. The story also makes cooperation essential. One person may notice a pattern, another may craft a tool, and someone else may organize the work so the discovery can help everyone. Progress is not a straight line. A broken prototype offers information when the team records what failed and changes one variable instead of pretending the problem never happened. Even familiar objects hide many layers of invention. Clean containers, reliable measurements, and repeatable processes often come before the impressive device that audiences remember. The deeper appeal is not that science produces instant miracles. It is that curiosity, patience, shared knowledge, and careful testing can turn a difficult challenge into a sequence of possible steps.",
+      "narration_word_count": 249,
+      "description": "Dr. Stone: rebuilding knowledge one discovery at a time. Análise narrativa independente, com ilustrações geradas por IA; sem cenas oficiais ou associação com os criadores da obra."
+    },
+    {
+      "id": "7102-solo-leveling-portais",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "Solo Leveling: why ranking systems create pressure",
+      "cover_text": "THE RANK TRAP",
+      "hook": "What happens when a label defines your future?",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Solo Leveling uses ranks and dangerous spaces to create instant tension. A number or category seems to describe capability, but the story asks what happens when everyone starts tre",
+          "visual_brief": "Scene 1 of 8. glowing doorway in rocky cliff. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "The entrance to a dungeon is also a social threshold. Beyond it, ordinary expectations break down, and every decision can affect people who entered with very different levels of pr",
+          "visual_brief": "Scene 2 of 8. explorers at entrance with torchlight. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "A visible hierarchy may help organize risk, yet it can also hide effort. Someone judged weak might have developed careful observation, teamwork, or persistence that a simple score ",
+          "visual_brief": "Scene 3 of 8. different sized expedition tools on stone. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Uncertainty makes every corridor meaningful. A narrow passage, an unfamiliar symbol, or an unexpected silence can change a team's plan before a battle has even begun.",
+          "visual_brief": "Scene 4 of 8. silent underground corridor with symbols. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Preparation is never just about equipment. Knowing when to retreat, sharing information, and recognizing what remains unknown can protect a group from reckless confidence.",
+          "visual_brief": "Scene 5 of 8. rope and supplies before journey. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Growth feels exciting because it changes future possibilities. But the most interesting question is whether increased power also changes responsibility toward the people who truste",
+          "visual_brief": "Scene 6 of 8. figure standing at a fork in path. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "The fantasy setting uses strong visual contrasts: bright thresholds, dark chambers, and tiny human figures beneath enormous architecture. These images make vulnerability visible wi",
+          "visual_brief": "Scene 7 of 8. vast cavern with dramatic perspective. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "What keeps viewers invested is not simply a higher rank on a screen. It is the tension between ambition, risk, and the person someone becomes while chasing the next challenge.",
+          "visual_brief": "Scene 8 of 8. light crossing dungeon threshold at dawn. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "anime",
+        "anime analysis",
+        "Otaku Reframe",
+        "Solo Leveling",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Solo Leveling uses ranks and dangerous spaces to create instant tension. A number or category seems to describe capability, but the story asks what happens when everyone starts treating that label as destiny. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. glowing doorway in rocky cliff. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "The entrance to a dungeon is also a social threshold. Beyond it, ordinary expectations break down, and every decision can affect people who entered with very different levels of preparation.",
+          "visual_instruction": "Scene 2 of 8. explorers at entrance with torchlight. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A visible hierarchy may help organize risk, yet it can also hide effort. Someone judged weak might have developed careful observation, teamwork, or persistence that a simple score cannot capture.",
+          "visual_instruction": "Scene 3 of 8. different sized expedition tools on stone. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Uncertainty makes every corridor meaningful. A narrow passage, an unfamiliar symbol, or an unexpected silence can change a team's plan before a battle has even begun.",
+          "visual_instruction": "Scene 4 of 8. silent underground corridor with symbols. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Preparation is never just about equipment. Knowing when to retreat, sharing information, and recognizing what remains unknown can protect a group from reckless confidence.",
+          "visual_instruction": "Scene 5 of 8. rope and supplies before journey. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Growth feels exciting because it changes future possibilities. But the most interesting question is whether increased power also changes responsibility toward the people who trusted you before.",
+          "visual_instruction": "Scene 6 of 8. figure standing at a fork in path. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "The fantasy setting uses strong visual contrasts: bright thresholds, dark chambers, and tiny human figures beneath enormous architecture. These images make vulnerability visible without needing a detailed explanation.",
+          "visual_instruction": "Scene 7 of 8. vast cavern with dramatic perspective. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "What keeps viewers invested is not simply a higher rank on a screen. It is the tension between ambition, risk, and the person someone becomes while chasing the next challenge.",
+          "visual_instruction": "Scene 8 of 8. light crossing dungeon threshold at dawn. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Solo Leveling uses ranks and dangerous spaces to create instant tension. A number or category seems to describe capability, but the story asks what happens when everyone starts treating that label as destiny. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. The entrance to a dungeon is also a social threshold. Beyond it, ordinary expectations break down, and every decision can affect people who entered with very different levels of preparation. A visible hierarchy may help organize risk, yet it can also hide effort. Someone judged weak might have developed careful observation, teamwork, or persistence that a simple score cannot capture. Uncertainty makes every corridor meaningful. A narrow passage, an unfamiliar symbol, or an unexpected silence can change a team's plan before a battle has even begun. Preparation is never just about equipment. Knowing when to retreat, sharing information, and recognizing what remains unknown can protect a group from reckless confidence. Growth feels exciting because it changes future possibilities. But the most interesting question is whether increased power also changes responsibility toward the people who trusted you before. The fantasy setting uses strong visual contrasts: bright thresholds, dark chambers, and tiny human figures beneath enormous architecture. These images make vulnerability visible without needing a detailed explanation. What keeps viewers invested is not simply a higher rank on a screen. It is the tension between ambition, risk, and the person someone becomes while chasing the next challenge.",
+      "narration_word_count": 250,
+      "description": "Solo Leveling: why ranking systems create pressure. Análise narrativa independente, com ilustrações geradas por IA; sem cenas oficiais ou associação com os criadores da obra."
+    },
+    {
+      "id": "7103-promised-neverland-pistas",
+      "channel": "en",
+      "channel_id": "UCBoNbQjaMYdpJqPLRZAFkvQ",
+      "title": "The Promised Neverland: clues hidden in ordinary places",
+      "cover_text": "NOTHING IS RANDOM",
+      "hook": "Can an ordinary room hide a mystery?",
+      "language": "en-US",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "The Promised Neverland makes ordinary spaces feel unsettling by changing how viewers read small details. A hallway, a routine, or a closed door can become a clue once the character",
+          "visual_brief": "Scene 1 of 8. quiet country house exterior. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "At first, a familiar setting offers comfort. Repeated meals and predictable schedules create patterns, which means even a small change can suggest that something important is missi",
+          "visual_brief": "Scene 2 of 8. orderly dining room with one empty chair. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "Mystery grows through observation rather than constant action. A misplaced object matters because someone remembers where it belonged, and memory becomes a tool for testing what is",
+          "visual_brief": "Scene 3 of 8. single object out of place on shelf. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "The story also explores trust. Sharing information may make a group stronger, but choosing what to reveal requires care when everyone is frightened and no one sees the whole pictur",
+          "visual_brief": "Scene 4 of 8. two figures quietly sharing notes. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "A map can be both useful and misleading. It describes known paths while leaving uncertainty beyond the edges, reminding us that a plan should change when new evidence appears.",
+          "visual_brief": "Scene 5 of 8. hand drawn map with no readable letters. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Silence has a role in suspense. Footsteps in another room or a pause in conversation can signal danger without showing a single creature or revealing a shocking answer.",
+          "visual_brief": "Scene 6 of 8. long corridor with shadow beneath door. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "The strongest mysteries reward attention to relationships as well as physical clues. People may interpret the same event differently because their goals, memories, and fears are no",
+          "visual_brief": "Scene 7 of 8. friends looking at same object from different angles. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "That is why the question is larger than finding one secret. The challenge is learning to think together under pressure while protecting the people who depend on each other.",
+          "visual_brief": "Scene 8 of 8. window looking toward distant field. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "anime",
+        "anime analysis",
+        "Otaku Reframe",
+        "The Promised Neverland",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "The Promised Neverland makes ordinary spaces feel unsettling by changing how viewers read small details. A hallway, a routine, or a closed door can become a clue once the characters begin asking difficult questions. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. quiet country house exterior. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "At first, a familiar setting offers comfort. Repeated meals and predictable schedules create patterns, which means even a small change can suggest that something important is missing.",
+          "visual_instruction": "Scene 2 of 8. orderly dining room with one empty chair. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Mystery grows through observation rather than constant action. A misplaced object matters because someone remembers where it belonged, and memory becomes a tool for testing what is true.",
+          "visual_instruction": "Scene 3 of 8. single object out of place on shelf. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "The story also explores trust. Sharing information may make a group stronger, but choosing what to reveal requires care when everyone is frightened and no one sees the whole picture.",
+          "visual_instruction": "Scene 4 of 8. two figures quietly sharing notes. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "A map can be both useful and misleading. It describes known paths while leaving uncertainty beyond the edges, reminding us that a plan should change when new evidence appears.",
+          "visual_instruction": "Scene 5 of 8. hand drawn map with no readable letters. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Silence has a role in suspense. Footsteps in another room or a pause in conversation can signal danger without showing a single creature or revealing a shocking answer.",
+          "visual_instruction": "Scene 6 of 8. long corridor with shadow beneath door. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "The strongest mysteries reward attention to relationships as well as physical clues. People may interpret the same event differently because their goals, memories, and fears are not identical.",
+          "visual_instruction": "Scene 7 of 8. friends looking at same object from different angles. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "That is why the question is larger than finding one secret. The challenge is learning to think together under pressure while protecting the people who depend on each other.",
+          "visual_instruction": "Scene 8 of 8. window looking toward distant field. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "The Promised Neverland makes ordinary spaces feel unsettling by changing how viewers read small details. A hallway, a routine, or a closed door can become a clue once the characters begin asking difficult questions. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. At first, a familiar setting offers comfort. Repeated meals and predictable schedules create patterns, which means even a small change can suggest that something important is missing. Mystery grows through observation rather than constant action. A misplaced object matters because someone remembers where it belonged, and memory becomes a tool for testing what is true. The story also explores trust. Sharing information may make a group stronger, but choosing what to reveal requires care when everyone is frightened and no one sees the whole picture. A map can be both useful and misleading. It describes known paths while leaving uncertainty beyond the edges, reminding us that a plan should change when new evidence appears. Silence has a role in suspense. Footsteps in another room or a pause in conversation can signal danger without showing a single creature or revealing a shocking answer. The strongest mysteries reward attention to relationships as well as physical clues. People may interpret the same event differently because their goals, memories, and fears are not identical. That is why the question is larger than finding one secret. The challenge is learning to think together under pressure while protecting the people who depend on each other.",
+      "narration_word_count": 255,
+      "description": "The Promised Neverland: clues hidden in ordinary places. Análise narrativa independente, com ilustrações geradas por IA; sem cenas oficiais ou associação com os criadores da obra."
+    },
+    {
+      "id": "game-201-portal-logica",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Portal: por que os quebra-cabeças mudam nossa forma de pensar?",
+      "cover_text": "PENSE DIFERENTE",
+      "hook": "E se a saída estivesse na parede errada?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Portal ficou conhecido por transformar espaço em parte do desafio. Em vez de apenas procurar uma chave, a proposta convida a observar paredes, distâncias e trajetórias por outros â",
+          "visual_brief": "Scene 1 of 8. minimalist puzzle room with two colored circles. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Imagine dois pontos conectados de maneira inesperada. A solução deixa de depender somente de caminhar até um lugar e passa a exigir compreensão de posição, movimento e sequência. V",
+          "visual_brief": "Scene 2 of 8. corridor with linked glowing doorways. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "O cenário limpo ajuda a comunicar regras visuais. Quando poucos objetos estão presentes, cada plataforma, abertura ou superfície ganha significado para quem está tentando entender ",
+          "visual_brief": "Scene 3 of 8. abstract white test chamber with platforms. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Um bom quebra-cabeça ensina sem precisar explicar tudo de uma vez. Primeiro apresenta uma ideia simples; depois combina a mesma regra com uma situação que parece completamente dife",
+          "visual_brief": "Scene 4 of 8. stacked blocks and raised bridge. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Errar uma tentativa não significa que o raciocínio foi inútil. Ao observar a consequência, podemos descobrir que a premissa estava certa, mas o ponto de partida precisava mudar.",
+          "visual_brief": "Scene 5 of 8. misaligned puzzle pieces on clean floor. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Também existe um prazer especial em reconhecer padrões. O momento em que uma sala complicada parece finalmente fazer sentido costuma ser tão marcante quanto chegar à saída.",
+          "visual_brief": "Scene 6 of 8. overhead symmetric maze room. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "A grande lição vale além de jogos: condições aparentemente rígidas podem oferecer caminhos inesperados quando examinamos as relações entre seus elementos com paciência.",
+          "visual_brief": "Scene 7 of 8. light rays revealing unexpected path. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "Aqui as imagens são ilustrações conceituais, não capturas de uma partida. Qual outro jogo transforma uma regra simples num desafio que faz você pensar de outra forma?",
+          "visual_brief": "Scene 8 of 8. doorway opening to bright abstract room. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "games",
+        "curiosidades gamer",
+        "Hélio Conde",
+        "Portal",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Portal ficou conhecido por transformar espaço em parte do desafio. Em vez de apenas procurar uma chave, a proposta convida a observar paredes, distâncias e trajetórias por outros ângulos. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. minimalist puzzle room with two colored circles. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Imagine dois pontos conectados de maneira inesperada. A solução deixa de depender somente de caminhar até um lugar e passa a exigir compreensão de posição, movimento e sequência. Vale reparar na relação entre a decisão e a consequência, porque toda história fica mais interessante quando uma escolha tem um motivo compreensível.",
+          "visual_instruction": "Scene 2 of 8. corridor with linked glowing doorways. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "O cenário limpo ajuda a comunicar regras visuais. Quando poucos objetos estão presentes, cada plataforma, abertura ou superfície ganha significado para quem está tentando entender o problema.",
+          "visual_instruction": "Scene 3 of 8. abstract white test chamber with platforms. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Um bom quebra-cabeça ensina sem precisar explicar tudo de uma vez. Primeiro apresenta uma ideia simples; depois combina a mesma regra com uma situação que parece completamente diferente.",
+          "visual_instruction": "Scene 4 of 8. stacked blocks and raised bridge. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Errar uma tentativa não significa que o raciocínio foi inútil. Ao observar a consequência, podemos descobrir que a premissa estava certa, mas o ponto de partida precisava mudar.",
+          "visual_instruction": "Scene 5 of 8. misaligned puzzle pieces on clean floor. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Também existe um prazer especial em reconhecer padrões. O momento em que uma sala complicada parece finalmente fazer sentido costuma ser tão marcante quanto chegar à saída.",
+          "visual_instruction": "Scene 6 of 8. overhead symmetric maze room. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "A grande lição vale além de jogos: condições aparentemente rígidas podem oferecer caminhos inesperados quando examinamos as relações entre seus elementos com paciência.",
+          "visual_instruction": "Scene 7 of 8. light rays revealing unexpected path. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Aqui as imagens são ilustrações conceituais, não capturas de uma partida. Qual outro jogo transforma uma regra simples num desafio que faz você pensar de outra forma?",
+          "visual_instruction": "Scene 8 of 8. doorway opening to bright abstract room. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Portal ficou conhecido por transformar espaço em parte do desafio. Em vez de apenas procurar uma chave, a proposta convida a observar paredes, distâncias e trajetórias por outros ângulos. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Imagine dois pontos conectados de maneira inesperada. A solução deixa de depender somente de caminhar até um lugar e passa a exigir compreensão de posição, movimento e sequência. Vale reparar na relação entre a decisão e a consequência, porque toda história fica mais interessante quando uma escolha tem um motivo compreensível. O cenário limpo ajuda a comunicar regras visuais. Quando poucos objetos estão presentes, cada plataforma, abertura ou superfície ganha significado para quem está tentando entender o problema. Um bom quebra-cabeça ensina sem precisar explicar tudo de uma vez. Primeiro apresenta uma ideia simples; depois combina a mesma regra com uma situação que parece completamente diferente. Errar uma tentativa não significa que o raciocínio foi inútil. Ao observar a consequência, podemos descobrir que a premissa estava certa, mas o ponto de partida precisava mudar. Também existe um prazer especial em reconhecer padrões. O momento em que uma sala complicada parece finalmente fazer sentido costuma ser tão marcante quanto chegar à saída. A grande lição vale além de jogos: condições aparentemente rígidas podem oferecer caminhos inesperados quando examinamos as relações entre seus elementos com paciência. Aqui as imagens são ilustrações conceituais, não capturas de uma partida. Qual outro jogo transforma uma regra simples num desafio que faz você pensar de outra forma?",
+      "narration_word_count": 262,
+      "description": "Portal: por que os quebra-cabeças mudam nossa forma de pensar?. Análise ilustrativa e original sobre jogos e estratégia. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+    },
+    {
+      "id": "game-202-slay-the-spire-cartas",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Slay the Spire: por que cada carta muda a estratégia?",
+      "cover_text": "UMA CARTA MUDA TUDO",
+      "hook": "O melhor plano continua bom depois de uma surpresa?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Slay the Spire usa cartas para transformar decisões pequenas em caminhos muito diferentes. Uma escolha aparentemente simples pode combinar com outras no futuro ou deixar uma fraque",
+          "visual_brief": "Scene 1 of 8. fantasy cards fanned on wooden table without text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Cada recurso tem valor dentro de uma situação. Guardar energia, defender no momento certo ou procurar uma combinação são ideias que podem competir na mesma rodada.",
+          "visual_brief": "Scene 2 of 8. glowing tokens beside deck of cards. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "O interessante é que nenhuma carta existe isolada. O efeito de uma jogada depende do restante do baralho, da ordem das opções e dos riscos que aparecem pelo caminho.",
+          "visual_brief": "Scene 3 of 8. single card facing many linked cards. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Planejamento não elimina surpresa. Ao encontrar uma situação inesperada, insistir no plano antigo pode ser pior do que reconhecer o problema e mudar de direção.",
+          "visual_brief": "Scene 4 of 8. two paths up mysterious tower. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Isso torna a construção de um baralho uma espécie de conversa entre escolhas anteriores e necessidades atuais. Uma recompensa forte nem sempre combina com a estratégia que você já ",
+          "visual_brief": "Scene 5 of 8. deck and compass on stone surface. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "A variedade de caminhos cria uma sensação de descoberta. Mesmo quando duas jornadas começam parecidas, decisões diferentes podem levar a recursos e desafios completamente novos.",
+          "visual_brief": "Scene 6 of 8. tower staircase with branching rooms. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "A pergunta mais útil não é qual carta parece mais poderosa na imagem. É qual delas ajuda a resolver o problema que realmente existe naquele momento.",
+          "visual_brief": "Scene 7 of 8. one card illuminating dark tactical board. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "As cenas deste vídeo são ilustrações de estratégia, não gameplay gravado. Se tivesse que escolher entre uma opção segura e uma arriscada, qual você levaria para o próximo desafio?",
+          "visual_brief": "Scene 8 of 8. crossroads with safe and dangerous bridge. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "games",
+        "curiosidades gamer",
+        "Hélio Conde",
+        "Slay the Spire",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Slay the Spire usa cartas para transformar decisões pequenas em caminhos muito diferentes. Uma escolha aparentemente simples pode combinar com outras no futuro ou deixar uma fraqueza difícil de corrigir. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. fantasy cards fanned on wooden table without text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Cada recurso tem valor dentro de uma situação. Guardar energia, defender no momento certo ou procurar uma combinação são ideias que podem competir na mesma rodada.",
+          "visual_instruction": "Scene 2 of 8. glowing tokens beside deck of cards. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "O interessante é que nenhuma carta existe isolada. O efeito de uma jogada depende do restante do baralho, da ordem das opções e dos riscos que aparecem pelo caminho.",
+          "visual_instruction": "Scene 3 of 8. single card facing many linked cards. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Planejamento não elimina surpresa. Ao encontrar uma situação inesperada, insistir no plano antigo pode ser pior do que reconhecer o problema e mudar de direção.",
+          "visual_instruction": "Scene 4 of 8. two paths up mysterious tower. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Isso torna a construção de um baralho uma espécie de conversa entre escolhas anteriores e necessidades atuais. Uma recompensa forte nem sempre combina com a estratégia que você já construiu.",
+          "visual_instruction": "Scene 5 of 8. deck and compass on stone surface. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "A variedade de caminhos cria uma sensação de descoberta. Mesmo quando duas jornadas começam parecidas, decisões diferentes podem levar a recursos e desafios completamente novos.",
+          "visual_instruction": "Scene 6 of 8. tower staircase with branching rooms. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "A pergunta mais útil não é qual carta parece mais poderosa na imagem. É qual delas ajuda a resolver o problema que realmente existe naquele momento.",
+          "visual_instruction": "Scene 7 of 8. one card illuminating dark tactical board. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "As cenas deste vídeo são ilustrações de estratégia, não gameplay gravado. Se tivesse que escolher entre uma opção segura e uma arriscada, qual você levaria para o próximo desafio?",
+          "visual_instruction": "Scene 8 of 8. crossroads with safe and dangerous bridge. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Slay the Spire usa cartas para transformar decisões pequenas em caminhos muito diferentes. Uma escolha aparentemente simples pode combinar com outras no futuro ou deixar uma fraqueza difícil de corrigir. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Cada recurso tem valor dentro de uma situação. Guardar energia, defender no momento certo ou procurar uma combinação são ideias que podem competir na mesma rodada. O interessante é que nenhuma carta existe isolada. O efeito de uma jogada depende do restante do baralho, da ordem das opções e dos riscos que aparecem pelo caminho. Planejamento não elimina surpresa. Ao encontrar uma situação inesperada, insistir no plano antigo pode ser pior do que reconhecer o problema e mudar de direção. Isso torna a construção de um baralho uma espécie de conversa entre escolhas anteriores e necessidades atuais. Uma recompensa forte nem sempre combina com a estratégia que você já construiu. A variedade de caminhos cria uma sensação de descoberta. Mesmo quando duas jornadas começam parecidas, decisões diferentes podem levar a recursos e desafios completamente novos. A pergunta mais útil não é qual carta parece mais poderosa na imagem. É qual delas ajuda a resolver o problema que realmente existe naquele momento. As cenas deste vídeo são ilustrações de estratégia, não gameplay gravado. Se tivesse que escolher entre uma opção segura e uma arriscada, qual você levaria para o próximo desafio?",
+      "narration_word_count": 242,
+      "description": "Slay the Spire: por que cada carta muda a estratégia?. Análise ilustrativa e original sobre jogos e estratégia. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+    },
+    {
+      "id": "game-203-subnautica-exploracao",
+      "channel": "games",
+      "channel_id": "UCg77gYc1_wkHuL07XPtKcow",
+      "title": "Subnautica: a curiosidade pode ser mais forte que o medo?",
+      "cover_text": "O OCEANO DESCONHECIDO",
+      "hook": "Por que explorar algo que parece assustador?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Subnautica apresenta um oceano cheio de possibilidades, mas também de incerteza. A ideia de explorar um ambiente enorme faz a curiosidade competir com o receio de não saber o que e",
+          "visual_brief": "Scene 1 of 8. blue ocean surface with small research buoy. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Perto da superfície, a luz oferece referências. É mais fácil reconhecer formas, calcular distâncias e voltar para um lugar conhecido quando o cenário ainda parece familiar. Vale re",
+          "visual_brief": "Scene 2 of 8. sunlight over shallow reef. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "Conforme a profundidade aumenta, cores e sons mudam. A paisagem se torna menos previsível, e a própria iluminação pode transformar uma área tranquila em algo misterioso.",
+          "visual_brief": "Scene 3 of 8. deep underwater canyon glowing flora. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Explorar exige preparação imaginativa: organizar suprimentos, lembrar o caminho de volta e respeitar limites. Uma decisão responsável pode ser parar antes de descobrir tudo naquela",
+          "visual_brief": "Scene 4 of 8. prepared exploration backpack and map on desk. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "O oceano também cria contrastes interessantes entre espaços apertados e horizontes aparentemente infinitos. Um abrigo pequeno pode transmitir segurança no meio de uma paisagem giga",
+          "visual_brief": "Scene 5 of 8. small underwater glass shelter surrounded by sea. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Nem todo encontro precisa ser uma batalha. Observar movimentos de criaturas fantásticas e reconhecer padrões do ambiente também pode produzir momentos marcantes de descoberta.",
+          "visual_brief": "Scene 6 of 8. distant sea creatures in peaceful silhouette. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "A sensação de progresso aparece quando o desconhecido ganha detalhes. Um lugar que antes parecia apenas perigoso pode revelar beleza, caminhos alternativos e perguntas ainda maiore",
+          "visual_brief": "Scene 7 of 8. newly discovered coral grotto. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "As artes aqui são ilustrações inspiradas no tema, nunca capturas reais de gameplay. Para você, o que mais atrai numa aventura submarina: encontrar criaturas ou descobrir lugares es",
+          "visual_brief": "Scene 8 of 8. submarine light entering unexplored ocean. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "games",
+        "curiosidades gamer",
+        "Hélio Conde",
+        "Subnautica",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Subnautica apresenta um oceano cheio de possibilidades, mas também de incerteza. A ideia de explorar um ambiente enorme faz a curiosidade competir com o receio de não saber o que existe adiante. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. blue ocean surface with small research buoy. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Perto da superfície, a luz oferece referências. É mais fácil reconhecer formas, calcular distâncias e voltar para um lugar conhecido quando o cenário ainda parece familiar. Vale reparar na relação entre a decisão e a consequência, porque toda história fica mais interessante quando uma escolha tem um motivo compreensível.",
+          "visual_instruction": "Scene 2 of 8. sunlight over shallow reef. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Conforme a profundidade aumenta, cores e sons mudam. A paisagem se torna menos previsível, e a própria iluminação pode transformar uma área tranquila em algo misterioso.",
+          "visual_instruction": "Scene 3 of 8. deep underwater canyon glowing flora. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Explorar exige preparação imaginativa: organizar suprimentos, lembrar o caminho de volta e respeitar limites. Uma decisão responsável pode ser parar antes de descobrir tudo naquela viagem.",
+          "visual_instruction": "Scene 4 of 8. prepared exploration backpack and map on desk. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "O oceano também cria contrastes interessantes entre espaços apertados e horizontes aparentemente infinitos. Um abrigo pequeno pode transmitir segurança no meio de uma paisagem gigantesca.",
+          "visual_instruction": "Scene 5 of 8. small underwater glass shelter surrounded by sea. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Nem todo encontro precisa ser uma batalha. Observar movimentos de criaturas fantásticas e reconhecer padrões do ambiente também pode produzir momentos marcantes de descoberta.",
+          "visual_instruction": "Scene 6 of 8. distant sea creatures in peaceful silhouette. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "A sensação de progresso aparece quando o desconhecido ganha detalhes. Um lugar que antes parecia apenas perigoso pode revelar beleza, caminhos alternativos e perguntas ainda maiores.",
+          "visual_instruction": "Scene 7 of 8. newly discovered coral grotto. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "As artes aqui são ilustrações inspiradas no tema, nunca capturas reais de gameplay. Para você, o que mais atrai numa aventura submarina: encontrar criaturas ou descobrir lugares escondidos?",
+          "visual_instruction": "Scene 8 of 8. submarine light entering unexplored ocean. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Subnautica apresenta um oceano cheio de possibilidades, mas também de incerteza. A ideia de explorar um ambiente enorme faz a curiosidade competir com o receio de não saber o que existe adiante. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Perto da superfície, a luz oferece referências. É mais fácil reconhecer formas, calcular distâncias e voltar para um lugar conhecido quando o cenário ainda parece familiar. Vale reparar na relação entre a decisão e a consequência, porque toda história fica mais interessante quando uma escolha tem um motivo compreensível. Conforme a profundidade aumenta, cores e sons mudam. A paisagem se torna menos previsível, e a própria iluminação pode transformar uma área tranquila em algo misterioso. Explorar exige preparação imaginativa: organizar suprimentos, lembrar o caminho de volta e respeitar limites. Uma decisão responsável pode ser parar antes de descobrir tudo naquela viagem. O oceano também cria contrastes interessantes entre espaços apertados e horizontes aparentemente infinitos. Um abrigo pequeno pode transmitir segurança no meio de uma paisagem gigantesca. Nem todo encontro precisa ser uma batalha. Observar movimentos de criaturas fantásticas e reconhecer padrões do ambiente também pode produzir momentos marcantes de descoberta. A sensação de progresso aparece quando o desconhecido ganha detalhes. Um lugar que antes parecia apenas perigoso pode revelar beleza, caminhos alternativos e perguntas ainda maiores. As artes aqui são ilustrações inspiradas no tema, nunca capturas reais de gameplay. Para você, o que mais atrai numa aventura submarina: encontrar criaturas ou descobrir lugares escondidos?",
+      "narration_word_count": 258,
+      "description": "Subnautica: a curiosidade pode ser mais forte que o medo?. Análise ilustrativa e original sobre jogos e estratégia. 🎨 Visuais ilustrativos gerados por IA; não são capturas de gameplay."
+    },
+    {
+      "id": "kids-201-pipa-e-vento",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "A pipinha que aprendeu a dançar com o vento",
+      "cover_text": "A PIPA DANÇANTE",
+      "hook": "Uma pipa pode aprender a ouvir o vento?",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Era uma manhã bonita, e uma pipinha amarela descansava ao lado de uma árvore. Ela queria subir bem alto, mas o vento estava quietinho, como se ainda estivesse acordando. Esse detal",
+          "visual_brief": "Scene 1 of 8. yellow kite on grassy garden under tree. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Um menino segurou a linha com cuidado e esperou. A pipinha sacudiu sua cauda colorida uma vez, depois outra, mas continuou pertinho do chão macio. Vale reparar na relação entre a d",
+          "visual_brief": "Scene 2 of 8. child's hands holding thread spool. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "Então as folhas começaram a fazer um barulhinho suave. A pipinha pensou que precisava correr depressa, porém a primeira rajada a fez girar para o lado errado.",
+          "visual_brief": "Scene 3 of 8. colored kite tilting beside leaves. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "O menino não puxou com força. Ele observou as folhas, deu alguns passos pequenos e deixou a linha acompanhar a direção do vento, sem pressa nem susto.",
+          "visual_brief": "Scene 4 of 8. gentle breeze and calm child silhouette. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "A pipinha subiu um pouquinho. Lá do alto viu formiguinhas no jardim, flores dançando e uma borboleta que parecia passear entre as cores do céu.",
+          "visual_brief": "Scene 5 of 8. flowers butterflies and kite in sky. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Quando o vento ficou forte, ela balançou e sentiu medo de cair. Mas percebeu que podia voltar um pouco, encontrar equilíbrio e tentar novamente com calma.",
+          "visual_brief": "Scene 6 of 8. kite oscillating safely above garden. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "Aos poucos, aprendeu que dançar no céu não era lutar contra o vento. Era escutar o movimento, mudar de posição e respeitar o momento de cada brisa.",
+          "visual_brief": "Scene 7 of 8. smooth joyful kite arc under clouds. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "No final da tarde, a pipinha voltou para descansar na árvore. Sua cauda ainda mexia devagar, como se agradecesse ao vento por uma aventura tão bonita e tranquila.",
+          "visual_brief": "Scene 8 of 8. kite resting on low tree branch at sunset. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "história infantil",
+        "Emanuelly Kids",
+        "conto infantil",
+        "aventuras",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Era uma manhã bonita, e uma pipinha amarela descansava ao lado de uma árvore. Ela queria subir bem alto, mas o vento estava quietinho, como se ainda estivesse acordando. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. yellow kite on grassy garden under tree. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Um menino segurou a linha com cuidado e esperou. A pipinha sacudiu sua cauda colorida uma vez, depois outra, mas continuou pertinho do chão macio. Vale reparar na relação entre a decisão e a consequência, porque toda história fica mais interessante quando uma escolha tem um motivo compreensível.",
+          "visual_instruction": "Scene 2 of 8. child's hands holding thread spool. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Então as folhas começaram a fazer um barulhinho suave. A pipinha pensou que precisava correr depressa, porém a primeira rajada a fez girar para o lado errado.",
+          "visual_instruction": "Scene 3 of 8. colored kite tilting beside leaves. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "O menino não puxou com força. Ele observou as folhas, deu alguns passos pequenos e deixou a linha acompanhar a direção do vento, sem pressa nem susto.",
+          "visual_instruction": "Scene 4 of 8. gentle breeze and calm child silhouette. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "A pipinha subiu um pouquinho. Lá do alto viu formiguinhas no jardim, flores dançando e uma borboleta que parecia passear entre as cores do céu.",
+          "visual_instruction": "Scene 5 of 8. flowers butterflies and kite in sky. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Quando o vento ficou forte, ela balançou e sentiu medo de cair. Mas percebeu que podia voltar um pouco, encontrar equilíbrio e tentar novamente com calma.",
+          "visual_instruction": "Scene 6 of 8. kite oscillating safely above garden. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Aos poucos, aprendeu que dançar no céu não era lutar contra o vento. Era escutar o movimento, mudar de posição e respeitar o momento de cada brisa.",
+          "visual_instruction": "Scene 7 of 8. smooth joyful kite arc under clouds. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "No final da tarde, a pipinha voltou para descansar na árvore. Sua cauda ainda mexia devagar, como se agradecesse ao vento por uma aventura tão bonita e tranquila.",
+          "visual_instruction": "Scene 8 of 8. kite resting on low tree branch at sunset. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Era uma manhã bonita, e uma pipinha amarela descansava ao lado de uma árvore. Ela queria subir bem alto, mas o vento estava quietinho, como se ainda estivesse acordando. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Um menino segurou a linha com cuidado e esperou. A pipinha sacudiu sua cauda colorida uma vez, depois outra, mas continuou pertinho do chão macio. Vale reparar na relação entre a decisão e a consequência, porque toda história fica mais interessante quando uma escolha tem um motivo compreensível. Então as folhas começaram a fazer um barulhinho suave. A pipinha pensou que precisava correr depressa, porém a primeira rajada a fez girar para o lado errado. O menino não puxou com força. Ele observou as folhas, deu alguns passos pequenos e deixou a linha acompanhar a direção do vento, sem pressa nem susto. A pipinha subiu um pouquinho. Lá do alto viu formiguinhas no jardim, flores dançando e uma borboleta que parecia passear entre as cores do céu. Quando o vento ficou forte, ela balançou e sentiu medo de cair. Mas percebeu que podia voltar um pouco, encontrar equilíbrio e tentar novamente com calma. Aos poucos, aprendeu que dançar no céu não era lutar contra o vento. Era escutar o movimento, mudar de posição e respeitar o momento de cada brisa. No final da tarde, a pipinha voltou para descansar na árvore. Sua cauda ainda mexia devagar, como se agradecesse ao vento por uma aventura tão bonita e tranquila.",
+      "narration_word_count": 259,
+      "description": "A pipinha que aprendeu a dançar com o vento. História infantil original, narrada com ilustrações delicadas geradas por IA, sem conteúdo perigoso."
+    },
+    {
+      "id": "kids-202-lobinho-escuta",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "O lobinho que descobriu a importância de escutar",
+      "cover_text": "OUVIR É CARINHO",
+      "hook": "O que acontece quando ninguém escuta?",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Num bosque cheio de flores, morava um lobinho muito animado. Ele gostava tanto de contar aventuras que às vezes começava a falar antes de seus amigos terminarem uma frase. Esse det",
+          "visual_brief": "Scene 1 of 8. cute young wolf waving in flower forest. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Certa manhã, uma coelhinha tentou mostrar onde havia encontrado frutinhas maduras. Mas o lobinho já estava explicando seu plano de correr até a grande pedra.",
+          "visual_brief": "Scene 2 of 8. small rabbit pointing toward berries. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "A coelhinha sorriu e ficou em silêncio. Pouco depois, os dois se perderam numa trilha que parecia igual às outras, com folhas verdes para todos os lados.",
+          "visual_brief": "Scene 3 of 8. two friendly animals on identical leafy paths. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "O lobinho ficou preocupado e quis correr novamente. A amiga pediu um instante, apontou para pequenos sinais no chão e convidou o lobinho a observar com atenção.",
+          "visual_brief": "Scene 4 of 8. rabbit pointing to footprints. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Eles escutaram o som de um riacho e viram pegadas perto de uma árvore antiga. Juntos, lembraram que o caminho da casa passava justamente por aquele lugar.",
+          "visual_brief": "Scene 5 of 8. stream and old tree under sun. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "O lobinho percebeu que a coelhinha tinha tentado explicar aquilo antes. Ele pediu desculpas com carinho e prometeu esperar a vez de falar, mesmo quando tivesse uma grande ideia.",
+          "visual_brief": "Scene 6 of 8. wolf and rabbit exchanging kind gesture. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "Na volta, os dois contaram o que tinham descoberto. O lobinho fez perguntas e deixou os amigos responderem, porque começou a gostar de aprender coisas novas pelas palavras dos outr",
+          "visual_brief": "Scene 7 of 8. forest friends sitting in circle talking. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "Naquela noite, enquanto a lua brilhava sobre o bosque, o lobinho entendeu algo simples: escutar também é uma forma de amizade. E dormiu feliz com a nova descoberta.",
+          "visual_brief": "Scene 8 of 8. wolf sleeping in cozy woodland den. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "história infantil",
+        "Emanuelly Kids",
+        "conto infantil",
+        "aventuras",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Num bosque cheio de flores, morava um lobinho muito animado. Ele gostava tanto de contar aventuras que às vezes começava a falar antes de seus amigos terminarem uma frase. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. cute young wolf waving in flower forest. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Certa manhã, uma coelhinha tentou mostrar onde havia encontrado frutinhas maduras. Mas o lobinho já estava explicando seu plano de correr até a grande pedra.",
+          "visual_instruction": "Scene 2 of 8. small rabbit pointing toward berries. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A coelhinha sorriu e ficou em silêncio. Pouco depois, os dois se perderam numa trilha que parecia igual às outras, com folhas verdes para todos os lados.",
+          "visual_instruction": "Scene 3 of 8. two friendly animals on identical leafy paths. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "O lobinho ficou preocupado e quis correr novamente. A amiga pediu um instante, apontou para pequenos sinais no chão e convidou o lobinho a observar com atenção.",
+          "visual_instruction": "Scene 4 of 8. rabbit pointing to footprints. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Eles escutaram o som de um riacho e viram pegadas perto de uma árvore antiga. Juntos, lembraram que o caminho da casa passava justamente por aquele lugar.",
+          "visual_instruction": "Scene 5 of 8. stream and old tree under sun. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "O lobinho percebeu que a coelhinha tinha tentado explicar aquilo antes. Ele pediu desculpas com carinho e prometeu esperar a vez de falar, mesmo quando tivesse uma grande ideia.",
+          "visual_instruction": "Scene 6 of 8. wolf and rabbit exchanging kind gesture. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Na volta, os dois contaram o que tinham descoberto. O lobinho fez perguntas e deixou os amigos responderem, porque começou a gostar de aprender coisas novas pelas palavras dos outros.",
+          "visual_instruction": "Scene 7 of 8. forest friends sitting in circle talking. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Naquela noite, enquanto a lua brilhava sobre o bosque, o lobinho entendeu algo simples: escutar também é uma forma de amizade. E dormiu feliz com a nova descoberta.",
+          "visual_instruction": "Scene 8 of 8. wolf sleeping in cozy woodland den. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Num bosque cheio de flores, morava um lobinho muito animado. Ele gostava tanto de contar aventuras que às vezes começava a falar antes de seus amigos terminarem uma frase. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Certa manhã, uma coelhinha tentou mostrar onde havia encontrado frutinhas maduras. Mas o lobinho já estava explicando seu plano de correr até a grande pedra. A coelhinha sorriu e ficou em silêncio. Pouco depois, os dois se perderam numa trilha que parecia igual às outras, com folhas verdes para todos os lados. O lobinho ficou preocupado e quis correr novamente. A amiga pediu um instante, apontou para pequenos sinais no chão e convidou o lobinho a observar com atenção. Eles escutaram o som de um riacho e viram pegadas perto de uma árvore antiga. Juntos, lembraram que o caminho da casa passava justamente por aquele lugar. O lobinho percebeu que a coelhinha tinha tentado explicar aquilo antes. Ele pediu desculpas com carinho e prometeu esperar a vez de falar, mesmo quando tivesse uma grande ideia. Na volta, os dois contaram o que tinham descoberto. O lobinho fez perguntas e deixou os amigos responderem, porque começou a gostar de aprender coisas novas pelas palavras dos outros. Naquela noite, enquanto a lua brilhava sobre o bosque, o lobinho entendeu algo simples: escutar também é uma forma de amizade. E dormiu feliz com a nova descoberta.",
+      "narration_word_count": 244,
+      "description": "O lobinho que descobriu a importância de escutar. História infantil original, narrada com ilustrações delicadas geradas por IA, sem conteúdo perigoso."
+    },
+    {
+      "id": "kids-203-vagalume-luz",
+      "channel": "kids",
+      "channel_id": "UCxEzVW2Uy44OUVurTQSg_Eg",
+      "title": "O vagalume que encontrou sua própria luz",
+      "cover_text": "UMA LUZ ESPECIAL",
+      "hook": "Toda luz precisa brilhar igual?",
+      "language": "pt-BR",
+      "made_for_kids": true,
+      "visibility_intent": "private_first_after_QA",
+      "series": "standalone_children_story_not_fofinhos",
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "No começo da noite, um pequeno vagalume acordou entre as folhas de um jardim. Ele viu várias luzinhas dançando no ar e ficou encantado com aquele espetáculo. Esse detalhe orienta a",
+          "visual_brief": "Scene 1 of 8. fireflies glowing above evening garden. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Tentou brilhar tão forte quanto os amigos, mas sua luz aparecia bem fraquinha. O vagalume ficou triste e se escondeu atrás de uma flor azul. Vale reparar na relação entre a decisão",
+          "visual_brief": "Scene 2 of 8. small dim firefly beside bright lights. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "Uma joaninha que descansava por perto percebeu seu silêncio. Ela perguntou por que ele não estava voando, e o vagalume contou que achava sua luz pequena demais.",
+          "visual_brief": "Scene 3 of 8. ladybug visiting firefly behind blue flower. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "A joaninha mostrou uma folha escura e pediu que ele olhasse com atenção. Mesmo fraquinha, a luz do vagalume revelou gotinhas brilhantes que ninguém tinha notado.",
+          "visual_brief": "Scene 4 of 8. tiny dew drops glowing on dark leaf. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Animado, ele começou a voar entre as flores com movimentos bem lentos. Seu brilho iluminou um caminho seguro para uma formiguinha que procurava a família.",
+          "visual_brief": "Scene 5 of 8. firefly guiding ant between flowers. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Os outros vagalumes perceberam a cena e se aproximaram. Em vez de comparar brilhos, fizeram uma dança de luzes diferentes, cada uma com seu próprio ritmo e sua própria cor.",
+          "visual_brief": "Scene 6 of 8. many different glowing fireflies dancing. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "O pequeno vagalume descobriu que não precisava ser a luz mais forte do jardim. Bastava usar o que tinha para tornar a noite um pouquinho mais bonita.",
+          "visual_brief": "Scene 7 of 8. small firefly over warmly lit garden path. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "Quando a lua apareceu acima das árvores, todos descansaram entre as folhas. O vagalume fechou os olhos feliz, lembrando que até uma luz pequena consegue ajudar alguém.",
+          "visual_brief": "Scene 8 of 8. moonlight on quiet sleeping garden. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "história infantil",
+        "Emanuelly Kids",
+        "conto infantil",
+        "aventuras",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "No começo da noite, um pequeno vagalume acordou entre as folhas de um jardim. Ele viu várias luzinhas dançando no ar e ficou encantado com aquele espetáculo. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. fireflies glowing above evening garden. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Tentou brilhar tão forte quanto os amigos, mas sua luz aparecia bem fraquinha. O vagalume ficou triste e se escondeu atrás de uma flor azul. Vale reparar na relação entre a decisão e a consequência, porque toda história fica mais interessante quando uma escolha tem um motivo compreensível.",
+          "visual_instruction": "Scene 2 of 8. small dim firefly beside bright lights. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Uma joaninha que descansava por perto percebeu seu silêncio. Ela perguntou por que ele não estava voando, e o vagalume contou que achava sua luz pequena demais.",
+          "visual_instruction": "Scene 3 of 8. ladybug visiting firefly behind blue flower. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "A joaninha mostrou uma folha escura e pediu que ele olhasse com atenção. Mesmo fraquinha, a luz do vagalume revelou gotinhas brilhantes que ninguém tinha notado.",
+          "visual_instruction": "Scene 4 of 8. tiny dew drops glowing on dark leaf. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Animado, ele começou a voar entre as flores com movimentos bem lentos. Seu brilho iluminou um caminho seguro para uma formiguinha que procurava a família.",
+          "visual_instruction": "Scene 5 of 8. firefly guiding ant between flowers. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Os outros vagalumes perceberam a cena e se aproximaram. Em vez de comparar brilhos, fizeram uma dança de luzes diferentes, cada uma com seu próprio ritmo e sua própria cor.",
+          "visual_instruction": "Scene 6 of 8. many different glowing fireflies dancing. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "O pequeno vagalume descobriu que não precisava ser a luz mais forte do jardim. Bastava usar o que tinha para tornar a noite um pouquinho mais bonita.",
+          "visual_instruction": "Scene 7 of 8. small firefly over warmly lit garden path. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Quando a lua apareceu acima das árvores, todos descansaram entre as folhas. O vagalume fechou os olhos feliz, lembrando que até uma luz pequena consegue ajudar alguém.",
+          "visual_instruction": "Scene 8 of 8. moonlight on quiet sleeping garden. Maintain a clear consistent visual bible: soft gentle hand drawn children's storybook palette; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "No começo da noite, um pequeno vagalume acordou entre as folhas de um jardim. Ele viu várias luzinhas dançando no ar e ficou encantado com aquele espetáculo. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Tentou brilhar tão forte quanto os amigos, mas sua luz aparecia bem fraquinha. O vagalume ficou triste e se escondeu atrás de uma flor azul. Vale reparar na relação entre a decisão e a consequência, porque toda história fica mais interessante quando uma escolha tem um motivo compreensível. Uma joaninha que descansava por perto percebeu seu silêncio. Ela perguntou por que ele não estava voando, e o vagalume contou que achava sua luz pequena demais. A joaninha mostrou uma folha escura e pediu que ele olhasse com atenção. Mesmo fraquinha, a luz do vagalume revelou gotinhas brilhantes que ninguém tinha notado. Animado, ele começou a voar entre as flores com movimentos bem lentos. Seu brilho iluminou um caminho seguro para uma formiguinha que procurava a família. Os outros vagalumes perceberam a cena e se aproximaram. Em vez de comparar brilhos, fizeram uma dança de luzes diferentes, cada uma com seu próprio ritmo e sua própria cor. O pequeno vagalume descobriu que não precisava ser a luz mais forte do jardim. Bastava usar o que tinha para tornar a noite um pouquinho mais bonita. Quando a lua apareceu acima das árvores, todos descansaram entre as folhas. O vagalume fechou os olhos feliz, lembrando que até uma luz pequena consegue ajudar alguém.",
+      "narration_word_count": 259,
+      "description": "O vagalume que encontrou sua própria luz. História infantil original, narrada com ilustrações delicadas geradas por IA, sem conteúdo perigoso."
+    },
+    {
+      "id": "alchemy-201-backup-321",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Backup 3-2-1: por que uma cópia só não basta?",
+      "cover_text": "NÃO PERCA SEUS ARQUIVOS",
+      "hook": "Seu arquivo está seguro se existe em um lugar só?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Você já pensou no que aconteceria se seu computador parasse de funcionar agora? Fotos, documentos e projetos podem depender de um único dispositivo, e isso cria um risco que muitas",
+          "visual_brief": "Scene 1 of 8. laptop with precious family photos represented abstractly. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Uma cópia simples já ajuda, mas ainda pode falhar junto com o arquivo original. Por exemplo, dois documentos guardados no mesmo computador estão sujeitos a um problema que afete aq",
+          "visual_brief": "Scene 2 of 8. two identical file boxes beside one computer. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "A regra conhecida como três, dois, um propõe três cópias dos dados, em dois tipos de armazenamento, com uma delas fora do local principal. É uma estratégia de organização, não uma ",
+          "visual_brief": "Scene 3 of 8. three connected storage boxes arranged two media. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Imagine o original no computador, uma cópia num dispositivo externo e outra num serviço remoto confiável. A combinação reduz o impacto de algumas falhas, mas cada opção tem seus pr",
+          "visual_brief": "Scene 4 of 8. computer external drive and cloud icon no text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Também é importante verificar se o backup pode ser restaurado. Um arquivo que parece copiado pode estar incompleto, protegido por senha esquecida ou inacessível quando mais precisa",
+          "visual_brief": "Scene 5 of 8. person checking safe restored folder. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Automatizar cópias de forma responsável diminui a chance de esquecer uma atualização. Mesmo assim, vale revisar datas, espaço disponível e alertas de erro de tempos em tempos.",
+          "visual_brief": "Scene 6 of 8. calendar and backup drives on desk. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "Para dados sensíveis, proteção de acesso e criptografia merecem atenção. Uma cópia segura não deve transformar informações privadas em arquivos disponíveis para qualquer pessoa.",
+          "visual_brief": "Scene 7 of 8. locked archive and protective shield diagram. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "Comece pelos documentos que seriam mais difíceis de recuperar e crie uma rotina simples. Este vídeo traz exemplos conceituais, não um teste de software: a segurança real depende de",
+          "visual_brief": "Scene 8 of 8. organized digital desk with multiple copies. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "tecnologia",
+        "produtividade",
+        "segurança digital",
+        "Alchemy Lab",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Você já pensou no que aconteceria se seu computador parasse de funcionar agora? Fotos, documentos e projetos podem depender de um único dispositivo, e isso cria um risco que muitas pessoas só percebem depois.",
+          "visual_instruction": "Scene 1 of 8. laptop with precious family photos represented abstractly. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Uma cópia simples já ajuda, mas ainda pode falhar junto com o arquivo original. Por exemplo, dois documentos guardados no mesmo computador estão sujeitos a um problema que afete aquela máquina.",
+          "visual_instruction": "Scene 2 of 8. two identical file boxes beside one computer. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "A regra conhecida como três, dois, um propõe três cópias dos dados, em dois tipos de armazenamento, com uma delas fora do local principal. É uma estratégia de organização, não uma garantia absoluta.",
+          "visual_instruction": "Scene 3 of 8. three connected storage boxes arranged two media. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Imagine o original no computador, uma cópia num dispositivo externo e outra num serviço remoto confiável. A combinação reduz o impacto de algumas falhas, mas cada opção tem seus próprios riscos.",
+          "visual_instruction": "Scene 4 of 8. computer external drive and cloud icon no text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Também é importante verificar se o backup pode ser restaurado. Um arquivo que parece copiado pode estar incompleto, protegido por senha esquecida ou inacessível quando mais precisa ser usado.",
+          "visual_instruction": "Scene 5 of 8. person checking safe restored folder. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Automatizar cópias de forma responsável diminui a chance de esquecer uma atualização. Mesmo assim, vale revisar datas, espaço disponível e alertas de erro de tempos em tempos.",
+          "visual_instruction": "Scene 6 of 8. calendar and backup drives on desk. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Para dados sensíveis, proteção de acesso e criptografia merecem atenção. Uma cópia segura não deve transformar informações privadas em arquivos disponíveis para qualquer pessoa.",
+          "visual_instruction": "Scene 7 of 8. locked archive and protective shield diagram. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Comece pelos documentos que seriam mais difíceis de recuperar e crie uma rotina simples. Este vídeo traz exemplos conceituais, não um teste de software: a segurança real depende de configuração e verificação.",
+          "visual_instruction": "Scene 8 of 8. organized digital desk with multiple copies. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Você já pensou no que aconteceria se seu computador parasse de funcionar agora? Fotos, documentos e projetos podem depender de um único dispositivo, e isso cria um risco que muitas pessoas só percebem depois. Uma cópia simples já ajuda, mas ainda pode falhar junto com o arquivo original. Por exemplo, dois documentos guardados no mesmo computador estão sujeitos a um problema que afete aquela máquina. A regra conhecida como três, dois, um propõe três cópias dos dados, em dois tipos de armazenamento, com uma delas fora do local principal. É uma estratégia de organização, não uma garantia absoluta. Imagine o original no computador, uma cópia num dispositivo externo e outra num serviço remoto confiável. A combinação reduz o impacto de algumas falhas, mas cada opção tem seus próprios riscos. Também é importante verificar se o backup pode ser restaurado. Um arquivo que parece copiado pode estar incompleto, protegido por senha esquecida ou inacessível quando mais precisa ser usado. Automatizar cópias de forma responsável diminui a chance de esquecer uma atualização. Mesmo assim, vale revisar datas, espaço disponível e alertas de erro de tempos em tempos. Para dados sensíveis, proteção de acesso e criptografia merecem atenção. Uma cópia segura não deve transformar informações privadas em arquivos disponíveis para qualquer pessoa. Comece pelos documentos que seriam mais difíceis de recuperar e crie uma rotina simples. Este vídeo traz exemplos conceituais, não um teste de software: a segurança real depende de configuração e verificação.",
+      "narration_word_count": 241,
+      "description": "Backup 3-2-1: por que uma cópia só não basta?. Explicação conceitual sobre tecnologia e boas práticas, sem simular testes realizados. 🎨 Imagens conceituais geradas por IA."
+    },
+    {
+      "id": "alchemy-202-senhas-fortes",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Senhas fortes: o erro de reutilizar a mesma senha",
+      "cover_text": "SENHA REPETIDA?",
+      "hook": "Por que repetir uma senha pode ser perigoso?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma senha reutilizada parece prática porque é fácil de lembrar. O problema surge quando um serviço sofre vazamento: a mesma combinação pode ser tentada em outras contas que nunca t",
+          "visual_brief": "Scene 1 of 8. multiple identical keys on one ring. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Por isso, usar senhas diferentes para serviços importantes reduz o impacto de um incidente isolado. Uma conta comprometida não precisa abrir automaticamente as portas de todas as o",
+          "visual_brief": "Scene 2 of 8. separate unique keys beside accounts as abstract circles. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "O comprimento costuma ajudar mais do que truques previsíveis. Uma frase longa, criada sem informações pessoais óbvias, pode ser mais resistente a tentativas comuns do que uma palav",
+          "visual_brief": "Scene 3 of 8. long chain of secure symbols without readable text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Um gerenciador de senhas confiável pode guardar combinações únicas e ajudar no preenchimento. Mas ele próprio exige proteção cuidadosa, incluindo uma senha mestra forte e recuperaç",
+          "visual_brief": "Scene 4 of 8. password vault illustration and safe lock. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Sempre que possível, habilite autenticação em dois fatores. Um segundo passo pode dificultar acesso indevido, embora não elimine golpes, ataques de phishing nem decisões inseguras.",
+          "visual_brief": "Scene 5 of 8. phone with two factor shield illustration. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Links falsos continuam sendo um risco. Antes de digitar credenciais, confira o endereço real do serviço e desconfie de mensagens que pressionam por uma ação imediata.",
+          "visual_brief": "Scene 6 of 8. fake doorway contrasted with official doorway. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "Passkeys também podem oferecer alternativas mais resistentes ao phishing em serviços compatíveis. O importante é compreender as opções disponíveis e guardar métodos de recuperação ",
+          "visual_brief": "Scene 7 of 8. secure keycard and fingerprint abstract illustration. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "Nenhuma medida oferece proteção perfeita, mas pequenas escolhas reduzem riscos. Esta é uma explicação conceitual: revise contas críticas, troque senhas reutilizadas e proteja seu a",
+          "visual_brief": "Scene 8 of 8. organized secure set of keys and protected home. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "tecnologia",
+        "produtividade",
+        "segurança digital",
+        "Alchemy Lab",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Uma senha reutilizada parece prática porque é fácil de lembrar. O problema surge quando um serviço sofre vazamento: a mesma combinação pode ser tentada em outras contas que nunca tiveram uma falha direta. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado.",
+          "visual_instruction": "Scene 1 of 8. multiple identical keys on one ring. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Por isso, usar senhas diferentes para serviços importantes reduz o impacto de um incidente isolado. Uma conta comprometida não precisa abrir automaticamente as portas de todas as outras.",
+          "visual_instruction": "Scene 2 of 8. separate unique keys beside accounts as abstract circles. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "O comprimento costuma ajudar mais do que truques previsíveis. Uma frase longa, criada sem informações pessoais óbvias, pode ser mais resistente a tentativas comuns do que uma palavra curta com substituições simples.",
+          "visual_instruction": "Scene 3 of 8. long chain of secure symbols without readable text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Um gerenciador de senhas confiável pode guardar combinações únicas e ajudar no preenchimento. Mas ele próprio exige proteção cuidadosa, incluindo uma senha mestra forte e recuperação bem planejada.",
+          "visual_instruction": "Scene 4 of 8. password vault illustration and safe lock. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Sempre que possível, habilite autenticação em dois fatores. Um segundo passo pode dificultar acesso indevido, embora não elimine golpes, ataques de phishing nem decisões inseguras.",
+          "visual_instruction": "Scene 5 of 8. phone with two factor shield illustration. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Links falsos continuam sendo um risco. Antes de digitar credenciais, confira o endereço real do serviço e desconfie de mensagens que pressionam por uma ação imediata.",
+          "visual_instruction": "Scene 6 of 8. fake doorway contrasted with official doorway. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "Passkeys também podem oferecer alternativas mais resistentes ao phishing em serviços compatíveis. O importante é compreender as opções disponíveis e guardar métodos de recuperação de maneira segura.",
+          "visual_instruction": "Scene 7 of 8. secure keycard and fingerprint abstract illustration. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "Nenhuma medida oferece proteção perfeita, mas pequenas escolhas reduzem riscos. Esta é uma explicação conceitual: revise contas críticas, troque senhas reutilizadas e proteja seu acesso principal com atenção.",
+          "visual_instruction": "Scene 8 of 8. organized secure set of keys and protected home. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Uma senha reutilizada parece prática porque é fácil de lembrar. O problema surge quando um serviço sofre vazamento: a mesma combinação pode ser tentada em outras contas que nunca tiveram uma falha direta. Esse detalhe orienta a maneira como entendemos o próximo acontecimento, pois pequenas pistas também mudam o sentido do que está sendo contado. Por isso, usar senhas diferentes para serviços importantes reduz o impacto de um incidente isolado. Uma conta comprometida não precisa abrir automaticamente as portas de todas as outras. O comprimento costuma ajudar mais do que truques previsíveis. Uma frase longa, criada sem informações pessoais óbvias, pode ser mais resistente a tentativas comuns do que uma palavra curta com substituições simples. Um gerenciador de senhas confiável pode guardar combinações únicas e ajudar no preenchimento. Mas ele próprio exige proteção cuidadosa, incluindo uma senha mestra forte e recuperação bem planejada. Sempre que possível, habilite autenticação em dois fatores. Um segundo passo pode dificultar acesso indevido, embora não elimine golpes, ataques de phishing nem decisões inseguras. Links falsos continuam sendo um risco. Antes de digitar credenciais, confira o endereço real do serviço e desconfie de mensagens que pressionam por uma ação imediata. Passkeys também podem oferecer alternativas mais resistentes ao phishing em serviços compatíveis. O importante é compreender as opções disponíveis e guardar métodos de recuperação de maneira segura. Nenhuma medida oferece proteção perfeita, mas pequenas escolhas reduzem riscos. Esta é uma explicação conceitual: revise contas críticas, troque senhas reutilizadas e proteja seu acesso principal com atenção.",
+      "narration_word_count": 249,
+      "description": "Senhas fortes: o erro de reutilizar a mesma senha. Explicação conceitual sobre tecnologia e boas práticas, sem simular testes realizados. 🎨 Imagens conceituais geradas por IA."
+    },
+    {
+      "id": "alchemy-203-atalhos-produtividade",
+      "channel": "alchemy",
+      "channel_id": "UCCTYFE5Cmz2aYZ37cJQ-wcg",
+      "title": "Atalhos de teclado: pequenas ações que economizam tempo",
+      "cover_text": "MENOS CLIQUES",
+      "hook": "Quantos cliques você poderia evitar?",
+      "language": "pt-BR",
+      "made_for_kids": false,
+      "visibility_intent": "private_first_after_QA",
+      "series": null,
+      "editorial_beats": [
+        {
+          "number": 1,
+          "goal": "Uma rotina no computador pode ter dezenas de pequenos movimentos repetidos. Alternar janelas, localizar um texto e desfazer uma edição parecem tarefas simples, mas somadas podem in",
+          "visual_brief": "Scene 1 of 8. desk with mouse and keyboard and multiple tasks. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "goal": "Os atalhos de teclado ajudam quando substituem ações frequentes, não quando viram algo para decorar sem necessidade. O primeiro passo é observar quais comandos você repete muitas v",
+          "visual_brief": "Scene 2 of 8. three frequently used keyboard keys glowing. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "goal": "Copiar, colar e desfazer são exemplos bastante conhecidos. A combinação exata depende do sistema e do aplicativo, por isso vale conferir os menus ou a documentação antes de criar u",
+          "visual_brief": "Scene 3 of 8. abstract keyboard with copy and paste icons no text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "goal": "Navegar entre janelas também pode facilitar tarefas que envolvem pesquisa e escrita. O objetivo não é digitar mais rápido a qualquer custo, mas reduzir a distância entre uma ideia ",
+          "visual_brief": "Scene 4 of 8. two side by side windows represented symbolically. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "goal": "Uma boa estratégia é aprender apenas dois ou três atalhos por semana. Depois de praticar em atividades reais, os movimentos deixam de exigir tanta atenção consciente.",
+          "visual_brief": "Scene 5 of 8. weekly calendar next to three keys. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "goal": "Para quem trabalha com arquivos, atalhos de busca e renomeação podem ser úteis. No entanto, comandos que apagam ou alteram conteúdo merecem cuidado e confirmação do resultado.",
+          "visual_brief": "Scene 6 of 8. organized file folders and safe rename icon. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "goal": "A acessibilidade também importa. Nem todas as pessoas usam o teclado da mesma maneira; adaptar combinações, usar recursos de voz ou preferir o mouse pode ser a melhor escolha em ce",
+          "visual_brief": "Scene 7 of 8. different accessible computer input devices. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "goal": "A meta é deixar a ferramenta trabalhar a favor da concentração. Esta demonstração é conceitual, sem simular testes de produtividade: experimente atalhos seguros e mantenha apenas o",
+          "visual_brief": "Scene 8 of 8. quiet focused workspace with streamlined keyboard. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "tags": [
+        "tecnologia",
+        "produtividade",
+        "segurança digital",
+        "Alchemy Lab",
+        "Shorts"
+      ],
+      "production_state": {
+        "narration": "written_pending_editorial_preflight",
+        "image_generation": "not_started",
+        "voice": "not_started",
+        "render": "not_started",
+        "media_qa": "not_started",
+        "upload": "not_started",
+        "youtube_id": null
+      },
+      "scenes": [
+        {
+          "number": 1,
+          "editorial_beat": "Uma rotina no computador pode ter dezenas de pequenos movimentos repetidos. Alternar janelas, localizar um texto e desfazer uma edição parecem tarefas simples, mas somadas podem interromper o raciocínio a todo momento.",
+          "visual_instruction": "Scene 1 of 8. desk with mouse and keyboard and multiple tasks. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 2,
+          "editorial_beat": "Os atalhos de teclado ajudam quando substituem ações frequentes, não quando viram algo para decorar sem necessidade. O primeiro passo é observar quais comandos você repete muitas vezes no dia.",
+          "visual_instruction": "Scene 2 of 8. three frequently used keyboard keys glowing. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 3,
+          "editorial_beat": "Copiar, colar e desfazer são exemplos bastante conhecidos. A combinação exata depende do sistema e do aplicativo, por isso vale conferir os menus ou a documentação antes de criar um hábito.",
+          "visual_instruction": "Scene 3 of 8. abstract keyboard with copy and paste icons no text. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 4,
+          "editorial_beat": "Navegar entre janelas também pode facilitar tarefas que envolvem pesquisa e escrita. O objetivo não é digitar mais rápido a qualquer custo, mas reduzir a distância entre uma ideia e a próxima.",
+          "visual_instruction": "Scene 4 of 8. two side by side windows represented symbolically. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 5,
+          "editorial_beat": "Uma boa estratégia é aprender apenas dois ou três atalhos por semana. Depois de praticar em atividades reais, os movimentos deixam de exigir tanta atenção consciente.",
+          "visual_instruction": "Scene 5 of 8. weekly calendar next to three keys. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 6,
+          "editorial_beat": "Para quem trabalha com arquivos, atalhos de busca e renomeação podem ser úteis. No entanto, comandos que apagam ou alteram conteúdo merecem cuidado e confirmação do resultado.",
+          "visual_instruction": "Scene 6 of 8. organized file folders and safe rename icon. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 7,
+          "editorial_beat": "A acessibilidade também importa. Nem todas as pessoas usam o teclado da mesma maneira; adaptar combinações, usar recursos de voz ou preferir o mouse pode ser a melhor escolha em certas situações.",
+          "visual_instruction": "Scene 7 of 8. different accessible computer input devices. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        },
+        {
+          "number": 8,
+          "editorial_beat": "A meta é deixar a ferramenta trabalhar a favor da concentração. Esta demonstração é conceitual, sem simular testes de produtividade: experimente atalhos seguros e mantenha apenas os que realmente ajudam.",
+          "visual_instruction": "Scene 8 of 8. quiet focused workspace with streamlined keyboard. Maintain a clear consistent visual bible: cinematic editorial illustration with consistent composition and lighting; original vertical 9:16 illustration, no readable text, no fake interface, no official screenshots, no disconnected props."
+        }
+      ],
+      "narration_script": "Uma rotina no computador pode ter dezenas de pequenos movimentos repetidos. Alternar janelas, localizar um texto e desfazer uma edição parecem tarefas simples, mas somadas podem interromper o raciocínio a todo momento. Os atalhos de teclado ajudam quando substituem ações frequentes, não quando viram algo para decorar sem necessidade. O primeiro passo é observar quais comandos você repete muitas vezes no dia. Copiar, colar e desfazer são exemplos bastante conhecidos. A combinação exata depende do sistema e do aplicativo, por isso vale conferir os menus ou a documentação antes de criar um hábito. Navegar entre janelas também pode facilitar tarefas que envolvem pesquisa e escrita. O objetivo não é digitar mais rápido a qualquer custo, mas reduzir a distância entre uma ideia e a próxima. Uma boa estratégia é aprender apenas dois ou três atalhos por semana. Depois de praticar em atividades reais, os movimentos deixam de exigir tanta atenção consciente. Para quem trabalha com arquivos, atalhos de busca e renomeação podem ser úteis. No entanto, comandos que apagam ou alteram conteúdo merecem cuidado e confirmação do resultado. A acessibilidade também importa. Nem todas as pessoas usam o teclado da mesma maneira; adaptar combinações, usar recursos de voz ou preferir o mouse pode ser a melhor escolha em certas situações. A meta é deixar a ferramenta trabalhar a favor da concentração. Esta demonstração é conceitual, sem simular testes de produtividade: experimente atalhos seguros e mantenha apenas os que realmente ajudam.",
+      "narration_word_count": 240,
+      "description": "Atalhos de teclado: pequenas ações que economizam tempo. Explicação conceitual sobre tecnologia e boas práticas, sem simular testes realizados. 🎨 Imagens conceituais geradas por IA."
+    }
+  ]
+}
