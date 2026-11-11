@@ -168,12 +168,84 @@ def art_prompt(row:dict,scene:dict,channel:str)->str:
 
 engine.prompt=art_prompt
 
+def verify_previous_finished_episode(row:dict,folder:Path,channel:str)->dict:
+    """Fail closed when recovering the two MP4s from the immutable failed run.
+
+    Their source is the pinned artifact in workflow run 42957295592, and they
+    must independently pass on-disk integrity, dimensions and metadata checks.
+    """
+    from PIL import Image
+    media=folder/"final.mp4"
+    thumb=folder/"thumb.jpg"
+    qa_path=folder/"qa.json"
+    meta_path=folder/"metadata.json"
+    paths=(media,thumb,qa_path,meta_path)
+    if not all(p.is_file() and not p.is_symlink() for p in paths):
+        raise BatchBlocked("RECOVERY_PRIOR_VIDEO_FILES_INVALID_"+row["id"])
+    qa=json.loads(qa_path.read_text(encoding="utf-8"))
+    meta=json.loads(meta_path.read_text(encoding="utf-8"))
+    if (qa.get("schema")!="autoeditorvideo/remaining-static-original-90s-qa/v1"
+            or qa.get("episode_id")!=row["id"]
+            or qa.get("channel")!=channel or qa.get("channel_id")!=KNOWN_IDS[channel]
+            or qa.get("image_count")!=8
+            or qa.get("automated_technical_qa")!="passed"
+            or qa.get("word_boundaries_synced") is not True
+            or qa.get("character_warp_mesh_animation") is not False
+            or qa.get("youtube_upload")!="not_performed"
+            or qa.get("manual_visual_review") is not False
+            or qa.get("publication_allowed") is not False):
+        raise BatchBlocked("RECOVERY_PRIOR_VIDEO_QA_INVALID_"+row["id"])
+    if (meta.get("id")!=row["id"] or meta.get("channel")!=channel
+            or meta.get("channel_id")!=KNOWN_IDS[channel]
+            or meta.get("title")!=row["title"]
+            or meta.get("description")!=row["description"]
+            or meta.get("tags")!=row["tags"]
+            or meta.get("privacyStatus")!="private"
+            or meta.get("selfDeclaredMadeForKids") is not False):
+        raise BatchBlocked("RECOVERY_PRIOR_VIDEO_METADATA_INVALID_"+row["id"])
+    if (qa.get("mp4_sha256")!=engine.digest(media)
+            or qa.get("cover_sha256")!=engine.digest(thumb)
+            or meta.get("mp4_sha256")!=qa.get("mp4_sha256")
+            or meta.get("cover_sha256")!=qa.get("cover_sha256")):
+        raise BatchBlocked("RECOVERY_PRIOR_MP4_OR_COVER_HASH_MISMATCH_"+row["id"])
+    image_hashes=qa.get("image_sha256")
+    if not isinstance(image_hashes,list) or len(image_hashes)!=8:
+        raise BatchBlocked("RECOVERY_PRIOR_IMAGE_DIGESTS_MISSING_"+row["id"])
+    for n in range(1,9):
+        image=folder/("scene-%02d.png"%n)
+        if not image.is_file() or image.is_symlink() or engine.digest(image)!=image_hashes[n-1]:
+            raise BatchBlocked("RECOVERY_PRIOR_SCENE_HASH_MISMATCH_"+row["id"])
+        with Image.open(image) as im:
+            im.verify()
+        with Image.open(image) as im:
+            if im.format!="PNG" or im.size!=(1024,1536):
+                raise BatchBlocked("RECOVERY_PRIOR_SCENE_FORMAT_INVALID_"+row["id"])
+    if len(set(image_hashes))!=8:
+        raise BatchBlocked("RECOVERY_PRIOR_DUPLICATE_SCENE_"+row["id"])
+    with Image.open(thumb) as im:
+        if im.format!="JPEG" or im.size!=(1080,1920):
+            raise BatchBlocked("RECOVERY_PRIOR_THUMB_INVALID_"+row["id"])
+    inspected=engine.probe(media)
+    seconds=float(inspected["format"]["duration"])
+    streams=inspected["streams"]
+    video=[x for x in streams if x.get("codec_type")=="video"]
+    audio=[x for x in streams if x.get("codec_type")=="audio"]
+    if (not 90<=seconds<=121 or len(video)!=1 or not audio
+            or video[0].get("width")!=1080 or video[0].get("height")!=1920
+            or media.stat().st_size<300_000):
+        raise BatchBlocked("RECOVERY_PRIOR_VIDEO_TECHNICAL_QA_INVALID_"+row["id"])
+    print("BATCH15_REUSED_VERIFIED_PRIOR_MP4_"+row["id"],flush=True)
+    return {"id":row["id"],"duration":round(seconds,2),
+            "mp4_sha256":qa["mp4_sha256"],
+            "cover_sha256":qa["cover_sha256"]}
+
+
 def produce(channel:str)->None:
     guard(channel)
     rows=validate(channel)
     out=output(channel)
     recovering=(channel=="br" and
-                os.environ.get("BATCH15_BR_SCENE_CACHE_FROM_42954205755")=="yes")
+                os.environ.get("BATCH15_BR_SCENE_CACHE_FROM_42957295592")=="yes")
     if recovering:
         if not out.is_dir() or out.is_symlink():
             raise BatchBlocked("VERIFIED_BR_RECOVERY_CACHE_REQUIRED")
@@ -189,8 +261,17 @@ def produce(channel:str)->None:
                 raise BatchBlocked("RECOVERY_CACHE_SCENE_COUNT_MISMATCH_"+row["id"])
             if (folder/"qa.json").is_file() is not (idx<2):
                 raise BatchBlocked("RECOVERY_CACHE_QA_PROVENANCE_MISSING_"+row["id"])
-            if (folder/"final.mp4").exists() or (folder/"youtube-private-receipts.json").exists():
+            if (folder/"youtube-private-receipts.json").exists():
                 raise BatchBlocked("RECOVERY_CACHE_MAY_CONTAIN_PREVIOUS_UPLOAD")
+            # Exactly two previously completed videos may be reused only with
+            # their own QA, metadata, thumbnails and validated original images.
+            finished=(folder/"final.mp4").is_file()
+            if finished is not (idx<2):
+                raise BatchBlocked("RECOVERY_CACHE_COMPLETED_VIDEO_SET_MISMATCH")
+            if finished and not (folder/"metadata.json").is_file():
+                raise BatchBlocked("RECOVERY_CACHE_METADATA_MISSING_"+row["id"])
+            if finished and not (folder/"thumb.jpg").is_file():
+                raise BatchBlocked("RECOVERY_CACHE_THUMB_MISSING_"+row["id"])
     else:
         if out.exists():
             raise BatchBlocked("EXISTING_OUTPUT_REFUSE_DUPLICATE_GENERATION")
@@ -199,8 +280,11 @@ def produce(channel:str)->None:
     for row in rows:
         folder=out/row["id"]
         folder.mkdir(parents=True,exist_ok=recovering)
-        voice,sec,words=engine.voice_takes(row,folder,channel)
-        ready.append((row,folder,voice,sec,words))
+        if recovering and (folder/"final.mp4").is_file():
+            ready.append((row,folder,None,None,None))
+        else:
+            voice,sec,words=engine.voice_takes(row,folder,channel)
+            ready.append((row,folder,voice,sec,words))
     from gerar_video_codex import proxy_key,check_proxy_accounts
     key=proxy_key()
     check_proxy_accounts(key)
@@ -210,6 +294,9 @@ def produce(channel:str)->None:
              "render_engine":"AutoEditorVideo/ArquivoOtakuMaster",
              "video_count":3,"videos":[]}
     for row,folder,voice,sec,words in ready:
+        if recovering and voice is None:
+            summary["videos"].append(verify_previous_finished_episode(row,folder,channel))
+            continue
         try:
             arts=engine.images(row,folder,key,channel,reuse_verified_cache=recovering)
         except Exception as exc:
