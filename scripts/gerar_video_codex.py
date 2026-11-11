@@ -82,10 +82,31 @@ def request_image(prompt:str, model:str, key:str, size:str='1024x1536', *, backg
         json=payload,
         headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},timeout=(15,300))
     if not r.ok:
-        # Do not leak provider errors/headers into public cloud logs.
+        # Never log or propagate raw provider messages, response bodies, prompts,
+        # request headers or account identifiers to public GitHub Actions logs.
+        safe_category="UNCLASSIFIED"
+        if r.status_code == 400:
+            try:
+                payload=r.json()
+                detail=payload.get("error",{}) if isinstance(payload,dict) else {}
+                detail=detail if isinstance(detail,dict) else {}
+                fields=" ".join(str(detail.get(k,"")) for k in ("code","type","message")).lower()
+                if any(k in fields for k in ("policy","safety","moderation","content_filter","content policy")):
+                    safe_category="CONTENT_REJECTION"
+                elif any(k in fields for k in ("quota","billing","credits","limit reached","too many images")):
+                    safe_category="CAPACITY_OR_QUOTA"
+                elif any(k in fields for k in ("unsupported","not supported","model_not_found","invalid model")):
+                    safe_category="MODEL_UNSUPPORTED"
+                elif any(k in fields for k in ("invalid","missing","parameter","request body","format")):
+                    safe_category="REQUEST_VALIDATION"
+                elif any(k in fields for k in ("temporarily unavailable","upstream","internal")):
+                    safe_category="UPSTREAM_REQUEST_FAILURE"
+            except (ValueError,TypeError,AttributeError):
+                pass
+            print("IMAGE_PROXY_HTTP_400_CATEGORY_"+safe_category,flush=True)
         if background=='transparent':
             raise RuntimeError(f'O Codex Proxy recusou background=transparent (HTTP {r.status_code}). Sem fallback verde.')
-        raise RuntimeError(f'Imagem recusada (HTTP {r.status_code}).')
+        raise RuntimeError(f'Imagem recusada (HTTP {r.status_code}; CATEGORY {safe_category}).')
     items=r.json().get('data',[])
     if not items:raise RuntimeError('Resposta nao possui imagens')
     obj=items[0]
