@@ -155,13 +155,33 @@ def produce(channel:str)->None:
     guard(channel)
     rows=validate(channel)
     out=output(channel)
-    if out.exists():
-        raise BatchBlocked("EXISTING_OUTPUT_REFUSE_DUPLICATE_GENERATION")
-    out.mkdir(parents=True,exist_ok=False)
+    recovering=(channel=="br" and
+                os.environ.get("BATCH15_BR_SCENE_CACHE_FROM_42954205755")=="yes")
+    if recovering:
+        if not out.is_dir() or out.is_symlink():
+            raise BatchBlocked("VERIFIED_BR_RECOVERY_CACHE_REQUIRED")
+        if any(p.name not in {r["id"] for r in rows} or not p.is_dir() or p.is_symlink()
+               for p in out.iterdir()):
+            raise BatchBlocked("RECOVERY_CACHE_UNEXPECTED_CONTENTS")
+        # These exact counts are from the known failed run. Two finished
+        # stories have full image sets and QA; Haikyuu lacks scenes 7 and 8.
+        for idx,row in enumerate(rows):
+            folder=out/row["id"]
+            expected_count=(8,8,6)[idx]
+            if not folder.is_dir() or len(list(folder.glob("scene-*.png")))!=expected_count:
+                raise BatchBlocked("RECOVERY_CACHE_SCENE_COUNT_MISMATCH_"+row["id"])
+            if (folder/"qa.json").is_file() is not (idx<2):
+                raise BatchBlocked("RECOVERY_CACHE_QA_PROVENANCE_MISSING_"+row["id"])
+            if (folder/"final.mp4").exists() or (folder/"youtube-private-receipts.json").exists():
+                raise BatchBlocked("RECOVERY_CACHE_MAY_CONTAIN_PREVIOUS_UPLOAD")
+    else:
+        if out.exists():
+            raise BatchBlocked("EXISTING_OUTPUT_REFUSE_DUPLICATE_GENERATION")
+        out.mkdir(parents=True,exist_ok=False)
     ready=[]
     for row in rows:
         folder=out/row["id"]
-        folder.mkdir(parents=True,exist_ok=False)
+        folder.mkdir(parents=True,exist_ok=recovering)
         voice,sec,words=engine.voice_takes(row,folder,channel)
         ready.append((row,folder,voice,sec,words))
     from gerar_video_codex import proxy_key,check_proxy_accounts
@@ -174,7 +194,7 @@ def produce(channel:str)->None:
              "video_count":3,"videos":[]}
     for row,folder,voice,sec,words in ready:
         try:
-            arts=engine.images(row,folder,key,channel)
+            arts=engine.images(row,folder,key,channel,reuse_verified_cache=recovering)
         except Exception as exc:
             # Public Actions logs must not expose proxy responses or credentials.
             # Identify the failing episode and stage without consuming extra image calls.
