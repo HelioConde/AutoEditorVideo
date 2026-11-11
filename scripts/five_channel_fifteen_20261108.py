@@ -180,7 +180,7 @@ def produce(channel:str)->None:
             # Identify the failing episode and stage without consuming extra image calls.
             completed=len(list(folder.glob("scene-*.png")))
             stage=("SCENE_%02d"%(completed+1)) if completed<8 else "POST_IMAGE_QA"
-            http=re.search(r"\\bHTTP\\s+([1-5][0-9]{2})\\b",str(exc))
+            http=re.search(r"\bHTTP\s+([1-5][0-9]{2})\b",str(exc))
             reason=("HTTP_"+http.group(1)) if http else type(exc).__name__
             print("BATCH15_IMAGE_FAILED_%s_%s_%s_%s" %
                   (channel,row["id"],stage,reason),file=sys.stderr,flush=True)
