@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import sys
@@ -172,7 +173,18 @@ def produce(channel:str)->None:
              "render_engine":"AutoEditorVideo/ArquivoOtakuMaster",
              "video_count":3,"videos":[]}
     for row,folder,voice,sec,words in ready:
-        arts=engine.images(row,folder,key,channel)
+        try:
+            arts=engine.images(row,folder,key,channel)
+        except Exception as exc:
+            # Public Actions logs must not expose proxy responses or credentials.
+            # Identify the failing episode and stage without consuming extra image calls.
+            completed=len(list(folder.glob("scene-*.png")))
+            stage=("SCENE_%02d"%(completed+1)) if completed<8 else "POST_IMAGE_QA"
+            http=re.search(r"\\bHTTP\\s+([1-5][0-9]{2})\\b",str(exc))
+            reason=("HTTP_"+http.group(1)) if http else type(exc).__name__
+            print("BATCH15_IMAGE_FAILED_%s_%s_%s_%s" %
+                  (channel,row["id"],stage,reason),file=sys.stderr,flush=True)
+            raise
         video=engine.render_one(row,folder,voice,sec,words,arts,channel)
         qa_file=folder/"qa.json"
         meta_file=folder/"metadata.json"
