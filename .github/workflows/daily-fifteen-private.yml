@@ -863,12 +863,12 @@ jobs:
           old="$(gh api repos/HelioConde/AutoEditorVideo/actions/runs/42954205755 --jq '.status + " " + .conclusion + " " + .head_sha')"
           test "$old" = "completed failure 86332d4804cfeecb520a4d6cf1793e322b49b550" || { echo "PREVIOUS_BR_RUN_MUST_BE_FAILED"; exit 1; }
           old_files="$(gh api 'repos/HelioConde/AutoEditorVideo/actions/runs/42954205755/artifacts?per_page=100' --jq '.artifacts[] | select(.expired == false) | .name')"
-          printf '%s\\n' "$old_files" | grep -Fqx "br-only-2026-11-10-incomplete-not-for-upload-br" || { echo "VERIFIED_BR_SCENE_ARTIFACT_UNAVAILABLE"; exit 1; }
+          printf '%s\n' "$old_files" | grep -Fqx "br-only-2026-11-10-incomplete-not-for-upload-br" || { echo "VERIFIED_BR_SCENE_ARTIFACT_UNAVAILABLE"; exit 1; }
           sent_files="$(gh api 'repos/HelioConde/AutoEditorVideo/actions/runs/42948724879/artifacts?per_page=100' --jq '.artifacts[] | select(.expired == false) | .name')"
           for ch in en games alchemy kids; do
-            printf '%s\\n' "$sent_files" | grep -Fqx "daily-2026-11-10-private-youtube-receipts-$ch" || { echo "PREVIOUS_PRIVATE_RECEIPT_MISSING_$ch"; exit 1; }
+            printf '%s\n' "$sent_files" | grep -Fqx "daily-2026-11-10-private-youtube-receipts-$ch" || { echo "PREVIOUS_PRIVATE_RECEIPT_MISSING_$ch"; exit 1; }
           done
-          if printf '%s\\n' "$old_files" | grep -Fqx "daily-2026-11-10-private-youtube-receipts-br"; then
+          if printf '%s\n' "$old_files" | grep -Fqx "daily-2026-11-10-private-youtube-receipts-br"; then
             echo "BR_PRIOR_RECEIPTS_PRESENT_REVIEW_BEFORE_RESUME"
             exit 1
           fi
@@ -967,7 +967,7 @@ jobs:
         with:
           run-id: 42954205755
           github-token: ${{ github.token }}
-          name: br-scene-cache-2026-11-10-incomplete-not-for-upload-br
+          name: br-only-2026-11-10-incomplete-not-for-upload-br
           path: cloud-lote-15-diario-2026-11-10/br/
       - name: Render 3 distinct original videos with gpt-image-2
         shell: bash
@@ -1016,7 +1016,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: br-only-2026-11-10-incomplete-not-for-upload-${{ matrix.channel }}
+          name: br-scene-cache-2026-11-10-incomplete-not-for-upload-${{ matrix.channel }}
           path: |
             cloud-lote-15-diario-2026-11-10/${{ matrix.channel }}/**/scene-*.png
             cloud-lote-15-diario-2026-11-10/${{ matrix.channel }}/**/qa.json
