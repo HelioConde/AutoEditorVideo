@@ -1,0 +1,23 @@
+{
+  "schema": "autoeditorvideo/br-final-resume/v1",
+  "batch_date": "2026-11-10",
+  "source_run_id": 42957295592,
+  "source_commit_sha": "f85a95865a51f55894cd7e8254c58f4784b48d14",
+  "target_channel": "br",
+  "target_episode_ids": [
+    "5101-mob-psycho-emocoes",
+    "5102-chainsaw-man-contratos",
+    "5103-haikyuu-time"
+  ],
+  "reuse_trusted_scene_artifact": "br-scene-cache-2026-11-10-incomplete-not-for-upload-br",
+  "already_private_verified": [
+    "en",
+    "games",
+    "alchemy",
+    "kids"
+  ],
+  "render_only_missing_br": true,
+  "private_upload_only_after_qa": true,
+  "public_publication_approved": false,
+  "creator_authorized_recovery": true
+}
