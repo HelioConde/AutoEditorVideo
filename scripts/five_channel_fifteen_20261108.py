@@ -131,6 +131,23 @@ def guard(channel:str)->None:
         raise BatchBlocked("YOUTUBE_OAUTH_FORBIDDEN_IN_RENDER")
 
 def art_prompt(row:dict,scene:dict,channel:str)->str:
+    # Targeted recovery: the provider repeatedly rejected this one volleyball
+    # positioning illustration. Keep the original story action, but remove all
+    # named-series and extended narration context from its image payload.
+    if (channel=="br" and row["id"]=="5103-haikyuu-time"
+            and scene["number"]==7):
+        return (
+            "Create one original premium cinematic illustration, vertical 1024x1536. "
+            "An indoor school volleyball gym during team practice, warm wooden floor "
+            "with clear volleyball court boundary lines and a net. Six distinct "
+            "athletes are positioned across the court, communicating about where "
+            "to pass the ball; coordinated body language, supportive teamwork, "
+            "a lively but realistic action moment, warm light, dark blue and "
+            "sunny orange sports outfits, cohesive professional editorial art. "
+            "No brand names, celebrity or copyrighted characters, no writing, "
+            "numbers, lettering, symbols or interface; no split composition. "
+            "The full team must fit inside the center of the portrait frame."
+        )
     title=row["title"]
     original_theme=STYLES[channel]
     # All frames are independent illustrations. No claim of animation,
