@@ -1939,6 +1939,141 @@
       "story_title": "Conquiste a Princesa ou Morra!",
       "episode_number": 1,
       "note": "Teste editorial isolado de ficcao anime com sistema de missoes, flashbacks, 150-180 s e continuidade visual tipo Fofinhos. Sem geracao de imagem nem video, sem upload, sem alterar fila/automações dos cinco canais. Validar roteiro, direitos e referencias antes da producao."
+    },
+    {
+      "channel": "br",
+      "id": "5101-mob-psycho-emocoes",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "br",
+      "id": "5102-chainsaw-man-contratos",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "br",
+      "id": "5103-haikyuu-time",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "en",
+      "id": "7101-dr-stone-ciencia",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "en",
+      "id": "7102-solo-leveling-portais",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "en",
+      "id": "7103-promised-neverland-pistas",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "games",
+      "id": "game-201-portal-logica",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "games",
+      "id": "game-202-slay-the-spire-cartas",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "games",
+      "id": "game-203-subnautica-exploracao",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-201-pipa-e-vento",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-202-lobinho-escuta",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "kids",
+      "id": "kids-203-vagalume-luz",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-201-backup-321",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-202-senhas-fortes",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
+    },
+    {
+      "channel": "alchemy",
+      "id": "alchemy-203-atalhos-produtividade",
+      "status": "reserved",
+      "reservation_owner": "lote15_diario_20261110",
+      "source": "user_request_2026-11-10",
+      "publication_target": "private_first_after_technical_qa",
+      "note": "Distinct approved daily 15-video batch; do not reuse old titles/IDs, no public release without review."
     }
   ],
   "available_next_br_after_reserved": "5012-solo-leveling",
